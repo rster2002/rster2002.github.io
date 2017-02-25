@@ -1,0 +1,23 @@
+
+.header {
+	text-align: center;
+	align-items: center;
+	font-size: 30px;
+	font-family: sans-serif;
+	background-color: rgba(105, 156, 239, 0.6);
+}
+
+.userActions {
+	text-align: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.6);
+	font-family: sans-serif;
+}
+
+.payUser {
+	margin-top: 10px;
+	margin: 0 auto;
+	text-align: center;
+	width: 500px;
+	background-color: antiquewhite;
+}

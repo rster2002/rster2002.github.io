@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>setup</title>
+		<link href="assets/css/mainStyle.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="assets/js/setup.js"></script>
+	</head>
+	
+	<body>
+		<div class='intro'>
+			<h1>Welcome!</h1>
+			<h3>
+				Welcome to pay Crystal. To begin using this software you need to create a admin account first.
+				This admin account is like a god-mode. You can change everything exept the balance of users (because than you can cheat).
+				Lets begin by setting a username and password.
+			</h3>
+			<input id='username' placeholder="username" type="text">
+			<input id='password' placeholder="password" type="password">
+			<input id="rePassword" placeholder="Retype password" type="password">
+		</div>
+		<button onclick="register(document.getElementById('username').value, document.getElementById('password').value, document.getElementById('rePassword').value, 'admin')">Next</button>
+	</body>
+</html>
