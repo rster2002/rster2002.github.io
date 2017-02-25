@@ -1,8 +1,8 @@
 if (localStorage.getItem('sesion')) {
 	username = localStorage.getItem('sesion');
 	balance = localStorage.getItem(username + '_balance');
-	type = localStorage.getItem(username + '_balance');
-	document.getElementById("adminButton").style.visibility = "hidden";;
+	type = localStorage.getItem(username + '_type');
+	document.getElementById("adminButton").style.visibility = "hidden";
 	document.getElementById('bankButton').style.visibility = 'hidden';
 	switch (type) {
 		case 'admin':

@@ -54,3 +54,8 @@ function lockTo(userType, type) {
 		location.href='loginPage.html';
 	}
 }
+
+function logout() {
+	localStorage.removeItem('sesion');
+	location.href='loginPage.html';
+}

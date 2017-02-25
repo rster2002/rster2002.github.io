@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Admin Page</title>
+		<link href="assets/css/mainStyle.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="assets/js/adminFunctions.js"></script>
+	</head>
+	
+	<body>
+		<button onclick="location.href='mainPage.html'">Back</button>
+		<div class="header">
+			<h1>Admin page</h1>
+			<h3>Here you can remove users, add a bank and monitor everything.</h3>
+		</div>
+		<div class="userActions">
+			<div class="item">
+				<h3>Add bank</h3>
+				<input id="bankUsername" placeholder="bank name">
+				<input id="bankPassword" placeholder="password" type="password">
+				<input id="bankRepassword" placeholder="Retype" type="password">
+				<button onclick="registerBank(document.getElementById('bankUsername').value, document.getElementById('bankPassword').value, document.getElementById('bankRepassword').value)">Create</button>
+			</div>
+		</div>
+	</body>
+</html>
