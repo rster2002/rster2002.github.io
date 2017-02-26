@@ -63,3 +63,16 @@ function logout() {
 	location.href='loginPage.html';
 	console.log("action:logout:username" + username);
 }
+
+function loadSesion() {
+	if (localStorage.getItem('sesion')) {
+		username = localStorage.getItem('sesion');
+		balance = localStorage.getItem(username + '_balance');
+		type = localStorage.getItem(username, '_type');
+		bank = localStorage.getItem(username + '_bank');
+	} else {
+		console.log("error:load-sesion");
+		alert("ERROR: cant find sesion. Try relogging");
+		location.href='loginPage.html';
+	}
+}
