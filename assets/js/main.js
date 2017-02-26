@@ -42,11 +42,11 @@ function login(username, password) {
 			console.log("action:login:username:" + username);
 			location.href='mainPage.html';
 		} else {
-			console.log("error:login:wrong-password");
+			console.log("note:login:wrong-password");
 			alert("Wrong password");
 		}
 	} else {
-		console.log("error:login:cant-find-user:username:" + username);
+		console.log("note:login:cant-find-user:username:" + username);
 		alert("Cant find this user! Did you register?");
 	}
 }

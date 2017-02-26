@@ -18,7 +18,9 @@ if (localStorage.getItem('sesion')) {
 		default: 
 			break;
 	}
+	console.log("action:load-sesion:username:" + username);
 	document.getElementById('info').innerHTML = 'Username: ' + username + ' Balance: ' + balance + ' Type: ' + type;
 } else {
+	console.log("error:load-sesion:no-sesion-found:username:" + username);
 	alert("error when trying to load sesion. Try reloading the page or login.");
 }
