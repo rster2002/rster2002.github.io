@@ -58,4 +58,5 @@ function lockTo(userType, type) {
 function logout() {
 	localStorage.removeItem('sesion');
 	location.href='loginPage.html';
+	console.log("user loged out");
 }
