@@ -39,11 +39,14 @@ function login(username, password) {
 		var storedPassword = localStorage.getItem(username + '_password');
 		if (password === storedPassword) {
 			localStorage.setItem('sesion', username);
+			console.log("action:login:username:" + username);
 			location.href='mainPage.html';
 		} else {
+			console.log("note:login:wrong-password");
 			alert("Wrong password");
 		}
 	} else {
+		console.log("note:login:cant-find-user:username:" + username);
 		alert("Cant find this user! Did you register?");
 	}
 }
@@ -58,4 +61,5 @@ function lockTo(userType, type) {
 function logout() {
 	localStorage.removeItem('sesion');
 	location.href='loginPage.html';
+	console.log("action:logout:username" + username);
 }

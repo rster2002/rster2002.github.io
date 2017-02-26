@@ -1,8 +1,10 @@
 function register(username, password, rePassword, type, bank) {
 	if (localStorage.getItem(username)) {
+		console.log("note:register:username-exists:username:" + username);
 		alert("This username is already taken")
 	} else {
 		if (password !== rePassword) {
+			console.log("note:register:passwords-dont-match:username:" + username);
 			alert("passwords doesn't match");
 		} else {
 			switch (type) {
