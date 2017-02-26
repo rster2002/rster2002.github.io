@@ -13,6 +13,7 @@ function register(username, password, repassword, type, bank) {
 					localStorage.setItem(username + '_balance', 1000);
 					localStorage.setItem(username + '_type', 'normal');
 					localStorage.setItem('sesion', username);
+					console.log("action:register:username:" + username);
 					location.href='mainPage.html'
 				} else {
 					alert("Found this user, but this user isnt a bank")
