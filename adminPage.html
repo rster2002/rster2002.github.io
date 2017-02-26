@@ -4,7 +4,9 @@
 	<head>
 		<title>Admin Page</title>
 		<link href="assets/css/mainStyle.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="assets/js/main.js"></script>
 		<script type="text/javascript" src="assets/js/adminFunctions.js"></script>
+		<script type="text/javascript" src="assets/js/lockPage.js"></script>
 	</head>
 	
 	<body>
@@ -15,11 +17,17 @@
 		</div>
 		<div class="userActions">
 			<div class="item">
+				<script>
+					loadSesion();
+					lockPage(type, 'admin');
+				</script>
 				<h3>Add bank</h3>
 				<input id="bankUsername" placeholder="bank name">
 				<input id="bankPassword" placeholder="password" type="password">
 				<input id="bankRepassword" placeholder="Retype" type="password">
 				<button onclick="registerBank(document.getElementById('bankUsername').value, document.getElementById('bankPassword').value, document.getElementById('bankRepassword').value)">Create</button>
+				<button onclick="loadSesion()">Load sesion</button>
+				<button onclick="lockPage()">lock page</button>
 			</div>
 		</div>
 	</body>
