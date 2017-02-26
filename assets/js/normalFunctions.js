@@ -5,7 +5,7 @@ function payUser(user, toUser, amount) {
 		alert("You dont have enough money to do this.");
 	} else {
 		if (amount <= 0) {
-			console.log("note:transaction:amount-must-be-higher-than-0:username:" + username + ":toUser:" + toUser;
+			console.log("note:transaction:amount-must-be-higher-than-0:username:" + username + ":toUser:" + toUser);
 			alert("Amount must be higher than 0.")
 		} else {
 			if (localStorage.getItem(toUser)) {
