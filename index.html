@@ -2,18 +2,21 @@
 
 <html>
 	<head>
-		<title>Setup</title>
-		<link href="assets/css/mainStyle.css" type="text/css" rel="stylesheet">
+		<title>rster2002</title>
+		<link href="assets/css/index.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="assets/js/index.js"></script>
 	</head>
 	
 	<body>
-		<h1>Loading...</h1>
-		<script>
-			if (localStorage.getItem('setup')) {
-				location.href='loginPage.html'
-			} else {
-				location.href='setupPage.html'
-			}
-		</script>
+		<div class="header">
+			<h1>rster2002</h1>
+			<p>Welcome to my website! Here you can find a lot of cool content.</p>
+		</div>
+		<div class="mainPage">
+			<div class="pay">
+				<h3>Pay</h3>
+				<button onclick="location.href='payPage.html'">Discover</button>
+			</div>
+		</div>
 	</body>
 </html>
