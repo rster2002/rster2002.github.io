@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>engels-opdracht</title>
+    <style>
+    h1 {
+      font-size: 30px;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>doorsturen</h1>
+    <script>
+      location.href="http://rster2002.wixsite.com/tec-school/tfios";
+    </script>
+  </body>
+</html>
