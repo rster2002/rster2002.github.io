@@ -15,6 +15,7 @@ p {
 body {
 	text-align: center;
 	align-items: center;
+	margin-top: auto;
 }
 
 .mainPage {
