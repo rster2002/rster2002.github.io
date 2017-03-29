@@ -13,7 +13,7 @@ if (localStorage.getItem("settings-setup")) {
 	localStorage.setItem("settings-setup", true)
 }
 
-function redirect(url) {
+function rederect(url) {
 	if (localStorage.getItem("setting-red") === "false") {
 		localStorage.setItem("red", url);
 		location.href="external.html"
