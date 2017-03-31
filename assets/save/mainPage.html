@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Pay Crystal</title>
+		<link href="assets/css/mainPage.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="assets/js/main.js"></script>
+		<script type="text/javascript" src="assets/js/normalFunctions.js"></script>
+	</head>
+	
+	<body>
+		<div class="header">
+			<button onclick="logout()">log out</button>
+			<h1>Pay Crystal</h1>
+			<button id='adminButton' onclick="location.href='adminPage.html'">Admin page</button>
+			<button id='bankButton' onclick="location.href='bankPage.html'">Bank page</button>
+			<p id='info'>Username: balance: type: </p>
+			<script type="text/javascript" src="assets/js/sesion.js"></script>
+		</div>
+		<div class='userActions'>
+			<div class='payUser'>
+				<h3>Pay other user</h3>
+				<p>Here you can pay a other user.</p>
+				<input id="payAmount" placeholder="amount" type="number">
+				<input id="payUser" placeholder="user" type="text">
+				<button onclick="payUser(username, document.getElementById('payUser').value, document.getElementById('payAmount').value)">Pay</button>
+			</div>
+		</div>
+	</body>
+</html>

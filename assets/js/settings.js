@@ -19,5 +19,12 @@ function settingToggle(setting) {
 				document.getElementById("set-download").innerHTML = "Zet uit";
 			}
 			break;
+			
+		case 'delete':
+			if (confirm("Weet je zeker dat je je gegevens wilt verwijderen?")) {
+				localStorage.clear();
+				location.href="index.html"
+			}
+			break;
 	}
 }

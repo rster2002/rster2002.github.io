@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Setup</title>
+		<link href="assets/css/mainStyle.css" type="text/css" rel="stylesheet">
+	</head>
+	
+	<body>
+		<h1>Loading...</h1>
+		<p>Please wait while the page is loading... If this takes more than a minute please contact me at istargamesmail@gmail.com</P>
+		<script>
+			if (localStorage.getItem('setup')) {
+				location.href='loginPage.html'
+			} else {
+				location.href='setupPage.html'
+			}
+		</script>
+	</body>
+</html>
