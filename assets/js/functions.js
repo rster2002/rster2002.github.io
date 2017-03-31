@@ -72,5 +72,5 @@ function external() {
 			break;
 	}
 	localStorage.removeItem("red");
-	location.href=ur;
+	location.href=url;
 }
