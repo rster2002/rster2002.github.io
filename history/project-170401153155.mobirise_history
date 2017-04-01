@@ -1,7 +1,7 @@
 {
   "settings": {
     "name": "rster2002.github.io",
-    "currentPage": "error.html",
+    "currentPage": "index.html",
     "theme": {
       "name": "mobirise3",
       "title": "Mobirise 3",
@@ -22,7 +22,7 @@
       }
     },
     "versionFirst": "3.12.1",
-    "uniqCompNum": 101,
+    "uniqCompNum": 99,
     "versionPublish": "3.12.1",
     "path": "@PROJECT_PATH@",
     "screenshot": "screenshot.png",
@@ -1940,40 +1940,43 @@
           "items": "<li class=\"nav-item\"><a data-app-btn=\"true\" class=\"nav-link link\" href=\"index.html\">Thuis</a></li><li class=\"nav-item nav-btn\"><a data-app-btn=\"true\" data-button=\"\" data-app-selector=\".btn\" class=\"nav-link btn btn-white btn-white-outline\" href=\"https://mobirise.com/\">DOWNLOAD</a></li>"
         },
         {
+          "_inherit": "msg-box5",
+          "_styles": {
+            ".mbr-section-title, .lead p": {
+              "color": "#fff"
+            }
+          },
           "_tags": [
             "Theme"
           ],
-          "_name": "header2",
-          "_anchor": "header2-2s",
+          "_name": "msg-box6",
+          "_anchor": "msg-box6-2l",
           "_params": {
             "imageSize": 50,
+            "paddingTop": "3",
+            "paddingBottom": "3",
             "parallax": true,
-            "bgImageRadio": true,
-            "bgImage": "@THEME_PATH@/components/_images/landscape.jpg",
-            "bgColor": "#2e2e2e",
+            "bgImageRadio": false,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#fff",
             "bgColorRadio": false,
             "bgVideo": {
               "url": "https://www.youtube.com/watch?v=uNCr7NdOJgw"
             },
-            "bgVideoRadio": false,
+            "bgVideoRadio": true,
             "overlay": true,
-            "overlayOpacity": 0.3,
+            "overlayOpacity": 0.5,
             "overlayColor": "#000",
             "inverse": true,
             "showTitle": true,
             "showText": true,
-            "showButtons": false,
-            "showArrow": false
+            "showButtons": false
           },
           "media": {
             "image": {
               "active": true,
               "width": 1400,
-              "src": "@PROJECT_PATH@/assets/images/error_icon-1-1400x1400.png",
-              "link": "",
-              "alt": "",
-              "title": "",
-              "linkInNewWindow": false
+              "src": "@THEME_PATH@/components/_images/desert.jpg"
             },
             "video": {
               "src": "https://www.youtube.com/embed/Tq7p44IA-1U",
@@ -1982,24 +1985,24 @@
               "loop": false
             },
             "iconFont": {
-              "class": "mbr-iconfont mbr-iconfont-header2",
+              "class": "mbr-iconfont mbr-iconfont-msg-box5",
               "link": "",
               "size": 250
             }
           },
           "title": "Ho! Er is iets mis gegaan!",
-          "text": "Dit kan komen omdat cookies zijn uitgeschakelt of niet zijn geaccepteerd of omdat de sesion is verbruikt. Als je deze pagina blijft krijgen, report het dan als bug of neem contact opS.",
-          "buttons": "<a data-app-btn=\"true\" class=\"btn btn-primary\" href=\"https://mobirise.com\" data-toolbar=\"-mbrBtnMove\">MORE</a>"
+          "text": "Het ziet er naar uit dat er iets mis is gegaan. Dit kan zijn omdat je cookies niet hebt ingeschakelt. Als je dit blijft hebben, report het dan onderaan de pagina.",
+          "buttons": "<a data-app-btn=\"true\" class=\"btn btn-primary\" href=\"https://mobirise.com\">MORE</a>"
         },
         {
           "_tags": [
             "Theme"
           ],
-          "_name": "contacts3",
-          "_anchor": "contacts3-2p",
+          "_name": "contacts1",
+          "_anchor": "contacts1-2i",
           "_params": {
-            "paddingTop": 3,
-            "paddingBottom": 3,
+            "paddingTop": "4",
+            "paddingBottom": "3",
             "bgImageRadio": false,
             "parallax": true,
             "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
@@ -2011,86 +2014,26 @@
           },
           "logo": {
             "image": {
-              "src": "@PROJECT_PATH@/assets/images/logo-white-265x325.png",
-              "class": "card-img-top",
-              "width": 265,
-              "active": true,
+              "src": "@PROJECT_PATH@/assets/images/logo_white-128x157.png",
+              "width": 128,
               "link": "",
               "alt": "",
               "title": "",
               "linkInNewWindow": false
             },
             "iconFont": {
-              "class": "mbr-iconfont mbr-iconfont-logo-contacts3",
+              "class": "mbr-iconfont mbr-iconfont-contacts1",
+              "linkInNewWindow": false,
+              "name": "idea",
+              "family": "MobiriseIcons",
               "link": "",
-              "size": 0
-            }
-          },
-          "text1": "Hier vind je alle info die je nodig mocht hebben.",
-          "media1": {
-            "iconFont": {
-              "class": "mbr-iconfont-company-contacts3",
-              "linkInNewWindow": false,
-              "name": "github",
-              "family": "socicon",
-              "active": true,
-              "size": 0
-            }
-          },
-          "text2": "<a href=\"https://github.com/rster2002/rster2002.github.io/issues\">Report een bug</a>",
-          "media2": {
-            "iconFont": {
-              "class": "mbr-iconfont-company-contacts3",
-              "linkInNewWindow": false,
-              "name": "beaker",
-              "family": "et-line",
-              "active": true,
-              "size": 0
-            }
-          },
-          "text3": "<a href=\"cookie.html\">Zet cookies aan</a>",
-          "media3": {
-            "iconFont": {
-              "active": true,
-              "class": "mbr-iconfont-company-contacts3",
-              "name": "envelope",
               "size": 0,
-              "family": "et-line"
+              "active": true
             }
           },
-          "text4": "<a href=\"mailto:support@mobirise.com\">i</a>stargamesmail@gmail.com",
-          "title1": "Categories",
-          "text5": "<li><a class=\"text-white\" href=\"#\">Business</a></li><li><a class=\"text-white\" href=\"#\">Design</a></li><li><a class=\"text-white\" href=\"#\">Real life</a></li><li><a class=\"text-white\" href=\"#\">Science</a></li><li><a class=\"text-white\" href=\"#\">Tech</a>nic</li>",
-          "text6": "<strong>Contacts</strong><br>Email: istargamesspam@gmail.com<br><br><br><br>",
-          "form": {
-            "title": "MESSAGE",
-            "action": "istargamesspam@gmail.com",
-            "alerts": {
-              "success": "Bedankt voor het invullen van het formulier!"
-            },
-            "fields": {
-              "name": {
-                "title": "Name",
-                "visible": false,
-                "customTitle": "Name*"
-              },
-              "email": {
-                "title": "Email",
-                "visible": true,
-                "customTitle": "Email*"
-              },
-              "phone": {
-                "title": "Phone",
-                "visible": false,
-                "customTitle": "Phone"
-              },
-              "message": {
-                "title": "Message",
-                "customTitle": "Bericht"
-              }
-            }
-          },
-          "buttons": "<a data-app-btn=\"true\" type=\"submit\" class=\"btn btn-sm btn-black\" data-toolbar=\"-mbrLink,-mbrBtnAdd,-mbrBtnMove\">Stuur</a>"
+          "text1": "",
+          "text2": "<strong>Contact</strong><br>\nEmail: rstermail@gmail.com<br>",
+          "text3": ""
         },
         {
           "_tags": [

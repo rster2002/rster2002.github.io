@@ -1,5 +1,10 @@
 if (localStorage.getItem("cookies")) {
-	console.log("Cookie's accepted")
+	var cookies = localStorage.getItem("cookies")
+	if (cookies === "true") {
+		console.log("Cookie's accepted")
+	} else {
+		console.log("Cookies are not accepted")
+	}
 } else {
 	location.href="cookie.html"
 }
