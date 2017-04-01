@@ -1,4 +1,4 @@
-function accept(yes) {
+function cookiesAccept(yes) {
 	if (yes === "true") {
 		localStorage.setItem("cookies", "true");
 		location.href="index.html";

@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'rster2002Icons';
-  src:  url('rster2002-icons.eot?spat4u');
-  src:  url('rster2002-icons.eot?spat4u#iefix') format('embedded-opentype'),
-    url('rster2002-icons.ttf?spat4u') format('truetype'),
-    url('rster2002-icons.woff?spat4u') format('woff'),
-    url('rster2002-icons.svg?spat4u#rster2002Icons') format('svg');
+  font-family: 'MobiriseIcons';
+  src:  url('mobirise-icons.eot?spat4u');
+  src:  url('mobirise-icons.eot?spat4u#iefix') format('embedded-opentype'),
+    url('mobirise-icons.ttf?spat4u') format('truetype'),
+    url('mobirise-icons.woff?spat4u') format('woff'),
+    url('mobirise-icons.svg?spat4u#MobiriseIcons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="mbri-"], [class*=" mbri-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: rster2002Icons !important;
+  font-family: MobiriseIcons !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -222,7 +222,7 @@
 .mbri-mobile2:before {
   content: "\e941";
 }
-.mbri-rster2002:before {
+.mbri-mobirise:before {
   content: "\e942";
 }
 .mbri-music:before {

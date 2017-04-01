@@ -1,0 +1,14 @@
+
+body {
+	background-image: url(assets/images/mol/background.png);
+}
+
+.main {
+	background-color: rgba(69, 101, 37, 0.7);
+	align-items: center;
+	text-align: center;
+	margin-top: auto;
+	margin-left: auto;
+}
+
+
