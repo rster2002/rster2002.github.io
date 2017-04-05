@@ -1,28 +1,31 @@
-console.log("lookup cookies")
-if (localStorage.getItem("cookies")) {
-	console.log("found cookies")
-	var cookies = localStorage.getItem("cookies")
-	console.log("finding state of cookies")
-	if (cookies === "true") {
-		console.log("found cookies state as accepted")
+function cookies(page) {
+	console.log("lookup cookies")
+	if (localStorage.getItem("cookies")) {
+		console.log("found cookies")
+		var cookies = localStorage.getItem("cookies")
+		console.log("finding state of cookies")
+		if (cookies === "true") {
+			console.log("found cookies state as accepted")
+		} else {
+			console.log("found cookies state as disaccepted")
+		}
 	} else {
-		console.log("found cookies state as disaccepted")
+		console.log("lookup found nothing")
+		localStorage.setItem("cookieStore", page);
+		location.href="cookie.html"
 	}
-} else {
-	console.log("lookup found nothing")
-	location.href="cookie.html"
-}
-console.log("checking state cookies for cookies")
-if (localStorage.getItem("cookies") === "true") {
-	console.log("state for cookies is true")
-	if (localStorage.getItem("settings-setup")) {
-		console.log("found settings")
-	} else {
-		console.log("setting default settings")
-		localStorage.setItem("setting-red", "false");
-		localStorage.setItem("setting-dowload", "true");
-		localStorage.setItem("setting-private", "false");
-		localStorage.setItem("settings-setup", true)
+	console.log("checking state cookies for cookies")
+	if (localStorage.getItem("cookies") === "true") {
+		console.log("state for cookies is true")
+		if (localStorage.getItem("settings-setup")) {
+			console.log("found settings")
+		} else {
+			console.log("setting default settings")
+			localStorage.setItem("setting-red", "false");
+			localStorage.setItem("setting-dowload", "true");
+			localStorage.setItem("setting-private", "false");
+			localStorage.setItem("settings-setup", true)
+		}
 	}
 }
 
