@@ -1,3 +1,36 @@
+// checking for browser
+isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+isFirefox = typeof InstallTrigger !== 'undefined';
+isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+isIE = /*@cc_on!@*/false || !!document.documentMode;
+isEdge = !isIE && !!window.StyleMedia;
+isChrome = !!window.chrome && !!window.chrome.webstore;
+isBlink = (isChrome || isOpera) && !!window.CSS;
+if (isIE === true) {
+	console.log("found IE. running in minimal mode")
+	if (localStorage.getItem("IE")) {
+		console.log("found IE in storage")
+	} else {
+		if (localStorage.getItem("IE") === "false") {
+			if (isIE) {
+				if (confirm("Internet exploder is niet volledig ondersteund. Wilt je doorgaan?")) {
+					localStorage.setItem("IE", "true");
+				} else {
+					localStorage.setItem("IE", "false");
+					location.href="https://www.google.nl/";
+				}
+			}
+		}
+	}
+}
+if (isSafari === true) {
+	console.log("running in Safari mode")
+}
+
+if (isEdge === true) {
+	console.log("running in Edge mode")
+}
+
 function cookies(page) {
 	console.log("lookup cookies")
 	if (localStorage.getItem("cookies")) {

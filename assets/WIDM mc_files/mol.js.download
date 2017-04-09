@@ -1,6 +1,6 @@
-pot = 0;
-total = 0;
-next = "Apr 9, 2017 00:00:00"
+pot = 9050;
+total = 244400;
+next = "Apr 9, 2017 07:30:00"
 			// Set the date we're counting down to
 			var countDownDate = new Date(next).getTime();
 
@@ -31,8 +31,8 @@ next = "Apr 9, 2017 00:00:00"
 			}, 1000);
 	
 function update() {
-	document.getElementById("pot").innerHTML = pot + ",-"
-	document.getElementById("pot-total").innerHTML = "van de " + total + ",-"
+	document.getElementById("pot").innerHTML = "€" + pot + ",-"
+	document.getElementById("pot-total").innerHTML = "van de €" + total + ",-"
 	
 }
 
