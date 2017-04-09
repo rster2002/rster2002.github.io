@@ -1,0 +1,67 @@
+@font-face {
+    font-family: xband;
+    src: url(fonts/xband.ttf);
+}
+.header {
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-top: -70px;
+	height: 300px;
+	text-align: center;
+	background-image: url(images/mol/header-background.png);
+	margin-bottom: -40px;
+}
+
+.under-header {
+	background-color: white;
+	text-align: center;
+}
+
+.players {
+	align-items: center;
+}
+
+.player1, .player2, .player3, .player4, .player5, .player6, .player7, .player8 {
+	text-align: center;
+	align-items: center;
+	font-family: "xband";
+	font-size: 40px;
+}
+
+#player1img, #player2img, #player3img, #player4img, #player5img, #player6img, #player7img, #player8img {
+	margin-top: -70px;
+}
+
+#header-title {
+	line-height: 300px;
+	font-size: 100px;
+	font-family: "xband";
+	color: white;
+}
+
+#pot-title {
+	margin-top: 20px;
+	font-family: "xband";
+	font-size: 80px;
+}
+
+#pot {
+	margin-top: -30px;
+	font-family: "xband";
+	font-size: 120px;
+}
+
+#pot-total {
+	font-size: 40px;
+	margin-top: -60px;
+	font-family: "xband";
+}
+
+#subtitle {
+	font-size: 20px;
+}
+
+#timer {
+	font-family: "xband";
+	font-size: 80px;
+}

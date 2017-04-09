@@ -5,18 +5,42 @@
 		<title>Test sheet</title>
 		<script src="http://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>
 		<script src="bigAdd.js"></script>
+		<style>
+			@font-face {
+				font-family: xband;
+				src: url(assets/fonts/xband.ttf);
+			}
+			
+			body {
+				margin-top: 0;
+				align-items: center;
+			}
+			
+			.header {
+				height: 200px;
+				width: 100%;
+				background-image: url(assets/images/s1.png);
+				text-align: center;
+				align-items: center;
+			}
+			
+			#header-text {
+				line-height: 200px;
+				font-family: "xband";
+				font-size: 100px;
+				color: white;
+			}
+			
+			#header-text-pot {
+				font-family: "xband";
+			}
+		</style>
 	</head>
 	<body>
-		<button onclick="add()">add</button>
-		<input type="number" id="a">
-		<input type="number" id="b">
-		<p id="result"></p>
-		<script>
-			function add() {
-				var n = bigInt(document.getElementById("a").value)
-						.multiply(document.getElementById("b").value);
-				document.getElementById("result").innerHTML = n;
-			}
-		</script>
+		<div class="header">
+			<h1 id="header-text">De Mol</h1>
+			<h1 id="header-text-pot">De Pot:</h1>
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/gKOrYSFQuSI" frameborder="0" allowfullscreen></iframe>
+		</div>
 	</body>
 </html>
