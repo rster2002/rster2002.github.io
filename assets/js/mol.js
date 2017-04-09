@@ -1,6 +1,6 @@
 pot = 0;
 total = 0;
-next = "Apr 8, 2017 07:30:00"
+next = "Apr 9, 2017 00:00:00"
 			// Set the date we're counting down to
 			var countDownDate = new Date(next).getTime();
 
