@@ -28,6 +28,16 @@
 	font-size: 40px;
 }
 
+.player1:hover, .player2:hover, .player3:hover, .player4:hover, .player5:hover, .player6:hover, .player7:hover, .player8:hover {
+	text-align: center;
+	align-items: center;
+	font-family: "xband";
+	color: white;
+	background-color: rgba(255, 0, 0, 0.8);
+	font-size: 40px;
+}
+
+
 #player1img, #player2img, #player3img, #player4img, #player5img, #player6img, #player7img, #player8img {
 	margin-top: -70px;
 }
@@ -55,6 +65,27 @@
 	font-size: 40px;
 	margin-top: -60px;
 	font-family: "xband";
+}
+
+#archive {
+	padding: 6px 60px;
+	border: 2px solid #4CAF50;
+	background-color: white;
+	font-family: "xband";
+	border-radius: 4px;
+	font-size: 30px;
+}
+
+#archive:hover {
+	background-color: darkslategray;
+	color: white;
+	border: 2px solid #4C3F50;
+}
+
+#archive:active {
+	background-color: black;
+	color: white;
+	border: 2px solid #4C3F50;
 }
 
 #subtitle {
