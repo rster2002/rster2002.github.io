@@ -30,10 +30,26 @@ next = "May 14, 2017 00:00:00"
 			  }
 			}, 1000);
 	
-function update() {
+function update(page) {
 	document.getElementById("pot").innerHTML = pot + ",-"
 	document.getElementById("pot-total").innerHTML = "van de " + total + ",-"
-	
+	if (page === "pot") {
+		if (total !== 0) {
+			result = Math.round((pot / total) * 100)
+			document.getElementById("total").innerHTML = "Percentage: " + result + "%"
+			if (result !== 100) {
+				document.getElementById("100").style = "color:red;"
+			}
+		} else {
+			document.getElementById("total").innerHTML = "Er is nog niet gespeeld"
+		}
+	}
+}
+
+function marge(marge) {
+	if (result >= marge) {
+		document.getElementById(marge).style = "color: lawngreen;"
+	}
 }
 
 function player(username, number, inGame) {

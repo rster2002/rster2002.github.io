@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>WIDM MC</title>
+		<script src="assets/js/mol.js"></script>
+		<link type="text/css" href="assets/css/mol.css" rel="stylesheet">
+		<link rel="icon" href="assets/logo_black.png">
+	</head>
+	<body>
+		<noscript>You dont have javascript enabled or your browser doesnt support it</noscript>
+		<div class="header">
+			<h1 id="header-title">De Mol</h1>
+		</div>
+		<div class="under-header">
+			<h1 id="pot-title">De Pot: </h1>
+			<h1 id="pot"></h1>
+			<h1 id="pot-total"></h1>
+			<h1 id="timer"></h1>
+			<button onclick="location.href='mol.html'">Spelers</button>
+			<button id="archive" onclick="location.href='https://goo.gl/photos/yucveMRrjyCwGs6Y9'">Archief</button>
+		</div>
+		<div class="main">
+			<div class="marges">
+				<h1 id="marges">Marges en prijzen</h1>
+				<h1>De winnaar krijgt een structure. De grote van de structure hangt af van het geld. Hoe meer geld in de pot, hoe groter de structure zal zijn voor de winnaar.</h1>
+				<h1 id="total">0%</h1>
+				<h1 id="100">100%</h1>
+				<h1 id="95">95%</h1>
+				<h1 id="75">75%</h1>
+				<h1 id="50">50%</h1>
+				<h1 id="30">30%</h1>
+				<h1 id="10">10%</h1>
+			</div>
+		</div>
+		<script>
+			update("pot");
+			marge(100);
+			marge(95);
+			marge(75);
+			marge(50);
+			marge(30);
+			marge(10);
+		</script>
+	</body>
+</html>

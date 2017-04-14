@@ -2,6 +2,28 @@
     font-family: xband;
     src: url(fonts/xband.ttf);
 }
+
+button {
+	padding: 6px 60px;
+	border: 2px solid #4CAF50;
+	background-color: white;
+	font-family: "xband";
+	border-radius: 4px;
+	font-size: 30px;
+}
+
+button:hover {
+	background-color: darkslategray;
+	color: white;
+	border: 2px solid #4C3F50;
+}
+
+button:active {
+	background-color: black;
+	color: white;
+	border: 2px solid #4C3F50;
+}
+
 .header {
 	margin-left: -10px;
 	margin-right: -10px;
@@ -17,7 +39,7 @@
 	text-align: center;
 }
 
-.players {
+.players, .main {
 	align-items: center;
 }
 
@@ -37,6 +59,12 @@
 	font-size: 40px;
 }
 
+.marges {
+	font-size: 30px;
+	font-family: "xband";
+	text-align: center;
+	align-items: center;
+}
 
 #player1img, #player2img, #player3img, #player4img, #player5img, #player6img, #player7img, #player8img {
 	margin-top: -70px;
@@ -95,4 +123,9 @@
 #timer {
 	font-family: "xband";
 	font-size: 80px;
+}
+
+#marges {
+	font-family: "xband";
+	font-size: 70px;
 }
