@@ -1,5 +1,5 @@
-pot = 0;
-total = 0;
+pot = 9050;
+total = 24400;
 next = "May 14, 2017 00:00:00"
 			// Set the date we're counting down to
 			var countDownDate = new Date(next).getTime();
@@ -41,6 +41,7 @@ function update(page) {
 				document.getElementById("100").style = "color:red;"
 			}
 		} else {
+			document.getElementById("total").style = "color:red;"
 			document.getElementById("total").innerHTML = "Er is nog niet gespeeld"
 		}
 	}
