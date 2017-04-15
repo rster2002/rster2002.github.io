@@ -63,3 +63,92 @@ function player(username, number, inGame) {
 		document.getElementById("player" + number + "img").src = "assets/images/mol/" + username + ".png";
  	}
 }
+
+interval = Math.floor((Math.random() * 5000) + 1000);
+window.setInterval(function(){
+	random = Math.floor((Math.random() * 5) + 1);
+	switch(random) {
+		case 1:
+			var front = ""
+			var back = "E MOL"
+				document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+				setTimeout(function(){
+					document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+					setTimeout(function(){
+						document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+							setTimeout(function(){
+								document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+								document.getElementById("header-title").innerHTML = "DE MOL"
+							}, 50);
+					}, 50);
+				}, 50);
+			break;
+			
+		case 2:
+			var front = "D"
+			var back = " MOL"
+				document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+				setTimeout(function(){
+					document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+					setTimeout(function(){
+						document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+							setTimeout(function(){
+								document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+								document.getElementById("header-title").innerHTML = "DE MOL"
+							}, 50);
+					}, 50);
+				}, 50);
+			break;
+			
+		case 3:
+			var front = "DE "
+			var back = "OL"
+				document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+				setTimeout(function(){
+					document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+					setTimeout(function(){
+						document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+							setTimeout(function(){
+								document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+								document.getElementById("header-title").innerHTML = "DE MOL"
+							}, 50);
+					}, 50);
+				}, 50);
+			break;
+			
+		case 4:
+			var front = "DE M"
+			var back = "L"
+				document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+				setTimeout(function(){
+					document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+					setTimeout(function(){
+						document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+							setTimeout(function(){
+								document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+								document.getElementById("header-title").innerHTML = "DE MOL"
+							}, 50);
+					}, 50);
+				}, 50);
+			break;
+			
+		case 5:
+			var front = "DE MO"
+			var back = ""
+				document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+				setTimeout(function(){
+					document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+					setTimeout(function(){
+						document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+							setTimeout(function(){
+								document.getElementById("header-title").innerHTML = front + String.fromCharCode(Math.floor((Math.random() * 64) + 33)) + back;
+								document.getElementById("header-title").innerHTML = "DE MOL"
+							}, 50);
+					}, 50);
+				}, 50);
+			break;
+	}
+}, interval);
+function number() {
+	document.getElementById("result").innerHTML = String.fromCharCode(Number(document.getElementById("number").value))
+}
