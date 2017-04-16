@@ -10,9 +10,12 @@ button {
 	font-family: "xband";
 	border-radius: 4px;
 	font-size: 30px;
+	transition: all 0.3s ease-in;
 }
 
 button:hover {
+	transition: all 0.3s ease-in;
+	transform: scale(1.1);
 	background-color: darkslategray;
 	color: white;
 	border: 2px solid #4C3F50;
@@ -45,19 +48,30 @@ button:active {
 }
 
 .player1, .player2, .player3, .player4, .player5, .player6, .player7, .player8 {
+	transition: all 0.5s ease-in;
 	text-align: center;
 	align-items: center;
 	font-family: "xband";
 	font-size: 40px;
 }
 
+.player1 img, .player2 img, .player3 img, .player4 img, .player5 img, .player6 img, .player7 img, .player8 img{
+	transition: all 0.5s ease-in;
+}
+
 .player1:hover, .player2:hover, .player3:hover, .player4:hover, .player5:hover, .player6:hover, .player7:hover, .player8:hover {
+	transition: all 0.5s ease-in;
 	text-align: center;
 	align-items: center;
 	font-family: "xband";
 	color: white;
 	background-color: rgba(255, 0, 0, 0.8);
-	font-size: 40px;
+	font-size: 50px;
+}
+
+.player1:hover img, .player2:hover img, .player3:hover img, .player4:hover img, .player5:hover img, .player6:hover img, .player7:hover img, .player8:hover img {
+	transition: all 0.5s ease-in;
+	transform: scale(1.5);
 }
 
 .marges {
@@ -65,6 +79,20 @@ button:active {
 	font-family: "xband";
 	text-align: center;
 	align-items: center;
+}
+
+.marges h2{
+	transition: all 0.3s ease-in;
+	font-size: 60px;
+	font-family: "xband";
+	text-align: center;
+	align-items: center;
+}
+
+.marges h2:hover{
+	transition: all 0.3s ease-in;
+	transform: rotate(5deg);
+	font-size: 90px;
 }
 
 #player1img, #player2img, #player3img, #player4img, #player5img, #player6img, #player7img, #player8img {

@@ -2,32 +2,29 @@
 
 <html>
 	<head>
-		<title>Test sheet</title>
-		<script src="http://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>
+		<title>Zoom image and animation</title>
+		<style>
+			.container {
+				width: 256px;
+				height: 256px;
+			}
+			img {
+				widows: 100%;
+				height: 100%;
+				transition: all 0.5s ease-in;
+				filter: blur(10px);
+			}
+			.container:hover img{
+				transform: scale(1.4);
+				transition: all 0.2s ease-in;
+				filter: blur(0px);
+			}
+		</style>
 	</head>
 	<body>
-		<input placeholder="number" type="number" id="number">
-		<button onclick="number()">Press</button>
-		<p id="title">DE MOL</p>
-		<script>
-			interval = 3000;
-			window.setInterval(function(){
-				
-				document.getElementById("title").innerHTML = "DE M" + String.fromCharCode(Math.floor((Math.random() * 100) + 33)) + "L";
-				setTimeout(function(){
-					document.getElementById("title").innerHTML = "DE M" + String.fromCharCode(Math.floor((Math.random() * 100) + 33)) + "L";
-					setTimeout(function(){
-						document.getElementById("title").innerHTML = "DE M" + String.fromCharCode(Math.floor((Math.random() * 100) + 33)) + "L";
-							setTimeout(function(){
-								document.getElementById("title").innerHTML = "DE M" + String.fromCharCode(Math.floor((Math.random() * 100) + 33)) + "L";
-								document.getElementById("title").innerHTML = "DE MOL"
-							}, 50);
-					}, 50);
-				}, 50);
-			}, interval);
-			function number() {
-				document.getElementById("result").innerHTML = String.fromCharCode(Number(document.getElementById("number").value))
-			}
-		</script>
+		<div class="container">
+			<img src="assets/images/mol/Esmee_T.png">
+			<p>Test</p>
+		</div>
 	</body>
 </html>
