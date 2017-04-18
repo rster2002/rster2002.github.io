@@ -156,3 +156,38 @@ function external() {
 	localStorage.removeItem("displayName");
 	location.href=url;
 }
+
+function encrypt(input) {
+	if (input === null) {
+		alert("Je moet iets invullen");
+		location.href="index.html";
+	}
+	rawstr = '';
+	for (var char of input) {
+		rawstr += char.charCodeAt();
+	}
+	return rawstr;
+}
+
+function password(password) {
+	if (localStorage.getItem("passwordCache")) {
+		input = localStorage.getItem("passwordCache");
+		if (input !== password) {
+			input = encrypt(prompt("Type het wachtwoord in!"));
+			if (input !== password) {
+				alert("Dit wachtwoord is niet juist")
+				location.href="index.html";
+			} else {
+				localStorage.setItem("passwordCache", input);
+			}
+		}
+	} else {
+		input = encrypt(prompt("Type het wachtwoord in!"));
+		if (input !== password) {
+			alert("Dit wachtwoord is niet juist")
+			location.href="index.html";
+		} else {
+			localStorage.setItem("passwordCache", input);
+		}
+	}
+}
