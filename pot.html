@@ -3,6 +3,9 @@
 <html>
 	<head>
 		<title>WIDM MC</title>
+		<script>
+			script = false;
+		</script>
 		<meta name="google-site-verification" content="ZWwr8PTdgtVXY8bV4Y4PU35nqbEwINuPwW7lgy54SIo" />
 		<script src="assets/js/mol.js"></script>
 		<script src="assets/js/functions.js"></script>
@@ -11,6 +14,10 @@
 	</head>
 	<body>
 		<script>
+			if (script !== true) {
+				alert("False action 1. HTML found outside website!");
+				location.href="https://rster2002.github.io/error.html";
+			}
 			password("9856495051104100");
 		</script>
 		<noscript>You dont have javascript enabled or your browser doesnt support it</noscript>

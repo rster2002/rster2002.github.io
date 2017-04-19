@@ -1,3 +1,5 @@
+script = true;
+
 // checking for browser
 isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 isFirefox = typeof InstallTrigger !== 'undefined';
