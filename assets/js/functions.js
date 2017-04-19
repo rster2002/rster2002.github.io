@@ -172,8 +172,8 @@ function encrypt(input) {
 }
 
 function password(password) {
-	if (localStorage.getItem("passwordCache")) {
-		input = localStorage.getItem("passwordCache");
+	if (localStorage.getItem("passwordCache_" + passwordId)) {
+		input = localStorage.getItem("passwordCache_" + passwordId);
 		if (input !== password) {
 			input = encrypt(prompt("Type het wachtwoord in!"));
 			if (input !== password) {
@@ -189,7 +189,7 @@ function password(password) {
 			alert("Dit wachtwoord is niet juist")
 			location.href="index.html";
 		} else {
-			localStorage.setItem("passwordCache", input);
+			localStorage.setItem("passwordCache_" + passwordId, input);
 		}
 	}
 }
