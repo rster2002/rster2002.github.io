@@ -40,6 +40,22 @@ button:active {
 	border: 2px solid #4C3F50;
 }
 
+p {
+	font-family: "xband";
+	font-size: 30px;
+}
+
+a {
+	transition: all 0.2s ease-in;
+	color: #812B46;
+}
+
+a:hover {
+	transition: all 0.2s ease-in;
+	background-color: rgba(152,197,234, 0.6);
+	color: #731432;
+}
+
 .header {
 	margin-left: -10px;
 	margin-right: -10px;
@@ -57,6 +73,7 @@ button:active {
 }
 
 .players, .main {
+	text-align: center;
 	align-items: center;
 }
 
