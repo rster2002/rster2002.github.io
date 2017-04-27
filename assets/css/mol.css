@@ -112,7 +112,7 @@ a:hover {
 }
 
 .marges h2{
-	transition: all 0.5s ease-in;
+	transition: all 0.3s ease-in;
 	font-size: 60px;
 	font-family: "xband";
 	text-align: center;
@@ -120,7 +120,7 @@ a:hover {
 }
 
 .marges h2:hover{
-	transition: all 0.5s ease-in;
+	transition: all 0.3s ease-in;
 	transform: rotate(5deg);
 	font-size: 90px;
 }

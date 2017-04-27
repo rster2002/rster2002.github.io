@@ -172,8 +172,8 @@ function encrypt(input) {
 }
 
 function password(password) {
-	if (localStorage.getItem("passwordCache_" + pageId)) {
-		input = localStorage.getItem("passwordCache_" + pageId);
+	if (localStorage.getItem("passwordCache_" + passwordId)) {
+		input = localStorage.getItem("passwordCache_" + passwordId);
 		if (input !== password) {
 			input = encrypt(prompt("Type het wachtwoord in!"));
 			if (input !== password) {
@@ -189,13 +189,7 @@ function password(password) {
 			alert("Dit wachtwoord is niet juist")
 			location.href="index.html";
 		} else {
-			localStorage.setItem("passwordCache_" + pageId, input);
+			localStorage.setItem("passwordCache_" + passwordId, input);
 		}
 	}
-}
-
-function molReset() {
-	localStorage.removeItem("passwordCache_mol");
-	localStorage.removeItem("passwordCache_pot");
-	location.href=pageId + ".html";
 }
