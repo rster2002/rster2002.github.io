@@ -15,10 +15,6 @@
 	</head>
 	<body>
 		<script>
-			if (script !== true) {
-				alert("False action 1. HTML found outside website!");
-				location.href="https://rster2002.github.io/error.html";
-			}
 			password("10449565111457100");
 		</script>
 		<noscript>You dont have javascript enabled or your browser doesnt support it</noscript>
@@ -68,7 +64,10 @@
 					<img id="player8img" src="assets/images/mol/Esmee_T.png">
 				</div>
 			</div>
-			<p>Klik <a onclick="molReset()">hier</a> om pagina data te verwijderen.</p>
+			<div class="footer">
+				<button onclick="molReset()"><i class="fa fa-trash-o"></i> Clear data</button>
+				<button onclick="location.href='https://github.com/rster2002/rster2002.github.io/issues'"><i class="fa fa-bug"></i> Report een bug</button>
+			</div>
 			<script>
 				player("Luuk_T", "1", true);
 				player("Esmee_T", "2", true);

@@ -21,11 +21,11 @@ button {
 	font-family: "xband";
 	border-radius: 4px;
 	font-size: 30px;
-	transition: all 0.3s ease-in;
+	transition: all 1s cubic-bezier(1, -0.01, 0.24, 0.96);
 }
 
 button:hover {
-	transition: all 0.3s ease-in;
+	transition: all 1s cubic-bezier(1, -0.04, 0.33, 0.98);
 	transform: scale(1.1);
 	background-color: darkslategray;
 	color: white;
@@ -78,7 +78,7 @@ a:hover {
 }
 
 .player1, .player2, .player3, .player4, .player5, .player6, .player7, .player8 {
-	transition: all 0.5s ease-in;
+	transition: all 1s cubic-bezier(1, -0.01, 0.37, 0.98);
 	text-align: center;
 	align-items: center;
 	font-family: "xband";
@@ -86,11 +86,11 @@ a:hover {
 }
 
 .player1 img, .player2 img, .player3 img, .player4 img, .player5 img, .player6 img, .player7 img, .player8 img{
-	transition: all 0.5s ease-in;
+	transition: all 1s cubic-bezier(0.86, 0.01, 0.37, 1.01);
 }
 
 .player1:hover, .player2:hover, .player3:hover, .player4:hover, .player5:hover, .player6:hover, .player7:hover, .player8:hover {
-	transition: all 0.5s ease-in;
+	transition: all 1s cubic-bezier(0.94, -0.04, 0.38, 1.01);
 	text-align: center;
 	align-items: center;
 	font-family: "xband";
@@ -100,7 +100,7 @@ a:hover {
 }
 
 .player1:hover img, .player2:hover img, .player3:hover img, .player4:hover img, .player5:hover img, .player6:hover img, .player7:hover img, .player8:hover img {
-	transition: all 0.5s ease-in;
+	transition: all 1s cubic-bezier(0.86, 0.01, 0.37, 1.01);
 	transform: scale(1.5);
 }
 
@@ -112,7 +112,7 @@ a:hover {
 }
 
 .marges h2{
-	transition: all 0.5s ease-in;
+	transition: all 1s cubic-bezier(0.86, 0.01, 0.37, 1.01);
 	font-size: 60px;
 	font-family: "xband";
 	text-align: center;
@@ -120,9 +120,18 @@ a:hover {
 }
 
 .marges h2:hover{
-	transition: all 0.5s ease-in;
-	transform: rotate(5deg);
-	font-size: 90px;
+	transition: all 1s cubic-bezier(0.86, 0.01, 0.37, 1.01);
+	font-size: 70px;
+}
+
+.footer {
+	align-items: center;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.footer button{
+	width: 500px;
 }
 
 #player1img, #player2img, #player3img, #player4img, #player5img, #player6img, #player7img, #player8img {
