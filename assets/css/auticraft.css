@@ -34,16 +34,161 @@ html {
 	transform: scale(0.00001);
 }
 
+.rules {
+	transition: ease-in 0.5s all;
+	height: 200px;
+	width: 50%;
+  	margin: 0 auto;
+	width: 984px;
+	background-color: rgb(38, 38, 38);
+}
+
 .rules h1, h2{
+	transition: ease-in 0.5s all;
+	color: white;
+	text-align: center;
+	font-size: 60px;
+}
+
+.rules h1{
+	transform: scale(1);
+	transition: ease-in 0.5s all;
+	line-height: 200px;
+}
+
+.rules h2{
+	transition: ease-in 0.5s all;
+	font-size: 30px;
+	transform: scale(0.00001);
+}
+
+.rules ul{
+	transition: ease-in 0.5s all;
+	color: white;
+	width: 50%;
+  	margin: 0 auto;
+	transform: scale(0.00001);
+}
+
+.rules:hover {
+	transition: ease-in 0.5s all;
+	height: 1000px;
+	width: 984px;
+  	margin: 0 auto;
+	width: 984px;
+	background-color: rgb(38, 38, 38);
+}
+
+.rules:hover h1, h2{
+	transition: ease-in 0.5s all;
+	color: white;
 	text-align: center;
 	font-size: 40px;
 }
 
-.rules h2{
+.rules:hover h1{
+	transform: scale(2);
+	transition: ease-in 0.5s all;
+	line-height: 199px;
+}
+
+.rules:hover h2{
+	transition: ease-in 0.5s all;
+	font-size: 30px;
+	transform: scale(1);
+}
+
+.rules:hover ul{
+	transition: ease-in 0.5s all;
+	color: white;
+	width: 50%;
+  	margin: 0 auto;
+	transform: scale(1);
+}
+
+.shops {
+	transition: ease-in 0.5s all;
+	height: 200px;
+	width: 50%;
+  	margin: 0 auto;
+	width: 984px;
+	background-color: rgb(51, 255, 173);
+	text-align: center;
+}
+
+.shops ul{
+	transition: ease-in 0.5s all;
+	transform: scale(0.0001);
+	color: white;
+	font-size: 
+}
+
+.shops #title{
+	color: white;
+	transition: ease-in 0.5s all;
+	line-height: 200px;
+	font-size: 60px;
+	transform: scale(1);
+}
+
+.shops h2{
+	transition: ease-in 0.5s all;
+	transform: scale(0.0001);
+	font-size: 50px;
+}
+
+.shops h3{
+	color: white;
+	transition: ease-in 0.5s all;
+	transform: scale(0.0001);
+	font-size: 40px;
+}
+
+.shops h4{
+	color: white;
+	transition: ease-in 0.5s all;
+	transform: scale(0.0001);
 	font-size: 30px;
 }
 
-.rules ul{
+.shops ul{
+	transition: ease-in 0.5s all;
 	width: 50%;
   	margin: 0 auto;
+	transform: scale(0.00001);
+}
+
+.shops:hover {
+	width: 984px
+	transition: ease-in 0.5s all;
+	height: 2000px;
+}
+
+.shops:hover #title{
+	transition: ease-in 0.5s all;
+	line-height: 200px;
+	font-size: 40px;
+	transform: scale(2);
+}
+
+.shops:hover h2{
+	transition: ease-in 0.5s all;
+	transform: scale(1);
+}
+
+.shops:hover h3{
+	transition: ease-in 0.5s all;
+	transform: scale(1);
+}
+
+.shops:hover h4{
+	transition: ease-in 0.5s all;
+	transform: scale(1);
+}
+
+.shops:hover ul{
+	font-size: 30px;
+	transition: ease-in 0.5s all;
+	transform: scale(1);
+	color: white;
 }
