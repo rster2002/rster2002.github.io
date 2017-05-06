@@ -1,0 +1,49 @@
+html {
+	height: 100vh;
+	widows: 100vw;
+	align-items: center;
+	font-family: sans-serif;
+}
+
+.map {
+	transition: ease-in 0.5s all;
+	width: 50%;
+  	margin: 0 auto;
+	text-align: center;
+	background-image: url(../images/map.png);
+	width: 984px;
+	height: 200px;
+}
+
+.map h1{
+	transition: ease-in 0.5s all;
+	font-size: 50px;
+	line-height: 200px;
+	color: white;
+	visibility: visible;
+	transform: scale(1);
+}
+
+.map:active {
+	transition: ease-in 0.5s all;
+	height: 738px;
+}
+
+.map:active h1{
+	transition: ease-in 0.5s all;
+	transform: scale(0.00001);
+}
+
+.rules h1, h2{
+	text-align: center;
+	font-size: 40px;
+}
+
+.rules h2{
+	font-size: 30px;
+}
+
+.rules ul{
+	width: 50%;
+  	margin: 0 auto;
+}

@@ -1,0 +1,16 @@
+input {
+	transition: ease-in 0.5s all;
+    border: none;
+    border-bottom: 2px solid black;
+}
+
+input:focus {
+	transition: ease-in 0.5s all;
+	transform: scale(1.01);
+    border: none;
+    border-bottom: 2px solid black;
+}
+
+.main {
+	align-items: center;
+}
