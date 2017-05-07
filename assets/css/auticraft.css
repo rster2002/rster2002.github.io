@@ -73,7 +73,7 @@ html {
 .rules:hover {
 	transition: ease-in 0.5s all;
 	height: 1000px;
-	width: 984px;
+	width: 1000px;
   	margin: 0 auto;
 	width: 984px;
 	background-color: rgb(38, 38, 38);
@@ -159,7 +159,7 @@ html {
 }
 
 .shops:hover {
-	width: 984px
+	width: 1000px
 	transition: ease-in 0.5s all;
 	height: 2000px;
 }

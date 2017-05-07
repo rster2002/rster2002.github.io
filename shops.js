@@ -1,4 +1,11 @@
 defineUser("rster2002");
+defineShop("rster2002", "Paarden shop", "overworld: x: -111 y: -234");
+defineItem("rster2002", "Paarden shop", "sloom paard (huren)", "1", "1", "per rl dag");
+defineItem("rster2002", "Paarden shop", "gemiddeld paard (huren)", "1", "2", "per rl dag");
+defineItem("rster2002", "Paarden shop", "snel paard (huren)", "1", "3", "per rl dag");
+defineItem("rster2002", "Paarden shop", "sloom paard (kopen)", "1", "5", null);
+defineItem("rster2002", "Paarden shop", "gemiddeld paard (kopen)", "1", "15", null);
+defineItem("rster2002", "Paarden shop", "snel paard (kopen)", "1", "25", null);
 defineUser("Pyrollenium");
 defineUser("Luuk_T");
 defineUser("Vorlands");

@@ -36,16 +36,20 @@ function defineShop(username, shopName, coords) {
 	
 	var element = document.createElement("ul");
 	element.id = username + "_" + shopName + "_items";
-	var content = document.createTextNode("items");
+	var content = document.createTextNode("goederen");
 	element.appendChild(content);
 	document.getElementById(username + "_" + shopName).appendChild(element);
 	shopHeight += 20
 	document.getElementById("shops").style = shopHeight + 'px';
 }
 
-function defineItem(username, shopName, itemName, getNumber, payNumber) {
+function defineItem(username, shopName, itemName, getNumber, payNumber, per) {
 	var element = document.createElement("li");
-	var content = document.createTextNode(getNumber + " " + itemName + " " + payNumber + " dia");
+	if (per === null) {
+		var content = document.createTextNode(getNumber + " " + itemName + " " + payNumber + " dia");
+	} else {
+		var content = document.createTextNode(getNumber + " " + itemName + " " + payNumber + " dia " + per);
+	}
 	element.appendChild(content);
 	document.getElementById(username + "_" + shopName + "_items").appendChild(element);
 	shopHeight += 20
