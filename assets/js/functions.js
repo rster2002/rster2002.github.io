@@ -183,14 +183,14 @@ function password(password) {
 					alert("Dit wachtwoord is niet juist")
 					location.href="index.html";
 				} else {
-					localStorage.setItem("passwordCache", input);
+					localStorage.setItem("passwordCache_" + pageId, input);
 				}
 			}
 		}
 	} else {
 		var input = encrypt(urlParam("password"));
 		if (input === password) {
-			localStorage.setItem("passwordCache", input);
+			localStorage.setItem("passwordCache_" + pageId, input);
 		} else {
 			input = encrypt(prompt("Type het wachtwoord in!"));
 			if (input !== password) {
