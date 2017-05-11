@@ -1,21 +1,63 @@
 <!DOCTYPE html>
 
+<!--
 <html>
 	<head>
 		<title>Test breal</title>
 		<style>
-			input[type='text'] {
-				border: none;
-				border-bottom: 2px solid blue;
-			}
-			input[type='text']:focus {
-				transition: all
-				border: none;
-				border-bottom: 2px solid blue;
+			.test {
+				background-image: url(assets/images/map.png);
+				width: 984px;
+				height: 738px;
 			}
 		</style>
+		<script>
+			function read(e) {
+				var result_x = document.getElementById("x");
+				var result_y = document.getElementById("y");
+				result_x.innerHTML = e.clientX;
+				result_y.innerHTML = e.clientY;
+				var x = e.clientX;
+				var y = e.clientY;
+				if (y >= 90) {
+					if (x <= 991) {
+						var marginTop = y - 90;
+						document.getElementById("text").style = "margin-top:" + String(marginTop) + "px;"
+						document.getElementById("text").style = "margin-left:" + String(x) + "px;"
+					}
+				}
+			}
+			document.onmousemove = read;
+		</script>
 	</head>
 	<body>
-		<input type="text">
+		<p id="x">x</p>
+		<p id="y">y</p>
+		<div class="test">
+			<div>
+				<h1 id="text">text</h1>
+			</div>
+		</div>
+	</body>
+</html>
+-->
+
+<html>
+	<head>
+		<title>Passing</title>
+	</head>
+	<body>
+		<p id="output"></p>
+		<p id="output2"></p>
+		<script>
+			var urlParam = function(name, w){
+				w = w || window;
+				var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
+					val = w.location.search.match(rx);
+				return !val ? '':val[1];
+			}
+			document.getElementById("output").innerHTML = urlParam("test");
+			document.getElementById("output2").innerHTML = urlParam("test2");
+		</script>
 	</body>
 </html>

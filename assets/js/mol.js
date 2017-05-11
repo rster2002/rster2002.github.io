@@ -2,6 +2,7 @@ pot = 9050;
 total = 24400;
 next = "May 14, 2017 00:00:00"
 			// Set the date we're counting down to
+			document.getElementById("timer").innerHTML = "Onbepaalt";
 			var countDownDate = new Date(next).getTime();
 
 			// Update the count down every 1 second
@@ -20,8 +21,8 @@ next = "May 14, 2017 00:00:00"
 			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 			  // Display the result in the element with id="demo"
-			  document.getElementById("timer").innerHTML = days + "d " + hours + "h "
-			  + minutes + "m " + seconds + "s ";
+			  /* document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+			  + minutes + "m " + seconds + "s "; */
 
 			  // If the count down is finished, write some text 
 			  if (distance < 0) {

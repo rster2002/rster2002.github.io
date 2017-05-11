@@ -155,7 +155,7 @@ function external() {
 	localStorage.removeItem("red");
 	localStorage.removeItem("type");
 	localStorage.removeItem("displayName");
-	location.href=url;
+	location.href = url;
 }
 
 function encrypt(input) {
@@ -171,24 +171,34 @@ function encrypt(input) {
 }
 
 function password(password) {
-	if (localStoorage.getItem("passwordCache_" + pageId)) {
+	if (localStorage.getItem("passwordCache_" + pageId)) {
 		input = localStorage.getItem("passwordCache_" + pageId);
 		if (input !== password) {
+			var input = encrypt(urlParam("password"));
+			if (input === password) {
+				localStorage.setItem("passwordCache", input);
+			} else {
+				var input = encrypt(prompt("Type het wachtwoord in!"));
+				if (input !== password) {
+					alert("Dit wachtwoord is niet juist")
+					location.href="index.html";
+				} else {
+					localStorage.setItem("passwordCache", input);
+				}
+			}
+		}
+	} else {
+		var input = encrypt(urlParam("password"));
+		if (input === password) {
+			localStorage.setItem("passwordCache", input);
+		} else {
 			input = encrypt(prompt("Type het wachtwoord in!"));
 			if (input !== password) {
 				alert("Dit wachtwoord is niet juist")
 				location.href="index.html";
 			} else {
-				localStorage.setItem("passwordCache", input);
+				localStorage.setItem("passwordCache_" + pageId, input);
 			}
-		}
-	} else {
-		input = encrypt(prompt("Type het wachtwoord in!"));
-		if (input !== password) {
-			alert("Dit wachtwoord is niet juist")
-			location.href="index.html";
-		} else {
-			localStorage.setItem("passwordCache_" + pageId, input);
 		}
 	}
 }
@@ -199,6 +209,12 @@ function molReset() {
 	location.href=pageId + ".html";
 }
 
+var urlParam = function(name, w){
+	w = w || window;
+	var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
+	val = w.location.search.match(rx);
+	return !val ? '':val[1];
+}
 
 script = true;
 }
