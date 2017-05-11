@@ -163,11 +163,27 @@ function encrypt(input) {
 		alert("Je moet iets invullen");
 		location.href="index.html";
 	}
-	rawstr = '';
+	var rawstr = '';
 	for (var char of input) {
 		rawstr += char.charCodeAt();
 	}
-	return rawstr;
+	var rawstr2 = '';
+	for (var char of rawstr) {
+		rawstr2 += char.charCodeAt();
+	}
+	var rawstr3 = '';
+	for (var char of rawstr2) {
+		rawstr3 += char.charCodeAt();
+	}
+	var rawstr4 = '';
+	for (var char of rawstr3) {
+		rawstr4 += char.charCodeAt();
+	}
+	var rawstr5 = '';
+	for (var char of rawstr4) {
+		rawstr5 += char.charCodeAt();
+	}
+	return rawstr5;
 }
 
 function password(password) {
