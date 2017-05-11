@@ -176,7 +176,7 @@ function password(password) {
 		if (input !== password) {
 			var input = encrypt(urlParam("password"));
 			if (input === password) {
-				localStorage.setItem("passwordCache", input);
+				localStorage.setItem("passwordCache_" + pageId, input);
 			} else {
 				var input = encrypt(prompt("Type het wachtwoord in!"));
 				if (input !== password) {
