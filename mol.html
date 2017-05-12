@@ -17,6 +17,14 @@
 	<body>
 		<script src="assets/js/library/js-nacl-master/lib/nacl_factory.js"></script>
 		<script>
+		if (localStorage.getItem("reset") === "1") {
+			console.log("already reset")
+		} else {
+			localStorage.removeItem("passwordCache_mol");
+			localStorage.removeItem("passwordCache_pot");
+			localStorage.setItem("reset", "1");
+			location.href=pageId + ".html";
+		}
 			password("55ce37080b0b5de24ad236ed481f182dcb3a94a0dc936eb139d158af7bea6b9cdd9030acfa9e3e05d6bd8be4ef773041d0c6a0d21448ada99a57ec75d5b2cb51");
 		</script>
 		<noscript>You dont have javascript enabled or your browser doesnt support it</noscript>
