@@ -44,20 +44,21 @@
 
 <html>
 	<head>
-		<title>Passing</title>
+		<title>encrypt</title>
+		<script src="assets/js/library/js-nacl-master/lib/nacl_factory.js">
+			function encrypt(input) {
+				alert(nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(randomHex + nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(input)))))));
+			}
+		</script>
 	</head>
 	<body>
-		<p id="output"></p>
-		<p id="output2"></p>
 		<script>
-			var urlParam = function(name, w){
-				w = w || window;
-				var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
-					val = w.location.search.match(rx);
-				return !val ? '':val[1];
+		  nacl_factory.instantiate(function (nacl) {
+			alert(nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8("String"))));
+		  });
+			function encrypt(input) {
+				alert(nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(randomHex + nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(input)))))));
 			}
-			document.getElementById("output").innerHTML = urlParam("test");
-			document.getElementById("output2").innerHTML = urlParam("test2");
 		</script>
 	</body>
 </html>

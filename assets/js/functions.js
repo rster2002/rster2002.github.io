@@ -1,3 +1,13 @@
+nacl_factory.instantiate(function (nacl) {
+    randomHex = nacl.to_hex(nacl.random_bytes(16));
+});
+
+if (sessionStorage.getItem("randomHex")) {
+	console.log("found hex");
+} else {
+	sessionStorage.setItem("randomHex", randomHex);
+}
+
 try {
 // checking for browser
 isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
@@ -14,7 +24,7 @@ if (isIE === true) {
 	} else {
 		if (localStorage.getItem("IE") === "false") {
 			if (isIE) {
-				if (confirm("Internet exploder is niet volledig ondersteund. Wilt je doorgaan?")) {
+				if (confirm("Internet exploder is niet volledig ondersteund. Wil je doorgaan?")) {
 					localStorage.setItem("IE", "true");
 				} else {
 					localStorage.setItem("IE", "false");
@@ -159,34 +169,34 @@ function external() {
 }
 
 function encrypt(input) {
-	if (input === null) {
-		alert("Je moet iets invullen");
-		location.href="index.html";
-	}
-	var rawstr = '';
-	for (var char of input) {
+	var rawstr = ""
+	for (var char in input) {
 		rawstr += char.charCodeAt();
 	}
-	var rawstr2 = '';
-	for (var char of rawstr) {
-		rawstr2 += char.charCodeAt();
+	nacl_factory.instantiate(function (nacl) {
+    	re = nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(randomHex + nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(input))))));
+	});
+	return re;
+}
+	
+function encryptWithoutRandom(input) {
+	var rawstr = ""
+	for (var char in input) {
+		rawstr += char.charCodeAt();
 	}
-	var rawstr3 = '';
-	for (var char of rawstr2) {
-		rawstr3 += char.charCodeAt();
-	}
-	var rawstr4 = '';
-	for (var char of rawstr3) {
-		rawstr4 += char.charCodeAt();
-	}
-	var rawstr5 = '';
-	for (var char of rawstr4) {
-		rawstr5 += char.charCodeAt();
-	}
-	return rawstr5;
+	nacl_factory.instantiate(function (nacl) {
+    	re = nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(input)));
+	});
+	return re;
 }
 
 function password(password) {
+	if (sessionStorage.getItem("randomHex")) {
+		randomHex = sessionStorage.getItem("randomHex");
+	}
+	nacl_factory.instantiate(function (nacl) {
+    	password = nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(randomHex + password)));
+	});
 	if (localStorage.getItem("passwordCache_" + pageId)) {
 		input = localStorage.getItem("passwordCache_" + pageId);
 		if (input !== password) {
