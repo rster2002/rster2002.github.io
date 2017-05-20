@@ -45,7 +45,7 @@ function defineShop(username, shopName, coords) {
 
 function defineItem(username, shopName, itemName, getNumber, payNumber, per) {
 	var element = document.createElement("li");
-	if (per === null) {
+	if (per === null || per === false) {
 		var content = document.createTextNode(getNumber + " " + itemName + " " + payNumber + " dia");
 	} else {
 		var content = document.createTextNode(getNumber + " " + itemName + " " + payNumber + " dia " + per);

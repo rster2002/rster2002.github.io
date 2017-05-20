@@ -41,7 +41,8 @@ function listen(id, codeId) {
 
 /* add listeners under here */
 
-listen("compleetSetup", "compleetSetup")
+listen("compleetSetup", "compleetSetup");
+listen("register", "register");
 
 /* end of listeners */
 
