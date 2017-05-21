@@ -8,4 +8,4 @@ defineItem("rster2002", "Paarden shop", "gemiddeld paard (kopen)", "1", "15", nu
 defineItem("rster2002", "Paarden shop", "snel paard (kopen)", "1", "25", null);
 defineUser("Luuk_T");
 defineShop("Luuk_T", "Elytra shop", "overworld: x: -72 z: -1390");
-defineItem("Luuk_T", "Elytra shop", "elytra", "1", "20", false);
+defineItem("Luuk_T", "Elytra shop", "elytra", "1", "20", null);

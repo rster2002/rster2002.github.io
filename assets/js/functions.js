@@ -235,6 +235,11 @@ function molReset() {
 	location.href=pageId + ".html";
 }
 
+function lock() {
+	alert("this page is locked");
+	location.href="index.html";
+}
+	
 var urlParam = function(name, w){
 	w = w || window;
 	var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
