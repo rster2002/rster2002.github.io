@@ -1,194 +1,188 @@
+@font-face {
+    font-family: Noto Sans;
+    src: url(fonts/NotoSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: minecraft;
+    src: url(fonts/Minecrafter.Reg.ttf);
+}
+
 html {
-	height: 100vh;
-	widows: 100vw;
-	align-items: center;
+	width: 100vw;
+	overflow-x: hidden;
 	font-family: sans-serif;
 }
 
-.map {
-	transition: ease-in 0.5s all;
-	width: 50%;
-  	margin: 0 auto;
+.header {
+	width: 100%;
+	height: 820px;
+	margin-top: -102px;
+	margin-left: -10px;
+	background: url(../images/auticraft/header.jpg) no-repeat center;
+	background-attachment: fixed;
+	background-size: cover;
 	text-align: center;
-	background-image: url(../images/map.png);
-	width: 984px;
-	height: 200px;
 }
 
-.map h1{
-	transition: ease-in 0.5s all;
-	font-size: 50px;
-	line-height: 200px;
+.header h1 {
+	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+	font-family: "minecraft";
 	color: white;
-	visibility: visible;
-	transform: scale(1);
-}
-
-.map:active {
-	transition: ease-in 0.5s all;
-	height: 738px;
-}
-
-.map:active h1{
-	transition: ease-in 0.5s all;
-	transform: scale(0.00001);
+	font-size: 150px;
+	line-height: 820px;
 }
 
 .rules {
-	transition: ease-in 0.5s all;
-	height: 200px;
-	width: 50%;
-  	margin: 0 auto;
-	width: 984px;
-	background-color: rgb(38, 38, 38);
-}
-
-.rules h1, h2{
-	transition: ease-in 0.5s all;
-	color: white;
+	margin-top: -21px;
+	margin-left: -10px;
+	background: url(../images/auticraft/minecraft.jpg) no-repeat center;
+	background-attachment: fixed;
+	background-size: cover;
+	align-items: center;
 	text-align: center;
-	font-size: 60px;
+	color: white;
+	height: 500px;
+	width: 100%;
 }
 
-.rules h1{
-	transform: scale(1);
-	transition: ease-in 0.5s all;
-	line-height: 200px;
+.minecraft_button {
+	background-color: rgb(0, 187, 0);
+	border-top: 5px solid rgb(0, 220, 0);
+	border-left: 5px solid rgb(0, 100, 0);
+	border-bottom: 5px solid rgb(0, 130, 0);
+	border-right: 5px solid rgb(0, 190, 0);
 }
 
-.rules h2{
-	transition: ease-in 0.5s all;
+.minecraft_button a {
+	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+	font-family: 'Noto Sans', sans-serif;
 	font-size: 30px;
-	transform: scale(0.00001);
+	line-height: 140px;
+	cursor: pointer;
 }
 
-.rules ul{
-	transition: ease-in 0.5s all;
-	color: white;
-	width: 50%;
-  	margin: 0 auto;
-	transform: scale(0.00001);
+.rules_button {
+	transition: 0.2s ease-in all;
+	position: absolute;
+	margin-top: 150px;
+	margin-left: 40vw;
+	background-color: rgb(0, 185, 0);
+	border-top: 5px solid rgb(0, 220, 0);
+	border-left: 5px solid rgb(0, 100, 0);
+	border-bottom: 5px solid rgb(0, 130, 0);
+	border-right: 5px solid rgb(0, 190, 0);
+	cursor: pointer;
+	width: 300px;
+	height: 140px;
 }
 
-.rules:hover {
-	transition: ease-in 0.5s all;
-	height: 1000px;
-	width: 1000px;
-  	margin: 0 auto;
-	width: 984px;
-	background-color: rgb(38, 38, 38);
-}
-
-.rules:hover h1, h2{
-	transition: ease-in 0.5s all;
-	color: white;
-	text-align: center;
-	font-size: 40px;
-}
-
-.rules:hover h1{
-	transform: scale(2);
-	transition: ease-in 0.5s all;
-	line-height: 199px;
-}
-
-.rules:hover h2{
-	transition: ease-in 0.5s all;
+.rules_button a {
+	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+	font-family: 'Noto Sans', sans-serif;
 	font-size: 30px;
-	transform: scale(1);
+	line-height: 140px;
+	cursor: pointer;
 }
 
-.rules:hover ul{
-	transition: ease-in 0.5s all;
-	color: white;
-	width: 50%;
-  	margin: 0 auto;
-	transform: scale(1);
+.rules_button:hover {
+	transition: 0.2s ease-in all;
+	transform: scale(1.2);
+	background-color: rgb(40, 40, 40);
+	border-top: 5px solid rgb(55, 55, 55);
+	border-left: 5px solid rgb(10, 10, 10);
+	border-bottom: 5px solid rgb(20, 20, 20);
+	border-right: 5px solid rgb(30, 30, 30);
 }
 
 .shops {
-	transition: ease-in 0.5s all;
-	height: 200px;
-	width: 50%;
-  	margin: 0 auto;
-	width: 984px;
-	background-color: rgb(51, 255, 173);
+	margin-top: -21px;
+	margin-left: -10px;
+	background: url(../images/auticraft/shops.jpg) no-repeat center;
+	background-attachment: fixed;
+	background-size: cover;
+	align-items: center;
 	text-align: center;
-}
-
-.shops ul{
-	transition: ease-in 0.5s all;
-	transform: scale(0.0001);
 	color: white;
-	font-size: 
+	height: 500px;
+	width: 100%;
 }
 
-.shops #title{
-	color: white;
-	transition: ease-in 0.5s all;
-	line-height: 200px;
-	font-size: 60px;
-	transform: scale(1);
+.shops_button {
+	transition: 0.2s ease-in all;
+	position: absolute;
+	margin-top: 150px;
+	margin-left: 40vw;
+	background-color: rgb(0, 185, 0);
+	border-top: 5px solid rgb(0, 220, 0);
+	border-left: 5px solid rgb(0, 100, 0);
+	border-bottom: 5px solid rgb(0, 130, 0);
+	border-right: 5px solid rgb(0, 190, 0);
+	cursor: pointer;
+	width: 300px;
+	height: 140px;
 }
 
-.shops h2{
-	transition: ease-in 0.5s all;
-	transform: scale(0.0001);
-	font-size: 50px;
-}
-
-.shops h3{
-	color: white;
-	transition: ease-in 0.5s all;
-	transform: scale(0.0001);
-	font-size: 40px;
-}
-
-.shops h4{
-	color: white;
-	transition: ease-in 0.5s all;
-	transform: scale(0.0001);
+.shops_button a {
+	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+	font-family: 'Noto Sans', sans-serif;
 	font-size: 30px;
+	line-height: 140px;
+	cursor: pointer;
 }
 
-.shops ul{
-	transition: ease-in 0.5s all;
-	width: 50%;
-  	margin: 0 auto;
-	transform: scale(0.00001);
+.shops_button:hover {
+	transition: 0.2s ease-in all;
+	transform: scale(1.2);
+	background-color: rgb(40, 40, 40);
+	border-top: 5px solid rgb(55, 55, 55);
+	border-left: 5px solid rgb(10, 10, 10);
+	border-bottom: 5px solid rgb(20, 20, 20);
+	border-right: 5px solid rgb(30, 30, 30);
 }
 
-.shops:hover {
-	width: 1000px
-	transition: ease-in 0.5s all;
-	height: 2000px;
-}
-
-.shops:hover #title{
-	transition: ease-in 0.5s all;
-	line-height: 200px;
-	font-size: 40px;
-	transform: scale(2);
-}
-
-.shops:hover h2{
-	transition: ease-in 0.5s all;
-	transform: scale(1);
-}
-
-.shops:hover h3{
-	transition: ease-in 0.5s all;
-	transform: scale(1);
-}
-
-.shops:hover h4{
-	transition: ease-in 0.5s all;
-	transform: scale(1);
-}
-
-.shops:hover ul{
-	font-size: 30px;
-	transition: ease-in 0.5s all;
-	transform: scale(1);
+.map {
+	margin-top: -21px;
+	margin-left: -10px;
+	background: url(../images/auticraft/mapheader.jpg) no-repeat center;
+	background-attachment: fixed;
+	background-size: cover;
+	align-items: center;
+	text-align: center;
 	color: white;
+	height: 500px;
+	width: 100%;
+}
+
+.map_button {
+	transition: 0.2s ease-in all;
+	position: absolute;
+	margin-top: 150px;
+	margin-left: 40vw;
+	background-color: rgb(0, 185, 0);
+	border-top: 5px solid rgb(0, 220, 0);
+	border-left: 5px solid rgb(0, 100, 0);
+	border-bottom: 5px solid rgb(0, 130, 0);
+	border-right: 5px solid rgb(0, 190, 0);
+	cursor: pointer;
+	width: 300px;
+	height: 140px;
+}
+
+.map_button a {
+	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 30px;
+	line-height: 140px;
+	cursor: pointer;
+}
+
+.map_button:hover {
+	transition: 0.2s ease-in all;
+	transform: scale(1.2);
+	background-color: rgb(40, 40, 40);
+	border-top: 5px solid rgb(55, 55, 55);
+	border-left: 5px solid rgb(10, 10, 10);
+	border-bottom: 5px solid rgb(20, 20, 20);
+	border-right: 5px solid rgb(30, 30, 30);
 }

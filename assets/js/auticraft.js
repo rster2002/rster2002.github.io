@@ -13,7 +13,7 @@ function defineUser(username) {
 	shopHeight += 80
 	document.getElementById("shops").style = shopHeight + 'px';
 }
-
+ 
 function defineShop(username, shopName, coords) {
 	var element = document.createElement("div");
 	element.id = username + "_" + shopName;
