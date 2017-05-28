@@ -1,6 +1,6 @@
 articleNr = 0;
 updatesHeight = 50;
-function article(name, img, page) {
+function article(name, img, position, page) {
 	articleNr += 1
 	updatesHeight += 500;
 	document.getElementById("updates").setAttribute("style", "height: " + updatesHeight + "px;");
@@ -28,7 +28,7 @@ function article(name, img, page) {
 	element.style.backgroundImage = "url(" + img + ");";
 	element.setAttribute("id", "img_" + articleNr);
 	document.getElementById("main_" + articleNr).appendChild(element);
-	document.getElementById("img_" + articleNr).setAttribute("style", "background-image: url(" + img + "); width: 99%; height: 300px;");
+	document.getElementById("img_" + articleNr).setAttribute("style", "background-image: url(" + img + "); background-position: " + position + "; width: 99%; height: 300px;");
 	
 	/* Create button */
 	var element = document.createElement("div");
