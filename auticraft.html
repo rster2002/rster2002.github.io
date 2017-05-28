@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="assets/css/auticraft.css">
 		<link rel="icon" href="assets/logo_black.png">
 		<script src="assets/js/auticraft.js"></script>
+		<script src="auticraft/js/update.js"></script>
 		<script>
 			function rules() {
 				location.href='auticraft/rules.html';
@@ -17,6 +18,10 @@
 			
 			function shops() {
 				location.href='auticraft/shops.html';
+			}
+			
+			function skulls() {
+				location.href='auticraft/skulls.html';
 			}
 		</script>
 	</head>
@@ -39,5 +44,14 @@
 				<a>Bekijk de map</a>
 			</div>
 		</div>
+		<div class="skulls">
+			<div class="skulls_button" onclick="skulls()">
+				<a>Bekijk de skulls</a>
+			</div>
+		</div>
+		<div class="updates" id="updates">
+			<h1>Om te lezen</h1>
+		</div>
+		<script src="auticraft/js/updates.js"></script>
 	</body>
 </html>

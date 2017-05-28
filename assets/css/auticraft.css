@@ -9,7 +9,7 @@
 }
 
 html {
-	width: 100vw;
+	width: 100%;
 	overflow-x: hidden;
 	font-family: sans-serif;
 }
@@ -31,6 +31,37 @@ html {
 	color: white;
 	font-size: 150px;
 	line-height: 820px;
+}
+
+.latest-update {
+	margin-top: -30px;
+	margin-left: -10px;
+	background: url(../images/auticraft/soft_background.png) no-repeat center;
+	background-size: cover;
+	align-items: center;
+	text-align: center;
+	color: white;
+	height: 500px;
+	width: 100%;
+}
+
+.latest-update h1 {
+	margin-top: 30px;
+	color: black;
+	font-size: 40px;
+	font-family: 'Noto Sans', sans-serif;
+}
+
+.latest-update .img {
+	margin-top: -30px;
+	margin-left: -10px;
+	background: url(../images/auticraft/soft_background.png) no-repeat center;
+	background-size: cover;
+	align-items: center;
+	text-align: center;
+	color: white;
+	height: 500px;
+	width: 75%;
 }
 
 .rules {
@@ -64,9 +95,9 @@ html {
 
 .rules_button {
 	transition: 0.2s ease-in all;
-	position: absolute;
-	margin-top: 150px;
-	margin-left: 40vw;
+	position: relative;
+	left: 40%;
+	top: 35%;
 	background-color: rgb(0, 185, 0);
 	border-top: 5px solid rgb(0, 220, 0);
 	border-left: 5px solid rgb(0, 100, 0);
@@ -110,9 +141,9 @@ html {
 
 .shops_button {
 	transition: 0.2s ease-in all;
-	position: absolute;
-	margin-top: 150px;
-	margin-left: 40vw;
+	position: relative;
+	left: 40%;
+	top: 35%;
 	background-color: rgb(0, 185, 0);
 	border-top: 5px solid rgb(0, 220, 0);
 	border-left: 5px solid rgb(0, 100, 0);
@@ -156,9 +187,9 @@ html {
 
 .map_button {
 	transition: 0.2s ease-in all;
-	position: absolute;
-	margin-top: 150px;
-	margin-left: 40vw;
+	position: relative;
+	left: 40%;
+	top: 35%;
 	background-color: rgb(0, 185, 0);
 	border-top: 5px solid rgb(0, 220, 0);
 	border-left: 5px solid rgb(0, 100, 0);
@@ -185,4 +216,69 @@ html {
 	border-left: 5px solid rgb(10, 10, 10);
 	border-bottom: 5px solid rgb(20, 20, 20);
 	border-right: 5px solid rgb(30, 30, 30);
+}
+
+.skulls {
+	margin-top: -21px;
+	margin-left: -10px;
+	background: url(../images/auticraft/meincraft.jpg) no-repeat center;
+	background-attachment: fixed;
+	background-size: cover;
+	align-items: center;
+	text-align: center;
+	color: white;
+	height: 500px;
+	width: 100%;
+}
+
+.skulls_button {
+	transition: 0.2s ease-in all;
+	position: relative;
+	left: 40%;
+	top: 35%;
+	background-color: rgb(0, 185, 0);
+	border-top: 5px solid rgb(0, 220, 0);
+	border-left: 5px solid rgb(0, 100, 0);
+	border-bottom: 5px solid rgb(0, 130, 0);
+	border-right: 5px solid rgb(0, 190, 0);
+	cursor: pointer;
+	width: 300px;
+	height: 140px;
+}
+
+.skulls_button a {
+	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 30px;
+	line-height: 140px;
+	cursor: pointer;
+}
+
+.skulls_button:hover {
+	transition: 0.2s ease-in all;
+	transform: scale(1.2);
+	background-color: rgb(40, 40, 40);
+	border-top: 5px solid rgb(55, 55, 55);
+	border-left: 5px solid rgb(10, 10, 10);
+	border-bottom: 5px solid rgb(20, 20, 20);
+	border-right: 5px solid rgb(30, 30, 30);
+}
+
+.updates {
+	margin-left: -10px;
+	margin-top: -30px;
+	background: url(../images/auticraft/soft_background.png) no-repeat center;
+	background-size: cover;
+	align-content: center;
+	align-items: center;
+	text-align: center;
+	height: 500px;
+}
+
+.updates h1 {
+	background: 
+	margin-top: 30px;
+	color: black;
+	font-size: 40px;
+	font-family: 'Noto Sans', sans-serif;
 }
