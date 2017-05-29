@@ -1,5 +1,5 @@
 articleNr = 0;
-updatesHeight = 500;
+updatesHeight = 100;
 function article(name, img, position, page, type) {
 	if (sessionStorage.getItem("filter") === type || sessionStorage.getItem("filter") === "all") {
 		articleNr += 1

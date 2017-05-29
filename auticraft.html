@@ -52,21 +52,24 @@
 		</div>
 		-->
 		<script src="auticraft/js/updates.js"></script>
-		<div class="updates" id="updates">
+		<div class="updates">
 			<h1>Om te lezen</h1>
-			<h1>filter</h1>
-			<div class="all" onclick="articles('all')">
-				<a>alles</a>
+			<div class="filters">
+				<h1>filter</h1>
+				<div class="all" onclick="articles('all')">
+					<a>alles</a>
+				</div>
+				<div class="update" onclick="articles('update')">
+					<a>updates</a>
+				</div>
+				<div class="wedstrijd" onclick="articles('wedstrijd')">
+					<a>wedstrijden</a>
+				</div>
+				<div class="mededeling" onclick="articles('mededeling')">
+					<a>mededelingen</a>
+				</div>
 			</div>
-			<div class="update" onclick="articles('update')">
-				<a>updates</a>
-			</div>
-			<div class="wedstrijd" onclick="articles('wedstrijd')">
-				<a>wedstrijden</a>
-			</div>
-			<div class="mededeling" onclick="articles('mededeling')">
-				<a>mededelingen</a>
-			</div>
+			<div class="updates" id="updates"></div>
 		</div>
 		<script>
 			articles("all");
