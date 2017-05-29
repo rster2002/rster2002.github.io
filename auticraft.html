@@ -30,30 +30,46 @@
 			<h1>AutiCraft</h1>
 		</div>
 		<div class="rules">
-			<div class="rules_button" onclick="rules()">
+			<div class="button" onclick="rules()">
 				<a>Bekijk regels</a>
 			</div>
 		</div>
 		<div class="shops">
-			<div class="shops_button" onclick="shops()">
+			<div class="button" onclick="shops()">
 				<a>Bekijk shops</a>
 			</div>
 		</div>
 		<div class="map">
-			<div class="map_button" onclick="map()">
+			<div class="button" onclick="map()">
 				<a>Bekijk de map</a>
 			</div>
 		</div>
 		<!--
 		<div class="skulls">
-			<div class="skulls_button" onclick="skulls()">
+			<div class="button" onclick="skulls()">
 				<a>Bekijk de skulls</a>
 			</div>
 		</div>
 		-->
+		<script src="auticraft/js/updates.js"></script>
 		<div class="updates" id="updates">
 			<h1>Om te lezen</h1>
+			<h1>filter</h1>
+			<div class="all" onclick="articles('all')">
+				<a>alles</a>
+			</div>
+			<div class="update" onclick="articles('update')">
+				<a>updates</a>
+			</div>
+			<div class="wedstrijd" onclick="articles('wedstrijd')">
+				<a>wedstrijden</a>
+			</div>
+			<div class="mededeling" onclick="articles('mededeling')">
+				<a>mededelingen</a>
+			</div>
 		</div>
-		<script src="auticraft/js/updates.js"></script>
+		<script>
+			articles("all");
+		</script>
 	</body>
 </html>
