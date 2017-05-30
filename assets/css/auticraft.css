@@ -96,7 +96,9 @@ html {
 .button {
 	transition: 0.2s ease-in all;
 	position: relative;
-	left: 40%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 	top: 35%;
 	background-color: rgb(0, 185, 0);
 	border-top: 5px solid rgb(0, 220, 0);
@@ -301,7 +303,9 @@ html {
 .updates {
 	margin-left: -10px;
 	margin-top: -30px;
-	background: url(../images/auticraft/soft_background.png) no-repeat center;
+	background-image: url(../images/auticraft/soft_background.png);
+	background-position: center;
+	background-repeat: repeat;
 	background-size: cover;
 	align-content: center;
 	align-items: center;
@@ -317,133 +321,67 @@ html {
 	font-family: 'Noto Sans', sans-serif;
 }
 
-.all {
+.all, .update, .wedstrijd, .mededeling, .event {
 	transition: 0.2s ease-in all;
 	position: relative;
-	left: 40%;
-	top: 1%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	top: 4%;
+	cursor: pointer;
+	width: 300px;
+	height: 50px;
+	color: white;
+}
+
+.updates a {
+	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 30px;
+	line-height: 50px;
+	cursor: pointer;
+}
+
+.all {
 	background-color: rgb(0, 185, 0);
 	border-top: 5px solid rgb(0, 220, 0);
 	border-left: 5px solid rgb(0, 100, 0);
 	border-bottom: 5px solid rgb(0, 130, 0);
 	border-right: 5px solid rgb(0, 190, 0);
-	cursor: pointer;
-	width: 300px;
-	height: 50px;
-	color: white;
-}
-
-.all a {
-	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
-	font-family: 'Noto Sans', sans-serif;
-	font-size: 30px;
-	line-height: 50px;
-	cursor: pointer;
-}
-
-.all:hover{
-	transition: 0.2s ease-in all;
-	transform: scale(1.2);
-	background-color: rgb(40, 40, 40);
-	border-top: 5px solid rgb(55, 55, 55);
-	border-left: 5px solid rgb(10, 10, 10);
-	border-bottom: 5px solid rgb(20, 20, 20);
-	border-right: 5px solid rgb(30, 30, 30);
 }
 
 .update {
-	transition: 0.2s ease-in all;
-	position: relative;
-	left: 40%;
-	top: 10%;
 	background-color: rgb(0, 130, 0); 
 	border-top: 5px solid rgb(0, 150, 0); 
 	border-left: 5px solid rgb(0, 110, 0); 
 	border-bottom: 5px solid rgb(0, 120, 0); 
 	border-right: 5px solid rgb(0, 140, 0);
-	cursor: pointer;
-	width: 300px;
-	height: 50px;
-	color: white;
-}
-
-.update a {
-	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
-	font-family: 'Noto Sans', sans-serif;
-	font-size: 30px;
-	line-height: 50px;
-	cursor: pointer;
-}
-
-.update:hover {
-	transition: 0.2s ease-in all;
-	transform: scale(1.2);
-	background-color: rgb(40, 40, 40);
-	border-top: 5px solid rgb(55, 55, 55);
-	border-left: 5px solid rgb(10, 10, 10);
-	border-bottom: 5px solid rgb(20, 20, 20);
-	border-right: 5px solid rgb(30, 30, 30);
 }
 
 .wedstrijd {
-	transition: 0.2s ease-in all;
-	position: relative;
-	left: 40%;
-	top: 1.5%;
 	background-color: rgb(170, 0, 0); 
 	border-top: 5px solid rgb(190, 0, 0); 
 	border-left: 5px solid rgb(130, 0, 0); 
 	border-bottom: 5px solid rgb(140, 0, 0); 
 	border-right: 5px solid rgb(160, 0, 0);
-	cursor: pointer;
-	width: 300px;
-	height: 50px;
-	color: white;
-}
-
-.wedstrijd a {
-	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
-	font-family: 'Noto Sans', sans-serif;
-	font-size: 30px;
-	line-height: 50px;
-	cursor: pointer;
-}
-
-.wedstrijd:hover {
-	transition: 0.2s ease-in all;
-	transform: scale(1.2);
-	background-color: rgb(40, 40, 40);
-	border-top: 5px solid rgb(55, 55, 55);
-	border-left: 5px solid rgb(10, 10, 10);
-	border-bottom: 5px solid rgb(20, 20, 20);
-	border-right: 5px solid rgb(30, 30, 30);
 }
 
 .mededeling {
-	transition: 0.2s ease-in all;
-	position: relative;
-	left: 40%;
-	top: 2%;
 	background-color: rgb(80, 80, 220); 
 	border-top: 5px solid rgb(100, 100, 240); 
 	border-left: 5px solid rgb(60, 60, 200); 
 	border-bottom: 5px solid rgb(70, 70, 210); 
 	border-right: 5px solid rgb(90, 90, 230);
-	cursor: pointer;
-	width: 300px;
-	height: 50px;
-	color: white;
+}
+.event {
+	background-color: rgb(210, 140, 0); 
+	border-top: 5px solid rgb(230, 140, 0); 
+	border-left: 5px solid rgb(190, 140, 0); 
+	border-bottom: 5px solid rgb(200, 140, 0); 
+	border-right: 5px solid rgb(220, 140, 0);
 }
 
-.mededeling a {
-	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
-	font-family: 'Noto Sans', sans-serif;
-	font-size: 30px;
-	line-height: 50px;
-	cursor: pointer;
-}
-
-.mededeling:hover {
+.all:hover, .update:hover, .wedstrijd:hover, .mededeling:hover, .event:hover{
 	transition: 0.2s ease-in all;
 	transform: scale(1.2);
 	background-color: rgb(40, 40, 40);

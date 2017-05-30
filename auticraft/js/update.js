@@ -7,7 +7,7 @@ function article(name, img, position, page, type) {
 		document.getElementById("updates").setAttribute("style", "height: " + updatesHeight + "px;");
 		/* Create main div */
 		var element = document.createElement("div");
-		element.setAttribute("style", "position: relative; width: 50%; left: 25%; margin-top: 50px;");
+		element.setAttribute("style", "display:block;margin-left:auto;margin-right:auto;position: relative; width: 50%;margin-top: 50px;");
 		element.setAttribute("id", "main_" + articleNr);
 		document.getElementById("updates").appendChild(element);
 
@@ -33,7 +33,7 @@ function article(name, img, position, page, type) {
 
 		/* Create button */
 		var element = document.createElement("div");
-		element.setAttribute("style", "background-color: rgb(0, 187, 0); border-top: 5px solid rgb(0, 220, 0); border-left: 5px solid rgb(0, 100, 0); border-bottom: 5px solid rgb(0, 130, 0); border-right: 5px solid rgb(0, 190, 0); height: 60px; width: 200px; position: relative; left: 35%; top: 85%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;cursor: pointer;");
+		element.setAttribute("style", "display:block;margin-left:auto;margin-right:auto;background-color: rgb(0, 187, 0); border-top: 5px solid rgb(0, 220, 0); border-left: 5px solid rgb(0, 100, 0); border-bottom: 5px solid rgb(0, 130, 0); border-right: 5px solid rgb(0, 190, 0); height: 60px; width: 200px; position: relative;  top: 85%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;cursor: pointer;");
 		element.setAttribute("id", "button_" + articleNr);
 		element.setAttribute("onclick", "location.href='" + page + "'");
 		document.getElementById("img_" + articleNr).appendChild(element);
@@ -54,19 +54,19 @@ function article(name, img, position, page, type) {
 		var element = document.createElement("div");
 		switch (type) {
 			case 'event':
-				element.setAttribute("style", "background-color: rgb(210, 210, 210); border-top: 5px solid rgb(230, 230, 230); border-left: 5px solid rgb(190, 190, 190); border-bottom: 5px solid rgb(200, 200, 200); border-right: 5px solid rgb(220, 220, 220); height: 40px; width: 100px; position: relative; left: 40%; top: -30%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;");
+				element.setAttribute("style", "display:block;margin-left:auto;margin-right:auto;background-color: rgb(210, 140, 0); border-top: 5px solid rgb(230, 140, 0); border-left: 5px solid rgb(190, 140, 0); border-bottom: 5px solid rgb(200, 140, 0); border-right: 5px solid rgb(220, 140, 0); height: 40px; width: 100px; position: relative; top: -30%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;");
 				break;
 			case 'update':
-				element.setAttribute("style", "background-color: rgb(0, 130, 0); border-top: 5px solid rgb(0, 150, 0); border-left: 5px solid rgb(0, 110, 0); border-bottom: 5px solid rgb(0, 120, 0); border-right: 5px solid rgb(0, 140, 0); height: 40px; width: 120px; position: relative; left: 40%; top: -30%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;");
+				element.setAttribute("style", "display:block;margin-left:auto;margin-right:auto;background-color: rgb(0, 130, 0); border-top: 5px solid rgb(0, 150, 0); border-left: 5px solid rgb(0, 110, 0); border-bottom: 5px solid rgb(0, 120, 0); border-right: 5px solid rgb(0, 140, 0); height: 40px; width: 120px; position: relative; top: -30%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;");
 				break;
 			case 'mededeling':
-				element.setAttribute("style", "background-color: rgb(80, 80, 220); border-top: 5px solid rgb(100, 100, 240); border-left: 5px solid rgb(60, 60, 200); border-bottom: 5px solid rgb(70, 70, 210); border-right: 5px solid rgb(90, 90, 230); height: 40px; width: 200px; position: relative; left: 34%; top: -30%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;");
+				element.setAttribute("style", "display:block;margin-left:auto;margin-right:auto;background-color: rgb(80, 80, 220); border-top: 5px solid rgb(100, 100, 240); border-left: 5px solid rgb(60, 60, 200); border-bottom: 5px solid rgb(70, 70, 210); border-right: 5px solid rgb(90, 90, 230); height: 40px; width: 200px; position: relative; top: -30%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;");
 				break;
 			case 'wedstrijd':
-				element.setAttribute("style", "background-color: rgb(170, 0, 0); border-top: 5px solid rgb(190, 0, 0); border-left: 5px solid rgb(130, 0, 0); border-bottom: 5px solid rgb(140, 0, 0); border-right: 5px solid rgb(160, 0, 0); height: 40px; width: 200px; position: relative; left: 35%; top: -30%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;");
+				element.setAttribute("style", "display:block;margin-left:auto;margin-right:auto;background-color: rgb(170, 0, 0); border-top: 5px solid rgb(190, 0, 0); border-left: 5px solid rgb(130, 0, 0); border-bottom: 5px solid rgb(140, 0, 0); border-right: 5px solid rgb(160, 0, 0); height: 40px; width: 200px; position: relative; top: -30%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;");
 				break;
 			default: 
-				element.setAttribute("style", "background-color: rgb(210, 210, 210); border-top: 5px solid rgb(230, 230, 230); border-left: 5px solid rgb(190, 190, 190); border-bottom: 5px solid rgb(200, 200, 200); border-right: 5px solid rgb(220, 220, 220); height: 40px; width: 100px; position: relative; left: 41%; top: -30%; color: black; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;");
+				element.setAttribute("style", "display:block;margin-left:auto;margin-right:auto;background-color: rgb(210, 210, 210); border-top: 5px solid rgb(230, 230, 230); border-left: 5px solid rgb(190, 190, 190); border-bottom: 5px solid rgb(200, 200, 200); border-right: 5px solid rgb(220, 220, 220); height: 40px; width: 100px; position: relative; top: -30%; color: black; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;");
 				break;
 		}
 		element.setAttribute("id", "type_" + articleNr);
