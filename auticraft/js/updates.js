@@ -24,6 +24,7 @@ function articles(type) {
 			break;
 	}
 	/* articles */
+	article("Paarden korting", "assets/images/auticraft/shops.jpg", "50% 50%","auticraft/articles/event1.html", "event");
 	article("Skulls a.0.8", "assets/images/auticraft/spawn.png", "30% 20%","auticraft/articles/a.0.8.html", "update");
 	article("Komt dat zien", "assets/images/auticraft/meincraft.jpg", "30% 20%","auticraft/articles/default.html", "mededeling");
 	article("Paarden races", "assets/images/auticraft/horse.png", "30% 5%","auticraft/articles/paarden-races.html", "wedstrijd");
