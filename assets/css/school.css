@@ -32,3 +32,19 @@ html {
 	line-height: 500px;
 	font-size: 80px;
 }
+
+.card, .card2 {
+	float: left;
+	position: relative;
+	top: 50px;
+	margin-bottom: 50px;
+	border-radius: 3px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 500px;
+	width: 300px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin-left: 50%;
+	margin-right: auto;
+}

@@ -13,13 +13,19 @@
 		}
 		vak = urlParam('vak');
 		opd = urlParam("opd");
-		location.href="school/" + vak + "/" + opd + ".html";
+		if (vak !== "") {
+			location.href="school/" + vak + "/" + opd + ".html";
+		}
 		</script>
 		<link rel="stylesheet" href="assets/css/school.css">
 	</head>
 	<html>
 		<div class="header">
 			<h1>School</h1>
+		</div>
+		<div class="cards">
+			<div class="card"></div>
+			<div class="card2"></div>
 		</div>
 	</html>
 </html>
