@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>School</title>
+		<script src="assets/js/functions.js"></script>
+		<script>
+		var urlParam = function(name, w){
+			w = w || window;
+			var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
+			val = w.location.search.match(rx);
+			return !val ? '':val[1];
+		}
+		vak = urlParam('vak');
+		opd = urlParam("opd");
+		location.href="school/" + vak + "/" + opd + ".html";
+		</script>
+		<link rel="stylesheet" href="assets/css/school.css">
+	</head>
+	<html>
+		<div class="header">
+			<h1>School</h1>
+		</div>
+	</html>
+</html>
