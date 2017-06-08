@@ -23,6 +23,17 @@
 			function skulls() {
 				location.href='auticraft/skulls.html';
 			}
+			
+			var urlParam = function(name, w){
+			w = w || window;
+			var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
+			val = w.location.search.match(rx);
+			return !val ? '':val[1];
+			}
+			article = urlParam('article');
+			if (article !== "") {
+				location.href="auticraft/articles/" + article + ".html";
+			}
 		</script>
 	</head>
 	<body>
