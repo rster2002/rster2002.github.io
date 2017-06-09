@@ -30,9 +30,9 @@
 			val = w.location.search.match(rx);
 			return !val ? '':val[1];
 			}
-			article = urlParam('article');
-			if (article !== "") {
-				location.href="auticraft/articles/" + article + ".html";
+			var a = urlParam('article');
+			if (a !== "") {
+				location.href="auticraft/articles/" + a + ".html";
 			}
 		</script>
 	</head>

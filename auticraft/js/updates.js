@@ -24,6 +24,7 @@ function articles(type) {
 			break;
 	}
 	/* articles */
+	article("Skulls a.0.10", "assets/images/auticraft/spawn.png", "30% 20%","auticraft/articles/a.0.10.html", "update");
 	article("Skulls a.0.9", "assets/images/auticraft/spawn.png", "30% 20%","auticraft/articles/a.0.9.html", "update");
 	article("Paarden korting", "assets/images/auticraft/shops.jpg", "50% 50%","auticraft/articles/event1.html", "event");
 	article("Skulls a.0.8", "assets/images/auticraft/spawn.png", "30% 20%","auticraft/articles/a.0.8.html", "update");
