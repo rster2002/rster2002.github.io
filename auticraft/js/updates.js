@@ -24,6 +24,7 @@ function articles(type) {
 			break;
 	}
 	/* articles */
+	article("Skulls resetten", "assets/images/auticraft/reset.png", "30% 45%","auticraft/articles/skulls%20reset.html", "mededeling");
 	article("Skulls a.0.12", "assets/images/auticraft/spawn.png", "30% 20%","auticraft/articles/a.0.12.html", "update");
 	article("Skulls a.0.11", "assets/images/auticraft/spawn.png", "30% 20%","auticraft/articles/a.0.11.html", "update");
 	article("Skulls a.0.10", "assets/images/auticraft/spawn.png", "30% 20%","auticraft/articles/a.0.10.html", "update");
