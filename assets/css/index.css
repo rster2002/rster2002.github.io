@@ -3,6 +3,11 @@
 	src: url(fonts/Museo500.otf);
 }
 
+@font-face {
+	font-family: Roboto-Thin;
+	src: url(fonts/roboto/Roboto-Thin.ttf);
+}
+
 html {
 	background-color: rgb(230, 230, 230);
 	width: 100vw;
@@ -10,7 +15,7 @@ html {
 }
 
 .header {
-	margin-top: -60px;
+	margin-top: -90px;
 	margin-left: -8px;
 	background-image: url(../images/mbr-1-2000x1333.jpg);
 	background-attachment: fixed;
@@ -22,9 +27,12 @@ html {
 }
 
 .header h1 {
-	color: rgb(255, 255, 255);
-	font-family: "museo";
-	font-size: 90px;
+	background-image: -webkit-linear-gradient(92deg,#000099,#0099ff);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-font-smoothing: antialiased;
+	font-family: "Roboto-Thin";
+	font-size: 120px;
 	line-height: 800px;
 }
 
@@ -40,6 +48,18 @@ html {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.cards {
+.main .developers {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
 	width: 100%;
+	height: 300px;
+	background-image: -webkit-linear-gradient(92deg,rgb(0, 150, 0),rgb(0,220,0));
+	-webkit-text-fill-color: transparent;
+	-webkit-font-smoothing: antialiased;
+}
+
+.main .developers h1 {
+	color: white;
+	font-family: "Roboto-Thin";
+	font-size: 60px;
 }
