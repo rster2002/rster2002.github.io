@@ -39,6 +39,7 @@ html {
 .main {
 	text-align: center;
 	position: relative;
+	top: -50px;
 	z-index: 2;
 	border-radius: 3px;
 	background-color: rgb(255, 255, 255);
@@ -46,25 +47,57 @@ html {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: -90px;
-	height: 500px;
 	width: 70%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .main h1 {
 	position: relative;
-	top: 50px;
+	padding-top: 50px;
+	padding-bottom: 50px;
 	font-size: 70px;
 	font-family: "Roboto-Thin", "museo";
 }
 
 .check {
-	margin-top: -75px;
+	margin-top: -189px;
 	margin-left: -1%;
-	width: 200%;
-	height: 300px;
-	background-color: #11476d;
+	width: 100%;
+	background-image: url(https://static.pexels.com/photos/429058/pexels-photo-429058.jpeg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
+
+.check .text {
+	text-align: left;
+	position: relative;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	top: -50px;
+	width: 70%;
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 3px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.check .text h1 {
+	padding-left: 50px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	font-size: 100px;
+	font-family: "Roboto-Thin";
+	background-image: -webkit-linear-gradient(92deg,rgb(0,240,240),rgb(0,80,80));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-font-smoothing: antialiased;
+}
+
+.check .text p {
+	
+}
+
 /*
 .icon-scroll,
 .icon-scroll:before {
