@@ -13,8 +13,11 @@
 		}
 		vak = urlParam('vak');
 		opd = urlParam("opd");
-		if (vak !== "") {
+		alt = urlParam("alt");
+		if (alt === "" && vak !== "") {
 			location.href="school/" + vak + "/" + opd + ".html";
+		} else if (alt !== "") {
+			location.href="school/" + vak + "/" + alt + ".html";
 		}
 		</script>
 		<link rel="stylesheet" href="assets/css/school.css">
