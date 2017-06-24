@@ -6,6 +6,18 @@
 		<script src="assets/js/functions.js"></script>
 		<link rel="icon" href="assets/logo_black.png">
 		<link rel="stylesheet" href="assets/css/dev.css">
+		<script>
+		var urlParam = function(name, w){
+		w = w || window;
+		var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
+		val = w.location.search.match(rx);
+		return !val ? '':val[1];
+		}
+		var p = urlParam('prj');
+		if (p !== "") {
+			location.href="dev/projects/" + p + "/main.html";
+		}
+		</script>
 	</head>
 	<body>
 		<div class="header">
@@ -18,6 +30,11 @@
 			</div>
 		</div>
 		<div class="projects">
+			<div class="cards">
+				<div class="project" onclick="location.href='dev/projects/skulls/main.html'">
+					<h1>/skulls</h1>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

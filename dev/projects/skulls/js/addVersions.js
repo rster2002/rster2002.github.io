@@ -31,8 +31,8 @@ function version(name, type, changes) {
 		document.getElementById("versions").appendChild(element);
 		
 		var element = document.createElement("h1");
-		element.innerHTML = name;
-		element.setAttribute("style","line-height:100px;font-size:50px;background-image: " + color);
+		element.innerHTML = "snapshot " + name;
+		element.setAttribute("style","line-height:100px;font-size:4vw;background-image: " + color);
 		document.getElementById(versionNr).appendChild(element);
 	}
 	
@@ -45,8 +45,22 @@ function version(name, type, changes) {
 		document.getElementById("versions").appendChild(element);
 		
 		var element = document.createElement("h1");
-		element.innerHTML = name;
-		element.setAttribute("style","line-height:150px;font-size:100px;background-image: " + color);
+		element.innerHTML = "pre-release " + name;
+		element.setAttribute("style","line-height:150px;font-size:7vw;background-image: " + color);
+		document.getElementById(versionNr).appendChild(element);
+	}
+	
+	if (type === "release") {
+		color = "-webkit-linear-gradient(92deg,rgb(0,240,0),rgb(0,80,0));-webkit-background-clip: text;-webkit-text-fill-color: transparent;-webkit-font-smoothing: antialiased;"
+		var element = document.createElement("div");
+		element.setAttribute("id", versionNr);
+		element.setAttribute("style", "width:60%;height:200px;display:block;margin-left:auto;margin-right:auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:3px;")
+		element.setAttribute("onclick","openPage('" + name + "',[" + changesList + "])");
+		document.getElementById("versions").appendChild(element);
+		
+		var element = document.createElement("h1");
+		element.innerHTML = "release " + name;
+		element.setAttribute("style","line-height:200px;font-size:10vw;background-image: " + color);
 		document.getElementById(versionNr).appendChild(element);
 	}
 }
@@ -59,7 +73,7 @@ function openPage(name, changes) {
 	}
 	var fileName = "'versions/" + projectName + "%20" + name + ".zip'";
 	var opened = window.open('');
-	opened.document.write("<html><head><title>" + name + "</title><link rel='icon' href='https://rster2002.github.io/assets/logo_black.png'><style>html {width: 100vw;overflow-x: hidden;}@font-face {font-family: Roboto-Thin;src: url(../../../assets/css/fonts/roboto/Roboto-Thin.ttf);}.header {width: 110%;height: 500px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-left: -10px;margin-top: -100px;text-align: left;}.header h1 {line-height: 500px;font-size: 150px;font-family: 'Roboto-Thin';padding-left: 60px;background-image: " + color + "}.changes {margin-left: -10px;font-size: 30px;font-family: 'Roboto-Thin';text-align: center;align-items: center;}ul {list-style-type: none;}button {display: block;margin-left: auto;margin-right: auto;padding: 5px 10px;transition: 0.1s ease-in all;font-size: 30px;font-family: 'Roboto-Thin';background-color: rgb(255, 255, 255);border: 0px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 3px;cursor: pointer;}button:hover {transition: 0.1s ease-in all;font-size: 30px;font-family: 'Roboto-Thin';background-color: rgb(255, 255, 255);border: 0px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 3px;cursor: pointer;transform: scale(1.2);}button:active {transition: 0.1s ease-in all;font-size: 30px;font-family: 'Roboto-Thin';background-color: rgb(255, 255, 255);border: 0px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 3px;cursor: pointer;transform: scale(1.3);}</style></head><body><div class='header'><h1>" + name + "</h1></div><div class='changes'><h1>changes</h1><ul id='changes'>" + changesList + "</ul><button onclick=location.href=" + fileName + ">download</button></div></body></html>");
+	opened.document.write("<html><head><title>" + projectName + " " + name + "</title><link rel='icon' href='https://rster2002.github.io/assets/logo_black.png'><style>html {width: 100vw;overflow-x: hidden;}@font-face {font-family: Roboto-Thin;src: url(../../../assets/css/fonts/roboto/Roboto-Thin.ttf);}.header {width: 110%;height: 500px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-left: -10px;margin-top: -100px;text-align: left;}.header h1 {line-height: 500px;font-size: 150px;font-family: 'Roboto-Thin';padding-left: 60px;background-image: " + color + "}.changes {margin-left: -10px;font-size: 30px;font-family: 'Roboto-Thin';text-align: center;align-items: center;}ul {list-style-type: none;text-align:left;width:50%;display:block;margin-left:auto;margin-right:auto;}button {display: block;margin-left: auto;margin-right: auto;padding: 5px 10px;transition: 0.1s ease-in all;font-size: 30px;font-family: 'Roboto-Thin';background-color: rgb(255, 255, 255);border: 0px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 3px;cursor: pointer;}button:hover {transition: 0.1s ease-in all;font-size: 30px;font-family: 'Roboto-Thin';background-color: rgb(255, 255, 255);border: 0px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 3px;cursor: pointer;transform: scale(1.2);}button:active {transition: 0.1s ease-in all;font-size: 30px;font-family: 'Roboto-Thin';background-color: rgb(255, 255, 255);border: 0px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 3px;cursor: pointer;transform: scale(1.3);}</style></head><body><div class='header'><h1>" + projectName + " " + name + "</h1></div><div class='changes'><h1>changes</h1><ul id='changes'>" + changesList + "</ul><button onclick=location.href=" + fileName + ">download</button></div></body></html>");
 }
 /*
 localStorage.setItem('changes',"a.1");

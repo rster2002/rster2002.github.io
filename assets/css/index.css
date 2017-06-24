@@ -1,7 +1,7 @@
 @font-face {
 	font-family: museo;
 	src: url(fonts/Museo500.otf);
-}
+} 
 
 @font-face {
 	font-family: Roboto-Thin;
@@ -80,6 +80,13 @@ html {
 	background-color: rgba(255,255,255,0.5);
 	border-radius: 3px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	transition: 0.2s ease-in all;
+	cursor: pointer;
+}
+
+.check .text:hover {
+	transform: scale(1.1);
+	transition: 0.3s ease-in all;
 }
 
 .check .text h1 {
@@ -94,9 +101,6 @@ html {
 	-webkit-font-smoothing: antialiased;
 }
 
-.check .text p {
-	
-}
 
 /*
 .icon-scroll,
