@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title id="title">School | ned | boekveslag 3</title>
+		<script src="../../assets/js/functions.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+			  // Add smooth scrolling to all links
+			  $("a").on('click', function(event) {
+
+				// Make sure this.hash has a value before overriding default behavior
+				if (this.hash !== "") {
+				  // Prevent default anchor click behavior
+				  event.preventDefault();
+
+				  // Store hash
+				  var hash = this.hash;
+
+				  // Using jQuery's animate() method to add smooth page scroll
+				  // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+				  $('html, body').animate({
+					scrollTop: $(hash).offset().top
+				  }, 2000, function(){
+
+					// Add hash (#) to URL when done scrolling (default click behavior)
+					window.location.hash = hash;
+				  });
+				} // End if
+			  });
+			});
+		</script>
+		<link rel="icon" href="../../assets/logo_black.png">
+		<style>
+			@font-face {
+				font-family: museo;
+				src: url(../../assets/css/fonts/Museo500.otf);
+			}
+			
+			@font-face {
+				font-family: Roboto-Thin;
+				src: url(../../assets/css/fonts/roboto/Roboto-Thin.ttf);
+			}
+
+			html {
+				width: 100vw;
+				overflow-x: hidden;
+				font-family: sans-serif;
+			}
+
+			.header {
+				width: 100%;
+				height: 800px;
+				margin-top: -102px;
+				margin-left: -10px;
+				background: url(https://static.pexels.com/photos/57761/pexels-photo-57761.jpeg) no-repeat center;
+				background-attachment: fixed;
+				background-size: cover;
+				text-align: center;
+			}
+
+			.header h1 {
+				color: white;
+				line-height: 800px;
+				font-size: 150px;
+				font-family: "museo";
+			}
+			
+			.rules {
+				text-align: center;
+				align-items: center;
+			}
+
+			h1 {
+				margin-top: 100px;
+				color: rgb(40, 40, 40);
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 70%;
+				font-size: 50px;
+			}
+
+			p {
+				color: rgb(40, 40, 40);
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 50%;
+				font-size: 30px;
+			}
+
+			.story {
+				text-align: center;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				font-family: "museo";
+			}
+			
+			.story p {
+				text-align: left;
+			}
+
+			ul {
+				text-align: left;
+				padding-left: 10px;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 50%;
+				font-size: 30px;
+			}
+
+			.story img {
+				padding-top: -100px;
+				padding-bottom: -100px;
+				border-radius: 3px;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				width: 100%;
+				height: 100%;
+				transform: scale(0.8);
+			}
+			
+			.story a {
+				color: rgb(0, 160, 0);
+				transition: 0.2s ease-in all;
+				font-size: 30px;
+				margin-top: -100px;
+			}
+			
+			
+			.story a:hover {
+				color: rgb(0, 200, 0);
+				transition: 0.2s ease-in all;
+			}
+			
+			#h1 {
+				color: rgb(0, 160, 0);
+				transition: 0.2s ease-in all;
+				font-size: 50px;
+				margin-top: -100px;
+			}
+			
+			#h1:hover {
+				color: rgb(0, 200, 0);
+				transition: 0.2s ease-in all;
+			}
+			
+			.story .text {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				border-radius: 3px;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				width: 70%;
+			}
+			
+			.story .text h1 {
+				padding: 8px;
+			}
+			
+			.story .text p {
+				width: 80%;
+			}
+			
+			.story .text a {
+				padding-bottom: 10px;
+			}
+			
+			.story button {
+				transition: 0.1s ease-in all;
+				font-size: 30px;
+				font-family: "museo";
+				background-color: rgb(255, 255, 255);
+				border: 0px;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				border-radius: 3px;
+				cursor: pointer;
+			}
+			.story button:hover {
+				transition: 0.1s ease-in all;
+				font-size: 30px;
+				font-family: "museo";
+				background-color: rgb(255, 255, 255);
+				border: 0px;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				border-radius: 3px;
+				cursor: pointer;
+				transform: scale(1.2);
+			}
+			.story button:active {
+				transition: 0.1s ease-in all;
+				font-size: 30px;
+				font-family: "museo";
+				background-color: rgb(255, 255, 255);
+				border: 0px;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				border-radius: 3px;
+				cursor: pointer;
+				transform: scale(1.3);
+			}
+			
+			.story table {
+				font-family: "Roboto-Thin";
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				border-collapse: collapse;
+				width: 60%;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.story td, th {
+				background-image: -webkit-linear-gradient(92deg,#494949,#6f6f6f);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				-webkit-font-smoothing: antialiased;
+				text-align: left;
+				padding: 8px;
+				font-size: 50px;
+				border: 1px solid gray;
+			}
+			.story th {
+				transition: 0.1s ease-in all;
+				background-image: -webkit-linear-gradient(92deg,#26988a,#34e1cb);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				-webkit-font-smoothing: antialiased;
+			}
+
+			.story tr:nth-child(even) {
+				background-color: rgb(245,245,245);
+			}
+			
+			#topButton {
+				display: none;
+				position: fixed;
+				left: 95%;
+				bottom: 50%;
+				z-index: 99;
+			}
+			
+			#topButton a {
+				text-decoration: none;
+				width: 100%;
+			}
+			
+			.story #kop {
+				font-size: 80px;
+				font-family: "Roboto-Thin";
+				background-image: -webkit-linear-gradient(92deg,#26988a,#34e1cb);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				-webkit-font-smoothing: antialiased;
+			}
+		</style>
+		<script>
+			window.onscroll = function() {scrollFunction()};
+
+			function scrollFunction() {
+				if (document.body.scrollTop > 900 || document.documentElement.scrollTop > 900) {
+					document.getElementById("topButton").style.display = "block";
+				} else {
+					document.getElementById("topButton").style.display = "none";
+				}
+			}
+			
+			function sleep(delay) {
+				var start = new Date().getTime();
+				while (new Date().getTime() < start + delay);
+			}
+		</script>
+	</head>
+	<body>
+		<div class="header">
+			<h1 id="header">Boekverslag 3</h1>
+		</div>
+		<div class="story">
+			<a href="#header"><button id="topButton">^</button></a>
+			<h1 id="kop">Verklaring Title</h1>
+			<p>Het boek heet "De bijzondere kinderen van mevrouw Peregrine" omdat het over de kinderen gaat die Mv Peregrine onder haar hoeden heeft genomen.</p>
+			<h1 id="kop">Personages</h1>
+			<p>De hoofdpersoon, Jacob weet in het begin van het verhaal niet dat hij een bijzondere is of heeft er uberhaupt nog nooit over gehoord. Door het verhaal heen ontdenkt hij dat hij zelf bijzonder is. Ook ontdenkt hij de plaats waar zijn Opa een tijd heeft gewoond. Hij ontmoet veel nieuwe mensen waaronder Emma waar hij uiteindelijk ook verlieft op wordt. Hij is kan soms nogal opstandig zijn en dwars. (De volgende informatie is van de film omdat in het boek het uiterlijk niet duidelijk is uitgewerkt) Jacob heeft zwart haar en blauw groene ogen</p>
+			<img src="http://content.internetvideoarchive.com/content/photos/10396/964387_128.jpg">
+			<a href="https://www.google.nl/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj6mbiTnt7UAhWMaVAKHXtfDSYQjRwIBw&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F394346511106517167%2F&psig=AFQjCNFrELKWuxoDGdhG-YMYcvopDWQr2Q&ust=1498660075273753" target="_blank">bron</a>
+			<h1 id="kop">Tijd</h1>
+			<p>De vertelde tijd is chronologisch omdat er geen flashbacks zijn. Het verhaal speelt zich in verschillende tijdzones af omdat Jacob ook tijdreist. Hij is eerst in de 21e eeuw, daarna in de tijd rond 1943.</p>
+			<h1 id="kop">Vertelperspectief</h1>
+			<p>Het verhaal wordt vertelt vanaf het perspectief van Jacob omdat je alleen te weten komt wat Jacob ook te weten komt. Ik herken dit omdat er telkens zoiets wordt gezegt zoals "ik dacht je kunt mijn kont kussen" (Ja dat staat zo in het boek).</p>
+			<h1 id="kop">Spanning</h1>
+			<p>Er wordt voor spanning gezorgt doordat jij alleen maar weet wat Jacob weet waardoor je altijd met dezelfde informatie onbeantwoorden vragen moet beantwoorden.</p>
+			<h1 id="kop">Thema</h1>
+			<p>Het thema van de boeken is dat Jacob en de anderen bijzonderen Mv Peregrine moeten redden van de schepsels en hulsels.</p>
+			<h1 id="kop">Schrijver</h1>
+			<p>Ransom Riggs is geboren in Maryland in de Verenigde Staten. Zijn oplijding was bij de University of Southern California. Hij heeft geen anderen boeken geschreven naast deze reeks (3 boeken). Afkomst kan ik niet vinden.</p>
+			<a href="https://www.scholieren.com/boekverslag/75548" target="_blank"><button>Samenvatting</button></a>
+		</div>
+	</body>
+</html>
