@@ -31,6 +31,7 @@
 			  });
 			});
 		</script>
+		<script src="../../assets/js/print.js"></script>
 		<link rel="icon" href="../../assets/logo_black.png">
 		<style>
 			@font-face {
@@ -112,7 +113,21 @@
 				width: 50%;
 				font-size: 30px;
 			}
-
+						
+			#h1 {
+				color: rgb(0, 160, 0);
+				transition: 0.2s ease-in all;
+				font-size: 50px;
+				margin-top: -100px;
+			}
+			
+			#h1:hover {
+				color: rgb(0, 200, 0);
+				transition: 0.2s ease-in all;
+			}
+			
+			/*story begin*/
+			
 			.story img {
 				padding-top: -100px;
 				padding-bottom: -100px;
@@ -132,18 +147,6 @@
 			
 			
 			.story a:hover {
-				color: rgb(0, 200, 0);
-				transition: 0.2s ease-in all;
-			}
-			
-			#h1 {
-				color: rgb(0, 160, 0);
-				transition: 0.2s ease-in all;
-				font-size: 50px;
-				margin-top: -100px;
-			}
-			
-			#h1:hover {
 				color: rgb(0, 200, 0);
 				transition: 0.2s ease-in all;
 			}
@@ -170,7 +173,7 @@
 			}
 			
 			.story button {
-				transition: 0.1s ease-in all;
+				transition: 0.5s cubic-bezier(0.25, 0.01, 0.05, 0.99) all;
 				font-size: 30px;
 				font-family: "museo";
 				background-color: rgb(255, 255, 255);
@@ -180,7 +183,7 @@
 				cursor: pointer;
 			}
 			.story button:hover {
-				transition: 0.1s ease-in all;
+				transition: 0.5s cubic-bezier(0.99, 0, 0.54, 0.99) all;
 				font-size: 30px;
 				font-family: "museo";
 				background-color: rgb(255, 255, 255);
@@ -191,7 +194,7 @@
 				transform: scale(1.2);
 			}
 			.story button:active {
-				transition: 0.1s ease-in all;
+				transition: 0.5s ease-in all;
 				font-size: 30px;
 				font-family: "museo";
 				background-color: rgb(255, 255, 255);
@@ -234,6 +237,17 @@
 				background-color: rgb(245,245,245);
 			}
 			
+			.story #kop {
+				font-size: 80px;
+				font-family: "Roboto-Thin";
+				background-image: -webkit-linear-gradient(92deg,#26988a,#34e1cb);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			/*story end*/
+			
 			#topButton {
 				display: none;
 				position: fixed;
@@ -245,15 +259,6 @@
 			#topButton a {
 				text-decoration: none;
 				width: 100%;
-			}
-			
-			.story #kop {
-				font-size: 80px;
-				font-family: "Roboto-Thin";
-				background-image: -webkit-linear-gradient(92deg,#26988a,#34e1cb);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				-webkit-font-smoothing: antialiased;
 			}
 		</style>
 		<script>
@@ -272,6 +277,7 @@
 				while (new Date().getTime() < start + delay);
 			}
 		</script>
+		<link rel="stylesheet" href="../css/print.css">
 	</head>
 	<body>
 		<div class="header">
@@ -296,6 +302,25 @@
 			<h1 id="kop">Schrijver</h1>
 			<p>Ransom Riggs is geboren in Maryland in de Verenigde Staten. Zijn oplijding was bij de University of Southern California. Hij heeft geen anderen boeken geschreven naast deze reeks (3 boeken). Afkomst kan ik niet vinden.</p>
 			<a href="https://www.scholieren.com/boekverslag/75548" target="_blank"><button>Samenvatting</button></a>
+			<div id="print" class="print">
+				<h1 id="kop">Verklaring Title</h1>
+				<p>Het boek heet "De bijzondere kinderen van mevrouw Peregrine" omdat het over de kinderen gaat die Mv Peregrine onder haar hoeden heeft genomen.</p>
+				<h1 id="kop">Personages</h1>
+				<p>De hoofdpersoon, Jacob weet in het begin van het verhaal niet dat hij een bijzondere is of heeft er uberhaupt nog nooit over gehoord. Door het verhaal heen ontdenkt hij dat hij zelf bijzonder is. Ook ontdenkt hij de plaats waar zijn Opa een tijd heeft gewoond. Hij ontmoet veel nieuwe mensen waaronder Emma waar hij uiteindelijk ook verlieft op wordt. Hij is kan soms nogal opstandig zijn en dwars. (De volgende informatie is van de film omdat in het boek het uiterlijk niet duidelijk is uitgewerkt) Jacob heeft zwart haar en blauw groene ogen</p>
+				<img src="http://content.internetvideoarchive.com/content/photos/10396/964387_128.jpg">
+				<h1 id="kop">Tijd</h1>
+				<p>De vertelde tijd is chronologisch omdat er geen flashbacks zijn. Het verhaal speelt zich in verschillende tijdzones af omdat Jacob ook tijdreist. Hij is eerst in de 21e eeuw, daarna in de tijd rond 1943.</p>
+				<h1 id="kop">Vertelperspectief</h1>
+				<p>Het verhaal wordt vertelt vanaf het perspectief van Jacob omdat je alleen te weten komt wat Jacob ook te weten komt. Ik herken dit omdat er telkens zoiets wordt gezegt zoals "ik dacht je kunt mijn kont kussen" (Ja dat staat zo in het boek).</p>
+				<h1 id="kop">Spanning</h1>
+				<p>Er wordt voor spanning gezorgt doordat jij alleen maar weet wat Jacob weet waardoor je altijd met dezelfde informatie onbeantwoorden vragen moet beantwoorden.</p>
+				<h1 id="kop">Thema</h1>
+				<p>Het thema van de boeken is dat Jacob en de anderen bijzonderen Mv Peregrine moeten redden van de schepsels en hulsels.</p>
+				<h1 id="kop">Schrijver</h1>
+				<p>Ransom Riggs is geboren in Maryland in de Verenigde Staten. Zijn oplijding was bij de University of Southern California. Hij heeft geen anderen boeken geschreven naast deze reeks (3 boeken). Afkomst kan ik niet vinden.</p>
+			</div>
+			<button onclick="printDiv('print')">print pagina</button>
+			<button onclick="location.href='extra/doc.docx'">download docx</button>
 		</div>
 	</body>
 </html>
