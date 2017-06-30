@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js">
+		$(".inputs").keyup(function () {
+			if (this.value.length == this.maxLength) {
+				$(this).next('.inputs').focus();
+			}
+		});
+		</script>
+		<link href="assets/css/registerId.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="main">
+			<div class="box">
+				<input class="input" maxlength="4">
+				<p>-</p>
+				<input class="input" maxlength="4">
+				<p>-</p>
+				<input class="input" maxlength="4">
+				<p>-</p>
+				<input class="input" maxlength="4">
+			</div>
+		</div>
+	</body>
+</html>
