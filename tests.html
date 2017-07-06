@@ -68,22 +68,22 @@
 <html>
 	<head>
 		<title>discord</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js"></script>
+		<script src="assets/js/library/push.min.js"></script>
 	</head>
 	<body>
+		<button onclick="press()">Press</button>
 		<script>
-			function isonline() {
-				var uri = 'http://217.102.161.71:21025/L'
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET",uri,false);
-				xhr.send(null);
-				if(xhr.status == 200) {
-					//is online
-					return xhr.responseText;
-				}
-				else {
-					//is offline
-					return null;
-				}   
+			function press() {
+				Push.create("Hello world!", {
+					body: "How's it hangin'?",
+					icon: 'icon.png',
+					timeout: 4000,
+					onClick: function () {
+						window.focus();
+						this.close();
+					}
+				});
 			}
 		</script>
 	</body>
