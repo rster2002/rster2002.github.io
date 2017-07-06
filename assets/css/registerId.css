@@ -1,8 +1,20 @@
 html {
 	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+@font-face {
+	font-family: museo;
+	src: url(fonts/Museo500.otf);
+} 
+
+@font-face {
+	font-family: Roboto-Thin;
+	src: url(fonts/roboto/Roboto-Thin.ttf);
 }
 
 .main {
+	margin-top: -47px;
 	margin-left: -10px;
 	width: 100vw;
 	height: 100vh;
@@ -11,15 +23,69 @@ html {
 }
 
 .box {
+	width: 40%;
+	height: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	top: 25%;
 	text-align: center;
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 3px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.box input {
-	width: 30px;
-	float: left;
+.box h1 {
+	font-size: 70px;
+	font-family: "Roboto-Thin";
 }
 
 .box p {
-	width: 20px;
-	float: left;
+	font-family: "Roboto-Thin";
+}
+
+.box input {
+	border-radius: 3px;
+	font-family: "Roboto-Thin";
+	width: 435px;
+	font-size: 45px;
+	height: 50px;
+	border: 0px;
+}
+
+.box button {
+	margin-top: 30px;
+	transition: 0.5s cubic-bezier(0.25, 0.01, 0.05, 0.99) all;
+	font-size: 30px;
+	font-family: "museo";
+	background-color: rgb(255, 255, 255);
+	border: 0px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.box button:hover {
+	transition: 0.5s cubic-bezier(0.99, 0, 0.54, 0.99) all;
+	font-size: 30px;
+	font-family: "museo";
+	background-color: rgb(255, 255, 255);
+	border: 0px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 3px;
+	cursor: pointer;
+	transform: scale(1.2);
+}
+
+.box button:active {
+	transition: 0.5s ease-in all;
+	font-size: 30px;
+	font-family: "museo";
+	background-color: rgb(255, 255, 255);
+	border: 0px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 3px;
+	cursor: pointer;
+	transform: scale(1.3);
 }

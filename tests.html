@@ -68,13 +68,23 @@
 <html>
 	<head>
 		<title>discord</title>
-		<style>
-			img {
-				filter: blur(100%);
-			}
-		</style>
 	</head>
 	<body>
-		<img src="https://static.pexels.com/photos/122429/leaf-nature-green-spring-122429.jpeg">
+		<script>
+			function isonline() {
+				var uri = 'http://217.102.161.71:21025/L'
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET",uri,false);
+				xhr.send(null);
+				if(xhr.status == 200) {
+					//is online
+					return xhr.responseText;
+				}
+				else {
+					//is offline
+					return null;
+				}   
+			}
+		</script>
 	</body>
 </html>

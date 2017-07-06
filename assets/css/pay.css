@@ -1,0 +1,37 @@
+html {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+@font-face {
+	font-family: Roboto-Thin;
+	src: url(fonts/roboto/Roboto-Thin.ttf);
+}
+
+.main  {
+	width: 100vw;
+	height: 100vh;
+	background-image: url(https://static.pexels.com/photos/159275/macro-focus-cogwheel-gear-159275.jpeg);
+	background-size: cover;
+	margin-left: -8px;
+	margin-top: -8px;
+}
+
+.box {
+	font-family: "Roboto-Thin";
+	text-align: center;
+	padding: 10px;
+	width: 90%;
+	height: 90%;
+	display: block;
+	position: relative;
+	top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 3px;
+}
+
+.box #pixels {
+	font-size: 60px;
+}

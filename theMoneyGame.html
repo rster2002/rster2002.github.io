@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title id="title">The Money Game</title>
+		<link href="assets/css/theMoneyGame.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="background">
+			<div class="forground">
+				<div class="stocks">
+					<h1 id="add">Current price:</h1>
+					<h1 id="price">loading...</h1>
+				</div>
+				<div class="buttons">
+					<button id="buy" onclick="buy()">buy</button>
+					<button id="sell" onclick="sell()">sell</button>
+				</div>
+				<div class="info">
+					<h1>Your money</h1>
+					<h1 id="money"></h1>
+					<h1>Your stocks</h1>
+					<h1 id="stocks"></h1>
+					<button onclick="transver()">Transver to pay</button>
+				</div>
+			</div>
+		</div>
+		<script src="assets/js/theMoneyGame.js"></script>
+	</body>
+</html>
