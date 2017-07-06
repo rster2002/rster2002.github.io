@@ -1,4 +1,6 @@
 timeLeft = Math.floor((Math.random() * 6) + 1) * 1000;
+lss = false;
+
 if (localStorage.getItem("money")) {
 	money = Number(localStorage.getItem("money"));
 	document.getElementById("money").innerHTML = money;
