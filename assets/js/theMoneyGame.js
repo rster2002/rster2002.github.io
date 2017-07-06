@@ -35,6 +35,23 @@ window.setInterval(function(){
 	if (moneyCashe < 200) {
 		moneyCashe = 200;
 	}
+	
+	if (moneyCashe >= 1000) {
+		lss = false;
+	}
+	
+	if (moneyCashe < 1000 && lss === false) {
+		Push.create("Now is your chance!", {
+			body: "The price is now less than 1000",
+			timeout: 4000,
+			onClick: function () {
+				window.focus();
+				this.close();
+			}
+		});
+		//alert("not");
+		lss = true;
+	}
 	localStorage.setItem("moneyBank", moneyCashe);
 	document.getElementById("price").innerHTML = moneyCashe;
 	
