@@ -59,7 +59,7 @@ window.setInterval(function(){
 	if (minLss !== false) {
 		if (moneyCashe < minLss && lss === false) {
 			Push.create("Now is your chance!", {
-				body: "The price is now less than 1000",
+				body: "The price is now less than " + minLss,
 				timeout: 4000,
 				onClick: function () {
 					window.focus();
@@ -90,7 +90,7 @@ window.setInterval(function(){
 			if (minMax !== false) {
 				if (i >= minMax && max === false) {
 					Push.create("Now is your chance!", {
-					body: "The price is now less than 1000",
+					body: "The profit is now more than " + minMax,
 					timeout: 4000,
 					onClick: function () {
 						window.focus();
