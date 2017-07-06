@@ -23,7 +23,7 @@ if (localStorage.getItem("payMoney")) {
 
 function transaction() {
 	much = Number(prompt("How much do you want to make a transaction code of?"));
-	code = Number(prompt("Type a code the reciever needs to recieve the transaction"));
+	code = Number(prompt("Type a code the reciever needs to recieve the transaction. Do not use the same code over and over again for the same ammount of money!"));
 	if (much <= payMoney) {
 		muchCode = bigInt(much).multiply(code);
 		confirmCode = bigInt(12351).multiply(code);
@@ -39,19 +39,26 @@ function transaction() {
 }
 
 function completeTransaction() {
-	var muchCode = prompt("Type the transaction code");
+	var transactionCode = prompt("Type the transaction code");
 	var confirmCode = prompt("Type the configm code");
-	var muchCode = muchCode.split("-");
+	var muchCode = transactionCode.split("-");
 	var code = muchCode[1];
 	var checkCode = Number(code) / Number(confirmCode);
-	if (checkCode === 12351) {
-		var addMoney = Number(muchCode[0]) / Number(confirmCode);
-		payMoney = Number(payMoney);
-		payMoney += Number(addMoney);
-		localStorage.setItem("payMoney", payMoney);
-		document.getElementById("pixels").innerHTML = payMoney + "P";
-		alert("Transaction succesfull!");
+	if (localStorage.getItem(transactionCode + "-" + confirmCode)) {
+		alert("Transaction code is already ussed! Do not use the same code over and over again for the same ammount of money!");
+		return;
 	} else {
-		alert("Something went wrong");
+		if (checkCode === 12351) {
+			var addMoney = Number(muchCode[0]) / Number(confirmCode);
+			payMoney = Number(payMoney);
+			payMoney += Number(addMoney);
+			localStorage.setItem(transactionCode + "-" + confirmCode, "used");
+			localStorage.setItem("payMoney", payMoney);
+			document.getElementById("pixels").innerHTML = payMoney + "P";
+			alert("Transaction succesfull!");
+		} else {
+			alert("Something went wrong");
+			return;
+		}
 	}
 }
