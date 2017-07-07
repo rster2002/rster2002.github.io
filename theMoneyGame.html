@@ -25,7 +25,19 @@
 					<h1>Your stocks</h1>
 					<h1 id="stocks"></h1>
 					<button onclick="transver()">Transver to pay</button>
-					<button onclick="settings()">Set triggers</button>
+					<div class="settings">
+						<h1>Settings</h1>
+						<p>Check a bar to enable it</p>
+						<p>At what price and lower should you be notified?</p>
+						<input type="checkbox" id="cminLss"><input type="number" id="minLss">
+						<p>At how much profit should you be notified?</p>
+						<input type="checkbox" id="cminMax"><input type="number" id="minMax">
+						<p>At how high procent of your money should I buy stocks?</p>
+						<input type="checkbox" id="cminPro"><input type="number" id="minPro">
+						<p>At how high procent of the ammount of money you bought it for should I sell your stocks?</p>
+						<input type="checkbox" id="cmaxPro"><input type="number" id="maxPro">
+						<button onclick="settings()">Save changes</button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,18 +1,46 @@
-timeLeft = Math.floor((Math.random() * 6) + 1) * 1000;
 lss = false;
 max = false;
+if (localStorage.getItem("ch")) {
+	var i = localStorage.getItem("ch");
+	if (i === "") {
+		ch = [];
+	} else {
+		ch = i.split(",");
+	}
+} else {
+	ch = ["200","200","200","200","200"];
+}
+
 if (localStorage.getItem("minLss")) {
 	minLss = localStorage.getItem("minLss");
-} else {
-	minLss = 1000;
-	localStorage.setItem("minLss", minLss);
+	document.getElementById("minLss").value = minLss;
+	cminLss = localStorage.getItem("cminLss");
+	if (cminLss === "true") {cminLss = true} else {cminLss = false}
+	if (cminLss === true) {document.getElementById("cminLss").checked = true};
 }
 
 if (localStorage.getItem("minMax")) {
 	minMax = localStorage.getItem("minMax");
-} else {
-	minMax = 1000;
-	localStorage.setItem("minMax", minMax);
+	document.getElementById("minMax").value = minMax;
+	cminMax = localStorage.getItem("cminMax");
+	if (cminMax === "true") {cminMax = true} else {cminMax = false}
+	if (cminMax === true) {document.getElementById("cminMax").checked = true};
+}
+
+if (localStorage.getItem("minPro")) {
+	minPro = localStorage.getItem("minPro");
+	document.getElementById("minPro").value = minPro;
+	cminPro = localStorage.getItem("cminPro");
+	if (cminPro === "true") {cminPro = true} else {cminPro = false}
+	if (cminPro === true) {document.getElementById("cminPro").checked = true};
+}
+
+if (localStorage.getItem("maxPro")) {
+	maxPro = localStorage.getItem("maxPro");
+	document.getElementById("maxPro").value = maxPro;
+	cmaxPro = localStorage.getItem("cmaxPro");
+	if (cmaxPro === "true") {cmaxPro = true} else {cmaxPro = false}
+	if (cmaxPro === true) {document.getElementById("cmaxPro").checked = true};
 }
 
 if (localStorage.getItem("money")) {
@@ -33,6 +61,10 @@ if (localStorage.getItem("stocks")) {
 	document.getElementById("stocks").innerHTML = stocks;
 }
 
+int = 1000;
+if (localStorage.getItem("botMode") === "true") {
+	int = 100;
+}
 
 window.setInterval(function(){
 	if (localStorage.getItem("moneyBank")) {
@@ -55,8 +87,24 @@ window.setInterval(function(){
 	if (moneyCashe >= minLss) {
 		lss = false;
 	}
+	
+	if (cminPro === true) {
+		var procent = Math.round((moneyCashe / money) * 100);
+		if (procent <= minPro) {
+			while (moneyCashe <= money) {
+				++stocks
+				money -= moneyCashe;
+				localStorage.setItem("stocks", stocks);
+				document.getElementById("stocks").innerHTML = stocks;
+				localStorage.setItem("money", money);
+				document.getElementById("money").innerHTML = money;
+				ch.unshift(String(moneyCashe));
+				localStorage.setItem("ch", ch);
+			}
+		}
+	}
 	 
-	if (minLss !== false) {
+	if (cminLss === true) {
 		if (moneyCashe < minLss && lss === false) {
 			Push.create("Now is your chance!", {
 				body: "The price is now less than " + minLss,
@@ -76,18 +124,18 @@ window.setInterval(function(){
 	var change = localStorage.getItem("change");
 	
 	if (stocks > 0) {
-		if (moneyCashe < change) {
-			var i = change - moneyCashe;
+		if (moneyCashe < Number(ch[0])) {
+			var i = Number(ch[0]) - moneyCashe;
 			document.getElementById("add").innerHTML = "Current price: -" + i;
 			document.getElementById("title").innerHTML = "tmg (-" + i + ")";
 		} else {
-			var i = moneyCashe - change;
+			var i = moneyCashe - Number(ch[0]);
 			document.getElementById("add").innerHTML = "Current price: +" + i;
 			document.getElementById("title").innerHTML = "tmg (+" + i + ")";
 			if (i < minMax) {
 				max = false;
 			}
-			if (minMax !== false) {
+			if (cminMax === true) {
 				if (i >= minMax && max === false) {
 					Push.create("Now is your chance!", {
 					body: "The profit is now more than " + minMax,
@@ -101,14 +149,27 @@ window.setInterval(function(){
 					max = true;
 				}
 			}
+			if (cmaxPro === true) {
+				var procent = Math.round((i / moneyCashe) * 100);
+				if (procent >= maxPro) {
+					while (stocks > 0) {
+						--stocks;
+						money += moneyCashe;
+						localStorage.setItem("stocks", stocks);
+						document.getElementById("stocks").innerHTML = stocks;
+						localStorage.setItem("money", money);
+						document.getElementById("money").innerHTML = money;
+						ch.shift();
+						localStorage.setItem("ch", ch);
+					}
+				}
+			}
 		}
 	} else {
 		document.getElementById("title").innerHTML = "The Money Game";
 		document.getElementById("add").innerHTML = "Current price:";
 	}
-	
-	timeLeft = Math.floor((Math.random() * 6) + 1) * 1000;
-}, timeLeft);
+}, int);
 
 function buy() {
 	var price = localStorage.getItem("moneyBank");
@@ -121,7 +182,8 @@ function buy() {
 		document.getElementById("stocks").innerHTML = stocks;
 		localStorage.setItem("money", money);
 		document.getElementById("money").innerHTML = money;
-		localStorage.setItem("change", price);
+		ch.unshift(String(price));
+		localStorage.setItem("ch", ch);
 	}
 }
 
@@ -134,6 +196,39 @@ function sell() {
 		document.getElementById("stocks").innerHTML = stocks;
 		localStorage.setItem("money", money);
 		document.getElementById("money").innerHTML = money;
+		ch.shift();
+		localStorage.setItem("ch", ch);
+		if (stocks > 0) {
+			if (moneyCashe < Number(ch[0])) {
+				var i = Number(ch[0]) - moneyCashe;
+				document.getElementById("add").innerHTML = "Current price: -" + i;
+				document.getElementById("title").innerHTML = "tmg (-" + i + ")";
+			} else {
+				var i = moneyCashe - Number(ch[0]);
+				document.getElementById("add").innerHTML = "Current price: +" + i;
+				document.getElementById("title").innerHTML = "tmg (+" + i + ")";
+				if (i < minMax) {
+					max = false;
+				}
+				if (minMax !== false) {
+					if (i >= minMax && max === false) {
+						Push.create("Now is your chance!", {
+						body: "The profit is now more than " + minMax,
+						timeout: 4000,
+						onClick: function () {
+							window.focus();
+							this.close();
+						}
+						});
+						//alert("yes");
+						max = true;
+					}
+				}
+			}
+		} else {
+			document.getElementById("title").innerHTML = "The Money Game";
+			document.getElementById("add").innerHTML = "Current price:";
+		}
 	} else {
 		alert("You dont have any stocks");
 	}
@@ -145,12 +240,14 @@ function reset() {
 	localStorage.removeItem("money");
 	localStorage.removeItem("stocks");
 	localStorage.removeItem("change");
+	localStorage.removeItem("ch");
 	money = 2000;
 	localStorage.setItem("money", money);
 	document.getElementById("money").innerHTML = money;
 	stocks = 5;
 	localStorage.setItem("stocks", stocks);
 	document.getElementById("stocks").innerHTML = stocks;
+	ch = ["200","200","200","200","200"];
 }
 
 function transver() {
@@ -158,6 +255,10 @@ function transver() {
 	money = Number(localStorage.getItem("money"))
 	much = Number(prompt("How much do you want to transver?"));
 	if (much === null || much === "") {
+		return;
+	}
+	if (much < 1) {
+		alert("This is not right")
 		return;
 	}
 	if (much <= money) {
@@ -177,22 +278,50 @@ function transver() {
 		alert("You dont have enough money");
 	}
 }
-	
+
 function settings() {
-	var i = prompt("At what price notify that the price dropped? Type false to turn off.", minLss);
-	if (i !== "false") {
-		minLss = i;
-		localStorage.setItem("minLss", i);
+	if (document.getElementById("cminLss").checked) {
+		cminLss = true;
+		minLss = document.getElementById("minLss").value;
+		localStorage.setItem("minLss", minLss);
+		localStorage.setItem("cminLss", cminLss);
 	} else {
-		minLss = false;
-		localStorage.setItem("minLss", false);
+		cminLss = false;
+		localStorage.setItem("cminLss", cminLss);
 	}
-	var i = prompt("At what price notify when you made profit? Type false to turn off.", minMax);
-	if (i !== "false") {
-		minMax = i;
-		localStorage.setItem("minMax", i);
+	if (document.getElementById("cminMax").checked) {
+		cminMax = true;
+		minMax = document.getElementById("minMax").value;
+		localStorage.setItem("minMax", minMax);
+		localStorage.setItem("cminMax", cminMax);
 	} else {
-		minMax = false;
-		localStorage.setItem("minMax", false);
+		cminMax = false;
+		localStorage.setItem("cminMax", cminMax);
+	}
+	if (document.getElementById("cminPro").checked) {
+		cminPro = true;
+		minPro = document.getElementById("minPro").value;
+		localStorage.setItem("minPro", minPro);
+		localStorage.setItem("cminPro", cminPro);
+	} else {
+		cminPro = false;
+		localStorage.setItem("cminPro", cminPro);
+	}
+	if (document.getElementById("cmaxPro").checked) {
+		cmaxPro = true;
+		maxPro = document.getElementById("maxPro").value;
+		localStorage.setItem("maxPro", maxPro);
+		localStorage.setItem("cmaxPro", cmaxPro);
+	} else {
+		cmaxPro = false;
+		localStorage.setItem("cmaxPro", cmaxPro);
+	}
+}
+
+function botMode(state) {
+	if (state === true) {
+		localStorage.setItem("botMode","true");
+	} else {
+		localStorage.setItem("botMode","false");
 	}
 }

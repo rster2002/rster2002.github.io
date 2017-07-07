@@ -24,6 +24,10 @@ if (localStorage.getItem("payMoney")) {
 function transaction() {
 	much = Number(prompt("How much do you want to make a transaction code of?"));
 	code = Number(prompt("Type a code the reciever needs to recieve the transaction. Do not use the same code over and over again for the same ammount of money!"));
+	if (much < 1) {
+		alert("This is not right")
+		return;
+	}
 	if (much <= payMoney) {
 		muchCode = bigInt(much).multiply(code);
 		confirmCode = bigInt(12351).multiply(code);
@@ -61,4 +65,8 @@ function completeTransaction() {
 			return;
 		}
 	}
+}
+
+function transverTo() {
+	
 }
