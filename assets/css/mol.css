@@ -36,7 +36,13 @@ html {
 }
 
 .story {
+	text-align: center;
 	width: 100%;
+}
+
+.story h1 {
+	font-size: 50px;
+	font-family: "xband";
 }
 
 .story .box {
