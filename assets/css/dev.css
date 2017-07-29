@@ -85,7 +85,7 @@ html {
 	height: 500px;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	background-image: url(https://static.pexels.com/photos/312105/pexels-photo-312105.jpeg);
+	background-image: url(https://static.pexels.com/photos/534164/pexels-photo-534164.jpeg);
 	background-attachment: fixed;
 	background-position: center;
 	background-size: cover;
@@ -99,7 +99,8 @@ html {
 	padding-top: 30px;
 	padding-bottom: 30px;
 	background-color: rgba(255,255,255,0.1);
-	height: 100px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	width: 70%;
 	border-radius: 3px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -116,7 +117,6 @@ html {
 	cursor: pointer;
 	padding-left: 30px;
 	text-align: left;
-	margin-top: 15px;
 	background-color: white;
 	border-radius: 3px;
 	width: 100%;
