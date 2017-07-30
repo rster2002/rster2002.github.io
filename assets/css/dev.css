@@ -84,11 +84,8 @@ html {
 	width: 100%;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	background-image: url(https://static.pexels.com/photos/534164/pexels-photo-534164.jpeg);
-	background-attachment: fixed;
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
+	background-image: url(http://images.all-free-download.com/images/graphicthumb/vector_metal_background_patterns_536482.jpg);
+	background-repeat: repeat;
 }
 
 .projects .cards {
