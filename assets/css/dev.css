@@ -82,7 +82,6 @@ html {
 .projects {
 	margin-left: -10px;
 	width: 100%;
-	height: 500px;
 	padding-top: 50px;
 	padding-bottom: 50px;
 	background-image: url(https://static.pexels.com/photos/534164/pexels-photo-534164.jpeg);
@@ -96,11 +95,7 @@ html {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	padding-top: 30px;
-	padding-bottom: 30px;
 	background-color: rgba(255,255,255,0.1);
-	padding-top: 20px;
-	padding-bottom: 20px;
 	width: 70%;
 	border-radius: 3px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

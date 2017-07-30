@@ -45,6 +45,19 @@ html {
 	font-family: "xband";
 }
 
+.story .info {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 40%;
+	padding: 6px;
+	background-color: rgb(255,255,255);
+	border-style: solid;
+	border-width: 5px;
+	border-radius: 20px;
+	border-color: rgb(200,200,200);
+}
+
 .story .box {
 	border-radius: 5px;
 	height: 150vh;

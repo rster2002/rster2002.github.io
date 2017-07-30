@@ -11,6 +11,13 @@ if (localStorage.getItem("ch")) {
 	ch = ["200","200","200","200","200"];
 }
 
+if (localStorage.getItem("botTime")) {
+	botTime = Number(localStorage.getItem("botTime"));
+} else {
+	botTime = new Date().getTime();
+	localStorage.setItem("botTime",botTime)
+}
+
 if (localStorage.getItem("minLss")) {
 	minLss = localStorage.getItem("minLss");
 	document.getElementById("minLss").value = minLss;
@@ -318,10 +325,10 @@ function settings() {
 	}
 }
 
-function botMode(state) {
-	if (state === true) {
-		localStorage.setItem("botMode","true");
-	} else {
-		localStorage.setItem("botMode","false");
-	}
+function botMode() {
+	var date = new Date();
+	botTimeUse = [date.getHours, date.getDay];
 }
+
+window.setInterval(function(){
+},1000)
