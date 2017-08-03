@@ -29,9 +29,19 @@ body {
 }
 
 .navHeader img {
-	float: left;
+    float: left;
 	height: 4vh;
 	width: 4vh;
+}
+
+.navHeader a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 4vh;
 }
 
 .navHeader h1 {
@@ -39,6 +49,7 @@ body {
     margin-left: 10px;
 	line-height: 5vh;
 	font-size: 4vh;
+    text-decoration: none;
     color: rgb(255,255,255);
 }
 
