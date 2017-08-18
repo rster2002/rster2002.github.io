@@ -16,6 +16,7 @@ function requireId(type) {
 		} else {
 			if (confirm("Do you want to register this id? You can't change it later!") === true) {
 				localStorage.setItem("id",urlId);
+				return urlId;
 			} else {
 				location.href="index.html";
 			}
