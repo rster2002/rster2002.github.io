@@ -3,13 +3,44 @@
 <html>
 	<head>
 		<title>De Mol - MC</title>
-		<link href="assets/css/mol.css" rel="stylesheet">
+		<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="assets/css/mol.css">
+		<link rel="stylesheet" media="screen and (max-device-width: 800px)" href="assets/css/mol.m.css">
 		<link href="assets/logo_black.png" rel="icon">
 		<script src="assets/js/id.js"></script>
+		<script src="assets/js/players.js"></script>
 		<script>
-			if (requireId("return") === true) {
-				alert("true");
-			};
+			switch (requireId()) {
+				case 'bs17-v7s1-j8b1-nxia':
+					acces = true;
+					break;
+				case '0j1b-bsv1-4b8b-buya':
+					acces = true;
+					break;
+				case 'j0on-bit1-byx9-nau2':
+					acces = true;
+					break;
+				case '9nsy-b813-9ua1-n981':
+					acces = true;
+					break;
+				case 'p01y-nzv1-bxvd-nyv6':
+					acces = true;
+					break;
+				case 'j109-b11g-e9c1-cb1r':
+					acces = true;
+					break;
+				case '1b87-yuav-n14t-nua1':
+					acces = true;
+					break;
+				default:
+					acces = false;
+					break;
+				
+			}
+			
+			if (acces === false) {
+				alert("Je ligt eruit of je id is niet geldig");
+				location.href="index.html";
+			}
 		</script>
 	</head>
 	<body>
@@ -19,8 +50,92 @@
 		<div class="story">
 			<h1>ertvmvivv szevmkllig</h1>
 			<div class="box">
-				<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf7c06hZ96I1tK6xHPDcu5yX91PEENiyqyddS1ov2Aq-mh6fQ/viewform?embedded=true">Bezig met laden...</iframe>
+				<button onclick="location.href='https://goo.gl/photos/yucveMRrjyCwGs6Y9'">Archief</button>
+			</div>
+			<div class="box">
+				<h2>De pot</h2>
+				<h1 id="pot">0</h1>
+				<h2>Percentage</h2>
+				<h1 id="percentage"></h1>
+			</div>
+			<div class="box">
+				<h2>Timer</h2>
+				<h1 id="days"></h1>
+				<h1 id="hour"></h1>
+				<h1 id="min"></h1>
+				<h1 id="sec"></h1>
+			</div>
+			<div class="box" id="players">
 			</div>
 		</div>
+		<script>
+			pot = 9050;
+			total = 24400;
+			next = "Aug 18, 2017 00:00:00"
+			
+			player("Luuk_T","in");
+			player("Pyrollenium","in");
+			player("catlover313","in");
+			player("FogDogPvP","in");
+			player("Esmee_T","in");
+			player("thom20_02","in");
+			player("The_Gameking","in");
+			
+			document.getElementById("pot").innerHTML = pot + ",-";
+			function toFixed(value, precision) {
+			var precision = precision || 0,
+				power = Math.pow(10, precision),
+				absValue = Math.abs(Math.round(value * power)),
+				result = (value < 0 ? '-' : '') + String(Math.floor(absValue / power));
+
+			if (precision > 0) {
+				var fraction = String(absValue % power),
+					padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
+				result += '.' + padding + fraction;
+			}
+				return result;
+			}
+			var precentage = toFixed((pot / total) * 100, 1);
+			document.getElementById("percentage").innerHTML = precentage + "%";
+			
+			// Set the date we're counting down to
+			document.getElementById("days").innerHTML = "-";
+			document.getElementById("hour").innerHTML = "-";
+			document.getElementById("min").innerHTML = "-";
+			document.getElementById("sec").innerHTML = "-";
+			var countDownDate = new Date(next).getTime();
+
+			// Update the count down every 1 second
+			var x = setInterval(function() {
+
+			  // Get todays date and time
+			  var now = new Date().getTime();
+
+			  // Find the distance between now an the count down date
+			  var distance = countDownDate - now;
+
+			  // Time calculations for days, hours, minutes and seconds
+			  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			  // Display the result in the element with id="demo"
+			  /* document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+			  + minutes + "m " + seconds + "s "; */
+				document.getElementById("days").innerHTML = "D: " + days;
+				document.getElementById("hour").innerHTML = "U: " + hours;
+				document.getElementById("min").innerHTML = "M: " + minutes;
+				document.getElementById("sec").innerHTML = "S: " + seconds;
+			  // If the count down is finished, write some text 
+			  if (distance < 0) {
+				clearInterval(x);
+				document.getElementById("days").innerHTML = "-";
+				document.getElementById("hour").innerHTML = "-";
+				document.getElementById("min").innerHTML = "-";
+				document.getElementById("sec").innerHTML = "-";
+			  }
+			}, 1000);
+		</script>
 	</body>
 </html>
