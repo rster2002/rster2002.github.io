@@ -3,51 +3,18 @@
 <html>
 	<head>
 		<title>De Mol - MC</title>
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
 		<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="assets/css/mol.css">
 		<link rel="stylesheet" media="screen and (max-device-width: 800px)" href="assets/css/mol.m.css">
 		<link href="assets/logo_black.png" rel="icon">
 		<script src="assets/js/id.js"></script>
 		<script src="assets/js/players.js"></script>
-		<script>
-			switch (requireId()) {
-				case 'bs17-v7s1-j8b1-nxia':
-					acces = true;
-					break;
-				case '0j1b-bsv1-4b8b-buya':
-					acces = true;
-					break;
-				case 'j0on-bit1-byx9-nau2':
-					acces = true;
-					break;
-				case '9nsy-b813-9ua1-n981':
-					acces = true;
-					break;
-				case 'p01y-nzv1-bxvd-nyv6':
-					acces = true;
-					break;
-				case 'j109-b11g-e9c1-cb1r':
-					acces = true;
-					break;
-				case '1b87-yuav-n14t-nua1':
-					acces = true;
-					break;
-				default:
-					acces = false;
-					break;
-				
-			}
-			
-			if (acces === false) {
-				alert("Je ligt eruit of je id is niet geldig");
-				location.href="index.html";
-			}
-		</script>
 	</head>
 	<body>
 		<div class="header">
 			<h1>DE MOL</h1>
 		</div>
-		<div class="story">
+		<div class="story" id="mainStory">
 			<h1>ertvmvivv szevmkllig</h1>
 			<div class="box">
 				<button onclick="location.href='https://goo.gl/photos/yucveMRrjyCwGs6Y9'">Archief</button>
@@ -136,6 +103,8 @@
 				document.getElementById("sec").innerHTML = "-";
 			  }
 			}, 1000);
+			
+			requireId();
 		</script>
 	</body>
 </html>
