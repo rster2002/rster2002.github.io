@@ -21,13 +21,13 @@ var urlParam = function(name, w){
 
 urlId = urlParam("id");
 
+if (localStorage.getItem("id")) {
+	urlId = localStorage.getItem("id");
+}
+
 if (urlId === "") {
 	alert("There is no id in url or registrated");
 	location.href="index.html";
-}
-
-if (localStorage.getItem("id")) {
-	urlId = localStorage.getItem("id");
 }
 
 function requireId() {
