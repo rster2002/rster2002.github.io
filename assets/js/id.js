@@ -37,10 +37,25 @@ function requireId() {
 			alert("This id is invalid (anymore)");
 			location.href="index.html";
 		}
-		if (dbIdState.registrated === "false") {
+		
+		distance = -1
+		if (dbIdState.expire !== null && dbIdState.registrated === "false") {
+			var expire = new Date(dbIdState.expire).getTime();
+			var now = new Date().getTime();
+			var distance = expire - now;
+			if (distance < 0) {
+				alert("This id is expired. Please contact webhost.");
+				location.href="index.html";
+			}
+		}
+		
+		if (dbIdState.registrated === "false" && distance > 0) {
 			if (confirm("Do you want to register this id on this device? You can't use it on a other device!") === true) {
 				dbRef.child(urlId).child("registrated").set("true");
 				localStorage.setItem("id",urlId);
+				if (dbIdState.expire !== null) {
+					dbRef.child(urlId).child("expire").remove();
+				}
 				re = true;
 			} else {
 				location.href="index.html";
