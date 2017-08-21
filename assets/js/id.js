@@ -21,8 +21,10 @@ var urlParam = function(name, w){
 
 urlId = urlParam("id");
 
+local = false;
 if (localStorage.getItem("id")) {
 	urlId = localStorage.getItem("id");
+	local = true;
 }
 
 if (urlId === "") {
@@ -38,13 +40,18 @@ function requireId() {
 			location.href="index.html";
 		}
 		
-		distance = -1
-		if (dbIdState.expire !== null && dbIdState.registrated === "false") {
+		if (local === false && dbIdState.registrated === "true") {
+			alert("This id is already in use!");
+			location.href="index.html";
+		}
+		
+		distance = 1;
+		if (dbIdState.expire !== undefined && dbIdState.registrated === "false") {
 			var expire = new Date(dbIdState.expire).getTime();
 			var now = new Date().getTime();
 			var distance = expire - now;
 			if (distance < 0) {
-				alert("This id is expired. Please contact webhost.");
+				alert("This id has expired. Please contact webhost.");
 				location.href="index.html";
 			}
 		}
