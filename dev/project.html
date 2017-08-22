@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title id="title">dev | project | skulls</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="icon" href="../assets/logo_black.png">
+		<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="../assets/css/versions.css">
+		<link rel="stylesheet" media="screen and (max-device-width: 800px)" href="../assets/css/versions.m.css">
+		<script src="../assets/js/project.js"></script>
+		<style>
+			.header h1 {
+				background-image: -webkit-linear-gradient(92deg,rgb(0, 160, 160),rgb(0, 200, 200));
+			}
+		</style>
+		<script src="../assets/js/versions.js"></script>
+	</head>
+	<body>
+		<div class="header" id="header">
+			<h1 id="header-title">test</h1>
+		</div>
+		<button onclick="downloadLatest()" style="margin-top:50px;">download latest</button>
+		<div class="changelog">
+			<ul id="changes">
+			</ul>
+		</div>
+		<button onclick="change()" id="blue">Change view</button>
+		<div class="versions" id="versions">
+		</div>
+		<div id="allChanges">
+		</div>
+		<script id="list"></script>
+		<script>
+			n = sessionStorage.getItem("prjName");
+			sessionStorage.setItem("pro_name", n);
+			
+			function downloadLatest() {
+				location.href="projects/versions/" + n + "%20" + localStorage.getItem("latest") + ".zip";
+			}
+			
+			if (sessionStorage.getItem("header") !== "false") {
+				var header = sessionStorage.getItem("header");
+				document.getElementById("header").setAttribute("style","background-image: url(" + header + ");background-size: cover;background-attachment: fixed;background-position: 70% 160%;")
+			}
+			
+			document.getElementById("title").innerHTML = "dev | projects | " + n;
+			document.getElementById("header-title").innerHTML = n;
+			document.getElementById("list").src = "projects/" + n + ".js"
+		</script>
+	</body>
+</html>

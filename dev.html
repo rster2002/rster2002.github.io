@@ -5,17 +5,29 @@
 		<title>rster2002 | dev</title>
 		<link rel="icon" href="assets/logo_black.png">
 		<link rel="stylesheet" href="assets/css/dev.css">
+		<script src="assets/js/project.js"></script>
 		<script>
-		var urlParam = function(name, w){
-		w = w || window;
-		var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
-		val = w.location.search.match(rx);
-		return !val ? '':val[1];
-		}
-		var p = urlParam('prj');
-		if (p !== "") {
-			location.href="dev/projects/" + p + "/main.html";
-		}
+			var urlParam = function(name, w) {
+				w = w || window;
+				var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
+				val = w.location.search.match(rx);
+				return !val ? '':val[1];
+			}
+
+			if (urlParam("prj") !== '') {
+				var prjName = urlParam("prj");
+				switch (prjName) {
+					case 'mirror':
+						openPrj('mirror',"../assets/images/mirror.png");
+						break;
+					case 'minetoon':
+						openPrj('minetoon',"../assets/images/minetoon.png");
+						break;
+					case 'skulls':
+						openPrj('skulls',false);
+						break;
+				}
+			}
 		</script>
 	</head>
 	<body>
@@ -30,22 +42,22 @@
 		</div>
 		<div class="projects">
 			<div class="cards">
-				<div class="project" onclick="location.href='dev/projects/skulls/main.html'">
+				<div class="project" onclick="openPrj('skulls',false)">
 					<h1>/skulls</h1>
 				</div>
-				<div class="project" onclick="location.href='dev/projects/minetoon/main.html'">
+				<div class="project" onclick="openPrj('minetoon','../assets/images/minetoon.png')">
 					<h1>/minetoon</h1>
 				</div>
-				<div class="project" onclick="location.href='dev/projects/mc%20pc/main.html'">
+				<div class="project" onclick="openPrj('mc pc',false)">
 					<h1>/mc pc</h1>
 				</div>
-				<div class="project" onclick="location.href='dev/projects/pay/main.html'">
+				<div class="project" onclick="openPrj('pay',false)">
 					<h1>/pay</h1>
 				</div>
-				<div class="project" onclick="location.href='dev/projects/encrypt/main.html'">
+				<div class="project" onclick="openPrj('encrypt',false)">
 					<h1>/encrypt</h1>
 				</div>
-				<div class="project" onclick="location.href='dev/projects/benai/main.html'">
+				<div class="project" onclick="openPrj('benai',false)">
 					<h1>/benai</h1>
 				</div>
 			</div>

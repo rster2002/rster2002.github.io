@@ -46,6 +46,58 @@ body {
 	margin-right: auto;
 }
 
+#allChanges {
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+	text-align: center;
+}
+
+#allChanges h1 {
+	text-align: center;
+}
+
+#allChanges h1 {
+	line-height:150px;
+	font-size:4vw;
+	font-family: "Roboto-Thin";
+
+}
+
+#allChanges #snapshot {
+	background-image: -webkit-linear-gradient(92deg,rgb(0,240,240),rgb(0,80,80));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-font-smoothing: antialiased;
+}
+
+#allChanges #pre {
+	background-image: -webkit-linear-gradient(92deg,rgb(240,100,0),rgb(0,80,80));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-font-smoothing: antialiased;
+}
+
+#allChanges #release {
+	background-image: -webkit-linear-gradient(92deg,rgb(0,240,0),rgb(0,80,0));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-font-smoothing: antialiased;
+}
+
+#allChanges ul {
+	list-style-type: none;
+	font-family: "Roboto-Thin";
+	width: 70%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	padding-left: 100px;
+	font-size: 2vw;
+}
+
 .versions h1 {
     text-align: center;
 /*	padding-left: 50px;*/
@@ -114,7 +166,8 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-ul {
+
+.changelog ul {
 	list-style-type: none;
 	font-family: "Roboto-Thin";
 	width: 50%;
@@ -157,6 +210,45 @@ button:active {
 	font-size: 30px;
 	font-family: "Roboto-Thin";
 	background-color: rgb(255, 255, 255);
+	border: 0px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 3px;
+	cursor: pointer;
+	transform: scale(1.15);
+}
+
+#blue {
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px 10px;
+	transition: .5s cubic-bezier(0.72, 0.35, 0.29, 0.97) all;
+	font-size: 30px;
+	font-family: "Roboto-Thin";
+	background-color: rgb(0, 0, 170);
+	border: 0px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+#blue:hover {
+	transition: .5s cubic-bezier(0.77, 0.04, 0.29, 0.75) all;
+	font-size: 30px;
+	font-family: "Roboto-Thin";
+	background-color: rgb(0, 0, 170);
+	border: 0px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 3px;
+	cursor: pointer;
+	transform: scale(1.1);
+}
+#blue:active {
+	transition: .2s ease-in all;
+	font-size: 30px;
+	font-family: "Roboto-Thin";
+	background-color: rgb(0, 0, 170);
 	border: 0px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-radius: 3px;
