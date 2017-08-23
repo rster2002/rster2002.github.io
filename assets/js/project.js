@@ -7,7 +7,7 @@ function openPrj(name, header) {
 	} else {
 		sessionStorage.setItem("header",header);
 	}
-	location.href="dev/project.html"
+	location.href="dev/project.html?prj=" + name;
 }
 
 function loadPrj() {

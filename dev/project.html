@@ -7,7 +7,6 @@
 		<link rel="icon" href="../assets/logo_black.png">
 		<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="../assets/css/versions.css">
 		<link rel="stylesheet" media="screen and (max-device-width: 800px)" href="../assets/css/versions.m.css">
-		<script src="../assets/js/project.js"></script>
 		<style>
 			.header h1 {
 				background-image: -webkit-linear-gradient(92deg,rgb(0, 160, 160),rgb(0, 200, 200));
@@ -31,6 +30,33 @@
 		</div>
 		<script id="list"></script>
 		<script>
+			function openPrj(name, header) {
+				sessionStorage.setItem("prjName",name);
+				sessionStorage.setItem("header",header);
+			}
+			
+			var urlParam = function(name, w) {
+				w = w || window;
+				var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
+				val = w.location.search.match(rx);
+				return !val ? '':val[1];
+			}
+
+			if (urlParam("prj") !== '') {
+				var prjName = urlParam("prj");
+				switch (prjName) {
+					case 'mirror':
+						openPrj('mirror',"../assets/images/mirror.png");
+						break;
+					case 'minetoon':
+						openPrj('minetoon',"../assets/images/minetoon.png");
+						break;
+					case 'skulls':
+						openPrj('skulls',false);
+						break;
+				}
+			}
+			
 			n = sessionStorage.getItem("prjName");
 			sessionStorage.setItem("pro_name", n);
 			
