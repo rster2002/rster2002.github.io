@@ -2,39 +2,11 @@
 
 <html>
 	<head>
-		<title>rster2002</title>
-		<link rel="stylesheet" href="assets/css/index.css">
-		<script src="assets/js/functions.js"></script>
-		<script>
-		var urlParam = function(name, w){
-		w = w || window;
-		var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
-		val = w.location.search.match(rx);
-		return !val ? '':val[1];
-		}
-		var prj = urlParam('prj');
-		if (prj !== "") {
-			location.href="dev/projects/" + p + "/main.html";
-		}
-		</script>
+		<title>redirect</title>
 	</head>
 	<body>
-<!--
-		<div class="navHeader">
-			<img src="assets/images/logo_white-104x128.png">
-            <a>rster2002</a>
-		</div>
--->
-		<div class="header">
-			<h1>rster2002</h1>
-		</div>
-		<div class="check">
-			<div class="main">
-				<h1>Check it out</h1>
-			</div>
-			<div class="text" onclick="location.href='dev.html'">
-				<h1>/dev</h1>
-			</div>
-		</div>
+		<script>
+			location.href="pay.html";
+		</script>
 	</body>
 </html>

@@ -1,72 +1,26 @@
-function toFixed(value, precision) {
-    var precision = precision || 0,
-        power = Math.pow(10, precision),
-        absValue = Math.abs(Math.round(value * power)),
-        result = (value < 0 ? '-' : '') + String(Math.floor(absValue / power));
+// Initialize Firebase
+var config = {
+	apiKey: "AIzaSyDCgnh6ezKcNkcpAUtGXuiN77jxlDbLPck",
+	authDomain: "dewebsite-bae27.firebaseapp.com",
+	databaseURL: "https://dewebsite-bae27.firebaseio.com",
+	projectId: "dewebsite-bae27",
+	storageBucket: "dewebsite-bae27.appspot.com",
+	messagingSenderId: "437303961105"
+};
+firebase.initializeApp(config);
 
-    if (precision > 0) {
-        var fraction = String(absValue % power),
-            padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
-        result += '.' + padding + fraction;
-    }
-    return result;
-}
+// FirebaseUI config.
+var uiConfig = {
+	signInSuccessUrl: 'pay/main.html',
+	signInOptions: [
+		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+		firebase.auth.EmailAuthProvider.PROVIDER_ID
+	],
+	// Terms of service url.
+	tosUrl: 'tos.html'
+};
 
-if (localStorage.getItem("payMoney")) {
-	payMoney = toFixed(localStorage.getItem("payMoney"), 4);
-	document.getElementById("pixels").innerHTML = payMoney + "P";
-} else {
-	payMoney = 1000;
-	localStorage.setItem("payMoney", payMoney);
-	document.getElementById("pixels").innerHTML = payMoney + "P";
-}
-
-function transaction() {
-	much = Number(prompt("How much do you want to make a transaction code of?"));
-	code = Number(prompt("Type a code the reciever needs to recieve the transaction. Do not use the same code over and over again for the same ammount of money!"));
-	if (much < 1) {
-		alert("This is not right")
-		return;
-	}
-	if (much <= payMoney) {
-		muchCode = bigInt(much).multiply(code);
-		confirmCode = bigInt(12351).multiply(code);
-		code = String(muchCode + "-" + confirmCode);
-		payMoney = Number(payMoney);
-		payMoney -= much;
-		localStorage.setItem("payMoney", payMoney);
-		document.getElementById("pixels").innerHTML = payMoney + "P";
-		alert("You code is: " + code);
-	} else {
-		alert("Not enough pixels");
-	}
-}
-
-function completeTransaction() {
-	var transactionCode = prompt("Type the transaction code");
-	var confirmCode = prompt("Type the configm code");
-	var muchCode = transactionCode.split("-");
-	var code = muchCode[1];
-	var checkCode = Number(code) / Number(confirmCode);
-	if (localStorage.getItem(transactionCode + "-" + confirmCode)) {
-		alert("Transaction code is already ussed! Do not use the same code over and over again for the same ammount of money!");
-		return;
-	} else {
-		if (checkCode === 12351) {
-			var addMoney = Number(muchCode[0]) / Number(confirmCode);
-			payMoney = Number(payMoney);
-			payMoney += Number(addMoney);
-			localStorage.setItem(transactionCode + "-" + confirmCode, "used");
-			localStorage.setItem("payMoney", payMoney);
-			document.getElementById("pixels").innerHTML = payMoney + "P";
-			alert("Transaction succesfull!");
-		} else {
-			alert("Something went wrong");
-			return;
-		}
-	}
-}
-
-function transverTo() {
-	
-}
+// Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+// The start method will wait until the DOM is loaded.
+ui.start('#firebaseui-auth-container', uiConfig);

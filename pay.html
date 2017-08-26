@@ -3,13 +3,17 @@
 <html>
 	<head>
 		<title>pay - login</title>
-		<link media="screen and (min-device-width:800px)" rel="stylesheet" href="assets/css/pay/login.css">
-		<link media="screen and (max-device-width:800px)" rel="stylesheet" href="assets/css/pay/login.m.css">
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+		<script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
+		<script src="assets/js/pay.js"></script>
+		<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="assets/css/pay.css">
+		<link rel="stylesheet" media="screen and (max-device-width: 800px)" href="assets/css/pay.m.css">
+		<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
 	</head>
 	<body>
 		<div class="background">
-			<div class="box">
-			
+			<div class="login-box">
+				<div id="firebaseui-auth-container"></div>
 			</div>
 		</div>
 	</body>

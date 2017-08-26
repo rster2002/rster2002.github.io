@@ -15,12 +15,16 @@ html, body {
 .login-box {
 	position: relative;
 	background-color: white;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	width: 30%;
+	width: 90%;
+	height: 90%;
 	border-radius: 5px;
-	top: 30%;
+	top: 5%;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.firebaseui-auth-container {
+	height: 100%;
+	width: 100%;
 }
