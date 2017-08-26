@@ -40,15 +40,13 @@
 				</div>
 				<div class="transact">
 					<h1 id="title">Create transaction</h1>
+					<p id="errorTransact"></p>
 					<input type="text" placeholder="user id" id="transId" onchange="searchId()">
-					<p id="errorId"></p>
 					<input type="number" placeholder="amount" id="transAmount" onchange="checkAmount()">
-					<p id="errorAmount"></p>
 					<button onclick="transact()">Transact</button>
-					<p id="errorTrans"></p>
 					<h1 id="title">Create pay request</h1>
 					<input type="text" placeholder="amount" id="requestAmount" onchange="checkRequest()">
-					<p id="errorAmount2"></p>
+					<p id="errorRequest"></p>
 					<button onclick="request()">Request</button>
 				</div>
 			</div>

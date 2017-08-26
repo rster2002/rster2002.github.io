@@ -177,7 +177,8 @@ input:focus {
 	height: 100px;
 }
 
-.transaction .transact #errorId, #errorAmount, #errorAmount2, #errorTrans {
+.transaction .transact #errorTransact {
+	font-size: 40px;
 	margin-top: 2px;
 	margin-bottom: 2px;
 	padding-left: 20px;

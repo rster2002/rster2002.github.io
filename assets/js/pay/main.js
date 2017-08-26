@@ -26,24 +26,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				document.getElementById("username").innerHTML = username;
 				document.getElementById("usericon").setAttribute("src",userIcon);
 				document.getElementById("userid").innerHTML = uid;
+				
+				// check if catched data is available
+				if (sessionStorage.getItem("catchedId")) {
+					document.getElementById("transId").value = sessionStorage.getItem("catchedId");
+					searchId();
+					sessionStorage.removeItem("catchedId");
+				}
+				if (sessionStorage.getItem("catchedAmount")) {
+					document.getElementById("transAmount").value = sessionStorage.getItem("catchedAmount");
+					sessionStorage.removeItem("catchedAmount");
+					transAmountPossible = true;
+				}
 			} else {
 				location.href="../pay.html"
 			}
 		});
-		// check if catched data is available
-		if (sessionStorage.getItem("catchedId")) {
-			if (sessionStorage.getItem("catchedId") !== uid) {
-				document.getElementById("transId").value = sessionStorage.getItem("catchedId");
-				transUserPossible = true;
-			}
-			sessionStorage.removeItem("catchedId");
-		}
-
-		if (sessionStorage.getItem("catchedAmount")) {
-			document.getElementById("transAmount").value = sessionStorage.getItem("catchedAmount");
-			sessionStorage.removeItem("catchedAmount");
-			transAmountPossible = true;
-		}
 	// define database
 	database = firebase.database();
 	dbRef = database.ref("pay");
@@ -88,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 function searchId() {
 	var transId = document.getElementById("transId").value;
-	var error = document.getElementById("errorId");
+	var error = document.getElementById("errorTransact");
 	if (transId === uid) {
 		error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
 		error.innerHTML = "You can't transact to yourself";
@@ -122,7 +120,7 @@ function toFixed(value, precision) {
 function checkAmount() {
 	var value = sessionStorage.getItem("value");
 	var amount = Number(document.getElementById("transAmount").value);
-	var error = document.getElementById("errorAmount");
+	var error = document.getElementById("errorTransact");
 	if (amount < 0) {
 		error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
 		error.innerHTML = "Amount is less than 0";
@@ -159,7 +157,7 @@ function checkRequest() {
 }
 
 function transact() {
-	var error = document.getElementById("errorTrans");
+	var error = document.getElementById("errorTransact");
 	if (transAmountPossible !== true || transUserPossible !== true) {
 		error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
 		error.innerHTML = "There are errors, please check if amount and user id are right.";
@@ -194,9 +192,15 @@ function transact() {
 }
 
 function request() {
+	var error = document.getElementById("errorTransact");
 	var requestValue = Number(document.getElementById("requestAmount").value);
 	if (requestValue !== 0) {
-		prompt("Copy and send to requester.","https://rster2002.github.io/pay?id=" + uid + "&amount=" + requestValue);
+		if (requestValue < 0) {
+			error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
+			error.innerHTML = "Amount is less than 0";
+		} else {
+			prompt("Copy and send to requester.","https://rster2002.github.io/pay?id=" + uid + "&amount=" + requestValue);
+		}
 	} else {
 		prompt("Copy and send to requester.","https://rster2002.github.io/pay?id=" + uid);
 	}
