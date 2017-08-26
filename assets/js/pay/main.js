@@ -14,16 +14,6 @@ transUserPossible = false;
 
 // Get user information
 document.addEventListener("DOMContentLoaded", function(event) { 
-		// check if catched data is available
-		if (sessionStorage.getItem("catchedId")) {
-			document.getElementById("transId").value = sessionStorage.getItem("catchedId");
-			transUserPossible = true;
-		}
-
-		if (sessionStorage.getItem("catchedAmount")) {
-			document.getElementById("transAmount").value = sessionStorage.getItem("catchedAmount");
-			transAmountPossible = true;
-		}
 		// get user data
 		var user = firebase.auth().currentUser;
 		firebase.auth().onAuthStateChanged(function(user) {
@@ -40,6 +30,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				location.href="../pay.html"
 			}
 		});
+		// check if catched data is available
+		if (sessionStorage.getItem("catchedId")) {
+			if (sessionStorage.getItem("catchedId") !== uid) {
+				document.getElementById("transId").value = sessionStorage.getItem("catchedId");
+				transUserPossible = true;
+			}
+			sessionStorage.removeItem("catchedId");
+		}
+
+		if (sessionStorage.getItem("catchedAmount")) {
+			document.getElementById("transAmount").value = sessionStorage.getItem("catchedAmount");
+			sessionStorage.removeItem("catchedAmount");
+			transAmountPossible = true;
+		}
 	// define database
 	database = firebase.database();
 	dbRef = database.ref("pay");
