@@ -168,7 +168,7 @@ input:focus {
 	height: 50px;
 }
 
-.transaction .transact #errorId, #errorAmount, #errorTrans {
+.transaction .transact #errorId, #errorAmount, #errorAmount2, #errorTrans {
 	padding-left: 20px;
-	visibility: hidden
+	visibility: hidden;
 }

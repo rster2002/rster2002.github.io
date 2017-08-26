@@ -9,8 +9,21 @@ var config = {
 };
 firebase.initializeApp(config);
 
+transAmountPossible = false;
+transUserPossible = false;
+
 // Get user information
 document.addEventListener("DOMContentLoaded", function(event) { 
+		// check if catched data is available
+		if (sessionStorage.getItem("catchedId")) {
+			document.getElementById("transId").value = sessionStorage.getItem("catchedId");
+			transUserPossible = true;
+		}
+
+		if (sessionStorage.getItem("catchedAmount")) {
+			document.getElementById("transAmount").value = sessionStorage.getItem("catchedAmount");
+			transAmountPossible = true;
+		}
 		// get user data
 		var user = firebase.auth().currentUser;
 		firebase.auth().onAuthStateChanged(function(user) {
@@ -69,9 +82,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	})
 });
 
-transAmountPossible = false;
-transUserPossible = false;
-
 function searchId() {
 	var transId = document.getElementById("transId").value;
 	var error = document.getElementById("errorId");
@@ -126,6 +136,24 @@ function checkAmount() {
 	}
 }
 
+function checkRequest() {
+	var value = sessionStorage.getItem("value");
+	var amount = Number(document.getElementById("requestAmount").value);
+	var error = document.getElementById("errorAmount2");
+	if (amount < 0) {
+		error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
+		error.innerHTML = "Amount is less than 0";
+	} else if (amount > value) {
+		error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
+		error.innerHTML = "You dont have this amount";
+	} else {
+		error.setAttribute("style","visibility: visible;color:rgb(0,160,0);");
+		error.innerHTML = "Amount set";
+		document.getElementById("requestAmount").value = toFixed(amount,2);
+		transAmountPossible = true;
+	}
+}
+
 function transact() {
 	var error = document.getElementById("errorTrans");
 	if (transAmountPossible !== true || transUserPossible !== true) {
@@ -158,5 +186,14 @@ function transact() {
 				error.innerHTML = "A error has acured. User has invalid value";
 			}
 		})
+	}
+}
+
+function request() {
+	var requestValue = Number(document.getElementById("requestAmount").value);
+	if (requestValue !== 0) {
+		prompt("Copy and send to requester.","https://rster2002.github.io/pay?id=" + uid + "&amount=" + requestValue);
+	} else {
+		prompt("Copy and send to requester.","https://rster2002.github.io/pay?id=" + uid);
 	}
 }
