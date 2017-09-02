@@ -1,3 +1,50 @@
+// Initialize Firebase
+var config = {
+	apiKey: "AIzaSyDCgnh6ezKcNkcpAUtGXuiN77jxlDbLPck",
+	authDomain: "dewebsite-bae27.firebaseapp.com",
+	databaseURL: "https://dewebsite-bae27.firebaseio.com",
+	projectId: "dewebsite-bae27",
+	storageBucket: "dewebsite-bae27.appspot.com",
+	messagingSenderId: "437303961105"
+};
+firebase.initializeApp(config);
+
+user = {
+	"username":null
+}
+
+database = firebase.database();
+dbRef = database.ref("pay");
+
+// FirebaseUI config.
+var uiConfig = {
+	signInSuccessUrl: 'theMoneyGame.html',
+	signInOptions: [
+		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+		firebase.auth.EmailAuthProvider.PROVIDER_ID
+	],
+	// Terms of service url.
+	tosUrl: 'tos.html'
+};
+
+if (localStorage.getItem("firebaseui::rememberedAccounts")) {
+	var user = firebase.auth().currentUser;
+	firebase.auth().onAuthStateChanged(function(user) {
+		username = user.displayName;
+		userIcon = user.photoURL;
+		uid = user.uid;
+		document.getElementById("username").innerHTML = username;
+		localStorage.setItem("log",true);
+		document.getElementById("logOut").setAttribute("style","display:block;");
+	})
+} else {
+	// Initialize the FirebaseUI Widget using Firebase.
+	var ui = new firebaseui.auth.AuthUI(firebase.auth());
+	// The start method will wait until the DOM is loaded.
+	ui.start('#firebaseui-auth-container', uiConfig);
+	document.getElementById("logOut").setAttribute("style","display:none;");
+}
+
 lss = false;
 max = false;
 if (localStorage.getItem("ch")) {
@@ -9,45 +56,6 @@ if (localStorage.getItem("ch")) {
 	}
 } else {
 	ch = ["200","200","200","200","200"];
-}
-
-if (localStorage.getItem("botTime")) {
-	botTime = Number(localStorage.getItem("botTime"));
-} else {
-	botTime = new Date().getTime();
-	localStorage.setItem("botTime",botTime)
-}
-
-if (localStorage.getItem("minLss")) {
-	minLss = localStorage.getItem("minLss");
-	document.getElementById("minLss").value = minLss;
-	cminLss = localStorage.getItem("cminLss");
-	if (cminLss === "true") {cminLss = true} else {cminLss = false}
-	if (cminLss === true) {document.getElementById("cminLss").checked = true};
-}
-
-if (localStorage.getItem("minMax")) {
-	minMax = localStorage.getItem("minMax");
-	document.getElementById("minMax").value = minMax;
-	cminMax = localStorage.getItem("cminMax");
-	if (cminMax === "true") {cminMax = true} else {cminMax = false}
-	if (cminMax === true) {document.getElementById("cminMax").checked = true};
-}
-
-if (localStorage.getItem("minPro")) {
-	minPro = localStorage.getItem("minPro");
-	document.getElementById("minPro").value = minPro;
-	cminPro = localStorage.getItem("cminPro");
-	if (cminPro === "true") {cminPro = true} else {cminPro = false}
-	if (cminPro === true) {document.getElementById("cminPro").checked = true};
-}
-
-if (localStorage.getItem("maxPro")) {
-	maxPro = localStorage.getItem("maxPro");
-	document.getElementById("maxPro").value = maxPro;
-	cmaxPro = localStorage.getItem("cmaxPro");
-	if (cmaxPro === "true") {cmaxPro = true} else {cmaxPro = false}
-	if (cmaxPro === true) {document.getElementById("cmaxPro").checked = true};
 }
 
 if (localStorage.getItem("money")) {
@@ -69,9 +77,6 @@ if (localStorage.getItem("stocks")) {
 }
 
 int = 1000;
-if (localStorage.getItem("botMode") === "true") {
-	int = 100;
-}
 
 window.setInterval(function(){
 	if (localStorage.getItem("moneyBank")) {
@@ -91,40 +96,6 @@ window.setInterval(function(){
 		moneyCashe = 200;
 	}
 	
-	if (moneyCashe >= minLss) {
-		lss = false;
-	}
-	
-	if (cminPro === true) {
-		var procent = Math.round((moneyCashe / money) * 100);
-		if (procent <= minPro) {
-			while (moneyCashe <= money) {
-				++stocks
-				money -= moneyCashe;
-				localStorage.setItem("stocks", stocks);
-				document.getElementById("stocks").innerHTML = stocks;
-				localStorage.setItem("money", money);
-				document.getElementById("money").innerHTML = money;
-				ch.unshift(String(moneyCashe));
-				localStorage.setItem("ch", ch);
-			}
-		}
-	}
-	 
-	if (cminLss === true) {
-		if (moneyCashe < minLss && lss === false) {
-			Push.create("Now is your chance!", {
-				body: "The price is now less than " + minLss,
-				timeout: 4000,
-				onClick: function () {
-					window.focus();
-					this.close();
-				}
-			});
-			//alert("not");
-			lss = true;
-		}
-	}
 	localStorage.setItem("moneyBank", moneyCashe);
 	document.getElementById("price").innerHTML = moneyCashe;
 	
@@ -139,38 +110,6 @@ window.setInterval(function(){
 			var i = moneyCashe - Number(ch[0]);
 			document.getElementById("add").innerHTML = "Current price: +" + i;
 			document.getElementById("title").innerHTML = "tmg (+" + i + ")";
-			if (i < minMax) {
-				max = false;
-			}
-			if (cminMax === true) {
-				if (i >= minMax && max === false) {
-					Push.create("Now is your chance!", {
-					body: "The profit is now more than " + minMax,
-					timeout: 4000,
-					onClick: function () {
-						window.focus();
-						this.close();
-					}
-					});
-					//alert("yes");
-					max = true;
-				}
-			}
-			if (cmaxPro === true) {
-				var procent = Math.round((i / moneyCashe) * 100);
-				if (procent >= maxPro) {
-					while (stocks > 0) {
-						--stocks;
-						money += moneyCashe;
-						localStorage.setItem("stocks", stocks);
-						document.getElementById("stocks").innerHTML = stocks;
-						localStorage.setItem("money", money);
-						document.getElementById("money").innerHTML = money;
-						ch.shift();
-						localStorage.setItem("ch", ch);
-					}
-				}
-			}
 		}
 	} else {
 		document.getElementById("title").innerHTML = "The Money Game";
@@ -257,78 +196,66 @@ function reset() {
 	ch = ["200","200","200","200","200"];
 }
 
+function toFixed(value, precision) {
+	var precision = precision || 0,
+	power = Math.pow(10, precision),
+	absValue = Math.abs(Math.round(value * power)),
+	result = (value < 0 ? '-' : '') + String(Math.floor(absValue / power));
+	if (precision > 0) {
+		var fraction = String(absValue % power),
+		padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
+			result += '.' + padding + fraction;
+	}
+	return result;
+}
+
 function transver() {
-	payMoney = Number(localStorage.getItem("payMoney"));
-	money = Number(localStorage.getItem("money"))
-	much = Number(prompt("How much do you want to transver?"));
-	if (much === null || much === "") {
-		return;
-	}
-	if (much < 1) {
-		alert("This is not right")
-		return;
-	}
-	if (much <= money) {
-		var transverAmmount = much / 10000;
-		if (confirm("Are you sure you want to transver to pay? You'll get " + transverAmmount + "Pixels") === true) {
-			payMoney += Number(transverAmmount);
-			localStorage.setItem("payMoney", payMoney);
-			money -= much;
-			localStorage.setItem("money", money);
-			document.getElementById("money").innerHTML = money;
-			alert("transver succesfull");
-		} else {
+	if (localStorage.getItem("firebaseui::rememberedAccounts")) {
+		var money = Number(localStorage.getItem("money"))
+		var much = Number(prompt("How much do you want to transver?"));
+		if (much === null || much === "") {
 			return;
 		}
-		
+		if (much < 1) {
+			alert("This is less than 0")
+			return;
+		}
+		if (much <= money) {
+			var transverAmmount = Number(toFixed(much / 1000, 2));
+			if (confirm("Are you sure you want to transver to pay? You'll get " + transverAmmount + " Credits") === true) {
+				dbRef.once("value",function(snapshot) {
+					if (snapshot.hasChild(uid)) {
+						dbRef.child(uid).once("value",function(snapshot){
+							var dbContent = snapshot.val();
+							var gamepayCredits = Number(dbContent.value);
+							var exportCredit = gamepayCredits + transverAmmount;
+							dbRef.child(uid).child("value").set(exportCredit);
+							dbRef.child(uid).child("latestTransaction").child("amount").set(transverAmmount);
+							dbRef.child(uid).child("latestTransaction").child("type").set("add");
+							dbRef.child(uid).child("latestTransaction").child("user").set("The Money Game");
+							localStorage.setItem("money",money - much);
+							document.getElementById("money").innerHTML = localStorage.getItem("money");
+						})
+					} else {
+						alert("You haven't made a gamepay account")
+					}
+				})
+			} else {
+				return;
+			}
+
+		} else {
+			alert("You dont have enough money");
+		}
 	} else {
-		alert("You dont have enough money");
+		alert("You are not loged in")
 	}
 }
 
-function settings() {
-	if (document.getElementById("cminLss").checked) {
-		cminLss = true;
-		minLss = document.getElementById("minLss").value;
-		localStorage.setItem("minLss", minLss);
-		localStorage.setItem("cminLss", cminLss);
-	} else {
-		cminLss = false;
-		localStorage.setItem("cminLss", cminLss);
-	}
-	if (document.getElementById("cminMax").checked) {
-		cminMax = true;
-		minMax = document.getElementById("minMax").value;
-		localStorage.setItem("minMax", minMax);
-		localStorage.setItem("cminMax", cminMax);
-	} else {
-		cminMax = false;
-		localStorage.setItem("cminMax", cminMax);
-	}
-	if (document.getElementById("cminPro").checked) {
-		cminPro = true;
-		minPro = document.getElementById("minPro").value;
-		localStorage.setItem("minPro", minPro);
-		localStorage.setItem("cminPro", cminPro);
-	} else {
-		cminPro = false;
-		localStorage.setItem("cminPro", cminPro);
-	}
-	if (document.getElementById("cmaxPro").checked) {
-		cmaxPro = true;
-		maxPro = document.getElementById("maxPro").value;
-		localStorage.setItem("maxPro", maxPro);
-		localStorage.setItem("cmaxPro", cmaxPro);
-	} else {
-		cmaxPro = false;
-		localStorage.setItem("cmaxPro", cmaxPro);
+function logout() {
+	if (confirm("If you logout you'll lose all your progress on this machine") === true){
+		reset();
+		localStorage.removeItem("firebaseui::rememberedAccounts");
+		location.href="theMoneyGame.html";
 	}
 }
-
-function botMode() {
-	var date = new Date();
-	botTimeUse = [date.getHours, date.getDay];
-}
-
-window.setInterval(function(){
-},1000)

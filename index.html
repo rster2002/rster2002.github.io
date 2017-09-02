@@ -2,11 +2,50 @@
 
 <html>
 	<head>
-		<title>redirect</title>
+		<title>rster2002</title>
+		<link rel="stylesheet" href="assets/css/index.css">
+		<script src="assets/js/functions.js"></script>
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-WCD9TKQ');</script>
+		<!-- End Google Tag Manager -->
+		<script>
+		var urlParam = function(name, w){
+		w = w || window;
+		var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
+		val = w.location.search.match(rx);
+		return !val ? '':val[1];
+		}
+		var prj = urlParam('prj');
+		if (prj !== "") {
+			location.href="dev/projects/" + p + "/main.html";
+		}
+		</script>
 	</head>
 	<body>
-		<script>
-			location.href="pay.html";
-		</script>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCD9TKQ"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+<!--
+		<div class="navHeader">
+			<img src="assets/images/logo_white-104x128.png">
+            <a>rster2002</a>
+		</div>
+-->
+		<div class="header">
+			<h1>rster2002</h1>
+		</div>
+		<div class="check">
+			<div class="main">
+				<h1>Check it out</h1>
+			</div>
+			<div class="text" onclick="location.href='dev.html'">
+				<h1>/dev</h1>
+			</div>
+		</div>
 	</body>
 </html>

@@ -3,9 +3,14 @@
 <html>
 	<head>
 		<title id="title">The Money Game</title>
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+		<script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
+		<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
 		<link href="assets/css/theMoneyGame.css" rel="stylesheet">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js"></script>
 		<script src="assets/js/library/push.min.js"></script>
+		<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="assets/css/theMoneyGame.css">
+		<link rel="stylesheet" media="screen and (max-device-width: 800px)" href="assets/css/theMoneyGame.m.css">
 		<meta name="viewport" content="user-scalable=no">
 	</head>
 	<body>
@@ -20,11 +25,15 @@
 					<button id="sell" onclick="sell()">sell</button>
 				</div>
 				<div class="info">
+					<h1 id="username"></h1>
+					<button onclick="logout()" id="logOut">logout</button>
 					<h1>Your money</h1>
 					<h1 id="money"></h1>
 					<h1>Your stocks</h1>
 					<h1 id="stocks"></h1>
+					<div id="firebaseui-auth-container"></div>
 					<button onclick="transver()">Transver to pay</button>
+<!--
 					<div class="settings">
 						<h1>Settings</h1>
 						<p>Check a bar to enable it</p>
@@ -35,6 +44,7 @@
 						<p>Time untill you can use a bot:</p>
 						<p id="timer"></p>
 					</div>
+-->
 				</div>
 			</div>
 		</div>
