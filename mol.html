@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<title>De Mol - MC</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
 		<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="assets/css/mol.css">
 		<link rel="stylesheet" media="screen and (max-device-width: 800px)" href="assets/css/mol.m.css">
@@ -47,76 +48,80 @@
 			</div>
 		</div>
 		<script>
-			pot = 9050;
-			total = 24400;
-			next = "Aug 18, 2017 00:00:00"
-//			new Date("Aug 18, 2017 00:00:00").getTime();
-			
-			player("Luuk_T","in");
-			player("Pyrollenium","in");
-			player("catlover313","in");
-			player("FogDogPvP","in");
-			player("Esmee_T","in");
-			player("thom20_02","in");
-			player("The_Gameking","in");
-			
-			document.getElementById("pot").innerHTML = pot + ",-";
-			function toFixed(value, precision) {
-			var precision = precision || 0,
-				power = Math.pow(10, precision),
-				absValue = Math.abs(Math.round(value * power)),
-				result = (value < 0 ? '-' : '') + String(Math.floor(absValue / power));
+			$(document).ready(function(){
+				pot = 9050;
+				total = 24400;
+	//			new Date("Aug 18, 2017 00:00:00").getTime();
+				dbRef.child("CountDown").once("value",function(snapshot) {
+					var dbContent = snapshot.val();
+					next = dbContent.value;
+					// Set the date we're counting down to
+					document.getElementById("days").innerHTML = "-";
+					document.getElementById("hour").innerHTML = "-";
+					document.getElementById("min").innerHTML = "-";
+					document.getElementById("sec").innerHTML = "-";
+					var countDownDate = new Date(next).getTime();
 
-			if (precision > 0) {
-				var fraction = String(absValue % power),
-					padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
-				result += '.' + padding + fraction;
-			}
-				return result;
-			}
-			var precentage = toFixed((pot / total) * 100, 1);
-			document.getElementById("percentage").innerHTML = precentage + "%";
-			
-			// Set the date we're counting down to
-			document.getElementById("days").innerHTML = "-";
-			document.getElementById("hour").innerHTML = "-";
-			document.getElementById("min").innerHTML = "-";
-			document.getElementById("sec").innerHTML = "-";
-			var countDownDate = new Date(next).getTime();
+					// Update the count down every 1 second
+					var x = setInterval(function() {
 
-			// Update the count down every 1 second
-			var x = setInterval(function() {
+					  // Get todays date and time
+					  var now = new Date().getTime();
 
-			  // Get todays date and time
-			  var now = new Date().getTime();
+					  // Find the distance between now an the count down date
+					  var distance = countDownDate - now;
 
-			  // Find the distance between now an the count down date
-			  var distance = countDownDate - now;
+					  // Time calculations for days, hours, minutes and seconds
+					  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+					  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+					  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-			  // Time calculations for days, hours, minutes and seconds
-			  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-			  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+					  // Display the result in the element with id="demo"
+					  /* document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+					  + minutes + "m " + seconds + "s "; */
+						document.getElementById("days").innerHTML = "D: " + days;
+						document.getElementById("hour").innerHTML = "U: " + hours;
+						document.getElementById("min").innerHTML = "M: " + minutes;
+						document.getElementById("sec").innerHTML = "S: " + seconds;
+					  // If the count down is finished, write some text 
+					  if (distance < 0) {
+						clearInterval(x);
+						document.getElementById("days").innerHTML = "-";
+						document.getElementById("hour").innerHTML = "-";
+						document.getElementById("min").innerHTML = "-";
+						document.getElementById("sec").innerHTML = "-";
+					  }
+					}, 1000);
+				});
 
-			  // Display the result in the element with id="demo"
-			  /* document.getElementById("timer").innerHTML = days + "d " + hours + "h "
-			  + minutes + "m " + seconds + "s "; */
-				document.getElementById("days").innerHTML = "D: " + days;
-				document.getElementById("hour").innerHTML = "U: " + hours;
-				document.getElementById("min").innerHTML = "M: " + minutes;
-				document.getElementById("sec").innerHTML = "S: " + seconds;
-			  // If the count down is finished, write some text 
-			  if (distance < 0) {
-				clearInterval(x);
-				document.getElementById("days").innerHTML = "-";
-				document.getElementById("hour").innerHTML = "-";
-				document.getElementById("min").innerHTML = "-";
-				document.getElementById("sec").innerHTML = "-";
-			  }
-			}, 1000);
-			
-			requireId();
+				player("Luuk_T","in");
+				player("Pyrollenium","in");
+				player("catlover313","in");
+				player("FogDogPvP","in");
+				player("Esmee_T","in");
+				player("Thom20_02","in");
+				player("The_Gameking","in");
+
+				document.getElementById("pot").innerHTML = pot + ",-";
+				function toFixed(value, precision) {
+				var precision = precision || 0,
+					power = Math.pow(10, precision),
+					absValue = Math.abs(Math.round(value * power)),
+					result = (value < 0 ? '-' : '') + String(Math.floor(absValue / power));
+
+				if (precision > 0) {
+					var fraction = String(absValue % power),
+						padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
+					result += '.' + padding + fraction;
+				}
+					return result;
+				}
+				var precentage = toFixed((pot / total) * 100, 1);
+				document.getElementById("percentage").innerHTML = precentage + "%";
+
+				requireId();
+			})
 		</script>
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -126,7 +131,6 @@
 
 		  ga('create', 'UA-102147810-1', 'auto');
 		  ga('send', 'pageview');
-
 		</script>
 	</body>
 </html>
