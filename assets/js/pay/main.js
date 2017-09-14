@@ -14,6 +14,8 @@ transUserPossible = false;
 
 // Get user information
 document.addEventListener("DOMContentLoaded", function(event) { 
+	$(".loading").show();
+	$(".info-bar").hide();
 		// get user data
 		var user = firebase.auth().currentUser;
 		firebase.auth().onAuthStateChanged(function(user) {
@@ -74,14 +76,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					document.getElementById("latestTransactionAmount").setAttribute("style","color:rgb(0,160,0);")
 					document.getElementById("latestTransactionUser").innerHTML = "from " + latestTransactionUser;
 				} else {
-					document.getElementById("latestTransactionAmount").setAttribute("style","color:rgb(160,00,0);")
+					document.getElementById("latestTransactionAmount").setAttribute("style","color:rgb(160,00,0);");
+					document.getElementById("latestTransactionUser").innerHTML = "to " + latestTransactionUser;
 				}
 			} else {
 				latestTransactionAmount = false;
 			}
-			document.getElementById("value").innerHTML = dbContent.value + "C";
+			document.getElementById("value").innerHTML = toFixed(dbContent.value, 2) + "C";
 		})
 	})
+	$(".loading").hide();
+	$(".info-bar").show();
 });
 
 function searchId() {
@@ -204,4 +209,9 @@ function request() {
 	} else {
 		prompt("Copy and send to requester.","https://rster2002.github.io/pay?id=" + uid);
 	}
+}
+
+function logout() {
+	localStorage.removeItem("firebaseui::rememberedAccounts");
+	location.href="../pay.html";
 }

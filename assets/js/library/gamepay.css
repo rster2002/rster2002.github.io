@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+#gamePayWindow {
+	border-radius: 5px;
+	background-color: brown;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.gamePayBackground {
+	border-radius: 5px;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(255,255,255);
+}
+
+.gamePayBackground .header {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background-color: #4c90ff;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 20%;
+}
+
+.gamePayBackground .header h1 {
+	color: white;
+	font-size: 3em;
+	font-family: 'Raleway';
+}
+
+.gamePayBackground .header #toId {
+	font-size: 1em;
+}
+
+.gamePayBackground button {
+	display: block;
+	margin-top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	border: none;
+	font-size: 2em;
+	border-radius: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

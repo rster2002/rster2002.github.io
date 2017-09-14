@@ -27,6 +27,7 @@ var uiConfig = {
 	tosUrl: 'tos.html'
 };
 
+// check if there is a account loged in
 if (localStorage.getItem("firebaseui::rememberedAccounts")) {
 	var user = firebase.auth().currentUser;
 	firebase.auth().onAuthStateChanged(function(user) {
@@ -45,6 +46,7 @@ if (localStorage.getItem("firebaseui::rememberedAccounts")) {
 	document.getElementById("logOut").setAttribute("style","display:none;");
 }
 
+// check and import bought chain
 lss = false;
 max = false;
 if (localStorage.getItem("ch")) {
@@ -58,6 +60,7 @@ if (localStorage.getItem("ch")) {
 	ch = ["200","200","200","200","200"];
 }
 
+// check and setup money
 if (localStorage.getItem("money")) {
 	money = Number(localStorage.getItem("money"));
 	document.getElementById("money").innerHTML = money;
@@ -67,6 +70,7 @@ if (localStorage.getItem("money")) {
 	document.getElementById("money").innerHTML = money;
 }
 
+// check and setup stocks
 if (localStorage.getItem("stocks")) {
 	stocks = Number(localStorage.getItem("stocks"));
 	document.getElementById("stocks").innerHTML = stocks;
@@ -76,8 +80,18 @@ if (localStorage.getItem("stocks")) {
 	document.getElementById("stocks").innerHTML = stocks;
 }
 
+// check and setup assets
+if (localStorage.getItem("assets")) {
+	assets = Number(localStorage.getItem("assets"));
+} else {
+	assets = 0;
+	localStorage.setItem("assets",assets)
+}
+
+// set interval
 int = 1000;
 
+// game loop
 window.setInterval(function(){
 	if (localStorage.getItem("moneyBank")) {
 		moneyCashe = localStorage.getItem("moneyBank");
@@ -103,13 +117,24 @@ window.setInterval(function(){
 	
 	if (stocks > 0) {
 		if (moneyCashe < Number(ch[0])) {
+//			 + toFixed((assets/100*moneyCashe), 2)
 			var i = Number(ch[0]) - moneyCashe;
-			document.getElementById("add").innerHTML = "Current price: -" + i;
-			document.getElementById("title").innerHTML = "tmg (-" + i + ")";
+			if (assets > 0) {
+				document.getElementById("add").innerHTML = "Current price: -" + i + "(+" + assets +"%)";
+				document.getElementById("title").innerHTML = "tmg (-" + i + ")";
+			} else {
+				document.getElementById("add").innerHTML = "Current price: -" + i;
+				document.getElementById("title").innerHTML = "tmg (-" + i + ")";
+			}
 		} else {
-			var i = moneyCashe - Number(ch[0]);
-			document.getElementById("add").innerHTML = "Current price: +" + i;
-			document.getElementById("title").innerHTML = "tmg (+" + i + ")";
+			var i = Number(ch[0]) - moneyCashe;
+			if (assets > 0) {
+				document.getElementById("add").innerHTML = "Current price: +" + i + "(+" + assets +"%)";
+				document.getElementById("title").innerHTML = "tmg (+" + i + ")";
+			} else {
+				document.getElementById("add").innerHTML = "Current price: +" + i;
+				document.getElementById("title").innerHTML = "tmg (+" + i + ")";
+			}
 		}
 	} else {
 		document.getElementById("title").innerHTML = "The Money Game";
@@ -117,6 +142,8 @@ window.setInterval(function(){
 	}
 }, int);
 
+
+// buy stock
 function buy() {
 	var price = localStorage.getItem("moneyBank");
 	if (money < price) {
@@ -133,10 +160,11 @@ function buy() {
 	}
 }
 
+// sell stock
 function sell() {
 	if (stocks > 0) {
 		var price = localStorage.getItem("moneyBank");
-		money = Number(money) + Number(price);
+		money = Number(money) + Number(price) + toFixed((assets/100*price), 2);
 		stocks -= 1;
 		localStorage.setItem("stocks", stocks);
 		document.getElementById("stocks").innerHTML = stocks;
@@ -180,6 +208,7 @@ function sell() {
 	}
 }
 
+// reset gameplay
 function reset() {
 	document.getElementById("price").innerHTML = "resetting...";
 	localStorage.removeItem("moneyBank");
@@ -187,6 +216,7 @@ function reset() {
 	localStorage.removeItem("stocks");
 	localStorage.removeItem("change");
 	localStorage.removeItem("ch");
+	localStorage.removeItem("assets");
 	money = 2000;
 	localStorage.setItem("money", money);
 	document.getElementById("money").innerHTML = money;
@@ -196,6 +226,7 @@ function reset() {
 	ch = ["200","200","200","200","200"];
 }
 
+// to fixed
 function toFixed(value, precision) {
 	var precision = precision || 0,
 	power = Math.pow(10, precision),
@@ -209,6 +240,7 @@ function toFixed(value, precision) {
 	return result;
 }
 
+// transver to gamepay
 function transver() {
 	if (localStorage.getItem("firebaseui::rememberedAccounts")) {
 		var money = Number(localStorage.getItem("money"))
@@ -252,6 +284,28 @@ function transver() {
 	}
 }
 
+// buy asset
+function buyAsset() {
+	dbRef.child(uid).once("value", function(snapshot) {
+		var dbContent = snapshot.val();
+		var gamepayCredits = Number(dbContent.value);
+		var localAssets = Number(localStorage.getItem("assets"));
+		if (gamepayCredits < 200) {
+			alert("You dont have enough money on gamepay for this");
+		} else {
+			if (confirm("Are you sure you want to buy this? You'll buy this with your CREDITS on gamepay.") === true) {
+				dbRef.child(uid).child("value").set(gamepayCredits - 200);
+				dbRef.child(uid).child("latestTransaction").child("amount").set(200);
+				dbRef.child(uid).child("latestTransaction").child("type").set("remove");
+				dbRef.child(uid).child("latestTransaction").child("user").set("The Money Game");
+				++assets
+				localStorage.setItem("assets", assets);
+			}
+		}
+	});
+}
+
+// logout
 function logout() {
 	if (confirm("If you logout you'll lose all your progress on this machine") === true){
 		reset();

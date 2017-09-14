@@ -11,7 +11,7 @@ firebase.initializeApp(config);
 
 // FirebaseUI config.
 var uiConfig = {
-	signInSuccessUrl: 'pay/main.html',
+	signInSuccessUrl: 'spaceOne/main.html',
 	signInOptions: [
 		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
 		firebase.auth.EmailAuthProvider.PROVIDER_ID
@@ -25,25 +25,6 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 // The start method will wait until the DOM is loaded.
 ui.start('#firebaseui-auth-container', uiConfig);
 
-var urlParam = function(name, w) {
-	w = w || window;
-	var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
-	val = w.location.search.match(rx);
-	return !val ? '':val[1];
-}
-
-if (urlParam("payment") !== '') {
-	location.href="pay/payment.html";
-} else {
-	if (urlParam("id") !== '') {
-		sessionStorage.setItem("catchedId", urlParam("id"));
-	}
-
-	if (urlParam("amount") !== '') {
-		sessionStorage.setItem("catchedAmount",urlParam("amount"));
-	}
-
-	if (localStorage.getItem("firebaseui::rememberedAccounts")) {
-		location.href = "pay/main.html";
-	}
+if (localStorage.getItem("firebaseui::rememberedAccounts")) {
+	location.href = "spaceOne/main.html";
 }

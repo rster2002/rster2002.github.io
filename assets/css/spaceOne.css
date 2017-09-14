@@ -1,0 +1,218 @@
+@font-face {
+	font-family: Space;
+	src: url(fonts/SpaceMono-Regular);
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	transition: all .2s ease-in;
+	margin-left: 10px;
+	font-family: "Space";
+	color: white;
+	border: solid 2px #59b8e6;
+	background-color: rgba(0,0,0,0);
+	position: relative;
+	top: 30%;
+}
+
+button:hover {
+	background-color: rgba(233,85,44,.5);
+	transition: all .2s ease-in;
+	border: solid 2px #e9552c;
+}
+
+.background {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	width: 100vw;
+	background-image: url(https://static.pexels.com/photos/110854/pexels-photo-110854.jpeg);
+	background-size: cover;
+	background-position: center;
+}
+
+.forground {
+/*	margin-top: -21px;*/
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	top: 5%;
+	height: 90%;
+	width: 90%;
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 5px;
+	text-align: center;
+}
+
+.forground h1 {
+	color: white;
+	font-family: "Space";
+}
+
+#resources {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 2;
+}
+
+#resources div {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	height: 10%;
+}
+
+#resources img {
+	float: left;
+	height: 90%;
+}
+
+#resources button {
+	margin-top: 10px;
+}
+
+#resources h1 {
+	float: left;
+	margin-left: 10px;
+	line-height: 100%;
+}
+
+.profile {
+	height: 10%;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background-color: rgba(0,0,0,0.5);
+}
+
+.profile img {
+	float: left;
+	position: relative;
+	margin-left: 10px;
+	top: 5%;
+	border-radius: 100%;
+	height: 90%;
+}
+
+.profile h1 {
+	margin-left: 10px;
+	float: left;
+	line-height: 100%;
+}
+
+.profile button {
+	height: 40%;
+}
+
+.profile #logout {
+	float: left;
+}
+
+.profile #showResources, #showCrafting {
+	float: right;
+}
+
+.profile #pixels {
+	margin-right: 10px;
+	float: right;
+}
+
+.planet {
+	position: relative;
+	top: 2%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+	height: 10%;
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 5px;
+}
+
+.planet h1 {
+	float: left;
+	line-height: 100%;
+	margin-left: 10px;
+}
+
+.planet img {
+	position: relative;
+	top: 5%;
+	margin-left: -10px;
+	float: left;
+	height: 90%;
+}
+
+.mine {
+	position: relative;
+	margin-top: 2%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+	height: 10%;
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 5px;
+}
+
+.mine h1 {
+	float: left;
+	line-height: 100%;
+	margin-left: 10px;
+}
+
+.mine img {
+	position: relative;
+	top: 5%;
+	margin-left: 10px;
+	float: left;
+	height: 90%;
+}
+
+.mine button {
+	margin-left: 10px;
+	float: left;
+}
+
+.travel {
+	position: relative;
+	margin-top: 2%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+	height: 10%;
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 5px;
+}
+
+.travel h1 {
+	float: left;
+	line-height: 100%;
+	margin-left: 10px;
+}
+
+.travel img {
+	position: relative;
+	top: 5%;
+	margin-left: 10px;
+	float: left;
+	height: 90%;
+}
+
+.travel button {
+	margin-left: 10px;
+	float: left;
+}

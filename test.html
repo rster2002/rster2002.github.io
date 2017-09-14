@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Test</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/1.5.1/fingerprint2.min.js"></script>
+	</head>
+	<body>
+		<style>
+			#gamepayWindow {
+				height: 600px;
+				width: 400px;
+			}
+		</style>
+		<script src="assets/js/library/gamepay.js"></script>
+		<div id="gamepayWindow"></div>
+		<script>
+			$(document).ready(function() {
+				gamepay.config({
+					toId: "ny3VKIhj3fRldT6Sv8T1UleNv6C3",
+					amount: 10,
+					mode: "dev"
+				});
+			});
+		</script>
+	</body>
+</html>

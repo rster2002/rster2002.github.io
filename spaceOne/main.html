@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>SpaceOne</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+		<script src="../assets/js/spaceOne.js"></script>
+		<link href="../assets/css/spaceOne.css" rel="stylesheet" type="text/css">
+	</head>
+	
+	<body>
+		<div class="background">
+			<div class="forground">
+				<div class="profile">
+					<img id="userIcon">
+					<h1 id="userName"></h1>
+					<button id="logout" onclick="logout()">Logout</button>
+					<h1 id="pixels">PIXELS</h1>
+					<button id="showResources" onclick="showResources()">Resources</button>
+					<button id="showCrafting">Craft</button>
+				</div>
+				<div class="planet">
+					<img id="planetIcon">
+					<h1 id="planetName">PlanetName</h1>
+					<h1 id="planetResource">Stone</h1>
+					<h1 id="planetMultiplier">Resource multiplier</h1>
+					<h1 id="planetTotal"></h1>
+				</div>
+				<div class="mine">
+					<img id="miningShip" src="../assets/images/spaceOne/space-ship.png">
+					<h1>Start...</h1>
+					<button onclick="mine()">Mining</button>
+					<h1 id="mineState"></h1>
+				</div>
+				<div class="travel">
+					<img id="travelShip" src="../assets/images/spaceOne/travelship.png">
+					<h1>Travel to...</h1>
+					<button id="btnTravel">Normal planet</button>
+					<button id="btnWarp">Distand planet</button>
+					<button id="btnSpaceStation">Space Station</button>
+				</div>
+				<div id="resources">
+					<button onclick="closeResources()">Close</button>
+					<div>
+						<img src="../assets/images/spaceOne/water.png">
+						<h1 id="water"></h1>
+					</div>
+					<div>
+						<img src="../assets/images/spaceOne/wood.png">
+						<h1 id="wood"></h1>
+					</div>
+					<div>
+						<img src="../assets/images/spaceOne/iron.png">
+						<h1 id="iron"></h1>
+					</div>
+					<div>
+						<img src="../assets/images/spaceOne/titanium.png">
+						<h1 id="titanium"></h1>
+					</div>
+				</div>
+				<div class="crafting">
+					
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
