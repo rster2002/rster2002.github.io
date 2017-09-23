@@ -19,10 +19,6 @@ if (localStorage.getItem("firebaseui::rememberedAccounts")) {
 	location.href="../pay.html";
 }
 
-new Fingerprint2().get(function(result, components){
-	sessionStorage.setItem("::browserId", result); //a hash, representing your device fingerprint
-});
-
 function toFixed(value, precision) {
 	var precision = precision || 0,
 	power = Math.pow(10, precision),
@@ -37,6 +33,13 @@ function toFixed(value, precision) {
 }
 
 $(document).ready(function(){
+	// get fingerprint
+	var client = new ClientJS();
+	var fingerprint = client.getFingerprint();
+	sessionStorage.setItem("::browserId", fingerprint);
+	console.log(fingerprint);
+	
+	// get loged-in user
 	var user = firebase.auth().currentUser;
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user != null) {
@@ -60,7 +63,12 @@ $(document).ready(function(){
 				payFromURL = dbContent.fromURL;
 				console.log(dbContent);
 				$("#amount").text(payAmount + "c");
-				$("#toId").text(payToId);
+				dbRefPay.child(payToId).once("value",function(s){
+					var dbContent = s.val();
+					toIdName = dbContent.username;
+					console.log(toIdName);
+					$("#toId").text("to " + toIdName);
+				});
 			});
 			
 			$("#btnConfirmPay").on("click",function(){
