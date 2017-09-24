@@ -29,7 +29,7 @@ function article(name, img, position, page, type) {
 		element.style.backgroundImage = "url(" + img + ");";
 		element.setAttribute("id", "img_" + articleNr);
 		document.getElementById("main_" + articleNr).appendChild(element);
-		document.getElementById("img_" + articleNr).setAttribute("style", "background-image: url(" + img + "); background-position: " + position + "; width: 99%; height: 300px;");
+		document.getElementById("img_" + articleNr).setAttribute("style", "background-image: url(" + img + "); background-position: " + position + "; width: 99%; height: 300px;background-size:cover;");
 
 		/* Create button */
 		var element = document.createElement("div");

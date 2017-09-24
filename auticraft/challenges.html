@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Auticraft | Projecten</title>
+		<link rel="icon" href="../assets/logo_black.png">
+		<style>
+			@font-face {
+				font-family: Noto Sans;
+				src: url(../assets/css/fonts/NotoSans-Regular.ttf);
+			}
+			
+			html,body {
+				margin: 0;
+				padding: 0;
+				overflow-x: hidden;
+			}
+			
+			.story {
+				background-image: -webkit-linear-gradient(92deg,#00CDCD,#2D66F1);
+				width: 100vw;
+				padding: 10px;
+				height: 100vh;
+			}
+			
+			.text h1 {
+				font-size: 80px;
+			}
+
+			.text p {
+				font-size: 50px;
+			}
+			
+			.story .text {
+				width: 40%;
+				float: left;
+				margin-left: 10%;
+				color: white;
+				font-family: "Noto Sans";
+			}
+			
+			.randomizer {
+				position: relative;
+				top: 10px;
+				width: 70%;
+				background-color: white;
+				height: 50vh;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="story">
+			<div class="text">
+				<h1>Challenges</h1>
+				<p>Dus, je verveelt je. Klik hieronder op de knop om een random challenge te genereren.</p>
+			</div>
+			
+			<div class="randomizer">
+				<h1 id="output"></h1>
+				<div class="button">
+					<a onclick="random">Genereer</a>
+				</div>
+			</div>
+		</div>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-102147810-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+	</body>
+</html>

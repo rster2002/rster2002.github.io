@@ -3,10 +3,12 @@
 <html>
 	<head>
 		<title>AutiCraft</title>
-		<link rel="stylesheet" type="text/css" href="assets/css/auticraft.css">
+		<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="assets/css/auticraft.css">
+		<link rel="stylesheet" media="screen and (max-device-width: 800px)" href="assets/css/auticraft.m.css">
 		<link rel="icon" href="assets/logo_black.png">
 		<script src="assets/js/auticraft.js"></script>
 		<script src="auticraft/js/update.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script>
 			function rules() {
 				location.href='auticraft/rules.html';
@@ -40,28 +42,39 @@
 		<div class="header">
 			<h1>AutiCraft</h1>
 		</div>
-		<div class="rules">
-			<div class="button" onclick="rules()">
-				<a>Bekijk regels</a>
+		<div class="story">
+			<div class="regels">
+				<div class="text">
+					<h1>Regels</h1>
+					<p>De server moet leuk voor iedereen blijven, daarom zijn er een paar regels waar je je aan moet houden.</p>
+					<div class="button">
+						<a href="auticraft/rules.html">Bekijk <i class="fa fa-arrow-right"></i></a>
+					</div>
+				</div>
+				<img src="https://minecraft.net/static/pages/img/servers/servers-hub-3.3048acef5b82.png">
+			</div>
+			<div class="shops">
+				<div class="text">
+					<h1>Shops</h1>
+					<p>Iets nodig en geen zin om het zelf te halen? Kijk of ze het hebben in een van de shops op de server.</p>
+					<div class="button">
+						<a href="auticraft/shops.html">Bekijk <i class="fa fa-arrow-right"></i></a>
+					</div>
+				</div>
+				<img src="https://minecraft.net/static/pages/img/servers/servers-hub-4.633392af89a0.png">
+			</div>
+			<div class="challenges">
+				<div class="text">
+					<h1>Challenges</h1>
+					<p>Verveel je je? Dan kan je hier een challenge krijgen!</p>
+					<div class="nonebutton">
+						<a>Komt binnenkort</a>
+<!--						<a href="auticraft/challenges.html">Bekijk <i class="fa fa-arrow-right"></i></a>-->
+					</div>
+				</div>
+				<img src="https://minecraft.net/static/pages/img/servers/servers-hub-1.0b16f8147a1c.png">
 			</div>
 		</div>
-		<div class="shops">
-			<div class="button" onclick="shops()">
-				<a>Bekijk shops</a>
-			</div>
-		</div>
-		<div class="map">
-			<div class="button" onclick="map()">
-				<a>Bekijk de map</a>
-			</div>
-		</div>
-		<!--
-		<div class="skulls">
-			<div class="button" onclick="skulls()">
-				<a>Bekijk de skulls</a>
-			</div>
-		</div>
-		-->
 		<script src="auticraft/js/updates.js"></script>
 		<div class="updates">
 			<h1>Om te lezen</h1>
@@ -96,7 +109,6 @@
 
 		  ga('create', 'UA-102147810-1', 'auto');
 		  ga('send', 'pageview');
-
 		</script>
 	</body>
 </html>

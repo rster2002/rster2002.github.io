@@ -24,6 +24,7 @@ function articles(type) {
 			break;
 	}
 	/* articles */
+	article("website updates", "https://community-content-assets.minecraft.net/upload/styles/small/s3fs/abc84939cb66bbc5113d1b339da4ce5e-aubbeta_bit1.jpg", "0% 0%", "auticraft/articles/websiteupdate.html", "update");
 	article("skulls project", "assets/images/auticraft/reset.png", "30% 45%", "auticraft/articles/project.html", "mededeling");
 	article("Skulls resetten", "assets/images/auticraft/reset.png", "30% 45%","auticraft/articles/skulls%20reset.html", "mededeling");
 	article("Paarden korting", "assets/images/auticraft/shops.jpg", "50% 50%","auticraft/articles/event1.html", "event");

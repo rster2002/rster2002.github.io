@@ -19,7 +19,7 @@ body {
 }
 
 .header {
-	width: 100%;
+	width: 100vw;
 	height: 820px;
 	margin-top: -102px;
 	margin-left: -10px;
@@ -174,6 +174,21 @@ body {
 	padding: 10px;
 }
 
+.regels img {
+	margin-top: 20px;
+	align-self: center;
+}
+
+.shops img {
+	margin-top: 20px;
+	align-self: center;
+}
+
+.challenges img {
+	margin-top: 20px;
+	align-self: center;
+}
+
 .text {
 	color: white;
 	font-family: "Noto Sans";
@@ -212,45 +227,40 @@ body {
 	color: white;
 	text-decoration: none;
 	padding: 3px;
-	font-size: 25px;
+	font-size: 50px;
 }
 
 .text .nonebutton a {
 	color: white;
 	text-decoration: none;
 	padding: 3px;
-	font-size: 25px;
-}
-
-.text .button:hover {
-	transform: scale(1.1);
-	transition: all ease-in .2s;
+	font-size: 50px;
 }
 
 .text h1 {
-	font-size: 70px;
+	font-size: 90px;
 }
 
 .text p {
-	font-size: 30px;
+	font-size: 50px;
 }
 
 .regels .text {
-	width: 40%;
+	width: 80%;
 	float: left;
 	margin-left: 10%;
 	color: white;
 }
 
 .shops .text {
-	width: 35%;
+	width: 90%;
 	float: left;
 	margin-left: 10%;
 	color: white;
 }
 
 .challenges .text {
-	width: 35%;
+	width: 90%;
 	float: left;
 	margin-left: 10%;
 	color: white;
@@ -264,11 +274,10 @@ body {
 	align-content: center;
 	align-items: center;
 	text-align: center;
-	height: 500px;
+	height: 900px;
 }
 
 .updates h1 {
-	background: 
 	margin-top: 30px;
 	color: black;
 	font-size: 40px;
@@ -283,16 +292,16 @@ body {
 	margin-right: auto;
 	top: 4%;
 	cursor: pointer;
-	width: 300px;
-	height: 50px;
+	width: 70%;
+	height: 90px;
 	color: white;
 }
 
 .updates a {
 	text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
 	font-family: 'Noto Sans', sans-serif;
-	font-size: 30px;
-	line-height: 50px;
+	font-size: 60px;
+	line-height: 90px;
 	cursor: pointer;
 }
 
