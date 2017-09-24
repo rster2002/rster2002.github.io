@@ -49,8 +49,6 @@
 		</div>
 		<script>
 			$(document).ready(function(){
-				pot = 9050;
-				total = 24400;
 	//			new Date("Aug 18, 2017 00:00:00").getTime();
 				dbRef.child("CountDown").once("value",function(snapshot) {
 					var dbContent = snapshot.val();
@@ -93,6 +91,25 @@
 						document.getElementById("sec").innerHTML = "-";
 					  }
 					}, 1000);
+					
+					pot = dbContent.pot;
+					total = dbContent.total;
+					document.getElementById("pot").innerHTML = pot + ",-";
+					function toFixed(value, precision) {
+					var precision = precision || 0,
+						power = Math.pow(10, precision),
+						absValue = Math.abs(Math.round(value * power)),
+						result = (value < 0 ? '-' : '') + String(Math.floor(absValue / power));
+
+					if (precision > 0) {
+						var fraction = String(absValue % power),
+							padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
+						result += '.' + padding + fraction;
+					}
+						return result;
+					}
+					var precentage = toFixed((pot / total) * 100, 1);
+					document.getElementById("percentage").innerHTML = precentage + "%";
 				});
 
 				player("Luuk_T","in");
@@ -103,22 +120,6 @@
 				player("Thom20_02","in");
 				player("The_Gameking","in");
 
-				document.getElementById("pot").innerHTML = pot + ",-";
-				function toFixed(value, precision) {
-				var precision = precision || 0,
-					power = Math.pow(10, precision),
-					absValue = Math.abs(Math.round(value * power)),
-					result = (value < 0 ? '-' : '') + String(Math.floor(absValue / power));
-
-				if (precision > 0) {
-					var fraction = String(absValue % power),
-						padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
-					result += '.' + padding + fraction;
-				}
-					return result;
-				}
-				var precentage = toFixed((pot / total) * 100, 1);
-				document.getElementById("percentage").innerHTML = precentage + "%";
 
 				requireId();
 			})
