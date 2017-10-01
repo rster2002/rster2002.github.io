@@ -8,6 +8,11 @@
 	src: url(../assets/css/fonts/roboto/Roboto-Thin.ttf);
 }
 
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
 html {
 	width: 100vw;
 	overflow-x: hidden;
@@ -39,10 +44,24 @@ h1 {
 p {
 	color: rgb(40, 40, 40);
 	display: block;
+	text-align: left;
 	margin-left: auto;
 	margin-right: auto;
 	width: 50%;
 	font-size: 30px;
+}
+
+#center {
+	text-align: center;
+}
+
+#youtube {
+	color: red;
+}
+
+i {
+	background-color: darkgray;
+	border-radius: 3px;
 }
 
 .story {
