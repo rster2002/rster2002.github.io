@@ -34,11 +34,112 @@ input {
 	border-bottom: solid 2px rgb(0,160,160);
 }
 
+button {
+	padding: 10px;
+	border: none;
+	border-radius: 3px;
+	background-color: white;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	font-family: "museo";
+	font-size: 20px;
+	cursor: pointer;
+	transition: ease-in all .2s;
+}
+
+button:hover {
+	transform: scale(1.05);
+	transition: cubic-bezier(0.6, 0.01, 0.13, 0.89) all .3s;
+}
+
 /*
 input:focus {
 	border-bottom: solid 3px rgb(0,200,200);
 }
 */
+
+/*
+
+	POPUP
+
+*/
+
+#popup-outer {
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0,0,0,0.5);
+	display: none;
+}
+			
+#popup {
+	transition: .3s all ease-in;
+	position: fixed;
+	height: 70vh;
+	width: 50vw;
+	background-color: white;
+	z-index: 4;
+	top: 15vh;
+	left: 25vw;
+	border-radius: 7px;
+	display: none;
+	cursor: pointer;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#popup .header {
+	margin: 0;
+	margin-top: -22px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	width: 100%;
+	height: 100px;
+	background-color: #4c90ff;
+	text-align: center;
+	font-family: "museo";
+}
+
+#popup .header h1 {
+	color: white;
+	line-height: 100px;
+}
+			
+.qrScanner-outer {
+	height: 100%;
+	width: 100%;
+}
+			
+.qrScanner-outer video {
+	border-radius: 7px;
+	width: 100%;
+	height: 100%;
+}
+
+#qrcode {
+	position: relative;
+	height: 50%;
+	width: 100%;
+	top: 25%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#qrcode img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+/*
+
+	INFOBAR
+
+*/
+
 
 .info-bar {
 	position: fixed;
@@ -74,7 +175,12 @@ input:focus {
 	border-radius: 100%;
 }
 
-/*page*/
+/*
+
+	PAGE
+
+*/
+
 .page {
 	position: fixed;
 	top: 60px;
@@ -109,7 +215,12 @@ input:focus {
 	line-height: 50px;
 }
 
-/*info*/
+/*
+
+	INFO
+
+*/
+
 .info .balance {
 	text-align: center;
 	font-family: "museo";
@@ -161,7 +272,8 @@ input:focus {
 	text-align: center;
 	font-family: "museo";
 	width: 100%;
-	padding: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	background-color: lightgrey;
 }
 
@@ -169,10 +281,11 @@ input:focus {
 	font-size: 20px;
 }
 
-.transaction .transact #title {
-	padding-left: 20px;
+.transaction .transact {
+	text-align: center;
 }
 
+/*
 .transaction .transact button {
 	margin-left: 20px;
 	border: none;
@@ -180,8 +293,10 @@ input:focus {
 	width: 60%;
 	height: 50px;
 }
+*/
 
-.transaction .transact #errorTransact, #errorRequest {
+.createTransaction #errorTransact, #errorRequest {
 	padding-left: 20px;
 	visibility: hidden;
+	font-family: 'museo';
 }

@@ -1,3 +1,8 @@
+var head = document.getElementsByTagName('head').item(0);
+var element = document.createElement("script");
+element.src = "https://rawgit.com/jackspirou/clientjs/master/dist/client.min.js";
+head.appendChild(element);
+
 var config = {
 	apiKey: "AIzaSyDCgnh6ezKcNkcpAUtGXuiN77jxlDbLPck",
 	authDomain: "dewebsite-bae27.firebaseapp.com",
@@ -41,6 +46,8 @@ gamepay = {
 			
 			if (config.mode !== undefined) {
 				sessionStorage.setItem("::type","dev");
+			} else {
+				sessionStorage.setItem("::type","default");
 			}
 			
 			dbRefPay.child(config.toId).once("value",function(s){
@@ -55,6 +62,11 @@ gamepay = {
 				console.error("No amount set");
 				return;
 			}
+			
+			if (config.return !== undefined) {
+				sessionStorage.setItem("::return",String(config.return));
+			}
+			
 			document.getElementById("gamePayAmount").innerHTML = config.amount + "c";
 			var client = new ClientJS();
 			var fingerprint = client.getFingerprint();
@@ -67,6 +79,7 @@ gamepay = {
 			dbBrowserId = dbRefAPI.child(sessionStorage.getItem("::browserId"));
 			dbBrowserId.child("amount").set(sessionStorage.getItem("::amount"));
 			dbBrowserId.child("toId").set(sessionStorage.getItem("::toId"));
+			dbBrowserId.child("return").set(sessionStorage.getItem("::return"));
 			dbBrowserId.child("fromURL").set(window.location.href);
 			if (sessionStorage.getItem("::type") === "dev") {
 				sessionStorage.removeItem("::type");

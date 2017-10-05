@@ -83,6 +83,8 @@ $(document).ready(function(){
 						return;
 					}
 					
+					var browserId = sessionStorage.getItem("::browserId");
+					
 					userValue = userValue - payAmount;
 					toIdValue = toIdValue + payAmount;
 					dbRefPay.child(uid).child("latestTransaction").child("type").set("remove");
@@ -96,7 +98,14 @@ $(document).ready(function(){
 					dbRefPay.child(payToId).child("value").set(toIdValue);
 					
 					dbRefAPI.child(sessionStorage.getItem("::browserId")).remove();
-					location.href="../pay.html";
+					dbRefAPI.child(browserId).once("value",function(s){
+						var dbContent = s.val();
+						if (dbContent.return === "true") {
+							location.href = payFromURL;
+						} else {
+							location.href="../pay.html";
+						}
+					})
 				});
 			});
 		}

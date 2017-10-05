@@ -1,16 +1,24 @@
 // Initialize Firebase
 var config = {
-	apiKey: "AIzaSyDCgnh6ezKcNkcpAUtGXuiN77jxlDbLPck",
-	authDomain: "dewebsite-bae27.firebaseapp.com",
-	databaseURL: "https://dewebsite-bae27.firebaseio.com",
-	projectId: "dewebsite-bae27",
-	storageBucket: "dewebsite-bae27.appspot.com",
-	messagingSenderId: "437303961105"
+    apiKey: "AIzaSyDCgnh6ezKcNkcpAUtGXuiN77jxlDbLPck",
+    authDomain: "dewebsite-bae27.firebaseapp.com",
+    databaseURL: "https://dewebsite-bae27.firebaseio.com",
+    projectId: "dewebsite-bae27",
+    storageBucket: "dewebsite-bae27.appspot.com",
+    messagingSenderId: "437303961105"
 };
 firebase.initializeApp(config);
 
 transAmountPossible = false;
 transUserPossible = false;
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
 
 // Get user information
 document.addEventListener("DOMContentLoaded", function(event) { 
@@ -41,7 +49,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					transAmountPossible = true;
 				}
 			} else {
-				location.href="../pay.html"
+//				localStorage.removeItem("firebaseui::rememberedAccounts");
+//				location.href="../pay.html";
 			}
 		});
 	// define database
@@ -100,8 +109,11 @@ function searchId() {
 	dbRef.once("value", function(snapshot) {
 		if (snapshot.hasChild(transId)) {
 			error.setAttribute("style","visibility: visible;color:rgb(0,160,0);");
-			error.innerHTML = "Found user";
-			transUserPossible = true;
+			dbRef.child(transId).once("value",function(e){
+				var dbContent = e.val();
+				error.innerHTML = "Found user as " + dbContent.username;
+				transUserPossible = true;
+			})
 		} else {
 			error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
 			error.innerHTML = "Couldn't find user";
@@ -179,7 +191,7 @@ function transact() {
 				dbRef.child(transId).child("value").set(userValue);
 				
 				dbRef.child(uid).child("latestTransaction").child("amount").set(transAmount);
-				dbRef.child(uid).child("latestTransaction").child("user").set(dbContent.username);
+				dbRef.child(uid).child("latestTransaction").child("user").set(transUserContent.username);
 				dbRef.child(uid).child("latestTransaction").child("type").set("remove");
 				
 				dbRef.child(transId).child("latestTransaction").child("amount").set(transAmount);
@@ -188,13 +200,16 @@ function transact() {
 				
 				error.setAttribute("style","visibility: visible;color:rgb(0,160,0);");
 				error.innerHTML = "Transaction succesfull";
+				ga('send', 'event', 'Pay', uid + 'made a transaction to ' + transId, 'Payment');
 			} else {
 				error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
 				error.innerHTML = "A error has acured. User has invalid value";
 			}
-		})
+		});
+		closeCreateTransaction();
 	}
 }
+
 
 function request() {
 	var error = document.getElementById("errorTransact");
@@ -204,14 +219,104 @@ function request() {
 			error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
 			error.innerHTML = "Amount is less than 0";
 		} else {
-			prompt("Copy and send to requester.","https://rster2002.github.io/pay?id=" + uid + "&amount=" + requestValue);
+			prompt("Copy and send to request.","https://rster2002.github.io/pay?id=" + uid + "&amount=" + requestValue);
 		}
 	} else {
-		prompt("Copy and send to requester.","https://rster2002.github.io/pay?id=" + uid);
+		prompt("Copy and send to request.","https://rster2002.github.io/pay?id=" + uid);
 	}
+}
+
+function qrCam() {
+	$(".qrCam-outer").fadeIn();
+	$(".qrCam").show();
+	$('#reader').html5_qrcode(
+	function(data) {
+		var qrCode = data.split("/");
+		toId = qrCode[0];
+		amount = qrCode[1];
+		console.log(toId);
+		console.log(amount);
+		dbRef.child(toId).once("value",function(e){
+			var dbContent = e.val();
+			if (amount === "false") {
+				var amount = confirm("How much do you want to pay " + dbContent + "?");
+				if (amount !== '' || amount !== false || amount !== "0") {
+					transactionAmount = Number(amount);
+				}
+			} else {
+				transactionAmount = Number(amount);
+			}
+			if (confirm("Do you want to pay " + dbContent.username + " " + amount + "credits?")) {
+				console.log("YES I DO");
+			};
+		});
+	},
+	function(error){
+		console.log(error);
+	}, 
+	function(videoError){
+		//the video stream could be opened
+	});
+}
+
+///////////////////////////////////////////////////////////////////////
+//OPENING AND CLOSING POPUPS
+///////////////////////////////////////////////////////////////////////
+
+function closeCreateTransaction() {
+	$(".createTransaction-outer").fadeOut();
+	$(".createTransaction").hide();
+}
+
+function qrCamStop() {
+	$('#reader').html5_qrcode_stop();
+	$('#reader').remove();
+	$('.qrReader-outer').append("<div id='reader' style='width:100%;height:100%;'></div>");
+	readerOn = false;
+	$(".qrCam-outer").fadeOut();
+	$(".qrCam").hide;
+}
+
+function qrCodeShow() {
+	var amount = prompt("How much do you want to pay?");
+	if (amount === '') {
+		amount = "false";
+	}
+	new QRCode(document.getElementById("qrcode"), uid + "/" + amount);
+	$(".qrCode-outer").fadeIn();
+	$(".qrCode").show();
+}
+
+function qrCodeHide() {
+	$(".qrCode-outer").fadeOut();
+	$(".qrCode").hide;
+	$("#qrcode").remove();
+	$(".qrCode").append("<div id='qrcode'></div>");
 }
 
 function logout() {
 	localStorage.removeItem("firebaseui::rememberedAccounts");
 	location.href="../pay.html";
 }
+
+// appending functions to buttons
+$(document).ready(function(){
+	$("#btnCreateTransaction").on("click",function(){
+		$(".createTransaction-outer").fadeIn();
+		$(".createTransaction").show();
+	});
+	
+	$("#btnCloseCreateTransaction").on("click",function(){
+		closeCreateTransaction();
+	});
+	
+	$("#btnUsingQrCode").on("click",function(){
+		closeCreateTransaction();
+		qrCodeShow();
+	});
+	
+	$("#btnReceiveQrCode").on("click",function(){
+		closeCreateTransaction();
+		qrCam();
+	});
+})

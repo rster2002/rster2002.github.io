@@ -4,24 +4,101 @@
 	<head>
 		<title>Test</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-	</head>
-	<body>
+		<script type="text/javascript" src="assets/js/library/dwa012-html5-qrcode-8f98e26/lib/jsqrcode-combined.min.js"></script>
+		<script type="text/javascript" src="assets/js/library/dwa012-html5-qrcode-8f98e26/lib/html5-qrcode.min.js"></script>
+		<script type="text/javascript" src="assets/js/library/davidshimjs-qrcodejs-04f46c6/qrcode.js"></script>
 		<style>
-			#gamepayWindow {
-				height: 600px;
-				width: 400px;
+			body {
+				background-color: white;
+			}
+			
+/*
+			.popup-outer {
+				width: 100vw;
+				height: 100vh;
+			}
+*/
+			#popup-outer {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				background-color: rgba(0,0,0,0.5);
+				display: none;
+			}
+			
+			#popup {
+				transition: .3s all ease-in;
+				position: fixed;
+				height: 70vh;
+				width: 50vw;
+				background-color: white;
+				z-index: 4;
+				top: 15vh;
+				left: 25vw;
+				border-radius: 7px;
+				display: none;
+				cursor: pointer;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			}
+			
+			.outer {
+				height: 100%;
+				width: 100%;
+			}
+			
+			.outer video {
+				border-radius: 7px;
 			}
 		</style>
-		<script src="assets/js/library/gamepay/gamepay.js"></script>
-		<div id="gamepayWindow"></div>
+	</head>
+	<body>
+		<div id="qrcode"></div>
+		<script type="text/javascript">
+			new QRCode(document.getElementById("qrcode"), "e0rjNnr7AJZDUyKwZSGOhOZK0l03");
+		</script>
+		<div class="popup-outer" id="popup-outer">
+			<div class="popup" onclick="jsCamStop()" id="popup">
+				<div class="outer">
+					<div id="reader" style="width:100%;height:100%;"></div>
+				</div>
+			</div>
+		</div>
+		<button id="btnToggle">Button</button>
 		<script>
-			$(document).ready(function() {
-				gamepay.config({
-					toId: "ny3VKIhj3fRldT6Sv8T1UleNv6C3",
-					amount: 10,
-					mode: "dev"
-				});
+			readerOn = false;
+			function jsCam() {
+				if (readerOn !== true) {
+					$('#reader').html5_qrcode(
+					function(data) {
+						alert(data);
+					},
+					function(error){
+						console.log(error);
+					}, 
+					function(videoError){
+						//the video stream could be opened
+					});
+					readerOn = true;
+				} else {
+					alert("Reader already running")
+				}
+			}
+			
+			function jsCamStop() {
+				$('#reader').html5_qrcode_stop();
+				$('#reader').remove();
+				$('.outer').append("<div id='reader' style='width:100%;height:100%;'></div>");
+				readerOn = false;
+				$(".popup-outer").fadeOut();
+				$(".popup").hide();
+			}
+			
+			$("#btnToggle").on("click",function(){
+				$(".popup-outer").fadeIn();
+				$(".popup").show();
+				jsCam();
 			});
 		</script>
 	</body>
