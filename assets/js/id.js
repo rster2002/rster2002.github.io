@@ -70,6 +70,7 @@ function requireId() {
 		}
 		if (dbIdState.valid === "true") {
 			document.getElementById("mainStory").setAttribute("style","display:block");
+			document.getElementById("userId").innerHTML = "Je id: " + urlId;
 		} else {
 			reValid = false;
 		}
