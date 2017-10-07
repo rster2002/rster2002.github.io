@@ -23,12 +23,35 @@
 		<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="../assets/css/pay/main.css">
 		<link rel="stylesheet" media="screen and (max-device-width: 800px)" href="../assets/css/pay/main.m.css">
 		<link rel="stylesheet" href="../assets/css/pay/loading.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	</head>
 	<body>
 		<div class="info-bar">
+<!--
+			<a style="float:right;color:white;height:100%;margin-right: 10px;cursor:pointer;" id="settings">
+				<i class="material-icons" style="position:relative;font-size:40px;line-height:60px;">settings</i>
+			</a>
+-->
 			<img id="usericon" onclick="logout()">
 			<a id="username"</a>
 			<a id="uid"></a>
+		</div>
+		<div class="payment-outer" id="popup-outer">
+			<div class="payment" id="popup" style="cursor:default;">
+				<div class="header">
+					<h1 id="paymentAmount">10c</h1>
+					<h2 id="paymentUser" class="under-header-text">User Name</h2>
+				</div>
+				<div class="center center-in" style="width:50%;margin-top:10px;">
+					<button id="paymentConfirm" style="background-color:#4c90ff;color:white;margin-left:10px;"><i class="material-icons">done</i> Confirm</button>
+					<button id="paymentCancel" style="background-color:#f21d1d;color:white;margin-left:10px;"><i class="material-icons">clear</i> Cancel</button>
+				</div>
+			</div>
+		</div>
+		<div class="settings-outer" id="popup-outer">
+			<div class="settings" id="popup" style="cursor:default;">
+				<input type="checkbox"><p>Ask for pin</p>
+			</div>
 		</div>
 		<div class="qrCam-outer" id="popup-outer">
 			<div class="qrCam" onclick="qrCamStop()" id="popup">
@@ -49,15 +72,14 @@
 					<h1 id="title">Create Transaction</h1>
 				</div>
 				<p id="errorTransact"></p>
-				<input type="text" placeholder="user id" id="transId" onchange="searchId()">
-				<input type="number" placeholder="amount" id="transAmount" onchange="checkAmount()">
-				<br>
-				<button onclick="transact()" style="margin-left: 20px;background-color:#4c90ff;color:white;">Transact</button>
-				<button id="btnCloseCreateTransaction" style="margin-left:20px;background-color:#f21d1d;color:white;">Cancel</button>
-<!--
-				<button id="btnUsingQrCode" style="margin-left:20px;">Receive using QR code</button>
-				<button id="btnReceiveQrCode">Pay using QR code</button>
--->
+				<i class="material-icons" style="margin-left:10px;">account_box</i><input type="text" placeholder="user id" id="transId" onchange="searchId()"><br>
+				<i class="material-icons" style="margin-left:10px;">toll</i><input type="number" placeholder="amount" id="transAmount" onchange="checkAmount()"><br>
+				<div style="margin-top: 20px;">
+					<button onclick="transact()" style="margin-left: 20px;background-color:#4c90ff;color:white;"><i class="material-icons">credit_card</i> Pay</button>
+					<button id="btnCloseCreateTransaction" style="margin-left:20px;background-color:#f21d1d;color:white;"><i class="material-icons">clear</i> Cancel</button>
+					<button id="btnUsingQrCode" style="margin-left:20px;width: 10%;"><i class="material-icons">gradient</i></button>
+					<button id="btnReceiveQrCode"style="width: 10%;"><i class="material-icons">camera_alt</i></button>
+				</div>
 			</div>
 		</div>
 		<div class="page">
@@ -89,8 +111,8 @@
 					<h1 id="userid" onclick="copyToClipboard('#userid')"></h1>
 				</div>
 				<div class="transact">
-					<h1 id="title">Create transaction</h1>
-					<button id="btnCreateTransaction">Create transaction</button>
+					<h1 id="title">Transact</h1>
+					<button id="btnCreateTransaction"><i class="material-icons">credit_card</i> Create transaction</button>
 					<h1 id="title">Create pay request</h1>
 					<input type="text" placeholder="amount" id="requestAmount" onchange="checkRequest()">
 					<p id="errorRequest"></p>

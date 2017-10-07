@@ -103,7 +103,19 @@ input:focus {
 
 #popup .header h1 {
 	color: white;
-	line-height: 100px;
+	line-height: 50px;
+}
+
+#popup .header h2 {
+	color: lightgray;
+	font-size: 20px;
+	line-height: 10px;
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 			
 .qrScanner-outer {
@@ -299,4 +311,24 @@ input:focus {
 	padding-left: 20px;
 	visibility: hidden;
 	font-family: 'museo';
+}
+div {
+	
+}
+
+
+
+#settings {
+	float:right;
+	color:white;
+	height:100%;
+	margin-right: 10px;
+}
+
+
+
+
+
+.payment .head {
+	
 }

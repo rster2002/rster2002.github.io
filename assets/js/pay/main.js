@@ -20,6 +20,55 @@ function copyToClipboard(element) {
   $temp.remove();
 }
 
+function openPopup(id) {
+	$("." + id + "-outer").fadeIn();
+	$("." + id).show();
+}
+
+function closePopup(id) {
+	$("." + id + "-outer").fadeOut();
+	$("." + id).hide();
+}
+
+function payment(toId, amount) {
+	closeCreateTransaction();
+	dbRef.child(toId).once("value",function(e){
+		var toIdUser = e.val();
+		$("#paymentAmount").text(amount + "c");
+		$("#paymentUser").text(toIdUser.username);
+		sessionStorage.setItem("::paymentAmount",amount);
+		sessionStorage.setItem("::paymentUser",toId);
+		openPopup("payment");
+	});
+}
+
+function confirmPayment() {
+	if (Number(sessionStorage.getItem("value")) < amount) {
+		alert("You don't have enough credits");
+		closePopup("payment");
+		return;
+	}
+	var toId = sessionStorage.getItem("::paymentUser");
+	var amount = Number(sessionStorage.getItem("::paymentAmount"));
+	dbRef.child(toId).once("value",function(e){
+		var dbContent = e.val();
+		var toIdValue = dbContent.value;
+		var toIdCValue = toIdValue + amount;
+		dbRef.child(toId).child("value").set(toIdCValue);
+		dbRef.child(toId).child("latestTransaction").child("amount").set(amount);
+		dbRef.child(toId).child("latestTransaction").child("user").set(sessionStorage.getItem("::localUsername"));
+		dbRef.child(toId).child("latestTransaction").child("type").set("add");
+		
+		var fromAmount = Number(sessionStorage.getItem("value") - amount);
+		
+		dbRef.child(uid).child("value").set(fromAmount);
+		dbRef.child(uid).child("latestTransaction").child("amount").set(amount);
+		dbRef.child(uid).child("latestTransaction").child("user").set(dbContent.username);
+		dbRef.child(uid).child("latestTransaction").child("type").set("remove");
+		closePopup("payment");
+	});
+}
+
 // Get user information
 document.addEventListener("DOMContentLoaded", function(event) { 
 	$(".loading").show();
@@ -31,6 +80,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				username = user.displayName;
 				userIcon = user.photoURL;
 				uid = user.uid;
+				
+				sessionStorage.setItem("::localUsername",username);
 
 				// set info bar
 				document.getElementById("username").innerHTML = username;
@@ -179,33 +230,9 @@ function transact() {
 		error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
 		error.innerHTML = "There are errors, please check if amount and user id are right.";
 	} else {
-		var value = Number(sessionStorage.getItem("value"));
 		var transId = document.getElementById("transId").value;
 		var transAmount = Number(document.getElementById("transAmount").value);
-		dbRef.child(transId).once("value",function(snapshot) {
-			var transUserContent = snapshot.val();
-			if (transUserContent.value !== null) {
-				var transValue = value - transAmount;
-				var userValue = transUserContent.value + transAmount;
-				dbRef.child(uid).child("value").set(transValue);
-				dbRef.child(transId).child("value").set(userValue);
-				
-				dbRef.child(uid).child("latestTransaction").child("amount").set(transAmount);
-				dbRef.child(uid).child("latestTransaction").child("user").set(transUserContent.username);
-				dbRef.child(uid).child("latestTransaction").child("type").set("remove");
-				
-				dbRef.child(transId).child("latestTransaction").child("amount").set(transAmount);
-				dbRef.child(transId).child("latestTransaction").child("user").set(dbContent.username);
-				dbRef.child(transId).child("latestTransaction").child("type").set("add");
-				
-				error.setAttribute("style","visibility: visible;color:rgb(0,160,0);");
-				error.innerHTML = "Transaction succesfull";
-				ga('send', 'event', 'Pay', uid + 'made a transaction to ' + transId, 'Payment');
-			} else {
-				error.setAttribute("style","visibility: visible;color:rgb(160,0,0);");
-				error.innerHTML = "A error has acured. User has invalid value";
-			}
-		});
+		payment(transId,transAmount);
 		closeCreateTransaction();
 	}
 }
@@ -233,23 +260,17 @@ function qrCam() {
 	function(data) {
 		var qrCode = data.split("/");
 		toId = qrCode[0];
-		amount = qrCode[1];
-		console.log(toId);
-		console.log(amount);
-		dbRef.child(toId).once("value",function(e){
-			var dbContent = e.val();
-			if (amount === "false") {
-				var amount = confirm("How much do you want to pay " + dbContent + "?");
-				if (amount !== '' || amount !== false || amount !== "0") {
-					transactionAmount = Number(amount);
-				}
+		amount = Number(qrCode[1]);
+		if (amount === "false") {
+			var prompt = prompt(prompt("How much do you want to pay?"));
+			if (prompt === false) {
+				return;
 			} else {
-				transactionAmount = Number(amount);
+				amount = Number(prompt);
 			}
-			if (confirm("Do you want to pay " + dbContent.username + " " + amount + "credits?")) {
-				console.log("YES I DO");
-			};
-		});
+		}
+		qrCamStop();
+		payment(toId,amount);
 	},
 	function(error){
 		console.log(error);
@@ -271,14 +292,14 @@ function closeCreateTransaction() {
 function qrCamStop() {
 	$('#reader').html5_qrcode_stop();
 	$('#reader').remove();
-	$('.qrReader-outer').append("<div id='reader' style='width:100%;height:100%;'></div>");
+	$('.qrScanner-outer').append("<div id='reader' style='width:100%;height:100%;'></div>");
 	readerOn = false;
 	$(".qrCam-outer").fadeOut();
 	$(".qrCam").hide;
 }
 
 function qrCodeShow() {
-	var amount = prompt("How much do you want to pay?");
+	var amount = prompt("How much do you want to receive?");
 	if (amount === '') {
 		amount = "false";
 	}
@@ -318,5 +339,17 @@ $(document).ready(function(){
 	$("#btnReceiveQrCode").on("click",function(){
 		closeCreateTransaction();
 		qrCam();
+	});
+	
+	$("#settings").on("click",function(){
+		openPopup("settings");			  
+	});
+	
+	$("#paymentCancel").on("click",function(){
+		closePopup("payment");
+	});
+	
+	$("#paymentConfirm").on("click",function(){
+		confirmPayment();
 	});
 })
