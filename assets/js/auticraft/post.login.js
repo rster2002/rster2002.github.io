@@ -1,8 +1,3 @@
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-	alert("Je kan (nog) niet posten vanaf een mobiel apparaat");
-	location.href="../auticraft.html";
-}
-
 // Initialize Firebase
 var config = {
 	apiKey: "AIzaSyDCgnh6ezKcNkcpAUtGXuiN77jxlDbLPck",

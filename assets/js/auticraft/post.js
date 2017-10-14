@@ -1,3 +1,14 @@
+var blacklist = [
+	"someone"
+];
+
+// checks if mobile ##############################################################################
+
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+	alert("Je kan (nog) niet posten vanaf een mobiel apparaat");
+	location.href="../auticraft.html";
+}
+
 var config = {
     apiKey: "AIzaSyDCgnh6ezKcNkcpAUtGXuiN77jxlDbLPck",
     authDomain: "dewebsite-bae27.firebaseapp.com",
@@ -9,13 +20,19 @@ var config = {
 firebase.initializeApp(config);
 dbRef = firebase.database().ref("auticraft");
 
+// Makes it first test before post ###############################################################
+
 sessionStorage.setItem("imgUrl", "false");
 sessionStorage.setItem("type", "false");
+
+// Logout function ###############################################################################
 
 function logout() {
 	localStorage.removeItem("firebaseui::rememberedAccounts");
 	location.href="../auticraft.html";
 }
+
+// checks inputs #################################################################################
 
 function checkUrl() {
 	var inputValue = $("#imgUrl").val();
@@ -44,6 +61,8 @@ function checkType() {
 	}
 }
 
+// Catches logged in user ########################################################################
+
 $(document).ready(function(){
 	var user = firebase.auth().currentUser;
 	firebase.auth().onAuthStateChanged(function(user) {
@@ -52,13 +71,25 @@ $(document).ready(function(){
 			userIcon = user.photoURL;
 			uid = user.uid;
 			
+			sessionStorage.setItem("uid",uid);
+			
+			for (var i = 0; i < blacklist.length; i++) {
+				if (blacklist[i] === uid) {
+					alert("Je staat op de blacklist. Je kan niets meer posten.");
+					location.href="../auticraft.html";
+				}
+			}
 			$("#username").text(username);
 			$("#userImg").attr("src", userIcon);
 		}
 	})
 });
 
+// function to post and finalize post ############################################################
+
 function post() {
+	checkType();
+	checkUrl();
 	if (sessionStorage.getItem("type") !== "false" || sessionStorage.getItem("imgUrl") !== "false") {
 		dbRef.child("articles").once("value",function(e){
 			var dbContent = e.val();
@@ -80,4 +111,32 @@ function post() {
 	} else {
 		alert("Niet alles is goed ingevult.");
 	}
+}
+
+// secret remove post function ##################################################################
+
+if (sessionStorage.getItem("uid") === "lOPeKBQl9RZ7ch082LCiG2TfO0r1") {
+	sessionStorage.removeItem("uid");
+	function removePost(postName) {
+		dbReplace = [];
+		dbRef.child("articles").once("value",function(e){
+			var dbContent = e.val();
+			console.log(dbContent);
+			for (var i = 0; i < dbContent.length; i++) {
+				if (dbContent[i].title === postName) {
+					console.log("Found:");
+					console.log(dbContent[i]);
+				} else {
+					console.log("Skipped:");
+					console.log("- " + dbContent[i].title);
+					dbReplace.unshift(dbContent[i]);
+				}
+			}
+			console.log("db replaced with:");
+			console.log(dbReplace);
+			dbRef.child("articles").set(dbReplace);
+		});
+	}
+} else {
+	sessionStorage.removeItem("uid");
 }

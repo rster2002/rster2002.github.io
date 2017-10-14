@@ -45,23 +45,47 @@ button[class|="minimal"]:active {
 .article-inner {
 	transition: .3s all ease-in;
 	position: fixed;
-	height: 70vh;
-	width: 50vw;
+	height: 90vh;
+	width: 90vw;
 	background-color: white;
 	z-index: 4;
-	top: 15vh;
-	left: 25vw;
+	top: 5vh;
+	left: 5vw;
 	border-radius: 7px;
 /*	display: none;*/
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.article-inner p {
-	text-align: left;
+.article-inner h1 {
+	font-size: 70px;
+	text-align: center;
 }
 
-.article-inner h1 {
+.article-inner p {
+	width: 90%;
+	display: block;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 50px;
+}
+
+.article-inner #postedBy {
+	background-color: gray;
+	color: white;
+	border-radius: 5px;
 	text-align: center;
+}
+
+.article-inner #title {
+	font-size: 100px;
+	width: 70%;
+	background-color: #2D66F1;
+	border-radius: 5px;
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .header {
