@@ -1,6 +1,15 @@
 articleNr = 0;
 updatesHeight = 100;
-function article(name, img, position, page, type) {
+
+function openArticle(number) {
+	$("#article-outer-" + number).css("display","block");
+}
+
+function closeArticle(number) {
+	$("#article-outer-" + number).css("display","none");
+}
+
+function article(name, img, position, content, type, postedBy) {
 	if (sessionStorage.getItem("filter") === type || sessionStorage.getItem("filter") === "all") {
 		articleNr += 1
 		updatesHeight += 500;
@@ -35,7 +44,7 @@ function article(name, img, position, page, type) {
 		var element = document.createElement("div");
 		element.setAttribute("style", "display:block;margin-left:auto;margin-right:auto;background-color: rgb(0, 187, 0); border-top: 5px solid rgb(0, 220, 0); border-left: 5px solid rgb(0, 100, 0); border-bottom: 5px solid rgb(0, 130, 0); border-right: 5px solid rgb(0, 190, 0); height: 60px; width: 200px; position: relative;  top: 85%; color: white; font-size: 30px; font-family: 'Noto Sans', sans-serif; transition: 0.2s ease-in all;cursor: pointer;");
 		element.setAttribute("id", "button_" + articleNr);
-		element.setAttribute("onclick", "location.href='" + page + "'");
+		element.setAttribute("onclick", "openArticle(" + articleNr + ")");
 		document.getElementById("img_" + articleNr).appendChild(element);
 		var element = document.createElement("a");
 
@@ -76,6 +85,27 @@ function article(name, img, position, page, type) {
 		var text = document.createTextNode(type);
 		element.appendChild(text);
 		document.getElementById("type_" + articleNr).appendChild(element);
+		
+		var element = document.createElement("div");
+		element.setAttribute("class", "article-outer");
+		element.setAttribute("id", "article-outer-" + articleNr);
+		element.setAttribute("onclick", "closeArticle(" + articleNr + ")");
+		document.getElementById("articles").appendChild(element);
+		var element = document.createElement("div");
+		element.setAttribute("class", "article-inner");
+		element.setAttribute("id", "article-inner-" + articleNr);
+		document.getElementById("article-outer-" + articleNr).appendChild(element);
+		var element = document.createElement("h1");
+		element.innerHTML = name;
+		element.id = "title";
+		document.getElementById("article-inner-" + articleNr).appendChild(element);
+		var element = document.createElement("p");
+		element.innerHTML = "Gepost door: " + postedBy;
+		element.id = "postedBy";
+		document.getElementById("article-inner-" + articleNr).appendChild(element);
+		var element = document.createElement("p");
+		element.innerHTML = content;
+		document.getElementById("article-inner-" + articleNr).appendChild(element);
 	}
 }
 

@@ -1,11 +1,11 @@
 @font-face {
 	font-family: museo;
-	src: url(../assets/css/fonts/Museo500.otf);
+	src: url(../../assets/css/fonts/Museo500.otf);
 }
 
 @font-face {
 	font-family: Roboto-Thin;
-	src: url(../assets/css/fonts/roboto/Roboto-Thin.ttf);
+	src: url(../../assets/css/fonts/roboto/Roboto-Thin.ttf);
 }
 
 html, body {
@@ -19,9 +19,20 @@ html {
 	font-family: sans-serif;
 }
 
+.header {
+	position: relative;
+	width: 90vw;
+	height: 90vh;
+	top: 5vh;
+	left: 5vw;
+	border-radius: 10px;
+	margin-top: -102px;
+	text-align: center;
+}
+
 .header h1 {
 	color: white;
-	line-height: 800px;
+	line-height: 95vh;
 	font-size: 150px;
 	font-family: "museo";
 }

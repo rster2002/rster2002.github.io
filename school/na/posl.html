@@ -5,68 +5,18 @@
 		<title id="title">School | nu | po slingertijd</title>
 		<script src="../../assets/js/functions.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script>
-			$(document).ready(function(){
-			  // Add smooth scrolling to all links
-			  $("a").on('click', function(event) {
-
-				// Make sure this.hash has a value before overriding default behavior
-				if (this.hash !== "") {
-				  // Prevent default anchor click behavior
-				  event.preventDefault();
-
-				  // Store hash
-				  var hash = this.hash;
-
-				  // Using jQuery's animate() method to add smooth page scroll
-				  // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-				  $('html, body').animate({
-					scrollTop: $(hash).offset().top
-				  }, 2000, function(){
-
-					// Add hash (#) to URL when done scrolling (default click behavior)
-					window.location.hash = hash;
-				  });
-				} // End if
-			  });
-			});
-		</script>
+		<script src="../../assets/js/library/parallax.min.js"></script>
+		<script src="../assets/page.js"></script>
+		<link href="../../assets/css/animate.min.css" rel="stylesheet">
 		<link rel="icon" href="../../assets/logo_black.png">
-		<link rel="stylesheet" href="../default.css">
-		<style>
-			.header {
-				width: 100vw;
-				height: 100vh;
-				margin-top: -102px;
-				background: url(https://static.pexels.com/photos/80378/study-pen-school-notebook-80378.jpeg) no-repeat center;
-				background-attachment: fixed;
-				background-size: cover;
-				text-align: center;
-			}
-		</style>
-		<script>
-			window.onscroll = function() {scrollFunction()};
-
-			function scrollFunction() {
-				if (document.body.scrollTop > 900 || document.documentElement.scrollTop > 900) {
-					document.getElementById("topButton").style.display = "block";
-				} else {
-					document.getElementById("topButton").style.display = "none";
-				}
-			}
-			
-			function sleep(delay) {
-				var start = new Date().getTime();
-				while (new Date().getTime() < start + delay);
-			}
-		</script>
+		<link rel="stylesheet" href="../assets/default.css">
 	</head>
 	<body>
-		<div class="header">
+		<div class="header parallax-window" data-parallax="scroll" data-image-src="https://static.pexels.com/photos/80378/study-pen-school-notebook-80378.jpeg">
 			<h1 id="header">slingertijd</h1>
 		</div>
 		<div class="story">
-			<a href="#header"><button id="topButton">^</button></a>
+			<a href="#header" id="topA"><button id="topButton">^</button></a>
 			<h1>Onderzoeksvraag</h1>
 			<p>Wat is het verband tussen de lengte van de slinger en de slingertijd.</p>
 			<h1>Theorie en hypothese</h1>

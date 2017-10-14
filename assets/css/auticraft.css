@@ -18,6 +18,77 @@ body {
 	margin: 0;
 }
 
+button[class|="minimal"] {
+	color: darkslategray;
+	background-color: white;
+	border: none;
+	height: 7vh;
+	width: 30vw;
+	font-size: 40px;
+}
+
+button[class|="minimal"]:active {
+	background-color: darkgray;
+}
+
+.article-outer {
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0,0,0,0.5);
+	display: none;
+}
+			
+.article-inner {
+	transition: .3s all ease-in;
+	position: fixed;
+	height: 70vh;
+	width: 50vw;
+	background-color: white;
+	z-index: 4;
+	top: 15vh;
+	left: 25vw;
+	border-radius: 7px;
+/*	display: none;*/
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	overflow-y: scroll;
+}
+
+.article-inner h1 {
+	font-size: 50px;
+	text-align: center;
+}
+
+.article-inner p {
+	width: 70%;
+	display: block;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 20px;
+}
+
+.article-inner #postedBy {
+	background-color: gray;
+	color: white;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.article-inner #title {
+	font-size: 60px;
+	width: 70%;
+	background-color: #2D66F1;
+	border-radius: 5px;
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .header {
 	width: 100%;
 	height: 820px;

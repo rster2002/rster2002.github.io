@@ -1,3 +1,15 @@
+var config = {
+    apiKey: "AIzaSyDCgnh6ezKcNkcpAUtGXuiN77jxlDbLPck",
+    authDomain: "dewebsite-bae27.firebaseapp.com",
+    databaseURL: "https://dewebsite-bae27.firebaseio.com",
+    projectId: "dewebsite-bae27",
+    storageBucket: "dewebsite-bae27.appspot.com",
+    messagingSenderId: "437303961105"
+};
+firebase.initializeApp(config);
+
+var dbRef = firebase.database().ref("auticraft");
+
 function articles(type) {
 	sessionStorage.setItem("filter", "all");
 	console.log("filtered " + type);
@@ -24,10 +36,11 @@ function articles(type) {
 			break;
 	}
 	/* articles */
-	article("website updates", "https://community-content-assets.minecraft.net/upload/styles/small/s3fs/abc84939cb66bbc5113d1b339da4ce5e-aubbeta_bit1.jpg", "0% 0%", "auticraft/articles/websiteupdate.html", "update");
-	article("skulls project", "assets/images/auticraft/reset.png", "30% 45%", "auticraft/articles/project.html", "mededeling");
-	article("Skulls resetten", "assets/images/auticraft/reset.png", "30% 45%","auticraft/articles/skulls%20reset.html", "mededeling");
-	article("Paarden korting", "assets/images/auticraft/shops.jpg", "50% 50%","auticraft/articles/event1.html", "event");
-	article("Komt dat zien", "assets/images/auticraft/meincraft.jpg", "30% 20%","auticraft/articles/default.html", "mededeling");
-	article("Paarden races", "assets/images/auticraft/horse.png", "30% 5%","auticraft/articles/paarden-races.html", "wedstrijd");
+	dbRef.child("articles").once("value",function(e){
+		var dbContent = e.val();
+		for (var i = 0; i < dbContent.length; i++) {
+			article(dbContent[i].title, dbContent[i].img, dbContent[i].offset, dbContent[i].content, dbContent[i].type, dbContent[i].postedBy);
+		}
+	})
+//	article("website updates", "https://community-content-assets.minecraft.net/upload/styles/small/s3fs/abc84939cb66bbc5113d1b339da4ce5e-aubbeta_bit1.jpg", "0% 0%", "<p><h1>Hello World</h1><p>How are you</p></p>", "update");
 }

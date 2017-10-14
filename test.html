@@ -2,23 +2,22 @@
 
 <html>
 	<head>
-		<title>gamepay api</title>
-		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-		<script src="https://rawgit.com/jackspirou/clientjs/master/dist/client.min.js"></script>
-		<script src="assets/js/library/gamepay/gamepay.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<title>Service worker</title>
+		<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
 	</head>
 	<body>
-		<div id="gamepayWindow">
-		</div>
 		<script>
-		 $(document).ready(function(){
-			 gamepay.config({
-				 toId: "6vFMK5zjKhWTTQiVxWhQU1kByT62",
-				 mode: "dev",
-				 amount: 10
-			 });
-		 })
+			if ('serviceWorker' in navigator) {
+			  window.addEventListener('load', function() {
+				navigator.serviceWorker.register('sw.js').then(function(registration) {
+				  // Registration was successful
+				  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				}, function(err) {
+				  // registration failed :(
+				  console.log('ServiceWorker registration failed: ', err);
+				});
+			  });
+			}
 		</script>
 	</body>
 </html>

@@ -18,6 +18,52 @@ body {
 	margin: 0;
 }
 
+button[class|="minimal"] {
+	color: darkslategray;
+	background-color: white;
+	border: none;
+	height: 7vh;
+	width: 30vw;
+	font-size: 40px;
+}
+
+button[class|="minimal"]:active {
+	background-color: darkgray;
+}
+
+.article-outer {
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0,0,0,0.5);
+	display: none;
+}
+			
+.article-inner {
+	transition: .3s all ease-in;
+	position: fixed;
+	height: 70vh;
+	width: 50vw;
+	background-color: white;
+	z-index: 4;
+	top: 15vh;
+	left: 25vw;
+	border-radius: 7px;
+/*	display: none;*/
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.article-inner p {
+	text-align: left;
+}
+
+.article-inner h1 {
+	text-align: center;
+}
+
 .header {
 	width: 100vw;
 	height: 820px;
