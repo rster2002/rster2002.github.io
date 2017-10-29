@@ -59,11 +59,12 @@
 			</div>
 		</div>
 		<script>
+			dbMol = database.ref("Mol").child("Data");
 			$(document).ready(function(){
 	//			new Date("Aug 18, 2017 00:00:00").getTime();
-				dbRef.child("CountDown").once("value",function(snapshot) {
+				dbMol.once("value",function(snapshot) {
 					var dbContent = snapshot.val();
-					next = dbContent.value;
+					next = dbContent.CountDown;
 					// Set the date we're counting down to
 					document.getElementById("days").innerHTML = "-";
 					document.getElementById("hour").innerHTML = "-";
@@ -103,8 +104,8 @@
 					  }
 					}, 1000);
 					
-					pot = dbContent.pot;
-					total = dbContent.total;
+					pot = dbContent.Pot;
+					total = dbContent.Total;
 					document.getElementById("pot").innerHTML = pot + ",-";
 					function toFixed(value, precision) {
 					var precision = precision || 0,
@@ -121,15 +122,39 @@
 					}
 					var precentage = toFixed((pot / total) * 100, 1);
 					document.getElementById("percentage").innerHTML = precentage + "%";
+					var playerArray = dbContent.player;
+					for (var i = 0; i < playerArray.length; i++) {
+						player(playerArray[i].username,playerArray[i].state);
+					}
 				});
-
-				player("Luuk_T","in");
-				player("catlover313","in");
-				player("FogDogPvP","in");
-				player("Esmee_T","in");
-				player("Thom20_02","in");
-				player("The_Gameking","in");
-				player("Pyrollenium","out");
+				
+				function removePost(username) {
+					dbReplace = [];
+					dbMol.once("value",function(e){
+						var dbContent = e.val();
+						var playerArray = dbContent.player;
+						console.log(playerArray);
+						for (var i = 0; i < playerArray.length; i++) {
+							if (playerArray[i].username === username) {
+								console.log("Found:");
+								console.log(playerArray[i]);
+								found = playerArray[i];
+							} else if (playerArray[i].state === "out") {
+								dbContent.push(playerArray[i]);
+								console.log("Out spipped:")
+								console.log("- " + playerArray[i].username);
+							} else {
+								console.log("Skipped:");
+								console.log("- " + playerArray[i].username);
+								dbReplace.unshift(playerArray[i]);
+							}
+						}
+						dbReplace.push(found);
+						console.log("db replaced with:");
+						console.log(dbReplace);
+						dbMol.child("player").set(dbReplace);
+					});
+				}
 		  		
 				requireId();
 			})
