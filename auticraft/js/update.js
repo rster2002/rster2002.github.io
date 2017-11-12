@@ -89,7 +89,6 @@ function article(name, img, position, content, type, postedBy) {
 		var element = document.createElement("div");
 		element.setAttribute("class", "article-outer");
 		element.setAttribute("id", "article-outer-" + articleNr);
-		element.setAttribute("onclick", "closeArticle(" + articleNr + ")");
 		document.getElementById("articles").appendChild(element);
 		var element = document.createElement("div");
 		element.setAttribute("class", "article-inner");
@@ -103,6 +102,11 @@ function article(name, img, position, content, type, postedBy) {
 		element.innerHTML = "Gepost door: " + postedBy;
 		element.id = "postedBy";
 		document.getElementById("article-inner-" + articleNr).appendChild(element);
+        var element = document.createElement("button");
+        element.setAttribute("onclick", "closeArticle(" + articleNr + ")");
+        element.setAttribute("id","close");
+        element.innerHTML = "Sluit";
+        document.getElementById("article-inner-" + articleNr).appendChild(element);
 		var element = document.createElement("p");
 		element.innerHTML = content;
 		document.getElementById("article-inner-" + articleNr).appendChild(element);

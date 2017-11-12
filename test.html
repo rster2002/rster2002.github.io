@@ -2,22 +2,29 @@
 
 <html>
 	<head>
-		<title>Service worker</title>
-		<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+		<title>Design</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style>
+			body,html {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.test {
+				transition: .1s all ease-in;
+				height: 100vh;
+				width: 100px;
+				background-color: black;
+				margin-left: -100px;
+			}
+			
+			.test.an {
+				transition: .1s all ease-in;
+				margin-left: 0px;
+			}
+		</style>
 	</head>
 	<body>
-		<script>
-			if ('serviceWorker' in navigator) {
-			  window.addEventListener('load', function() {
-				navigator.serviceWorker.register('sw.js').then(function(registration) {
-				  // Registration was successful
-				  console.log('ServiceWorker registration successful with scope: ', registration.scope);
-				}, function(err) {
-				  // registration failed :(
-				  console.log('ServiceWorker registration failed: ', err);
-				});
-			  });
-			}
-		</script>
+		<div class="test"></div>
 	</body>
 </html>

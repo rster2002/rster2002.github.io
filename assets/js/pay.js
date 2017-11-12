@@ -1,11 +1,11 @@
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyDCgnh6ezKcNkcpAUtGXuiN77jxlDbLPck",
-    authDomain: "dewebsite-bae27.firebaseapp.com",
-    databaseURL: "https://dewebsite-bae27.firebaseio.com",
-    projectId: "dewebsite-bae27",
-    storageBucket: "dewebsite-bae27.appspot.com",
-    messagingSenderId: "437303961105"
+	apiKey: "AIzaSyD4jtNIKxqPDzZSsDdW0Lzrz4NInL1cf4M",
+    authDomain: "gamepay-9dbab.firebaseapp.com",
+    databaseURL: "https://gamepay-9dbab.firebaseio.com",
+    projectId: "gamepay-9dbab",
+    storageBucket: "gamepay-9dbab.appspot.com",
+    messagingSenderId: "298811984858"
 };
 firebase.initializeApp(config);
 

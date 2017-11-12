@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Francois+One');
+
+.menu.top {
+    height: 6vh;
+    width: 100vw;
+    z-index: 99;
+    position: fixed;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.menu.top h1 {
+    height: 4vh;
+    margin-top: 1vh;
+    margin-left: 2vw;
+    font-family: "Francois One", sans-serif;
+}

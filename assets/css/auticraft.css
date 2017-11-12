@@ -71,11 +71,34 @@ button[class|="minimal"]:active {
 	font-size: 20px;
 }
 
+.article-inner #close {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30px;
+    width: 100px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f21d1d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all ease-in .1s;
+    cursor: pointer;
+}
+
+.article-inner #close:hover {
+    background-color: #f45151;
+    transition: all ease-in .1s;
+    border-radius: 3px;
+}
+
 .article-inner #postedBy {
 	background-color: gray;
 	color: white;
 	border-radius: 5px;
 	text-align: center;
+    height: 40px;
+    line-height: 40px;
 }
 
 .article-inner #title {

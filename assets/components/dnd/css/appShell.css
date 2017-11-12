@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow:100');
+@import url('../../../css/fonts/Museo500.otf');
+@import url('https://fonts.googleapis.com/css?family=Spectral+SC|Vollkorn+SC');
+
+html, body {
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+}
+
+.bar {
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	height: 7vh;
+	background-color: white;
+	overflow: hidden;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	z-index: 100;
+}
+
+ button {
+	transition: .1s all ease-in;
+	font-size: 1.5rem;
+	color: #00B6C9;
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+button:hover {
+	transition: .1s all ease-in;
+	background-color: #eaeaea;
+}
+
+.bar button {
+	transition: .1s all ease-in;
+	height: 70%;
+	position: relative;
+	top: 15%;
+	font-size: 1.5rem;
+	color: #00B6C9;
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	border-radius: 3px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.bar button:hover {
+	transition: .1s all ease-in;
+	background-color: #eaeaea;
+}
+
+.bar img {
+	height: 5vh;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 1vh;
+	border-radius: 100%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.bar a {
+	font-size: 1.5rem;
+	color: #00B6C9;
+	font-family: 'Museo', sans-serif;
+	height: 5vh;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 1.75vh;
+}
+
+.page {
+	height: 93vh;
+	width: 100vw;
+	position: fixed;
+	top: 7vh;
+}
+
+.innerPage {
+	width: 100%;
+	height: 100%;
+}
+
+.welcomeText {
+	height: 20%;
+	width: 50%;
+	position: relative;
+	top: 40%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.welcomeText h1 {
+	margin: 0;
+	padding: 0;
+	font-family: "Spectral SC";
+}
+
+.welcomeText p {
+	font-family: "Vollkorn SC";
+}
+
+input, select {
+	border: none;
+	font-size: 1.2rem;
+	font-family: "Vollkorn SC";
+	background-color: #eaeaea;
+	border-radius: 3px;
+}

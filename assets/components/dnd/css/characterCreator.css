@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Spectral+SC|Vollkorn+SC');
+
+.colom1, .colom2, .colom3 {
+	height: 93%;
+	float: left;
+}
+
+.colom1, .colom2 {
+	width: 33%;
+}
+
+.colom3 {
+	width: 34%;
+}
+
+.colom1, .colom2, .colom3 h1 {
+	color: black;
+	font-family: 'Vollkorn SC', serif;
+	margin-left: 10px;
+}
+
+.colom1, .colom2, .colom3 p {
+	color: black;
+	font-family: 'Spectral SC', serif;
+	margin-left: 10px;
+	font-size: 0.9rem;
+}
+
+.colom3 {
+	overflow-y: scroll;
+	margin-left: 66%;
+	position: fixed;
+}
+
+.colom3 p {
+	font-size: 1rem;
+}
+
+.colom3 div {
+	margin-left: 10px;
+}
+
+.ability {
+	width: 30%;
+	border-radius: 3px;
+}
+
+.ability p {
+	color: white;
+}

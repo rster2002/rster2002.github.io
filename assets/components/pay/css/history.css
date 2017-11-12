@@ -1,0 +1,70 @@
+@font-face {
+	font-family: museo;
+	src: url(../assets/css/fonts/Museo500.otf);
+}
+
+.side-bar {
+	height: 100%;
+	background-color: #e7d6d6;
+	width: 40%;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+.side-bar .head {
+	width: 100%;
+	height: 20%;
+	background-color: #4c90ff;
+	text-align: center;
+	float: left;
+}
+
+.side-bar .head h1 {
+	margin: 0;
+	color: white;
+	font-size: 50px;
+	line-height: 350%;
+	font-family: "museo";
+}
+
+.historyList {
+	height: 100%;
+	background-color: #e7d6d6;
+	width: 60%;
+	float: left;
+	overflow: scroll;
+}
+
+.historyItem {
+	width: 100%;
+	height: 15%;
+	line-height: 15%;
+	background-color: white;
+}
+
+.historyItem h1 {
+	position: relative;
+	top: 30%;
+}
+
+.historyItem .amount {
+	float: left;
+	margin-left: 5%;
+	font-size: 3rem;
+	font-family: "museo";
+}
+
+.historyItem .amount.plus {
+	color: #25D366;
+}
+
+.historyItem .amount.minus {
+	color: #ff0909;
+}
+
+.historyItem .from {
+	float: right;
+	margin-right: 5%;
+	font-family: "museo";
+}

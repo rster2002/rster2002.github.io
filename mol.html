@@ -128,33 +128,69 @@
 					}
 				});
 				
-				function removePost(username) {
-					dbReplace = [];
-					dbMol.once("value",function(e){
-						var dbContent = e.val();
-						var playerArray = dbContent.player;
-						console.log(playerArray);
-						for (var i = 0; i < playerArray.length; i++) {
-							if (playerArray[i].username === username) {
-								console.log("Found:");
-								console.log(playerArray[i]);
-								found = playerArray[i];
-							} else if (playerArray[i].state === "out") {
-								dbContent.push(playerArray[i]);
-								console.log("Out spipped:")
-								console.log("- " + playerArray[i].username);
-							} else {
-								console.log("Skipped:");
-								console.log("- " + playerArray[i].username);
-								dbReplace.unshift(playerArray[i]);
+				changePlayer = {
+					out: function(username) {
+						console.log("##########Begin##########");
+						dbReplace = [];
+						dbMol.once("value",function(e){
+							var dbContent = e.val();
+							var playerArray = dbContent.player;
+							console.log(playerArray);
+							for (var i = 0; i < playerArray.length; i++) {
+								if (playerArray[i].username === username) {
+									console.log("Found:");
+									console.log(playerArray[i]);
+									found = playerArray[i];
+									found.state = "out";
+								} else if (playerArray[i].state === "out") {
+									dbReplace.push(playerArray[i]);
+									console.log("Piped out:")
+									console.log("- " + playerArray[i].username);
+								} else {
+									console.log("Skipped:");
+									console.log("- " + playerArray[i].username);
+									dbReplace.unshift(playerArray[i]);
+								}
 							}
-						}
-						dbReplace.push(found);
-						console.log("db replaced with:");
-						console.log(dbReplace);
-						dbMol.child("player").set(dbReplace);
-					});
+							dbReplace.push(found);
+							console.log("db replaced with:");
+							console.log(dbReplace);
+							dbMol.child("player").set(dbReplace);
+							console.log("###########End###########");
+						});
+					},
+					in: function(username) {
+						console.log("##########Begin##########");
+						dbReplace = [];
+						dbMol.once("value",function(e){
+							var dbContent = e.val();
+							var playerArray = dbContent.player;
+							console.log(playerArray);
+							for (var i = 0; i < playerArray.length; i++) {
+								if (playerArray[i].username === username) {
+									console.log("Found:");
+									console.log(playerArray[i]);
+									found = playerArray[i];
+									found.state = "in";
+								} else if (playerArray[i].state === "out") {
+									dbReplace.push(playerArray[i]);
+									console.log("Piped out:")
+									console.log("- " + playerArray[i].username);
+								} else {
+									console.log("Skipped:");
+									console.log("- " + playerArray[i].username);
+									dbReplace.unshift(playerArray[i]);
+								}
+							}
+							dbReplace.unshift(found);
+							console.log("db replaced with:");
+							console.log(dbReplace);
+							dbMol.child("player").set(dbReplace);
+							console.log("###########End###########");
+						});
+					}
 				}
+				
 		  		
 				requireId();
 			})

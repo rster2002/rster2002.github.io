@@ -1,0 +1,19 @@
+.joinParty, .createParty {
+	height: 100%;
+	width: 50%;
+	float: left;
+}
+
+.center {
+	width: 50%;
+	height: 50%;
+	position: relative;
+	top: 25%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.center h1 {
+	font-family: "Spectral SC";
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+	<body>
+		<link href="../assets/components/dnd/css/characterCreator.css" rel="stylesheet" type="text/css">
+		<script src="../assets/components/dnd/js/characterCreation.js"></script>
+		<div class="innerPage">
+			<div class="colom1">
+				<div>
+					<h1>Name</h1>
+					<input placeholder="name" id="cName" type="text">
+					<h1>Sex</h1>
+					<select id="sex">
+						<option>Male</option>
+						<option>Female</option>
+					</select>
+					<h1>Alignment</h1>
+					<select id="alignment">
+						<option>Lawful good</option>
+						<option>Neutral good</option>
+						<option>Chaotic good</option>
+						<option>Lawful neutral</option>
+						<option>Neutral</option>
+						<option>Chaotic neutral</option>
+						<option>Lawful evil</option>
+						<option>Neutral evil</option>
+						<option>Cheatic evil</option>
+					</select>
+					<h1>Race</h1>
+					<select id="raceSelector">
+						
+					</select>
+					<h1>Class</h1>
+					<select id="classSelector">
+						
+					</select>
+					<h1>Background</h1>
+					<select id="backgroundSelector">
+						
+					</select>
+				</div>
+			</div>
+			<div class="colom2">
+				<h1>Ability Scores</h1>
+				<p>Strength</p>
+				<input class="ability" id="iStrength">
+				<p>Dexterity</p>
+				<input class="ability" id="iDexterity">
+				<p>Constitution</p>
+				<input class="ability" id="iConstitution">
+				<p>Intelligence</p>
+				<input class="ability" id="iIntelligence">
+				<p>Wisdom</p>
+				<input class="ability" id="iWisdom">
+				<p>Charisma</p>
+				<input class="ability" id="iCharisma">
+				<button onclick="updateCharacterInfo();">Check</button>
+			</div>
+			<div class="colom3">
+				<div>
+					<h1 id="name">Name:</h1>
+					<h1 id="race">Race:</h1>
+					<h1 id="speed">Speed:</h1>
+					<h1 id="hitpoints">Hitpoints:</h1>
+					<h1 id="hitdie">Hit Dice:</h1>
+					<h1 id="armorclass">Armor class:</h1>
+					<h1>Languages</h1>
+					<div class="language-outer">
+						<div id="language">
+						</div>
+					</div>
+					<h1>Ability scores</h1>
+					<div style="background-color:red;" class="ability">
+						<p>Strength</p>
+						<p id="strength" class="info"></p>
+					</div>
+					<div style="background-color:orange;" class="ability">
+						<p>Dexterity</p>
+						<p id="dexterity" class="info"></p>
+					</div>
+					<div style="background-color:brown;" class="ability">
+						<p>Constitution</p>
+						<p id="constitution"></p>
+					</div>
+					<div style="background-color:blue;" class="ability">
+						<p>Intelligence</p>
+						<p id="intelligence"></p>
+					</div>
+					<div style="background-color:green;" class="ability">
+						<p>Wisdom</p>
+						<p id="wisdom"></p>
+					</div>
+					<div style="background-color:purple;" class="ability">
+						<p>Charisma</p>
+						<p id="charisma"></p>
+					</div>
+					<h1>Saving Throws</h1>
+					<p>Strength</p>
+					<p id="sStrength"></p>
+					<p>Dexterity</p>
+					<p id="sDexterity"></p>
+					<p>Constitution</p>
+					<p id="sConstitution"></p>
+					<p>Intelligence</p>
+					<p id="sIntelligence"></p>
+					<p>Wisdom</p>
+					<p id="sWisdom"></p>
+					<p>Charisma</p>
+					<p id="sCharisma"></p>
+					<h1>Skills</h1>
+					<p>Acrobatics</p>
+					<p id="Acrobatics"></p>
+					<p>Animal Handling</p>
+					<p id="Animal_Handling"></p>
+					<p>Arcana</p>
+					<p id="Arcana"></p>
+					<p>Athletics</p>
+					<p id="Athletics"></p>
+					<p>Deception</p>
+					<p id="Deception"></p>
+					<p>History</p>
+					<p id="History"></p>
+					<p>Insight</p>
+					<p id="Insight"></p>
+					<p>Intimidation</p>
+					<p id="Intimidation"></p>
+					<p>Investigation</p>
+					<p id="Investigation"></p>
+					<p>Medicine</p>
+					<p id="Medicine"></p>
+					<p>Nature</p>
+					<p id="Nature"></p>
+					<p>Perception</p>
+					<p id="Perception"></p>
+					<p>Performance</p>
+					<p id="Performance"></p>
+					<p>Persuasion</p>
+					<p id="Persuasion"></p>
+					<p>Religion</p>
+					<p id="Religion"></p>
+					<p>Sleight of Hand</p>
+					<p id="Sleight_of_Hand"></p>
+					<p>Stealth</p>
+					<p id="Stealth"></p>
+					<p>Survival</p>
+					<p id="Survival"></p>
+					<button onclick="done()">Finish</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
