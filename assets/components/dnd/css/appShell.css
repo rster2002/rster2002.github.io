@@ -2,12 +2,6 @@
 @import url('../../../css/fonts/Museo500.otf');
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC|Vollkorn+SC');
 
-html, body {
-	padding: 0;
-	margin: 0;
-	overflow: hidden;
-}
-
 .right {
 	float: right;
 }
