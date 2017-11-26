@@ -1,0 +1,28 @@
+.colom1, .colom2, .colom3 {
+	height: 100%;
+	float: left;
+}
+
+.colom1, .colom2 {
+	width: 33vw;
+}
+
+.colom3 {
+	width: 34vw;
+}
+
+.colom1 h1, .colom2 h1, .colom3 h1 {
+	margin-left: 2%;
+	font-size: 2.5rem;
+	margin-top: 2%;
+}
+
+.colom1 p, .colom2 p, .colom3 p {
+	margin-left: 2%;
+	font-size: 1rem;
+}
+
+.colom1 button, .colom2 button, .colom3 button {
+	margin-left: 2%;
+	font-size: 1.5rem;
+}

@@ -19,6 +19,10 @@ var uiConfig = {
 	tosUrl: 'tos.html'
 };
 
+if (localStorage.getItem("firebaseui::rememberedAccounts")) {
+	location.href = "dnd/app.html";
+}
+
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 // The start method will wait until the DOM is loaded.

@@ -21,6 +21,13 @@
 	z-index: 100;
 }
 
+.center {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+	transform: translate(-50%, -50%);
+}
+
  button {
 	transition: .1s all ease-in;
 	font-size: 1.5rem;
@@ -97,13 +104,13 @@ button:hover {
 	margin-right: auto;
 }
 
-.welcomeText h1 {
+h1 {
 	margin: 0;
 	padding: 0;
 	font-family: "Spectral SC";
 }
 
-.welcomeText p {
+p {
 	font-family: "Vollkorn SC";
 }
 
@@ -134,4 +141,18 @@ input, select {
 	margin-left: 2%;
 	margin-top: 1%;
 	float: left;
+}
+
+button.blue {
+	background-color: #4c90ff;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+button.blue:hover {
+	background-color: #8cb6f9;
 }
