@@ -10,6 +10,14 @@ $(document).ready(function(){
 			$("#username").text(username);
 		}
 	});
+	dbUsernames.once("value",function(e){
+		var dbContent = e.val();
+		if (e.hasChild(username)) {
+			uid = dbContent[uid];
+		} else {
+			dbUsernames.child(username).set(uid);
+		}
+	})
 	dbUsers.once("value",function(e){
 		var dbContent = e.val();
 		if (e.hasChild(uid)) {
@@ -29,5 +37,5 @@ $(document).ready(function(){
 				openPage("mainPage");
 			}
 		})
-	})
+	});
 });
