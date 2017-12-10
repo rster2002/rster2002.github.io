@@ -32,3 +32,13 @@ function getSelected(selector) {
 	var e = document.getElementById("selector");
 	return e.options[e.selectedIndex].text;
 }
+
+function error(error) {
+	$("#error").text(error);
+	$(".error-background").fadeIn();
+	ga('send', 'event', "dnd-error", error);
+}
+
+function closeError() {
+	$(".error-background").fadeOut();
+}
