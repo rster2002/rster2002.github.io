@@ -1,0 +1,50 @@
+.side, .characterSheetContainer {
+	height: 100%;
+}
+
+.side {
+	position: absolute;
+	width: 5vw;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: #eeeeee;
+}
+
+.side .inner {
+	height: 100%;
+	width: 100%;
+}
+
+.side .inner img {
+	position: relative;
+	width: 90%;
+	border-radius: 100%;
+	top: 5%;
+	left: 5%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	cursor: pointer;
+}
+
+.characterSheetContainer {
+	position: absolute;
+	left: 5vw;
+	width: 95vw;
+	background-color: white;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.pageArea {
+	border-radius: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#save {
+	position: absolute;
+	z-index: 200;
+	width: 4vw;
+	margin-left: .5vw;
+	margin-top: 88vh;
+	display: none;
+	height: 2vw;
+	font-size: 1em;
+}

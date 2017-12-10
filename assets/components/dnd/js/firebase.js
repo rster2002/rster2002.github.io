@@ -11,3 +11,4 @@ firebase.initializeApp(config);
 database = firebase.database();
 dbUsers = database.ref("dnd").child("users");
 dbParty = database.ref("dnd").child("party");
+dbUsernames = database.ref("dnd").child("usernames");

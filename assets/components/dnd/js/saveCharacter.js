@@ -7,7 +7,7 @@ function saveCharacter() {
 		dbUsers.child(uid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 		alert("Saved character sheet");
 	} else {
-		var i = prompt("Type a name for this character sheet");
+		var i = prompt("Type a name for this caracter sheet");
 		if (i) {
 			sessionStorage.setItem("::saved",i);
 			dbUsers.child(uid).child("characters").child(i).set(characterObj);
