@@ -7,6 +7,10 @@ $(document).ready(function(){
 			userIcon = user.photoURL;
 			uid = user.uid;
 			
+			if (userIcon === undefined || userIcon === null) {
+				userIcon = "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg";
+			}
+			
 			sessionStorage.setItem("::uid",uid)
 			
 			$("#userIcon").attr("src", userIcon);
@@ -20,6 +24,16 @@ $(document).ready(function(){
 				} else {
 					dbUsers.child(uid).child("username").set(username);
 					dbUsers.child(uid).child("usericon").set(userIcon);
+				}
+				if (e.hasChild(uid + "/usericon")) {
+					console.log("Usericon");
+				} else {
+					dbUsers.child(uid).child("usericon").set(userIcon);
+				}
+				if (e.hasChild(uid + "/uid")) {
+					console.log("Usericon");
+				} else {
+					dbUsers.child(uid).child("uid").set(uid);
 				}
 			});
 			

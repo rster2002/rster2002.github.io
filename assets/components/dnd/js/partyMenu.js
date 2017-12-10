@@ -1,4 +1,6 @@
 console.log("partyMenu.js")
+uid = sessionStorage.getItem("::uid")
+
 
 // adds listerer to join btn
 $("#btnJoin").on("click",function(){
@@ -22,27 +24,38 @@ function join(partyId,host) {
 					playerList = dbContent.playerList;
 				}
 				
+				exist = false;
 				// checks if uid already exists in firebase
 				if (playerList.length !== 0) {
 					for (var i = 0; i < playerList.length; ++i) {
-						if (playerList[i] === sessionStorage.getItem("::uid")) {
-							exist = true;
+						if (playerList[i].includes("DM::")) {
+							player = playerList[i].replace("DM::","");
 						} else {
-							exist = false;
+							player = playerList[i];
 						}
+						if (player === uid) {
+							exist = true;
+						}
+						console.log(player + " " + playerList[i] + " " + sessionStorage.getItem("::uid") + " " + exist);
 					}
 				} else {
 					exist = false;
 				}
 				
 				// creates user if not found in firebase
-				if (exist === false) {
-					playerList.unshift(sessionStorage.getItem("::uid"));
-					if (host) {
-						dbParty.child(partyId).child(sessionStorage.getItem("::uid")).set("DM::" + sessionStorage.getItem("::uid"));
+				if (exist === false && exist !== true) {
+					if (host === true) {
+						playerList.unshift("DM::" + sessionStorage.getItem("::uid"));
 					} else {
+						playerList.unshift(sessionStorage.getItem("::uid"));
+					}
+					
+					
+					if (host === false) {
 						var input = prompt("Type the name of the character you want to use in this party.");
-						if (input === "") {
+						
+						
+						if (input === "" || input === null || input === false || input === undefined) {
 							alert("You haven't typed anything, how rude!");
 							return;
 						} else {
@@ -56,7 +69,7 @@ function join(partyId,host) {
 									alert("Can't find this character.");
 									return;
 								}
-							})
+							});
 						}
 					}
 					
@@ -65,9 +78,9 @@ function join(partyId,host) {
 				} else {
 					console.log("exists")
 				}
+				sessionStorage.setItem("::partyId", partyId);
+				openPage("party");
 			});
-			sessionStorage.setItem("::partyId", partyId);
-			openPage("party");
 		} else {
 			alert("Cant find this party id.");
 			return;

@@ -1,0 +1,21 @@
+.colom1, .colom2 {
+	float: none;
+	width: 100vw;
+	height: 40vh;
+}
+
+.box h1 {
+	font-size: 6em;
+}
+
+.box input {
+	font-size: 5em;
+}
+
+.box {
+	width: 70%;
+}
+
+.box button {
+	font-size: 4em;
+}
