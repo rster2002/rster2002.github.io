@@ -47,5 +47,6 @@
 
 .page {
 	margin-top: 4vh;
+	height: 90vh;
 	overflow-y: scroll;
 }

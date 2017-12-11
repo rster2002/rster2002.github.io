@@ -20,6 +20,7 @@
 .colom1 p, .colom2 p, .colom3 p {
 	margin-left: 2%;
 	font-size: 1rem;
+	margin-bottom: 5px;
 }
 
 .colom1 button, .colom2 button, .colom3 button {
