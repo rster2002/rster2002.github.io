@@ -1,6 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Barlow:100');
 @import url('../../../css/fonts/Museo500.otf');
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC|Vollkorn+SC');
+@font-face {
+	font-family: Iokharic;
+	src: url(../../../css/fonts/Iokharic.otf);
+}
 
 .right {
 	float: right;

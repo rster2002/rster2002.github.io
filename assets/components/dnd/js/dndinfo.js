@@ -1,69 +1,69 @@
 races = [
 	"Aarakocra",
-	"Aasimar-Protector",
-	"Aasimar-Scourge",
-	"Aasimar-Fallen",
+	"Aasimar_Protector",
+	"Aasimar_Scourge",
+	"Aasimar_Fallen",
 	"Bugbear",
 	"Changeling",
 	"Dragonborn",
-	"Dwarf-Hill",
-	"Dwarf-Mountain",
-	"Dwart-Duergar",
-	"Elf-Drow",
-	"Elf-Eladrin",
-	"Elf-High",
-	"Elf-Wood",
-	"Elf-Tajuru",
-	"Elf-Joraga",
-	"Elf-MulDaya",
-	"Firbolg",
-	"Genasi-Water",
-	"Genasi-Air",
-	"Genasi-Earth",
-	"Genasi-Fire",
-	"Gnome-Deep",
-	"Gnome-Forest",
-	"Gnome-Rock",
+	"Dwarf_Hill",
+	"Dwarf_Mountain",
+	"Dwarf_Duergar",
+	"Elf_Drow",
+	"Elf_Eladrin",
+	"Elf_High",
+	"Elf_Wood",
+	"Elf_Tajuru",
+	"Elf_Joraga",
+	"Elf_Mul_Daya",
+	"Firebolg",
+	"Genasi_Water",
+	"Genasi_Air",
+	"Genasi_Earth",
+	"Genasi_Fire",
+	"Gnome_Deep",
+	"Gnome_Forest",
+	"Gnome_Rock",
 	"Goblin",
 	"Goliath",
-	"Halfling-Lightfoot",
-	"Halfling-Stout",
-	"Halfling-Ghostwise",
-	"Half-Elf-Wood",
-	"Half-Elf-Moon-Sun",
-	"Half-Elf-Drow",
-	"Half-Elf-Aquatic",
-	"Half-Orc",
+	"Halfling_Lightfoot",
+	"Halfling_Stout",
+	"Halfling_Ghostwise",
+	"Half_Elf_Wood",
+	"Half_Elf_Moon_Sun",
+	"Half_Elf_Drow",
+	"Half_Elf_Aquatic",
+	"Half_Orc",
 	"Human",
 	"Hobgoblin",
 	"Kenku",
 	"Kobold",
 	"Kor",
 	"Lizardfolk",
-	"Merflok-Cosi",
-	"Merflok-Emeria",
-	"Merflok-Ula",
+	"Merfolk_Cosi",
+	"Merfolk_Emeria",
+	"Merfolk_Ula",
 	"Minotaur",
 	"Orc",
-	"Shifter-Beasthide",
-	"Shifter-Cliffwalk",
-	"Shifter-Longstride",
-	"Shifter-Longtooth",
-	"Shifter-Razorclaw",
-	"Shifter-Wildhunt",
+	"Shifter_Beasthide",
+	"Shifter_Cliffwalk",
+	"Shifter_Longstride",
+	"Shifter_Longtooth",
+	"Shifter_Razorclaw",
+	"Shifter_Wildhunt",
 	"Tabaxi",
-	"Tiefling-Abyssal",
-	"Tiefling-Infernal",
-	"Tiefling-Feral",
+	"Tiefling_Abyssal",
+	"Tiefling_Infernal",
+	"Tiefling_Feral",
 	"Triton",
 	"Vampire",
 	"Warforged",
-	"Yuan-Ti-Pureblood"
+	"Yuan_Ti_Pureblood"
 ]
 
 racesStats = {
 	Aarakocra: {
-		size: "m",
+		size: "medium",
 		speed: "25",
 		language: [
 			"Common",
@@ -79,8 +79,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	AasimarProtector: {
-		size: "m",
+	Aasimar_Protector: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -95,8 +95,8 @@ racesStats = {
 			charisma: 2
 		}
 	},
-	AasimarScourge: {
-		size: "m",
+	Aasimar_Scourge: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -111,8 +111,8 @@ racesStats = {
 			charisma: 2
 		}
 	},
-	AasimarFallen: {
-		size: "m",
+	Aasimar_Fallen: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -128,7 +128,7 @@ racesStats = {
 		}
 	},
 	Bugbear: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -144,7 +144,7 @@ racesStats = {
 		}
 	},
 	Changeling: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common"
@@ -159,7 +159,7 @@ racesStats = {
 		}
 	},
 	Dragonborn: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -174,8 +174,8 @@ racesStats = {
 			charisma: 1
 		}
 	},
-	DwarfHill: {
-		size: "m",
+	Dwarf_Hill: {
+		size: "medium",
 		speed: "25",
 		language: [
 			"Common",
@@ -190,8 +190,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	DwarfMountain: {
-		size: "m",
+	Dwarf_Mountain: {
+		size: "medium",
 		speed: "25",
 		language: [
 			"Common",
@@ -206,8 +206,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	DwarfDuergar: {
-		size: "m",
+	Dwarf_Duergar: {
+		size: "medium",
 		speed: "25",
 		language: [
 			"Common",
@@ -223,8 +223,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ElfDrow: {
-		size: "m",
+	Elf_Drow: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -240,8 +240,8 @@ racesStats = {
 			charisma: 1
 		}
 	},
-	ElfEladrin: {
-		size: "m",
+	Elf_Eladrin: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -256,8 +256,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ElfHigh: {
-		size: "m",
+	Elf_High: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -272,8 +272,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ElfWood: {
-		size: "m",
+	Elf_Wood: {
+		size: "medium",
 		speed: "35",
 		language: [
 			"Common",
@@ -288,8 +288,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ElfTajuru: {
-		size: "m",
+	Elf_Tajuru: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -304,8 +304,8 @@ racesStats = {
 			charisma: 1
 		}
 	},
-	ElfJoraga: {
-		size: "m",
+	Elf_Joraga: {
+		size: "medium",
 		speed: "35",
 		language: [
 			"Common",
@@ -320,8 +320,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ElfMulDaya: {
-		size: "m",
+	Elf_Mul_Daya: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -337,7 +337,7 @@ racesStats = {
 		}
 	},
 	Firebolg: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -353,8 +353,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	GenasiAir: {
-		size: "m",
+	Genasi_Air: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -369,8 +369,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	GenasiEarth: {
-		size: "m",
+	Genasi_Earth: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -385,8 +385,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	GenasiFire: {
-		size: "m",
+	Genasi_Fire: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -401,8 +401,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	GenasiWater: {
-		size: "m",
+	Genasi_Water: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -417,8 +417,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	GnomeDeep: {
-		size: "s",
+	Gnome_Deep: {
+		size: "small",
 		speed: "25",
 		language: [
 			"Common",
@@ -434,8 +434,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	GnomeForest: {
-		size: "s",
+	Gnome_Forest: {
+		size: "small",
 		speed: "25",
 		language: [
 			"Common",
@@ -450,8 +450,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	GnomeRock: {
-		size: "s",
+	Gnome_Rock: {
+		size: "small",
 		speed: "25",
 		language: [
 			"Common",
@@ -467,7 +467,7 @@ racesStats = {
 		}
 	},
 	Goblin: {
-		size: "s",
+		size: "small",
 		speed: "30",
 		language: [
 			"Common",
@@ -483,7 +483,7 @@ racesStats = {
 		}
 	},
 	Goliath: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -498,8 +498,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	HalflingLightfoot: {
-		size: "s",
+	Halfling_Lightfoot: {
+		size: "small",
 		speed: "25",
 		language: [
 			"Common",
@@ -514,8 +514,8 @@ racesStats = {
 			charisma: 1
 		}
 	},
-	HalflingStout: {
-		size: "s",
+	Halfling_Stout: {
+		size: "small",
 		speed: "25",
 		language: [
 			"Common",
@@ -530,8 +530,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	HalflingGhostwise: {
-		size: "s",
+	Halfling_Ghostwise: {
+		size: "small",
 		speed: "25",
 		language: [
 			"Common",
@@ -547,8 +547,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	HalfElfWood: {
-		size: "m",
+	Half_Elf_Wood: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -563,8 +563,8 @@ racesStats = {
 			charisma: 2
 		}
 	},
-	HalfElfMoonSun: {
-		size: "m",
+	Half_Elf_Moon_Sun: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -579,8 +579,8 @@ racesStats = {
 			charisma: 2
 		}
 	},
-	HalfElfDrow: {
-		size: "m",
+	Half_Elf_Drow: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -595,8 +595,8 @@ racesStats = {
 			charisma: 2
 		}
 	},
-	HalfElfAquatic: {
-		size: "m",
+	Half_Elf_Aquatic: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -611,8 +611,8 @@ racesStats = {
 			charisma: 2
 		}
 	},
-	HalfOrg: {
-		size: "m",
+	Half_Orc: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -628,7 +628,7 @@ racesStats = {
 		}
 	},
 	Human: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common"
@@ -643,7 +643,7 @@ racesStats = {
 		}
 	},
 	Hobgoblin: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -659,7 +659,7 @@ racesStats = {
 		}
 	},
 	Kenku: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -675,7 +675,7 @@ racesStats = {
 		}
 	},
 	Kobold: {
-		size: "s",
+		size: "small",
 		speed: "30",
 		language: [
 			"Common",
@@ -691,7 +691,7 @@ racesStats = {
 		}
 	},
 	Kor: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -708,7 +708,7 @@ racesStats = {
 		}
 	},
 	Lizardfolk: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -723,8 +723,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	MerfolkCosi: {
-		size: "m",
+	Merfolk_Cosi: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -739,8 +739,8 @@ racesStats = {
 			charisma: 2
 		}
 	},
-	MerfolkEmeria: {
-		size: "m",
+	Merfolk_Emeria: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -755,8 +755,8 @@ racesStats = {
 			charisma: 1
 		}
 	},
-	MerfolkUla: {
-		size: "m",
+	Merfolk_Ula: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -772,7 +772,7 @@ racesStats = {
 		}
 	},
 	Minotaur: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common"
@@ -787,7 +787,7 @@ racesStats = {
 		}
 	},
 	Orc: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -802,8 +802,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ShifterBeasthide: {
-		size: "m",
+	Shifter_Beasthide: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -818,8 +818,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ShifterCliffwalk: {
-		size: "m",
+	Shifter_Cliffwalk: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -834,8 +834,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ShifterLongstride: {
-		size: "m",
+	Shifter_Longstride: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -850,8 +850,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ShifterLongtooth: {
-		size: "m",
+	Shifter_Longtooth: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -866,8 +866,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ShifterRazorclaw: {
-		size: "m",
+	Shifter_Razorclaw: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -882,8 +882,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	ShifterWildhunt: {
-		size: "m",
+	Shifter_Wildhunt: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -899,7 +899,7 @@ racesStats = {
 		}
 	},
 	Tabaxi: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common"
@@ -913,8 +913,8 @@ racesStats = {
 			charisma: 1
 		}
 	},
-	TieflingAbyssal: {
-		size: "m",
+	Tiefling_Abyssal: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -929,8 +929,8 @@ racesStats = {
 			charisma: 2
 		}
 	},
-	TieflingInfernal: {
-		size: "m",
+	Tiefling_Infernal: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -945,8 +945,8 @@ racesStats = {
 			charisma: 2
 		}
 	},
-	TieflingFeral: {
-		size: "m",
+	Tiefling_Feral: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common"
@@ -961,7 +961,7 @@ racesStats = {
 		}
 	},
 	Triton: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -977,7 +977,7 @@ racesStats = {
 		}
 	},
 	Vampire: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
@@ -993,7 +993,7 @@ racesStats = {
 		}
 	},
 	Warforged: {
-		size: "m",
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common"
@@ -1007,8 +1007,8 @@ racesStats = {
 			charisma: 0
 		}
 	},
-	YuanTiPureblood: {
-		size: "m",
+	Yuan_Ti_Pureblood: {
+		size: "medium",
 		speed: "30",
 		language: [
 			"Common",
