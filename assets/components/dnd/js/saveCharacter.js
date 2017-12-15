@@ -1,3 +1,5 @@
+uid = sessionStorage.getItem("::uid");
+
 sessionStorage.setItem("::saved","false");
 console.log("hmm");
 function saveCharacter() {
