@@ -5,6 +5,12 @@
 	src: url(../../../css/fonts/Iokharic.otf);
 }
 
+html, body {
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
 .right {
 	float: right;
 }
@@ -158,6 +164,20 @@ button.blue {
 
 button.blue:hover {
 	background-color: #8cb6f9;
+}
+
+button.red {
+	background-color: #f21d1d;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+button.red:hover {
+	background-color: #f96161;
 }
 
 .error-background {

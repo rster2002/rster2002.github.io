@@ -8,6 +8,7 @@ $("#btnJoin").on("click",function(){
 });
 
 function join(partyId,host) {
+	cancel = false;
 	dbParty.once("value",function(e){
 		var dbContent = e.val();
 		
@@ -18,65 +19,80 @@ function join(partyId,host) {
 				var dbContent = e.val();
 				
 				// checks if playerList is empty
-				if (dbContent.playerList === "") {
-					playerList = [];
-				} else {
-					playerList = dbContent.playerList;
+				try {
+					if (dbContent.playerList === "") {
+						playerList = [];
+					} else {
+						playerList = dbContent.playerList;
+					}
+				} catch(e) {
+					error(e);
 				}
 				
-				exist = false;
-				// checks if uid already exists in firebase
-				if (playerList.length !== 0) {
-					for (var i = 0; i < playerList.length; ++i) {
-						if (playerList[i].includes("DM::")) {
-							player = playerList[i].replace("DM::","");
-						} else {
-							player = playerList[i];
-						}
-						if (player === uid) {
-							exist = true;
-						}
-						console.log(player + " " + playerList[i] + " " + sessionStorage.getItem("::uid") + " " + exist);
-					}
-				} else {
+				try {
 					exist = false;
+					// checks if uid already exists in firebase
+					if (playerList.length !== 0) {
+						for (var i = 0; i < playerList.length; ++i) {
+							if (playerList[i].includes("DM::")) {
+								player = playerList[i].replace("DM::","");
+							} else {
+								player = playerList[i];
+							}
+							if (player === uid) {
+								exist = true;
+							}
+							console.log(player + " " + playerList[i] + " " + sessionStorage.getItem("::uid") + " " + exist);
+						}
+					} else {
+						exist = false;
+					}
+				} catch(e) {
+					error(e);
 				}
 				
 				// creates user if not found in firebase
-				if (exist === false && exist !== true) {
-					if (host === true) {
-						playerList.unshift("DM::" + sessionStorage.getItem("::uid"));
-					} else {
-						playerList.unshift(sessionStorage.getItem("::uid"));
-					}
-					
-					
-					if (host === false) {
-						var input = prompt("Type the name of the character you want to use in this party.");
-						
-						
-						if (input === "" || input === null || input === false || input === undefined) {
-							alert("You haven't typed anything, how rude!");
-							return;
+				try {
+					if (exist === false && exist !== true) {
+						if (host === true) {
+							playerList.unshift("DM::" + sessionStorage.getItem("::uid"));
 						} else {
-							dbUsers.child(sessionStorage.getItem("::uid")).child("characters").once("value",function(e){
-								var dbContent = e.val();
-								console.log(input);
-								console.log(dbContent);
-								if (e.hasChild(input)) {
-									dbParty.child(partyId).child(sessionStorage.getItem("::uid")).set(input);
-								} else {
-									alert("Can't find this character.");
-									return;
-								}
-							});
+							playerList.unshift(sessionStorage.getItem("::uid"));
 						}
+
+
+						if (host === false) {
+							var input = prompt("Type the name of the character you want to use in this party.");
+
+
+							if (input === "" || input === null || input === false || input === undefined) {
+								alert("You haven't typed anything, how rude!");
+								return;
+							} else {
+								dbUsers.child(sessionStorage.getItem("::uid")).child("characters").once("value",function(e){
+									var dbContent = e.val();
+									console.log(input);
+									console.log(dbContent);
+									if (e.hasChild(input)) {
+										dbParty.child(partyId).child(sessionStorage.getItem("::uid")).set(input);
+									} else {
+										alert("Can't find this character.");
+										cancel = true;
+										return;
+									}
+								});
+							}
+						}
+
+						// pushes all data to firebase
+						if (cancel !== true) {
+							dbParty.child(partyId).child("playerList").set(playerList);
+						}
+					} else {
+						console.log("exists")
 					}
-					
-					// pushes all data to firebase
-					dbParty.child(partyId).child("playerList").set(playerList);
-				} else {
-					console.log("exists")
+				} catch(e) {
+					error(e);
 				}
 				sessionStorage.setItem("::partyId", partyId);
 				openPage("party");

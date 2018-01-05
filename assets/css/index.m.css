@@ -1,0 +1,11 @@
+.card .content {
+	float: inherit;
+}
+
+.card .content .text h1 {
+	font-size: 4rem;
+}
+
+.card .img {
+	float: inherit;
+}

@@ -46,6 +46,16 @@ $(document).ready(function(){
 					dbUsernames.child(username).set(uid);
 				}
 			});
+		} else {
+			$(".login").show();
+			ui.start('#firebaseui-auth-container', {
+				signInSuccessUrl: 'app.html',
+				signInOptions: [
+					firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+					firebase.auth.EmailAuthProvider.PROVIDER_ID
+				],
+				tosUrl: 'tos.html'
+			});
 		}
 	});
 });
