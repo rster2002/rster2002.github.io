@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Horse races</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="assets/js/library/parallax.min.js"></script>
+		<style>
+			@font-face {
+				font-family: museo;
+				src: url(assets/css/fonts/museo500.otf);
+			}
+			@import url('https://fonts.googleapis.com/css?family=Roboto');
+			
+			html, body {
+				margin: 0;
+				padding: 0;
+			}
+			
+			h1, h2, h3, p, a {
+				font-family: 'Roboto', sans-serif;
+				width: 70%;
+				display: block;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			
+			.header {
+				height: 90vh;
+				width: 90vw;
+				position: relative;
+				top: 5vh;
+				left: 5vw;
+				border-radius: .5em;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			}
+			
+			.header h1 {
+				width: 100%;
+				text-align: center;
+				line-height: 90vh;
+				margin: 0;
+				font-size: 7em;
+				color: white;
+				font-family: "museo";
+			}
+			
+			.parallax-mirror {
+				border-radius: 5px;
+			}
+			
+			.story {
+				position: relative;
+				top: 5vh;
+				width: 100%;
+			}
+			
+			.story h1 {
+				font-size: 5em;
+				text-align: left;
+			}
+			
+			.story h2 {
+				font-size: 3.5em;
+				text-align: left;
+			}
+			
+			.story h3 {
+				font-size: 2em;
+				text-align: left;
+			}
+			
+			.story p {
+				font-size: 2em;
+				text-align: left;
+				width: 70%;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.story a{
+				font-size: 2em;
+				text-align: left;
+				width: 70%;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				text-decoration: none;
+			}
+			
+			.note {
+				padding: 0.5em;
+				width: 70%;
+				border-radius: .5em;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.note h1 {
+				width: 80%;
+			}
+			.note h2 {
+				width: 80%;
+			}
+			.note h3 {
+				width: 80%;
+			}
+			.note p {
+				width: 80%;
+			}
+		</style>
+		<script>
+			$(document).on('click', 'a[href^="#"]', function (event) {
+			event.preventDefault();
+
+			$('html, body').animate({
+				scrollTop: $($.attr(this, 'href')).offset().top
+			}, 500);
+		});
+		</script>
+	</head>
+	<body>
+		<div class="page">
+			<div class="header parallax-window" data-parallax="scroll" data-image-src="https://images.sftcdn.net/images/t_optimized,f_auto/p/b276c62c-96bf-11e6-ad7b-00163ec9f5fa/674522305/minecraft-screenshot.jpg">
+				<h1>Horse Races</h1>
+			</div>
+			<div class="story">
+				<h1 id="intro">A quick introduction</h1>
+				<p>F1 horse races is all about speed and strategy. To win, you need to perform good but also need to thing ahead, meaning that you don't need to be the fastest. In this article I'll lay some basics that you need to know when racing.</p>
+				<div class="note">
+					<a href="#basics">The basics</a>
+					<a href="#track">The track</a>
+					<a href="#race">The race</a>
+					<a href="#stuff">More advanced stuff</a>
+					<a href="#tyres">Tyres</a>
+					<a href="#mixes">Fuel mixes</a>
+				</div>
+				<h1 id="bisics">The basics</h1>
+				<p>First off, you have a couple of things above your hotbar when racing. These show info such as how much fuel you have left and how much your tires are depleted. Here are some importand ones:</p>
+				<h2>ASP</h2>
+				<p>ASP stands for absolute speed. This is your real-time speed.</p>
+				<h2>MSP</h2>
+				<p>MSP stands for modified speed. This is an importand number, as this is what makes your horse faster. The higher the number, the faster your horse is. You can get a high MSP with tires or less fuel.</p>
+				<h2>F</h2>
+				<p>F is how much fuel you have left over. As this number decreases, your MSP will rise to a max of 5 extra points.</p>
+				<h2>TW</h2>
+				<p>TW or tyre wear, is how much your tires are depleated. If this number reaches 0%, your MSP will be 0. TW is determened by your selected tyre. Harder compounds have a long lifespan, but don't give a lot of extra MSP. Softer tires have a much shorter lifespan, but will grand you a lot more MSP.</p>
+				<br>
+				<h1 id="track">The track</h1>
+				<p>The track has some special places that can help you with racing. Each zone has its own color.</p>
+				<h2>Track start/finish (green zone)</h2>
+				<p>The track start/finish is a zone that tracks your progress, like wich tyre type you are using and wich fuel mix. It also displays track times in ticks.</p>
+				<h2>PIT (blue zone)</h2>
+				<p>The pit is the place where you'll change tyres and fuel mixes. In the pit, your MSP is set to 0, so your max speed is the max speed of your horse.</p>
+				<h2>DRS (orange zone)</h2>
+				<p>DRS stands for Drag Reduction System and grands you +2 MSP. DRS is activated when you enter a DRS zone within one second after the opponent. DRS will also activate when always DRS is turned on by the race director.</p>
+				<br>
+				<h1 id="race">The race</h1>
+				<p>When racing, you don't just have the race. Here the different are explained.</p>
+				<div class="note">
+					<h3>Before hand</h3>
+					<p>Before any racing starts, you need to have created an array of the available tyre types for the rounds. For example, if the available tyres are: hard, medium, soft. You can make an array like this: 4 hard tyres, 3 midium tyres and 4 soft tyres.</p>
+					<h3>FP1, FP2, FP3</h3>
+					<p>FP of Free Practice is when you'll test the track and see what works best for the race. At the end of every FP, 2 tyre sets are handed in, so there is no reason to not try the track. FP'es are held one day before the race.</p>
+					<h3>Q1, Q2, Q3</h3>
+					<p>On the day of the race, Qualifying is held. Qualifying go in 3 rounds. Qualifying meens, settins the grid (where you start at the grid). The first round takes 15 minutes, the second 10 minutes and the 3 5 minutes. When there are anly a small amount of drivers, there will only be 1 round held as if it was Q2. You have t start on the same tyre type you set your fastert time with in Q2 at the start of the race. In Q3 you have an extra set of tyres selected by the race director to your exposal and you can use that set of tires. If it is a short qualifying, then this set will be avaible in Q2.</p>
+					<h3>Race</h3>
+					<p>In the race you start with the tyres you used to set your fastest time in Q2. In a race you need to have at least used 2 different tyre types, one at the start and one changed durring the race.</p>
+				</div>
+				<br>
+				<h1 id="stuff">More advanced stuff</h1>
+				<h2 id="tyres">Tyres</h2>
+				<p>There are 7 tyre types: Superhard, Hard, Medium, Soft, Supersoft, Ultrasoft and Hypersoft. Here you can find some stats. Tyre duration is how many ticks the tyre can survive on track. When you race, your tyre temperture will go up, and when within the temperture margin of the tyre type, you get the temperture bonus of that tyre type.</p>
+				<div class="note">
+					<h3>Superhard</h3>
+					<p>+MSP: 1</p>
+					<p>Duration: 15000 ticks</p>
+					<p>Performance wear: ---</p>
+					<p>Temperture margin: 110-125</p>
+					<p>Temperture bonus: +4 MSP</p>
+					<p>Color: orange</p>
+					<h3>Hard</h3>
+					<p>+MSP: 2</p>
+					<p>Duration: 13500 ticks</p>
+					<p>Performance wear: ---</p>
+					<p>Temperture margin: 100-115</p>
+					<p>Temperture bonus: +3 MSP</p>
+					<p>Color: blue</p>
+					<h3>Medium</h3>
+					<p>+MSP: 3</p>
+					<p>Duration: 12000 ticks</p>
+					<p>Performance wear: ---</p>
+					<p>Temperture margin: 90-105</p>
+					<p>Temperture bonus: +3 MSP</p>
+					<p>Color: white</p>
+					<h3>Soft</h3>
+					<p>+MSP: 4</p>
+					<p>Duration: 10500 ticks</p>
+					<p>Performance wear: -1 MSP</p>
+					<p>Temperture margin: 100-115</p>
+					<p>Temperture bonus: +2 MSP</p>
+					<p>Color: yellow</p>
+					<h3>Supersoft</h3>
+					<p>+MSP: 5</p>
+					<p>Duration: 9000 ticks</p>
+					<p>Performance wear: -2 MSP</p>
+					<p>Temperture margin: 80-90</p>
+					<p>Temperture bonus: +2 MSP</p>
+					<p>Color: red</p>
+					<h3>Ultrasoft</h3>
+					<p>+MSP: 6</p>
+					<p>Duration: 6000 ticks</p>
+					<p>Performance wear: -3 MSP</p>
+					<p>Temperture margin: 75-85</p>
+					<p>Temperture bonus: +1 MSP</p>
+					<p>Color: purple</p>
+					<h3>Hypersoft</h3>
+					<p>+MSP: 7</p>
+					<p>Duration: 4500 ticks</p>
+					<p>Performance wear: -4 MSP</p>
+					<p>Temperture margin: 70-80</p>
+					<p>Temperture bonus: +1 MSP</p>
+					<p>Color: pink</p>
+				</div>
+				<p>As a race progresses, your tires get slower. So when you start the race, you'll be faster than at the end of the race.</p>
+				<h2 id="mixes">Fuel mixes</h2>
+				<p>Fuel is an importand aspect of racing. When you have a lot of fuel in your tank, you'll be slower than when you have a quarter of that. You can compensate that by choocing the right fuel mix. A fuel mix if how much fuel you'll burn per second. The more fuel you burn, the faster you'll go. Here you can see the different fuel mixes.</p>
+				<div class="note">
+					<h3>Lean</h3>
+					<h3>Normal</h3>
+					<h3>Rich</h3>
+					<h3>Max (available in FP1, FP2, FP3, Q1, Q2 and Q3)</h3>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
