@@ -68,6 +68,8 @@ function loadCharacter(uid) {
 						selfl(characterObj);
 					} else if (isDM === true) {
 						$("#kick").show();
+						console.log(characterName);
+						sessionStorage.setItem("::saved",characterName);
 						loadedUid = uid;
 						selfl(characterObj);
 					} else {
@@ -99,9 +101,12 @@ function l(characterObj) {
 						$("textarea#form" + i + "_" + page).val(characterObj[i + "_" + page]);
 						$("textarea#form" + i + "_" + page).attr("disabled","disabled");
 					} else if ($("input#form" + i + "_" + page).is(":checkbox")) {
-						if (characterObj[i + "_" + page]) {
+						if (characterObj[i + "_" + page] === true) {
 							$("input#form" + i + "_" + page).prop("checked",true);
 							$("img#form" + i + "_" + page).attr("src","1/form/3011 0 ROn.png");
+						} else {
+							$("input#form" + i + "_" + page).prop("checked",false);
+							$("img#form" + i + "_" + page).attr("src","1/form/3015 0 ROff.png");
 						}
 					}
 				}
@@ -126,9 +131,12 @@ function selfl(characterObj) {
 						$("textarea#form" + i + "_" + page).val(characterObj[i + "_" + page]);
 						$("textarea#form" + i + "_" + page).removeAttr("disabled");
 					} else if ($("input#form" + i + "_" + page).is(":checkbox")) {
-						if (characterObj[i + "_" + page]) {
+						if (characterObj[i + "_" + page] === true) {
 							$("input#form" + i + "_" + page).prop("checked",true);
 							$("img#form" + i + "_" + page).attr("src","1/form/3011 0 ROn.png");
+						} else {
+							$("input#form" + i + "_" + page).prop("checked",false);
+							$("img#form" + i + "_" + page).attr("src","1/form/3015 0 ROff.png");
 						}
 					}
 				}
@@ -144,11 +152,17 @@ function save() {
 		dbUsers.child(uid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 		alert("Saved character sheet");
 	} else if (isDM === true) {
-		s();
-		console.log(loadedUid);
-		dbUsers.child(loadedUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
+		try {
+			s();
+			console.log(characterObj);
+			console.log(loadedUid);
+			dbUsers.child(loadedUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
+			alert("Saved " + sessionStorage.getItem("::saved"));
+		} catch(e) {
+			error(e);
+		}
 	} else {
-		error("You are the DM and not the DM! Superposition confirmed?");
+		error("You are the DM and not the DM! Superposition confirmed?!");
 	}
 }
 
