@@ -1,21 +1,11 @@
-.colom1, .colom2 {
-	float: none;
-	width: 100vw;
-	height: 40vh;
+.createParty h1 {
+	font-size: 4em;
 }
 
-.box h1 {
-	font-size: 6em;
-}
-
-.box input {
+.party h1 {
 	font-size: 5em;
 }
 
-.box {
-	width: 70%;
-}
-
-.box button {
-	font-size: 4em;
+.party p {
+	font-size: 3em;
 }

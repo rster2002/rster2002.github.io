@@ -1,39 +1,91 @@
-.colom1, .colom2 {
+.scroll {
 	height: 100%;
-	width: 50%;
-	float: left;
+	width: 100%;
+	margin: 0;
+	overflow-y: scroll;
 }
 
-.box {
+.partyList {
+	width: 70%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+	margin-bottom: 10%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.party {
+	height: 20vh;
+	width: 100%;
+	border-top: 1px solid rgb(235,235,235);
+	cursor: pointer;
+}
+
+.party:hover {
+	background-color: rgb(235,235,235);
+}
+
+.party h1 {
+	width: 100%;
+	font-size: 3em;
+	margin-left: 2%;
+}
+
+.party p {
+	width: 100%;
+	margin-left: 2%;
+}
+
+.createParty {
+	height: 20vh;
+	width: 100%;
+	cursor: pointer;
+	background-color: white;
+}
+
+.createParty:hover {
+	background-color: rgb(235,235,235);
+}
+
+.createParty:hover input {
+	background-color: rgb(215,215,215);
+}
+
+.addParty {
+	display: none;
+	width: 100%;
+	height: 100%;
+}
+
+.addParty input {
+	font-size: 2em;
+	position: relative;
+	top: 50%;
+	transform: translate(0%,-50%);
+	margin-left: 2%;
+}
+
+.addParty button {
+	font-size: 2em;
+	position: relative;
+	top: 50%;
+	transform: translate(0%,-50%);
+	margin-left: 2%;
+}
+
+.deletable {
+	width: 100%;
+	height: 100%;
+}
+
+.deletable h1 {
 	position: relative;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
-	width: 50%;
-	height: 30%;
-}
-
-.box h1 {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 	text-align: center;
-}
-
-.box p {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.box input {
-	width: 70%;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.box button {
-	width: 70%;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 1%;
 }

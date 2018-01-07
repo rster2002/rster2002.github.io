@@ -39,23 +39,19 @@
 }
 
 #save {
-	position: absolute;
-	z-index: 200;
-	width: 4vw;
-	margin-left: .5vw;
-	margin-top: 88vh;
-	display: none;
-	height: 2vw;
-	font-size: 1em;
+	position: fixed;
+    z-index: 200;
+    margin-left: .5vw;
+    display: none;
+    font-size: 1em;
+    bottom: 1vh;
 }
 
 #kick {
-	position: absolute;
-	z-index: 200;
-	width: 4vw;
-	margin-left: .5vw;
-	margin-top: 83vh;
-	display: none;
-	height: 2vw;
-	font-size: 1em;
+	position: fixed;
+    z-index: 200;
+    margin-left: .5vw;
+    display: none;
+    font-size: 1em;
+    bottom: 4vh;
 }

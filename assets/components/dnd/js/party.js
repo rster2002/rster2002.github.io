@@ -175,21 +175,38 @@ function s() {
 }
 
 function kick() {
-	dbParty.child(partyId).once("value",function(e) {
-		var partyContent = e.val();
-		console.log(partyContent);
-		var partyArray = partyContent.playerList;
-		var rePlayerList = [];
-		for (var i = 0; i < partyArray.length; ++i) {
-			if (partyArray[i] === loadedUid) {
-				console.log("kicked: " + partyArray[i]);
-			} else {
-				rePlayerList.push(partyArray[i]);
-				console.log("skipped: " + partyArray[i])
+	if (confirm("Are you sure you want to kick this person?") === true) {
+		dbParty.child(partyId).once("value",function(e) {
+			var partyContent = e.val();
+			console.log(partyContent);
+			var partyArray = partyContent.playerList;
+			var rePlayerList = [];
+			for (var i = 0; i < partyArray.length; ++i) {
+				if (partyArray[i] === loadedUid) {
+					console.log("kicked: " + partyArray[i]);
+				} else {
+					rePlayerList.push(partyArray[i]);
+					console.log("skipped: " + partyArray[i])
+				}
 			}
-		}
-		dbParty.child(partyId).child("playerList").set(rePlayerList);
-	});
-	$("#kick").hide();
-	$("#save").hide();
+			dbParty.child(partyId).child("playerList").set(rePlayerList);
+		});
+
+		dbUsers.child(loadedUid).once("value", e => {
+			var dbContent = e.val();
+			var partiesArray = dbContent.parties;
+			var rePartyList = [];
+			for (var i = 0; i < partiesArray.length; ++i) {
+				if (partiesArray[i] === partyId) {
+					console.log("removed " + partyId + " from users party list");
+				} else {
+					rePartyList.push(partiesArray[i]);
+					console.log("skipped: " + partiesArray[i]);
+				}
+			}
+			dbUsers.child(loadedUid).child("parties").set(rePartyList);
+		});
+		$("#kick").hide();
+		$("#save").hide();
+	}
 }

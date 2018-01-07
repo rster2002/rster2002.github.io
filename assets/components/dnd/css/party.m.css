@@ -17,3 +17,21 @@
 	margin-left: 1vw;
 	overflow-x: auto;
 }
+
+#save {
+	position: fixed;
+    z-index: 200;
+    display: none;
+    font-size: 3em;
+    bottom: 1vh;
+    left: 1vw;
+}
+
+#kick {
+	position: fixed;
+    z-index: 200;
+    display: none;
+    font-size: 3em;
+    bottom: 4vh;
+    left: 1vw;
+}

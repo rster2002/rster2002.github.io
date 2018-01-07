@@ -1,11 +1,84 @@
-console.log("partyMenu.js")
-uid = sessionStorage.getItem("::uid")
+console.log("partyMenu.js");
+sUid = sessionStorage.getItem("::uid");
 
 
 // adds listerer to join btn
-$("#btnJoin").on("click",function(){
-	join($("#join").val(),false);
+
+var localParties = {};
+
+function addList(id, place) {
+	dbParty.child(id).once("value",e => {
+		console.log(id);
+		try {
+			var party = e.val();
+			var playerArray = party.playerList;
+			var players = playerArray.length;
+			localParties[place] = id;
+			$(".partyList").append("<div class='party' onclick='clickParty(" + place + ")'><h1>" + id + "</h1><p>" + players + " players in this party</p></div>");
+		} catch(e) {
+			error(e);
+		}
+	});
+}
+
+dbUsers.child(sUid).once("value",e => {
+	// adds 'add party' to list
+	$(".partyList").append("<div class='createParty'><div class='deletable'><h1>Add party</h1></div><div class='addParty'><input id='partyId' placeholder='party id' type='text'><button id='join'>Join</button><button id='host'>Create</button></div></div>");
+	
+	// adds items to list
+	var dbContent = e.val();
+	console.log(dbContent);
+	if (dbContent !== undefined) {
+		var partiesArray = dbContent.parties;
+		if (partiesArray !== undefined) {
+			console.log(partiesArray);
+			for (var i = 0; i < partiesArray.length; ++i) {
+				var partyId = partiesArray[i]
+				addList(partyId, i);
+			}
+		}
+	}
+	
+	// add button hooks
+	$(".createParty").on("click",function(){
+		$(".deletable").hide();
+		$(".addParty").show();
+	});
+	
+	$("#join").on("click",function(){
+		join($("#partyId").val(),false);
+	});
+	
+	
+	// adds lisener to host btn
+	$("#host").on("click",function(){
+		// gets party id and checkes it
+		var partyId = $("#partyId").val();
+		if (partyId === "") {
+			alert("Party id is empty");
+			return;
+		} else if (partyId.length > 15) {
+			alert("Party id is to long");
+			return;
+		}
+		if (partyId !== '' && partyId !== null && partyId !== undefined) {
+			dbParty.once("value",function(e){
+				if (e.hasChild(partyId)) {
+					alert("This party id is already in use");
+					return;
+				} else {
+					dbParty.child(partyId).child("playerList").set("");
+					join(partyId,true);
+				}
+			});
+		}
+	});
 });
+
+function clickParty(index) {
+	var partyId = localParties[index];
+	join(partyId,false);
+}
 
 function join(partyId,host) {
 	cancel = false;
@@ -39,10 +112,10 @@ function join(partyId,host) {
 							} else {
 								player = playerList[i];
 							}
-							if (player === uid) {
+							if (player === sUid) {
 								exist = true;
 							}
-							console.log(player + " " + playerList[i] + " " + sessionStorage.getItem("::uid") + " " + exist);
+							console.log(player + " " + playerList[i] + " " + sUid + " " + exist);
 						}
 					} else {
 						exist = false;
@@ -55,9 +128,9 @@ function join(partyId,host) {
 				try {
 					if (exist === false && exist !== true) {
 						if (host === true) {
-							playerList.unshift("DM::" + sessionStorage.getItem("::uid"));
+							playerList.unshift("DM::" + sUid);
 						} else {
-							playerList.unshift(sessionStorage.getItem("::uid"));
+							playerList.unshift(sUid);
 						}
 
 
@@ -67,14 +140,15 @@ function join(partyId,host) {
 
 							if (input === "" || input === null || input === false || input === undefined) {
 								alert("You haven't typed anything, how rude!");
+								cancel = true
 								return;
 							} else {
-								dbUsers.child(sessionStorage.getItem("::uid")).child("characters").once("value",function(e){
+								dbUsers.child(sUid).child("characters").once("value",function(e){
 									var dbContent = e.val();
 									console.log(input);
 									console.log(dbContent);
 									if (e.hasChild(input)) {
-										dbParty.child(partyId).child(sessionStorage.getItem("::uid")).set(input);
+										dbParty.child(partyId).child(sUid).set(input);
 									} else {
 										alert("Can't find this character.");
 										cancel = true;
@@ -84,6 +158,20 @@ function join(partyId,host) {
 							}
 						}
 
+						if (cancel !== true) {
+							dbUsers.child(sUid).once("value",e => {
+								var dbContent = e.val();
+								if (dbContent.parties !== undefined) {
+									upload = dbContent.parties;
+								} else {
+									upload = [];
+								}
+								upload.unshift(partyId);
+								dbUsers.child(sUid).child("parties").set(upload);
+							});
+						}
+						
+						
 						// pushes all data to firebase
 						if (cancel !== true) {
 							dbParty.child(partyId).child("playerList").set(playerList);
@@ -103,27 +191,3 @@ function join(partyId,host) {
 		}
 	});
 }
-
-// adds lisener to host btn
-$("#btnHost").on("click",function(){
-	// gets party id and checkes it
-	var partyId = $("#host").val();
-	if (partyId === "") {
-		alert("Party id is empty");
-		return;
-	} else if (partyId.length > 15) {
-		alert("Party id is to long");
-		return;
-	}
-	if (partyId !== '' && partyId !== null && partyId !== undefined) {
-		dbParty.once("value",function(e){
-			if (e.hasChild(partyId)) {
-				alert("This party id is already in use");
-				return;
-			} else {
-				dbParty.child(partyId).child("playerList").set("");
-				join(partyId,true);
-			}
-		});
-	}
-});
