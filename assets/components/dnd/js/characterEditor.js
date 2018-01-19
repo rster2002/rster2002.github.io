@@ -1,4 +1,8 @@
-uid = sessionStorage.getItem("::uid");
+sUid = sessionStorage.getItem("::uid");
+
+$(".innerPage").ready(() => {
+	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
+});
 
 sessionStorage.setItem("::saved","false");
 console.log("hmm");
