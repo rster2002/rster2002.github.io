@@ -146,8 +146,6 @@ join checklist:
 */
 
 function join(partyId) {
-	cancel = false;
-	next = true;
 	
 	// checks if the party exits
 	dbParty.once("value",(e) => {
