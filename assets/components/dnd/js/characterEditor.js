@@ -1,4 +1,8 @@
-uid = sessionStorage.getItem("::uid");
+sUid = sessionStorage.getItem("::uid");
+
+$(".innerPage").ready(() => {
+	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
+});
 
 sessionStorage.setItem("::saved","false");
 console.log("hmm");
@@ -6,13 +10,13 @@ function saveCharacter() {
 	s();
 	console.log(characterObj);
 	if (sessionStorage.getItem("::saved") !== "false") {
-		dbUsers.child(uid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
+		dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 		alert("Saved character sheet");
 	} else {
 		var i = prompt("Type a name for this caracter sheet");
 		if (i) {
 			sessionStorage.setItem("::saved",i);
-			dbUsers.child(uid).child("characters").child(i).set(characterObj);
+			dbUsers.child(sUid).child("characters").child(i).set(characterObj);
 			alert("Saved character sheet");
 		}
 	}
@@ -23,17 +27,18 @@ function saveAsCharacter() {
 	var i = prompt("Type a name for this caracter sheet");
 	if (i) {
 		sessionStorage.setItem("::saved",i);
-		dbUsers.child(uid).child("characters").child(i).set(characterObj);
+		dbUsers.child(sUid).child("characters").child(i).set(characterObj);
 	}
 }
 
 function loadCharacter() {
 	var i = prompt("Type the name of the caracter sheet you want to load");
 	if (i) {
-		dbUsers.child(uid).child("characters").once("value",function(e){
+		dbUsers.child(sUid).child("characters").once("value",function(e){
 			var dbContent = e.val();
 			if (e.hasChild(i)) {
 				var c = dbContent[i];
+				console.log(c);
 				l(c);
 				sessionStorage.setItem("::saved",i);
 			} else {

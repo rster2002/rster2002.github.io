@@ -1,0 +1,50 @@
+.scroll {
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.sheet {
+	padding-top: 10vh;
+	padding-bottom: 10vh;
+}
+
+.innerPage {
+	overflow-y: hidden;
+}
+
+.controll {
+	height: 20vh;
+	width: 60vw;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	top: 5vh;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.controll .button {
+	float: left;
+	height: 100%;
+	width: 33.333333333333333333333333333%;
+	cursor: pointer;
+}
+
+.controll .button h1 {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	text-align: center;
+	font-size: 2em;
+}
+
+.controll .button:hover {
+	background-color: rgb(235,235,235);
+}
+
+.pageArea {
+	border-radius: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

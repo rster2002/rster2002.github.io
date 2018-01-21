@@ -1,37 +1,31 @@
-.side {
-	position: absolute;
+#partyId {
+	font-size: 6rem;
+}
+
+.DM {
 	width: 100%;
-	height: 10vh;
-	z-index: 10;
 }
 
-.characterSheetContainer {
-	top: 9%;
-	left: 2.5%;
+.DM h1 {
+	font-size: 4.5rem;
 }
 
-.side .inner img {
-	height: 9vh;
-	width: 9vh;
-	float: left;
-	margin-left: 1vw;
-	overflow-x: auto;
+.player {
+	width: 100%;
 }
 
-#save {
-	position: fixed;
-    z-index: 200;
-    display: none;
-    font-size: 3em;
-    bottom: 1vh;
-    left: 1vw;
+.player h1 {
+	font-size: 4rem;
 }
 
-#kick {
-	position: fixed;
-    z-index: 200;
-    display: none;
-    font-size: 3em;
-    bottom: 4vh;
-    left: 1vw;
+.save h1 {
+	font-size: 4rem;
+}
+
+.kick h1 {
+	font-size: 4rem;
+}
+
+.ban h1 {
+	font-size: 4rem;
 }

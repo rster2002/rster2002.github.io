@@ -2,10 +2,30 @@
 	<link href="../assets/components/dnd/css/party.css" rel="stylesheet" type="text/css">
 	<link href="../assets/components/dnd/css/party.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
 	<script src="../assets/components/dnd/js/party.js"></script>
-	<button onclick="kick()" class="red" id="kick">Kick</button>
-	<button onclick="save()" id="save">Save</button>
-	<div class="side">
-		<div class="inner"></div>
+	<div class="head">
+		<div class="top">
+			<h1 id="partyId"></h1>
+		</div>
+		<div class="bottom">
+			<div class="DM">
+				<img id="DMusericon">
+				<h1 id="DMusername"></h1>
+			</div>
+		</div>
 	</div>
-	<div class="characterSheetContainer"></div>
+	<div class="playerList">
+		<div class="innerList">
+		</div>
+	</div>
+	<div class="save" onclick="save()">
+		<h1>Save</h1>
+	</div>
+	<div class="kick" onclick="kick(false)">
+		<h1>Kick</h1>
+	</div>
+	<div class="ban" onclick="ban()">
+		<h1>Ban</h1>
+	</div>
+	<div class="characterContainer">
+	</div>
 </div>
