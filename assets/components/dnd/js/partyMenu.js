@@ -22,6 +22,7 @@ function addList(id, place) {
 			var party = e.val();
 			var playerArray = party.playerList;
 			var players = playerArray.length;
+			players -= 1;
 			localParties[place] = id;
 			$(".partyList").append("<div class='party' onclick='clickParty(" + place + ")'><h1>" + id + "</h1><p>" + players + " players in this party</p></div>");
 		} catch(e) {
@@ -124,6 +125,7 @@ function host(partyId) {
 			
 			// continues to the party screen
 			try {
+				sessionStorage.setItem("::party",partyId);
 				openPage("party");
 			} catch(e) {
 				error(e);
@@ -160,38 +162,71 @@ function join(partyId) {
 					openPage("party");
 				} else {
 					
-					// gives an input for typing the character
-					var character = prompt("Type a character to use in the party");
+					banned = false;
 					
-					// checks if the input is valid
-					if (checkInput(character)) {
+					// checks if the user is banned
+					dbParty.child(partyId).once("value",(e) => {
 						
-						// checks if the character exists in the users account
-						dbUsers.child(sUid).child("characters").once("value",(e) => {
-							if (e.hasChild(character)) {
-								
-								// catches the party obj from the database
-								dbParty.child(partyId).once("value",(e) => {
-									var dbContent = e.val();
-									
-									dbContent[sUid] = character;
-									var playerList = dbContent.playerList;
-									playerList.unshift(sUid);
-									dbContent["playerList"] = playerList;
-									console.log(dbContent);
-									
-									dbParty.child(partyId).set(dbContent);
-									sessionStorage.setItem("::party",partyId);
-									openPage("party");
-								});
-							} else {
-								alert("Couldn't find this character!");
-								return;
+						if (e.hasChild("banList")) {
+							var c = e.val();
+							var banList = c.banList;
+							
+							for (var i = 0; i < banList.length; ++i) {
+								if (sUid === banList[i]) {
+									alert("You've been banned from this party!");
+									banned = true;
+								}
 							}
-						});
-					} else {
-						alert("The input was invalid");
-						return;
+						}
+					});
+					if (!banned) {
+						// gives an input for typing the character
+						var character = prompt("Type a character to use in the party");
+
+						// checks if the input is valid
+						if (checkInput(character)) {
+
+							// checks if the character exists in the users account
+							dbUsers.child(sUid).child("characters").once("value",(e) => {
+								if (e.hasChild(character)) {
+
+									// catches the party obj from the database
+									dbParty.child(partyId).once("value",(e) => {
+										var dbContent = e.val();
+
+										dbContent[sUid] = character;
+										var playerList = dbContent.playerList;
+										playerList.unshift(sUid);
+										dbContent["playerList"] = playerList;
+										console.log(dbContent);
+
+										dbParty.child(partyId).set(dbContent);
+										
+										dbUsers.child(sUid).once("value",(e) => {
+											var c = e.val();
+											if (e.hasChild("parties")) {
+												parties = c.parties;
+											} else {
+												parties = [];
+											}
+											
+											parties.unshift(partyId);
+											console.log(parties);
+											dbUsers.child(sUid).child("parties").set(parties);
+											
+											sessionStorage.setItem("::party",partyId);
+											openPage("party");
+										});
+									});
+								} else {
+									alert("Couldn't find this character!");
+									return;
+								}
+							});
+						} else {
+							alert("The input was invalid");
+							return;
+						}
 					}
 				}
 			});

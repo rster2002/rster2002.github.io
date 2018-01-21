@@ -1,36 +1,67 @@
-$(".characterSheetContainer").load("../assets/components/dnd/pages/characterSheet.html");
-var partyId = sessionStorage.getItem("::partyId");
-var uid = sessionStorage.getItem("::uid");
+$(".innerPage").ready(() => {
+	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
+	
+	$("#partyId").text(sessionStorage.getItem("::party"));
+});
+var partyId = sessionStorage.getItem("::party");
 var sUid = sessionStorage.getItem("::uid");
 var isDM = false;
 
 console.log("party.js");
 
-dbParty.child(partyId).on("value",function(e){
-	$(".side .inner").remove();
-	$(".side").append("<div class='inner'></div>")
+dbParty.child(partyId).once("value",(e) => {
 	var dbContent = e.val();
-	console.log(dbContent);
-	var array = dbContent.playerList;
-	for (var i = 0; i < array.length; ++i) {
-		tUid = array[i];
-		console.log("---")
-		if (array[i].includes("DM::")) {
-			console.log("Found DM");
-			var DMUid = array[i].replace("DM::","");
-			if (sUid === DMUid) {
-				isDM = true;
-			}
-		} else {
-			console.log("Found user");
-			dbUsers.child(array[i]).once("value",function(e){
-				var dbUsersContent = e.val();
-				console.log(dbUsersContent.username + " " + dbUsersContent.usericon + " " + dbUsersContent.uid);
-				var onclick = "loadCharacter('" + dbUsersContent.uid + "')";
-				$(".side .inner").append("<img src=" + dbUsersContent.usericon + " onclick=" + onclick + ">")
+	
+	// checks if there is a DM
+	if (!e.hasChild("DM")) {
+		error("There was an error loading the party.");
+		openPage("mainMenu");
+	}
+	
+	var dmUid = dbContent.DM;
+	sessionStorage.setItem("::dm",dmUid)
+	console.log(dmUid);
+	
+	// gets the DM's user info
+	dbUsers.child(dmUid).once("value",(e) => {
+		var userinfo = e.val();
+		
+		$("#DMusericon").attr("src", userinfo.usericon);
+		$("#DMusername").text(userinfo.username);
+	});
+	
+	if (sUid === dmUid) {
+		isDM = true;
+	} else {
+		isDM = false;
+	}
+});
+
+dbParty.child(partyId).child("playerList").on("value",(e) => {
+	var height = 0;
+	list = {};
+	$(".innerList").remove();
+	$(".playerList").append("<div class='innerList'></div>");
+	var playerList = e.val();
+	
+	var dm = sessionStorage.getItem("::dm");
+	console.log(playerList);
+	
+	for (var i = 0; i < playerList.length; ++i) {
+		var lUid = playerList[i];
+		console.log(lUid + " " + dm);
+		if (lUid !== dm) {
+			height += 10;
+			list[i] = lUid;
+			
+			index = i;
+			$(".playerList").css("height",height + "vh")
+			dbUsers.child(lUid).once("value",(e) => {
+				var playerInfo = e.val();
+				$(".innerList").append("<div class='player' onclick='loadCharacter(" + index + ")'><img src=" + playerInfo.usericon + "><h1>" + playerInfo.username + "</h1></div>");
+				
 			});
 		}
-		console.log(tUid);
 	}
 });
 
@@ -41,52 +72,40 @@ pages = {
 }
 
 // called when clicked on user
-function loadCharacter(uid) {
+function loadCharacter(index) {
+	var lUid = list[index];
+	loadedUid = lUid;
 	
-	// load the party from the database
-	dbParty.child(partyId).once("value",function(e){
-		
-		// loads the data
-		var dbContent = e.val();
-		try {
-			
-			// sets the character name
-			var characterName = dbContent[uid];
-			
-			// gets the character from the users characters
-			dbUsers.child(uid).child("characters").once("value",function(e){
-				var dbCharacter = e.val();
-				var characterObj = dbCharacter[characterName];
-				console.log(characterObj);
-				try {
+	try {
+		dbParty.child(partyId).child(lUid).once("value",(e) => {
+			var characterName = e.val();
+			sessionStorage.setItem("::saved", characterName);
+			try {	
+				dbUsers.child(lUid).child("characters").child(characterName).once("value",(e) => {
+					var characterObj = e.val();
+					console.log(characterObj);
 					
-					// checks if the uid is the same as the uid used to load the character
-					if (uid === sUid) {
-						
-						// if true set saved to charactername and self load the character
-						sessionStorage.setItem("::saved",characterName);
+					if (sUid === lUid) {
 						selfl(characterObj);
-					} else if (isDM === true) {
-						$("#kick").show();
-						console.log(characterName);
-						sessionStorage.setItem("::saved",characterName);
-						loadedUid = uid;
+					} else if (isDM) {
 						selfl(characterObj);
+						$(".kick").show();
+						$(".ban").show();
 					} else {
 						l(characterObj);
 					}
-				} catch(e) {
-					error(e);
-				}
-			})
-		} catch(e) {
-			error(e);
-		}
-	})
+				})
+			} catch(e) {
+				error(e);
+			}
+		});
+	} catch(e) {
+		error(e);
+	}
 }
 
 function l(characterObj) {
-	$("#save").hide();
+	$(".save").hide();
 	for (var page = 0; page <= 3; ++page) {
 		if (page > 0) {
 			for (var i = 0; i <= pages[page]; ++i) {
@@ -116,7 +135,7 @@ function l(characterObj) {
 }
 
 function selfl(characterObj) {
-	$("#save").show();
+	$(".save").show();
 	for (var page = 0; page <= 3; ++page) {
 		if (page > 0) {
 			for (var i = 0; i <= pages[page]; ++i) {
@@ -149,7 +168,7 @@ function save() {
 	if (isDM === false) {
 		s();
 		console.log(characterObj);
-		dbUsers.child(uid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
+		dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 		alert("Saved character sheet");
 	} else if (isDM === true) {
 		try {
@@ -188,8 +207,14 @@ function s() {
 	}
 }
 
-function kick() {
-	if (confirm("Are you sure you want to kick this person?") === true) {
+function kick(ban) {
+	if (ban) {
+		next = true;
+	} else {
+		next = confirm("Are you sure you want to ban this person?");
+	}
+	
+	if (next) {
 		dbParty.child(partyId).once("value",function(e) {
 			var partyContent = e.val();
 			console.log(partyContent);
@@ -220,7 +245,29 @@ function kick() {
 			}
 			dbUsers.child(loadedUid).child("parties").set(rePartyList);
 		});
-		$("#kick").hide();
-		$("#save").hide();
+		$(".kick").hide();
+		$(".save").hide();
+	}
+}
+
+function ban() {
+	if (confirm("Are you sure you want to ban this person?")) {
+		dbParty.child(partyId).once("value",(e) => {
+			var partyContent = e.val();
+			if (e.hasChild("banList")) {
+				banList = partyContent.banList;
+			} else {
+				banList = [];
+			}
+			
+			banList.unshift(loadedUid);
+			console.log(banList);
+			
+			dbParty.child(partyId).child("banList").set(banList);
+			dbParty.child(partyId).child(loadedUid).set(null);
+			
+			
+			kick(true);
+		})
 	}
 }
