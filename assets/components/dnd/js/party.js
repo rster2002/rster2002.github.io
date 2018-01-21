@@ -48,21 +48,19 @@ dbParty.child(partyId).child("playerList").on("value",(e) => {
 	console.log(playerList);
 	
 	for (var i = 0; i < playerList.length; ++i) {
-		var lUid = playerList[i];
-		console.log(lUid + " " + dm);
-		if (lUid !== dm) {
-			height += 10;
-			list[i] = lUid;
-			
-			index = i;
-			$(".playerList").css("height",height + "vh")
-			dbUsers.child(lUid).once("value",(e) => {
-				var playerInfo = e.val();
-				$(".innerList").append("<div class='player' onclick='loadCharacter(" + index + ")'><img src=" + playerInfo.usericon + "><h1>" + playerInfo.username + "</h1></div>");
-				
-			});
+			tUid = playerList[i];
+			console.log("---")
+			if (tUid !== sessionStorage.getItem("::dm")) {
+				console.log("Found user");
+				dbUsers.child(playerList[i]).once("value",function(e){
+					var dbUsersContent = e.val();
+					console.log(dbUsersContent.username + " " + dbUsersContent.usericon + " " + dbUsersContent.uid);
+					var onclick = "loadCharacter('" + dbUsersContent.uid + "')";
+					$(".innerList").append("<div class='player' onclick=" + onclick + "><img src=" + dbUsersContent.usericon + "><h1>" + dbUsersContent.username + "</h1></div>")
+				});
+			}
+			console.log(tUid);
 		}
-	}
 });
 
 pages = {
@@ -72,9 +70,8 @@ pages = {
 }
 
 // called when clicked on user
-function loadCharacter(index) {
-	var lUid = list[index];
-	loadedUid = lUid;
+function loadCharacter(uid) {
+	var lUid = uid;
 	
 	try {
 		dbParty.child(partyId).child(lUid).once("value",(e) => {
