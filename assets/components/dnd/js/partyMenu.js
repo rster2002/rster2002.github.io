@@ -103,7 +103,7 @@ function host(partyId) {
 				dbParty.child(partyId).set(partyObj);
 			} catch(e) {
 				error(e);
-			}
+			}dm.hellw;
 			
 			// adds the party
 			try {

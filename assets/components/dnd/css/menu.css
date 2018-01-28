@@ -1,29 +1,40 @@
-.colom1, .colom2, .colom3 {
-	height: 100%;
-	float: left;
+.innerPage {
+	overflow-y: scroll;
 }
 
-.colom1, .colom2 {
-	width: 33vw;
+.menu {
+	width: 80%;
+	position: relative;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	top: 5vh;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin-bottom: 5vh;
 }
 
-.colom3 {
-	width: 34vw;
+.menuItem {
+	width: 100%;
+	background-color: white;
+	cursor: pointer;
+	border-bottom: rgb(235,235,235) solid 1px;
 }
 
-.colom1 h1, .colom2 h1, .colom3 h1 {
-	margin-left: 2%;
-	font-size: 2.5rem;
-	margin-top: 2%;
+.menuItem:hover {
+	background-color: rgb(235,235,235);
 }
 
-.colom1 p, .colom2 p, .colom3 p {
-	margin-left: 2%;
-	font-size: 1rem;
-	margin-bottom: 5px;
+.menuItem h1 {
+	font-size: 3em;
+	width: 100%;
+	text-align: center;
 }
 
-.colom1 button, .colom2 button, .colom3 button {
-	margin-left: 2%;
-	font-size: 1.5rem;
+.menuItem p {
+	font-size: 1.3em;
+	width: 70%;
+	text-align: left;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }

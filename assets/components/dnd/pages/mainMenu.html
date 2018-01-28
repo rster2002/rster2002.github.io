@@ -5,25 +5,19 @@
 		<div class="innerPage">
 			<link href="../assets/components/dnd/css/menu.css" rel="stylesheet" type="text/css">
 			<link href="../assets/components/dnd/css/menu.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
-			<div class="colom1">
-				<h1>Character Editor</h1>
-				<p>Create a character with the character editor</p>
-				<button onclick="openPage('characterEditor')" class="blue">Open</button>
-<!--
-				<h1>Monsters and Enemies</h1>
-				<p>Find the right enemy at the right time</p>
-				<button onclick="openPage('monsterList')" class="blue">Open</button>
--->
-				<h1>Party</h1>
-				<p>Create a party that friends can join to be able to see each others character sheet.</p>
-				<button onclick="openPage('partyMenu')" class="blue">Create/Join</button>
-				<h1>Races</h1>
-				<p>Find custom and original races.</p>
-				<button onclick="openPage('races')" class="blue">View</button>
-			</div>
-			<div class="colom2"></div>
-			<div class="colom3">
-<!--				<button onclick="openPage('about')">About</button>-->
+			<div class="menu">
+				<div class="menuItem" onclick="openPage('characterEditor')">
+					<h1>Character Editor</h1>
+					<p>Create a character with the character editor</p>
+				</div>
+				<div class="menuItem" onclick="openPage('partyMenu')">
+					<h1>Party</h1>
+					<p>Create a party that friends can join to be able to see each others character sheet.</p>
+				</div>
+				<div class="menuItem" onclick="openPage('races')">
+					<h1>Races</h1>
+					<p>Find custom and original races.</p>
+				</div>
 			</div>
 		</div>
 	</body>

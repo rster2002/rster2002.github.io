@@ -9,35 +9,37 @@ var isDM = false;
 
 console.log("party.js");
 
-dbParty.child(partyId).once("value",(e) => {
-	var dbContent = e.val();
-	
-	// checks if there is a DM
-	if (!e.hasChild("DM")) {
-		error("There was an error loading the party.");
-		openPage("mainMenu");
-	}
-	
-	var dmUid = dbContent.DM;
-	sessionStorage.setItem("::dm",dmUid)
-	console.log(dmUid);
-	
-	// gets the DM's user info
-	dbUsers.child(dmUid).once("value",(e) => {
-		var userinfo = e.val();
-		
-		$("#DMusericon").attr("src", userinfo.usericon);
-		$("#DMusername").text(userinfo.username);
-	});
-	
-	if (sUid === dmUid) {
-		isDM = true;
-	} else {
-		isDM = false;
-	}
-});
-
 dbParty.child(partyId).child("playerList").on("value",(e) => {
+	
+	dbParty.child(partyId).once("value",(u) => {
+		var dbContent = u.val();
+
+		// checks if there is a DM
+		if (!u.hasChild("DM")) {
+			error("There was an error loading the party.");
+			openPage("mainMenu");
+		}
+
+		var dmUid = dbContent.DM;
+		sessionStorage.setItem("::dm",dmUid)
+		console.log(dmUid);
+
+		// gets the DM's user info
+		dbUsers.child(dmUid).once("value",(v) => {
+			var userinfo = v.val();
+
+			$("#DMusericon").attr("src", userinfo.usericon);
+			$("#DMusername").text(userinfo.username);
+		});
+
+		if (sUid === dmUid) {
+			isDM = true;
+		} else {
+			isDM = false;
+		}
+	});
+
+	
 	var height = 0;
 	list = {};
 	$(".innerList").remove();
@@ -72,6 +74,7 @@ pages = {
 // called when clicked on user
 function loadCharacter(uid) {
 	var lUid = uid;
+	loadedUid = uid;
 	
 	try {
 		dbParty.child(partyId).child(lUid).once("value",(e) => {
@@ -208,7 +211,7 @@ function kick(ban) {
 	if (ban) {
 		next = true;
 	} else {
-		next = confirm("Are you sure you want to ban this person?");
+		next = confirm("Are you sure you want to kick this person?");
 	}
 	
 	if (next) {
