@@ -7,18 +7,24 @@ $(".innerPage").ready(() => {
 sessionStorage.setItem("::saved","false");
 console.log("hmm");
 function saveCharacter() {
-	s();
-	console.log(characterObj);
-	if (sessionStorage.getItem("::saved") !== "false") {
-		dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
-		alert("Saved character sheet");
-	} else {
-		var i = prompt("Type a name for this caracter sheet");
-		if (i) {
-			sessionStorage.setItem("::saved",i);
-			dbUsers.child(sUid).child("characters").child(i).set(characterObj);
+	try {
+		s();
+		console.log(characterObj);
+		if (sessionStorage.getItem("::saved") !== "false") {
+			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 			alert("Saved character sheet");
+		} else {
+			var i = prompt("Type a name for this caracter sheet");
+			if (i) {
+				loader.show();
+				sessionStorage.setItem("::saved",i);
+				dbUsers.child(sUid).child("characters").child(i).set(characterObj);
+				alert("Saved character sheet");
+				loader.hide();
+			}
 		}
+	} catch(e) {
+		error(e);
 	}
 }
 
@@ -26,25 +32,38 @@ function saveAsCharacter() {
 	s();
 	var i = prompt("Type a name for this caracter sheet");
 	if (i) {
+		loader.show();
 		sessionStorage.setItem("::saved",i);
 		dbUsers.child(sUid).child("characters").child(i).set(characterObj);
+		loader.hide();
 	}
 }
 
 function loadCharacter() {
-	var i = prompt("Type the name of the caracter sheet you want to load");
-	if (i) {
-		dbUsers.child(sUid).child("characters").once("value",function(e){
-			var dbContent = e.val();
-			if (e.hasChild(i)) {
-				var c = dbContent[i];
-				console.log(c);
-				l(c);
-				sessionStorage.setItem("::saved",i);
-			} else {
-				alert("Couldn't find this character in your account");
-			}
-		});
+	try {
+		var i = prompt("Type the name of the caracter sheet you want to load");
+		if (i) {
+			
+			loader.show();
+			
+			dbUsers.child(sUid).child("characters").once("value",function(e){
+				var dbContent = e.val();
+				if (e.hasChild(i)) {
+					var c = dbContent[i];
+					console.log(c);
+					l(c);
+					sessionStorage.setItem("::saved",i);
+					loader.hide();
+				} else {
+					loader.hide();
+					alert("Couldn't find this character in your account");
+				}
+			});
+
+			loader.hide();
+		}
+	} catch(e) {
+		error(e);
 	}
 }
 

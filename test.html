@@ -2,29 +2,14 @@
 
 <html>
 	<head>
-		<title>Design</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<style>
-			body,html {
-				margin: 0;
-				padding: 0;
-			}
-			
-			.test {
-				transition: .1s all ease-in;
-				height: 100vh;
-				width: 100px;
-				background-color: black;
-				margin-left: -100px;
-			}
-			
-			.test.an {
-				transition: .1s all ease-in;
-				margin-left: 0px;
-			}
-		</style>
+		<script src="http://requirejs.org/docs/release/2.2.0/minified/require.js"></script>
+		<script>
+//			var Git = require(["./node_modules/nodegit"]);
+			require(["./node_modules/nodegit/dist/nodegit"], function(Git) {
+				Git.Clone("https://github.com/nodegit/nodegit", "nodegit").then(function(repository) {
+					console.log(repository);
+				});
+			});
+		</script>
 	</head>
-	<body>
-		<div class="test"></div>
-	</body>
 </html>

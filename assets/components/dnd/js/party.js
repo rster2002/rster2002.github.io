@@ -57,8 +57,17 @@ dbParty.child(partyId).child("playerList").on("value",(e) => {
 				dbUsers.child(playerList[i]).once("value",function(e){
 					var dbUsersContent = e.val();
 					console.log(dbUsersContent.username + " " + dbUsersContent.usericon + " " + dbUsersContent.uid);
-					var onclick = "loadCharacter('" + dbUsersContent.uid + "')";
-					$(".innerList").append("<div class='player' onclick=" + onclick + "><img src=" + dbUsersContent.usericon + "><h1>" + dbUsersContent.username + "</h1></div>")
+					dbParty.child(partyId).once("value",(p) => {
+						var content = p.val();
+						var character = content[tUid];
+						
+						dbUsers.child(tUid).child("characters").child(character).child("form96_1").once("value",(c) => {
+							var characterName = c.val();
+							
+							var onclick = "loadCharacter('" + tUid + "')";
+							$(".innerList").append("<div class='player' onclick=" + onclick + "><img src=" + dbUsersContent.usericon + "><h1>" + dbUsersContent.username + "</h1></div>")
+						});
+					});
 				});
 			}
 			console.log(tUid);
@@ -73,6 +82,9 @@ pages = {
 
 // called when clicked on user
 function loadCharacter(uid) {
+	
+	loader.show();
+	
 	var lUid = uid;
 	loadedUid = uid;
 	
@@ -94,6 +106,8 @@ function loadCharacter(uid) {
 					} else {
 						l(characterObj);
 					}
+					
+					loader.hide();
 				})
 			} catch(e) {
 				error(e);

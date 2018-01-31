@@ -11,9 +11,22 @@ function logout() {
 	location.href="../dnd.html";
 }
 
+loader = {
+	show: function() {
+		$(".loader-background").show();
+		$(".loader").show();
+	},
+	hide: function() {
+		$(".loader-background").hide();
+		$(".loader").hide();
+	}
+}
+
 function openPage(page) {
+	loader.show();
 	$(".innerPage").remove();
 	$(".page").load("../assets/components/dnd/pages/" + page + ".html");
+	loader.hide();
 }
 
 function cal(number) {
@@ -34,6 +47,9 @@ function getSelected(selector) {
 }
 
 function error(error) {
+	
+	loader.hide();
+	
 	$("#error").text(error);
 	$(".error-background").fadeIn();
 	ga('send', 'event', "dnd-error", error);
