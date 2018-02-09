@@ -29,3 +29,7 @@
 .ban h1 {
 	font-size: 4rem;
 }
+
+.order {
+	display: hidden;
+}

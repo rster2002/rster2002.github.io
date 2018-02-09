@@ -24,9 +24,29 @@ loader = {
 
 function openPage(page) {
 	loader.show();
-	$(".innerPage").remove();
+	$(".page.innerPage").remove();
 	$(".page").load("../assets/components/dnd/pages/" + page + ".html");
 	loader.hide();
+}
+
+function openOverlay(page) {
+    loader.show();
+    $(".overlay .content .innerPage").remove();
+    
+    if (page.includes("http")) {
+        $(".overlay .content").load(page);
+    } else {
+        $(".overlay .content").load("../assets/components/dnd/pages/" + page + ".html");
+    }
+    
+    $(".background").show();
+    $(".overlay").show();
+    loader.hide();
+}
+
+function closeOverlay() {
+    $(".background").hide();
+    $(".overlay").hide();
 }
 
 function cal(number) {

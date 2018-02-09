@@ -7,12 +7,15 @@ $(".innerPage").ready(() => {
 sessionStorage.setItem("::saved","false");
 console.log("hmm");
 function saveCharacter() {
+    
 	try {
 		s();
 		console.log(characterObj);
 		if (sessionStorage.getItem("::saved") !== "false") {
+            loader.show();
 			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 			alert("Saved character sheet");
+            loader.hide();
 		} else {
 			var i = prompt("Type a name for this caracter sheet");
 			if (i) {
