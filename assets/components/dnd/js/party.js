@@ -276,3 +276,22 @@ function ban() {
 		})
 	}
 }
+
+// some small functions
+
+var visible = true;
+
+function toggleCharacter() {
+	if (visible) {
+		visible = false;
+		$(".characterContainer").hide();
+		$("#toggle").text("Show character sheet");
+		$(".save").hide();
+		$(".kick").hide();
+		$(".ban").hide();
+	} else {
+		visible = true;
+		$(".characterContainer").show();
+		$("#toggle").text("Hide character sheet");
+	}
+}
