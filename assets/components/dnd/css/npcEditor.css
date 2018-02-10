@@ -4,4 +4,27 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+	height: 80%;
+}
+
+.button {
+	width: 100%;
+	cursor: pointer;
+	height: 25%;
+}
+
+.button:hover {
+	background-color: rgb(235,235,235);
+}
+
+.button h1 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 3em;
+	margin: 0;
+	width: 90%;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }

@@ -5,6 +5,10 @@
 	src: url(../../../css/fonts/Iokharic.otf);
 }
 
+.shadow {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 html, body {
 	padding: 0;
 	margin: 0;
@@ -305,21 +309,57 @@ button.red:hover {
     height: 90%;
 }
 
-.overlay .button {
+.overlay .closeButton {
     cursor: pointer;
     width: 100%;
     height: 10%;
 }
 
-.overlay .button:hover {
+.overlay .closeButton:hover {
     background-color: rgb(235,235,235);
 }
 
-.overlay .button h1 {
+.overlay .closeButton h1 {
     width: 100%;
     position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     text-align: center;
+}
+
+/* Note styling */
+
+.note {
+	top: 100vh;
+	position: fixed;
+	height: 10vh;
+	width: 60vw;
+	left: 20vw;
+	background-color: white;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.note.open {
+	animation: open linear .15s forwards;
+}
+
+.note.close {
+	animation: open linear .15s backwards;
+}
+
+@keyframes open {
+	from {top: 100vh}
+	to {top: 90vh}
+}
+
+
+
+.note #noteContent {
+	position: relative;
+	width: 90%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }
