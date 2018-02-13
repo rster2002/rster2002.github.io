@@ -10,6 +10,6 @@ firebase.initializeApp(config);
 
 database = firebase.database();
 dbUsers = database.ref("dnd").child("users");
-dbParty = database.ref("dnd").child("party");
+dbCampaign = database.ref("dnd").child("campaign");
 dbUsernames = database.ref("dnd").child("usernames");
 dbGlobal = database.ref("dnd").child("global");

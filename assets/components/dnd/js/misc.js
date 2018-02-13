@@ -83,6 +83,8 @@ function error(error) {
 	loader.hide();
 	
 	$("#error").text(error);
+	
+	console.error(error);
 	$(".error-background").fadeIn();
 	ga('send', 'event', "dnd-error", error);
 }

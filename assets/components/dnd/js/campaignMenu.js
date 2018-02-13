@@ -13,18 +13,18 @@ function checkInput(input) {
 
 // adds listerer to join btn
 
-var localParties = {};
+var localcampaigns = {};
 
 function addList(id, place) {
-	dbParty.child(id).once("value",e => {
+	dbCampaign.child(id).once("value",e => {
 		console.log(id);
 		try {
 			var party = e.val();
 			var playerArray = party.playerList;
 			var players = playerArray.length;
 			players -= 1;
-			localParties[place] = id;
-			$(".partyList").append("<div class='party' onclick='clickParty(" + place + ")'><h1>" + id + "</h1><p>" + players + " players in this party</p></div>");
+			localcampaigns[place] = id;
+			$(".partyList").append("<div class='party' onclick='clickParty(" + place + ")'><h1>" + id + "</h1><p>" + players + " players in this campaign</p></div>");
 		} catch(e) {
 			error(e);
 		}
@@ -33,17 +33,17 @@ function addList(id, place) {
 
 dbUsers.child(sUid).once("value",e => {
 	// adds 'add party' to list
-	$(".partyList").append("<div class='createParty'><div class='deletable'><h1>Add party</h1></div><div class='addParty'><input id='partyId' placeholder='party id' type='text'><button id='join'>Join</button><button id='host'>Create</button></div></div>");
+	$(".partyList").append("<div class='createParty'><div class='deletable'><h1>Add Campaign</h1></div><div class='addParty'><input id='partyId' placeholder='party id' type='text'><button id='join'>Join</button><button id='host'>Create</button></div></div>");
 	
 	// adds items to list
 	var dbContent = e.val();
 	console.log(dbContent);
 	if (dbContent !== undefined) {
-		var partiesArray = dbContent.parties;
-		if (partiesArray !== undefined) {
-			console.log(partiesArray);
-			for (var i = 0; i < partiesArray.length; ++i) {
-				var partyId = partiesArray[i]
+		var campaignsArray = dbContent.campaigns;
+		if (campaignsArray !== undefined) {
+			console.log(campaignsArray);
+			for (var i = 0; i < campaignsArray.length; ++i) {
+				var partyId = campaignsArray[i]
 				addList(partyId, i);
 			}
 		}
@@ -67,7 +67,7 @@ dbUsers.child(sUid).once("value",e => {
 });
 
 function clickParty(index) {
-	var partyId = localParties[index];
+	var partyId = localcampaigns[index];
 	join(partyId,false);
 }
 
@@ -85,7 +85,7 @@ host checklist
 function host(partyId) {
 	
 	// checks if there is a party with the same party id in the database
-	dbParty.once("value",(e) => {
+	dbCampaign.once("value",(e) => {
 		if (e.hasChild(partyId)) {
 			alert("This party id is already in use!");
 			return;
@@ -100,24 +100,24 @@ function host(partyId) {
 				partyObj["DM"] = sUid;
 				partyObj[sUid] = "DM";
 				console.log(partyObj);
-				dbParty.child(partyId).set(partyObj);
+				dbCampaign.child(partyId).set(partyObj);
 			} catch(e) {
 				error(e);
-			}dm.hellw;
+			};
 			
 			// adds the party
 			try {
 				dbUsers.child(sUid).once("value",(e) => {
 					var dbContent = e.val();
 					
-					if (e.hasChild("parties")) {
-						var parties = dbContent.parties;
+					if (e.hasChild("campaigns")) {
+						var campaigns = dbContent.campaigns;
 					} else {
-						var parties = [];
+						var campaigns = [];
 					}
 					
-					parties.unshift(partyId);
-					dbUsers.child(sUid).child("parties").set(parties);
+					campaigns.unshift(partyId);
+					dbUsers.child(sUid).child("campaigns").set(campaigns);
 				});
 			} catch(e) {
 				error(e);
@@ -126,7 +126,7 @@ function host(partyId) {
 			// continues to the party screen
 			try {
 				sessionStorage.setItem("::party",partyId);
-				openPage("party");
+				openPage("campaign");
 			} catch(e) {
 				error(e);
 			}
@@ -150,22 +150,22 @@ join checklist:
 function join(partyId) {
 	
 	// checks if the party exits
-	dbParty.once("value",(e) => {
+	dbCampaign.once("value",(e) => {
 		if (e.hasChild(partyId)) {
-			dbParty.child(partyId).once("value",(e) => {
+			dbCampaign.child(partyId).once("value",(e) => {
 				
 				// checks if the player already exists in the party
 				if (e.hasChild(sUid)) {
 					
 					// continues the user through to the party screen
 					sessionStorage.setItem("::party",partyId);
-					openPage("party");
+					openPage("campaign");
 				} else {
 					
 					banned = false;
 					
 					// checks if the user is banned
-					dbParty.child(partyId).once("value",(e) => {
+					dbCampaign.child(partyId).once("value",(e) => {
 						
 						if (e.hasChild("banList")) {
 							var c = e.val();
@@ -191,32 +191,34 @@ function join(partyId) {
 								if (e.hasChild(character)) {
 
 									// catches the party obj from the database
-									dbParty.child(partyId).once("value",(e) => {
+									dbCampaign.child(partyId).once("value",(e) => {
 										var dbContent = e.val();
-
-										dbContent[sUid] = character;
+										o = dbContent;
+										chaObj = {};
+										chaObj["character"] = character;
+										dbContent[sUid] = chaObj;
 										var playerList = dbContent.playerList;
 										playerList.unshift(sUid);
 										dbContent["playerList"] = playerList;
 										console.log(dbContent);
 
-										dbParty.child(partyId).set(dbContent);
+										dbCampaign.child(partyId).set(dbContent);
 										
 										dbUsers.child(sUid).once("value",(e) => {
 											var c = e.val();
-											if (e.hasChild("parties")) {
-												parties = c.parties;
+											if (e.hasChild("campaigns")) {
+												campaigns = c.campaigns;
 											} else {
-												parties = [];
+												campaigns = [];
 											}
 											
-											parties.unshift(partyId);
-											console.log(parties);
-											dbUsers.child(sUid).child("parties").set(parties);
-											dbParty.child(partyId).child("liveState").set("update");
+											campaigns.unshift(partyId);
+											console.log(campaigns);
+											dbUsers.child(sUid).child("campaigns").set(campaigns);
+											dbCampaign.child(partyId).child("liveState").set("update");
 											
 											sessionStorage.setItem("::party",partyId);
-											openPage("party");
+											openPage("campaign");
 										});
 									});
 								} else {
