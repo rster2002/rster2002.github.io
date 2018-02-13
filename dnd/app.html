@@ -13,10 +13,28 @@
 		<script src="../assets/components/dnd/js/dndinfo.js"></script>
 		<script src="../assets/components/dnd/js/firebase.js"></script>
 		<script src="../assets/components/dnd/js/userInfo.js"></script>
+		<script>
+			clientVersion = "A.0.0";
+			
+			// Checks for the database
+			dbGlobal.once("value",(e) => {
+				var global = e.val();
+				if (global.state !== "online") {
+					alert("The database is not online!");
+					logout();
+				}
+
+				if (global.version !== clientVersion) {
+					alert("This client is out of date. Try clearing the browsers cache.");
+					logout();
+				}
+			});
+		</script>
 		<!-- Link styles -->
 		<link href="../assets/icon.png" rel="icon">
 		<link href="../assets/components/dnd/css/appShell.css" rel="stylesheet" type="text/css">
 		<link href="../assets/components/dnd/css/appShell.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
+		
 	</head>
 	<body>
 		<div class="background"></div>
@@ -61,7 +79,7 @@
 				<div class="welcomeText">
 					<h1>Welcome to Dungeons and Dragons Online</h1>
 					<p>Start by creating a character</p>
-					<button onclick="openPage('characterCreator')">Character editor</button>
+					<button onclick="openPage('characterEditor')">Character editor</button>
 				</div>
 			</div>
 		</div>

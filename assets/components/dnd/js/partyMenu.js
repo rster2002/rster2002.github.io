@@ -213,6 +213,7 @@ function join(partyId) {
 											parties.unshift(partyId);
 											console.log(parties);
 											dbUsers.child(sUid).child("parties").set(parties);
+											dbParty.child(partyId).child("liveState").set("update");
 											
 											sessionStorage.setItem("::party",partyId);
 											openPage("party");

@@ -3,13 +3,15 @@
 <html>
 	<head>
 		<script src="http://requirejs.org/docs/release/2.2.0/minified/require.js"></script>
-		<script>
-//			var Git = require(["./node_modules/nodegit"]);
-			require(["./node_modules/nodegit/dist/nodegit"], function(Git) {
-				Git.Clone("https://github.com/nodegit/nodegit", "nodegit").then(function(repository) {
-					console.log(repository);
-				});
-			});
+		<script src="node_modules/github-commits/lib/github-commits.js">
+			var GitHubCommits = require("github-commits");
+			var gitHubCommits = new GitHubCommits();
+
+			gitHubCommits.forUser("tjchaplin")
+						.currentWeekCommits()
+						.toArray(function(repositories){
+						  console.log(repositories);
+            });
 		</script>
 	</head>
 </html>
