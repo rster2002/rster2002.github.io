@@ -1,7 +1,3 @@
-.innerPage {
-	overflow-y: scroll;
-}
-
 .pageArea {
 	border-radius: 5px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -100,18 +96,18 @@
 	background-color: rgb(235,235,235);
 }
 
-.save {
-	display: none;
+.button {
+	display: block;
 	cursor: pointer;
 	width: 100%;
 	height: 15vh;
 }
 
-.save:hover {
+.button:hover {
 	background-color: rgb(235,235,235);
 }
 
-.save h1 {
+.button h1 {
 	text-align: center;
 	position: relative;
 	top: 50%;
@@ -119,25 +115,7 @@
 	transform: translate(-50%,-50%);
 }
 
-.kick {
-	display: none;
-	cursor: pointer;
-	width: 100%;
-	height: 15vh;
-}
-
-.kick:hover {
-	background-color: rgb(235,235,235);
-}
-
-.kick h1 {
-	text-align: center;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-}
-
+/*
 .ban {
 	display: none;
 	cursor: pointer;
@@ -156,6 +134,7 @@
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
+*/
 
 .characterSheet {
 	margin-bottom: 10vh;

@@ -5,6 +5,10 @@
 	src: url(../../../css/fonts/Iokharic.otf);
 }
 
+.shadow {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 html, body {
 	padding: 0;
 	margin: 0;
@@ -137,6 +141,10 @@ button:hover {
 	height: 100%;
 }
 
+.innerPage.scroll {
+    overflow-y: scroll;
+}
+
 .welcomeText {
 	height: 20%;
 	width: 50%;
@@ -259,4 +267,99 @@ button.red:hover {
 	width: 80%;
 	height: 10%;
 	left: 10%;
+}
+
+/*
+    TODO
+    - Create a universal background for overlays
+    - Create a universal forground for overlays
+    - Create a function that returns a ncp object in a function
+    - Create a Quick npc button
+    _ Create a Load npc button
+        - The npc's will be saved on the DM's account
+        - Npc's can be created outside the party
+    - Create a Spesific npc button that has some parms to use like race, class and other stuff.
+*/
+
+.background {
+    display: none;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 80vw;
+    height: 90vh;
+    z-index: 1001;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.overlay .content {
+    overflow: hidden;
+    width: 100%;
+    height: 90%;
+}
+
+.overlay .closeButton {
+    cursor: pointer;
+    width: 100%;
+    height: 10%;
+}
+
+.overlay .closeButton:hover {
+    background-color: rgb(235,235,235);
+}
+
+.overlay .closeButton h1 {
+    width: 100%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+
+/* Note styling */
+
+.note {
+	top: 100vh;
+	position: fixed;
+	height: 10vh;
+	width: 60vw;
+	left: 20vw;
+	background-color: white;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.note.open {
+	animation: open linear .15s forwards;
+}
+
+.note.close {
+	animation: open linear .15s backwards;
+}
+
+@keyframes open {
+	from {top: 100vh}
+	to {top: 90vh}
+}
+
+
+
+.note #noteContent {
+	position: relative;
+	width: 90%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }

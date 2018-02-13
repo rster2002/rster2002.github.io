@@ -1,3 +1,5 @@
+loader.show();
+
 $(".innerPage").ready(() => {
 	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
 	
@@ -9,61 +11,71 @@ var isDM = false;
 
 console.log("party.js");
 
-dbParty.child(partyId).child("playerList").on("value",(e) => {
-	
-	dbParty.child(partyId).once("value",(u) => {
-		var dbContent = u.val();
+dbParty.child(partyId).once("value",(e) => {
+	update(e.val());
+	loader.hide();
+});
 
-		// checks if there is a DM
-		if (!u.hasChild("DM")) {
-			error("There was an error loading the party.");
-			openPage("mainMenu");
-		}
-
-		var dmUid = dbContent.DM;
-		sessionStorage.setItem("::dm",dmUid)
-		console.log(dmUid);
-
-		// gets the DM's user info
-		dbUsers.child(dmUid).once("value",(v) => {
-			var userinfo = v.val();
-
-			$("#DMusericon").attr("src", userinfo.usericon);
-			$("#DMusername").text(userinfo.username);
+dbParty.child(partyId).child("liveState").on("value", (u) => {
+	if (u.val() === "update") {
+		dbParty.child(partyId).once("value",(e) => {
+			var partyContent = e.val();
+			update(partyContent);
+			dbParty.child(partyId).child("liveState").set("resting");
 		});
+	}
+});
 
-		if (sUid === dmUid) {
-			isDM = true;
-		} else {
-			isDM = false;
-		}
-	});
-
+function update(partyContent) {
 	
-	var height = 0;
-	list = {};
+	function addToList(ww, characterw) {
+		dbUsers.child(ww).once("value",(u) => {
+			var userContent = u.val();
+			var characterName = userContent.characters[characterw]["96_1"];
+			var username = userContent.username;
+			var usericon = userContent.usericon;
+			var onclick = "loadCharacter('" + userContent.uid + "')";
+			
+			$(".innerList").append("<div class='player' onclick=" + onclick + "><img src=" + usericon + "><h1>" + characterName + "</h1></div>");
+		});
+	}
+	
+	// gets the DM uid
+	dmUid = partyContent.DM;
+	
+	// sets isDM var
+	if (sUid === dmUid) {
+		isDM = true;
+	}
+	
+	
+	// updates the player list
+	var playerList = partyContent.playerList;
+	
+	// clears the list
 	$(".innerList").remove();
 	$(".playerList").append("<div class='innerList'></div>");
-	var playerList = e.val();
 	
-	var dm = sessionStorage.getItem("::dm");
-	console.log(playerList);
 	
+	// for every player in the player list, add it to the ui
 	for (var i = 0; i < playerList.length; ++i) {
-			tUid = playerList[i];
-			console.log("---")
-			if (tUid !== sessionStorage.getItem("::dm")) {
-				console.log("Found user");
-				dbUsers.child(playerList[i]).once("value",function(e){
-					var dbUsersContent = e.val();
-					console.log(dbUsersContent.username + " " + dbUsersContent.usericon + " " + dbUsersContent.uid);
-					var onclick = "loadCharacter('" + dbUsersContent.uid + "')";
-					$(".innerList").append("<div class='player' onclick=" + onclick + "><img src=" + dbUsersContent.usericon + "><h1>" + dbUsersContent.username + "</h1></div>")
-				});
-			}
-			console.log(tUid);
+		var w = playerList[i];
+		if (w !== dmUid) {
+			var character = partyContent[w];
+			console.log(w + " " + character);
+			addToList(w, character);
 		}
-});
+	}
+	
+	// adds the DM's info to the page
+	dbUsers.child(dmUid).once("value", (u) => {
+		var userinfo = u.val();
+		$("#DMusericon").attr("src", userinfo.usericon);
+		$("#DMusername").text(userinfo.username);
+	})
+}
+
+// $(".innerList").append("<div class='player' onclick=" + onclick + "><img src=" + dbUsersContent.usericon + "><h1>" + dbUsersContent.username + "</h1></div>")
 
 pages = {
 	1: 106,
@@ -274,5 +286,24 @@ function ban() {
 			
 			kick(true);
 		})
+	}
+}
+
+// some small functions
+
+var visible = true;
+
+function toggleCharacter() {
+	if (visible) {
+		visible = false;
+		$(".characterContainer").hide();
+		$("#toggle").text("Show character sheet");
+		$(".save").hide();
+		$(".kick").hide();
+		$(".ban").hide();
+	} else {
+		visible = true;
+		$(".characterContainer").show();
+		$("#toggle").text("Hide character sheet");
 	}
 }

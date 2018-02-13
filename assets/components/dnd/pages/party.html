@@ -1,4 +1,5 @@
-<div class="innerPage">
+<div class="innerPage scroll">
+	<script src="../assets/components/dnd/js/characterLoader.js"></script>
 	<link href="../assets/components/dnd/css/party.css" rel="stylesheet" type="text/css">
 	<link href="../assets/components/dnd/css/party.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
 	<script src="../assets/components/dnd/js/party.js"></script>
@@ -17,15 +18,23 @@
 		<div class="innerList">
 		</div>
 	</div>
+	<div class="button" onclick="toggleCharacter()">
+		<h1 id="toggle">Hide character sheet</h1>
+	</div>
 	<div class="characterContainer">
 	</div>
-	<div class="save" onclick="save()">
+	
+    <div class="button" onclick="changeId()" style="display:none">
+		<h1>Change Campaign id</h1>
+	</div>
+    
+	<div class="button save" onclick="save()" style="display:none">
 		<h1>Save</h1>
 	</div>
-	<div class="kick" onclick="kick(false)">
+	<div class="button kick" onclick="kick(false)" style="display:none">
 		<h1>Kick</h1>
 	</div>
-	<div class="ban" onclick="ban()">
+	<div class="button ban" onclick="ban()" style="display:none">
 		<h1>Ban</h1>
 	</div>
 </div>
