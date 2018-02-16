@@ -1,7 +1,6 @@
 loader.show();
-
 $(".innerPage").ready(() => {
-	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
+    $(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
 	
 	$("#partyId").text(sessionStorage.getItem("::party"));
 });

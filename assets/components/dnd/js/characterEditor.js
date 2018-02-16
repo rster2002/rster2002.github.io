@@ -4,6 +4,10 @@ $(".innerPage").ready(() => {
 	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
 });
 
+function ctrlS() {
+	saveCharacter();
+}
+
 sessionStorage.setItem("::saved","false");
 console.log("hmm");
 function saveCharacter() {
@@ -13,9 +17,10 @@ function saveCharacter() {
 		console.log(characterObj);
 		if (sessionStorage.getItem("::saved") !== "false") {
             loader.show();
-			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
-			alert("Saved character sheet");
-            loader.hide();
+			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj).then(() => {
+				loader.hide();
+				alert("Saved character sheet");
+			});
 		} else {
 			var i = prompt("Type a name for this caracter sheet");
 			if (i) {

@@ -6,6 +6,15 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-102147810-1', 'auto');
 ga('send', 'pageview');
 
+$(document).keydown(function(event) {
+	// If Control or Command key is pressed and the S key is pressed
+	// run save function. 83 is the key code for S.
+	if((event.ctrlKey || event.metaKey) && event.which == 83) {
+		ctrlS();
+		event.preventDefault();
+		return false;
+	}
+});
 
 note = {
 	open: function() {
