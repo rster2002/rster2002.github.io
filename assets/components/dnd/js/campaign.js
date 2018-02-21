@@ -10,6 +10,14 @@ var isDM = false;
 
 console.log("party.js");
 
+loadedUid = false;
+
+function ctrlS() {
+	if (loadedUid) {
+		save();
+	}
+}
+
 dbCampaign.child(partyId).once("value",(e) => {
 	update(e.val());
 	loader.hide();
@@ -183,10 +191,12 @@ function selfl(characterObj) {
 
 function save() {
 	if (isDM === false) {
-		s();
-		console.log(characterObj);
-		dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
-		alert("Saved character sheet");
+		if (loadedUid === sUid) {
+			s();
+			console.log(characterObj);
+			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
+			alert("Saved character sheet");
+		}
 	} else if (isDM === true) {
 		try {
 			s();
