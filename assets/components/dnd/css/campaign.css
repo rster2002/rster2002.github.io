@@ -85,11 +85,13 @@
 }
 
 .player h1 {
+	width: 60%;
 	float: left;
 	position: relative;
 	top: 50%;
 	left: 5%;
 	transform: translate(0%,-50%);
+	text-overflow: ellipsis;
 }
 
 .player:hover {
