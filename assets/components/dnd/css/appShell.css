@@ -1,8 +1,12 @@
-@import url('../../../css/fonts/Museo500.otf');
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC|Vollkorn+SC');
 @font-face {
 	font-family: Iokharic;
 	src: url(../../../css/fonts/Iokharic.otf);
+}
+
+@font-face {
+	font-family: museo;
+	src: url(../../../css/fonts/Museo500.otf);
 }
 
 .shadow {
