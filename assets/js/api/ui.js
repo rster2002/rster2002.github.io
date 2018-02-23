@@ -19,8 +19,12 @@ uijs = {
 			} 
 			
 			switch (options.style) {
-				default:
+				case 'material': 
 					notifyStyle = "material";
+					break;
+				default:
+					notifyStyle = options.style;
+					break;
 				break;
 			}
 			

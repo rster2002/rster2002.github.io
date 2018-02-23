@@ -110,6 +110,15 @@ button:hover {
 	background-color: #eaeaea;
 }
 
+.bar .openMenu {
+	background-color: #4c90ff;
+	color: white;
+}
+
+.bar .openMenu:hover {
+	background-color: #8cb6f9;
+}
+
 .bar img {
 	height: 5vh;
 	margin-left: 5px;

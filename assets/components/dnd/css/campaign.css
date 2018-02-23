@@ -85,6 +85,10 @@
 }
 
 .player h1 {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: block;
+	overflow: hidden;
 	width: 60%;
 	float: left;
 	position: relative;
