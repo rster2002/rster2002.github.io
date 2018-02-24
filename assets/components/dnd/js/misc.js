@@ -97,7 +97,10 @@ function error(error) {
 	
 	console.error(error);
 	$(".error-background").fadeIn();
-	ga('send', 'event', "dnd-error", error);
+	
+	if (DEV !== true) {
+		ga('send', 'event', "dnd-error", error);
+	}
 }
 
 function closeError() {

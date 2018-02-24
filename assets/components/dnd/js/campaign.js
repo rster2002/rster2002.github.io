@@ -30,6 +30,9 @@ dbCampaign.child(partyId).child("liveState").on("value", (u) => {
 			update(partyContent);
 			dbCampaign.child(partyId).child("liveState").set("resting");
 		});
+	} else if (u.val() === "changeId") {
+		alert("The campaign id was changed");
+		openPage("campaignMenu");
 	}
 });
 
@@ -50,9 +53,11 @@ function update(partyContent) {
 	// gets the DM uid
 	dmUid = partyContent.DM;
 	
-	// sets isDM var
+	// sets isDM var and shows hidden buttons
 	if (sUid === dmUid) {
 		isDM = true;
+		
+		$(".changeId").show();
 	}
 	
 	
@@ -196,6 +201,8 @@ function save() {
 			console.log(characterObj);
 			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 			alert("Saved character sheet");
+		} else {
+			error("You are trying to save a character sheet that isn't yours!")
 		}
 	} else if (isDM === true) {
 		try {
@@ -233,6 +240,100 @@ function s() {
 		}
 	}
 }
+
+// DM functions
+
+function changeId() {
+	
+	// Creates a function required later
+	function updateList(wUid) {
+		
+		// gets the players campaign list
+		dbUsers.child(wUid).child("campaigns").once("value", c => {
+			var l = c.val();
+
+			// creates a new empty list
+			var re = [];
+			for (var camp = 0; camp < l.length; ++camp) {
+				
+				// gets the campaign in the list
+				var campaignName = l[camp];
+				
+				// checks if the campaign in the list is the same as the chaning id
+				if (campaignName === partyId) {
+					
+					// if true add the new id instead of the old one
+					re.unshift(newId);
+				} else {
+					
+					// if false just add it to the new list
+					re.unshift(campaignName);
+				}
+			}
+			
+			// pushes the new list to the database
+			dbUsers.child(wUid).child("campaigns").set(re);
+		});
+	}
+	
+	// checks if the currect user is the DM of the party
+	if (isDM) {
+		
+		// Prompts a new id
+		var newId = prompt("Type the new campaign id");
+		
+		// checks if its a valid id
+		if (newId !== undefined || newId !== "" || newId !== false) {
+			
+			// gets the campaigns
+			dbCampaign.once("value", a => {
+				
+				// checks if there is a campaign with that id already
+				if (a.hasChild(newId)) {
+					
+					// alerts the user that that id is already in use and stops the function
+					alert("This id is already in use!");
+					return;
+				} else {
+					
+					// gets the playerlist form the campaign
+					dbCampaign.child(partyId).child("playerList").once("value", l => {
+						var playerList = l.val();
+						
+						// for every user update their campaign list
+						for (var i = 0; i < playerList.length; ++i) {
+							var wUid = playerList[i];
+
+							console.log("wUid: " + wUid);
+							updateList(wUid);
+						}
+
+					}).then(function() {
+						
+						// when all the users campaign lists are updated, migrate the campaign data to the new id
+						dbCampaign.child(partyId).once("value", (d) => {
+							
+							// gets the data from the old id
+							data = d.val();
+
+							// adds it to the new id
+							dbCampaign.child(newId).set(data);
+							
+							// sets the liveState to 'changeId' to users need to reconnect
+							dbCampaign.child(partyId).child("liveState").set("changeId");
+							
+							// deletes the old id
+							dbCampaign.child(partyId).set(null);
+						});
+					});
+				}
+			});
+		}
+	} else {
+		error("You are not the DM! But you are a hacker (unless you're not)");
+	}
+}
+
 
 function kick(ban) {
 	if (ban) {
