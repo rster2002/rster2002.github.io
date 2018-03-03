@@ -69,7 +69,7 @@ html, body {
 	background-color: white;
 	overflow: hidden;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	z-index: 100;
+	z-index: 50;
 }
 
 .center {
@@ -344,18 +344,19 @@ button.red:hover {
 /* Note styling */
 
 .note {
+	z-index: 2000;
 	top: 100vh;
 	position: fixed;
 	height: 10vh;
 	width: 60vw;
 	left: 20vw;
 	background-color: white;
-	border-top-right-radius: 10px;
-	border-top-left-radius: 10px;
+	transition: .15s all ease-in;
 }
 
 .note.open {
-	animation: open linear .15s forwards;
+	top: 90vh;
+	transition: .15s all ease-in;
 }
 
 .note.close {

@@ -1,97 +1,96 @@
-notifyOpen = false;
+$(document).ready(function() {
+	var style = "";
+	// font
+	style += "@import url('https://fonts.googleapis.com/css?family=Roboto');"
+	// global background
+	style += ".ui--background{display:none;transition:50ms all ease-in;z-index:99;position:fixed;width:100vw;height:100vh;background-color:rgba(0,0,0,0)}.ui--background.show{display:block;transition:50ms all ease-in;background-color:rgba(0,0,0,.5)}";
+	// box
+	style += ".ui--box.open{transition:200ms all ease-in;position:fixed;z-index:100;font-family:'Roboto',sans-serif;width:40%;height:40%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)}.ui--box{background-color:white;transition:200ms all ease-in;position:fixed;z-index:100;font-family:'Roboto',sans-serif;width:40%;height:40%;position:absolute;top:100%;left:50%;transform:translate(-50%,0%);box-shadow:0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)}.ui--box-top{width:100%;height:20%;border-bottom:1px #ebebeb solid}.ui--box-top .ui--box-top-text{margin:0;width:90%;position:relative;top:50%;left:2%;transform:translate(0%,-50%);text-align:left;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ui--box-content{height:60%;width:100%}.ui--box-content .ui--box-content-text{height:90%;width:98%;margin:0;position:relative;top:5%;left:2%;text-align:left;display:block;overflow:hidden;overflow-y:auto;text-overflow:ellipsis}.ui--box-buttons{height:20%;width:100%}.ui--box-buttons .ui--box-button{width:50%;height:100%;float:left;cursor:pointer}.ui--box-buttons .ui--box-button h1{margin:0;width:90%;position:relative;top:50%;left:2%;transform:translate(0%,-50%);text-align:left;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center}.ui--box-buttons .ui--box-true{transition:100ms all ease-in;background-color:white}.ui--box-buttons .ui--box-true:hover{transition:100ms all ease-in;background-color:#4c90ff}.ui--box-buttons .ui--box-false{transition:150ms all ease-in;background-color:white}.ui--box-buttons .ui--box-false:hover{transition:150ms all ease-in;background-color:rgb(235,235,235)}";
 
-document.head.innerHTML += "<style id='uijs'></style>";
-document.head.innerHTML += "<style id='uijs.m' media='screen and (max-device-width: 800px)'></style>"
 
-document.getElementById("uijs").innerHTML = "@import url('https://fonts.googleapis.com/css?family=Ubuntu');.notify.material {background-color: #1F1F1F;position: fixed;width: 60vw;height: 5vh;top: 100vh;left: 20vw;color: #1F1F1F;border-top-left-radius: 5px;border-top-right-radius: 5px;animation:notifyOpen linear .15s forwards}.notify.close{animation:notifyClose linear .15s forwards}.notify.material h1 {margin-left: 5%;font-family: 'Ubuntu', sans-serif;line-height: 40%;font-size: 3vh;color: #F98009;float: left;}.notify.material button {transition: .2s all ease-in;float: right;margin-right: 5%;height: 90%;width: 8%;margin-top: 0.15%;font-size: 3vh;cursor: pointer;border: none;background-color: #1F1F1F;color: white;}.notify.material button:active {transition: .2s all ease-in;background-color: #383838;border: none;}@keyframes notifyOpen {from {top:100vh} to {top:95vh}} @keyframes notifyClose {from {top:95vh} to {top:100vh}}"
-document.getElementById("uijs.m").innerHTML = ".notify.material {width: 100vw;height: 10vh;left:0vw} .notify.material button {float:right;margin-right: 1%;height: 90%;margin:0;}"
+	$("head").append("<style>" + style + "</style>");
 
-uijs = {
-	notify: {
-		open: function(options) {
-			if (options === undefined) {
-				console.error("No options object");
-				return;
-			}
-			
-			if (options.style === undefined) {
-				notifyStyle = "material";
-			} 
-			
-			switch (options.style) {
-				case 'material': 
-					notifyStyle = "material";
-					break;
-				default:
-					notifyStyle = options.style;
-					break;
-				break;
-			}
-			
-			if (notifyOpen === true) {
-				setTimeout(function(){
-					document.getElementById("notify").remove();
-					notifyOpen = false;
-				}, 150)
-			}
-			
-			if (options.btnAction !== undefined) {
-				notifyOnBtn = options.btnAction;
-			} else {
-				notifyOnBtn = function(){}
-			}
-			
-			if (options.btnClose !== undefined) {
-				onBtnClose = options.btnClose;
-			} else {
-				onBtnClose = true;
-			}
-			
-			if (options.autoClose !== undefined) {
-				autoClose = options.autoClose;
-			} else  {
-				autoClose = false;
-			}
-			
-			try {
-				document.body.innerHTML += "<div class='notify " + notifyStyle + " open' id='notify'><h1>" + options.text + "</h1><button onclick='btnNotify(" + notifyOnBtn + "," + onBtnClose + ")'>" + options.btnText + "</button></div>";
-				notifyOpen = true;
-			}
-			catch(err) {
-				console.error("Something is undefined in the options: " + err);
-				notifyOpen = false;
-			}
-			
-			if (autoClose !== false) {
-				setTimeout(function(){
-					uijs.notify.close();
-				}, autoClose);
+
+	$("body").append("<div class='ui--background'></div>")
+	uiBoxOpen = false;
+
+	uijs = {
+		background: {
+			show: function() {
+				s = ".ui--background";
+				$(s).addClass("show");
+			},
+			hide: function() {
+				s = ".ui--background";
+				$(s).removeClass("show");
 			}
 		},
-		close: function() {
-			document.getElementById("notify").className += " close";
-			setTimeout(function(){
-				document.getElementById("notify").remove();
-				notifyOpen = false;
-			}, 150)
-		}
-	},
-    dialog: {
-        confirm: function(options) {
-            if (options.text === undefined) {
-                options.text = "Confirm?";
-            }
-            if (options.btnConfirm === undefined) {
-                options.btnConfirm = "Yes";
-            }
-//            if (options.)
-        }
-    }
-}
+		box: {
+			open: function(options) {
+				if (options) {
 
-function btnNotify(fn, close) {
-	fn();
-	if (close) {
-		uijs.notify.close();
+				if (uiBoxOpen) {
+					$("body").remove(".ui--box");
+				}
+
+				uijs.background.show();
+
+				$("body").append("<div class='ui--box'><div class='ui--box-top'><h1 class='ui--box-top-text'>Title</h1></div><div class='ui--box-content'><h1 class='ui--box-content-text'>Content</h1></div><div class='ui--box-buttons'><div class='ui--box-button ui--box-false'><h1 class='ui--box-false-text'>False</h1></div><div class='ui--box-button ui--box-true'><h1 class='ui--box-true-text'>True</h1></div></div></div>");
+
+				if (options.title) {
+					$(".ui--box-top-text").text(options.title);
+				} else {
+					$(".ui--box-top-text").text("Title");
+				}
+
+				if (options.content) {
+					$(".ui--box-content-text").text(options.content);
+				} else {
+					$(".ui--box-content-text").text("Content");
+				}
+
+				if (options.btnFalse) {
+					$(".ui--box-false-text").text(options.btnFalse);
+				} else {
+					$(".ui--box-false-text").text("False");
+				}
+
+				if (options.btnTrue) {
+					$(".ui--box-true-text").text(options.btnTrue);
+				} else {
+					$(".ui--box-true-text").text("True");
+				}
+
+				if (options.onFalse) {
+					$(".ui--box-false").on("click", options.onFalse);
+				} else {
+					$(".ui--box-false").on("click", function(){uijs.box.close()});
+				}
+
+				if (options.onTrue) {
+					$(".ui--box-true").on("click", options.onTrue);
+				} else {
+					$(".ui--box-true").on("click", function(){uijs.box.close()});
+				}
+
+				if (options.buttonsClose === true || !options.buttonsClose) {
+					$(".ui--box-true").on("click", function(){uijs.box.close()});
+					$(".ui--box-false").on("click", function(){uijs.box.close()});
+				}
+			}
+
+			$(".ui--box").addClass("open");
+
+			uiBoxOpen = true;
+			},
+			close: function() {
+				if (uiBoxOpen) {
+					$(".ui--box").removeClass("open");
+					setTimeout(function(){$(".ui--box").remove();},200);
+					uijs.background.hide();
+					uiBoxOpen = true;
+				}
+			}
+		}
 	}
-}
+});

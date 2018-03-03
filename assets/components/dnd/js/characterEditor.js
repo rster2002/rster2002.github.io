@@ -16,19 +16,15 @@ function saveCharacter() {
 		s();
 		console.log(characterObj);
 		if (sessionStorage.getItem("::saved") !== "false") {
-            loader.show();
 			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj).then(() => {
-				loader.hide();
-				alert("Saved character sheet");
+				note.open("Saved " + sessionStorage.getItem("::saved"), 1000);
 			});
 		} else {
 			var i = prompt("Type a name for this caracter sheet");
 			if (i) {
-				loader.show();
 				sessionStorage.setItem("::saved",i);
 				dbUsers.child(sUid).child("characters").child(i).set(characterObj);
-				alert("Saved character sheet");
-				loader.hide();
+				note.open("Saved " + sessionStorage.getItem("::saved"), 1000);
 			}
 		}
 	} catch(e) {
@@ -64,7 +60,7 @@ function loadCharacter() {
 					loader.hide();
 				} else {
 					loader.hide();
-					alert("Couldn't find this character in your account");
+					note.open("Couldn't find this character in your account", 3000);
 				}
 			});
 
