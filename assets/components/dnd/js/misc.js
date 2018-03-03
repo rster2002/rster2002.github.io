@@ -6,7 +6,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-102147810-1', 'auto');
 ga('send', 'pageview');
 
-
 $(document).keydown(function(event) {
 	// If Control or Command key is pressed and the S key is pressed
 	// run save function. 83 is the key code for S.
@@ -19,13 +18,18 @@ $(document).keydown(function(event) {
 });
 
 note = {
-	open: function() {
-		$(".note").removeClass("close");
+	open: function(text, delay) {
+		$("#noteContent").text(text);
 		$(".note").addClass("open");
+		note.autoClose(delay);
 	},
 	close: function() {
-		$(".note").addClass("close");
 		$(".note").removeClass("open");
+	},
+	autoClose: function(delay) {
+		setTimeout(function(){
+			note.close();
+		},delay)
 	}
 }
 
@@ -97,7 +101,10 @@ function error(error) {
 	
 	console.error(error);
 	$(".error-background").fadeIn();
-	ga('send', 'event', "dnd-error", error);
+	
+	if (DEV !== true) {
+		ga('send', 'event', "dnd-error", error);
+	}
 }
 
 function closeError() {

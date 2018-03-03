@@ -8,8 +8,17 @@ var config = {
 };
 firebase.initializeApp(config);
 
+var url = document.URL;
+if (url.includes(":8887")) {
+	var db = "dev";
+	DEV = true;
+	$("#pageTitle").text("DEV");
+} else {
+	db = "";
+	DEV = false;
+}
 database = firebase.database();
-dbUsers = database.ref("dnd").child("users");
-dbCampaign = database.ref("dnd").child("campaign");
-dbUsernames = database.ref("dnd").child("usernames");
-dbGlobal = database.ref("dnd").child("global");
+dbUsers = database.ref("dnd" + db).child("users");
+dbCampaign = database.ref("dnd" + db).child("campaign");
+dbUsernames = database.ref("dnd" + db).child("usernames");
+dbGlobal = database.ref("dnd" + db).child("global");

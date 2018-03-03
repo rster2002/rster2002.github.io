@@ -1,8 +1,12 @@
-@import url('../../../css/fonts/Museo500.otf');
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC|Vollkorn+SC');
 @font-face {
 	font-family: Iokharic;
 	src: url(../../../css/fonts/Iokharic.otf);
+}
+
+@font-face {
+	font-family: museo;
+	src: url(../../../css/fonts/Museo500.otf);
 }
 
 .shadow {
@@ -65,7 +69,7 @@ html, body {
 	background-color: white;
 	overflow: hidden;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	z-index: 100;
+	z-index: 50;
 }
 
 .center {
@@ -108,6 +112,15 @@ button:hover {
 .bar button:hover {
 	transition: .1s all ease-in;
 	background-color: #eaeaea;
+}
+
+.bar .openMenu {
+	background-color: #4c90ff;
+	color: white;
+}
+
+.bar .openMenu:hover {
+	background-color: #8cb6f9;
 }
 
 .bar img {
@@ -331,18 +344,19 @@ button.red:hover {
 /* Note styling */
 
 .note {
+	z-index: 2000;
 	top: 100vh;
 	position: fixed;
 	height: 10vh;
 	width: 60vw;
 	left: 20vw;
 	background-color: white;
-	border-top-right-radius: 10px;
-	border-top-left-radius: 10px;
+	transition: .15s all ease-in;
 }
 
 .note.open {
-	animation: open linear .15s forwards;
+	top: 90vh;
+	transition: .15s all ease-in;
 }
 
 .note.close {
