@@ -1,10 +1,34 @@
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+var url = document.URL;
+if (url.includes(":8887")) {
+	var db = "dev";
+	DEV = true;
+	$("#pageTitle").text("DEV");
+} else {
+	db = "";
+	DEV = false;
+}
 
-ga('create', 'UA-102147810-1', 'auto');
-ga('send', 'pageview');
+if (!DEV) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-102147810-1', 'auto');
+	ga('send', 'pageview');
+}
+
+//// register service worker
+//if ('serviceWorker' in navigator) {
+//	navigator.serviceWorker
+//		.register('../assets/components/dnd/js/pwa/sw.js')
+//		.then(function() { console.log('Service Worker Registered'); });
+//}
+
+function randomFromArray(array) {
+	var index = Math.floor(Math.random() * array.length);
+	return array[index];
+}
 
 $(document).keydown(function(event) {
 	// If Control or Command key is pressed and the S key is pressed
@@ -94,19 +118,29 @@ function getSelected(selector) {
 }
 
 function error(error) {
-	
 	loader.hide();
 	
+	var randomMessage = randomFromArray([
+		"Don't steal books",
+		"You've upset the gods of D&D! Now you got punished",
+		"Maybe this is a mimic, in that case: ignore this message",
+		"Maybe a fireball would solve this error...",
+		"A mind flayer has taken over this website!"
+	])
+	
+	$("#error-message").text("An error has occurred (" + randomMessage + ")")
 	$("#error").text(error);
 	
 	console.error(error);
 	$(".error-background").fadeIn();
+	$(".background").fadeIn();
 	
-	if (DEV !== true) {
+	if (!DEV) {
 		ga('send', 'event', "dnd-error", error);
 	}
 }
 
 function closeError() {
 	$(".error-background").fadeOut();
+	$(".background").fadeOut();
 }

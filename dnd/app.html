@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<title id="pageTitle">Dungeons and Dragons online</title>
+		<link rel="manifest" href="../assets/components/dnd/manifest.json">
 		<!-- API and Library scripts -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
@@ -43,16 +44,10 @@
         </div>
 		<div class="error-background">
 			<div class="error-forground">
-				<h1>Login</h1>
-				<div id="firebaseui-auth-container"></div>
-			</div>
-		</div>
-		<div class="error-background">
-			<div class="error-forground">
 				<h1>Oops...</h1>
-				<p>You have upset the gods of DnD! Now you've got punished!</p>
-				<p id="error"></p>
-				<button onclick="closeError()" class="blue">Close</button>
+				<p id="error-message">You have upset the gods of DnD! Now you've got punished!</p>
+				<p id="error">This error</p>
+				<button onclick="closeError()" class="red">Close</button>
 			</div>
 		</div>
 		<div class="loader-background">
