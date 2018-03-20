@@ -8,6 +8,14 @@ var partyId = sessionStorage.getItem("::party");
 var sUid = sessionStorage.getItem("::uid");
 var isDM = false;
 
+
+timer = setInterval(function() {
+	console.log("timer fire");
+	if (loadedUid === sUid) {
+		save();
+	}
+}, 15000);
+
 console.log("party.js");
 
 loadedUid = false;
