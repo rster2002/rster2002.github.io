@@ -13,6 +13,8 @@ $(document).ready(function(){
 			
 			sessionStorage.setItem("::uid",uid)
 			
+			$("#userIcon-Bar").attr("src", userIcon);
+			$("#username-Bar").text(username);
 			$("#userIcon").attr("src", userIcon);
 			$("#username").text(username);
 			

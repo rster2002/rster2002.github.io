@@ -1,0 +1,9 @@
+.card-action a {
+	cursor: pointer;
+	color: white;
+}
+
+.card-content p {
+	white-space: normal;
+	overflow: hidden;
+}
