@@ -4,10 +4,10 @@
 	<head>
 		<title id="pageTitle">Dungeons and Dragons online</title>
 		<link rel="manifest" href="../assets/components/dnd/manifest.json">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<!-- API and Library scripts -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
-		<script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js" type="text/javascript"></script>
 		<script src="../assets/js/api/ui.js"></script>
 		<!-- App Scripts -->
 		<script src="../assets/components/dnd/js/app.js"></script>
@@ -27,13 +27,15 @@
 			});
 		</script>
 		<!-- Link styles -->
+		<link rel="stylesheet" href="../assets/components/dnd/css/materialize.css">
 		<link href="../assets/icon.png" rel="icon">
 		<link href="../assets/components/dnd/css/appShell.css" rel="stylesheet" type="text/css">
 		<link href="../assets/components/dnd/css/appShell.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
 		
 	</head>
 	<body>
-		<div class="background"></div>
+		<script src="../assets/components/dnd/js/materialize.js"></script>
+		<div class="overlay-background"></div>
 		<div class="overlay">
 			<div class="content">
 				<div class="innerPage"></div>
@@ -57,12 +59,9 @@
 			<h1 id="noteContent">Hello World</h1>
 		</div>
 		<div class="bar">
-			<button onclick="logout()">Logout</button>
-			<a id="username" class="right"></a>
-			<img id="userIcon" class="right">
-			<a id="characterName"></a>
-			<button onclick="openPage('mainMenu')" class="openMenu right">Menu</button>
-<!--			<button onclick="openPage('party')" class="right">Party</button>-->
+			<img data-target="slide-out" class="sidenav-trigger" src="../assets/components/dnd/images/icons/ic_view_stream_black_24dp_2x.png">
+			<a id="username-Bar" class="right"></a>
+			<img id="userIcon-Bar" class="right">
 		</div>
 		<div class="page">
 			<div class="innerPage">
@@ -73,8 +72,41 @@
 				</div>
 			</div>
 		</div>
+
+		<ul id="slide-out" class="sidenav">
+			<li>
+				<div class="user-view">
+					<div class="background">
+						<img src="https://graphicflip.com/wp-content/uploads/2016/02/40-backgrounds-material.jpg">
+					</div>
+					<a><img class="circle" id="userIcon"></a>
+					<a><span class="white-text name" id="username">John Doe</span></a>
+					<a><span class="white-text email"></span></a>
+				</div>
+			</li>
+			<li><a onclick="openPage('dashboard')"><i class="material-icons">dashboard</i>Dashboard</a></li>
+			<li><div class="divider"></div></li>
+			<li><a class="subheader">Character</a></li>
+			<li><a class="waves-effect" onclick="openPage('characterEditor')"><i class="material-icons">mode_edit</i>Character editor</a></li>
+			<li><a class="waves-effect" onclick="openPage('campaignMenu')"><i class="material-icons">bookmark</i>Campaigns</a></li>
+			<li><a class="waves-effect" onclick="openPage('races')"><i class="material-icons">change_history</i>Races</a></li>
+			<li><a class="waves-effect" href="https://www.dndbeyond.com/" target="_blank"><i class="material-icons">open_in_new</i>D&amp;D Beyond</a></li>
+			<li><div class="divider"></div></li>
+			<li><a class="waves-effect" href="https://github.com/rster2002/rster2002.github.io/issues" target="_blank"><i class="material-icons">bug_report</i>Report bug</a></li>
+			<li><a class="waves-effect" onclick="openPage('news')"><i class="material-icons">assignment</i>News</a></li>
+			<li><a class="waves-effect" onclick="logout()"><i class="material-icons">arrow_back</i>Logout</a></li>
+		</ul>
+		<a href="#" data-target="slide-out" class="sidenav-trigger" onclick="$('.sidenav').sidenav();"><i class="material-icons">menu</i></a>
+		<script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js" type="text/javascript">
+			setTimeout(function(){
+				$('.sidenav').sidenav();
+				console.log("fire");
+			}, 5000);
+		</script>
 		<script>
 			loader.hide();
+			elem = document.querySelector('.sidenav');
+			instance = M.Sidenav.init(elem, {});
 		</script>
 	</body>
 </html>
