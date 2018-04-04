@@ -1,4 +1,4 @@
-$(document).ready(function(){
+uijsImported = function(){
 	var user = firebase.auth().currentUser;
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user != null) {
@@ -17,6 +17,9 @@ $(document).ready(function(){
 			$("#username-Bar").text(username);
 			$("#userIcon").attr("src", userIcon);
 			$("#username").text(username);
+			
+			setUserinfo(username, userIcon);
+			$(".ui--sidenavWrapper").addClass("modified");
 			
 			// Check for user and returns stored user info
 			dbUsers.once("value",function(e){
@@ -60,4 +63,4 @@ $(document).ready(function(){
 			});
 		}
 	});
-});
+};
