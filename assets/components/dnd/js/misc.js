@@ -78,7 +78,7 @@ function openPage(page) {
 	$(".page.innerPage").remove();
 	$(".page").load("../assets/components/dnd/pages/" + page + ".html");
 	loader.hide();
-	instance.close();
+	closeSidenav();
 }
 
 function openOverlay(page) {
