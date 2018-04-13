@@ -18,6 +18,41 @@ function ctrlS() {
 
 sessionStorage.setItem("::saved","false");
 console.log("hmm");
+
+function promptName() {
+	input = prompt("Type a name for this caracter sheet");
+	if (input) {
+		if (sessionStorage.getItem("::saved") === "false") {
+			dbUsers.child(sUid).once("value", (e) => {
+				if (e.hasChild("characters")) {
+					dbUsers.child(sUid).child("characters").once("value", (e) => {
+						if (e.hasChild(input)) {
+							if(confirm("Are you sure you want to overwrite this character sheet?")) {
+								upCharacter();
+							}
+						} else {
+							upCharacter();
+						}
+					});
+				}
+			});
+		} else {
+			upCharacter();
+		}
+	}
+}
+
+function upCharacter() {
+	loader.show();
+	try {
+		sessionStorage.setItem("::saved", input);
+		dbUsers.child(sUid).child("characters").child(input).set(characterObj);
+	} catch (error) {
+		
+	}
+	loader.hide();
+}
+
 function saveCharacter() {
     
 	se = false;
@@ -30,24 +65,7 @@ function saveCharacter() {
 				note.open("Saved " + sessionStorage.getItem("::saved"), 1000);
 			});
 		} else {
-			var i = prompt("Type a name for this caracter sheet");
-			if (i) {
-				if (sessionStorage.getItem("::saved") === "false") {
-					dbUsers.child(sUid).child("characters").once("value", (e) => {
-						if (e.hasChild(i)) {
-							se = confirm("Are you sure you want to overwrite this character sheet?");
-						}
-					});
-				} else {
-					se = true;
-				}
-				
-				if (se) {
-					sessionStorage.setItem("::saved",i);
-					dbUsers.child(sUid).child("characters").child(i).set(characterObj);
-					note.open("Saved " + sessionStorage.getItem("::saved"), 1000);
-				}
-			}
+			promptName();
 		}
 	} catch(e) {
 		error(e);
@@ -59,25 +77,7 @@ function saveAsCharacter() {
 	se = false;
 	
 	s();
-	var i = prompt("Type a name for this caracter sheet");
-	if (i) {
-		if (sessionStorage.getItem("::saved") === "false") {
-			dbUsers.child(sUid).child("characters").once("value", (e) => {
-				if (e.hasChild(i)) {
-					se = confirm("Are you sure you want to overwrite this character sheet?");
-				}
-			});
-		} else {
-			se = true;
-		}
-		
-		if (se) {
-			loader.show();
-			sessionStorage.setItem("::saved",i);
-			dbUsers.child(sUid).child("characters").child(i).set(characterObj);
-			loader.hide();
-		}
-	}
+	promptName();
 }
 
 function loadCharacter() {
