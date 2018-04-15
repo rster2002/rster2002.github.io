@@ -25,6 +25,15 @@ if (!DEV) {
 //		.then(function() { console.log('Service Worker Registered'); });
 //}
 
+function randomString(characters, l) {
+	var retn = "";
+	for (var i = 0; i < l; i++) {
+		var r = Math.floor(Math.random() * characters.length);
+		retn += characters[r];
+	}
+	return retn;
+}
+
 function randomFromArray(array) {
 	var index = Math.floor(Math.random() * array.length);
 	return array[index];
@@ -77,8 +86,24 @@ function openPage(page) {
 	loader.show();
 	$(".page.innerPage").remove();
 	$(".page").load("../assets/components/dnd/pages/" + page + ".html");
+	sessionStorage.setItem("::openPage", page);
 	loader.hide();
 	closeSidenav();
+}
+
+function openOverlay(page) {
+    loader.show();
+    $(".overlay .content .innerPage").remove();
+    
+    if (page.includes("http")) {
+        $(".overlay .content").load(page);
+    } else {
+        $(".overlay .content").load("../assets/components/dnd/pages/" + page + ".html");
+    }
+    
+    $(".background").show();
+    $(".overlay").show();
+    loader.hide();
 }
 
 function openOverlay(page) {

@@ -199,6 +199,10 @@ button:hover {
 	margin-right: auto;
 }
 
+.welcomeText h1, p {
+	white-space: normal;
+}
+
 h1 {
 	margin: 0;
 	padding: 0;

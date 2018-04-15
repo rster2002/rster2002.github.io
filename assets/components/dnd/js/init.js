@@ -1,5 +1,6 @@
 var uijsOnload = function (uijs) {
 	uijs.import([
-		"sidenav"
+		"sidenav",
+		"shadow"
 	]);
 }

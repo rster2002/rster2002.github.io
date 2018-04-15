@@ -8,8 +8,9 @@ var config = {
 };
 firebase.initializeApp(config);
 
-database = firebase.database();
-dbUsers = database.ref("dnd" + db).child("users");
-dbCampaign = database.ref("dnd" + db).child("campaign");
-dbUsernames = database.ref("dnd" + db).child("usernames");
-dbGlobal = database.ref("dnd" + db).child("global");
+database = firebase.database().ref("dnd" + db);
+dbUsers = database.child("users");
+dbCampaign = database.child("campaign");
+dbUsernames = database.child("usernames");
+dbGlobal = database.child("global");
+dbUserCodes = database.child("userCodes");

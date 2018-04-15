@@ -26,9 +26,9 @@ function ctrlS() {
 	}
 }
 
+// get campaign info
 dbCampaign.child(partyId).once("value",(e) => {
 	update(e.val());
-	loader.hide();
 });
 
 dbCampaign.child(partyId).child("liveState").on("value", (u) => {
@@ -345,6 +345,19 @@ function changeId() {
 
 function kick(ban) {
 	function next() {
+		dbCampaign.child(partyId).child(loadedUid).child("character").once("value", function(e) {
+			var character = e.val();
+			dbUsers.child(loadedUid).child("characters").child(character).child("usedInCampaigns").once("value", function(c) {
+				var list = c.val();
+				var newList = [];
+				for (var i = 0; i < list.length; ++i) {
+					if (list[i] !== partyId) {
+						newList.unshift(list[i]);
+					}
+				}
+				dbUsers.child(loadedUid).child("characters").child(character).child("usedInCampaigns").set(newList);
+			});
+		});
 		dbCampaign.child(partyId).once("value",function(e) {
 			var partyContent = e.val();
 			console.log(partyContent);
@@ -358,10 +371,7 @@ function kick(ban) {
 					console.log("skipped: " + partyArray[i])
 				}
 			}
-			dbCampaign.child(partyId).child("playerList").set(rePlayerList);
-			dbCampaign.child(partyId).child("liveState").set("update");
 		});
-
 		dbUsers.child(loadedUid).once("value", e => {
 			var dbContent = e.val();
 			var campaignsArray = dbContent.campaigns;
@@ -377,6 +387,10 @@ function kick(ban) {
 			dbUsers.child(loadedUid).child("campaigns").set(rePartyList);
 			dbCampaign.child(partyId).child("liveState").set("update");
 		});
+		dbCampaign.child(partyId).child("playerList").set(rePlayerList);
+		dbCampaign.child(partyId).child("liveState").set("update");
+		
+
 		$(".kick").hide();
 		$(".save").hide();
 	}
@@ -384,13 +398,16 @@ function kick(ban) {
 	if (ban) {
 		next();
 	} else {
-		uijs.box.open({
-			title: "Confirm",
-			content: "Are you sure you want to kick this person?",
-			btnTrue: "Yes",
-			btnFalse: "no",
-			onTrue: next()
-		})
+//		uijs.box.open({
+//			title: "Confirm",
+//			content: "Are you sure you want to kick this person?",
+//			btnTrue: "Yes",
+//			btnFalse: "no",
+//			onTrue: next()
+//		})
+		if (confirm("Are you sure you want to kick this person?")) {
+			next();
+		}
 	}
 }
 
@@ -440,4 +457,8 @@ function toggleCharacter() {
 		$(".characterContainer").show();
 		$("#toggle").text("Hide character sheet");
 	}
+}
+
+function onload() {
+	loader.hide();
 }

@@ -1,5 +1,9 @@
 var cacheName = 'dnd';
-var filesToCache = [];
+var filesToCache = [
+	"/",
+	"/app.html",
+	""
+];
 
 self.addEventListener('install', function(e) {
 	console.log('[ServiceWorker] Install');
