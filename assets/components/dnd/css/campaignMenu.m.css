@@ -1,11 +1,22 @@
+h1 {
+	font-size: 5em;
+}
+
+p {
+	font-size: 3em;
+}
+
 .createParty h1 {
 	font-size: 4em;
 }
 
-.party h1 {
-	font-size: 5em;
+.selectCharacter .inner {
+	height: 90%;
+	width: 90%;
 }
 
-.party p {
-	font-size: 3em;
+.item {
+	width: 100%;
+    height: 50%;
+    float: left;
 }

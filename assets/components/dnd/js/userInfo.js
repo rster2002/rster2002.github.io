@@ -1,3 +1,5 @@
+characters = "abcdefghijklmnopqrstuvwxuz";
+
 uijsImported = function(){
 	var user = firebase.auth().currentUser;
 	firebase.auth().onAuthStateChanged(function(user) {
@@ -49,6 +51,15 @@ uijsImported = function(){
 					uid = dbContent[uid];
 				} else {
 					dbUsernames.child(username).set(uid);
+				}
+			});
+			
+			// Checks for userCode in database and if not found, create one
+			dbUsers.child(uid).once("value", function(e) {
+				if (!e.hasChild("userCode")) {
+					var userCode = "dnd-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
+					dbUsers.child(uid).child("userCode").set(userCode);
+					dbUserCodes.child(userCode).set(uid);
 				}
 			});
 		} else {

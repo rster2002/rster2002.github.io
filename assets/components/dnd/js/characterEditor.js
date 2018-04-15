@@ -1,12 +1,13 @@
 sUid = sessionStorage.getItem("::uid");
 
 timer = setInterval(function() {
-	console.log("timer fire");
-	if (sessionStorage.getItem("::saved") !== "false") {
-		saveCharacter();
+	if (sessionStorage.getItem("::openPage") === "characterEditor") {
+		console.log("timer fire");
+		if (sessionStorage.getItem("::saved") !== "false") {
+			saveCharacter();
+		}
 	}
 }, 15000);
-
 
 $(".innerPage").ready(() => {
 	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
@@ -47,8 +48,8 @@ function upCharacter() {
 	try {
 		sessionStorage.setItem("::saved", input);
 		dbUsers.child(sUid).child("characters").child(input).set(characterObj);
-	} catch (error) {
-		
+	} catch (e) {
+		error(e);
 	}
 	loader.hide();
 }
@@ -62,7 +63,7 @@ function saveCharacter() {
 		console.log(characterObj);
 		if (sessionStorage.getItem("::saved") !== "false") {
 			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj).then(() => {
-				note.open("Saved " + sessionStorage.getItem("::saved"), 1000);
+				note.open("Saved", 1000);
 			});
 		} else {
 			promptName();
@@ -72,17 +73,8 @@ function saveCharacter() {
 	}
 }
 
-function saveAsCharacter() {
-	
-	se = false;
-	
-	s();
-	promptName();
-}
-
-function loadCharacter() {
+function loadCharacter(i) {
 	try {
-		var i = prompt("Type the name of the caracter sheet you want to load");
 		if (i) {
 			
 			loader.show();
@@ -106,4 +98,33 @@ function loadCharacter() {
 	} catch(e) {
 		error(e);
 	}
+}
+
+function del() {
+	dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).once("value", function(e) {
+		if (!e.hasChild("usedInCampaigns")) {
+			if (confirm("Are you sure you want to delete this character sheet?")) {
+				var characterId = sessionStorage.getItem("::openCharacter");
+				dbUsers.child(sUid).child("characterList").once("value", function(e) {
+					var list = e.val();
+					var newList = [];
+					for (var i = 0; i < list.length; ++i) {
+						if (list[i] !== characterId) {
+							newList.push(list[i]);
+						}
+					}
+					dbUsers.child(sUid).child("characterList").set(newList);
+				}).then(function() {
+					dbUsers.child(sUid).child("characters").child(characterId).set(null);
+					openPage('characterList');
+				});
+			}
+		} else {
+			alert("You can't delete this character because it's in use in a campaign");
+		}
+	})
+}
+
+function onload() {
+	loadCharacter(sessionStorage.getItem("::openCharacter"));
 }
