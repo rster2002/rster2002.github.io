@@ -1,0 +1,127 @@
+div.wave--sidenavWrapper {
+	transition: .1s all ease-in;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 25;
+	display: none;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+div.wave--sidenavWrapper.show {
+	transition: .1s all ease-in;
+	background-color: rgba(0, 0, 0, .5);
+	display: block;
+}
+
+div.wave--invisible {
+	float: left;
+	width: 75%;
+	height: 100%;
+}
+
+div.wave--sidenav {
+	transition: .1s all ease-in;
+	float: left;
+	width: 25%;
+	height: 100%;
+	background-color: white;
+	box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+	margin-left: -25vw;
+}
+
+div.wave--sidenav.open {
+	transition: .1s all ease-in;
+	margin-left: 0vw;
+}
+
+div.wave--sidenav div.userinfo {
+	height: 20%;
+	width: 100%;
+	box-shadow:0 8px 17px 2px rgba(0,0,0,0.14),0 3px 14px 2px rgba(0,0,0,0.12),0 5px 5px -3px rgba(0,0,0,0.2);box-shadow:0 8px 17px 2px rgba(0,0,0,0.14),0 3px 14px 2px rgba(0,0,0,0.12),0 5px 5px -3px rgba(0,0,0,0.2);
+}
+
+div.wave--sidenav div.userinfo div.pos {
+	position: relative;
+	top: 25%;
+	height: 50%;
+	width: 100%;
+}
+
+div.wave--sidenav div.userinfo div.pos img {
+	position: relative;
+	height: 100%;
+	left: 3%;
+	float: left;
+	border-radius: 100%;
+	box-shadow:0 16px 24px 2px rgba(0,0,0,0.14),0 6px 30px 5px rgba(0,0,0,0.12),0 8px 10px -7px rgba(0,0,0,0.2);box-shadow:0 16px 24px 2px rgba(0,0,0,0.14),0 6px 30px 5px rgba(0,0,0,0.12),0 8px 10px -7px rgba(0,0,0,0.2)
+}
+
+div.wave--sidenav div.userinfo div.pos h1 {
+	float: left;
+    position: relative;
+    left: 7%;
+    width: 70%;
+    font-size: 2em;
+    font-family: 'Roboto';
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+div.wave--sidenav div.items {
+	height: 80%;
+	width: 100%;
+	padding-top: 6%;
+}
+
+div.wave--sidenav div.items button {
+	transition: .2s all ease-in;
+	border: 0px;
+    width: 100%;
+    height: 7%;
+    outline: none;
+    font-size: 1em;
+    font-family: 'Roboto';
+    background-color: transparent;
+    text-align: left;
+	cursor: pointer;
+	color: #505050;
+}
+
+div.wave--sidenav div.items button .i {
+	position: relative;
+    top: 50%;
+    left: 7%;
+    transform: translate(0%, 35%);
+    float: left;
+}
+
+div.wave--sidenav div.items button .p {
+	position: relative;
+    top: 50%;
+    left: 15%;
+    transform: translate(0%,-5%);
+    float: left;
+}
+
+div.wave--sidenav div.items button:hover {
+	transition: .2s all ease-in;
+	background-color: rgb(235, 235, 235);
+}
+
+div.wave--sidenav div.items div.divider {
+	width: 100%;
+    height: 1px;
+    background-color: #dadada;
+}
+
+div.wave--sidenav div.items p.section {
+	font-family: 'Roboto';
+    color: #505050;
+    width: 90%;
+    left: 8%;
+    top: 2.5%;
+    position: relative;
+    margin: 0;
+    margin-bottom: 8%;
+}

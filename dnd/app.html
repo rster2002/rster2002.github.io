@@ -9,7 +9,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
 <!--		<script src="../assets/js/api/ui.js"></script>-->
-		<script src="https://cdn.rawgit.com/rster2002/uijs/master/uijs.js"></script>
+		<script src="./wave.js"></script>
 		<!-- App Scripts -->
 		<script src="../assets/components/dnd/js/init.js"></script>
 <!--		<script src="../assets/components/dnd/js/app.js"></script>-->
@@ -29,13 +29,13 @@
 			});
 		</script>
 		<!-- Link styles -->
-		<link href="../assets/icon.png" rel="icon">
+		<link href="../assets/images/icons/tab%20icons/dnd.png" rel="icon">
 		<link href="../assets/components/dnd/css/appShell.css" rel="stylesheet" type="text/css">
 		<link href="../assets/components/dnd/css/appShell.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
 		
 	</head>
 	<body>
-		<div class="ui--sidenav">
+		<div class="wave--sidenav">
 			<div class="userinfo">
 				<img class="usericon">
 				<h1 class="username"></h1>
@@ -50,7 +50,8 @@
 				<button icon="bookmark" onclick="openPage('campaignMenu')">Campaigns</button>
 				<button icon="change_history" onclick="openPage('races')">Races</button>
 				<button icon="open_in_new" onclick="window.open('https://www.dndbeyond.com/','_blank');">D&amp;D Beyond</button>
-				<div class="divider"></div>
+                <div class="divider"></div>
+                <button icon="account_box" onclick="openPage('profile')">Profile</button>
 				<button icon="bug_report" onclick="window.open('https://github.com/rster2002/rster2002.github.io/issues','_blank');">Report bug</button>
 				<button icon="assignment" onclick="openPage('news');">News</button>
 				<button icon="arrow_back" onclick="logout();">Logout</button>

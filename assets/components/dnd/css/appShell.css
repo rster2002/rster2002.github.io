@@ -19,8 +19,8 @@
 	src: url(../../../css/fonts/Museo500.otf);
 }
 
-.ui--sidenavWrapper.modified {
-	z-index: 100;
+.wave--sidenavWrapper {
+	z-index: 100 !important;
 }
 
 .shadow {
