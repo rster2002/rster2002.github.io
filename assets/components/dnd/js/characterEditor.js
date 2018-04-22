@@ -4,7 +4,7 @@ timer = setInterval(function() {
 	if (sessionStorage.getItem("::openPage") === "characterEditor") {
 		console.log("timer fire");
 		if (sessionStorage.getItem("::saved") !== "false") {
-			saveCharacter();
+			saveCharacter(false);
 		}
 	}
 }, 15000);
@@ -54,16 +54,20 @@ function upCharacter() {
 	loader.hide();
 }
 
-function saveCharacter() {
+function saveCharacter(show) {
     
 	se = false;
 	
 	try {
 		s();
-		console.log(characterObj);
+		if (show) {
+			console.log(characterObj);
+		}
 		if (sessionStorage.getItem("::saved") !== "false") {
 			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj).then(() => {
-				note.open("Saved", 1000);
+				if (show) {
+					note.open("Saved", 1000);
+				}
 			});
 		} else {
 			promptName();
@@ -127,4 +131,5 @@ function del() {
 
 function onload() {
 	loadCharacter(sessionStorage.getItem("::openCharacter"));
+	
 }

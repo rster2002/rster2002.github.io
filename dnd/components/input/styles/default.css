@@ -1,0 +1,21 @@
+/* input */
+div.wave--input {
+	border: 1px solid #0F487F;
+	border-radius: 3px;
+}
+
+div.wave--input i {
+	top: 50%;
+    margin-left: 6px;
+    transform: translate(0%,14%);
+    margin-right: 6px;
+}
+
+div.wave--input input {
+	font-size: 3vh;
+	border: none;
+}
+
+div.wave--input input:focus{
+    outline: none;
+}

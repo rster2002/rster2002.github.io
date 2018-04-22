@@ -8,6 +8,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
+console.log("firebase init");
 database = firebase.database().ref("dnd" + db);
 dbUsers = database.child("users");
 dbCampaign = database.child("campaign");

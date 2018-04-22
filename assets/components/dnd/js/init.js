@@ -1,6 +1,9 @@
-var uijsOnload = function (uijs) {
-	uijs.import([
+var waveOnload = function (wave) {
+	wave.import([
 		"sidenav",
-		"shadow"
-	]);
+		"shadow",
+		"text",
+		"buttons",
+		"popover"
+	], true);
 }

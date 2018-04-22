@@ -4,8 +4,9 @@
 	<link href="../assets/components/dnd/css/characterEditor.css" type="text/css" rel="stylesheet">
 	<link href="../assets/components/dnd/css/characterEditor.m.css" media="screen and (max-device-width: 800px)" type="text/css" rel="stylesheet">
 	<div class="scroll">
+		<div class="tester" style="position: fixed; width: 50px; height: 50px; background-color: red; z-index: 10; display: none;"></div>
 		<div class="controll">
-			<div class="button" onclick="saveCharacter()"><h1>Save</h1></div>
+			<div id="test" class="button" onclick="saveCharacter(true)"><h1>Save</h1></div>
 			<div class="button" onclick="del()"><h1>Delete</h1></div>
 			<div class="button" onclick="openPage('characterList')"><h1>Back</h1></div>
 		</div>

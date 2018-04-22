@@ -1,6 +1,6 @@
 characters = "abcdefghijklmnopqrstuvwxuz";
 
-uijsImported = function(){
+waveImported = function(){
 	var user = firebase.auth().currentUser;
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user != null) {
@@ -9,6 +9,9 @@ uijsImported = function(){
 			userIcon = user.photoURL;
 			uid = user.uid;
 			
+            sessionStorage.setItem("::uid", uid);
+            sUid = uid;
+            
 			if (userIcon === undefined || userIcon === null) {
 				userIcon = "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg";
 			}
@@ -55,7 +58,7 @@ uijsImported = function(){
 			});
 			
 			// Checks for userCode in database and if not found, create one
-			dbUsers.child(uid).once("value", function(e) {
+			dbUsers.child(sUid).once("value", function(e) {
 				if (!e.hasChild("userCode")) {
 					var userCode = "dnd-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
 					dbUsers.child(uid).child("userCode").set(userCode);
