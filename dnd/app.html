@@ -81,8 +81,14 @@
 		<div class="note shadow">
 			<h1 id="noteContent">Hello World</h1>
 		</div>
+		<script>
+			function o() {
+				toggleSidenav();
+				clearInterval(timer);
+			}
+		</script>
 		<div class="bar">
-			<img onclick="toggleSidenav();" class="sidenav-trigger" src="../assets/components/dnd/images/icons/ic_view_stream_black_24dp_2x.png">
+			<img onclick="o();" class="sidenav-trigger" src="../assets/components/dnd/images/icons/ic_view_stream_black_24dp_2x.png">
 			<a id="username-Bar" class="right"></a>
 			<img id="userIcon-Bar" class="right">
 		</div>
