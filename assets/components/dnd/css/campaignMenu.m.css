@@ -1,8 +1,8 @@
-h1 {
+.innerPage h1 {
 	font-size: 5em;
 }
 
-p {
+.innerPage p {
 	font-size: 3em;
 }
 
