@@ -90,9 +90,14 @@ function loadCharacter(i) {
 					console.log(c);
 					l(c);
 					sessionStorage.setItem("::saved",i);
-					dbUsers.child(sUid).child("characters").child(i).once("value", function(e) {
+					dbUsers.child(sUid).child("characters").child(i + "-info").once("value", function(e) {
 						if (!e.hasChild("allowEdit")) {
 							dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved") + "-info").child("allowEdit").set("0");
+						} else {
+							dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved") + "-info").once("value", function(e) {
+								var options = e.val();
+								$(".allowEdit").val(options.allowEdit);
+							});
 						}
 					});
 					loader.hide();
