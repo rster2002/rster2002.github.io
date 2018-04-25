@@ -51,3 +51,34 @@
 .pageArea {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.characterInfo {
+	width: 50%;
+	position: relative;
+	left: 25%;
+}
+
+.characterInfo p {
+	width: 100%;
+	text-align: center;
+}
+
+.characterOptions {
+	width: 50%;
+	position: relative;
+	left: 25%;
+}
+
+.characterOptions .r {
+	height: 5vh;
+	width: 100%;
+}
+
+.characterOptions .r p {
+	margin: 0;
+	float: left;
+}
+
+.characterOptions .r select {
+	float: right;
+}

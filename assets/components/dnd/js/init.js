@@ -4,6 +4,7 @@ var waveOnload = function (wave) {
 		"shadow",
 		"text",
 		"buttons",
-		"popover"
+		"popover",
+		"buttons"
 	], true);
 }

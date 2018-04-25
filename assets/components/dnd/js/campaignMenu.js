@@ -268,27 +268,28 @@ function afterSelect(index) {
 
 						campaigns.unshift(partyId);
 						console.log(campaigns);
-						dbUsers.child(sUid).child("campaigns").set(campaigns);
-						dbCampaign.child(partyId).child("liveState").set("update");
-
-						sessionStorage.setItem("::party",partyId);
-						openPage("campaign");
 					}).then(function() {
-							dbUsers.child(sUid).child("characters").child(character).once("value", function(e) {
+							dbUsers.child(sUid).child("characters").child(character + "-info").once("value", function(e) {
 								if (e.hasChild("usedInCampaigns")) {
-									dbUsers.child(sUid).child("characters").child(character).child("usedInCampaigns").once("value", function(c) {
+									dbUsers.child(sUid).child("characters").child(character + "-info").child("usedInCampaigns").once("value", function(c) {
 										var list = c.val();
 										list.unshift(partyId);
-										dbUsers.child(sUid).child("characters").child(character).child("usedInCampaigns").set(list);
+										dbUsers.child(sUid).child("characters").child(character + "-info").child("usedInCampaigns").set(list);
 									});
 								} else {
 									var list = [];
 									list.unshift(partyId);
-									dbUsers.child(sUid).child("characters").child(character).child("usedInCampaigns").set(list);
+									dbUsers.child(sUid).child("characters").child(character + "-info").child("usedInCampaigns").set(list);
 								}
+								
+								dbUsers.child(sUid).child("campaigns").set(campaigns);
+								dbCampaign.child(partyId).child("liveState").set("update");
+
+								sessionStorage.setItem("::party",partyId);
+								sessionStorage.setItem("::join", "true");
+								openPage("campaign");
 							});
-						}
-					);
+						});
 				});
 			} else {
 				alert("Couldn't find this character!");

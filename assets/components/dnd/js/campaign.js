@@ -10,9 +10,11 @@ var isDM = false;
 
 
 timer = setInterval(function() {
-	console.log("timer fire");
-	if (loadedUid === sUid) {
-		save();
+	if (sessionStorage.getItem("::openPage") === "campaign") {
+		console.log("timer fire");
+		if (loadedUid === sUid) {
+			save();
+		}
 	}
 }, 15000);
 
@@ -22,14 +24,18 @@ loadedUid = false;
 
 function ctrlS() {
 	if (loadedUid) {
-		save();
+		save(false);
 	}
 }
 
 // get campaign info
-dbCampaign.child(partyId).once("value",(e) => {
-	update(e.val());
-});
+if (sessionStorage.getItem("::join") !== "true") {
+	dbCampaign.child(partyId).once("value",(e) => {
+		update(e.val());
+	});
+}
+
+sessionStorage.setItem("::join", "false");
 
 dbCampaign.child(partyId).child("liveState").on("value", (u) => {
 	if (u.val() === "update") {
@@ -202,13 +208,15 @@ function selfl(characterObj) {
 	}
 }
 
-function save() {
+function save(showNote) {
 	if (isDM === false) {
 		if (loadedUid === sUid) {
 			s();
 			console.log(characterObj);
 			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
-			note.open("Saved " + $("#form96_1").val(), 1000);
+			if (showNote) {
+				note.open("Saved " + $("#form96_1").val(), 1000);
+			}
 		} else {
 			error("You are trying to save a character sheet that isn't yours!")
 		}
@@ -218,7 +226,9 @@ function save() {
 			console.log(characterObj);
 			console.log(loadedUid);
 			dbUsers.child(loadedUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
-			note.open("Saved " + $("#form96_1").val(), 1000);
+			if (showNote) {
+				note.open("Saved " + $("#form96_1").val(), 1000);
+			}
 		} catch(e) {
 			error(e);
 		}
@@ -356,39 +366,41 @@ function kick(ban) {
 					}
 				}
 				dbUsers.child(loadedUid).child("characters").child(character).child("usedInCampaigns").set(newList);
+				
+				dbCampaign.child(partyId).once("value",function(e) {
+					var partyContent = e.val();
+					console.log(partyContent);
+					var partyArray = partyContent.playerList;
+					var rePlayerList = [];
+					for (var i = 0; i < partyArray.length; ++i) {
+						if (partyArray[i] === loadedUid) {
+							console.log("kicked: " + partyArray[i]);
+						} else {
+							rePlayerList.push(partyArray[i]);
+							console.log("skipped: " + partyArray[i])
+						}
+					}
+					
+					dbUsers.child(loadedUid).once("value", e => {
+						var dbContent = e.val();
+						var campaignsArray = dbContent.campaigns;
+						var rePartyList = [];
+						for (var i = 0; i < campaignsArray.length; ++i) {
+							if (campaignsArray[i] === partyId) {
+								console.log("removed " + partyId + " from users party list");
+							} else {
+								reCampaignList.push(campaignsArray[i]);
+								console.log("skipped: " + campaignsArray[i]);
+							}
+						}
+						dbUsers.child(loadedUid).child("campaigns").set(rePartyList);
+						dbCampaign.child(partyId).child("playerList").set(rePlayerList);
+						dbCampaign.child(partyId).child("liveState").set("update");
+					});
+				});
 			});
 		});
-		dbCampaign.child(partyId).once("value",function(e) {
-			var partyContent = e.val();
-			console.log(partyContent);
-			var partyArray = partyContent.playerList;
-			var rePlayerList = [];
-			for (var i = 0; i < partyArray.length; ++i) {
-				if (partyArray[i] === loadedUid) {
-					console.log("kicked: " + partyArray[i]);
-				} else {
-					rePlayerList.push(partyArray[i]);
-					console.log("skipped: " + partyArray[i])
-				}
-			}
-		});
-		dbUsers.child(loadedUid).once("value", e => {
-			var dbContent = e.val();
-			var campaignsArray = dbContent.campaigns;
-			var rePartyList = [];
-			for (var i = 0; i < campaignsArray.length; ++i) {
-				if (campaignsArray[i] === partyId) {
-					console.log("removed " + partyId + " from users party list");
-				} else {
-					reCampaignList.push(campaignsArray[i]);
-					console.log("skipped: " + campaignsArray[i]);
-				}
-			}
-			dbUsers.child(loadedUid).child("campaigns").set(rePartyList);
-			dbCampaign.child(partyId).child("liveState").set("update");
-		});
-		dbCampaign.child(partyId).child("playerList").set(rePlayerList);
-		dbCampaign.child(partyId).child("liveState").set("update");
+//		dbCampaign.child(partyId).child("liveState").set("update");
 		
 
 		$(".kick").hide();

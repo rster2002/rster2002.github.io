@@ -14,7 +14,7 @@ $(".innerPage").ready(() => {
 });
 
 function ctrlS() {
-	saveCharacter();
+	saveCharacter(true);
 }
 
 sessionStorage.setItem("::saved","false");
@@ -90,6 +90,11 @@ function loadCharacter(i) {
 					console.log(c);
 					l(c);
 					sessionStorage.setItem("::saved",i);
+					dbUsers.child(sUid).child("characters").child(i).once("value", function(e) {
+						if (!e.hasChild("allowEdit")) {
+							dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved") + "-info").child("allowEdit").set("0");
+						}
+					});
 					loader.hide();
 				} else {
 					loader.hide();
@@ -105,7 +110,7 @@ function loadCharacter(i) {
 }
 
 function del() {
-	dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).once("value", function(e) {
+	dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved") + "-info").once("value", function(e) {
 		if (!e.hasChild("usedInCampaigns")) {
 			if (confirm("Are you sure you want to delete this character sheet?")) {
 				var characterId = sessionStorage.getItem("::openCharacter");
@@ -120,6 +125,7 @@ function del() {
 					dbUsers.child(sUid).child("characterList").set(newList);
 				}).then(function() {
 					dbUsers.child(sUid).child("characters").child(characterId).set(null);
+					dbUsers.child(sUid).child("characters").child(characterId + "-info").set(null);
 					openPage('characterList');
 				});
 			}
@@ -131,5 +137,10 @@ function del() {
 
 function onload() {
 	loadCharacter(sessionStorage.getItem("::openCharacter"));
-	
+	$(".characterId").text(sessionStorage.getItem("::openCharacter"));
+}
+
+function saveOptions() {
+	var allowEdit = $(".allowEdit").val();
+	dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved") + "-info").child("allowEdit").set(allowEdit);
 }
