@@ -72,6 +72,9 @@ function update(partyContent) {
 		isDM = true;
 		
 		$(".changeId").show();
+		$(".delete").show();
+	} else {
+		$(".leave").show();
 	}
 	
 	
@@ -130,7 +133,22 @@ function loadCharacter(uid) {
 					if (sUid === lUid) {
 						selfl(characterObj);
 					} else if (isDM) {
-						selfl(characterObj);
+						dbUsers.child(loadedUid).child("characters").child(characterName + "-info").once("value", function(inf) {
+							var content = inf.val();
+							if (inf.hasChild("allowEdit")) {
+								allowEdit = content["allowEdit"];
+							} else {
+								allowEdit = "0";
+							}
+							
+							console.log(allowEdit);
+							
+							if (allowEdit === "1") {
+								selfl(characterObj);
+							} else {
+								l(characterObj);
+							}
+						});
 						$(".kick").show();
 						$(".ban").show();
 					} else {
@@ -353,11 +371,11 @@ function changeId() {
 }
 
 
-function kick(ban) {
+function kick(ban, f) {
 	function next() {
 		dbCampaign.child(partyId).child(loadedUid).child("character").once("value", function(e) {
 			var character = e.val();
-			dbUsers.child(loadedUid).child("characters").child(character).child("usedInCampaigns").once("value", function(c) {
+			dbUsers.child(loadedUid).child("characters").child(character + "-info").child("usedInCampaigns").once("value", function(c) {
 				var list = c.val();
 				var newList = [];
 				for (var i = 0; i < list.length; ++i) {
@@ -365,7 +383,7 @@ function kick(ban) {
 						newList.unshift(list[i]);
 					}
 				}
-				dbUsers.child(loadedUid).child("characters").child(character).child("usedInCampaigns").set(newList);
+				dbUsers.child(loadedUid).child("characters").child(character + "-info").child("usedInCampaigns").set(newList);
 				
 				dbCampaign.child(partyId).once("value",function(e) {
 					var partyContent = e.val();
@@ -395,6 +413,7 @@ function kick(ban) {
 						}
 						dbUsers.child(loadedUid).child("campaigns").set(rePartyList);
 						dbCampaign.child(partyId).child("playerList").set(rePlayerList);
+						dbCampaign.child(partyId).child(sUid).set(null);
 						dbCampaign.child(partyId).child("liveState").set("update");
 					});
 				});
@@ -402,8 +421,12 @@ function kick(ban) {
 		});
 //		dbCampaign.child(partyId).child("liveState").set("update");
 		
+		if (f !== undefined) {
+			f();
+		}
 
 		$(".kick").hide();
+		$(".ban").hide();
 		$(".save").hide();
 	}
 	
@@ -424,13 +447,7 @@ function kick(ban) {
 }
 
 function ban() {
-	o = {
-		title: "Confirm",
-		content: "Are you sure you want to ban this person?",
-		btnFalse: "No",
-		btnTrue: "Yes"
-	}
-	o["onTrue"] = function () {
+	if (confirm("Are you sure you want to ban this person?")){
 		dbCampaign.child(partyId).once("value",(e) => {
 			var partyContent = e.val();
 			if (e.hasChild("banList")) {
@@ -447,9 +464,8 @@ function ban() {
 
 
 			kick(true);
-		})
+		});
 	}
-	uijs.box.open(o);
 }
 
 // some small functions
@@ -468,6 +484,39 @@ function toggleCharacter() {
 		visible = true;
 		$(".characterContainer").show();
 		$("#toggle").text("Hide character sheet");
+	}
+}
+
+function del() {
+	if (confirm("Are you sure you want to delete this campaign?")) {
+		if (confirm("Are you realy sure you want to delete this campaign?")) {
+			dbCampaign.child(partyId).once("value", function(e) {
+				var content = e.val();
+				var playerList = content.playerList;
+				var dM = content.DM;
+				for (var i = 0; i < playerList.length; ++i) {
+					var player = playerList[i];
+					if (!player === dM) {
+						loadedUid = player;
+						kick(true);
+					}
+				}
+				
+				loadedUid = dM;
+				kick(true);
+				dbCampaign.child(partyId).set(null);
+				openPage("campaignMenu");
+			});
+		}
+	}
+}
+
+function leave() {
+	if (confirm("Are you sure you want to leave this campaign?")) {
+		loadedUid = sUid;
+		kick(true, function() {
+			openPage("campaignMenu");
+		});
 	}
 }
 
