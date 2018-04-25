@@ -138,6 +138,7 @@ function loadCharacter(uid) {
 							if (inf.hasChild("allowEdit")) {
 								allowEdit = content["allowEdit"];
 							} else {
+								dbUsers.child(loadedUid).child("characters").child(characterName + "-info").child("allowEdit").set("0");
 								allowEdit = "0";
 							}
 							
