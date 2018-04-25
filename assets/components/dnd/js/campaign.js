@@ -379,12 +379,14 @@ function kick(ban, f) {
 			dbUsers.child(loadedUid).child("characters").child(character + "-info").child("usedInCampaigns").once("value", function(c) {
 				var list = c.val();
 				var newList = [];
-				for (var i = 0; i < list.length; ++i) {
-					if (list[i] !== partyId) {
-						newList.unshift(list[i]);
+				if (list === undefined) {
+					for (var i = 0; i < list.length; ++i) {
+						if (list[i] !== partyId) {
+							newList.unshift(list[i]);
+						}
 					}
+					dbUsers.child(loadedUid).child("characters").child(character + "-info").child("usedInCampaigns").set(newList);
 				}
-				dbUsers.child(loadedUid).child("characters").child(character + "-info").child("usedInCampaigns").set(newList);
 				
 				dbCampaign.child(partyId).once("value",function(e) {
 					var partyContent = e.val();
