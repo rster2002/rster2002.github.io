@@ -34,6 +34,13 @@
     width: 94%;
 }
 
+.item .inner p {
+	position: relative;
+	top: 3%;
+	left: 3%;
+	width: 94%;
+}
+
 .item .inner img {
 	position: relative;
 	top: 50%;

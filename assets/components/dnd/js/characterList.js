@@ -7,11 +7,18 @@ emptyCharacterObj = {"1_1":false,"2_1":false,"3_1":false,"4_1":false,"5_1":false
 
 function addTolist(i, characterId) {
 	dbUsers.child(sUid).child("characters").child(characterId).once("value", function(c) {
-		var characterObj = c.val();
-		var characterName = characterObj["96_1"];
-		$(".list").append("<div class='item'><div class='inner shadow-5' onclick='loadCharacter(" + i + ")'><h1>" + characterName + "</h1></div></div>");
-					
-		obj[i] = characterId;
+		dbUsers.child(sUid).child("characters").child(characterId + "-info").once("value", function(j) {
+			var characterObj = c.val();
+			var characterInfo = j.val();
+			var characterName = characterObj["96_1"];
+			if (j.hasChild("dupe")) {
+				$(".list").append("<div class='item'><div class='inner shadow-5' onclick='loadCharacter(" + i + ")'><h1>" + characterName + "</h1><p>Dupe: " + characterInfo.dupe + "</p></div></div>");
+			} else {
+				$(".list").append("<div class='item'><div class='inner shadow-5' onclick='loadCharacter(" + i + ")'><h1>" + characterName + "</h1></div></div>");
+			}
+
+			obj[i] = characterId;
+		});
 	});
 }
 

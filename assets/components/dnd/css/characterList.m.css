@@ -1,3 +1,7 @@
 .item {
 	width: 100%;
 }
+
+.item .inner h1 {
+	font-size: 4em;
+}

@@ -1,4 +1,5 @@
 sUid = sessionStorage.getItem("::uid");
+characters = "abcdefghijklmnopqrstuvwxyz0123456789";
 
 timer = setInterval(function() {
 	if (sessionStorage.getItem("::openPage") === "characterEditor") {
@@ -91,6 +92,7 @@ function loadCharacter(i) {
 					l(c);
 					sessionStorage.setItem("::saved",i);
 					dbUsers.child(sUid).child("characters").child(i + "-info").once("value", function(e) {
+						var content = e.val();
 						if (!e.hasChild("allowEdit")) {
 							dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved") + "-info").child("allowEdit").set("0");
 						} else {
@@ -98,6 +100,12 @@ function loadCharacter(i) {
 								var options = e.val();
 								$(".allowEdit").val(options.allowEdit);
 							});
+						}
+						
+						if (e.hasChild("dupe")) {
+							$(".characterId").text(sessionStorage.getItem("::openCharacter") + " (dupe " + content.dupe + ")");
+						} else {
+							$(".characterId").text(sessionStorage.getItem("::openCharacter"));
 						}
 					});
 					loader.hide();
@@ -140,9 +148,42 @@ function del() {
 	})
 }
 
+function dupe() {
+	if (confirm("Are you sure you want to duplicate this character?")) {
+		var characterId = sessionStorage.getItem("::saved");
+		var newCharacterId = "character-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
+
+		dbUsers.child(sUid).child("characters").child(characterId).once("value", function(e) {
+			characterObj = e.val();
+		}).then(function() {
+			dbUsers.child(sUid).child("characters").child(characterId + "-info").once("value", function(e) {
+				storedInfo = e.val();
+				characterInfo = storedInfo;
+				if (storedInfo.dupe === undefined) {
+					characterInfo.dupe = 1;
+				} else {
+					characterInfo.dupe = storedInfo.dupe + 1;
+				}
+				characterInfo.usedInCampaigns = null;
+			}).then(function() {
+				dbUsers.child(sUid).child("characterList").once("value", function(e) {
+					var characterList = e.val();
+					characterList.unshift(newCharacterId);
+					dbUsers.child(sUid).child("characterList").set(characterList);
+				}).then(function() {
+					dbUsers.child(sUid).child("characters").child(newCharacterId).set(characterObj);
+					dbUsers.child(sUid).child("characters").child(newCharacterId + "-info").set(characterInfo).then(function() {
+						sessionStorage.setItem("::openCharacter", newCharacterId);
+						onload();
+					});	
+				});;
+			})
+		});
+	}
+}
+
 function onload() {
 	loadCharacter(sessionStorage.getItem("::openCharacter"));
-	$(".characterId").text(sessionStorage.getItem("::openCharacter"));
 }
 
 function saveOptions() {

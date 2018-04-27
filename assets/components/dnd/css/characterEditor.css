@@ -79,6 +79,12 @@
 	float: left;
 }
 
+.characterOptions .r button {
+	float: 0;
+	margin: 0;
+	float: right;
+}
+
 .characterOptions .r select {
 	float: right;
 }
