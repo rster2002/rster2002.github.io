@@ -150,3 +150,9 @@
 	top: 3%;
 	left: 3%;
 }
+
+.item .card p {
+	width: 94%;
+    position: relative;
+    left: 3%;
+}

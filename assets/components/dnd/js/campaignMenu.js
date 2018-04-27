@@ -212,10 +212,17 @@ function selectCharacter() {
 
 function addTolist(i, characterId) {
 	dbUsers.child(sUid).child("characters").child(characterId).once("value", function(c) {
-		var characterObj = c.val();
-		var characterName = characterObj["96_1"];
-		$(".selectCharacter .inner").append("<div class='item'><div class='card shadow-4' onclick='afterSelect(" + i + ")'><h1>" + characterName + "</h1></div></div>");
-		obj[i] = characterId;
+		dbUsers.child(sUid).child("characters").child(characterId + "-info").once("value", function(j) {
+			var characterObj = c.val();
+			var characterInfo = j.val();
+			var characterName = characterObj["96_1"];
+			additional = "";
+			if (j.hasChild("dupe")) {
+				additional += "<p>Dupe: " + characterInfo.dupe + "</p>"
+			}
+			$(".selectCharacter .inner").append("<div class='item'><div class='card shadow-4' onclick='afterSelect(" + i + ")'><h1>" + characterName + "</h1>" + additional + "</div></div>");
+			obj[i] = characterId;
+		});
 	})
 }
 
