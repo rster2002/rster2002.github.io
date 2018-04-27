@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Projects for tasks</title>
+		<!-- API and Libraries -->
+		<script src="../assets/js/library/jquery.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+		<!-- App scripts -->
+		<script src="../assets/components/task/js/firebase.js"></script>
+		<script src="../assets/components/task/js/misc.js"></script>
+		<script src="../assets/components/task/js/userinfo.js"></script>
+		<!-- Styles -->
+		<link href="../assets/components/task/css/appShell.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div class="bar">
+			<div class="userinfo">
+				<img class="userIcon">
+				<h1 class="username"></h1>
+			</div>
+			<button class="s1" onclick="openPage('dashboard')">Daskboard</button>
+		</div>
+		<div class="loader active"><div class="animation"></div></div>
+		<div class="page">
+			<div class="innerPage"></div>
+		</div>
+	</body>
+</html>

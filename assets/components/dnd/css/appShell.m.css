@@ -20,6 +20,11 @@ p {
 	display: none;
 }
 
+.bar #userIcon-Bar {
+	position: relative;
+	right: 1%;
+}
+
 .welcomeText h1 {
 	font-size: 3rem;
 }
@@ -53,6 +58,10 @@ p {
 	margin-top: 4vh;
 	height: 90vh;
 	overflow-y: scroll;
+}
+
+.startButton {
+	font-size: 2.5em;
 }
 
 /* Side Bar */

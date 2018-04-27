@@ -33,9 +33,9 @@ if (sessionStorage.getItem("::join") !== "true") {
 	dbCampaign.child(partyId).once("value",(e) => {
 		update(e.val());
 	});
+} else {
+	sessionStorage.setItem("::join", "false");
 }
-
-sessionStorage.setItem("::join", "false");
 
 dbCampaign.child(partyId).child("liveState").on("value", (u) => {
 	if (u.val() === "update") {
@@ -379,18 +379,21 @@ function kick(ban, f) {
 			dbUsers.child(loadedUid).child("characters").child(character + "-info").child("usedInCampaigns").once("value", function(c) {
 				var list = c.val();
 				var newList = [];
-				for (var i = 0; i < list.length; ++i) {
-					if (list[i] !== partyId) {
-						newList.unshift(list[i]);
+				if (list === undefined) {
+					for (var i = 0; i < list.length; ++i) {
+						if (list[i] !== partyId) {
+							newList.unshift(list[i]);
+						}
 					}
+					dbUsers.child(loadedUid).child("characters").child(character + "-info").child("usedInCampaigns").set(newList);
 				}
-				dbUsers.child(loadedUid).child("characters").child(character + "-info").child("usedInCampaigns").set(newList);
 				
+			}).then(function() {
 				dbCampaign.child(partyId).once("value",function(e) {
 					var partyContent = e.val();
 					console.log(partyContent);
 					var partyArray = partyContent.playerList;
-					var rePlayerList = [];
+					rePlayerList = [];
 					for (var i = 0; i < partyArray.length; ++i) {
 						if (partyArray[i] === loadedUid) {
 							console.log("kicked: " + partyArray[i]);
@@ -399,11 +402,11 @@ function kick(ban, f) {
 							console.log("skipped: " + partyArray[i])
 						}
 					}
-					
+				}).then(function() {
 					dbUsers.child(loadedUid).once("value", e => {
 						var dbContent = e.val();
 						var campaignsArray = dbContent.campaigns;
-						var rePartyList = [];
+						rePartyList = [];
 						for (var i = 0; i < campaignsArray.length; ++i) {
 							if (campaignsArray[i] === partyId) {
 								console.log("removed " + partyId + " from users party list");
@@ -412,19 +415,21 @@ function kick(ban, f) {
 								console.log("skipped: " + campaignsArray[i]);
 							}
 						}
+					}).then(function() {
 						dbUsers.child(loadedUid).child("campaigns").set(rePartyList);
 						dbCampaign.child(partyId).child("playerList").set(rePlayerList);
 						dbCampaign.child(partyId).child(sUid).set(null);
 						dbCampaign.child(partyId).child("liveState").set("update");
+
+						if (f !== undefined) {
+							f();
+						}
 					});
 				});
 			});
 		});
 //		dbCampaign.child(partyId).child("liveState").set("update");
 		
-		if (f !== undefined) {
-			f();
-		}
 
 		$(".kick").hide();
 		$(".ban").hide();
