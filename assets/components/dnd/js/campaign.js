@@ -406,7 +406,7 @@ function kick(ban, f) {
 					dbUsers.child(loadedUid).once("value", e => {
 						var dbContent = e.val();
 						var campaignsArray = dbContent.campaigns;
-						rePartyList = [];
+						reCampaignList = [];
 						for (var i = 0; i < campaignsArray.length; ++i) {
 							if (campaignsArray[i] === partyId) {
 								console.log("removed " + partyId + " from users party list");
@@ -416,7 +416,7 @@ function kick(ban, f) {
 							}
 						}
 					}).then(function() {
-						dbUsers.child(loadedUid).child("campaigns").set(rePartyList);
+						dbUsers.child(loadedUid).child("campaigns").set(reCampaignListList);
 						dbCampaign.child(partyId).child("playerList").set(rePlayerList);
 						dbCampaign.child(partyId).child(sUid).set(null);
 						dbCampaign.child(partyId).child("liveState").set("update");
