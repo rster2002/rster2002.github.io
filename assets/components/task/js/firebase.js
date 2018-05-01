@@ -10,3 +10,4 @@ var config = {
 firebase.initializeApp(config);
 
 const firestore = firebase.firestore();
+const projects = firestore.collection("projects");

@@ -31,6 +31,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 		$(".userIcon").attr("src", userIcon);
 		$(".username").text(username);
 		
+		sessionStorage.setItem("::username", username);
+		sessionStorage.setItem("::uid", uid);
+		
 		loader.hide();
 	}
 });

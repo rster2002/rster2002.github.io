@@ -78,3 +78,5 @@ waveImported = function(){
 		}
 	});
 };
+
+userRef = dbUsers.child(sessionStorage.getItem("::uid"));

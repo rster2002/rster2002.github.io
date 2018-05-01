@@ -48,6 +48,7 @@
 				<p class="section">Character</p>
 				<button icon="mode_edit" onclick="openPage('characterList')">Character editor</button>
 				<button icon="bookmark" onclick="openPage('campaignMenu')">Campaigns</button>
+<!--				<button icon="map" onclick="openPage('dm')">DM Tools</button>-->
 				<button icon="change_history" onclick="openPage('races')">Races</button>
 				<button icon="open_in_new" onclick="window.open('https://www.dndbeyond.com/','_blank');">D&amp;D Beyond</button>
                 <div class="divider"></div>
@@ -57,7 +58,6 @@
 				<button icon="arrow_back" onclick="logout();">Logout</button>
 			</div>
 		</div>
-		<script src="../assets/components/dnd/js/materialize.js"></script>
 		<div class="overlay-background"></div>
 		<div class="overlay">
 			<div class="content">
@@ -87,17 +87,27 @@
 				clearInterval(timer);
 			}
 		</script>
-		<div class="bar">
+		<div class="progressBar">
+			<div class="animation"></div>
+		</div>
+		<div class="menuFloater">
 			<img onclick="openSide();" class="sidenav-trigger" src="../assets/components/dnd/images/icons/ic_view_stream_black_24dp_2x.png">
-			<a id="username-Bar" class="right"></a>
-			<img id="userIcon-Bar" class="right">
+		</div>
+		<div class="userFloater">
+			<h1 id="username-Bar" class="right centerVertical"></h1>
+			<img id="userIcon-Bar" class="right centerVertical">
 		</div>
 		<div class="page">
 			<div class="innerPage">
-				<div class="welcomeText">
-					<h1>Welcome to Dungeons and Dragons Online</h1>
-					<p>Start by creating a character</p>
-					<button onclick="openPage('characterList')" class="startButton">Character editor</button>
+				<div class="boxer shadow center">
+					<div class="text">
+						<div class="title">
+							<h1>Welcome to the new UI</h1>
+						</div>
+						<div class="content">
+							<p class="center">There have been some UI changes to the website making the website more mobile friendly and overal more user friendly.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

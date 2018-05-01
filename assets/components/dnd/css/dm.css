@@ -1,0 +1,53 @@
+.notes {
+	width: 50%;
+	float: left;
+}
+
+.wrapper {
+	width: 100%;
+}
+
+.wrapper .card {
+	width: 90%;
+	height: 90%;
+	border-radius: 7px;
+	margin-bottom: 3vh;
+}
+
+.notesWrapper {
+	width: 100%;
+	margin-top: 5vh;
+}
+
+.card .actions {
+	width: 100%;
+	height: calc(5vh - 1px);
+	border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.card .actions button {
+	float: right;
+	margin-right: 0.5%;
+}
+
+.card .content {
+	padding: 1%;
+}
+
+.card .content h1 {
+	white-space: initial;
+}
+
+.newNote {
+	width: 100%;
+	height: 40vh;
+}
+
+.newNote textarea {
+	height: 25vh;
+	width: 70%;
+	resize: none;
+	font-size: 1.5em;
+	outline: 0;
+	border: 1px solid rgb(235, 235, 235);
+}

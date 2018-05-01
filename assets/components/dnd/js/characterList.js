@@ -52,12 +52,16 @@ function add() {
 }
 
 dbUsers.child(sUid).once("value", function(e) {
+	progress.show();
+	
 	if (e.hasChild("characterList")) {
 		dbUsers.child(sUid).child("characterList").once("value", function(e) {
 			var characterList = e.val();
 			for (var i = 0; i < characterList.length; ++i) {
 				addTolist(i, characterList[i]);
 			}
+			
+			progress.hide();
 		});
 	}
 });

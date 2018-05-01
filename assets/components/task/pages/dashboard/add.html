@@ -1,0 +1,33 @@
+<div class="innerContent">
+	<div class="name">
+		<input id="name" placeholder="Name your project" maxlength="20">
+	</div>
+	<div class="settings">
+		<div class="colorPicker">
+			<div class="color selected" style="background-color: white;"></div>
+			<div class="color" style="background-color: #33FF42;"></div>
+			<div class="color" style="background-color: #FFA833;"></div>
+			<div class="color" style="background-color: #6AB25F;"></div>
+			<div class="color" style="background-color: #2A78DC;"></div>
+			<div class="color" style="background-color: #FFD700;"></div>
+			<div class="color" style="background-color: #663271;"></div>
+			<div class="color" style="background-color: #f92b2b;"></div>
+		</div>
+	</div>
+	<div class="create" onclick="create()">
+		<h1 class="center">Create</h1>
+	</div>
+	<script>loader.hide();</script>
+	<script>
+		$(".color").on("click", function() {
+			var t = this;
+			$(".color").each(function() {
+				$(this).removeClass("selected");
+			});
+			
+			$(t).addClass("selected");
+			var color = $(t).css("background-color");
+			$(".name").css("background-color", color);
+		});
+	</script>
+</div>
