@@ -1,0 +1,189 @@
+.head {
+	height: 10%;
+	width: 100%;
+	color: white;
+}
+
+.head .wrapper {
+	height: 100%;
+	width: 49%;
+	float: left;
+}
+
+.head .wrapper h1 {
+	position: relative;
+	top: 50%;
+	left: 1%;
+	transform: translate(0%, -50%);
+}
+
+.head .fullup {
+	width: 40%;
+	height: 100%;
+	float: left;
+}
+
+.head .button {
+	display: none;
+	height: 100%;
+	width: 10%;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+}
+
+.head .button:hover {
+	background-color: rgba(235, 235, 235, .5);
+}
+
+.content {
+	height: 90%;
+	width: 100%;
+}
+
+.content .colom {
+	width: 25%;
+	height: 100%;
+	float: left;
+}
+
+.content .card {
+	width: 90%;
+	height: 90%;
+	border-radius: 5px;
+}
+
+.content .card .top {
+	color: white;
+	border-top-right-radius: 5px; 
+	border-top-left-radius: 5px;
+	height: 10%;
+}
+
+.content .card .top h1 {
+	width: 98%;
+	margin-left: 2%;
+}
+
+.content .card .con {
+	height: 80%;
+}
+
+.content .card .action {
+	color: black;
+	border-bottom-right-radius: 5px; 
+	border-bottom-left-radius: 5px;
+	height: calc(10% - 1px);
+	border-top: 1px solid rgb(235, 235, 235);
+	text-align: center;
+	cursor: pointer;
+}
+
+.content .card .action:hover {
+	background-color: rgb(235, 235, 235);
+}
+
+.r1 {
+	width: calc(25% - 1px);
+	border-right: 1px solid rgb(235, 235, 235);
+}
+
+.taskList {
+	height: 93%;
+	width: 100%;
+}
+
+.taskList .taskWrapper {
+	height: 100%;
+	width: 100%;
+}
+
+.addTask {
+	height: calc(7% - 1px);
+	width: 100%;
+	border-top: 1px solid rgb(235, 235, 235);
+}
+
+.addTask .img {
+	height: 100%;
+	width: 15%;
+	float: left;
+}
+
+.addTask .img img {
+	height: 60%;
+}
+
+.addTask .input {
+	width: 85%;
+	height: 100%;
+	float: left;
+}
+
+.addTask .input input {
+	width: calc(100% - 2px);
+	height: 100%;
+	border: 0;
+	outline: 0;
+	font-size: 150%;
+}
+
+.task {
+	width: 100%;
+	height: 7%;
+	cursor: default;
+	cursor: pointer;
+}
+
+.task:hover {
+	background-color: rgb(235, 235, 235);
+}
+
+.task .check {
+	height: 100%;
+	width: 15%;
+	float: left;
+}
+
+.task .check img {
+	height: 60%;
+	cursor: pointer;
+}
+
+.task .info {
+	height: 100%;
+	width: 85%;
+	float: left;
+}
+
+.task .info h1 {
+	width: 97%;
+	margin-left: 3%;
+	font-size: 1.5em;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.task.closed {
+	color: rgb(235, 235, 235);
+}
+
+.task.closed:hover {
+	background-color: white;
+}
+
+.taskInfo {
+	width: 100%;
+	height: 100%;
+}
+
+.taskInfo .taskTitle {
+	width: 100%;
+	height: 10%;
+}
+
+.taskInfo .taskTitle {
+	width: 99%;
+	margin-left: 1%;
+}

@@ -27,11 +27,10 @@ button.wave--button:hover {
 
 button.wave--button i {
 	height: 90%;
-	top: 50%;
-	left: 0%;
-	transform: translate(0%,14%);
 	margin-right: 3px;
 	margin-left: 3px;
+	font-size: inherit;
+    transform: translate(0%, 12%);
 }
 
 button.wave--button i.wave--right {

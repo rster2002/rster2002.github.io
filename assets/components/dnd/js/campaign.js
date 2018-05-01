@@ -11,7 +11,6 @@ var isDM = false;
 
 timer = setInterval(function() {
 	if (sessionStorage.getItem("::openPage") === "campaign") {
-		console.log("timer fire");
 		if (loadedUid === sUid) {
 			save();
 		}
@@ -91,7 +90,6 @@ function update(partyContent) {
 		var w = playerList[i];
 		if (w !== dmUid) {
 			var character = partyContent[w]["character"];
-			console.log(w + " " + character);
 			addToList(w, character);
 		}
 	}
@@ -128,7 +126,6 @@ function loadCharacter(uid) {
 			try {	
 				dbUsers.child(lUid).child("characters").child(characterName).once("value",(e) => {
 					var characterObj = e.val();
-					console.log(characterObj);
 					
 					if (sUid === lUid) {
 						selfl(characterObj);
@@ -142,7 +139,6 @@ function loadCharacter(uid) {
 								allowEdit = "0";
 							}
 							
-							console.log(allowEdit);
 							
 							if (allowEdit === "1") {
 								selfl(characterObj);
@@ -231,7 +227,6 @@ function save(showNote) {
 	if (isDM === false) {
 		if (loadedUid === sUid) {
 			s();
-			console.log(characterObj);
 			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 			if (showNote) {
 				note.open("Saved " + $("#form96_1").val(), 1000);
@@ -242,8 +237,6 @@ function save(showNote) {
 	} else if (isDM === true) {
 		try {
 			s();
-			console.log(characterObj);
-			console.log(loadedUid);
 			dbUsers.child(loadedUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 			if (showNote) {
 				note.open("Saved " + $("#form96_1").val(), 1000);
@@ -341,7 +334,6 @@ function changeId() {
 						for (var i = 0; i < playerList.length; ++i) {
 							var wUid = playerList[i];
 
-							console.log("wUid: " + wUid);
 							updateList(wUid);
 						}
 
@@ -391,7 +383,6 @@ function kick(ban, f) {
 			}).then(function() {
 				dbCampaign.child(partyId).once("value",function(e) {
 					var partyContent = e.val();
-					console.log(partyContent);
 					var partyArray = partyContent.playerList;
 					rePlayerList = [];
 					for (var i = 0; i < partyArray.length; ++i) {
@@ -399,7 +390,6 @@ function kick(ban, f) {
 							console.log("kicked: " + partyArray[i]);
 						} else {
 							rePlayerList.push(partyArray[i]);
-							console.log("skipped: " + partyArray[i])
 						}
 					}
 				}).then(function() {
@@ -412,7 +402,6 @@ function kick(ban, f) {
 								console.log("removed " + partyId + " from users party list");
 							} else {
 								reCampaignList.push(campaignsArray[i]);
-								console.log("skipped: " + campaignsArray[i]);
 							}
 						}
 					}).then(function() {
@@ -463,7 +452,6 @@ function ban() {
 			}
 			
 			banList.unshift(loadedUid);
-			console.log(banList);
 			
 			dbCampaign.child(partyId).child("banList").set(banList);
 			dbCampaign.child(partyId).child(loadedUid).set(null);

@@ -25,33 +25,18 @@ p {
 	right: 1%;
 }
 
-.welcomeText h1 {
-	font-size: 3rem;
+.boxer {
+	width: 90%;
+	height: 90%;
 }
 
-.welcomeText p {
-	font-size: 2.5rem;
+.boxer .title h1 {
+	font-size: 5em !important;
 }
 
-.hud {
-	position: relative;
-	z-index: 200;
-	background-color: white;
-	height: 10vh;
-	width: 100vw;
-	margin: 0;
-	margin-top: 7vh;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	border-radius: 0;
-}
-
-.hud button {
-	position: relative;
-	height: 8vh;
-	top: 1vh;
-	left: 2%;
-	float: left;
-	font-size: 2rem;
+.boxer .text .content {
+	width: 90%;
+	font-size: 3em;
 }
 
 .page {

@@ -19,18 +19,16 @@
 	src: url(../../../css/fonts/Museo500.otf);
 }
 
-.wave--sidenavWrapper {
-	z-index: 100 !important;
-}
-
-.shadow {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+@font-face {
+	font-family: Alexana;
+	src: url(../fonts/Alexana.ttf);
 }
 
 h1, p, a {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	margin: 0;
 }
 
 h1 {
@@ -41,6 +39,151 @@ html, body {
 	padding: 0;
 	margin: 0;
 	overflow: hidden;
+}
+
+h1, h2, textarea {
+	margin: 0;
+	padding: 0;
+	font-family: "Spectral SC";
+}
+
+p {
+	font-family: "Vollkorn SC";
+}
+
+ button {
+	transition: .1s all ease-in;
+	font-size: 1.5rem;
+	color: #00B6C9;
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	border-radius: 3px;
+	outline: 0;
+}
+
+button:hover {
+	transition: .1s all ease-in;
+	background-color: #eaeaea;
+}
+
+button i {
+	font-size: inherit;
+	transform: translate(0%, 12%);
+}
+
+input, select {
+	border: none;
+	font-size: 1.2rem;
+	font-family: "Vollkorn SC";
+	background-color: #eaeaea;
+	border-radius: 3px;
+}
+
+button.blue {
+	background-color: #4c90ff;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+button.blue:hover {
+	background-color: #8cb6f9;
+}
+
+button.red {
+	background-color: #f21d1d;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+button.red:hover {
+	background-color: #f96161;
+}
+
+.push {
+	margin-bottom: 5vh;
+}
+
+.center {
+	position: relative;
+    top: 50%;
+    left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.centerHorizontal {
+	position: relative;
+    left: 50%;
+	transform: translate(-50%, 0%);
+}
+
+.centerVertical {
+	position: relative;
+    top: 50%;
+	transform: translate(0%, -50%);
+}
+
+.wave--sidenavWrapper {
+	z-index: 100 !important;
+}
+
+.shadow {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.h1 {
+	width: 100%;
+	height: 30%;
+}
+
+.h1 h1 {
+	width: 99%;
+	text-align: center;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.h2 {
+	width: 100%;
+	height: 20%;
+}
+
+.h2 h2 {
+	width: 99%;
+	text-align: center;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.button {
+	display: block;
+	cursor: pointer;
+	width: 100%;
+	height: 15vh;
+}
+
+.button:hover {
+	background-color: rgb(235,235,235);
+}
+
+.button h1 {
+	text-align: center;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }
 
 .loader-background {
@@ -85,99 +228,75 @@ html, body {
 	float: left;
 }
 
-.bar {
-	position: fixed;
-	top: 0;
+.progressBar {
 	width: 100vw;
-	height: 7vh;
-	background-color: white;
-	overflow: hidden;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	z-index: 50;
+	height: 2px;
+	background-color: rgb(235, 235, 235);
 }
 
-.center {
-	position: absolute;
-    top: 50%;
-    left: 50%;
-	transform: translate(-50%, -50%);
-}
-
- button {
-	transition: .1s all ease-in;
-	font-size: 1.5rem;
-	color: #00B6C9;
-	border: none;
-	background-color: white;
-	cursor: pointer;
-	border-radius: 3px;
-}
-
-button:hover {
-	transition: .1s all ease-in;
-	background-color: #eaeaea;
-}
-
-.bar button {
-	transition: .1s all ease-in;
-	height: 70%;
+.progressBar .animation {
+	background-color: #2a2a72;
+	background-image: linear-gradient(-90deg, #2a2a72 0%, #009ffd 74%);
+	width: 0;
+	height: 100%;
 	position: relative;
-	top: 15%;
-	font-size: 1.5rem;
-	color: #00B6C9;
-	border: none;
-	background-color: white;
+}
+
+.progressBar.active .animation {
+	animation: progressBar 2s linear infinite;
+}
+
+@keyframes progressBar {
+	0% {
+		width: 0%;
+		left: 0;
+	}
+	50% {
+		width: 50%;
+		left: 25vw;
+	}
+	100% {
+		width: 0%;
+		left: 100vw;
+	}
+}
+
+.menuFloater {
+	position: fixed;
+	height: 6vh;
+	width: 6vh;
+	background-color: transparent;
+}
+
+.menuFloater img {
 	cursor: pointer;
-	border-radius: 3px;
-	margin-left: 5px;
-	margin-right: 5px;
+	width: 90%;
 }
 
-.bar .sidenav-trigger {
-	cursor: pointer;
+.userFloater {
+	position: fixed;
+	height: 6vh;
+	background-color: red;
+    width: 40vw;
+    left: 58vw;
+    background-color: transparent;
 }
 
-.bar button:hover {
-	transition: .1s all ease-in;
-	background-color: #eaeaea;
+.userFloater h1 {
+	margin-left: 1%;
+	margin-right: 1%;
 }
 
-.bar .openMenu {
-	background-color: #4c90ff;
-	color: white;
-}
-
-.bar .openMenu:hover {
-	background-color: #8cb6f9;
-}
-
-.bar img {
-	height: 5vh;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-top: 1vh;
-	border-radius: 100%;
-}
-
-.bar #userIcon-Bar {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.bar a {
-	font-size: 1.5rem;
-	color: #00B6C9;
-	font-family: 'Museo', sans-serif;
-	height: 5vh;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-top: 1.75vh;
+.userFloater img {
+	height: 5.5vh;
+	width: 5.5vh;
+	border-radius: 50%;
+	border: 1px solid rgb(235, 235, 235);
 }
 
 .page {
-	height: 93vh;
+	height: 100vh;
 	width: 100vw;
-	position: fixed;
-	top: 7vh;
 }
 
 .innerPage {
@@ -189,85 +308,44 @@ button:hover {
     overflow-y: scroll;
 }
 
-.welcomeText {
-	height: 20%;
-	width: 50%;
-	position: relative;
-	top: 40%;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+.boxer {
+	width: 70%;
+	height: 70%;
+	border-radius: 5vh;
+	background-color: #0cbaba;
+	background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
+	color: white;
 }
 
-.welcomeText h1, p {
-	white-space: normal;
-}
-
-h1 {
-	margin: 0;
-	padding: 0;
-	font-family: "Spectral SC";
-}
-
-p {
-	font-family: "Vollkorn SC";
-}
-
-input, select {
-	border: none;
-	font-size: 1.2rem;
-	font-family: "Vollkorn SC";
-	background-color: #eaeaea;
-	border-radius: 3px;
-}
-
-.hud {
-	position: fixed;
-	z-index: 200;
-	background-color: white;
-	height: 6%;
-	width: 20%;
-	margin: 0;
-	margin-top: 1%;
-	margin-left: 1%;
-	border-radius: 5px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.hud button {
-	position: relative;
-	height: 90%;
-	margin-left: 2%;
-	margin-top: 1%;
+.boxer .text {
+	width: 100%;
+	height: 100%;
 	float: left;
 }
 
-button.blue {
-	background-color: #4c90ff;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	color: white;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+.boxer .text .title {
+	height: 20%;
+	width: 100%;
+	position: relative;
+	top: 5vh;
 }
 
-button.blue:hover {
-	background-color: #8cb6f9;
+.boxer .text .title h1 {
+	font-size: 3.5em;
+    position: relative;
+    left: 1%;
 }
 
-button.red {
-	background-color: #f21d1d;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	color: white;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+.boxer .text .content {
+	width: 30%;
+	height: 80%;
 }
 
-button.red:hover {
-	background-color: #f96161;
+.boxer .text .content p {
+	width: 90%;
+	height: 90%;
+	white-space: initial;
+	font-size: 1.5em;
 }
 
 .error-background {
@@ -384,27 +462,19 @@ button.red:hover {
 
 .note {
 	z-index: 2000;
-	top: 100vh;
+	top: -9vh;
 	position: fixed;
-	height: 10vh;
+	height: 7vh;
 	width: 60vw;
 	left: 20vw;
+	border-radius: 5vh;
 	background-color: white;
-	transition: .15s all ease-in;
+	transition: .1s all ease-in;
 }
 
 .note.open {
-	top: 90vh;
-	transition: .15s all ease-in;
-}
-
-.note.close {
-	animation: open linear .15s backwards;
-}
-
-@keyframes open {
-	from {top: 100vh}
-	to {top: 90vh}
+	transition: .1s all ease-in;
+	top: 1vh;
 }
 
 .note #noteContent {

@@ -1,0 +1,158 @@
+<div class="innerContent">
+	<div class="r1">
+		<div class="taskList">
+			<div class="taskWrapper">
+<!--
+				<div class="task">
+					<div class="check">
+						<img src="../assets/images/icons/google/unchecked.png" class="center">
+					</div>
+					<div class="info">
+						<h1 class="center">Taks</h1>
+					</div>
+				</div>
+				<div class="task closed">
+					<div class="check">
+						<img src="../assets/images/icons/google/checked.png" class="center">
+					</div>
+					<div class="info">
+						<h1 class="center">Taks</h1>
+					</div>
+				</div>
+-->
+			</div>
+		</div>
+		<div class="addTask">
+			<div class="img">
+				<img src="../assets/images/icons/google/add.png" class="center">
+			</div>
+			<div class="input">
+				<input id="taskInput" placeholder="New task">
+			</div>
+		</div>
+	</div>
+	<div class="r3">
+		<div class="taskInfo">
+			<div class="taskTitle">
+				<h1 class="center" id="taskTitle"></h1>
+			</div>
+		</div>
+	</div>
+	<script>loader.hide();</script>
+	<script>
+		function loadInfo(here) {
+			var taskId = $(here).attr("taskId");
+			ref.collection("tasks").doc(taskId).get().then(function(doc) {
+				if (doc && doc.exists) {
+					var taskObj = doc.data();
+					$("#taskTitle").text(taskObj.task);
+				}
+			});
+		}
+		
+		async function addOpenTasks(array) {
+			for (var i = 0; i < array.length; ++i) {
+				var task = array[i];
+				console.log(task);
+				$(".taskWrapper").append("<div class='task' id='task" + i + "' taskid=" + task.__id + "><div class='check'><img src='../assets/images/icons/google/unchecked.png' class='center checkbox'></div><div class='info'><h1 class='center'>" + task.task + "</h1></div></div>");
+				
+				$("#task" + i + " .checkbox").on("click", function() {
+					closeTask(this);
+				});
+				
+				$("#task" + i).on("click", function() {
+					loadInfo(this);
+				});
+			}
+		}
+		
+		async function addCloseTasks(array) {
+			console.log(array)
+			for (var i = 0; i < array.length; ++i) {
+				var task = array[i];
+				console.log(task);
+				$(".taskWrapper").append("<div class='task closed' id='closedTask" + i + "' taskid=" + task.__id + "><div class='check'><img src='../assets/images/icons/google/checked.png' class='center checkbox'></div><div class='info'><h1 class='center'>" + task.task + "</h1></div></div>");
+				
+				$("#closedTask" + i + " .checkbox").on("click", function() {
+					openTask(this);
+				});
+			}
+		}
+		
+		function closeTask(here) {
+			var t = $(here).parent().parent();
+			var taskId = t.attr("taskId");
+			ref.collection("tasks").doc(taskId).update({
+				open: false,
+				closeTime: Date.now()
+			});
+			
+			ref.collection("tasks").doc("updater").update({
+				state: "update"
+			});
+		}
+		
+		function openTask(here) {
+			var t = $(here).parent().parent();
+			var taskId = t.attr("taskId");
+			ref.collection("tasks").doc(taskId).update({
+				open: true,
+				closeTime: null
+			});
+			
+			ref.collection("tasks").doc("updater").update({
+				state: "update"
+			});
+		}
+		
+		ref.collection("tasks").doc("updater").get().then(function (doc) {
+			console.log(doc);
+			if (doc.exists === false) {
+				ref.collection("tasks").doc("updater").set({
+					state: "resting",
+					type: "updater"
+				});
+			}
+		});
+		
+		ref.collection("tasks").doc("updater").onSnapshot(function (doc) {
+			console.log("get update");
+			var d = doc.data();
+			if (d.state === "update") {
+				updateList();
+				ref.collection("tasks").doc("updater").update({
+					state: "resting"
+				});
+			}
+		});
+		
+		async function updateList() {
+			$(".taskWrapper").remove();
+			$(".taskList").append("<div class='taskWrapper'></div>")
+			var q = await createQuery(ref.collection("tasks").where("type", "==", "task").where("open", "==", true).orderBy("creationTime", "desc"));
+			console.log(q);
+			addOpenTasks(q);
+			var c = await createQuery(ref.collection("tasks").where("type", "==", "task").where("open", "==", false).orderBy("closeTime", "desc"));
+			addCloseTasks(c);
+		}
+		
+		$("#taskInput").keydown(function(e) {
+			if (e.keyCode === 13) {
+				var task = $(this).val();
+				$(this).val("");
+				ref.collection("tasks").add({
+					task: task,
+					type: "task",
+					creationTime: Date.now(),
+					createdBy: sessionStorage.getItem("::uid"),
+					open: true
+				});
+				ref.collection("tasks").doc("updater").update({
+					state: "update"
+				});
+			}
+		});
+		
+		updateList();
+	</script>
+</div>

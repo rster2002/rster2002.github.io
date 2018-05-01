@@ -1,0 +1,51 @@
+<div class="innerPage scroll">
+	<script id="T1" type="text/javascript"></script>
+	<link id="T2" rel="stylesheet" type="text/css">
+	<link id="T3" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
+	<script>
+		$("#T1").attr("src", "../assets/components/dnd/js/" + sessionStorage.getItem("::openPage") + ".js");
+		$("#T2").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".css");
+		$("#T3").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".m.css");
+	</script>
+	<div class="h1">
+		<h1>DM Tools</h1>
+	</div>
+	<div class="h2">
+		<h2>Notes</h2>
+	</div>
+	<div class="button">
+		<h1>New</h1>
+	</div>
+	<div class="notesWrapper">
+		<div class="notes">
+			<div class="wrapper">
+				<div class="card shadow centerHorizontal">
+					<div class="actions">
+						<button class="centerVertical" class="note.remove()"><i class="material-icons">cancel</i></button>
+						<button class="centerVertical"><i class="material-icons">bookmark_border</i></button>
+						<button class="centerVertical"><i class="material-icons">share</i></button>
+						<button class="centerVertical"><i class="material-icons">input</i></button>
+						<button class="centerVertical"><i class="material-icons">edit</i></button>
+					</div>
+					<div class="content">
+						<h1>Hello World</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="notes">
+
+		</div>
+	</div>
+	<script>
+		loader.hide();
+		$("#newNoteTextarea").attr("placeholder", randomFromArray([
+			"Your plothole",
+			"Your plottwist",
+			"Your villians evil plan",
+			"The reason this tree is dead",
+			"The reason the mountain is upsidedown"
+		]));
+	</script>
+	<div class="push"></div>
+</div>

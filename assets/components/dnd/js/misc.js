@@ -82,6 +82,15 @@ loader = {
 	}
 }
 
+progress = {
+	show: function() {
+		$(".progressBar").addClass("active");
+	},
+	hide: function() {
+		$(".progressBar").removeClass("active");
+	}
+}
+
 function openPage(page) {
 	loader.show();
 	$(".page.innerPage").remove();

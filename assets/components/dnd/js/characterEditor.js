@@ -3,7 +3,6 @@ characters = "abcdefghijklmnopqrstuvwxyz0123456789";
 
 timer = setInterval(function() {
 	if (sessionStorage.getItem("::openPage") === "characterEditor") {
-		console.log("timer fire");
 		if (sessionStorage.getItem("::saved") !== "false") {
 			saveCharacter(false);
 		}
@@ -15,7 +14,9 @@ $(".innerPage").ready(() => {
 });
 
 function ctrlS() {
-	saveCharacter(true);
+	if (sessionStorage.getItem("::openPage") === "characterEditor") {
+		saveCharacter(true);
+	}
 }
 
 sessionStorage.setItem("::saved","false");
@@ -56,16 +57,16 @@ function upCharacter() {
 }
 
 function saveCharacter(show) {
+	
+	progress.show();
     
 	se = false;
 	
 	try {
 		s();
-		if (show) {
-			console.log(characterObj);
-		}
 		if (sessionStorage.getItem("::saved") !== "false") {
 			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj).then(() => {
+				progress.hide();
 				if (show) {
 					note.open("Saved", 1000);
 				}
@@ -88,7 +89,6 @@ function loadCharacter(i) {
 				var dbContent = e.val();
 				if (e.hasChild(i)) {
 					var c = dbContent[i];
-					console.log(c);
 					l(c);
 					sessionStorage.setItem("::saved",i);
 					dbUsers.child(sUid).child("characters").child(i + "-info").once("value", function(e) {
@@ -182,8 +182,65 @@ function dupe() {
 	}
 }
 
-function onload() {
+var inputs = [
+	"form83_1",
+	"form84_1",
+	"form82_1",
+	"form86_1",
+	"form81_1",
+	"form85_1"
+]
+
+var mods = {
+	"form83_1": "form56_1",
+	"form84_1": "form59_1",
+	"form82_1": "form58_1",
+	"form86_1": "form57_1",
+	"form81_1": "form60_1",
+	"form85_1": "form55_1"
+}
+
+var modifiers = [
+	"-5",
+	"-4",
+	"-4",
+	"-3",
+	"-3",
+	"-2",
+	"-2",
+	"-1",
+	"-1",
+	"+0",
+	"+0",
+	"+1",
+	"+1",
+	"+2",
+	"+2",
+	"+3",
+	"+3",
+	"+4",
+	"+4",
+	"+5"
+]
+
+function onload() {	
 	loadCharacter(sessionStorage.getItem("::openCharacter"));
+	
+	for (var i = 0; i < inputs.length; ++i) {
+		var selector = "#" + inputs[i];
+		var modSelector = "#" + mods[inputs[i]];
+		calcMod(selector, modSelector);
+	}
+}
+
+function calcMod(selector, modSelector) {
+	$(selector).focusout(function() {
+		var value = Number($(this).val());
+		var modValue = modifiers[value - 1];
+		console.log(selector, modSelector);
+		console.log(value, modValue);
+		$(modSelector).val(modValue);
+	});
 }
 
 function saveOptions() {

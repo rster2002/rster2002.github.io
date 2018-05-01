@@ -4,6 +4,7 @@ var waveOnload = function (wave) {
 		"colors",
 		"card",
 		"shadow",
-		"popover"
+		"popover",
+		"buttons"
 	], true);
 }
