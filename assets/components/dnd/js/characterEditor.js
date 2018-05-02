@@ -107,6 +107,44 @@ function loadCharacter(i) {
 						} else {
 							$(".characterId").text(sessionStorage.getItem("::openCharacter"));
 						}
+						
+						function prop(text) {
+							return "<div class='property'><p>" + text + "</p></div>"
+						}
+						
+						if (e.hasChild("spells")) {
+							var spellArray = Object.values(content.spells);
+							console.log(spellArray);
+							for(var i = 0; i < spellArray.length; ++i) {
+								var spell = spellArray[i];
+								var properties = "";
+								if (spell.verbal === true) {
+									properties += prop("Verbal");
+								}
+								
+								if (spell.somatic === true) {
+									properties += prop("Somatic");
+								}
+								
+								if (spell.material !== '') {
+									properties += prop("Material " + spell.material);
+								}
+								
+								if (spell.range !== '') {
+									properties += prop("Range " + spell.range);
+								}
+								
+								if (spell.castingTime !== '') {
+									properties += prop("Casting time " + spell.castingTime);
+								}
+								
+								if (spell.duration !== '') {
+									properties += prop("Duration " + spell.duration);
+								}
+								
+								$(".spellList").append("<div class='spell centerHorizontal rounded s2'><div class='title'><h1>" + spell.name + "</h1></div><div class='properties'>" + properties + "</div><div class='description'><p>" + spell.description + "</p></div></div>")
+							}
+						}
 					});
 					loader.hide();
 				} else {
@@ -180,6 +218,22 @@ function dupe() {
 			})
 		});
 	}
+}
+
+function addSpell() {
+	var spellId = genId();
+	var spellObj = {
+		name: $("#spellName").val(),
+		verbal: $(".verbal").hasClass("selected"),
+		somatic: $(".somatic").hasClass("selected"),
+		material: $("#materialComponent").val(),
+		range: $("#range").val(),
+		castingTime: $("#castingTime").val(),
+		duration: $("#duration").val(),
+		description: $("#description").val(),
+		id: spellId
+	};
+	userRef.child("characters").child(sessionStorage.getItem("::openCharacter") + "-info").child("spells").child(spellId).set(spellObj);
 }
 
 var inputs = [

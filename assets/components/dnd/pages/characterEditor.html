@@ -15,6 +15,73 @@
 
 			</div>
 		</div>
+		<div class="spells">
+			<div class="addSpell centerHorizontal s2 rounded">
+				<div class="title">
+					<h1>Add spell</h1>
+				</div>
+				<div class="spellName">
+					<input placeholder="Spell" id="spellName" class="center">
+				</div>
+				<div class="props">
+					<div class="select verbal rounded">
+						<h1>Verbal</h1>
+					</div>
+					<div class="select somatic rounded">
+						<h1>Somatic</h1>
+					</div>
+					<div class="material select rounded input">
+						<h1>Material</h1>
+						<input placeholder="Material" id="materialComponent">
+					</div>
+					<div class="select input range rounded">
+						<h1>Range</h1>
+						<input placeholder="range" id="range">
+					</div>
+					<div class="select input castingTime rounded">
+						<h1>Casting time</h1>
+						<input placeholder="time" id="castingTime">
+					</div>
+					<div class="select input duration rounded">
+						<h1>Duration</h1>
+						<input placeholder="duration" id="duration">
+					</div>
+				</div>
+				<div class="description">
+					<textarea id="description" class="center"></textarea>
+				</div>
+				<div class="confirm" onclick="addSpell()">
+					<h1 class="center">Add</h1>
+				</div>
+			</div>
+			<div class="spellList">
+			</div>
+		</div>
+		<script>
+			$(".select").each(function() {
+				if (!$(this).hasClass("input")) {
+					$(this).on("click", function() {
+						changeState(this);
+					});
+				} else {
+					$(".select.input input").on("keyup", function() {
+						checkInput(this);
+					});
+				}
+			});
+			
+			function changeState(here) {
+				$(here).toggleClass("selected");
+			}
+			
+			function checkInput(here) {
+				if ($(here).val() !== '') {
+					$(here).parent().addClass("selected");
+				} else {
+					$(here).parent().removeClass("selected");
+				}
+			}
+		</script>
 		<div class="characterInfo">
 			<p class="characterId"></p>
 		</div>

@@ -78,6 +78,7 @@ input, select {
 	font-family: "Vollkorn SC";
 	background-color: #eaeaea;
 	border-radius: 3px;
+	outline: 0;
 }
 
 button.blue {
@@ -134,6 +135,10 @@ button.red:hover {
 
 .s5 {
 	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.rounded {
+	border-radius: 1vh;
 }
 
 .push {
