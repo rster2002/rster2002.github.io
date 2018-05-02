@@ -407,7 +407,7 @@ function kick(ban, f) {
 					}).then(function() {
 						dbUsers.child(loadedUid).child("campaigns").set(reCampaignList);
 						dbCampaign.child(partyId).child("playerList").set(rePlayerList);
-						dbCampaign.child(partyId).child(sUid).set(null);
+						dbCampaign.child(partyId).child(loadedUid).set(null);
 						dbCampaign.child(partyId).child("liveState").set("update");
 
 						if (f !== undefined) {
