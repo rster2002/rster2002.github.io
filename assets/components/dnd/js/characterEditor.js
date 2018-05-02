@@ -79,6 +79,55 @@ function saveCharacter(show) {
 	}
 }
 
+function addSpellToList(spell) {
+	function prop(text) {
+		return "<div class='property'><p>" + text + "</p></div>"
+	}
+	
+	var properties = "";
+	if (spell.level !== '') {
+		if (spell.level === "0") {
+			properties += prop("cantrip");
+		} else {
+			properties += prop("Level " + spell.level);
+		}
+	}
+
+	if (spell.verbal === true) {
+		properties += prop("Verbal");
+	}
+
+	if (spell.somatic === true) {
+		properties += prop("Somatic");
+	}
+
+	if (spell.material !== '') {
+		properties += prop("Material " + spell.material);
+	}
+
+	if (spell.range !== '') {
+		properties += prop("Range " + spell.range);
+	}
+
+	if (spell.castingTime !== '') {
+		properties += prop("Casting time " + spell.castingTime);
+	}
+
+	if (spell.duration !== '') {
+		properties += prop("Duration " + spell.duration);
+	}
+
+	if (spell.concentration === true) {
+		properties += prop("Concentration");
+	}
+
+	if (spell.ritual === true) {
+		properties += prop("Ritual");
+	}
+
+	$(".spellList").prepend("<div class='spell centerHorizontal rounded s2'><div class='title'><h1>" + spell.name + "</h1></div><div class='properties'>" + properties + "</div><div class='description'><p>" + spell.description + "</p></div></div>");
+}
+
 function loadCharacter(i) {
 	try {
 		if (i) {
@@ -108,41 +157,12 @@ function loadCharacter(i) {
 							$(".characterId").text(sessionStorage.getItem("::openCharacter"));
 						}
 						
-						function prop(text) {
-							return "<div class='property'><p>" + text + "</p></div>"
-						}
-						
 						if (e.hasChild("spells")) {
 							var spellArray = Object.values(content.spells);
 							console.log(spellArray);
 							for(var i = 0; i < spellArray.length; ++i) {
-								var spell = spellArray[i];
-								var properties = "";
-								if (spell.verbal === true) {
-									properties += prop("Verbal");
-								}
-								
-								if (spell.somatic === true) {
-									properties += prop("Somatic");
-								}
-								
-								if (spell.material !== '') {
-									properties += prop("Material " + spell.material);
-								}
-								
-								if (spell.range !== '') {
-									properties += prop("Range " + spell.range);
-								}
-								
-								if (spell.castingTime !== '') {
-									properties += prop("Casting time " + spell.castingTime);
-								}
-								
-								if (spell.duration !== '') {
-									properties += prop("Duration " + spell.duration);
-								}
-								
-								$(".spellList").append("<div class='spell centerHorizontal rounded s2'><div class='title'><h1>" + spell.name + "</h1></div><div class='properties'>" + properties + "</div><div class='description'><p>" + spell.description + "</p></div></div>")
+								var spellObj = spellArray[i];
+								addSpellToList(spellObj);
 							}
 						}
 					});
@@ -231,9 +251,14 @@ function addSpell() {
 		castingTime: $("#castingTime").val(),
 		duration: $("#duration").val(),
 		description: $("#description").val(),
+		level: $("#level").val(),
+		concentration: $(".concentration").hasClass("selected"),
+		ritual: $(".ritual").hasClass("selected"),
 		id: spellId
 	};
 	userRef.child("characters").child(sessionStorage.getItem("::openCharacter") + "-info").child("spells").child(spellId).set(spellObj);
+	
+	addSpellToList(spellObj);
 }
 
 var inputs = [
