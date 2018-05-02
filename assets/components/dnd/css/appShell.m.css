@@ -2,29 +2,6 @@ p {
 	font-size: .7em;
 }
 
-.bar {
-	height: 10vh;
-}
-
-.bar button {
-	font-size: 2.5rem;
-}
-
-.bar img {
-	height: 7vh;
-	margin-top: 1.5vh;
-	margin-right: 5px;
-}
-
-.bar a {
-	display: none;
-}
-
-.bar #userIcon-Bar {
-	position: relative;
-	right: 1%;
-}
-
 .boxer {
 	width: 90%;
 	height: 90%;
@@ -36,6 +13,23 @@ p {
 
 .boxer .text .content {
 	width: 90%;
+	font-size: 3em;
+}
+
+.sidebar.open {
+	width: 80vw;
+}
+
+.sidebarBackground .sidebarExit {
+	left: 80%;
+	width: 20%;
+}
+
+.sidebar .nameWrapper h1 {
+	font-size: 4em;
+}
+
+.sidebar .menubutton p {
 	font-size: 3em;
 }
 

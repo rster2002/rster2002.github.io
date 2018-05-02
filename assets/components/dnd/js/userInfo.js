@@ -18,10 +18,8 @@ waveImported = function(){
 			
 			sessionStorage.setItem("::uid",uid)
 			
-			$("#userIcon-Bar").attr("src", userIcon);
-			$("#username-Bar").text(username);
-			$("#userIcon").attr("src", userIcon);
-			$("#username").text(username);
+			$(".userIcon").attr("src", userIcon);
+			$(".username").text(username);
 			
 			setUserinfo(username, userIcon);
 			$(".ui--sidenavWrapper").addClass("modified");
@@ -66,15 +64,7 @@ waveImported = function(){
 				}
 			});
 		} else {
-			$(".login").show();
-			ui.start('#firebaseui-auth-container', {
-				signInSuccessUrl: 'app.html',
-				signInOptions: [
-					firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-					firebase.auth.EmailAuthProvider.PROVIDER_ID
-				],
-				tosUrl: 'tos.html'
-			});
+			logout();
 		}
 	});
 };

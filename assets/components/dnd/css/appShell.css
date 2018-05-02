@@ -108,6 +108,34 @@ button.red:hover {
 	background-color: #f96161;
 }
 
+.s1 {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.s1.hover {
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.s1.hover:hover {
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.s2 {
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.s3 {
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.s4 {
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.s5 {
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
 .push {
 	margin-bottom: 5vh;
 }
@@ -265,6 +293,7 @@ button.red:hover {
 	position: fixed;
 	height: 6vh;
 	width: 6vh;
+	z-index: 25;
 	background-color: transparent;
 }
 
@@ -275,6 +304,7 @@ button.red:hover {
 
 .userFloater {
 	position: fixed;
+	z-index: 25;
 	height: 6vh;
 	background-color: red;
     width: 40vw;
@@ -311,7 +341,7 @@ button.red:hover {
 .boxer {
 	width: 70%;
 	height: 70%;
-	border-radius: 5vh;
+	border-radius: 1vh;
 	background-color: #0cbaba;
 	background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
 	color: white;
@@ -346,6 +376,124 @@ button.red:hover {
 	height: 90%;
 	white-space: initial;
 	font-size: 1.5em;
+}
+
+.sidebar {
+	position: fixed;
+	z-index: 26;
+	width: 20vw;
+	height: 100vh;
+	background-color: white;
+	transition: .2s all ease-in;
+	left: -21vw;
+}
+
+.sidebar.open {
+	left: 0vw;
+	transition: .2s all ease-in;
+}
+
+.sidebar .userWrapper {
+	width: 100%;
+	height: 15%;
+	position: relative;
+	top: 5%;
+}
+
+.sidebar .userWrapper .userCard {
+	width: 90%;
+	height: 90%;
+	border-radius: 1vh;
+	background-color: #f7b42c;
+	background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+}
+
+.sidebar .iconWrapper {
+	height: 100%;
+	width: 30%;
+	float: left;
+}
+
+.sidebar .iconWrapper img {
+    height: 60%;
+    border-radius: 50%;
+}
+
+.sidebar .nameWrapper {
+	width: 70%;
+	height: 100%;
+	float: left;
+}
+
+.sidebar .nameWrapper h1 {
+	width: 98%;
+	color: white;
+}
+
+.sidebar .menu {
+	height: 85%;
+    width: 100%;
+    position: relative;
+    top: 10%;
+}
+
+.sidebar .menubutton {
+	width: 100%;
+	height: 7%;
+	background-color: white;
+	cursor: pointer;
+}
+
+.sidebar .menubutton p {
+	color: #505050;
+	width: 70%;
+	position: relative;
+	left: 10%;
+	font-size: 1.4em;
+}
+
+.sidebar .menubutton p i {
+	font-size: inherit;
+	transform: translate(0%, 13%);
+    margin-right: 5%;
+}
+
+.sidebar .menubutton:hover {
+	background-color: rgb(235, 235, 235);
+}
+
+.divider {
+	width: 100%;
+	height: 1px;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+.divider .dividerInner {
+	width: 90%;
+	height: 100%;
+	background-color: rgb(235, 235, 235);
+}
+
+.sidebarBackground {
+	transition: .2s all ease-in;
+	position: fixed;
+	z-index: 10;
+	width: 0vw;
+	height: 100vh;
+	background-color: rgba(235, 235, 235, .5);
+}
+
+.sidebarBackground.open {
+	width: 100vw;
+	transition: .2s all ease-in;
+}
+
+.sidebarBackground .sidebarExit {
+	width: 80%;
+	height: 100%;
+	position: relative;
+	left: 20%;
 }
 
 .error-background {
