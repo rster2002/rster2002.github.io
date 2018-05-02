@@ -256,7 +256,7 @@ function addSpell() {
 		ritual: $(".ritual").hasClass("selected"),
 		id: spellId
 	};
-	userRef.child("characters").child(sessionStorage.getItem("::openCharacter") + "-info").child("spells").child(spellId).set(spellObj);
+	dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::openCharacter") + "-info").child("spells").child(spellId).set(spellObj);
 	
 	addSpellToList(spellObj);
 }
