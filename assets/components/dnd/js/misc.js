@@ -18,6 +18,8 @@ if (!DEV) {
 	ga('send', 'pageview');
 }
 
+const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
 //// register service worker
 //if ('serviceWorker' in navigator) {
 //	navigator.serviceWorker
@@ -37,6 +39,10 @@ function randomString(characters, l) {
 function randomFromArray(array) {
 	var index = Math.floor(Math.random() * array.length);
 	return array[index];
+}
+
+function genId() {
+	return randomString(idCharacters, 25);
 }
 
 $(document).keydown(function(event) {
