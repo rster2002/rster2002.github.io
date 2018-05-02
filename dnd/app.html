@@ -35,28 +35,44 @@
 		
 	</head>
 	<body>
-		<div class="wave--sidenav">
-			<div class="userinfo">
-				<img class="usericon">
-				<h1 class="username"></h1>
+		<div class="sidebar shadow">
+			<div class="userWrapper">
+				<div class="userCard center s3">
+					<div class="iconWrapper">
+						<img class="userIcon center">
+					</div>
+					<div class="nameWrapper">
+						<h1 class="username center"></h1>
+					</div>
+				</div>
 			</div>
-			<div class="items">
-<!--
-				<button icon="dashboard" onclick="openPage('dashboard')">Dashboard</button>
-				<div class="divider"></div>
--->
-				<p class="section">Character</p>
-				<button icon="mode_edit" onclick="openPage('characterList')">Character editor</button>
-				<button icon="bookmark" onclick="openPage('campaignMenu')">Campaigns</button>
-<!--				<button icon="map" onclick="openPage('dm')">DM Tools</button>-->
-				<button icon="change_history" onclick="openPage('races')">Races</button>
-				<button icon="open_in_new" onclick="window.open('https://www.dndbeyond.com/','_blank');">D&amp;D Beyond</button>
-                <div class="divider"></div>
-<!--                <button icon="account_box" onclick="openPage('profile')">Profile</button>-->
-				<button icon="bug_report" onclick="window.open('https://github.com/rster2002/rster2002.github.io/issues','_blank');">Report bug</button>
-				<button icon="assignment" onclick="openPage('news');">News</button>
-				<button icon="arrow_back" onclick="logout();">Logout</button>
+			<div class="menu">
+				<div class="menubutton" onclick="openPage('characterList')">
+					<p class="centerVertical"><i class="material-icons">edit</i>Character Editor</p>
+				</div>
+				<div class="menubutton" onclick="openPage('campaignMenu')">
+					<p class="centerVertical"><i class="material-icons">bookmark</i>Campaigns</p>
+				</div>
+				<div class="menubutton" onclick="openPage('races')">
+					<p class="centerVertical"><i class="material-icons">pets</i>Races</p>
+				</div>
+				<div class="menubutton" onclick="window.open('https://www.dndbeyond.com/')">
+					<p class="centerVertical"><i class="material-icons">open_in_new</i>D&amp;D Beyond</p>
+				</div>
+				<div class="divider"><div class="centerHorizontal dividerInner"></div></div>
+				<div class="menubutton" onclick="window.open('https://github.com/rster2002/rster2002.github.io/issues')">
+					<p class="centerVertical"><i class="material-icons">bug_report</i>Report bug</p>
+				</div>
+				<div class="menubutton" onclick="openPage('news')">
+					<p class="centerVertical"><i class="material-icons">assignment</i>News</p>
+				</div>
+				<div class="menubutton" onclick="logout()">
+					<p class="centerVertical"><i class="material-icons">arrow_back</i>Logout</p>
+				</div>
 			</div>
+		</div>
+		<div class="sidebarBackground">
+			<div class="sidebarExit" onclick="sidebar.close()"></div>
 		</div>
 		<div class="overlay-background"></div>
 		<div class="overlay">
@@ -91,15 +107,15 @@
 			<div class="animation"></div>
 		</div>
 		<div class="menuFloater">
-			<img onclick="openSide();" class="sidenav-trigger" src="../assets/components/dnd/images/icons/ic_view_stream_black_24dp_2x.png">
+			<img onclick="sidebar.toggle();" class="sidenav-trigger" src="../assets/components/dnd/images/icons/ic_view_stream_black_24dp_2x.png">
 		</div>
 		<div class="userFloater">
-			<h1 id="username-Bar" class="right centerVertical"></h1>
-			<img id="userIcon-Bar" class="right centerVertical">
+			<h1 class="username right centerVertical"></h1>
+			<img class="userIcon right centerVertical">
 		</div>
 		<div class="page">
 			<div class="innerPage">
-				<div class="boxer shadow center">
+				<div class="boxer s4 center">
 					<div class="text">
 						<div class="title">
 							<h1>Welcome to the new UI</h1>

@@ -21,11 +21,13 @@
 	cursor: pointer;
 }
 
+/*
 .item .inner:hover {
 	transition: all ease-in .1s;
 	width: 72%;
 	height: 72%;
 }
+*/
 
 .item .inner h1 {
 	position: relative;

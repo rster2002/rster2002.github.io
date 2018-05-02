@@ -226,11 +226,11 @@ var modifiers = [
 function onload() {	
 	loadCharacter(sessionStorage.getItem("::openCharacter"));
 	
-	for (var i = 0; i < inputs.length; ++i) {
-		var selector = "#" + inputs[i];
-		var modSelector = "#" + mods[inputs[i]];
-		calcMod(selector, modSelector);
-	}
+//	for (var i = 0; i < inputs.length; ++i) {
+//		var selector = "#" + inputs[i];
+//		var modSelector = "#" + mods[inputs[i]];
+//		calcMod(selector, modSelector);
+//	}
 }
 
 function calcMod(selector, modSelector) {

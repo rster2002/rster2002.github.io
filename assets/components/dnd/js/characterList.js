@@ -1,4 +1,4 @@
-$(".list").append("<div class='item'><div class='inner shadow-5' onclick='add()'><img src='../assets/components/dnd/images/icons/ic_add_black_48dp.png'></div></div>");
+$(".list").append("<div class='item'><div class='inner s1 hover' onclick='add()'><img src='../assets/components/dnd/images/icons/ic_add_black_48dp.png'></div></div>");
 var sUid = sessionStorage.getItem("::uid");
 
 obj = {};
@@ -12,9 +12,9 @@ function addTolist(i, characterId) {
 			var characterInfo = j.val();
 			var characterName = characterObj["96_1"];
 			if (j.hasChild("dupe")) {
-				$(".list").append("<div class='item'><div class='inner shadow-5' onclick='loadCharacter(" + i + ")'><h1>" + characterName + "</h1><p>Dupe: " + characterInfo.dupe + "</p></div></div>");
+				$(".list").append("<div class='item'><div class='inner s1 hover' onclick='loadCharacter(" + i + ")'><h1>" + characterName + "</h1><p>Dupe: " + characterInfo.dupe + "</p></div></div>");
 			} else {
-				$(".list").append("<div class='item'><div class='inner shadow-5' onclick='loadCharacter(" + i + ")'><h1>" + characterName + "</h1></div></div>");
+				$(".list").append("<div class='item'><div class='inner s1 hover' onclick='loadCharacter(" + i + ")'><h1>" + characterName + "</h1></div></div>");
 			}
 
 			obj[i] = characterId;

@@ -66,6 +66,24 @@ note = {
 	}
 }
 
+sidebar = {
+	open: function() {
+		$(".sidebar").addClass("open");
+		$(".sidebarBackground").addClass("open");
+	},
+	close: function() {
+		$(".sidebar").removeClass("open");
+		$(".sidebarBackground").removeClass("open");
+	},
+	toggle: function() {
+		if ($(".sidebar").hasClass("open")) {
+			sidebar.close();
+		} else {
+			sidebar.open();
+		}
+	}
+}
+
 function logout() {
 	localStorage.removeItem("firebaseui::rememberedAccounts");
 	location.href="../dnd.html";
@@ -96,7 +114,7 @@ function openPage(page) {
 	$(".page.innerPage").remove();
 	$(".page").load("../assets/components/dnd/pages/" + page + ".html");
 	sessionStorage.setItem("::openPage", page);
-	closeSidenav();
+	sidebar.close();
 }
 
 function openOverlay(page) {
