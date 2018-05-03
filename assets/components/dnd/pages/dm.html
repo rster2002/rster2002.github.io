@@ -10,42 +10,81 @@
 	<div class="h1">
 		<h1>DM Tools</h1>
 	</div>
-	<div class="h2">
-		<h2>Notes</h2>
-	</div>
-	<div class="button">
-		<h1>New</h1>
-	</div>
-	<div class="notesWrapper">
-		<div class="notes">
-			<div class="wrapper">
-				<div class="card shadow centerHorizontal">
-					<div class="actions">
-						<button class="centerVertical" class="note.remove()"><i class="material-icons">cancel</i></button>
-						<button class="centerVertical"><i class="material-icons">bookmark_border</i></button>
-						<button class="centerVertical"><i class="material-icons">share</i></button>
-						<button class="centerVertical"><i class="material-icons">input</i></button>
-						<button class="centerVertical"><i class="material-icons">edit</i></button>
-					</div>
-					<div class="content">
-						<h1>Hello World</h1>
-					</div>
-				</div>
+	<div class="wrapper">
+		<div class="card statblock centerHorizontal s3 rounded">
+			<div class="name fill">
+				<input id="name" placeholder="name" class="fill">
 			</div>
-		</div>
-		<div class="notes">
-
+			<div class="undertext fill top">
+				<input step="font-size: 1.5em;" id="info" placeholder="Size, type and alignment" class="fill">
+			</div>
+			<div class="divider fill top"></div>
+			<div class="label fill top">
+				<h1>Armor class</h1>
+				<input placeholder="AC">
+			</div>
+			<div class="label fill top">
+				<h1>Hitpoints</h1>
+				<input placeholder="Hitpoints">
+			</div>
+			<div class="label fill top">
+				<h1>Speed</h1>
+				<input placeholder="Speed">
+			</div>
+			<div class="divider fill top"></div>
+			<div class="label fill top">
+				<h1>Strength</h1>
+				<input placeholder="Str">
+			</div>
+			<div class="label fill top">
+				<h1>Dexterity</h1>
+				<input placeholder="Dex">
+			</div>
+			<div class="label fill top">
+				<h1>Constitution</h1>
+				<input placeholder="Con">
+			</div>
+			<div class="label fill top">
+				<h1>Intelligence</h1>
+				<input placeholder="Int">
+			</div>
+			<div class="label fill top">
+				<h1>Wisdom</h1>
+				<input placeholder="Wis">
+			</div>
+			<div class="label fill top">
+				<h1>Charisma</h1>
+				<input placeholder="Cha">
+			</div>
+			<div class="divider fill top"></div>
+			<div class="label fill top">
+				<h1>Damage Resistances</h1>
+				<input placeholder="Damage types">
+			</div>
+			<div class="label fill top">
+				<h1>Damage Immunities</h1>
+				<input placeholder="Damage types">
+			</div>
+			<div class="label fill top">
+				<h1>Condition Immunities</h1>
+				<input placeholder="Conditions">
+			</div>
+			<div class="label fill top">
+				<h1>Sences</h1>
+				<input placeholder="Sences">
+			</div>
+			<div class="label fill top">
+				<h1>Languages</h1>
+				<input placeholder="Languages">
+			</div>
+			<div class="label fill top">
+				<h1>Challenge</h1>
+				<input placeholder="Challenge rating">
+			</div>
 		</div>
 	</div>
 	<script>
 		loader.hide();
-		$("#newNoteTextarea").attr("placeholder", randomFromArray([
-			"Your plothole",
-			"Your plottwist",
-			"Your villians evil plan",
-			"The reason this tree is dead",
-			"The reason the mountain is upsidedown"
-		]));
 	</script>
 	<div class="push"></div>
 </div>

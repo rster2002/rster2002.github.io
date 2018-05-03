@@ -87,7 +87,7 @@ function addSpellToList(spell) {
 	var properties = "";
 	if (spell.level !== '') {
 		if (spell.level === "0") {
-			properties += prop("cantrip");
+			properties += prop("Cantrip");
 		} else {
 			properties += prop("Level " + spell.level);
 		}
@@ -124,8 +124,21 @@ function addSpellToList(spell) {
 	if (spell.ritual === true) {
 		properties += prop("Ritual");
 	}
-
-	$(".spellList").prepend("<div class='spell centerHorizontal rounded s2'><div class='title'><h1>" + spell.name + "</h1></div><div class='properties'>" + properties + "</div><div class='description'><p>" + spell.description + "</p></div></div>");
+	
+	var description = spell.description;
+	var desc = description.split("\n");
+	console.log(desc);
+	var out = "";
+	for (var i = 0; i < desc.length; ++i) {
+		var text = desc[i];
+		if (text === "") {
+			out += "<br>";
+		} else {
+			out += "<p>" + text + "</p>";
+		}
+	}
+	
+	$(".spellList").prepend("<div class='spell centerHorizontal rounded s2'><div class='title'><h1>" + spell.name + "</h1></div><div class='properties'>" + properties + "</div><div class='description'>" + out + "</div></div>");
 }
 
 function loadCharacter(i) {
