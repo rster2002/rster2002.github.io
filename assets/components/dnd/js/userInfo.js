@@ -4,14 +4,19 @@ waveImported = function(){
 	var user = firebase.auth().currentUser;
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user != null) {
+			console.log(user);
+			
 			// catches user data
 			username = user.displayName;
 			userIcon = user.photoURL;
 			uid = user.uid;
+			userCode = "dnd-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
 			
             sessionStorage.setItem("::uid", uid);
             sUid = uid;
             
+			userRef = firestore.collection("users").doc(sessionStorage.getItem("::uid"));
+			
 			if (userIcon === undefined || userIcon === null) {
 				userIcon = "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg";
 			}
@@ -24,43 +29,30 @@ waveImported = function(){
 			setUserinfo(username, userIcon);
 			$(".ui--sidenavWrapper").addClass("modified");
 			
+			
+			
 			// Check for user and returns stored user info
-			dbUsers.once("value",function(e){
-				var dbContent = e.val();
-				if (e.hasChild(uid)) {
-					console.log("Found user " + uid);
-				} else {
-					dbUsers.child(uid).child("username").set(username);
-					dbUsers.child(uid).child("usericon").set(userIcon);
-				}
-				if (e.hasChild(uid + "/usericon")) {
-					console.log("Usericon");
-				} else {
-					dbUsers.child(uid).child("usericon").set(userIcon);
-				}
-				if (e.hasChild(uid + "/uid")) {
-					console.log("Usericon");
-				} else {
-					dbUsers.child(uid).child("uid").set(uid);
-				}
-			});
 			
-			// Checkes for user with name and returns stored uid if existend
-			dbUsernames.once("value",function(e){
-				var dbContent = e.val();
-				if (e.hasChild(username)) {
-					uid = dbContent[uid];
+			progress.show();
+			userRef.get()
+			.then(function(doc) {
+				if (doc && doc.exists) {
+					userRef.update({
+						lastLogin: Date.now()
+					}).then(function() {
+						progress.hide();
+					});
 				} else {
-					dbUsernames.child(username).set(uid);
-				}
-			});
-			
-			// Checks for userCode in database and if not found, create one
-			dbUsers.child(sUid).once("value", function(e) {
-				if (!e.hasChild("userCode")) {
-					var userCode = "dnd-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
-					dbUsers.child(uid).child("userCode").set(userCode);
-					dbUserCodes.child(userCode).set(uid);
+					userRef.set({
+						uid: uid,
+						username: username,
+						usericon: userIcon,
+						firstLogin: Date.now(),
+						lastLogin: Date.now(),
+						userCode: userCode
+					}).then(function() {
+						progress.hide();
+					});
 				}
 			});
 		} else {
@@ -69,4 +61,4 @@ waveImported = function(){
 	});
 };
 
-userRef = dbUsers.child(sessionStorage.getItem("::uid"));
+waveImported();

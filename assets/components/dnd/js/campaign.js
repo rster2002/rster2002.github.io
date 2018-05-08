@@ -1,18 +1,29 @@
 loader.show();
 $(".innerPage").ready(() => {
     $(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
-	
-	$("#partyId").text(sessionStorage.getItem("::party"));
 });
-var partyId = sessionStorage.getItem("::party");
+var campaignId = sessionStorage.getItem("::campaignId");
+var campaignName = sessionStorage.getItem("::campaignName");
 var sUid = sessionStorage.getItem("::uid");
 var isDM = false;
+
+progress.show();
+
+//firestore.collection("campaigns").doc(campaignId).get().then(function(doc) {
+//	if (doc && doc.exists) {
+//		
+//	} else {
+//		error("Couldn't fetch campaign");
+//		progress.hide();
+//	}
+//});
 
 
 timer = setInterval(function() {
 	if (sessionStorage.getItem("::openPage") === "campaign") {
 		if (loadedUid === sUid) {
-			save();
+			save(false);
+			hide();
 		}
 	}
 }, 15000);
@@ -23,48 +34,92 @@ loadedUid = false;
 
 function ctrlS() {
 	if (loadedUid) {
-		save(false);
+		save(true);
 	}
 }
 
 // get campaign info
 if (sessionStorage.getItem("::join") !== "true") {
-	dbCampaign.child(partyId).once("value",(e) => {
-		update(e.val());
-	});
+	firestore.collection("campaigns").doc(campaignId).get().then(function(doc) {
+		if (doc && doc.exists) {
+			var data = doc.data();
+			$("#partyId").text(data.name);
+			update(data);
+		} else {
+			error("Couldn't fetch campaign");
+			progress.hide();
+		}
+ 	});
 } else {
 	sessionStorage.setItem("::join", "false");
 }
 
-dbCampaign.child(partyId).child("liveState").on("value", (u) => {
-	if (u.val() === "update") {
-		dbCampaign.child(partyId).once("value",(e) => {
-			var partyContent = e.val();
-			update(partyContent);
-			dbCampaign.child(partyId).child("liveState").set("resting");
-		});
-	} else if (u.val() === "changeId") {
-		alert("The campaign id was changed");
-		openPage("campaignMenu");
+// on change
+firestore.collection("campaigns").doc(campaignId).onSnapshot(function (doc) {
+	
+	progress.show();
+	
+	if (doc && doc.exists) {
+		var campaignContent = doc.data();
+		if (campaignContent.liveState === "update") {
+			update(campaignContent);
+			firestore.collection("campaigns").doc(campaignId).update({
+				liveState: "resting"
+			});
+		} else if (campaignContent.liveState === "changeId") {
+			alert("The campaign id was changed");
+			openPage("campaignMenu");
+		}
+	} else {
+		error("Couldn't fetch campaign");
+		progress.hide();
 	}
 });
 
-function update(partyContent) {
+async function update(partyContent) {
 	
-	function addToList(ww, characterw) {
-		dbUsers.child(ww).once("value",(u) => {
-			var userContent = u.val();
-			var characterName = userContent.characters[characterw]["96_1"];
-			var username = userContent.username;
-			var usericon = userContent.usericon;
-			var onclick = "loadCharacter('" + userContent.uid + "')";
-			
-			$(".innerList").append("<div class='player' onclick=" + onclick + "><img src=" + usericon + "><h1>" + characterName + "</h1></div>");
-		});
+	progress.show();
+	
+	async function addToList(id, characterId) {
+		
+		firestore.collection("users").doc(id).get().then(function(doc) {
+			if (doc && doc.exists) {
+				var playerInfo = doc.data();
+				firestore.collection("users").doc(id + "/characters/" + characterId + "/data/characterObj").get().then(function(doc) {
+					if (doc && doc.exists) {
+						var characterObj = doc.data();
+						var characterName = characterObj["96_1"];
+						var username = playerInfo.username;
+						var usericon = playerInfo.usericon;
+						
+						var onclick = "loadCharacter('" + id + "')";
+						$(".innerList").append("<div class='player' onclick=" + onclick + "><img src=" + usericon + "><h1>" + characterName + "</h1></div>");
+					} else {
+						error("Couldn't fetch character object");
+						progress.hide();
+					}
+				})
+			} else {
+				error("Couldn't fetch user");
+				progress.hide();
+			}
+		})
 	}
 	
 	// gets the DM uid
-	dmUid = partyContent.DM;
+	var dmQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("users").where("type", "==", "DM"));
+	var dmUid = dmQuery[0]["id"];
+	
+	firestore.collection("users").doc(dmUid).get().then(function(doc) {
+		if (doc && doc.exists) {
+			var dmObj = doc.data();
+			$("#DMusericon").attr("src", dmObj.usericon);
+			$("#DMusername").text(dmObj.username);
+		} else {
+			error("Couldn't find DM");
+			progress.hide();
+		}
+	})
 	
 	// sets isDM var and shows hidden buttons
 	if (sUid === dmUid) {
@@ -72,13 +127,15 @@ function update(partyContent) {
 		
 		$(".changeId").show();
 		$(".delete").show();
+		$(".showBanned").show();
 	} else {
+		isDM = false;
 		$(".leave").show();
 	}
 	
 	
 	// updates the player list
-	var playerList = partyContent.playerList;
+	var playerList = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("users").where("type", "==", "player"));
 	
 	// clears the list
 	$(".innerList").remove();
@@ -86,23 +143,16 @@ function update(partyContent) {
 	
 	
 	// for every player in the player list, add it to the ui
+	
 	for (var i = 0; i < playerList.length; ++i) {
+		var playerId = playerList[i]["id"];
+		var playerCharacter = playerList[i]["character"];
 		var w = playerList[i];
-		if (w !== dmUid) {
-			var character = partyContent[w]["character"];
-			addToList(w, character);
-		}
+		addToList(playerId, playerCharacter);
 	}
 	
-	// adds the DM's info to the page
-	dbUsers.child(dmUid).once("value", (u) => {
-		var userinfo = u.val();
-		$("#DMusericon").attr("src", userinfo.usericon);
-		$("#DMusername").text(userinfo.username);
-	})
+	progress.hide();
 }
-
-// $(".innerList").append("<div class='player' onclick=" + onclick + "><img src=" + dbUsersContent.usericon + "><h1>" + dbUsersContent.username + "</h1></div>")
 
 pages = {
 	1: 106,
@@ -113,51 +163,89 @@ pages = {
 // called when clicked on user
 function loadCharacter(uid) {
 	
-	loader.show();
+	progress.show();
 	
-	var lUid = uid;
 	loadedUid = uid;
 	
 	try {
-		dbCampaign.child(partyId).child(lUid).once("value",(e) => {
-			var playerObj = e.val();
-			var characterName = playerObj.character;
-			sessionStorage.setItem("::saved", characterName);
-			try {	
-				dbUsers.child(lUid).child("characters").child(characterName).once("value",(e) => {
-					var characterObj = e.val();
-					
-					if (sUid === lUid) {
-						selfl(characterObj);
-					} else if (isDM) {
-						dbUsers.child(loadedUid).child("characters").child(characterName + "-info").once("value", function(inf) {
-							var content = inf.val();
-							if (inf.hasChild("allowEdit")) {
-								allowEdit = content["allowEdit"];
-							} else {
-								dbUsers.child(loadedUid).child("characters").child(characterName + "-info").child("allowEdit").set("0");
-								allowEdit = "0";
-							}
-							
-							
-							if (allowEdit === "1") {
-								selfl(characterObj);
-							} else {
-								l(characterObj);
+		firestore.collection("campaigns").doc(campaignId + "/users/" + uid).get().then(function(doc) {
+			if (doc && doc.exists) {
+				var userInCampaign = doc.data();
+				var characterId = userInCampaign.character;
+				loadedCharacter = characterId;
+				firestore.collection("users").doc(uid + "/characters/" + characterId + "/data/characterObj").get().then(function(doc) {
+					if (doc && doc.exists) {
+						var characterObj = doc.data();
+						firestore.collection("users").doc(uid + "/characters/" + characterId).get().then(function(doc) {
+							if (doc && doc.exists) {
+								var characterInfo = doc.data();
+								if (isDM) {
+									$(".kick").show();
+									$(".ban").show();
+									
+									if (characterInfo.allowEdit === undefined) {
+										l(characterObj);
+										progress.hide();
+									} else if (characterInfo.allowEdit === "1") {
+										selfl(characterObj);
+										$(".save").show();
+										progress.hide();
+									} else {
+										l(characterObj);
+										progress.hide();
+									}
+								} else if (uid === sUid) {
+									selfl(characterObj);
+									hide();
+								} else {
+									l(characterObj);
+								}
 							}
 						});
-						$(".kick").show();
-						$(".ban").show();
-					} else {
-						l(characterObj);
 					}
-					
-					loader.hide();
-				})
-			} catch(e) {
-				error(e);
+				});
 			}
-		});
+		})
+		
+//		dbCampaign.child(partyId).child(lUid).once("value",(e) => {
+//			var playerObj = e.val();
+//			var characterName = playerObj.character;
+//			sessionStorage.setItem("::saved", characterName);
+//			try {	
+//				dbUsers.child(lUid).child("characters").child(characterName).once("value",(e) => {
+//					var characterObj = e.val();
+//					
+//					if (sUid === lUid) {
+//						selfl(characterObj);
+//					} else if (isDM) {
+//						dbUsers.child(loadedUid).child("characters").child(characterName + "-info").once("value", function(inf) {
+//							var content = inf.val();
+//							if (inf.hasChild("allowEdit")) {
+//								allowEdit = content["allowEdit"];
+//							} else {
+//								dbUsers.child(loadedUid).child("characters").child(characterName + "-info").child("allowEdit").set("0");
+//								allowEdit = "0";
+//							}
+//							
+//							
+//							if (allowEdit === "1") {
+//								selfl(characterObj);
+//							} else {
+//								l(characterObj);
+//							}
+//						});
+//						$(".kick").show();
+//						$(".ban").show();
+//					} else {
+//						l(characterObj);
+//					}
+//					
+//					loader.hide();
+//				})
+//			} catch(e) {
+//				error(e);
+//			}
+//		});
 	} catch(e) {
 		error(e);
 	}
@@ -224,12 +312,16 @@ function selfl(characterObj) {
 }
 
 function save(showNote) {
+	
+	progress.show();
 	if (isDM === false) {
 		if (loadedUid === sUid) {
 			s();
-			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
+			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").set(characterObj);
+//			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 			if (showNote) {
 				note.open("Saved " + $("#form96_1").val(), 1000);
+				progress.hide();
 			}
 		} else {
 			error("You are trying to save a character sheet that isn't yours!")
@@ -237,15 +329,18 @@ function save(showNote) {
 	} else if (isDM === true) {
 		try {
 			s();
-			dbUsers.child(loadedUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
+			firestore.collection("users").doc(loadedUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").set(characterObj);
 			if (showNote) {
 				note.open("Saved " + $("#form96_1").val(), 1000);
+				progress.hide();
 			}
 		} catch(e) {
 			error(e);
+			progress.hide();
 		}
 	} else {
 		error("You are the DM and not the DM! Superposition confirmed?!");
+		progress.hide();
 	}
 }
 
@@ -365,51 +460,21 @@ function changeId() {
 
 
 function kick(ban, f) {
+	
+	show();
+	
 	function next() {
-		dbCampaign.child(partyId).child(loadedUid).child("character").once("value", function(e) {
-			var character = e.val();
-			dbUsers.child(loadedUid).child("characters").child(character + "-info").child("usedInCampaigns").once("value", function(c) {
-				var list = c.val();
-				var newList = [];
-				if (list === undefined) {
-					for (var i = 0; i < list.length; ++i) {
-						if (list[i] !== partyId) {
-							newList.unshift(list[i]);
-						}
-					}
-					dbUsers.child(loadedUid).child("characters").child(character + "-info").child("usedInCampaigns").set(newList);
-				}
-				
-			}).then(function() {
-				dbCampaign.child(partyId).once("value",function(e) {
-					var partyContent = e.val();
-					var partyArray = partyContent.playerList;
-					rePlayerList = [];
-					for (var i = 0; i < partyArray.length; ++i) {
-						if (partyArray[i] === loadedUid) {
-							console.log("kicked: " + partyArray[i]);
-						} else {
-							rePlayerList.push(partyArray[i]);
-						}
-					}
-				}).then(function() {
-					dbUsers.child(loadedUid).once("value", e => {
-						var dbContent = e.val();
-						var campaignsArray = dbContent.campaigns;
-						reCampaignList = [];
-						for (var i = 0; i < campaignsArray.length; ++i) {
-							if (campaignsArray[i] === partyId) {
-								console.log("removed " + partyId + " from users party list");
-							} else {
-								reCampaignList.push(campaignsArray[i]);
-							}
-						}
+		firestore.collection("campaigns").doc(campaignId + "/users/" + loadedUid).delete().then(function() {
+			firestore.collection("users").doc(loadedUid).collection("campaigns").doc(campaignId).delete().then(function() {
+				firestore.collection("users").doc(loadedUid + "/characters/" + loadedCharacter + "usedInCampaigns" + campaignId).delete().then(function() {
+					firestore.collection("campaigns").doc(campaignId).update({
+						liveState: "update"
 					}).then(function() {
-						dbUsers.child(loadedUid).child("campaigns").set(reCampaignList);
-						dbCampaign.child(partyId).child("playerList").set(rePlayerList);
-						dbCampaign.child(partyId).child(loadedUid).set(null);
-						dbCampaign.child(partyId).child("liveState").set("update");
-
+						$(".kick").hide();
+						$(".ban").hide();
+						$(".save").hide();
+						hide();
+						
 						if (f !== undefined) {
 							f();
 						}
@@ -417,12 +482,6 @@ function kick(ban, f) {
 				});
 			});
 		});
-//		dbCampaign.child(partyId).child("liveState").set("update");
-		
-
-		$(".kick").hide();
-		$(".ban").hide();
-		$(".save").hide();
 	}
 	
 	if (ban) {
@@ -443,22 +502,27 @@ function kick(ban, f) {
 
 function ban() {
 	if (confirm("Are you sure you want to ban this person?")){
-		dbCampaign.child(partyId).once("value",(e) => {
-			var partyContent = e.val();
-			if (e.hasChild("banList")) {
-				banList = partyContent.banList;
-			} else {
-				banList = [];
-			}
-			
-			banList.unshift(loadedUid);
-			
-			dbCampaign.child(partyId).child("banList").set(banList);
-			dbCampaign.child(partyId).child(loadedUid).set(null);
-
-
-			kick(true);
-		});
+		var reason = prompt("Type a reason for ban")
+		if (reason) {
+			firestore.collection("users").doc(loadedUid).get().then(function (doc) {
+				if (doc && doc.exists) {
+					var userData = doc.data();
+					firestore.collection("campaigns").doc(campaignId).collection("banList").add({
+						username: userData.username,
+						usericon: userData.usericon,
+						uid: userData.uid,
+						userCode: userData.userCode,
+						timeBanned: Date.now(),
+						reason: reason
+					}).then(function() {
+						kick(true);
+					});
+				} else {
+					error("Couldn't find this user");
+					hide();
+				}
+			})
+		}
 	}
 }
 
@@ -514,6 +578,66 @@ function leave() {
 	}
 }
 
+async function toggleBanList() {
+	if ($(".banList").hasClass("open")) {
+		$(".listItemWrapper").remove();
+		$(".showBanned h1").text("Show ban list");
+		$(".banList").removeClass("open")
+	} else {
+		var banListQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("banList"));
+		for (var i = 0; i < banListQuery.length; ++i) {
+			var userObj = banListQuery[i];
+			$(".banList").append("<div class='listItemWrapper centerHorizontal'><div class='listItem s2 rounded'><div class='icon'><img src='" + userObj.usericon + "'></div><div class='text'><div class='wrapper'><h1>" + userObj.username + "</h1><p>Reason: " + userObj.reason + "</p></div></div><div class='buttons'><div class='buttonsWrapper centerVertical'><button class='action pardon" + i + "' name='" + userObj.username + "'>pardon</button></div></div></div></div>");
+			
+			$(".pardon" + i).on("click", async function() {
+				var name = $(this).attr("name");
+				var banQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("banList").where("username", "==", name));
+				console.log(name, banQuery);
+				if (banQuery[0] !== undefined) {
+					var docId = banQuery[0]["__id"];
+					firestore.collection("campaigns").doc(campaignId).collection("banList").doc(docId).delete();
+					$(this).parent().parent().parent().parent().remove();
+					note.open("Unbanned", 2000);
+				}
+			});
+		}
+		
+		easeIn();
+		$(".showBanned h1").text("Hide ban list");
+		$(".banList").addClass("open")
+	}
+}
+
 function onload() {
 	loader.hide();
+}
+
+function easeOut() {
+	var delay = 0;
+	$(".listItem").each(function(index) {
+		setC(this, delay);
+		delay += 20;
+	});
+	$(".banList").removeClass("open");
+}
+
+function easeIn() {
+	var delay = 0;
+	$(".banList").addClass("open");
+	$(".listItem").each(function(index) {
+		setT(this, delay);
+		delay += 20;
+	});
+}
+
+function setT(here, wait) {
+	setTimeout(function() {
+		$(here).addClass("open");
+	}, wait)
+}
+
+function setC(here, wait) {
+	setTimeout(function() {
+		$(here).removeClass("open");
+	}, wait)
 }

@@ -1,12 +1,20 @@
 var config = {
-    apiKey: "AIzaSyDUJ9zJn7jgotr4cxZBQHrDjhTjX1cDAgo",
-    authDomain: "dnd-online.firebaseapp.com",
-    databaseURL: "https://dnd-online.firebaseio.com",
-    projectId: "dnd-online",
-    storageBucket: "dnd-online.appspot.com",
-    messagingSenderId: "318768830276"
+	apiKey: "AIzaSyDUJ9zJn7jgotr4cxZBQHrDjhTjX1cDAgo",
+	authDomain: "dnd-online.firebaseapp.com",
+	databaseURL: "https://dnd-online.firebaseio.com",
+	projectId: "dnd-online",
+	storageBucket: "dnd-online.appspot.com",
+	messagingSenderId: "318768830276"
 };
 firebase.initializeApp(config);
+
+const firestoreFunction = firebase.firestore();
+const firestoreSettings = {
+	timestampsInSnapshots: true
+}
+firestoreFunction.settings(firestoreSettings);
+const firestore = firestoreFunction.collection(dbNew).doc("dnd");
+
 
 console.log("firebase init");
 database = firebase.database().ref("dnd" + db);

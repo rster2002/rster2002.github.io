@@ -224,32 +224,44 @@ button.red:hover {
 	z-index: 1000;
 	width: 100vw;
 	height: 100vh;
-	background-color: rgba(0,0,0,.5);
+	background-color: rgba(235, 235, 235, .5);
 }
 
 .loader {
 	z-index: 1001;
-	width: 30vh;
-	height: 30vh;
+	width: 50vw;
+	height: 1px;
 	position: relative;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
-	animation: loader infinite linear 1.4s;
+	animation: loader infinite cubic-bezier(0.4, 0.0, 0.2, 1) 1.4s;
 	background-color: white;
-	border-radius: 100%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: #2a2a72;
+	background-image: linear-gradient(-90deg, #2a2a72 0%, #009ffd 74%);
 }
 
 @keyframes loader {
 	0% {
-		background-color: white;
+		width: 1px;
+		height: 1px;
+	}
+	25% {
+		width: 100vw;
+		height: 1px;
 	}
 	50% {
-		background-color: darkslategray;
+		width: 1px;
+		height: 1px;
+	}
+	75% {
+		width: 1px;
+		height: 100vh;
 	}
 	100% {
-		background-color: white;
+		width: 1px;
+		height: 1px;
 	}
 }
 
@@ -276,7 +288,7 @@ button.red:hover {
 }
 
 .progressBar.active .animation {
-	animation: progressBar 2s linear infinite;
+	animation: progressBar 2s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
 }
 
 @keyframes progressBar {
@@ -298,7 +310,7 @@ button.red:hover {
 	position: fixed;
 	height: 6vh;
 	width: 6vh;
-	z-index: 25;
+	z-index: 28;
 	background-color: transparent;
 }
 
@@ -385,17 +397,17 @@ button.red:hover {
 
 .sidebar {
 	position: fixed;
-	z-index: 26;
+	z-index: 30;
 	width: 20vw;
 	height: 100vh;
 	background-color: white;
-	transition: .2s all ease-in;
+	transition: 150ms all cubic-bezier(0.4, 0.0, 0.6, 1);
 	left: -21vw;
 }
 
 .sidebar.open {
 	left: 0vw;
-	transition: .2s all ease-in;
+	transition: 200ms all cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
 .sidebar .userWrapper {
@@ -481,7 +493,7 @@ button.red:hover {
 }
 
 .sidebarBackground {
-	transition: .2s all ease-in;
+	transition: 150ms all cubic-bezier(0.4, 0.0, 0.6, 1);
 	position: fixed;
 	z-index: 10;
 	width: 0vw;
@@ -491,7 +503,7 @@ button.red:hover {
 
 .sidebarBackground.open {
 	width: 100vw;
-	transition: .2s all ease-in;
+	transition: 200ms all cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
 .sidebarBackground .sidebarExit {
@@ -535,10 +547,11 @@ button.red:hover {
 	text-align: left;
 	margin-left: 10%;
 	font-size: 2em;
+	white-space: normal;
 }
 
 .error-forground #error {
-	color: rgb(200,200,200);
+	color: white;
 	width: 90%;
 	text-align: left;
 	margin-left: 10%;
@@ -622,11 +635,11 @@ button.red:hover {
 	left: 20vw;
 	border-radius: 5vh;
 	background-color: white;
-	transition: .1s all ease-in;
+	transition: 150ms all cubic-bezier(0.4, 0.0, 0.6, 1);
 }
 
 .note.open {
-	transition: .1s all ease-in;
+	transition: 200ms all cubic-bezier(0.0, 0.0, 0.2, 1);
 	top: 1vh;
 }
 

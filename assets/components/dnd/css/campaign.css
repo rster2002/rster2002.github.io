@@ -129,3 +129,87 @@
 .characterSheet {
 	margin-bottom: 10vh;
 }
+
+.banList {
+	width: 100%;
+	margin-top: 1%;
+	display: none;
+}
+
+.banList.open {
+	display: inline-block;
+}
+
+.listItemWrapper {
+	width: 60%;
+	height: 12vh;
+}
+
+.banList .listItem {
+	position: relative;
+	width: 100%;
+	height: 10vh;
+	opacity: 0;
+	transition: all cubic-bezier(0.4, 0.0, 0.6, 1) 200ms;
+	top: 10%;
+}
+
+.banList .listItem.open {
+	opacity: 1;
+	transition: all cubic-bezier(0.4, 0.0, 0.6, 1) 200ms;
+	top: 0%;
+}
+
+.listItem .icon {
+	width: 10vh;
+	height: 10vh;
+	float: left;
+}
+
+.listItem .icon img {
+	width: 70%;
+	height: 70%;
+	background-color: #00BCD4;
+	border-radius: 50%;
+	position: relative;
+	top: 15%;
+	left: 15%;
+}
+
+.listItem .text {
+	height: 10vh;
+	display: inline-block;
+	width: calc(60% - 10vh);
+	float: left;
+}
+
+.listItem .text .wrapper {
+	height: 70%;
+	position: relative;
+	top: 15%;
+}
+
+.listItem .text h1 {
+	margin-left: 1%;
+	width: 99%;
+}
+
+.listItem .text p {
+	margin-left: 1%;
+	width: 99%;
+}
+
+.listItem .buttons .buttonsWrapper {
+	float: right;
+}
+
+.listItem .buttons {
+	height: 10vh;
+	display: inline-block;
+	width: calc(40% - 0.5vh);
+	float: left;
+}
+
+.listItem .buttons button {
+	margin-left: -10%;
+}
