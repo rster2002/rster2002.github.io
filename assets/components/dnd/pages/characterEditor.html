@@ -26,7 +26,7 @@
 				<div class="props">
 					<div class="select input level rounded">
 						<h1>Level</h1>
-						<input placeholder="Spell level" id="level">
+						<input placeholder="Spell level" id="level" type="number">
 					</div>
 					<div class="select verbal rounded">
 						<h1>Verbal</h1>
@@ -65,9 +65,17 @@
 				</div>
 			</div>
 			<div class="spellList">
+				
 			</div>
 		</div>
-		<script>
+		<script>			
+			$(".spell").each(function() {
+				$(this).on("click", function(e) {
+					e.stopPropagation();
+					t(this);
+				});
+			});
+			
 			$(".select").each(function() {
 				if (!$(this).hasClass("input")) {
 					$(this).on("click", function() {
@@ -91,6 +99,10 @@
 					$(here).parent().removeClass("selected");
 				}
 			}
+			
+			$(document).on("click", function() {
+				c(".spell");
+			});
 		</script>
 		<div class="characterInfo">
 			<p class="characterId"></p>

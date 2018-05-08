@@ -1,10 +1,16 @@
 var url = document.URL;
-if (url.includes(":8887")) {
-	var db = "dev";
+if (url.includes("pro")) {
+	db = "";
+	dbNew = "production";
+	DEV = false;
+} else if (url.includes(":8887")) {
+	db = "dev";
+	dbNew = "dev";
 	DEV = true;
 	$("#pageTitle").text("DEV");
 } else {
 	db = "";
+	dbNew = "production";
 	DEV = false;
 }
 
@@ -26,6 +32,11 @@ const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 //		.register('../assets/components/dnd/js/pwa/sw.js')
 //		.then(function() { console.log('Service Worker Registered'); });
 //}
+
+async function createQuery(query) {
+	const snapshot = await query.get();
+	return snapshot.docs.map(doc => ({__id: doc.id, ...doc.data()})); 
+}
 
 function randomString(characters, l) {
 	var retn = "";
@@ -91,8 +102,12 @@ sidebar = {
 }
 
 function logout() {
-	localStorage.removeItem("firebaseui::rememberedAccounts");
-	location.href="../dnd.html";
+	firebase.auth().signOut().then(function() {
+		localStorage.removeItem("firebaseui::rememberedAccounts");
+		location.href="../dnd.html";
+	}, function(error) {
+		error(error);
+	});
 }
 
 loader = {
@@ -177,13 +192,15 @@ function getSelected(selector) {
 
 function error(error) {
 	loader.hide();
+	progress.hide();
 	
 	var randomMessage = randomFromArray([
 		"Don't steal books",
 		"You've upset the gods of D&D! Now you got punished",
 		"Maybe this is a mimic, in that case: ignore this message",
 		"Maybe a fireball would solve this error...",
-		"A mind flayer has taken over this website!"
+		"A mind flayer has taken over this website!",
+		"Don't trust portals!"
 	])
 	
 	$("#error-message").text("An error has occurred (" + randomMessage + ")")
@@ -201,4 +218,48 @@ function error(error) {
 function closeError() {
 	$(".error-background").fadeOut();
 	$(".background").fadeOut();
+}
+
+// sorting
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
+
+function show() {
+	loader.show();
+	progress.show();
+}
+
+function hide() {
+	loader.hide();
+	progress.hide();
+}
+
+function dynamicSortMultiple() {
+    /*
+     * save the arguments object as it will be overwritten
+     * note that arguments object is an array-like object
+     * consisting of the names of the properties to sort by
+     */
+    var props = arguments;
+    return function (obj1, obj2) {
+        var i = 0, result = 0, numberOfProperties = props.length;
+        /* try getting a different result from 0 (equal)
+         * as long as we have extra properties to compare
+         */
+        while(result === 0 && i < numberOfProperties) {
+            result = dynamicSort(props[i])(obj1, obj2);
+            i++;
+        }
+        return result;
+    }
 }

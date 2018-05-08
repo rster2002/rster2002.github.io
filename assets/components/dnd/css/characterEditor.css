@@ -155,6 +155,115 @@
 }
 
 .spellList .spell {
+	margin-top: 1%;
+	width: 60%;
+	max-height: 10vh;
+	transition: 375ms all cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.spellList .spell .shared {
+	height: 10vh;
+	width: 100%;
+	cursor: pointer;
+}
+
+.spellList .spell.open .shared {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.spellList .spell .shared .icon {
+	height: 10vh;
+	width: 10vh;
+	float: left;
+}
+
+.spellList .spell .shared .icon .circle {
+	width: 70%;
+	height: 70%;
+	background-color: #00BCD4;
+	border-radius: 50%;
+	position: relative;
+	top: 15%;
+	left: 15%;
+}
+
+.spellList .spell .shared .text {
+	height: 10vh;
+	width: calc(100% - 10vh);
+	float: left;
+}
+
+.spellList .spell .shared .text .wrapper {
+	height: 70%;
+	position: relative;
+	top: 15%;
+}
+
+.spellList .spell .shared .text .wrapper h1 {
+	width: 100%;
+}
+
+.spellList .spell .shared .text .wrapper p {
+	width: 100%;
+}
+
+.spellList .spell .content {
+	opacity: 0;
+	display: inline-block;
+	padding: 1%;
+	width: 98%;
+	transition: 150ms all cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+
+/* Spell open */
+
+.spellList .spell.open {
+	display: inline-block;
+	width: 70%;
+	transition: 295ms all cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.spellList .spell.h {
+	max-height: 1000vh;
+	transition: 295ms all cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.spellList .spell.open .content.open {
+	opacity: 1;
+	transition: 150ms all cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Content */
+
+.spell .tags {
+	width: 100%;
+	display: inline-block;
+}
+
+.spell .tags .tag {
+	padding: 1%;
+	background-color: rgb(235, 235, 235);
+	border-radius: 1vh;
+	display: inline-block;
+	margin-top: .4%;
+	margin-left: .5%;
+}
+
+.spell .content .text {
+	width: 98%;
+	padding: 1%;
+	display: inline-block;
+}
+
+.spell .content .text p {
+	white-space: normal;
+}
+
+/*
+.spellList .spell {
 	width: 60%;
 	margin-top: 3%;
 }
@@ -203,6 +312,7 @@
 	left: 1%;
 	white-space: normal;
 }
+*/
 
 .characterInfo {
 	margin-top: 2%;
