@@ -18,22 +18,10 @@
 		<script src="../assets/components/dnd/js/dndinfo.js"></script>
 		<script src="../assets/components/dnd/js/firebase.js"></script>
 		<script src="../assets/components/dnd/js/userInfo.js"></script>
-		<script>
-			
-			// Checks for the database
-			dbGlobal.once("value",(e) => {
-				var global = e.val();
-				if (global.state !== "online") {
-					alert("The database is not online!");
-					logout();
-				}
-			});
-		</script>
 		<!-- Link styles -->
 		<link href="../assets/images/icons/tab%20icons/dnd.png" rel="icon">
 		<link href="../assets/components/dnd/css/appShell.css" rel="stylesheet" type="text/css">
 		<link href="../assets/components/dnd/css/appShell.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
-		
 	</head>
 	<body>
 		<div class="sidebar shadow">

@@ -23,3 +23,20 @@ dbCampaign = database.child("campaign");
 dbUsernames = database.child("usernames");
 dbGlobal = database.child("global");
 dbUserCodes = database.child("userCodes");
+
+console.log(dbNew);
+firestore.get().then(function(doc) {
+	console.log(doc);
+	if (doc && doc.exists) {
+		var state = doc.data();
+		if (state.function === "logout") {
+			alert(state.message);
+			logout();
+		} else if (state.function === "message") {
+			alert(state.message);
+		}
+	} else {
+		alert("Can't fetch database state");
+		logout();
+	}
+});
