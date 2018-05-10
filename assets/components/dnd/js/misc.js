@@ -35,7 +35,7 @@ const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
 async function createQuery(query) {
 	const snapshot = await query.get();
-	return snapshot.docs.map(doc => ({__id: doc.id, ...doc.data()})); 
+	return snapshot.docs.map(doc => ({__id: doc.id, ...doc.data()}));
 }
 
 function randomString(characters, l) {
@@ -68,9 +68,10 @@ $(document).keydown(function(event) {
 });
 
 note = {
-	open: function(text, delay) {
+	open: function(text, icon, delay) {
 		$("#noteContent").text(text);
 		$(".note").addClass("open");
+		$(".icon .i").html(icon);
 		note.autoClose(delay);
 	},
 	close: function() {
@@ -136,18 +137,30 @@ function openPage(page) {
 	$(".page").load("../assets/components/dnd/pages/" + page + ".html");
 	sessionStorage.setItem("::openPage", page);
 	sidebar.close();
+	if (onExit !== undefined || onExit !== undefined) {
+		onExit();
+		onExit = null;
+	}
+}
+
+function onLoaded() {
+	loader.hide();
+	if (loaded !== undefined || loaded !== null) {
+		loaded();
+		loaded = null;
+	}
 }
 
 function openOverlay(page) {
     loader.show();
     $(".overlay .content .innerPage").remove();
-    
+
     if (page.includes("http")) {
         $(".overlay .content").load(page);
     } else {
         $(".overlay .content").load("../assets/components/dnd/pages/" + page + ".html");
     }
-    
+
     $(".background").show();
     $(".overlay").show();
     loader.hide();
@@ -156,13 +169,13 @@ function openOverlay(page) {
 function openOverlay(page) {
     loader.show();
     $(".overlay .content .innerPage").remove();
-    
+
     if (page.includes("http")) {
         $(".overlay .content").load(page);
     } else {
         $(".overlay .content").load("../assets/components/dnd/pages/" + page + ".html");
     }
-    
+
     $(".background").show();
     $(".overlay").show();
     loader.hide();
@@ -193,7 +206,7 @@ function getSelected(selector) {
 function error(error) {
 	loader.hide();
 	progress.hide();
-	
+
 	var randomMessage = randomFromArray([
 		"Don't steal books",
 		"You've upset the gods of D&D! Now you got punished",
@@ -202,14 +215,14 @@ function error(error) {
 		"A mind flayer has taken over this website!",
 		"Don't trust portals!"
 	])
-	
+
 	$("#error-message").text("An error has occurred (" + randomMessage + ")")
 	$("#error").text(error);
-	
+
 	console.error(error);
 	$(".error-background").fadeIn();
 	$(".background").fadeIn();
-	
+
 	if (!DEV) {
 		ga('send', 'event', "dnd-error", error);
 	}
@@ -262,4 +275,71 @@ function dynamicSortMultiple() {
         }
         return result;
     }
+}
+
+inputCard = {
+	content: {
+		toggle: function() {
+			$(".inputCard").toggleClass("open");
+		},
+		open: function() {
+			$(".inputCard").addClass("open");
+		},
+		close: function() {
+			$(".inputCard").remoceClass("open");
+		}
+	},
+	peek: {
+		toggle: function() {
+			$(".inputCard").toggleClass("peek");
+		},
+		open: function() {
+			$(".inputCard").addClass("peek");
+		},
+		close: function() {
+			$(".inputCard").removeClass("peek");
+		}
+	},
+	slideUp: function(text) {
+		$(".newTitle").text(text);
+		$(".sliding").addClass("up");
+		setTimeout(function() {
+			$(".currentTitle").text(text);
+			$(".sliding").removeClass("up");
+		}, 201);
+	},
+	slideDown: function(text) {
+		$(".newTitle").text(text);
+		$(".sliding").addClass("down");
+		setTimeout(function() {
+			$(".currentTitle").text(text);
+			$(".sliding").removeClass("down");
+		}, 201);
+	},
+	close: function() {
+		$(".inputCard").removeClass("peek");
+		$(".inputCard").removeClass("open");
+	},
+	loadContent: function(html, direction, extraClass) {
+		if (extraClass === undefined) {
+			extraClass = "";
+		}
+		if (direction === "Up" || direction === "Down") {
+			var content = $(".inputCard .content");
+			content.addClass("fadeOut" + direction);
+			if (direction === "Down") {
+				$(".inputCard .contentWrapper").append("<div class='newContent enter" + direction + "'>" + html + "</div>");
+			} else {
+				$(".inputCard .contentWrapper").prepend("<div class='newContent enter" + direction + "'>" + html + "</div>");
+			}
+			$(".inputCard .newContent").addClass("fadeIn" + direction);
+			setTimeout(function() {
+				$(".inputCard .content").remove();
+				$(".inputCard .newContent").addClass("content");
+				$(".inputCard .newContent").addClass("open");
+				$(".inputCard .newContent").addClass(extraClass);
+				$(".inputCard .newContent").removeClass("newContent");
+			}, 100);
+		}
+	}
 }

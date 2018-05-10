@@ -1,7 +1,8 @@
 loader.show();
 $(".innerPage").ready(() => {
-    $(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
+	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
 });
+
 var campaignId = sessionStorage.getItem("::campaignId");
 var campaignName = sessionStorage.getItem("::campaignName");
 var sUid = sessionStorage.getItem("::uid");
@@ -11,7 +12,7 @@ progress.show();
 
 //firestore.collection("campaigns").doc(campaignId).get().then(function(doc) {
 //	if (doc && doc.exists) {
-//		
+//
 //	} else {
 //		error("Couldn't fetch campaign");
 //		progress.hide();
@@ -56,9 +57,9 @@ if (sessionStorage.getItem("::join") !== "true") {
 
 // on change
 firestore.collection("campaigns").doc(campaignId).onSnapshot(function (doc) {
-	
+
 	progress.show();
-	
+
 	if (doc && doc.exists) {
 		var campaignContent = doc.data();
 		if (campaignContent.liveState === "update") {
@@ -77,11 +78,11 @@ firestore.collection("campaigns").doc(campaignId).onSnapshot(function (doc) {
 });
 
 async function update(partyContent) {
-	
+
 	progress.show();
-	
+
 	async function addToList(id, characterId) {
-		
+
 		firestore.collection("users").doc(id).get().then(function(doc) {
 			if (doc && doc.exists) {
 				var playerInfo = doc.data();
@@ -91,7 +92,7 @@ async function update(partyContent) {
 						var characterName = characterObj["96_1"];
 						var username = playerInfo.username;
 						var usericon = playerInfo.usericon;
-						
+
 						var onclick = "loadCharacter('" + id + "')";
 						$(".innerList").append("<div class='player' onclick=" + onclick + "><img src=" + usericon + "><h1>" + characterName + "</h1></div>");
 					} else {
@@ -105,11 +106,11 @@ async function update(partyContent) {
 			}
 		})
 	}
-	
+
 	// gets the DM uid
 	var dmQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("users").where("type", "==", "DM"));
 	var dmUid = dmQuery[0]["id"];
-	
+
 	firestore.collection("users").doc(dmUid).get().then(function(doc) {
 		if (doc && doc.exists) {
 			var dmObj = doc.data();
@@ -120,11 +121,11 @@ async function update(partyContent) {
 			progress.hide();
 		}
 	})
-	
+
 	// sets isDM var and shows hidden buttons
 	if (sUid === dmUid) {
 		isDM = true;
-		
+
 		$(".changeId").show();
 		$(".delete").show();
 		$(".showBanned").show();
@@ -132,25 +133,25 @@ async function update(partyContent) {
 		isDM = false;
 		$(".leave").show();
 	}
-	
-	
+
+
 	// updates the player list
 	var playerList = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("users").where("type", "==", "player"));
-	
+
 	// clears the list
 	$(".innerList").remove();
 	$(".playerList").append("<div class='innerList'></div>");
-	
-	
+
+
 	// for every player in the player list, add it to the ui
-	
+
 	for (var i = 0; i < playerList.length; ++i) {
 		var playerId = playerList[i]["id"];
 		var playerCharacter = playerList[i]["character"];
 		var w = playerList[i];
 		addToList(playerId, playerCharacter);
 	}
-	
+
 	progress.hide();
 }
 
@@ -162,11 +163,11 @@ pages = {
 
 // called when clicked on user
 function loadCharacter(uid) {
-	
+
 	progress.show();
-	
+
 	loadedUid = uid;
-	
+
 	try {
 		firestore.collection("campaigns").doc(campaignId + "/users/" + uid).get().then(function(doc) {
 			if (doc && doc.exists) {
@@ -182,7 +183,7 @@ function loadCharacter(uid) {
 								if (isDM) {
 									$(".kick").show();
 									$(".ban").show();
-									
+
 									if (characterInfo.allowEdit === undefined) {
 										l(characterObj);
 										progress.hide();
@@ -206,15 +207,15 @@ function loadCharacter(uid) {
 				});
 			}
 		})
-		
+
 //		dbCampaign.child(partyId).child(lUid).once("value",(e) => {
 //			var playerObj = e.val();
 //			var characterName = playerObj.character;
 //			sessionStorage.setItem("::saved", characterName);
-//			try {	
+//			try {
 //				dbUsers.child(lUid).child("characters").child(characterName).once("value",(e) => {
 //					var characterObj = e.val();
-//					
+//
 //					if (sUid === lUid) {
 //						selfl(characterObj);
 //					} else if (isDM) {
@@ -226,8 +227,8 @@ function loadCharacter(uid) {
 //								dbUsers.child(loadedUid).child("characters").child(characterName + "-info").child("allowEdit").set("0");
 //								allowEdit = "0";
 //							}
-//							
-//							
+//
+//
 //							if (allowEdit === "1") {
 //								selfl(characterObj);
 //							} else {
@@ -239,7 +240,7 @@ function loadCharacter(uid) {
 //					} else {
 //						l(characterObj);
 //					}
-//					
+//
 //					loader.hide();
 //				})
 //			} catch(e) {
@@ -312,7 +313,7 @@ function selfl(characterObj) {
 }
 
 function save(showNote) {
-	
+
 	progress.show();
 	if (isDM === false) {
 		if (loadedUid === sUid) {
@@ -369,10 +370,10 @@ function s() {
 // DM functions
 
 function changeId() {
-	
+
 	// Creates a function required later
 	function updateList(wUid) {
-		
+
 		// gets the players campaign list
 		dbUsers.child(wUid).child("campaigns").once("value", c => {
 			var l = c.val();
@@ -380,51 +381,51 @@ function changeId() {
 			// creates a new empty list
 			var re = [];
 			for (var camp = 0; camp < l.length; ++camp) {
-				
+
 				// gets the campaign in the list
 				var campaignName = l[camp];
-				
+
 				// checks if the campaign in the list is the same as the chaning id
 				if (campaignName === partyId) {
-					
+
 					// if true add the new id instead of the old one
 					re.unshift(newId);
 				} else {
-					
+
 					// if false just add it to the new list
 					re.unshift(campaignName);
 				}
 			}
-			
+
 			// pushes the new list to the database
 			dbUsers.child(wUid).child("campaigns").set(re);
 		});
 	}
-	
+
 	// checks if the currect user is the DM of the party
 	if (isDM) {
-		
+
 		// Prompts a new id
 		var newId = prompt("Type the new campaign id");
-		
+
 		// checks if its a valid id
 		if (newId !== undefined || newId !== "" || newId !== false) {
-			
+
 			// gets the campaigns
 			dbCampaign.once("value", a => {
-				
+
 				// checks if there is a campaign with that id already
 				if (a.hasChild(newId)) {
-					
+
 					// alerts the user that that id is already in use and stops the function
 					alert("This id is already in use!");
 					return;
 				} else {
-					
+
 					// gets the playerlist form the campaign
 					dbCampaign.child(partyId).child("playerList").once("value", l => {
 						var playerList = l.val();
-						
+
 						// for every user update their campaign list
 						for (var i = 0; i < playerList.length; ++i) {
 							var wUid = playerList[i];
@@ -433,19 +434,19 @@ function changeId() {
 						}
 
 					}).then(function() {
-						
+
 						// when all the users campaign lists are updated, migrate the campaign data to the new id
 						dbCampaign.child(partyId).once("value", (d) => {
-							
+
 							// gets the data from the old id
 							data = d.val();
 
 							// adds it to the new id
 							dbCampaign.child(newId).set(data);
-							
+
 							// sets the liveState to 'changeId' to users need to reconnect
 							dbCampaign.child(partyId).child("liveState").set("changeId");
-							
+
 							// deletes the old id
 							dbCampaign.child(partyId).set(null);
 						});
@@ -460,9 +461,9 @@ function changeId() {
 
 
 function kick(ban, f) {
-	
+
 	show();
-	
+
 	function next() {
 		firestore.collection("campaigns").doc(campaignId + "/users/" + loadedUid).delete().then(function() {
 			firestore.collection("users").doc(loadedUid).collection("campaigns").doc(campaignId).delete().then(function() {
@@ -474,7 +475,7 @@ function kick(ban, f) {
 						$(".ban").hide();
 						$(".save").hide();
 						hide();
-						
+
 						if (f !== undefined) {
 							f();
 						}
@@ -483,7 +484,7 @@ function kick(ban, f) {
 			});
 		});
 	}
-	
+
 	if (ban) {
 		next();
 	} else {
@@ -559,7 +560,7 @@ function del() {
 						kick(true);
 					}
 				}
-				
+
 				loadedUid = dM;
 				kick(true);
 				dbCampaign.child(partyId).set(null);
@@ -588,7 +589,7 @@ async function toggleBanList() {
 		for (var i = 0; i < banListQuery.length; ++i) {
 			var userObj = banListQuery[i];
 			$(".banList").append("<div class='listItemWrapper centerHorizontal'><div class='listItem s2 rounded'><div class='icon'><img src='" + userObj.usericon + "'></div><div class='text'><div class='wrapper'><h1>" + userObj.username + "</h1><p>Reason: " + userObj.reason + "</p></div></div><div class='buttons'><div class='buttonsWrapper centerVertical'><button class='action pardon" + i + "' name='" + userObj.username + "'>pardon</button></div></div></div></div>");
-			
+
 			$(".pardon" + i).on("click", async function() {
 				var name = $(this).attr("name");
 				var banQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("banList").where("username", "==", name));
@@ -601,7 +602,7 @@ async function toggleBanList() {
 				}
 			});
 		}
-		
+
 		easeIn();
 		$(".showBanned h1").text("Hide ban list");
 		$(".banList").addClass("open")

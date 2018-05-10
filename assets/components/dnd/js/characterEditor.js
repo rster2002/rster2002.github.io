@@ -13,6 +13,28 @@ function ctrlS() {
 	}
 }
 
+sessionStorage.setItem("current", "0");
+
+
+
+$(".innerPage").scroll(function () {
+	inputCard.peek.open();
+	var scrolled = $(".innerPage").scrollTop();
+	var height = $(".characterSheet").css("height");
+	var height = height.replace("px", "");
+	var tumble = Number(height);
+
+	if (scrolled < tumble && sessionStorage.getItem("current") !== "1") {
+		inputCard.slideUp("Creating a character");
+		inputCard.loadContent($(".characterBuilding").html(), "Down", "characterBuilding");
+		sessionStorage.setItem("current", "1");
+	} else if (scrolled > tumble && sessionStorage.getItem("current") !== "2") {
+		inputCard.slideDown("Add a spell");
+		inputCard.loadContent("<p>Spell form</p>", "Down");
+		sessionStorage.setItem("current", "2");
+	}
+});
+
 allowSave = false;
 
 timer = setInterval(function() {
@@ -59,45 +81,25 @@ function c(here) {
 
 console.log("hmm");
 
-
-function upCharacter() {
-	loader.show();
-	try {
-		sessionStorage.setItem("::saved", input);
-		dbUsers.child(sUid).child("characters").child(input).set(characterObj);
-	} catch (e) {
-		error(e);
-	}
-	loader.hide();
-}
-
 function saveCharacter(show) {
-	
+
 	progress.show();
-    
+
 	se = false;
-	
+
 	try {
 		s();
 		if (sessionStorage.getItem("::saved") !== "false") {
 			progress.show();
-			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj")
-				.update(characterObj)
-				.then(function() {
+			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").update(characterObj).then(function() {
 					progress.hide();
 					if (show) {
-						note.open("Saved", 1000);
+						note.open("Saved", "save", 1000);
 					}
 				})
 				.catch(function(error) {
 					error(error);
 				})
-//			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj).then(() => {
-//				progress.hide();
-//				if (show) {
-//					note.open("Saved", 1000);
-//				}
-//			});
 		} else {
 			promptName();
 		}
@@ -110,7 +112,7 @@ function addSpellToList(spell, index) {
 	function prop(text) {
 		return "<div class='tag'><p>" + text + "</p></div>"
 	}
-	
+
 	var properties = "";
 	console.log(spell);
 	if (spell.level == 0) {
@@ -150,7 +152,7 @@ function addSpellToList(spell, index) {
 	if (spell.ritual === true) {
 		properties += prop("Ritual");
 	}
-	
+
 	var description = spell.description;
 	var desc = description.split("\n");
 	console.log(desc);
@@ -163,11 +165,11 @@ function addSpellToList(spell, index) {
 			out += "<p>" + text + "</p>";
 		}
 	}
-	
+
 	var levelText = spell.level == 0 ? "Cantrip" : "Level " + spell.level;
-	
+
 	$(".spellList").prepend("<div class='spell s2 rounded centerHorizontal' id='spell" + index + "'><div class='shared'><div class='icon'><div class='circle'></div></div><div class='text'><div class='wrapper'><h1>" + spell.name + "</h1><p>" + levelText + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='text'>" + out + "</div></div></div>");
-	
+
 	$("#spell" + index).on("click", function(e) {
 		console.log("click")
 		e.stopPropagation();
@@ -178,11 +180,11 @@ function addSpellToList(spell, index) {
 function loadCharacter(i) {
 	try {
 		if (i) {
-			
+
 			progress.show();
-			
+
 			sessionStorage.setItem("::saved", i);
-			
+
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get()
 			.then(function(doc) {
 				if (doc && doc.exists) {
@@ -207,18 +209,18 @@ function loadCharacter(i) {
 
 async function del() {
 	console.log("Delete");
-	
+
 	progress.show();
 	var usedInCampaigns = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("usedInCampaigns"));
 	if (usedInCampaigns[0] === undefined) {
 		progress.hide();
-		
+
 		if (confirm("Are you sure you want to delete this character?")) {
 			if (confirm("Are you realy sure?")) {
 				progress.show();
 				firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").delete().then(function() {
 					progress.hide();
-					note.open("Character deleted", 2000);
+					note.open("Character deleted", "delete", 2000);
 					openPage("characterList");
 				}).catch(function(e) {
 					error(e);
@@ -230,19 +232,6 @@ async function del() {
 		alert("This character is in use in a campaign");
 		progress.hide();
 	}
-//	firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "userInCampaigns").get().then(function(doc) {
-//		if (doc && doc.exists) {
-//			var data = doc.data();
-//			if (data.usedInCampaigns !== undefined) {
-//			} else {
-//				alert("This charater is used in a campaign");
-//				progress.hide();
-//			}
-//		} else {
-//			error("Couldn't find this character in the database");
-//			openPage("characterList");
-//		}
-//	})
 }
 
 function dupe() {
@@ -250,20 +239,23 @@ function dupe() {
 	var newCharacterId = "character-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
 	if (confirm("Do you wan't to dupe this character?")) {
 		progress.show();
-		firestore.collection("users").doc(sUid + "/characters/" + characterId).get()
-		.then(function(doc) {
+		firestore.collection("users").doc(sUid + "/characters/" + characterId).get().then(function(doc) {
 			if (doc && doc.exists) {
 				var characterInfo = doc.data();
-				firestore.collection("users").doc(sUid + "/characters/" + newCharacterId).set(characterInfo)
-				.then(function() {
-					firestore.collection("users").doc(sUid + "/characters/" + characterId + "/data/characterObj").get()
-					.then(function(doc) {
+				console.log(characterInfo);
+				if (characterInfo["dupe"] !== undefined) {
+					characterInfo["dupe"] += 1;
+				} else {
+					characterInfo["dupe"] = 1;
+				}
+				console.log(characterInfo);
+				firestore.collection("users").doc(sUid + "/characters/" + newCharacterId).set(characterInfo).then(function() {
+					firestore.collection("users").doc(sUid + "/characters/" + characterId + "/data/characterObj").get().then(function(doc) {
 						if (doc && doc.exists) {
 							var characterObj = doc.data();
-							firestore.collection("users").doc(sUid + "/characters/" + newCharacterId + "/data/characterObj").set(characterObj)
-							.then(function() {
+							firestore.collection("users").doc(sUid + "/characters/" + newCharacterId + "/data/characterObj").set(characterObj).then(function() {
 								progress.hide();
-								note.open("Duped characer", 2000);
+								note.open("Duped characer", "file_copy", 2000);
 								loadCharacter(newCharacterId);
 							});
 						}
@@ -351,14 +343,14 @@ async function querySpells() {
 	console.log("Query spells")
 	progress.show();
 	var spellArray = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("level", "desc").orderBy("name", "desc"));
-	
+
 	console.log(spellArray);
 	console.log(spellArray);
-	
+
 	for (var i = 0; i < spellArray.length; ++i) {
 		addSpellToList(spellArray[i], i)
 	}
-	
+
 	progress.hide();
 }
 
@@ -366,11 +358,6 @@ async function onload() {
 	loader.show();
 	await loadCharacter(sessionStorage.getItem("::openCharacter"));
 	await querySpells();
-//	for (var i = 0; i < inputs.length; ++i) {
-//		var selector = "#" + inputs[i];
-//		var modSelector = "#" + mods[inputs[i]];
-//		calcMod(selector, modSelector);
-//	}
 	loader.hide();
 }
 
@@ -388,4 +375,8 @@ function saveOptions() {
 	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).update({
 		allowEdit: $(".allowEdit").val()
 	});
+}
+
+var onExit = function() {
+	inputCard.close();
 }

@@ -351,3 +351,7 @@
 .characterOptions .r select {
 	float: right;
 }
+
+.characterBuilding p {
+	white-space: normal;
+}
