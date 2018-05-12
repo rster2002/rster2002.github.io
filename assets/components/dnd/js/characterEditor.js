@@ -15,15 +15,15 @@ function ctrlS() {
 
 allowSave = false;
 
-timer = setInterval(function() {
-	if (sessionStorage.getItem("::openPage") === "characterEditor") {
-		if (sessionStorage.getItem("::saved") !== "false") {
-			if (allowSave === true) {
-				saveCharacter(false);
-			}
-		}
-	}
-}, 15000);
+// timer = setInterval(function() {
+// 	if (sessionStorage.getItem("::openPage") === "characterEditor") {
+// 		if (sessionStorage.getItem("::saved") !== "false") {
+// 			if (allowSave === true) {
+// 				saveCharacter(false);
+// 			}
+// 		}
+// 	}
+// }, 15000);
 
 function localError(error) {
 	error(error);
@@ -72,11 +72,11 @@ function upCharacter() {
 }
 
 function saveCharacter(show) {
-	
+
 	progress.show();
-    
+
 	se = false;
-	
+
 	try {
 		s();
 		if (sessionStorage.getItem("::saved") !== "false") {
@@ -110,7 +110,7 @@ function addSpellToList(spell, index) {
 	function prop(text) {
 		return "<div class='tag'><p>" + text + "</p></div>"
 	}
-	
+
 	var properties = "";
 	console.log(spell);
 	if (spell.level == 0) {
@@ -150,7 +150,7 @@ function addSpellToList(spell, index) {
 	if (spell.ritual === true) {
 		properties += prop("Ritual");
 	}
-	
+
 	var description = spell.description;
 	var desc = description.split("\n");
 	console.log(desc);
@@ -163,11 +163,11 @@ function addSpellToList(spell, index) {
 			out += "<p>" + text + "</p>";
 		}
 	}
-	
+
 	var levelText = spell.level == 0 ? "Cantrip" : "Level " + spell.level;
-	
+
 	$(".spellList").prepend("<div class='spell s2 rounded centerHorizontal' id='spell" + index + "'><div class='shared'><div class='icon'><div class='circle'></div></div><div class='text'><div class='wrapper'><h1>" + spell.name + "</h1><p>" + levelText + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='text'>" + out + "</div></div></div>");
-	
+
 	$("#spell" + index).on("click", function(e) {
 		console.log("click")
 		e.stopPropagation();
@@ -178,11 +178,11 @@ function addSpellToList(spell, index) {
 function loadCharacter(i) {
 	try {
 		if (i) {
-			
+
 			progress.show();
-			
+
 			sessionStorage.setItem("::saved", i);
-			
+
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get()
 			.then(function(doc) {
 				if (doc && doc.exists) {
@@ -207,12 +207,12 @@ function loadCharacter(i) {
 
 async function del() {
 	console.log("Delete");
-	
+
 	progress.show();
 	var usedInCampaigns = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("usedInCampaigns"));
 	if (usedInCampaigns[0] === undefined) {
 		progress.hide();
-		
+
 		if (confirm("Are you sure you want to delete this character?")) {
 			if (confirm("Are you realy sure?")) {
 				progress.show();
@@ -351,14 +351,14 @@ async function querySpells() {
 	console.log("Query spells")
 	progress.show();
 	var spellArray = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("level", "desc").orderBy("name", "desc"));
-	
+
 	console.log(spellArray);
 	console.log(spellArray);
-	
+
 	for (var i = 0; i < spellArray.length; ++i) {
 		addSpellToList(spellArray[i], i)
 	}
-	
+
 	progress.hide();
 }
 
