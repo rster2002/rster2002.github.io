@@ -131,13 +131,16 @@ progress = {
 	}
 }
 
+onExit = null;
+loaded = null;
+
 function openPage(page) {
 	loader.show();
 	$(".page.innerPage").remove();
 	$(".page").load("../assets/components/dnd/pages/" + page + ".html");
 	sessionStorage.setItem("::openPage", page);
 	sidebar.close();
-	if (onExit !== undefined || onExit !== undefined) {
+	if (onExit !== null) {
 		onExit();
 		onExit = null;
 	}
@@ -145,7 +148,7 @@ function openPage(page) {
 
 function onLoaded() {
 	loader.hide();
-	if (loaded !== undefined || loaded !== null) {
+	if (loaded !== null) {
 		loaded();
 		loaded = null;
 	}

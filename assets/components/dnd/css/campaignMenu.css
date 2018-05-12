@@ -156,3 +156,216 @@
     position: relative;
     left: 3%;
 }
+
+.fab.expand {
+	width: 70vw;
+	height: 70vh;
+	top: 15vh;
+	left: 15vw;
+	border-radius: 1vh;
+	cursor: default;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 300ms;
+}
+
+.fab.expand .i {
+    position: absolute;
+    /* top: 50%;
+	left: 50%; */
+	animation: iExpand 300ms cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+.add {
+	display: none;
+}
+
+.fab .contents {
+	width: 100%;
+	height: 100%;
+}
+
+.fab .top {
+	width: 100%;
+	height: 10%;
+}
+
+.fab .iconPlaceholder {
+	width: 7%;
+	height: 100%;
+	float: left;
+}
+
+.fab .close {
+	position: absolute;
+	z-index: 11;
+	font-size: 3em;
+	top: 0.5%;
+	left: 95%;
+}
+
+.fab .top .text {
+	width: 93%;
+	height: 100%;
+	float: left;
+}
+
+.fab .content {
+	width: 100%;
+	height: 90%;
+}
+
+.fab .content .colom {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+
+.fab .content .colom .inner {
+	width: 70%;
+	height: 70%;
+	position: relative;
+	top: 15%;
+	left: 15%;
+}
+
+.fab .colom .inner.join {
+	left: 7%;
+}
+
+.fab .colom .inner.host {
+	left: 22%;
+}
+
+.fab .colom .inner .top {
+	width: 100%;
+	height: 10%;
+}
+
+.fab .colom .inner .top i {
+    text-align: center;
+	font-size: 2.4em;
+}
+
+.fab .colom .inner .title {
+	width: 100%;
+	height: 10%;
+}
+
+.fab .colom .inner .title h1 {
+	width: 99%;
+	height: 99%;
+	text-align: center;
+}
+
+.fab .colom .inner .text {
+	width: 60%;
+	position: relative;
+	left: 20%;
+	top: 5%;
+	height: 44%;
+}
+
+.fab .colom .inner .text p {
+	white-space: normal;
+}
+
+.fab .colom .inner .action {
+	width: 100%;
+	height: 11%;
+}
+
+.fab .colom .inner .action .button {
+	position: relative;
+	left: 20%;
+	top: 5%;
+	width: 60%;
+	height: 90%;
+	background-color: white;
+	border-radius: 1vh;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 100ms;
+}
+
+.fab .colom .inner .action .button:hover {
+	background-color: rgb(235, 235, 235);
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 100ms;
+}
+
+.fab .colom .inner .action .button h1 {
+	color: black;
+    font-size: 1.4em;
+}
+
+.fab .campaignId {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border: 2px solid white;
+	transform: translate(-50%, -50%);
+	background-color: #aa00ff;
+	color: white !important;
+	padding: .2%;
+	font-size: 1.3em;
+}
+
+.fab .campaignId.invalid {
+	border: 2px solid red;
+	animation: invalidShake linear 500ms;
+}
+
+@keyframes invalidShake {
+	0% {
+		border: 2px solid white;
+		margin-left: 0px;
+	}
+	20% {
+		border: 2px solid red;
+		margin-left: -15px;
+	}
+	40% {
+		border: 2px solid red;
+		margin-left: 15px;
+	}
+	60% {
+		border: 2px solid red;
+		margin-left: -30px;
+	}
+	80% {
+		border: 2px solid red;
+		margin-left: 30px;
+	}
+	100% {
+		border: 2px solid white;
+		margin-left: 0px;
+	}
+}
+
+.fab .campaignId::placeholder {
+	color: white;
+}
+
+.fab .campaignId::-ms-input-placeholder {
+	color: white;
+}
+
+.expandedBackground {
+	width: 100vw;
+	height: 100vh;
+	z-index: 9;
+	position: fixed;
+	background-color: transparent;
+	display: none;
+}
+
+@keyframes iExpand {
+	0% {
+		top: 50%;
+		left: 50%;
+	}
+	100% {
+		top: 5%;
+	    left: 3%;
+	}
+}
+
+.fab.expand:hover {
+	transform: scale(1);
+}

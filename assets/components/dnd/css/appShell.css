@@ -156,10 +156,10 @@ button.red:hover {
 }
 
 .center {
-	position: relative;
-    top: 50%;
-    left: 50%;
-	transform: translate(-50%, -50%);
+	position: relative !important;
+    top: 50% !important;
+    left: 50% !important;
+	transform: translate(-50%, -50%) !important;
 }
 
 .centerHorizontal {
@@ -233,6 +233,7 @@ button.red:hover {
     left: calc(97vw - 4.5vw);
 	border-radius: 50%;
 	color: white;
+	z-index: 10;
 	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 	cursor: pointer;
 	transition: all cubic-bezier(0.4, 0.0, 1, 1) 100ms;
@@ -243,7 +244,7 @@ button.red:hover {
 	transition: all cubic-bezier(0.0, 0.0, 0.2, 1) 250ms;
 }
 
-.fab i {
+.fab .i {
 	position: relative;
 	text-align: center;
 	top: 50%;
@@ -257,7 +258,7 @@ button.red:hover {
 	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 150ms;
 }
 
-.fab:hover i {
+.fab:hover .i {
 	animation: pop cubic-bezier(0.4, 0.0, 0.2, 1) 300ms;
 }
 

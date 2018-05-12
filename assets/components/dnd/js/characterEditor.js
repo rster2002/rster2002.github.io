@@ -15,8 +15,6 @@ function ctrlS() {
 
 sessionStorage.setItem("current", "0");
 
-
-
 $(".innerPage").scroll(function () {
 	inputCard.peek.open();
 	var scrolled = $(".innerPage").scrollTop();
@@ -168,23 +166,33 @@ function addSpellToList(spell, index) {
 
 	var levelText = spell.level == 0 ? "Cantrip" : "Level " + spell.level;
 
-	$(".spellList").prepend("<div class='spell s2 rounded centerHorizontal' id='spell" + index + "'><div class='shared'><div class='icon'><div class='circle'></div></div><div class='text'><div class='wrapper'><h1>" + spell.name + "</h1><p>" + levelText + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='text'>" + out + "</div></div></div>");
+	$(".spellList").prepend("<div class='spell s2 rounded centerHorizontal' id='spell" + index + "'><div class='shared'><div class='icon'><div class='circle'></div></div><div class='text'><div class='wrapper'><h1>" + spell.name + "</h1><p>" + levelText + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='text'>" + out + "</div><div class='actions'><button class='flat del'>Delete</button></div></div></div>");
 
 	$("#spell" + index).on("click", function(e) {
 		console.log("click")
 		e.stopPropagation();
 		t(this);
 	});
+
+	$("#spell" + index + " .del").on("click", function(e) {
+		e.stopPropagation();
+		deleteSpell(this);
+	});
+}
+
+function deleteSpell(here) {
+	var k = $(here).parent().parent().parent().attr("id");
+	var elementId = Number(k.replace("spell", ""));
+	var spellId = spellObj[elementId]["__id"];
+	userRef.collection("characters").doc(sessionStorage.getItem("::saved") + "/spells/" + spellId).delete();
+	note.open("Spell deleted", "delete", 2000);
 }
 
 function loadCharacter(i) {
 	try {
 		if (i) {
-
 			progress.show();
-
 			sessionStorage.setItem("::saved", i);
-
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get()
 			.then(function(doc) {
 				if (doc && doc.exists) {
@@ -339,6 +347,8 @@ var modifiers = [
 	"+5"
 ]
 
+var spellObj = {};
+
 async function querySpells() {
 	console.log("Query spells")
 	progress.show();
@@ -348,7 +358,8 @@ async function querySpells() {
 	console.log(spellArray);
 
 	for (var i = 0; i < spellArray.length; ++i) {
-		addSpellToList(spellArray[i], i)
+		addSpellToList(spellArray[i], i);
+		spellObj[i] = spellArray[i];
 	}
 
 	progress.hide();
