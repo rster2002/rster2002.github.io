@@ -193,8 +193,7 @@ function loadCharacter(i) {
 		if (i) {
 			progress.show();
 			sessionStorage.setItem("::saved", i);
-			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get()
-			.then(function(doc) {
+			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get().then(function(doc) {
 				if (doc && doc.exists) {
 					var data = doc.data();
 					l(data);
