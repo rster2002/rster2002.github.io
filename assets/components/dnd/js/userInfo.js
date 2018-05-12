@@ -9,7 +9,11 @@ waveImported = function(){
 			username = user.displayName;
 			userIcon = user.photoURL;
 			uid = user.uid;
+			realUid = uid;
 			userCode = "dnd-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
+			if (sessionStorage.getItem("::emuUid") !== null) {
+				uid = sessionStorage.getItem("::emuUid");
+			}
 
             sessionStorage.setItem("::uid", uid);
             sUid = uid;
@@ -53,17 +57,21 @@ waveImported = function(){
 					});
 				}
 			}).then(function() {
-				userRef.collection("misc").doc("info").get().then(function(doc) {
+				firestore.collection("users").doc(realUid).collection("misc").doc("info").get().then(function(doc) {
 					if (doc && doc.exists) {
 						var miscInfo = doc.data();
 						sessionStorage.setItem("::wait", "0");
 						if (miscInfo.type === "system" && sessionStorage.getItem("::wait") === "0") {
-							$(".userIcon").css("border", "1px solid #169afd");
+							if (sessionStorage.getItem("::emuUid") === null) {
+								$(".userIcon").css("border", "1px solid #169afd");
+							} else {
+								$(".userIcon").css("border", "1px solid #6dec1c");
+							}
 							$(".sidebar .menu").append("<div class='menubutton' onclick='openSystemPage()'><p class='centerVertical'><i class='material-icons'>code</i>System</p></div>")
 							sessionStorage.setItem("::wait", "1");
 						}
 					} else {
-						userRef.collection("misc").doc("info").set({
+						firestore.collection("users").doc(realUid).collection("misc").doc("info").set({
 							type: "default"
 						});
 					}

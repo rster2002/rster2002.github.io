@@ -10,6 +10,30 @@ async function refreshUsers() {
 	}
 }
 
+function startEmulatetSession() {
+	sessionStorage.setItem("::emuUid", lUid);
+	if (DEV) {
+		location.href = "app.html";
+	} else {
+		location.href = "app.html?pro";
+	}
+}
+
+function stopEmulatetSession() {
+	sessionStorage.removeItem("::emuUid");
+	if (DEV) {
+		location.href = "app.html";
+	} else {
+		location.href = "app.html?pro";
+	}
+}
+
+function deleteAccount() {
+	if (confirm("Are you sure you want to delete this account?")) {
+		firestore.collection("users").doc(lUid).delete();
+	}
+}
+
 function userClick(here) {
 	lUid = $(here).attr("id");
 	$(".selectedUser").text(lUid);
