@@ -23,7 +23,7 @@ dbCampaign = database.child("campaign");
 dbUsernames = database.child("usernames");
 dbGlobal = database.child("global");
 dbUserCodes = database.child("userCodes");
-dbBackups = firebase.database().ref("backups");
+dbBackups = firebase.database().ref("backups" + dbNew);
 
 console.log(dbNew);
 firestore.get().then(function(doc) {
