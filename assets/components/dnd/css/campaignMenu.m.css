@@ -3,7 +3,7 @@
 }
 
 .innerPage p {
-	font-size: 3em;
+	font-size: 250%;
 }
 
 .createParty h1 {
@@ -49,7 +49,7 @@
 }
 
 .fab .content .colom .inner .title h1 {
-	font-size: 4em;
+	font-size: 300%;
 }
 
 .fab .content .colom .inner .text {
@@ -71,4 +71,9 @@
 .fab .colom .inner.host {
 	top: 10%;
 	left: 5%;
+}
+
+.fab .campaignId {
+	width: 80%;
+	font-size: 3em;
 }
