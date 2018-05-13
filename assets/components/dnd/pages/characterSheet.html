@@ -2,9 +2,14 @@
 <html lang="en">
 <body style="margin: 0;" onload='updateFDFXFA()'>
 	<div class="characterSheet">
-		
+		<input type="file" id="characterFile" style="display: none;" onchange="readURL(this);"/>
 <meta charset="utf-8" />
 <style>.innerPage{background-color:white;overflow-y: none;}
+#form12_2 {
+	background-position: center !important;
+	background-size: contain !important;
+	background-repeat: no-repeat !important;
+}
 #FDFXFA_Menu{text-align:center;width:100%;z-index:9999;color:white;background-color:#33966d;position:fixed;margin:0px;padding:10px; opacity:0.8;top:0px;min-width:300px;}
 #FDFXFA_Menu a{padding:5px ;cursor:pointer; border:groove 2px white; border-radius:5px; font-family: IDRSymbols; font-size:20px; margin:5px 10px 5px 10px;}
 #FDFXFA_Menu a:hover{background-color:darkgreen;}
@@ -884,6 +889,21 @@ function replaceChecks(isBase64) {
             }
     }
 	onload();
+	file = null;
+	$("#form12_2").on("click", function() {$("#characterFile").click();});
+	document.getElementById("characterFile").addEventListener("change", function(e) {
+		file = e.target.files[0];
+	});
+}
+
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			$('#form12_2').css('background-image', "url('" + e.target.result + "')");
+		};
+		reader.readAsDataURL(input.files[0]);
+	}
 }
 
 //change the checkbox status and the replacement image

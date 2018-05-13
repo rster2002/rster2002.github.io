@@ -81,23 +81,33 @@ function saveCharacter(show) {
 		s();
 		if (sessionStorage.getItem("::saved") !== "false") {
 			progress.show();
-			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj")
-				.update(characterObj)
-				.then(function() {
-					progress.hide();
-					if (show) {
-						note.open("Saved", 1000);
-					}
-				})
-				.catch(function(error) {
-					error(error);
-				})
-//			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj).then(() => {
-//				progress.hide();
-//				if (show) {
-//					note.open("Saved", 1000);
-//				}
-//			});
+			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").update(characterObj).then(function() {
+				progress.hide();
+				if (show) {
+					note.open("Saved", 1000);
+				}
+			}).then(function() {
+				if (file !== null) {
+					var task = userBucket.child(sessionStorage.getItem("::saved")).put(file);
+					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).update({
+						hasImg: true
+					});
+					task.on("state_changed",
+						function progress(e) {
+							var percentage = (e.bytesTransferred / e.totalBytes) * 100;
+							console.log(percentage);
+						},
+						function error(err) {
+							console.log("err", err);
+						},
+						function complete() {
+							console.log("done");
+						}
+					);
+				}
+			}).catch(function(error) {
+				error(error);
+			})
 		} else {
 			promptName();
 		}
@@ -183,8 +193,7 @@ function loadCharacter(i) {
 
 			sessionStorage.setItem("::saved", i);
 
-			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get()
-			.then(function(doc) {
+			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get().then(function(doc) {
 				if (doc && doc.exists) {
 					var data = doc.data();
 					l(data);
@@ -194,6 +203,20 @@ function loadCharacter(i) {
 					error("Couldn't find this character in the database");
 					openPage("characterList");
 				}
+			}).then(function() {
+				userRef.collection("characters").doc(sessionStorage.getItem("::saved")).get().then(function(doc) {
+					if (doc && doc.exists) {
+						var characterInfo = doc.data();
+						if (characterInfo.hasImg !== undefined && characterInfo.hasImg === true) {
+							userBucket.child(sessionStorage.getItem("::saved")).getDownloadURL().then(function(url) {
+								console.log(url);
+								$('#form12_2').css('background-image', "url('" + url + "')");
+							}).catch(function(err) {
+								error(err)
+							});
+						}
+					}
+				})
 			}).catch(function(error) {
 				error(error);
 			});

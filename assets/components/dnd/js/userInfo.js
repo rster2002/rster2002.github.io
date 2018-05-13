@@ -19,7 +19,7 @@ waveImported = function(){
             sUid = uid;
 
 			userRef = firestore.collection("users").doc(sessionStorage.getItem("::uid"));
-
+			userBucket = cloudStorage.child(uid);
 			if (userIcon === undefined || userIcon === null) {
 				userIcon = "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg";
 			}

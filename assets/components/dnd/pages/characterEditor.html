@@ -65,17 +65,17 @@
 				</div>
 			</div>
 			<div class="spellList">
-				
+
 			</div>
 		</div>
-		<script>			
+		<script>
 			$(".spell").each(function() {
 				$(this).on("click", function(e) {
 					e.stopPropagation();
 					t(this);
 				});
 			});
-			
+
 			$(".select").each(function() {
 				if (!$(this).hasClass("input")) {
 					$(this).on("click", function() {
@@ -87,11 +87,11 @@
 					});
 				}
 			});
-			
+
 			function changeState(here) {
 				$(here).toggleClass("selected");
 			}
-			
+
 			function checkInput(here) {
 				if ($(here).val() !== '') {
 					$(here).parent().addClass("selected");
@@ -99,7 +99,7 @@
 					$(here).parent().removeClass("selected");
 				}
 			}
-			
+
 			$(document).on("click", function() {
 				c(".spell");
 			});

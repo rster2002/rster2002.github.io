@@ -15,6 +15,8 @@ const firestoreSettings = {
 firestoreFunction.settings(firestoreSettings);
 const firestore = firestoreFunction.collection(dbNew).doc("dnd");
 
+var wait = firebase.storage();
+const cloudStorage = wait.ref("dnd" + dbNew);
 
 console.log("firebase init");
 database = firebase.database().ref("dnd" + db);
