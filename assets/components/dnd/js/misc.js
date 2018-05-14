@@ -34,8 +34,26 @@ const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 //}
 
 async function createQuery(query) {
-	const snapshot = await query.get();
-	return snapshot.docs.map(doc => ({__id: doc.id, ...doc.data()})); 
+	var snapshot = await query.get();
+	return snapshot.docs.map(doc => (Object.assign({__id: doc.id}, doc.data())));
+	// return snapshot.docs.map(doc => ({__id: doc.id, ...doc.data()}));
+	// var returnArr = [];
+	// for (var a = 0; a < queriedObj.length; ++a) {
+	// 	var arrObj = {};
+	// 	var thisObj = queriedObj[a];
+	// 	arrObj["__id"] = thisObj["__id"];
+	// 	var contentEntries = Object.entries(thisObj.content);
+	// 	for (var b = 0; b < contentEntries.length; ++b) {
+	// 		var key = contentEntries[b][0];
+	// 		var content = contentEntries[b][1];
+	// 		arrObj[key] = content;
+	// 	}
+	// 	returnArr[a] = arrObj;
+	// 	if (returnArr.length === queriedObj["length"]) {
+	// 		console.log(returnArr);
+	// 		return returnArr;
+	// 	}
+	// }
 }
 
 function randomString(characters, l) {
@@ -141,13 +159,13 @@ function openPage(page) {
 function openOverlay(page) {
     loader.show();
     $(".overlay .content .innerPage").remove();
-    
+
     if (page.includes("http")) {
         $(".overlay .content").load(page);
     } else {
         $(".overlay .content").load("../assets/components/dnd/pages/" + page + ".html");
     }
-    
+
     $(".background").show();
     $(".overlay").show();
     loader.hide();
@@ -156,13 +174,13 @@ function openOverlay(page) {
 function openOverlay(page) {
     loader.show();
     $(".overlay .content .innerPage").remove();
-    
+
     if (page.includes("http")) {
         $(".overlay .content").load(page);
     } else {
         $(".overlay .content").load("../assets/components/dnd/pages/" + page + ".html");
     }
-    
+
     $(".background").show();
     $(".overlay").show();
     loader.hide();
@@ -193,7 +211,7 @@ function getSelected(selector) {
 function error(error) {
 	loader.hide();
 	progress.hide();
-	
+
 	var randomMessage = randomFromArray([
 		"Don't steal books",
 		"You've upset the gods of D&D! Now you got punished",
@@ -202,14 +220,14 @@ function error(error) {
 		"A mind flayer has taken over this website!",
 		"Don't trust portals!"
 	])
-	
+
 	$("#error-message").text("An error has occurred (" + randomMessage + ")")
 	$("#error").text(error);
-	
+
 	console.error(error);
 	$(".error-background").fadeIn();
 	$(".background").fadeIn();
-	
+
 	if (!DEV) {
 		ga('send', 'event', "dnd-error", error);
 	}
