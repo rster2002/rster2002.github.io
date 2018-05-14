@@ -15,6 +15,8 @@ const firestoreSettings = {
 firestoreFunction.settings(firestoreSettings);
 const firestore = firestoreFunction.collection(dbNew).doc("dnd");
 
+var wait = firebase.storage();
+const cloudStorage = wait.ref("dnd" + dbNew);
 
 console.log("firebase init");
 database = firebase.database().ref("dnd" + db);
@@ -23,8 +25,9 @@ dbCampaign = database.child("campaign");
 dbUsernames = database.child("usernames");
 dbGlobal = database.child("global");
 dbUserCodes = database.child("userCodes");
+dbBackups = firebase.database().ref("backups" + dbNew);
 
-// checks for misc updates and functions
+console.log(dbNew);
 firestore.get().then(function(doc) {
 	console.log(doc);
 	if (doc && doc.exists) {

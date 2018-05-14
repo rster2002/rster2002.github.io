@@ -34,8 +34,8 @@ const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 //}
 
 async function createQuery(query) {
-	const snapshot = await query.get();
-	return snapshot.docs.map(doc => ({__id: doc.id, ...doc.data()}));
+	var snapshot = await query.get();
+	return snapshot.docs.map(doc => (Object.assign({__id: doc.id}, doc.data())));
 }
 
 function randomString(characters, l) {

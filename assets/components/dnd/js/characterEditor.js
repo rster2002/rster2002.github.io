@@ -13,25 +13,25 @@ function ctrlS() {
 	}
 }
 
-sessionStorage.setItem("current", "0");
+// sessionStorage.setItem("current", "0");
 
-$(".innerPage").scroll(function () {
-	inputCard.peek.open();
-	var scrolled = $(".innerPage").scrollTop();
-	var height = $(".characterSheet").css("height");
-	var height = height.replace("px", "");
-	var tumble = Number(height);
+// $(".innerPage").scroll(function () {
+// 	inputCard.peek.open();
+// 	var scrolled = $(".innerPage").scrollTop();
+// 	var height = $(".characterSheet").css("height");
+// 	var height = height.replace("px", "");
+// 	var tumble = Number(height);
 
-	if (scrolled < tumble && sessionStorage.getItem("current") !== "1") {
-		inputCard.slideUp("Creating a character");
-		inputCard.loadContent($(".characterBuilding").html(), "Down", "characterBuilding");
-		sessionStorage.setItem("current", "1");
-	} else if (scrolled > tumble && sessionStorage.getItem("current") !== "2") {
-		inputCard.slideDown("Add a spell");
-		inputCard.loadContent("<p>Spell form</p>", "Down");
-		sessionStorage.setItem("current", "2");
-	}
-});
+// 	if (scrolled < tumble && sessionStorage.getItem("current") !== "1") {
+// 		inputCard.slideUp("Creating a character");
+// 		inputCard.loadContent($(".characterBuilding").html(), "Down", "characterBuilding");
+// 		sessionStorage.setItem("current", "1");
+// 	} else if (scrolled > tumble && sessionStorage.getItem("current") !== "2") {
+// 		inputCard.slideDown("Add a spell");
+// 		inputCard.loadContent("<p>Spell form</p>", "Down");
+// 		sessionStorage.setItem("current", "2");
+// 	}
+// });
 
 allowSave = false;
 
@@ -80,14 +80,32 @@ function saveCharacter(show) {
 		if (sessionStorage.getItem("::saved") !== "false") {
 			progress.show();
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").update(characterObj).then(function() {
-					progress.hide();
-					if (show) {
-						note.open("Saved", "save", 1000);
-					}
-				})
-				.catch(function(error) {
-					error(error);
-				})
+				progress.hide();
+				if (show) {
+					note.open("Saved", 1000);
+				}
+			}).then(function() {
+				if (file !== null) {
+					var task = userBucket.child(sessionStorage.getItem("::saved")).put(file);
+					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).update({
+						hasImg: true
+					});
+					task.on("state_changed",
+						function progress(e) {
+							var percentage = (e.bytesTransferred / e.totalBytes) * 100;
+							console.log(percentage);
+						},
+						function error(err) {
+							console.log("err", err);
+						},
+						function complete() {
+							console.log("done");
+						}
+					);
+				}
+			}).catch(function(error) {
+				error(error);
+			})
 		} else {
 			promptName();
 		}
@@ -193,6 +211,20 @@ function loadCharacter(i) {
 					error("Couldn't find this character in the database");
 					openPage("characterList");
 				}
+			}).then(function() {
+				userRef.collection("characters").doc(sessionStorage.getItem("::saved")).get().then(function(doc) {
+					if (doc && doc.exists) {
+						var characterInfo = doc.data();
+						if (characterInfo.hasImg !== undefined && characterInfo.hasImg === true) {
+							userBucket.child(sessionStorage.getItem("::saved")).getDownloadURL().then(function(url) {
+								console.log(url);
+								$('#form12_2').css('background-image', "url('" + url + "')");
+							}).catch(function(err) {
+								error(err)
+							});
+						}
+					}
+				})
 			}).catch(function(error) {
 				error(error);
 			});

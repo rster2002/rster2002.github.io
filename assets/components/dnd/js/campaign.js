@@ -171,6 +171,16 @@ function loadCharacter(uid) {
 						firestore.collection("users").doc(uid + "/characters/" + characterId).get().then(function(doc) {
 							if (doc && doc.exists) {
 								var characterInfo = doc.data();
+
+								if (characterInfo.hasImg !== undefined && characterInfo.hasImg === true) {
+									cloudStorage.child(loadedUid).child(sessionStorage.getItem("::saved")).getDownloadURL().then(function(url) {
+										console.log(url);
+										$('#form12_2').css('background-image', "url('" + url + "')");
+									}).catch(function(err) {
+										error(err);
+									});
+								}
+
 								if (isDM) {
 									$(".kick").show();
 									$(".ban").show();
@@ -197,47 +207,7 @@ function loadCharacter(uid) {
 					}
 				});
 			}
-		})
-
-//		dbCampaign.child(partyId).child(lUid).once("value",(e) => {
-//			var playerObj = e.val();
-//			var characterName = playerObj.character;
-//			sessionStorage.setItem("::saved", characterName);
-//			try {
-//				dbUsers.child(lUid).child("characters").child(characterName).once("value",(e) => {
-//					var characterObj = e.val();
-//
-//					if (sUid === lUid) {
-//						selfl(characterObj);
-//					} else if (isDM) {
-//						dbUsers.child(loadedUid).child("characters").child(characterName + "-info").once("value", function(inf) {
-//							var content = inf.val();
-//							if (inf.hasChild("allowEdit")) {
-//								allowEdit = content["allowEdit"];
-//							} else {
-//								dbUsers.child(loadedUid).child("characters").child(characterName + "-info").child("allowEdit").set("0");
-//								allowEdit = "0";
-//							}
-//
-//
-//							if (allowEdit === "1") {
-//								selfl(characterObj);
-//							} else {
-//								l(characterObj);
-//							}
-//						});
-//						$(".kick").show();
-//						$(".ban").show();
-//					} else {
-//						l(characterObj);
-//					}
-//
-//					loader.hide();
-//				})
-//			} catch(e) {
-//				error(e);
-//			}
-//		});
+		});
 	} catch(e) {
 		error(e);
 	}
