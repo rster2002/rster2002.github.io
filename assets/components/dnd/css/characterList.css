@@ -1,11 +1,10 @@
 .list {
 	width: 100%;
-	height: 100%;
 }
 
 .item {
 	width: 25%;
-	height: 50%;
+	height: 50vh;
 	float: left;
 }
 
@@ -14,20 +13,25 @@
 	width: 70%;
 	height: 70%;
 	position: relative;
-	top: 50%;
+	top: 55%;
 	left: 50%;
 	transform: translate(-50%,-50%);
 	border-radius: 7px;
+	opacity: 0;
 	cursor: pointer;
+	color: #3949ab;
 }
 
-/*
-.item .inner:hover {
-	transition: all ease-in .1s;
-	width: 72%;
-	height: 72%;
+.item .inner.fadeIn {
+	top: 50%;
+	opacity: 1;
+	transition: all cubic-bezier(0.0, 0.0, 0.2, 1) 100ms;
 }
-*/
+
+.item .inner:hover {
+	transition: all cubic-bezier(0.4, 0.0, 1, 1) 150ms;
+	transform: translate(-50%, -50%) scale(1.05);
+}
 
 .item .inner h1 {
 	position: relative;

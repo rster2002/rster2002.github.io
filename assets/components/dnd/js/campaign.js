@@ -1,7 +1,8 @@
 loader.show();
 $(".innerPage").ready(() => {
-    $(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
+	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
 });
+
 var campaignId = sessionStorage.getItem("::campaignId");
 var campaignName = sessionStorage.getItem("::campaignName");
 var sUid = sessionStorage.getItem("::uid");
@@ -18,15 +19,6 @@ progress.show();
 //	}
 //});
 
-
-timer = setInterval(function() {
-	if (sessionStorage.getItem("::openPage") === "campaign") {
-		if (loadedUid === sUid) {
-			save(false);
-			hide();
-		}
-	}
-}, 15000);
 
 console.log("party.js");
 

@@ -39,7 +39,9 @@ firestore.get().then(function(doc) {
 			alert(state.message);
 		}
 	} else {
-		alert("Can't fetch database state");
-		logout();
+		firestore.set({
+			function: "online",
+			message: ""
+		});
 	}
 });
