@@ -35,16 +35,6 @@ $(".innerPage").scroll(function () {
 
 allowSave = false;
 
-timer = setInterval(function() {
-	if (sessionStorage.getItem("::openPage") === "characterEditor") {
-		if (sessionStorage.getItem("::saved") !== "false") {
-			if (allowSave === true) {
-				saveCharacter(false);
-			}
-		}
-	}
-}, 15000);
-
 function localError(error) {
 	error(error);
 	progress.hide();
@@ -226,9 +216,11 @@ async function del() {
 			if (confirm("Are you realy sure?")) {
 				progress.show();
 				firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").delete().then(function() {
-					progress.hide();
-					note.open("Character deleted", "delete", 2000);
-					openPage("characterList");
+					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).delete().then(function() {
+						progress.hide();
+						note.open("Character deleted", "delete", 2000);
+						openPage("characterList");
+					});
 				}).catch(function(e) {
 					error(e);
 					progress.hide();
@@ -255,6 +247,7 @@ function dupe() {
 				} else {
 					characterInfo["dupe"] = 1;
 				}
+				characterInfo["id"] = newCharacterId;
 				console.log(characterInfo);
 				firestore.collection("users").doc(sUid + "/characters/" + newCharacterId).set(characterInfo).then(function() {
 					firestore.collection("users").doc(sUid + "/characters/" + characterId + "/data/characterObj").get().then(function(doc) {

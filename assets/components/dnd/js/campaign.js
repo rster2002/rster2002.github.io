@@ -20,15 +20,6 @@ progress.show();
 //});
 
 
-timer = setInterval(function() {
-	if (sessionStorage.getItem("::openPage") === "campaign") {
-		if (loadedUid === sUid) {
-			save(false);
-			hide();
-		}
-	}
-}, 15000);
-
 console.log("party.js");
 
 loadedUid = false;

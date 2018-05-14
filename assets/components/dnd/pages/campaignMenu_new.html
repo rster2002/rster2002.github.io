@@ -1,0 +1,69 @@
+<div class="innerPage scroll">
+	<script>
+		$("#T1").attr("src", "../assets/components/dnd/js/" + sessionStorage.getItem("::openPage") + ".js");
+		$("#T2").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".css");
+		$("#T3").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".m.css");
+	</script>
+	<script id="T1" type="text/javascript"></script>
+	<link id="T2" rel="stylesheet" type="text/css">
+	<link id="T3" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
+	<div class="selectCharacter">
+		<div class="inner shadow-5">
+		</div>
+	</div>
+	<div class="fab action">
+		<i class="material-icons i">add</i>
+	</div>
+	<div class="expandedBackground" onclick="closeFab();"></div>
+	<div class="add">
+		<div class="contents">
+			<i class="material-icons close" onclick="closeFab();">close</i>
+			<div class="top">
+				<div class="iconPlaceholder"></div>
+				<div class="text">
+					<h1 class="centerVertical">Add campaign</h1>
+				</div>
+			</div>
+			<div class="content">
+				<div class="colom">
+					<div class="inner join">
+						<div class="top">
+							<i class="material-icons center">person_add</i>
+						</div>
+						<div class="title">
+							<h1 class="center">Join</h1>
+						</div>
+						<div class="text">
+							<p>Join a campaign to see the character sheet of other players. You DM gives you a campaign id that you can use to join.</p>
+						</div>
+						<div class="action">
+							<div class="button">
+								<h1 class="center">Join</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="colom">
+					<div class="inner host">
+						<div class="top">
+							<i class="material-icons center">dns</i>
+						</div>
+						<div class="title">
+							<h1 class="center">Host</h1>
+						</div>
+						<div class="text">
+							<p>Host a campaign for others to join. If you host, you automaticly become the DM. Give other players the campaign id so they can join.</p>
+						</div>
+						<div class="action">
+							<div class="button">
+								<h1 class="center">Host</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<input class="campaignId" placeholder="Campaign id" />
+	</div>
+	<script>onLoaded();</script>
+</div>
