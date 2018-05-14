@@ -33,6 +33,10 @@ const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 //		.then(function() { console.log('Service Worker Registered'); });
 //}
 
+function onLoaded() {
+	loader.hide();
+}
+
 async function createQuery(query) {
 	var snapshot = await query.get();
 	return snapshot.docs.map(doc => (Object.assign({__id: doc.id}, doc.data())));
