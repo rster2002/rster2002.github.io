@@ -11,11 +11,11 @@ function addTolist(i, characterId) {
 		if (info && info.exists) {
 			var characterInfo = info.data();
 			console.log("info");
-			
+
 			userRef.collection("characters").doc(characterId + "/data/characterObj").get()
 			.then(function(o) {
 				console.log(o);
-				
+
 				if (o && o.exists) {
 					var characterObj = o.data();
 
@@ -36,7 +36,7 @@ function addTolist(i, characterId) {
 				console.log(error);
 			})
 		}
-		
+
 	});
 }
 
@@ -54,16 +54,16 @@ function loadCharacter(index) {
 
 function add() {
 	progress.show();
-	
+
 	var characterId = "character-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
-	
+
 	userRef.collection("characters").doc(characterId).set({
 		id: characterId,
 		allowEdit: "0",
 		createdAt: Date.now(),
 		lastEdited: Date.now()
 	});
-	
+
 	userRef.collection("characters").doc(characterId + "/data/characterObj").set(emptyCharacterObj).then(function() {
 		progress.hide();
 		sessionStorage.setItem("::openCharacter", characterId);
@@ -80,7 +80,7 @@ async function loadList() {
 		console.log(c, i);
 		addTolist(i, c.id);
 	}
-	
+
 	progress.hide();
 }
 

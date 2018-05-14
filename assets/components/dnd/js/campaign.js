@@ -179,7 +179,7 @@ function loadCharacter(uid) {
 						firestore.collection("users").doc(uid + "/characters/" + characterId).get().then(function(doc) {
 							if (doc && doc.exists) {
 								var characterInfo = doc.data();
-								
+
 								if (characterInfo.hasImg !== undefined && characterInfo.hasImg === true) {
 									cloudStorage.child(loadedUid).child(sessionStorage.getItem("::saved")).getDownloadURL().then(function(url) {
 										console.log(url);
