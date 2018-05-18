@@ -26,12 +26,6 @@ if (!DEV) {
 
 const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-//// register service worker
-//if ('serviceWorker' in navigator) {
-//	navigator.serviceWorker
-//		.register('../assets/components/dnd/js/pwa/sw.js')
-//		.then(function() { console.log('Service Worker Registered'); });
-//}
 
 function onLoaded() {
 	loader.hide();
@@ -72,7 +66,7 @@ $(document).keydown(function(event) {
 });
 
 note = {
-	open: function(text, icon, delay) {
+	open: function(icon, text, delay) {
 		$("#noteContent").text(text);
 		$(".note").addClass("open");
 		$(".icon .i").html(icon);

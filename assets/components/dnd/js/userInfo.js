@@ -43,7 +43,7 @@ waveImported = function(){
 						lastLogin: Date.now()
 					}).then(function() {
 						progress.hide();
-					});
+					}).catch(function(e){error(e)});
 				} else {
 					userRef.set({
 						uid: uid,
@@ -54,7 +54,7 @@ waveImported = function(){
 						userCode: userCode
 					}).then(function() {
 						progress.hide();
-					});
+					}).catch(function(e){error(e)});
 				}
 			}).then(function() {
 				firestore.collection("users").doc(realUid).collection("misc").doc("info").get().then(function(doc) {
@@ -73,10 +73,10 @@ waveImported = function(){
 					} else {
 						firestore.collection("users").doc(realUid).collection("misc").doc("info").set({
 							type: "default"
-						});
+						}).catch(function(e){error(e)});
 					}
 				});
-			});
+			}).catch(function(e){error(e)});
 		} else {
 			logout();
 		}

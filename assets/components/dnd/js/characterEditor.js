@@ -82,7 +82,7 @@ function saveCharacter(show) {
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").update(characterObj).then(function() {
 				progress.hide();
 				if (show) {
-					note.open("Saved", 1000);
+					note.open("save", "Saved", 1000);
 				}
 			}).then(function() {
 				if (file !== null) {
@@ -104,7 +104,7 @@ function saveCharacter(show) {
 					);
 				}
 			}).catch(function(error) {
-				error(error);
+				error(e);
 			})
 		} else {
 			promptName();
@@ -192,8 +192,8 @@ function deleteSpell(here) {
 	var k = $(here).parent().parent().parent().attr("id");
 	var elementId = Number(k.replace("spell", ""));
 	var spellId = spellObj[elementId]["__id"];
-	userRef.collection("characters").doc(sessionStorage.getItem("::saved") + "/spells/" + spellId).delete();
-	note.open("Spell deleted", "delete", 2000);
+	userRef.collection("characters").doc(sessionStorage.getItem("::saved") + "/spells/" + spellId).delete().catch(function(e){error(e)});
+	note.open("delete", "Spell deleted", 2000);
 }
 
 function loadCharacter(i) {
@@ -224,10 +224,8 @@ function loadCharacter(i) {
 							});
 						}
 					}
-				})
-			}).catch(function(error) {
-				error(error);
-			});
+				}).catch(function(e){error(e)});
+			}).catch(function(e){error(e)});
 
 			loader.hide();
 		}
@@ -250,13 +248,10 @@ async function del() {
 				firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").delete().then(function() {
 					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).delete().then(function() {
 						progress.hide();
-						note.open("Character deleted", "delete", 2000);
+						note.open("delete", "Character deleted", 2000);
 						openPage("characterList");
-					});
-				}).catch(function(e) {
-					error(e);
-					progress.hide();
-				});
+					}).catch(function(e){error(e)});
+				}).catch(function(e){error(e)});
 			}
 		}
 	} else {
@@ -287,7 +282,7 @@ function dupe() {
 							var characterObj = doc.data();
 							firestore.collection("users").doc(sUid + "/characters/" + newCharacterId + "/data/characterObj").set(characterObj).then(function() {
 								progress.hide();
-								note.open("Duped characer", "file_copy", 2000);
+								note.open("file_copy", "Duped characer", 2000);
 								loadCharacter(newCharacterId);
 							});
 						}
@@ -322,7 +317,7 @@ function addSpell() {
 			id: spellId
 		};
 
-		userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("spells").add(spellObj);
+		userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("spells").add(spellObj).catch(function(e){error(e)});;
 
 		addSpellToList(spellObj);
 	} else {
@@ -409,7 +404,7 @@ function calcMod(selector, modSelector) {
 function saveOptions() {
 	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).update({
 		allowEdit: $(".allowEdit").val()
-	});
+	}).catch(function(e){error(e)});
 }
 
 var onExit = function() {

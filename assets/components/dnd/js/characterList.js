@@ -28,9 +28,7 @@ async function addTolist(i, characterInfo, delay) {
 		} else {
 			userRef.collection("characters").doc(characterInfo.id).delete();
 		}
-	}).catch(function(e) {
-		console.log(e);
-	})
+	}).catch(function(e){error(e)});
 }
 
 function loadCharacter(index) {
@@ -55,13 +53,13 @@ function add() {
 		allowEdit: "0",
 		createdAt: Date.now(),
 		lastEdited: Date.now()
-	});
+	}).catch(function(e){error(e)});
 
 	userRef.collection("characters").doc(characterId + "/data/characterObj").set(emptyCharacterObj).then(function() {
 		progress.hide();
 		sessionStorage.setItem("::openCharacter", characterId);
 		openPage("characterEditor");
-	});
+	}).catch(function(e){error(e)});
 }
 
 

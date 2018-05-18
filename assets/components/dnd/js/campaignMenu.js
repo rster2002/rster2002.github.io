@@ -70,6 +70,8 @@ async function addList(id, place) {
 			error("Error when fetching campaign, maybe it doesn't exists anymore");
 			hide();
 		}
+	}).catch(function(e) {
+		error(e);
 	});
 //	console.log(playerArray);
 //	var players = playerArray.length;
