@@ -280,7 +280,6 @@ function save(showNote) {
 		if (loadedUid === sUid) {
 			s();
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").set(characterObj);
-//			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 			if (showNote) {
 				note.open("save", "Saved " + $("#form96_1").val(), 1000);
 				progress.hide();
