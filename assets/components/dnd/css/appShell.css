@@ -33,6 +33,7 @@ h1, p, a {
 
 h1 {
 	font-size: 2em;
+	font-weight: 100;
 }
 
 html, body {
@@ -49,6 +50,10 @@ h1, h2, textarea {
 
 p {
 	font-family: "Vollkorn SC";
+}
+
+.action {
+	background-color: #aa00ff;
 }
 
  button {
@@ -141,15 +146,20 @@ button.red:hover {
 	border-radius: 1vh;
 }
 
+.roundedTop {
+	border-top-left-radius: 1vh;
+	border-top-right-radius: 1vh;
+}
+
 .push {
 	margin-bottom: 5vh;
 }
 
 .center {
-	position: relative;
-    top: 50%;
-    left: 50%;
-	transform: translate(-50%, -50%);
+	position: relative !important;
+    top: 50% !important;
+    left: 50% !important;
+	transform: translate(-50%, -50%) !important;
 }
 
 .centerHorizontal {
@@ -162,10 +172,6 @@ button.red:hover {
 	position: relative;
     top: 50%;
 	transform: translate(0%, -50%);
-}
-
-.wave--sidenavWrapper {
-	z-index: 100 !important;
 }
 
 .shadow {
@@ -217,6 +223,55 @@ button.red:hover {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
+}
+
+.fab {
+	width: 4.5vw;
+    height: 4.5vw;
+    position: fixed;
+    top: 101vh;
+    left: calc(97vw - 4.5vw);
+	border-radius: 50%;
+	color: white;
+	z-index: 10;
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	cursor: pointer;
+	transition: all cubic-bezier(0.4, 0.0, 1, 1) 100ms;
+}
+
+.fab.show {
+	top: calc(96vh - 4.5vw);
+	transition: all cubic-bezier(0.0, 0.0, 0.2, 1) 250ms;
+}
+
+.fab .i {
+	position: relative;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 3em;
+}
+
+.fab:hover {
+	transform: scale(1.05);
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 150ms;
+}
+
+.fab:hover .i {
+	animation: pop cubic-bezier(0.4, 0.0, 0.2, 1) 300ms;
+}
+
+@keyframes pop {
+	0% {
+		transform: translate(-50%, -50%) scale(1);
+	}
+	50% {
+		transform: translate(-50%, -50%) scale(1.2);
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+	}
 }
 
 .loader-background {
@@ -332,6 +387,7 @@ button.red:hover {
 .userFloater h1 {
 	margin-left: 1%;
 	margin-right: 1%;
+	font-weight: 100;
 }
 
 .userFloater img {
@@ -341,9 +397,19 @@ button.red:hover {
 	border: 1px solid rgb(235, 235, 235);
 }
 
-.page {
+.pages {
 	height: 100vh;
 	width: 100vw;
+}
+
+.page {
+	width: 100vw;
+	height: 100vh;
+	display: none;
+}
+
+.page.open {
+	display: block;
 }
 
 .innerPage {
@@ -401,13 +467,13 @@ button.red:hover {
 	width: 20vw;
 	height: 100vh;
 	background-color: white;
-	transition: 150ms all cubic-bezier(0.4, 0.0, 0.6, 1);
+	transition: 200ms all cubic-bezier(0.4, 0.0, 0.6, 1);
 	left: -21vw;
 }
 
 .sidebar.open {
 	left: 0vw;
-	transition: 200ms all cubic-bezier(0.0, 0.0, 0.2, 1);
+	transition: 250ms all cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
 .sidebar .userWrapper {
@@ -421,8 +487,8 @@ button.red:hover {
 	width: 90%;
 	height: 90%;
 	border-radius: 1vh;
-	background-color: #f7b42c;
-	background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+	background-color: #36096d;
+	background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
 }
 
 .sidebar .iconWrapper {
@@ -445,6 +511,7 @@ button.red:hover {
 .sidebar .nameWrapper h1 {
 	width: 98%;
 	color: white;
+	font-weight: 100;
 }
 
 .sidebar .menu {
@@ -633,9 +700,25 @@ button.red:hover {
 	height: 7vh;
 	width: 60vw;
 	left: 20vw;
-	border-radius: 5vh;
+	/* border-radius: 5vh; */
 	background-color: white;
 	transition: 150ms all cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+
+.note .icon {
+	width: 10%;
+	height: 100%;
+	float: left;
+}
+
+.note .icon .i {
+	font-size: 2em;
+}
+
+.note .text {
+	width: 90%;
+	height: 100%;
+	float: left;
 }
 
 .note.open {
@@ -649,4 +732,130 @@ button.red:hover {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
+}
+
+.inputCard {
+	position: fixed;
+	z-index: 9;
+	width: 50vw;
+	height: 50vh;
+	top: 101vh;
+	left: 25vw;
+	background-color: white;
+	transition: all cubic-bezier(0.4, 0.0, 1, 1) 200ms;
+}
+
+.inputCard.peek {
+	top: 95vh;
+	transition: all cubic-bezier(0.0, 0.0, 0.2, 1) 250ms;
+}
+
+.inputCard.open {
+	top: 50vh;
+	transition: all cubic-bezier(0.0, 0.0, 0.2, 1) 250ms;
+}
+
+.inputCard.open .arrow img {
+	transform: translate(-50%,-50%) rotate(180deg) !important;
+	transition: all cubic-bezier(0.0, 0.0, 0.2, 1) 250ms;
+}
+
+.inputCard .shared {
+	height: 5vh;
+	width: 100%;
+	overflow-y: hidden;
+}
+
+.inputCard .shared .arrow {
+	width: 10%;
+	height: 100%;
+	float: left;
+}
+
+.inputCard .shared .arrow img {
+	height: 70%;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	cursor: pointer;
+	transform: translate(-50%, -50%);
+}
+
+.inputCard .shared .slidingTitle {
+	width: 90%;
+	height: 100%;
+	float: left;
+}
+
+.inputCard .shared .sliding {
+	width: 100%;
+	height: 15vh;
+	position: relative;
+	top: -5vh;
+}
+
+.inputCard .shared .sliding.up {
+	top: 0vh;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
+}
+
+.inputCard .shared .sliding.down {
+	top: -10vh;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
+}
+
+.inputCard .shared .sliding h1 {
+	width: 100%;
+	height: 5vh;
+	font-weight: 100;
+}
+
+.inputCard .contentWrapper {
+	padding: 1%;
+	height: calc(50vh - 15%);
+	overflow-y: auto;
+}
+
+.inputCard .content {
+	width: 98%;
+	height: 98%;
+}
+
+.inputCard .content.open {
+	opacity: 1;
+}
+
+.inputCard .content.fadeOutDown {
+	margin-top: -2vh;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 100ms;
+	opacity: 0;
+}
+
+.inputCard .newContent.enterDown {
+	margin-top: 2vh;
+	opacity: 0;
+}
+
+.inputCard .newContent.enterDown.fadeInDown {
+	margin-top: 0vh;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 100ms;
+	opacity: 1;
+}
+
+.inputCard .content.fadeOutUp {
+	margin-top: 2vh;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 100ms;
+	opacity: 0;
+}
+
+.inputCard .newContent.enterUp {
+	z-index: 2;
+	margin-top: -2vh;
+	opacity: 0;
+}
+
+.inputCard .newContent.enterUp.fadeInUp {
+	margin-top: 0vh;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 100ms;
+	opacity: 1;
 }

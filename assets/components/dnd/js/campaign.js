@@ -1,7 +1,8 @@
 loader.show();
 $(".innerPage").ready(() => {
-    $(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
+	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
 });
+
 var campaignId = sessionStorage.getItem("::campaignId");
 var campaignName = sessionStorage.getItem("::campaignName");
 var sUid = sessionStorage.getItem("::uid");
@@ -18,15 +19,6 @@ progress.show();
 //	}
 //});
 
-
-timer = setInterval(function() {
-	if (sessionStorage.getItem("::openPage") === "campaign") {
-		if (loadedUid === sUid) {
-			save(false);
-			hide();
-		}
-	}
-}, 15000);
 
 console.log("party.js");
 
@@ -290,7 +282,7 @@ function save(showNote) {
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").set(characterObj);
 //			dbUsers.child(sUid).child("characters").child(sessionStorage.getItem("::saved")).set(characterObj);
 			if (showNote) {
-				note.open("Saved " + $("#form96_1").val(), 1000);
+				note.open("save", "Saved " + $("#form96_1").val(), 1000);
 				progress.hide();
 			}
 		} else {
@@ -301,7 +293,7 @@ function save(showNote) {
 			s();
 			firestore.collection("users").doc(loadedUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").set(characterObj);
 			if (showNote) {
-				note.open("Saved " + $("#form96_1").val(), 1000);
+				note.open("save", "Saved " + $("#form96_1").val(), 1000);
 				progress.hide();
 			}
 		} catch(e) {
@@ -567,7 +559,7 @@ async function toggleBanList() {
 					var docId = banQuery[0]["__id"];
 					firestore.collection("campaigns").doc(campaignId).collection("banList").doc(docId).delete();
 					$(this).parent().parent().parent().parent().remove();
-					note.open("Unbanned", 2000);
+					note.open("restore_from_trash", "Unbanned", 2000);
 				}
 			});
 		}

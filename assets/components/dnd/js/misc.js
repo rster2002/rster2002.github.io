@@ -26,34 +26,14 @@ if (!DEV) {
 
 const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-//// register service worker
-//if ('serviceWorker' in navigator) {
-//	navigator.serviceWorker
-//		.register('../assets/components/dnd/js/pwa/sw.js')
-//		.then(function() { console.log('Service Worker Registered'); });
-//}
+
+function onLoaded() {
+	loader.hide();
+}
 
 async function createQuery(query) {
 	var snapshot = await query.get();
 	return snapshot.docs.map(doc => (Object.assign({__id: doc.id}, doc.data())));
-	// return snapshot.docs.map(doc => ({__id: doc.id, ...doc.data()}));
-	// var returnArr = [];
-	// for (var a = 0; a < queriedObj.length; ++a) {
-	// 	var arrObj = {};
-	// 	var thisObj = queriedObj[a];
-	// 	arrObj["__id"] = thisObj["__id"];
-	// 	var contentEntries = Object.entries(thisObj.content);
-	// 	for (var b = 0; b < contentEntries.length; ++b) {
-	// 		var key = contentEntries[b][0];
-	// 		var content = contentEntries[b][1];
-	// 		arrObj[key] = content;
-	// 	}
-	// 	returnArr[a] = arrObj;
-	// 	if (returnArr.length === queriedObj["length"]) {
-	// 		console.log(returnArr);
-	// 		return returnArr;
-	// 	}
-	// }
 }
 
 function randomString(characters, l) {
@@ -86,9 +66,10 @@ $(document).keydown(function(event) {
 });
 
 note = {
-	open: function(text, delay) {
+	open: function(icon, text, delay) {
 		$("#noteContent").text(text);
 		$(".note").addClass("open");
+		$(".icon .i").html(icon);
 		note.autoClose(delay);
 	},
 	close: function() {
@@ -148,12 +129,27 @@ progress = {
 	}
 }
 
+onExit = null;
+loaded = null;
+
 function openPage(page) {
 	loader.show();
 	$(".page.innerPage").remove();
 	$(".page").load("../assets/components/dnd/pages/" + page + ".html");
 	sessionStorage.setItem("::openPage", page);
 	sidebar.close();
+	if (onExit !== null) {
+		onExit();
+		onExit = null;
+	}
+}
+
+function onLoaded() {
+	loader.hide();
+	if (loaded !== null) {
+		loaded();
+		loaded = null;
+	}
 }
 
 function openOverlay(page) {
@@ -280,4 +276,71 @@ function dynamicSortMultiple() {
         }
         return result;
     }
+}
+
+inputCard = {
+	content: {
+		toggle: function() {
+			$(".inputCard").toggleClass("open");
+		},
+		open: function() {
+			$(".inputCard").addClass("open");
+		},
+		close: function() {
+			$(".inputCard").remoceClass("open");
+		}
+	},
+	peek: {
+		toggle: function() {
+			$(".inputCard").toggleClass("peek");
+		},
+		open: function() {
+			$(".inputCard").addClass("peek");
+		},
+		close: function() {
+			$(".inputCard").removeClass("peek");
+		}
+	},
+	slideUp: function(text) {
+		$(".newTitle").text(text);
+		$(".sliding").addClass("up");
+		setTimeout(function() {
+			$(".currentTitle").text(text);
+			$(".sliding").removeClass("up");
+		}, 201);
+	},
+	slideDown: function(text) {
+		$(".newTitle").text(text);
+		$(".sliding").addClass("down");
+		setTimeout(function() {
+			$(".currentTitle").text(text);
+			$(".sliding").removeClass("down");
+		}, 201);
+	},
+	close: function() {
+		$(".inputCard").removeClass("peek");
+		$(".inputCard").removeClass("open");
+	},
+	loadContent: function(html, direction, extraClass) {
+		if (extraClass === undefined) {
+			extraClass = "";
+		}
+		if (direction === "Up" || direction === "Down") {
+			var content = $(".inputCard .content");
+			content.addClass("fadeOut" + direction);
+			if (direction === "Down") {
+				$(".inputCard .contentWrapper").append("<div class='newContent enter" + direction + "'>" + html + "</div>");
+			} else {
+				$(".inputCard .contentWrapper").prepend("<div class='newContent enter" + direction + "'>" + html + "</div>");
+			}
+			$(".inputCard .newContent").addClass("fadeIn" + direction);
+			setTimeout(function() {
+				$(".inputCard .content").remove();
+				$(".inputCard .newContent").addClass("content");
+				$(".inputCard .newContent").addClass("open");
+				$(".inputCard .newContent").addClass(extraClass);
+				$(".inputCard .newContent").removeClass("newContent");
+			}, 100);
+		}
+	}
 }

@@ -78,7 +78,7 @@ function backupUser(uid) {
 			var re = "::none";
 		}
 	});
-	note.open("Done", 2000);
+	note.open("backup", "Done", 2000);
 }
 
 backup = {

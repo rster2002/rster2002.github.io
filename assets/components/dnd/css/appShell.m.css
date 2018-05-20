@@ -16,8 +16,23 @@ p {
 	font-size: 3em;
 }
 
-.sidebar.open {
+.fab {
+	width: 15vw;
+    height: 15vw;
+	left: calc(97vw - 15vw);
+}
+
+.fab.show {
+	top: calc(96vh - 15vw);
+}
+
+.fab i {
+	font-size: 5em;
+}
+
+.sidebar {
 	width: 80vw;
+	left: -81vw;
 }
 
 .sidebarBackground .sidebarExit {

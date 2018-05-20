@@ -11,6 +11,41 @@ function checkInput(input) {
 	}
 }
 
+function expandFab() {
+	$(".fab").toggleClass("expand");
+}
+
+setTimeout(function() {
+	$(".fab").addClass("show");
+}, 300);
+
+var loaded = function() {
+	$(".fab").on("click", function() {
+		if (!$(".fab").hasClass("expand")) {
+			$(".fab").addClass("expand");
+			$(".expandedBackground").show();
+			setTimeout(function() {
+				$(".fab").append($(".add").html());
+			}, 60);
+		}
+	});
+}
+
+function closeFab() {
+	$(".fab .contents").remove();
+	$(".fab .campaignId").remove();
+	if ($(".fab").hasClass("expand")) {
+		$(".expandedBackground").hide();
+		$(".fab").removeClass("expand");
+	}
+}
+
+function invalidId() {
+	$(".fab .campaignId").addClass("invalid");
+	setTimeout(function() {
+		$(".fab .campaignId").removeClass("invalid");
+	}, 500);
+}
 
 // adds listerer to join btn
 
@@ -35,11 +70,13 @@ async function addList(id, place) {
 			error("Error when fetching campaign, maybe it doesn't exists anymore");
 			hide();
 		}
+	}).catch(function(e) {
+		error(e);
 	});
 //	console.log(playerArray);
 //	var players = playerArray.length;
 //	localCampaigns[place] = name;
-	
+
 //	dbCampaign.child(id).once("value",e => {
 //		console.log(id);
 //		try {
@@ -73,7 +110,7 @@ function fillCampaignList() {
 		$(".deletable").hide();
 		$(".addParty").show();
 	});
-	
+
 	$("#join").on("click", async function(){
 		var campaignName = await $("#partyId").val();
 		console.log(campaignName);
@@ -84,13 +121,13 @@ function fillCampaignList() {
 			join(campaignName, false);
 		}
 	});
-	
-	
+
+
 	// adds lisener to host btn
 	$("#host").on("click",function(){
 		host($("#partyId").val());
 	});
-	
+
 	getCampaigns();
 }
 
@@ -115,20 +152,20 @@ host checklist
 */
 
 async function host(campaignName) {
-	
+
 	console.log(campaignName);
-	
+
 	show();
-	
+
 	var exists = await createQuery(firestore.collection("campaigns").where("name", "==", campaignName));
 	console.log(exists);
-	
+
 	if (exists[0] === undefined) {
 		var campaignId = "party-" + genId();
 
 		sessionStorage.setItem("::campaignId", campaignId);
 		sessionStorage.setItem("::campaignName", campaignName);
-		
+
 		firestore.collection("campaigns").doc(campaignId).set({
 			name: campaignName,
 			DM: sUid,
@@ -173,13 +210,13 @@ join checklist:
 async function join(campaignName) {
 	show();
 	console.log(campaignName);
-	
+
 	// creates a query to check if a campaign with that campaign name exists
 	var query = await createQuery(firestore.collection("campaigns").where("name", "==", campaignName));
 	if (query[0] !== undefined) {
 		var campaign = query[0];
 		console.log(campaign);
-		
+
 		// gets the shared campaign obj
 		var campaignId = campaign.id;
 		var campaignName = campaign.name;
@@ -189,7 +226,7 @@ async function join(campaignName) {
 		// creates a query to check if the user is banned
 		var bannedQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("banList").where("uid", "==", sUid));
 		if (bannedQuery[0] === undefined) {
-			
+
 			// creates a query to see if the current user already joined the campaign
 			var userQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("users").where("id", "==", sUid));
 			if (userQuery[0] !== undefined) {
@@ -224,7 +261,7 @@ function addToList(i, characterId) {
 					if (characterInfo.dupe !== undefined) {
 						additional += "<p>Dupe: " + characterInfo.dupe + "</p>"
 					}
-					
+
 					$(".selectCharacter .inner").append("<div class='item'><div class='card shadow-4' onclick='afterSelect(" + i + ")'><h1>" + characterName + "</h1>" + additional + "</div></div>");
 					charactersObj[i] = characterId;
 				}
@@ -238,7 +275,7 @@ function addToList(i, characterId) {
 
 async function selectCharacter() {
 	$(".selectCharacter").show();
-	
+
 	var characterQuery = await createQuery(userRef.collection("characters"));
 	if (characterQuery[0] !== undefined) {
 		for (var i = 0; i < characterQuery.length; ++i) {
@@ -252,14 +289,14 @@ async function selectCharacter() {
 }
 
 function afterSelect(index) {
-	
+
 	show();
 	$("selectCharacter").hide();
-	
+
 	var character = charactersObj[index];
 	var campaignId = sessionStorage.getItem("::campaignId");
 	var campaignName = sessionStorage.getItem("::campaignName");
-	
+
 	if (confirm("Are you sure you want to use this character")) {
 		userRef.collection("campaigns").doc(campaignId).set({
 			name: campaignName,
@@ -283,7 +320,7 @@ function afterSelect(index) {
 			});
 		});
 	}
-	
+
 //	if (confirm("Are you sure you want to use this character?")) {
 //		// checks if the character exists in the users account
 //		dbUsers.child(sUid).child("characters").once("value",(e) => {
@@ -291,25 +328,25 @@ function afterSelect(index) {
 //
 //				// catches the whole party obj from the database
 //				dbCampaign.child(partyId).once("value",(e) => {
-//					
+//
 //					var dbContent = e.val();
 //					o = dbContent;
-//					
+//
 //					// creates an empty object that is filled later
 //					chaObj = {};
-//					
+//
 //					// sets the character
 //					chaObj["character"] = character;
-//					
+//
 //					// adds the new joined user to the campaign object
 //					dbContent[sUid] = chaObj;
-//					
+//
 //					// gets the party list
 //					var playerList = dbContent.playerList;
-//					
+//
 //					// adds the players uid to the list
 //					playerList.unshift(sUid);
-//					
+//
 //					// adds the new list to the campaign object
 //					dbContent["playerList"] = playerList;
 //					console.log(dbContent);
@@ -340,7 +377,7 @@ function afterSelect(index) {
 //									list.unshift(partyId);
 //									dbUsers.child(sUid).child("characters").child(character + "-info").child("usedInCampaigns").set(list);
 //								}
-//								
+//
 //								dbUsers.child(sUid).child("campaigns").set(campaigns);
 //								dbCampaign.child(partyId).child("liveState").set("update");
 //
