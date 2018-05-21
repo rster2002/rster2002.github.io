@@ -30,7 +30,7 @@ async function getClass() {
 	}
 	console.log(characterInfo);
 
-	classObj = await $.get("http://www.dnd5eapi.co/api/classes/" + characterInfo.class);
+	// classObj = await $.get("http://www.dnd5eapi.co/api/classes/" + characterInfo.class);
 	return classObj;
 }
 
@@ -49,9 +49,10 @@ function afterChoice() {
 async function calculateMods(levelOne) {
 	var temp = $("#form61_1").val();
 	var profBonus = Number(temp.replace("+", ""));
-
-	var classObj = await getClass();
-	var raceObj = await getRace();
+	classObj = null;
+	raceObj = null;
+	// var classObj = await getClass();
+	// var raceObj = await getRace();
 	if (raceObj !== null) {
 		$("#form87_1").val(raceObj.speed);
 	}
