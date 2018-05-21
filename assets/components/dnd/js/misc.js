@@ -344,7 +344,6 @@ inputCard = {
 		}
 	}
 }
-
 function openHotbar() {
 	$(".hotbar").addClass("left");
 	$(".hotbarBackground").show();

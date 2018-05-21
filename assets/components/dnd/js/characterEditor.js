@@ -335,6 +335,8 @@ function addSpell() {
 
 var spellObj = {};
 
+var spellObj = {};
+
 async function querySpells() {
 	console.log("Query spells")
 	progress.show();
