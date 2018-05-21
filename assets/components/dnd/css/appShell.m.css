@@ -30,6 +30,32 @@ p {
 	font-size: 5em;
 }
 
+.hotbar {
+	left: 90vw;
+	width: 90vw;
+	height: 90vh;
+}
+
+.hotbar .shared .icon {
+	width: 10vw;
+}
+
+.hotbar .icon i {
+	font-size: 4em;
+}
+
+.hotbar.left {
+	left: 5vw;
+}
+
+.hotbar.top {
+	top: 5vh;
+}
+
+.hotbar .content {
+	font-size: 3em;
+}
+
 .sidebar {
 	width: 80vw;
 	left: -81vw;

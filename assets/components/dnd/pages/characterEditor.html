@@ -1,5 +1,7 @@
 <div class="innerPage scroll">
+	<script src="../assets/components/dnd/js/info.js"></script>
 	<script src="../assets/components/dnd/js/characterLoader.js"></script>
+	<script src="../assets/components/dnd/js/autoFill.js"></script>
 	<script src="../assets/components/dnd/js/characterEditor.js"></script>
 	<link href="../assets/components/dnd/css/characterEditor.css" type="text/css" rel="stylesheet">
 	<link href="../assets/components/dnd/css/characterEditor.m.css" media="screen and (max-device-width: 800px)" type="text/css" rel="stylesheet">
@@ -67,6 +69,26 @@
 
 		</div>
 	</div>
+	<div class="hotbar s2 rounded">
+		<div class="shared" onclick="toggleHotbar()">
+			<div class="icon">
+				<i class="material-icons center">offline_bolt</i>
+			</div>
+		</div>
+		<div class="content">
+			<p class="textBlock">The website can only calculate the ability scores you give. It doesn't add racial bonuses and proficiencies (yet). It does calculate skills and saving throws with proficiency if you check the proficiency check box. It also calculates your (max) hitpoints at level 1 and gives you your hit die. If you are at a higher level, click 'calculate higher level'.</p>
+			<button onclick="calculateMods(true)">Calculate</button>
+			<button onclick="calculateMods(false)">Calculate higher levels</button>
+			<!-- <p class="textBlock" style="margin-top: 1%;">You can also do everything manually and use this as a guide.</p>
+			<button onclick="openGuide()">Guide</button> -->
+		</div>
+		<div class="guide" style="display: none;">
+			<div class="section">
+
+			</div>
+		</div>
+	</div>
+	<div class="hotbarBackground" style="display: none;" onclick="closeHotbar();"></div>
 	<script>
 		$(".spell").each(function() {
 			$(this).on("click", function(e) {

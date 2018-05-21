@@ -344,3 +344,46 @@ inputCard = {
 		}
 	}
 }
+
+function openHotbar() {
+	$(".hotbar").addClass("left");
+	$(".hotbarBackground").show();
+	setTimeout(() => {
+		$(".hotbar").addClass("top");
+		$(".hotbarBackground").addClass("open");
+		setTimeout(() => {
+			$(".hotbar").addClass("open");
+		}, 250);
+	}, 250);
+}
+
+function closeHotbar() {
+	if ($(".hotbar").hasClass("colom")) {
+		$(".hotbar").removeClass("colom");
+		setTimeout(() => {
+			closeHotbarTwo();
+		}, 200)
+	} else {
+		closeHotbarTwo();
+	}
+}
+
+function closeHotbarTwo() {
+	$(".hotbar").removeClass("top");
+	$(".hotbarBackground").removeClass("open");
+	setTimeout(() => {
+		$(".hotbarBackground").hide();
+		$(".hotbar").removeClass("left");
+		setTimeout(() => {
+			$(".hotbar").removeClass("open");
+		}, 200);
+	}, 200);
+}
+
+function toggleHotbar() {
+	if ($(".hotbar").hasClass("open")) {
+		closeHotbar();
+	} else {
+		openHotbar();
+	}
+}

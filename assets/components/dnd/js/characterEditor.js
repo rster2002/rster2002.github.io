@@ -13,6 +13,14 @@ function ctrlS() {
 	}
 }
 
+function openGuide() {
+	$(".hotbar .content").hide();
+	$(".hotbar").addClass("colom");
+	setTimeout(() => {
+		$(".hotbat .guide").show();
+	}, 250);
+}
+
 // sessionStorage.setItem("current", "0");
 
 // $(".innerPage").scroll(function () {
@@ -325,47 +333,6 @@ function addSpell() {
 	}
 }
 
-var inputs = [
-	"form83_1",
-	"form84_1",
-	"form82_1",
-	"form86_1",
-	"form81_1",
-	"form85_1"
-]
-
-var mods = {
-	"form83_1": "form56_1",
-	"form84_1": "form59_1",
-	"form82_1": "form58_1",
-	"form86_1": "form57_1",
-	"form81_1": "form60_1",
-	"form85_1": "form55_1"
-}
-
-var modifiers = [
-	"-5",
-	"-4",
-	"-4",
-	"-3",
-	"-3",
-	"-2",
-	"-2",
-	"-1",
-	"-1",
-	"+0",
-	"+0",
-	"+1",
-	"+1",
-	"+2",
-	"+2",
-	"+3",
-	"+3",
-	"+4",
-	"+4",
-	"+5"
-]
-
 var spellObj = {};
 
 async function querySpells() {
@@ -389,16 +356,6 @@ async function onload() {
 	await loadCharacter(sessionStorage.getItem("::openCharacter"));
 	await querySpells();
 	loader.hide();
-}
-
-function calcMod(selector, modSelector) {
-	$(selector).focusout(function() {
-		var value = Number($(this).val());
-		var modValue = modifiers[value - 1];
-		console.log(selector, modSelector);
-		console.log(value, modValue);
-		$(modSelector).val(modValue);
-	});
 }
 
 function saveOptions() {

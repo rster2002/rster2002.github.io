@@ -197,7 +197,7 @@ function loadCharacter(uid) {
 										progress.hide();
 									}
 								} else if (uid === sUid) {
-									selfl(characterObj);
+									l(characterObj);
 									hide();
 								} else {
 									l(characterObj);

@@ -1,90 +1,20 @@
 <div class="innerPage scroll">
-	<script id="T1" type="text/javascript"></script>
-	<link id="T2" rel="stylesheet" type="text/css">
-	<link id="T3" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
 	<script>
 		$("#T1").attr("src", "../assets/components/dnd/js/" + sessionStorage.getItem("::openPage") + ".js");
 		$("#T2").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".css");
 		$("#T3").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".m.css");
 	</script>
+	<script id="T1" type="text/javascript"></script>
+	<link id="T2" rel="stylesheet" type="text/css">
+	<link id="T3" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
 	<div class="h1">
-		<h1>DM Tools</h1>
+		<h1>Conditions</h1>
 	</div>
-	<div class="wrapper">
-		<div class="card statblock centerHorizontal s3 rounded">
-			<div class="name fill">
-				<input id="name" placeholder="name" class="fill">
-			</div>
-			<div class="undertext fill top">
-				<input step="font-size: 1.5em;" id="info" placeholder="Size, type and alignment" class="fill">
-			</div>
-			<div class="divider fill top"></div>
-			<div class="label fill top">
-				<h1>Armor class</h1>
-				<input placeholder="AC">
-			</div>
-			<div class="label fill top">
-				<h1>Hitpoints</h1>
-				<input placeholder="Hitpoints">
-			</div>
-			<div class="label fill top">
-				<h1>Speed</h1>
-				<input placeholder="Speed">
-			</div>
-			<div class="divider fill top"></div>
-			<div class="label fill top">
-				<h1>Strength</h1>
-				<input placeholder="Str">
-			</div>
-			<div class="label fill top">
-				<h1>Dexterity</h1>
-				<input placeholder="Dex">
-			</div>
-			<div class="label fill top">
-				<h1>Constitution</h1>
-				<input placeholder="Con">
-			</div>
-			<div class="label fill top">
-				<h1>Intelligence</h1>
-				<input placeholder="Int">
-			</div>
-			<div class="label fill top">
-				<h1>Wisdom</h1>
-				<input placeholder="Wis">
-			</div>
-			<div class="label fill top">
-				<h1>Charisma</h1>
-				<input placeholder="Cha">
-			</div>
-			<div class="divider fill top"></div>
-			<div class="label fill top">
-				<h1>Damage Resistances</h1>
-				<input placeholder="Damage types">
-			</div>
-			<div class="label fill top">
-				<h1>Damage Immunities</h1>
-				<input placeholder="Damage types">
-			</div>
-			<div class="label fill top">
-				<h1>Condition Immunities</h1>
-				<input placeholder="Conditions">
-			</div>
-			<div class="label fill top">
-				<h1>Sences</h1>
-				<input placeholder="Sences">
-			</div>
-			<div class="label fill top">
-				<h1>Languages</h1>
-				<input placeholder="Languages">
-			</div>
-			<div class="label fill top">
-				<h1>Challenge</h1>
-				<input placeholder="Challenge rating">
-			</div>
-		</div>
+	<div class="conditions">
 	</div>
 	<script>
 		loader.hide();
 	</script>
+
 	<div class="push"></div>
 </div>
