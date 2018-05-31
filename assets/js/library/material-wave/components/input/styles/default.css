@@ -1,0 +1,63 @@
+.wave--input {
+	/* background-color: red; */
+	width: 50%;
+	height: 30px;
+}
+
+.wave--input > .bar {
+	width: 100%;
+	background-color: rgb(235, 235, 235);
+	height: 2px;
+}
+
+.wave--input > .bar .color {
+	width: 0%;
+	height: 100%;
+	position: relative;
+	left: 50%;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
+}
+
+.wave--input > .bar .color.show {
+	width: 100%;
+	left: 0%;
+	background-color: #0080ff;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
+}
+
+.wave--input > p {
+	color: #424242;
+	position: absolute;
+	margin-top: 0%;
+	font-size: 20px;
+	left: 4.5%;
+	z-index: 1;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
+}
+
+.wave--input > p.move {
+	margin-top: -1.7%;
+	font-size: 15px;
+	color: #0080ff;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
+}
+
+.wave--input > input {
+	color: #424242;
+	width: 100%;
+	height: 80%;
+	font-size: 20px;
+	background-color: transparent;
+	border: 0;
+	outline: 0;
+	z-index: 3;
+}
+
+.wave--input > input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #424242;
+    opacity: 1; /* Firefox */
+}
+
+.wave--input > input::-ms-input-placeholder { /* Microsoft Edge */
+    color: #424242;
+}
