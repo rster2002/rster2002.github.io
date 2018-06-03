@@ -1,5 +1,5 @@
 var inputCounter = 0;
-$("input.wave").each((index, item) => {
+$("input:text.wave").each((index, item) => {
 	inputCounter += 1;
 	var pla = $(item).attr("placeholder");
 	$(item).wrap("<div class='wave--input'></div>");

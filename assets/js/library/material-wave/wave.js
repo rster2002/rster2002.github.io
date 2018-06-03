@@ -18,10 +18,8 @@ waveAuto = [];
 async function waveInitColors(colorObj) {
 	elementLoaded("body", async () => {
 		await setTimeout(() => {
-			console.log(colorObj, waveColor, waveColor.length);
 			for (var i = 0; i < waveColor.length; ++i) {
 				var colorFunction = waveColor[i];
-				console.log(colorFunction);
 				colorFunction(colorObj);
 			}
 		}, 1);
@@ -107,8 +105,8 @@ async function loadInit(url) {
 
 async function waveConfig(settings) {
 	if (settings !== undefined) {
-		if (settings["local"] !== undefined) {
-			waveD = settings.local;
+		if (settings["path"] !== undefined) {
+			waveFrom = settings["path"];
 		}
 		if (settings["init"] !== undefined) {
 			waveInit = settings.init;
@@ -117,30 +115,35 @@ async function waveConfig(settings) {
 		}
 	}
 }
-
+waveSetup = false;
 waveD = false;
+waveImported = {};
+waveInit = true;
+waveFrom = "./";
 
 async function waveImport(component) {
 	console.log(component);
 	try {
-		if (waveD) {
-			from = "./";
-		} else {
-			from = "https://rster2002.github.io/wave/"
+		if (!waveSetup) {
+			loadCss(waveFrom + "components/default/styles/default.css");
+			loadCss(waveFrom + "components/default/styles/mobile.css");
+			waveSetup = true;
 		}
-		loadCss(from + "components/default/styles/default.css");
-		loadCss(from + "components/default/styles/mobile.css");
+
 
 		if (component.constructor === Array) {
 			for (var c = 0; c < component.length; ++c) {
 				var comp = component[c];
 				if (comp) {
 					try {
-						await loadCss(from + "components/" + comp + "/styles/default.css");
-						await loadCss(from + "components/" + comp + "/styles/mobile.css");
+						if (waveImported[comp] === undefined) {
+							await loadCss(waveFrom + "components/" + comp + "/styles/default.css");
+							await loadCss(waveFrom + "components/" + comp + "/styles/mobile.css");
 
-						if (waveInit !== false) {
-							await loadInit(from + "components/" + comp + "/init.js");
+							if (waveInit !== false) {
+								await loadInit(waveFrom + "components/" + comp + "/init.js");
+							}
+							waveImported[comp] = true;
 						}
 					} catch(e) {
 						console.error("[wave] Failed to load " + comp);

@@ -1,10 +1,13 @@
 $(document).ready(() => {
     wave.config({
-        local: true
+        path: "../../../assets/js/library/material-wave/"
     }).import([
         "document",
-        "buttons"
+        "buttons",
+        "input",
+        "checkbox"
     ]).color({
-        base: "#FF8800"
+        base: "#FF8800",
+        action: "rgb(0,128,255)"
     });
 })

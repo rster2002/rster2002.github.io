@@ -1,0 +1,35 @@
+#partyId {
+	font-size: 6rem;
+}
+
+.DM {
+	width: 100%;
+}
+
+.DM h1 {
+	font-size: 4.5rem;
+}
+
+.player {
+	width: 100%;
+}
+
+.player h1 {
+	font-size: 4rem;
+}
+
+.save h1 {
+	font-size: 4rem;
+}
+
+.kick h1 {
+	font-size: 4rem;
+}
+
+.ban h1 {
+	font-size: 4rem;
+}
+
+.order {
+	display: hidden;
+}

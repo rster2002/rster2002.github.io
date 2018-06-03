@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow:100');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html, body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+h1, p {
+	font-family: 'Roboto', sans-serif;
+}
+
+.background {
+	width: 100vw;
+	height: 100vh;
+	background-color: white;
+}
+
+.background .color {
+	height: 100%;
+	width: 60%;
+	background-color: #07baff;
+	float: left;
+}
+
+.background .white {
+	height: 100%;
+	width: 40%;
+	background-color: white;
+	float: left;
+}
+
+.box {
+	z-index: 2;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 60vw;
+	height: 60vh;
+	background-color: white;
+	border-radius: 40px;
+}
+
+.box .title {
+	width: 100%;
+}
+
+.box .title h1 {
+	margin-left: 2%;
+}
+
+.content {
+	height: 50%;
+}

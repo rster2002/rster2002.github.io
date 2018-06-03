@@ -4,14 +4,28 @@
     <head>
         <title>Ak Veldwerk</title>
         <script src="jquery.js"></script>
-        <script src="app.js"></script>
         <script src="../../../assets/js/library/material-wave/wave.js"></script>
         <script src="init.js"></script>
+        <script src="app.js"></script>
     </head>
     <body>
-        <div class="content">
-            <div id="map"></div>
+        <div class="content page1">
+            <input class="wave" placeholder="Je naam" />
+            <button class="wave prime" icon-right="arrow_forward">Begin</button>
         </div>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYwImjxZnBRJSi8Cr7rb6Uwl7TkNiOhbs&callback=initMap"></script>
+        <div class="content">
+            <h1>Opdracht 1</h1>
+            <p>Ga naar de locatie aangeven op de kaart hieronder.</p>
+            <iframe
+              width="100%"
+              height="450"
+              frameborder="0" style="border:0"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBYwImjxZnBRJSi8Cr7rb6Uwl7TkNiOhbs
+                &q=Dijk+van+Kyoto" allowfullscreen>
+            </iframe>
+            <button onclick="window.open('https://www.google.nl/maps/place/Dijk+van+Kyoto,+Heerhugowaard/@52.6446796,4.8118259,17z/data=!3m1!4b1!4m8!1m2!2m1!1sStad+van+de+zon!3m4!1s0x47cf55d45035af91:0x187cd7cc14c2e200!8m2!3d52.6446796!4d4.8140146')" class="wave">Bekijk op maps</button>
+            <p>Wat valt je op als je hier staat?</p>
+            <input class="wave simple" placeholder="Schrijf je antwoord hier" />
+        </div>
     </body>
 </html>

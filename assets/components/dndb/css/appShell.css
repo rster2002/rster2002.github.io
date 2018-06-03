@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+:root {
+	--font: 'Roboto', sans-serif;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: var(--font);
+}
+
+.noMargin {
+	margin: 0;
+}
+
+.center {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.centerVertical {
+	position: relative;
+	top: 50%;
+	transform: translate(0%, -50%);
+}
+
+.centerHorizontal {
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.menubar {
+	position: fixed;
+	min-height: 46px;
+	height: 10vh;
+	width: 100%;
+	border-bottom-left-radius: 1vh;
+	border-bottom-right-radius: 1vh;
+}
+
+.menubar .menu {
+    height: 10vh;
+	width: 10vh;
+	min-height: 46px;
+	min-width: 46px;
+	background-color: transparent;
+}
+
+.menubar .menu i {
+	font-size: 5vh;
+	cursor: pointer;
+}
+
+.menubar .user img {
+	height: 60%;
+	width: 60%;
+	position: relative;
+	top: 20%;
+	left: 20%;
+	border-radius: 50%;
+}
+
+.sidebar {
+	position: fixed;
+	z-index: 30;
+	width: 25vw;
+	height: 100vh;
+	background-color: white;
+	transition: 200ms all cubic-bezier(0.4, 0.0, 0.6, 1);
+	left: -31vw;
+}
+
+.sidebar.open {
+	left: 0vw;
+	transition: 250ms all cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.sidebar .userWrapper {
+	width: 100%;
+	height: 15%;
+	position: relative;
+	top: 5%;
+}
+
+.sidebar .userWrapper .userCard {
+	width: 90%;
+	height: 90%;
+	border-radius: 1vh;
+	background-color: #36096d;
+	background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
+}
+
+.sidebar .iconWrapper {
+	height: 100%;
+	width: 30%;
+	float: left;
+}
+
+.sidebar .iconWrapper img {
+    height: 60%;
+    border-radius: 50%;
+}
+
+.sidebar .nameWrapper {
+	width: 70%;
+	height: 100%;
+	float: left;
+}
+
+.sidebar .nameWrapper h1 {
+	width: 98%;
+	color: white;
+	font-weight: 100;
+}
+
+.sidebar .menu {
+	height: 85%;
+    width: 100%;
+    position: relative;
+    top: 10%;
+}
+
+.sidebar .menubutton {
+	width: 100%;
+	height: 7%;
+	background-color: white;
+	cursor: pointer;
+}
+
+.sidebar .menubutton p {
+	color: #505050;
+	width: 70%;
+	position: relative;
+	left: 10%;
+	font-size: 1.4em;
+	margin: 0;
+}
+
+.sidebar .menubutton p i {
+	font-size: inherit;
+	transform: translate(0%, 13%);
+    margin-right: 5%;
+}
+
+.sidebar .menubutton:hover {
+	background-color: rgb(235, 235, 235);
+}
+
+.divider {
+	width: 100%;
+	height: 1px;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+.divider .dividerInner {
+	width: 90%;
+	height: 100%;
+	background-color: rgb(235, 235, 235);
+}
+
+.sidebarBackground {
+	transition: 150ms all cubic-bezier(0.4, 0.0, 0.6, 1);
+	position: fixed;
+	z-index: 10;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(235, 235, 235, .5);
+	left: -101vw;
+}
+
+.sidebarBackground.open {
+	left: 0vw;
+	transition: 200ms all cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.sidebarBackground .sidebarExit {
+	width: 80%;
+	height: 100%;
+	position: relative;
+	left: 20%;
+}
+
+.page {
+	height: 91vh;
+	position: relative;
+	top: 9vh;
+	width: 100vw;
+}
+
+.cardWrapper {
+	width: 25%;
+	padding: 2%;
+	display: inline-block;
+	float: left;
+}
+
+.cardWrapper .card {
+	width: 90%;
+	border-radius: 1vh;
+	padding-bottom: 0.5vh;
+}
+
+.cardWrapper .card .color {
+	background-color: #a4508b;
+	background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
+	width: 100%;
+	height: 1vh;
+	border-top-left-radius: 1vh;
+	border-top-right-radius: 1vh;
+}
+
+.cardWrapper .card h1 {
+	font-size: 4vh;
+	margin: 0.5vh;
+	font-weight: 500;
+	width: 95%;
+}
+
+.cardWrapper .card p {
+	width: 95%;
+	font-size: 2vh;
+}
+
+.fab {
+	width: 4.5vw;
+    height: 4.5vw;
+    position: fixed;
+    top: 101vh;
+    left: calc(97vw - 4.5vw);
+	border-radius: 50%;
+	color: white;
+	z-index: 10;
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	cursor: pointer;
+	transition: all cubic-bezier(0.4, 0.0, 1, 1) 100ms;
+}
+
+.fab.show {
+	top: calc(96vh - 4.5vw);
+	transition: all cubic-bezier(0.0, 0.0, 0.2, 1) 250ms;
+}
+
+.fab .i {
+	position: relative;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 3em;
+}
+
+.fab:hover {
+	transform: scale(1.05);
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 150ms;
+}
+
+.fab:hover .i {
+	animation: pop cubic-bezier(0.4, 0.0, 0.2, 1) 300ms;
+}
+
+@keyframes pop {
+	0% {
+		transform: translate(-50%, -50%) scale(1);
+	}
+	50% {
+		transform: translate(-50%, -50%) scale(1.2);
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+	}
+}

@@ -1,3 +1,15 @@
+button.wave i {
+	margin-top: -20%;
+}
+
+button.wave i.right {
+	transform: translate(20%, 30%);
+}
+
+button.wave i.left {
+	transform: translate(-20%, 30%);
+}
+
 button.wave {
 	background-color: white;
 	padding-top: 8px;

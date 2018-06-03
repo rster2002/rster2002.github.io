@@ -1,0 +1,79 @@
+.innerPage h1 {
+	font-size: 5em;
+}
+
+.innerPage p {
+	font-size: 250%;
+}
+
+.createParty h1 {
+	font-size: 4em;
+}
+
+.selectCharacter .inner {
+	height: 90%;
+	width: 90%;
+}
+
+.item {
+	width: 100%;
+    height: 50%;
+    float: left;
+}
+
+.fab.expand {
+	width: 90%;
+	height: 90%;
+	top: 5%;
+	left: 5%;
+}
+
+.fab .content .colom {
+	float: none !important;
+	width: 100% !important;
+	height: 50% !important;
+}
+
+.fab .content .colom .inner {
+	height: 99%;
+	width: 90%;
+	top: 1%;
+}
+
+.fab .colom .inner .top {
+	height: 15% !important;
+}
+
+.fab .colom .inner .top i {
+	font-size: 6em;
+}
+
+.fab .content .colom .inner .title h1 {
+	font-size: 300%;
+}
+
+.fab .content .colom .inner .text {
+	width: 90%;
+	left: 5%;
+	top: 1%;
+}
+
+.fab .content .colom .inner .action .button {
+	width: 90%;
+    left: 5%;
+    font-size: 2em;
+}
+
+.fab .colom .inner.join {
+	left: 5%;
+}
+
+.fab .colom .inner.host {
+	top: 10%;
+	left: 5%;
+}
+
+.fab .campaignId {
+	width: 80%;
+	font-size: 3em;
+}

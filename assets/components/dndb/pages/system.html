@@ -1,0 +1,25 @@
+<div class="innerPage scroll">
+	<script>
+		$("#T1").attr("src", "../assets/components/dnd/js/" + sessionStorage.getItem("::openPage") + ".js");
+		$("#T2").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".css");
+		$("#T3").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".m.css");
+	</script>
+	<script id="T1" type="text/javascript"></script>
+	<link id="T2" rel="stylesheet" type="text/css">
+	<link id="T3" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
+	<div class="layout">
+		<div class="systemControlls">
+			<h1 class="selectedUser"></h1>
+			<button style="width: 20%;" class="prime s1" onclick="backupAll()"><i class="material-icons">backup</i>Backup</button>
+			<!-- <button style="width: 20%;" class="prime s1" onclick="backupUser(lUid);"><i class="material-icons">backup</i>Backup user</button> -->
+			<button style="width: 30%;" class="prime s1" onclick="backup()"><i class="material-icons">history</i>Recover character</button>
+			<button style="width: 20%;" class="prime s1" onclick="startEmulatetSession()"><i class="material-icons">build</i>Remote session</button>
+			<button style="width: 20%;" class="prime s1" onclick="stopEmulatetSession()"><i class="material-icons">close</i>Stop session</button>
+			<button style="width: 20%;" class="prime s1" onclick="deleteAccount()"><i class="material-icons">delete</i>Delete account</button>
+		</div>
+		<div class="users">
+
+		</div>
+	</div>
+	<script>loader.hide();</script>
+</div>

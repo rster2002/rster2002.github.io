@@ -1,0 +1,148 @@
+<div class="innerPage scroll">
+	<script src="../assets/components/dnd/js/characterLoader.js"></script>
+	<script src="../assets/components/dnd/js/characterEditor.js"></script>
+	<link href="../assets/components/dnd/css/characterEditor.css" type="text/css" rel="stylesheet">
+	<link href="../assets/components/dnd/css/characterEditor.m.css" media="screen and (max-device-width: 800px)" type="text/css" rel="stylesheet">
+	<div class="tester" style="position: fixed; width: 50px; height: 50px; background-color: red; z-index: 10; display: none;"></div>
+	<div class="controll">
+		<div id="test" class="button" onclick="saveCharacter(true)"><h1>Save</h1></div>
+		<div class="button" onclick="del()"><h1>Delete</h1></div>
+		<div class="button" onclick="openPage('characterList')"><h1>Back</h1></div>
+	</div>
+	<div class="sheet">
+		<div class="characterContainer">
+
+		</div>
+	</div>
+	<div class="spells">
+		<div class="addSpell centerHorizontal s2 rounded">
+			<div class="title">
+				<h1>Add spell</h1>
+			</div>
+			<div class="spellName">
+				<input placeholder="Spell" id="spellName" class="center">
+			</div>
+			<div class="props">
+				<div class="select input level rounded">
+					<h1>Level</h1>
+					<input placeholder="Spell level" id="level" type="number">
+				</div>
+				<div class="select verbal rounded">
+					<h1>Verbal</h1>
+				</div>
+				<div class="select somatic rounded">
+					<h1>Somatic</h1>
+				</div>
+				<div class="material select rounded input">
+					<h1>Material</h1>
+					<input placeholder="Material" id="materialComponent">
+				</div>
+				<div class="select input range rounded">
+					<h1>Range</h1>
+					<input placeholder="range" id="range">
+				</div>
+				<div class="select input castingTime rounded">
+					<h1>Casting time</h1>
+					<input placeholder="time" id="castingTime">
+				</div>
+				<div class="select input duration rounded">
+					<h1>Duration</h1>
+					<input placeholder="duration" id="duration">
+				</div>
+				<div class="select concentration rounded">
+					<h1>Concentration</h1>
+				</div>
+				<div class="select ritual rounded">
+					<h1>Ritual</h1>
+				</div>
+			</div>
+			<div class="description">
+				<textarea id="description" class="center"></textarea>
+			</div>
+			<div class="confirm" onclick="addSpell()">
+				<h1 class="center">Add</h1>
+			</div>
+		</div>
+		<div class="spellList">
+
+		</div>
+	</div>
+	<script>
+		$(".spell").each(function() {
+			$(this).on("click", function(e) {
+				e.stopPropagation();
+				t(this);
+			});
+		});
+
+		$(".select").each(function() {
+			if (!$(this).hasClass("input")) {
+				$(this).on("click", function() {
+					changeState(this);
+				});
+			} else {
+				$(".select.input input").on("keyup", function() {
+					checkInput(this);
+				});
+			}
+		});
+
+		function changeState(here) {
+			$(here).toggleClass("selected");
+		}
+
+		function checkInput(here) {
+			if ($(here).val() !== '') {
+				$(here).parent().addClass("selected");
+			} else {
+				$(here).parent().removeClass("selected");
+			}
+		}
+
+		$(document).on("click", function() {
+			c(".spell");
+		});
+	</script>
+	<div class="characterInfo">
+		<p class="characterId"></p>
+	</div>
+	<div class="characterOptions">
+		<div class="r">
+			<p>Allow edit</p>
+			<select class="allowEdit">
+				<option value="0">Only me</option>
+				<option value="1">DM</option>
+			</select>
+		</div>
+		<div class="r">
+			<p>Save character options</p>
+			<button style="float: right;" onclick="saveOptions()">Save</button>
+		</div>
+		<div class="r">
+			<p>Duplicate character</p>
+			<button onclick="dupe()">Duplicate</button>
+		</div>
+	</div>
+	<div class="characterBuilding" style="display: none;">
+		<h1>Ability scores</h1>
+		<p>You can get your ability scores in three different ways.</p>
+		<br />
+		<p>1. Asign these numbers to the abilities: 15, 14, 13, 12, 10, 8</p>
+		<p>2. Roll 4d6 and remove the lowest number, then add them up. Do this 6 times total and then assign them to your abilities.</p>
+		<p>3. The third method is the point buy system. You get 27 points and all your abilities start at 8. You can then use those points to increase abilities. You can't have abilities higher than 15 with this method and lower than 8. So as an example: if you want strength as your highest score, you can spend 9 point to kick strength up to 15. Now you have 18 points left. You could then put 6 points in charisma with then becomes 14. Then you only have 12 points left. Do this until your points are up</p>
+		<h1>Ability modifiers</h1>
+		<p>To calculate your abiltiy modifiers, you take your (ability score - 10) / 2 rounded down.</p>
+		<h1>Proficiency bonus</h1>
+		<p>Your proficiency bonus can be found in the 'proficiency' colom of your classes table.</p>
+		<h1>Saving throws</h1>
+		<p>Saving throws modifiers are your ability modifiers plus your proficiency bonus if you are proficient in a saving throw. For example, if my dexterity modifier is +3 and my proficieny is +2, my dexterity saving throw becomes +5.</p>
+		<h1>Skills</h1>
+		<p>You can fill these in like you did with the saving throws.</p>
+		<h1>Passive perception</h1>
+		<p>This is 10 + your perception skill.</p>
+		<h1>Initiative</h1>
+		<p>This is your dexterity modifier.</p>
+	</div>
+	<script>onLoaded();</script>
+	<div class="push"></div>
+</div>

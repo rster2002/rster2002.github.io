@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+	<body>
+		<div class="innerPage scroll">
+			<link href="../assets/components/dnd/css/menu.css" rel="stylesheet" type="text/css">
+			<link href="../assets/components/dnd/css/menu.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
+			<div class="menu">
+				<div class="menuItem" onclick="openPage('characterEditor')">
+					<h1>Character Editor</h1>
+					<p>Create a character with the character editor</p>
+				</div>
+				<div class="menuItem" onclick="openPage('campaignMenu')">
+					<h1>Campaign</h1>
+					<p>Create a campaign that friends can join to be able to see each others character sheet.</p>
+				</div>
+				<div class="menuItem" onclick="openPage('races')">
+					<h1>Races</h1>
+					<p>Find custom and original races.</p>
+				</div>
+				<div class="menuItem" onclick="openPage('news')">
+					<h1>News</h1>
+					<p>See what's changed in the latest update.</p>
+				</div>
+				<div class="menuItem bug" onclick="location.href='https://github.com/rster2002/rster2002.github.io/issues'">
+					<img src="../assets/images/icons/google/bug.png">
+				</div>
+<!--
+                <div class="menuItem" onclick="openPage('npcEditor')">
+					<h1>NPC editor</h1>
+					<p>Create NPC's for your adventure in this NPC editor.</p>
+				</div>
+-->
+				<script>
+					if (timer !== undefined) {
+						clearInterval(timer);
+					}
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

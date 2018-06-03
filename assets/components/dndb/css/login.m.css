@@ -1,0 +1,21 @@
+body {
+	overflow-y: auto;
+}
+
+* {
+	font-size: 3rem;
+}
+
+.login-box {
+	height: 70%;
+	width: 70%;
+}
+
+.firebaseui-idp-text {
+	font-size: 2rem;
+}
+
+form, .firebaseui-idp-button, .firebaseui-idp-list, firebaseui-list-item, firebaseui-card-content, firebaseui-container, .firebaseui-container, .firebaseui-page-provider-sign-in, .firebaseui-id-page-provider-sign-in {
+	width: 100%;
+	max-width: none;
+}

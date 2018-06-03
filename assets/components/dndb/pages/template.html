@@ -1,0 +1,11 @@
+<div class="innerPage">
+	<script id="T1" type="text/javascript"></script>
+	<link id="T2" rel="stylesheet" type="text/css">
+	<link id="T3" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
+	<script>
+		$("#T1").attr("src", "../assets/components/dnd/js/" + sessionStorage.getItem("::openPage") + ".js");
+		$("#T2").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".css");
+		$("#T3").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".m.css");
+	</script>
+	<script>loader.hide();</script>
+</div>
