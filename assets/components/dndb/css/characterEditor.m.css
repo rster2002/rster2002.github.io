@@ -2,6 +2,9 @@
 	width: 100%;
 }
 
+.buttons {
+	width: calc(935px - 16vw);
+}
 .controll .button h1 {
 	font-size: 3rem;
 }

@@ -2,10 +2,21 @@
 	z-index: 10;
 }
 
-.scroll {
-	width: 100%;
+.slider {
+	display: inline-block;
+	width: 100vw;
+}
+
+.slider .sliding {
+	width: 200vw;
 	height: 100%;
-	overflow-y: scroll;
+	margin-left: -100vw;
+	transition: 350ms all cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+
+.slider .sliding .slide {
+	width: 100vw;
+	float: left;
 }
 
 .sheet {
@@ -13,29 +24,76 @@
 	padding-bottom: 10vh;
 }
 
-.innerPage {
-	overflow-y: hidden;
+.page .innerPage.scroll {
+	overflow-x: hidden;
 }
 
-.controll {
+.buttons {
 	height: 10vh;
-	width: 60vw;
+	width: calc(935px + 16vw);
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
 	top: 5vh;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.controll .button {
+.buttons .contr {
+	height: 100%;
+	width: 5vw;
+	background-color: white;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+	border-radius: 1vh;
+	float: left;
+	cursor: pointer;
+	opacity: 1;
+	transition: 150ms all cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+
+.buttons .contr.faded {
+	opacity: 0;
+	transition: 200ms all cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+
+.buttons .contr:hover {
+	background-color: rgb(235,235,235);
+}
+
+.buttons .contr.left {
+	margin-right: 3vw;
+}
+
+.buttons .contr.right {
+	margin-left: 3vw;
+}
+
+.buttons .controll {
+	float: left;
+	height: 100%;
+	width: 935px;
+	background-color: white;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+	border-radius: 1vh;
+}
+
+.buttons .controll .button {
 	float: left;
 	height: 100%;
 	width: 33.333333333333333333333333333%;
 	cursor: pointer;
 }
 
-.controll .button h1 {
+.buttons .controll .button.left {
+	border-top-left-radius: 1vh;
+	border-bottom-left-radius: 1vh;
+}
+
+.buttons .controll .button.right {
+	border-top-right-radius: 1vh;
+	border-bottom-right-radius: 1vh;
+}
+
+.buttons .controll .button h1 {
 	position: relative;
 	top: 50%;
 	left: 50%;
@@ -44,12 +102,13 @@
 	font-size: 2em;
 }
 
-.controll .button:hover {
+.buttons .controll .button:hover {
 	background-color: rgb(235,235,235);
 }
 
 .pageArea {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+	border-radius: 1vh;
 }
 
 .spells {

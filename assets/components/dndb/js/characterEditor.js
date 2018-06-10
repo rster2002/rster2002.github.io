@@ -4,7 +4,7 @@ characters = "abcdefghijklmnopqrstuvwxyz0123456789";
 sessionStorage.setItem("::saved", "false");
 
 $(".innerPage").ready(() => {
-	$(".characterContainer").load("../assets/components/dnd/pages/characterSheet.html");
+	$(".characterContainer").load("../assets/components/dndb/pages/characterSheet.html");
 });
 
 function ctrlS() {
@@ -410,4 +410,46 @@ function saveOptions() {
 
 var onExit = function() {
 	inputCard.close();
+}
+currentSlide = 1;
+slideNames = {
+	0: "Spells",
+	1: "Character sheet"
+}
+
+function slideLeft() {
+	currentSlide -= 1;
+	if (currentSlide === 0) {
+		$(".contr.left").addClass("faded");
+		setTimeout(() => {
+			$(".buttons .controll").css("margin-left", "8vw");
+			$(".contr.left").hide();
+		}, 200);
+	}
+
+	$("#slideTitle").text(slideNames[currentSlide]);
+
+	$(".contr.right").removeClass("faded");
+	$(".buttons .controll").css("margin-right", "0vw");
+	$(".contr.right").show();
+	$(".sliding").css("margin-left", "-" + currentSlide * 100 + "vw");
+}
+
+function slideRight() {
+	currentSlide += 1;
+	if (currentSlide === 1) {
+		$(".contr.left").removeClass("faded");
+		$(".buttons .controll").css("margin-left", "0vw");
+		$(".contr.left").show();
+	}
+
+	if (slideNames[currentSlide + 1] === undefined) {
+		$(".contr.right").addClass("faded");
+		setTimeout(() => {
+			$(".buttons .controll").css("margin-right", "8vw");
+			$(".contr.right").hide();
+		}, 200);
+	}
+	$("#slideTitle").text(slideNames[currentSlide]);
+	$(".sliding").css("margin-left", "-" + currentSlide * 100 + "vw");
 }
