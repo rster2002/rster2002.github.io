@@ -9,6 +9,7 @@ html, body {
 	padding: 0;
 	overflow: hidden;
 	font-family: var(--font);
+	height: 100%;
 }
 
 .noMargin {
@@ -42,6 +43,38 @@ html, body {
 	float: right;
 }
 
+.error {
+	display: none;
+	z-index: 15;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background-color: white;
+}
+
+.error .inner {
+	width: 60%;
+	height: 60%;
+}
+
+.error .inner h1 {
+	width: 98%;
+	position: relative;
+	top: 0.5%;
+	left: 1%;
+	font-size: 2.5em;
+}
+
+.error .inner p {
+	width: 98%;
+	position: relative;
+	top: 0.5%;
+	left: 1%;
+	font-size: 2em;
+}
+
 .menubar {
 	position: fixed;
 	min-height: 46px;
@@ -49,6 +82,8 @@ html, body {
 	width: 100%;
 	border-bottom-left-radius: 1vh;
 	border-bottom-right-radius: 1vh;
+	background-color: white;
+	z-index: 10;
 }
 
 .menubar .menu {
@@ -201,8 +236,17 @@ html, body {
 	width: 100vw;
 }
 
+.innerPage {
+	width: 100%;
+	height: 100%;
+}
+
+.innerPage.scroll {
+	overflow-y: auto;
+}
+
 .cardWrapper {
-	width: 25%;
+	width: 21%;
 	padding: 2%;
 	display: inline-block;
 	float: left;
@@ -214,30 +258,71 @@ html, body {
 	padding-bottom: 0.5vh;
 }
 
+.cardWrapper .card.select {
+	cursor: pointer;
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
+}
+
+.cardWrapper .card.select:hover {
+	transform: scale(1.02);
+	box-shadow: 0 8px 17px 2px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2);
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 250ms;
+}
+
 .cardWrapper .card .color {
-	background-color: #a4508b;
-	background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
+	background-color: #36096d;
+	background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
 	width: 100%;
 	height: 1vh;
 	border-top-left-radius: 1vh;
 	border-top-right-radius: 1vh;
 }
 
-.cardWrapper .card h1 {
+.cardWrapper .card .content {
+	height: calc(85% - 1vh);
+	width: 100%;
+}
+
+.cardWrapper .card .content h1 {
 	font-size: 4vh;
 	margin: 0.5vh;
+	margin-top: 0;
 	font-weight: 500;
 	width: 95%;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
 }
 
 .cardWrapper .card p {
 	width: 95%;
 	font-size: 2vh;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
+
+.cardWrapper .card .actions {
+	height: calc(15% + 1vh);
+	min-height: 48px;
+	width: 100%;
+	background-color: rgb(0,128,255);
+}
+
+.cardWrapper .card .actions button {
+	position: relative;
+	top: 50%;
+	transform: translate(0%, -50%);
+	margin-left: 5px;
+	margin-right: 5px;
+	float: right;
 }
 
 .fab {
 	width: 4.5vw;
     height: 4.5vw;
+	min-width: 72px;
+	min-height: 72px;
     position: fixed;
     top: 101vh;
     left: calc(97vw - 4.5vw);
@@ -247,6 +332,8 @@ html, body {
 	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 	cursor: pointer;
 	transition: all cubic-bezier(0.4, 0.0, 1, 1) 100ms;
+	background-color: #36096d;
+	background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
 }
 
 .fab.show {

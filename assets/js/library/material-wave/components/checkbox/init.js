@@ -24,8 +24,24 @@ function waveSetupCheckbox(here, ii) {
 
 function waveCheckboxesAddInput(i) {
 	var s = "#checkbox" + i;
-	$(s).append("<i class='material-icons'>check</i>")
+	if ($(s).parent().hasClass("radio")) {
+		$(s).append("<i class='material-icons'>lens</i>")
+	} else {
+		$(s).append("<i class='material-icons'>check</i>")
+	}
 	console.log(s, i);
+	if ($(s).parent().hasClass("radio")) {
+		$(s).on("click", () => {
+			$(s).parent().children(".wave.checkbox").each((index, k) => {
+				if ($(k).attr("id") !== s) {
+					$(k).children("i").removeClass("checked");
+					$(k).children("input:checkbox").attr("checked", false);
+					$(k).removeClass("checked");
+					$(k).css("background-color", "transparent");
+				}
+			})
+		});
+	}
 	$(s).on("click", () => {
 		if ($(s).hasClass("checked")) {
 			$(s).children("i").removeClass("checked");
@@ -43,4 +59,5 @@ function waveCheckboxesAddInput(i) {
 			}, 100);
 		}
 	});
+
 }

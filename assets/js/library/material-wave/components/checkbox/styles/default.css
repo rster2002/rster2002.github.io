@@ -30,3 +30,32 @@
 	transform: translate(-50%, -50%) scale(0.6);
 	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 100ms;
 }
+
+.radio {
+	width: 100%;
+}
+
+.radio .wave.checkbox {
+	float: left;
+}
+
+.radio p {
+	width: calc(95% - 15px);
+	margin: 0;
+	margin-left: 3%;
+	float: left;
+}
+
+.radio .wave.checkbox i {
+	transform: translate(-50%, -50%) scale(0);
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 100ms;
+}
+
+.radio .wave.checkbox {
+	border-radius: 50%;
+}
+
+.radio .wave.checkbox.checked i.checked {
+	transform: translate(-50%, -50%) scale(0.4);
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 100ms;
+}

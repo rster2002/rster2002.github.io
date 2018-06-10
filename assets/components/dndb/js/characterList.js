@@ -14,12 +14,18 @@ async function addTolist(i, characterInfo, delay) {
 
 			console.log(characterInfo, characterObj);
 
-			var characterName = characterObj["96_1"];
-			if (characterInfo.dupe !== undefined) {
-				$(".list").append("<div id='an" + i + "' class='item'><div class='inner s1 hover' onclick='loadCharacter(" + i + ")'><h1>" + characterName + "</h1><p>Dupe: " + characterInfo.dupe + "</p></div></div>");
+			if (characterObj["96_1"] !== "") {
+				characterName = characterObj["96_1"];
 			} else {
-				$(".list").append("<div id='an" + i + "' class='item'><div class='inner s1 hover' onclick='loadCharacter(" + i + ")'><h1>" + characterName + "</h1></div></div>");
+				characterName = "Unnamed character"
 			}
+			var dupe = characterInfo.dupe !== undefined ? "Dupe: " + characterInfo.dupe : "";
+			$(".cards").append("<div class='cardWrapper'><div class='card shadow-2 select' onclick='loadCharacter(" + i + ")'><div class='color'></div><div class='content'><h1>" + characterName + "</h1><p>" + characterObj["95_1"] + " " + characterObj["94_1"] + "</p><p>" + dupe + "</p></div></div></div>")
+			// if (characterInfo.dupe !== undefined) {
+			//
+			// } else {
+			// 	$(".list").append("<div id='an" + i + "' class='item'><div class='inner s1 hover' onclick='loadCharacter(" + i + ")'><h1>" + characterName + "</h1></div></div>");
+			// }
 
 			setTimeout(function() {
 				$("#an" + i + " .inner").addClass("fadeIn");
@@ -34,6 +40,7 @@ async function addTolist(i, characterInfo, delay) {
 function loadCharacter(index) {
 	progress.show();
 	var characterName = obj[index];
+	console.log(index, characterName);
 	userRef.collection("characters").doc(characterName).update({
 		lastEdited: Date.now()
 	}).then(function() {

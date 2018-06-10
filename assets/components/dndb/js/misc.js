@@ -208,21 +208,10 @@ function error(error) {
 	loader.hide();
 	progress.hide();
 
-	var randomMessage = randomFromArray([
-		"Don't steal books",
-		"You've upset the gods of D&D! Now you got punished",
-		"Maybe this is a mimic, in that case: ignore this message",
-		"Maybe a fireball would solve this error...",
-		"A mind flayer has taken over this website!",
-		"Don't trust portals!"
-	])
-
-	$("#error-message").text("An error has occurred (" + randomMessage + ")")
-	$("#error").text(error);
+	$("#errorText").text(error);
 
 	console.error(error);
-	$(".error-background").fadeIn();
-	$(".background").fadeIn();
+	$(".error").show();
 
 	if (!DEV) {
 		ga('send', 'event', "dnd-error", error);

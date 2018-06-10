@@ -77,6 +77,7 @@ function initUser() {
 			uid = p.uid;
 		}
 		realUid = p.uid;
+		sessionStorage.setItem("::uid", uid);
 		userRef = firestore.collection("users").doc(uid);
 		userBucket = cloudStorage.child(uid);
 		$(".userimg").attr("src", p.photoURL);

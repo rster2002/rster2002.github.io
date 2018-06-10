@@ -9,6 +9,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
+		<script src="https://raw.githubusercontent.com/lodash/lodash/4.17.10-npm/core.js"></script>
 <!--		<script src="../assets/js/api/ui.js"></script>-->
 		<script src="../assets/js/library/material-wave/wave.js"></script>
 		<!-- App Scripts -->
@@ -35,16 +36,15 @@
 				</div>
 			</div>
 			<div class="menu">
-				<div class="menubutton" onclick="openPage('dashboard')">
+				<!-- <div class="menubutton" onclick="openPage('dashboard')">
 					<p class="centerVertical"><i class="material-icons">dashboard</i>Dashboard</p>
-				</div>
+				</div> -->
 				<div class="menubutton" onclick="openPage('characterList')">
 					<p class="centerVertical"><i class="material-icons">edit</i>Character Editor</p>
 				</div>
 				<div class="menubutton" onclick="openPage('campaignMenu')">
 					<p class="centerVertical"><i class="material-icons">bookmark</i>Campaigns</p>
 				</div>
-
 				<div class="menubutton" onclick="openPage('dm')">
 					<p class="centerVertical"><i class="material-icons">map</i>DM Tools</p>
 				</div>
@@ -84,6 +84,16 @@
 			</div>
 			<div class="menu user right">
 				<img class="shadow-1 userimg" />
+			</div>
+		</div>
+		<div class="error">
+			<div class="center inner">
+				<h1>Whoops... <span style="color: red;">Critical error</span></h1>
+				<p>Something went wrong! If you had this issue a couple of times now, please open an issue on <span style="color:rgb(0,128,255);cursor: pointer;" onclick="window.open('https://github.com/rster2002/rster2002.github.io/issues')">github</span> so I can fix this, or you can try one of these things:</p>
+				<p>- Check your internet connection</p>
+				<p>- Try your action in another browser</p>
+				<button class="wave prime" onclick="$('.error').hide();">Close</button>
+				<p style="font-size: 1em; color: #585858;" id="errorText">ERROR</p>
 			</div>
 		</div>
 		<div class="page">

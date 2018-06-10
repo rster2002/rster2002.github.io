@@ -7,11 +7,17 @@
         <script src="../../../assets/js/library/material-wave/wave.js"></script>
         <script src="init.js"></script>
         <script src="app.js"></script>
+        <link href="./index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <div class="content">
+            <h1>Veldwerk</h1>
+            <p>Stad van de zon</p>
+        </div>
         <div class="content page1">
+            <h1>Inleiding</h1>
+            <p>In dit veldwerk ga je onderzoek doen naar de stad van de zon, een wijk in Heerhugowaard. Je doet dit door opdrachten te doen.</p>
             <input class="wave" placeholder="Je naam" />
-            <button class="wave prime" icon-right="arrow_forward">Begin</button>
         </div>
         <div class="content">
             <h1>Opdracht 1</h1>
@@ -25,7 +31,25 @@
             </iframe>
             <button onclick="window.open('https://www.google.nl/maps/place/Dijk+van+Kyoto,+Heerhugowaard/@52.6446796,4.8118259,17z/data=!3m1!4b1!4m8!1m2!2m1!1sStad+van+de+zon!3m4!1s0x47cf55d45035af91:0x187cd7cc14c2e200!8m2!3d52.6446796!4d4.8140146')" class="wave">Bekijk op maps</button>
             <p>Wat valt je op als je hier staat?</p>
-            <input class="wave simple" placeholder="Schrijf je antwoord hier" />
+            <input class="wave" placeholder="Je antwoord" />
+            <p class="ant1" style="display: none;">Antwoorden: De weg is een soort dijk die ervoor zorgt dat je naar de stad van de zon kan rijden. De grote zonnepanelen.</p>
+            <button class="wave" onclick="$('.ant1').show();">Antwoorden</button>
+        </div>
+        <div class="content">
+            <h1>Opdracht 2</h1>
+            <p>Deze flat heeft geen eigen zonnepanelen. Waar zou deze flat de energie vandaan halen?</p>
+            <iframe
+              width="100%"
+              height="450"
+              frameborder="0" style="border:0"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBYwImjxZnBRJSi8Cr7rb6Uwl7TkNiOhbs
+                &q=Hof+van+Ra,+Heerhugowaard" allowfullscreen>
+            </iframe>
+            <div class="radio">
+                <input class="wave" type="checkbox" /><p>Van een centrale</p>
+                <input class="wave" type="checkbox" /><p>Van andere huizen</p>
+                <input class="wave" type="checkbox" /><p>Van de zonnepanelen op de dijk</p>
+            </div>
         </div>
     </body>
 </html>
