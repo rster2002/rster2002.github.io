@@ -24,6 +24,21 @@ button.wave {
 	cursor: pointer;
 }
 
+button.wave.prime:disabled {
+	background-color: #81B59D;
+	color: white;
+	box-shadow: 0;
+}
+
+button.wave.flat:disabled {
+	color: #81B59D !important;
+	cursor: default;
+}
+
+button.wave.flat:disabled:hover {
+	background-color: transparent;
+}
+
 button.wave.wide {
 	padding-left: 27px;
 	padding-right: 27px;

@@ -1,33 +1,19 @@
 var inputCounter = 0;
-$("input:text.wave").each((index, item) => {
-	inputCounter += 1;
-	var pla = $(item).attr("placeholder");
-	$(item).wrap("<div class='wave--input'></div>");
-	if (pla !== undefined && $(item).hasClass("simple") !== true) {
-		$(item).parent(".wave--input").prepend("<p>" + pla + "</p>");
-		$(item).attr("placeholder", "");
+$("input.wave").each((index, item) => {
+	console.log(item, index);
+	if ($(item).attr("type") !== "checkbox") {
+		inputCounter += 1;
+		var pla = $(item).attr("placeholder");
+		$(item).wrap("<div class='wave--input'></div>");
+		if (pla !== undefined && $(item).hasClass("simple") !== true) {
+			$(item).parent(".wave--input").prepend("<p>" + pla + "</p>");
+			$(item).attr("placeholder", "");
+		}
+		$(item).parent(".wave--input").append("<div class='bar'><div class='color'></div></div>");
+		$(item).parent(".wave--input").css("margin-top", "3%");
+		$(item).parent(".wave--input").attr("id", "wave--input-" + inputCounter);
+		console.log("#wave--input-" + inputCounter);
 	}
-	$(item).parent(".wave--input").append("<div class='bar'><div class='color'></div></div>");
-	$(item).parent(".wave--input").css("margin-top", "3%");
-	$(item).parent(".wave--input").attr("id", "wave--input-" + inputCounter);
-	console.log("#wave--input-" + inputCounter);
-
-	// $(".wave--input").on("click", () => {
-	// 	$(".wave--input input").focus();
-	// });
-
-	// $(".wave--input input").focusin(() => {
-	// 	$(".wave--input p").addClass("move");
-	// 	$(".wave--input .bar .color").addClass("show");
-	// })
-	//
-	// $(".wave--input input").focusout(() => {
-	// 	var v = $(".wave--input input").val();
-	// 	if (v === "") {
-	// 		$(".wave--input p").removeClass("move");
-	// 		$(".wave--input .bar .color").removeClass("show");
-	// 	}
-	// });
 });
 
 setTimeout(() => {

@@ -1,0 +1,17 @@
+.wave.checkbox {
+  width: 45px;
+  height: 45px;
+}
+
+.radio .wave.checkbox.checked i.checked {
+	transform: translate(-50%, -50%) scale(.8);
+	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 100ms;
+}
+
+.radio p {
+	width: calc(95% - 45px);
+  height: 50px;
+	margin: 0;
+	margin-left: 3%;
+	float: left;
+}

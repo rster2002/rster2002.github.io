@@ -8,6 +8,9 @@
         <script src="init.js"></script>
         <script src="app.js"></script>
         <link href="./index.css" rel="stylesheet" type="text/css">
+        <script>
+            score = 0;
+        </script>
     </head>
     <body>
         <div class="content">
@@ -30,13 +33,45 @@
                 &q=Dijk+van+Kyoto" allowfullscreen>
             </iframe>
             <button onclick="window.open('https://www.google.nl/maps/place/Dijk+van+Kyoto,+Heerhugowaard/@52.6446796,4.8118259,17z/data=!3m1!4b1!4m8!1m2!2m1!1sStad+van+de+zon!3m4!1s0x47cf55d45035af91:0x187cd7cc14c2e200!8m2!3d52.6446796!4d4.8140146')" class="wave">Bekijk op maps</button>
-            <p>Wat valt je op als je hier staat?</p>
+            <p>Tel hoeveel zonnepanelen er op de dijk staan.</p>
+            <input id="val1" class="wave" placeholder="Je antwoord" type="number"/>
+            <p class="ant1" style="display: none;">Antwoord: 64, er zijn 4 palen met elk 16 zonnepanelen.</p>
+            <button id="btn1" class="wave" onclick="c1();">Antwoorden</button>
+            <script>
+                function c1() {
+                    if ($("#val1").val() == "64") {
+                        $(".ant1").css("color", "#45b001");
+                        $(".ant1").text("Dat is goed!");
+                        $(".ant1").show();
+                        score += 1;
+                        $("#score").text("Score: " + score);
+                        $("#btn1").prop("disabled", true);
+                    } else {
+                        $(".ant1").css("color", "#f24141");
+                        $(".ant1").text("Dat is niet goed. Tel de zonnepanelen, niet de palen waar de zonnepanelen op zitten.");
+                        $(".ant1").show();
+                    }
+                }
+            </script>
+            <p>Waar zouden deze zonnepanelen voor worden gebruikt?</p>
             <input class="wave" placeholder="Je antwoord" />
-            <p class="ant1" style="display: none;">Antwoorden: De weg is een soort dijk die ervoor zorgt dat je naar de stad van de zon kan rijden. De grote zonnepanelen.</p>
-            <button class="wave" onclick="$('.ant1').show();">Antwoorden</button>
+            <p id="ant2" style="color: #81B59D;display:none;">Ze worden voornamelijk gebruikt om energie op te wekken voor in de winter en voor de gebouwen die zelf geen of niet genoeg energie opwekken.</p>
+            <button id="btn1" onclick="c2();" class="wave">Antwoord weergeven</button>
+            <script>
+                function c2() {
+                    $("#ant2").show();
+                }
+            </script>
         </div>
         <div class="content">
             <h1>Opdracht 2</h1>
+            <p>Als bijna ieder huis eigen zonnepanelen hebben, waarom denk je dat er aparte zonnepanelen staan.</p>
+            <input class="wave" placeholder="Je antwoord" />
+            <p class="ant2" style="display: none;">Ze worden gebruikt voor huizen die geen of weinig zonnepanelen hebben en worden gebruikt om extra energie op te wekken voor in de winter.</p>
+            <button class="wave" onclick="$('.ant2').show();">Voorbeeld antwoorden</button>
+        </div>
+        <div class="content">
+            <h1>Opdracht 3</h1>
             <p>Deze flat heeft geen eigen zonnepanelen. Waar zou deze flat de energie vandaan halen?</p>
             <iframe
               width="100%"
@@ -50,6 +85,13 @@
                 <input class="wave" type="checkbox" /><p>Van andere huizen</p>
                 <input class="wave" type="checkbox" /><p>Van de zonnepanelen op de dijk</p>
             </div>
+        </div>
+        <div class="content">
+            <h1>Opdracht 4</h1>
+        </div>
+        <div class="content">
+            <h1>Je score</h1>
+            <p id="score"></p>
         </div>
     </body>
 </html>

@@ -144,6 +144,13 @@ function openPage(page) {
 	}
 }
 
+function openHomebrewary(url) {
+	loader.show();
+	$(".page.innerPage").remove();
+	$(".page").append("<div class='innerPage'><iframe src='" + url + "'></iframe></div>");
+	sidebar.close();
+}
+
 function onLoaded() {
 	loader.hide();
 	if (loaded !== null) {

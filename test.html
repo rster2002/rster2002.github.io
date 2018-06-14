@@ -1,54 +1,60 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-		<link href="assets/images/icons/tab%20icons/main.png" rel="icon" type="image/png">
- 
-    </head>
-    <body>
- 
-    <div id="gamepadPrompt"></div>
- 
-    <script>
-    var hasGP = false;
- 
-    function canGame() {
-        return "getGamepads" in navigator;
-    }
- 
-    $(document).ready(function() {
- 
-        if(canGame()) {
- 
-            var prompt = "To begin using your gamepad, connect it and press any button!";
-            $("#gamepadPrompt").text(prompt);
- 
-            $(window).on("gamepadconnected", function() {
-                hasGP = true;
-                $("#gamepadPrompt").html("Gamepad connected!");
-                console.log("connection event");
-            });
- 
-            $(window).on("gamepaddisconnected", function() {
-                console.log("disconnection event");
-                $("#gamepadPrompt").text(prompt);
-            });
- 
-            //setup an interval for Chrome
-            var checkGP = window.setInterval(function() {
-                if(navigator.getGamepads()[0]) {
-                    if(!hasGP) $(window).trigger("gamepadconnected");
-                    window.clearInterval(checkGP);
-                }
-            }, 500);
-        }
- 
-    });
-    </script>
-    </body>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="assets/js/library/jquery.js"></script>
+	</head>
+	<body>
+		<textarea>
+			Hello &#013;&#010; World
+		</textarea>
+		<div class="t">
+			<h1>T</h1>
+		</div>
+		<div class="v">
+			<h1>V</h1>
+		</div>
+		<script>
+			var track = [
+				[0.333, 1.379, 5.705E-3],
+				[8.667, 8.303E-2, 2.564E-2],
+				[0.667, 1.374, 3.692E-2],
+				[1.000, 1.355, 7.558E-2],
+				[8.333, 9.864E-2, 8.206E-2],
+				[1.333, 1.324, 0.113],
+				[8.000, 0.138, 0.127],
+				[1.667, 1.284, 0.134],
+				[2.000, 1.236, 0.136],
+				[5.000, 0.647, 0.151],
+				[7.667, 0.183, 0.162],
+				[6.667, 0.360, 0.166],
+				[6.333, 0.411, 0.170],
+				[5.333, 0.606, 0.171],
+				[4.667, 0.706, 0.173],
+				[7.000, 0.302, 0.174],
+				[7.333, 0.245, 0.178],
+				[4.333, 0.762, 0.178],
+				[6.000, 0.474, 0.183],
+				[3.667, 0.886, 0.185],
+				[4.000, 0.825, 0.186],
+				[5.667, 0.533, 0.198],
+				[3.333, 0.948, 0.212],
+				[2.333, 1.193, 0.213],
+				[3.000, 1.027, 0.220],
+				[2.667, 1.094, 0.249]
+			]
+
+			var t = "";
+			var v = "";
+			for (var i = 0; i < track.length; i++) {
+				var point = track[i];
+				t += point[0] + "&#013;&#010;";
+				v += point[2] + "&#013;&#010;";
+			}
+			$(".t").append("<p>" + t + "</p>");
+			$(".v").append("<p>" + v + "</p>");
+			console.log(t);
+		</script>
+	</body>
 </html>

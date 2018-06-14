@@ -1,0 +1,17 @@
+.wave--input {
+	height: 80px;
+}
+
+.wave--input > p {
+  margin-top: 2%;
+  left: 3.5%;
+}
+
+.wave--input > p.move {
+	margin-top: -2%;
+	font-size: 24px !important;
+}
+
+.wave--input > input {
+  font-size: 36px;
+}
