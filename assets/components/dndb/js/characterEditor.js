@@ -174,7 +174,7 @@ function addSpellToList(spell, index) {
 
 	var levelText = spell.level == 0 ? "Cantrip" : "Level " + spell.level;
 
-	$(".spellList").prepend("<div class='spell s2 rounded centerHorizontal' id='spell" + index + "'><div class='shared'><div class='icon'><div class='circle'></div></div><div class='text'><div class='wrapper'><h1>" + spell.name + "</h1><p>" + levelText + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='text'>" + out + "</div><div class='actions'><button class='flat del'>Delete</button></div></div></div>");
+	$(".spellList").prepend("<div class='spell s2 rounded centerHorizontal' id='spell" + index + "'><div class='shared'><div class='icon'><div class='circle'></div></div><div class='text'><div class='wrapper'><h1>" + spell.name + "</h1><p>" + levelText + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='text'>" + out + "</div><div class='actions'><button class='wave del'>Delete</button></div></div></div>");
 
 	$("#spell" + index).on("click", function(e) {
 		console.log("click")
@@ -184,7 +184,9 @@ function addSpellToList(spell, index) {
 
 	$("#spell" + index + " .del").on("click", function(e) {
 		e.stopPropagation();
-		deleteSpell(this);
+		if (confirm("Are you sure you want to delete this spell from your list?")) {
+			deleteSpell(this);
+		}
 	});
 }
 
@@ -193,6 +195,7 @@ function deleteSpell(here) {
 	var elementId = Number(k.replace("spell", ""));
 	var spellId = spellObj[elementId]["__id"];
 	userRef.collection("characters").doc(sessionStorage.getItem("::saved") + "/spells/" + spellId).delete().catch(function(e){error(e)});
+	$(here).parent().parent().parent().remove();
 	note.open("delete", "Spell deleted", 2000);
 }
 
@@ -414,7 +417,8 @@ var onExit = function() {
 currentSlide = 1;
 slideNames = {
 	0: "Spells",
-	1: "Character sheet"
+	1: "Character sheet",
+	2: "Inventory"
 }
 
 function slideLeft() {

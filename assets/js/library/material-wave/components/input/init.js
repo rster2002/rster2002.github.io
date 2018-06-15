@@ -1,6 +1,5 @@
 var inputCounter = 0;
 $("input.wave").each((index, item) => {
-	console.log(item, index);
 	if ($(item).attr("type") !== "checkbox") {
 		inputCounter += 1;
 		var pla = $(item).attr("placeholder");
@@ -12,7 +11,6 @@ $("input.wave").each((index, item) => {
 		$(item).parent(".wave--input").append("<div class='bar'><div class='color'></div></div>");
 		$(item).parent(".wave--input").css("margin-top", "3%");
 		$(item).parent(".wave--input").attr("id", "wave--input-" + inputCounter);
-		console.log("#wave--input-" + inputCounter);
 	}
 });
 
@@ -26,12 +24,10 @@ function processInput(i) {
 	var selector = "#wave--input-" + i;
 	if (i > 0) {
 		$(selector).on("click", () => {
-			console.log("Hello World");
 			$("#wave--input-" + i + " input").focus();
 		});
 
 		$(selector + " input").focusin(() => {
-			console.log("fire");
 			$(selector + " p").addClass("move");
 			$(selector + " .bar .color").addClass("show");
 		});

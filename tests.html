@@ -1,78 +1,64 @@
 <!DOCTYPE html>
-
-<!-- coords
-<html>
+<html lang="en" dir="ltr">
 	<head>
-		<title>Test breal</title>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="assets/js/library/jquery.js"></script>
+		<script src="assets/js/library/material-wave/wave.js"></script>
+		<script>
+			$(document).ready(() => {
+				wave.config({path: "assets/js/library/material-wave/"}).import(["buttons"]).then(() => {
+					wave.engine((engine) => {
+						engine.buttons((comp) => {
+							comp.corners([
+								{
+									"place": "topLeft",
+									"shape": "cut",
+									"size": "5px"
+								}
+							]);
+						});
+
+						engine.custom(".test", (comp) => {
+							comp.corners([
+								{
+									"place": "topRight",
+									"shape": "cut",
+									"size": "10px"
+								},
+								{
+									"place": "bottomLeft",
+									"shape": "cut",
+									"size": "10px"
+								},
+								{
+									"place": "topLeft",
+									"shape": "cut",
+									"size": "40%"
+								},
+								{
+									"place": "bottomRight",
+									"shape": "cut",
+									"size": "40%"
+								}
+							]);
+						})
+					});
+				});
+			});
+		</script>
 		<style>
 			.test {
-				background-image: url(assets/images/map.png);
-				width: 984px;
-				height: 738px;
+				width: 100px;
+				height: 100px;
+				background-color: red;
 			}
 		</style>
-		<script>
-			function read(e) {
-				var result_x = document.getElementById("x");
-				var result_y = document.getElementById("y");
-				result_x.innerHTML = e.clientX;
-				result_y.innerHTML = e.clientY;
-				var x = e.clientX;
-				var y = e.clientY;
-				if (y >= 90) {
-					if (x <= 991) {
-						var marginTop = y - 90;
-						document.getElementById("text").style = "margin-top:" + String(marginTop) + "px;"
-						document.getElementById("text").style = "margin-left:" + String(x) + "px;"
-					}
-				}
-			}
-			document.onmousemove = read;
-		</script>
 	</head>
 	<body>
-		<p id="x">x</p>
-		<p id="y">y</p>
+		<button class="wave prime">Hello World</button>
 		<div class="test">
-			<div>
-				<h1 id="text">text</h1>
-			</div>
+
 		</div>
-	</body>
-</html>
--->
-
-<!-- encrypting
-<html>
-	<head>
-		<title>encrypt</title>
-		<script src="assets/js/library/js-nacl-master/lib/nacl_factory.js">
-			function encrypt(input) {
-				alert(nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(randomHex + nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(input)))))));
-			}
-		</script>
-	</head>
-	<body>
-		<script>
-		  nacl_factory.instantiate(function (nacl) {
-			alert(nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8("String"))));
-		  });
-			function encrypt(input) {
-				alert(nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(randomHex + nacl.to_hex(nacl.crypto_hash(nacl.encode_utf8(input)))))));
-			}
-		</script>
-	</body>
-</html>
--->
-
-<html>
-	<head>
-		<title>discord</title>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js"></script>
-		<script src="assets/js/library/push.min.js"></script>
-	</head>
-	<body>
-		<script>
-		</script>
 	</body>
 </html>

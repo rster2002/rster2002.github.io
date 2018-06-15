@@ -3,6 +3,14 @@ sessionStorage.setItem("wave--init", 0);
 
 waveColor = [];
 waveAuto = [];
+waveEngineComponents = {
+	custom: function(se, fn) {
+		waveEngineSettings[se] = {changable: se};
+		activeComp = se;
+		fn(waveModulator);
+	}
+};
+waveEngineSettings = {};
 
 // dev(false);
 //
@@ -14,6 +22,40 @@ waveAuto = [];
 // 		from = "https://cdn.rawgit.com/rster2002/wave-ui/master/";
 // 	}
 // }
+
+waveModulator = {
+	corners: function(s) {
+		size = {
+			topLeft: "0px",
+			topRight: "0px",
+			bottomLeft: "0px",
+			bottomRight: "0px"
+		};
+		for (var i = 0; i < s.length; ++i) {
+			var rule = s[i];
+			console.log(rule);
+			if (rule.shape === "cut") {
+				var style = {};
+				if (rule.place === "all") {
+					size["topLeft"] = rule.size;
+					size["topRight"] = rule.size;
+					size["bottomLeft"] = rule.size;
+					size["bottomRight"] = rule.size;
+					console.log("all");
+				} else {
+					size[rule.place] = rule.size;
+				}
+				console.log(size);
+				style["clip-path"] = "polygon(0% " + size.topLeft + ", " + size.topLeft + " 0%, calc(100% - " + size.topRight + ") 0%, 100% " + size.topRight + ", 100% calc(100% - " + size.bottomRight + "), calc(100% - " + size.bottomRight + ") 100%, " + size.bottomLeft + " 100%, 0 calc(100% - " + size.bottomLeft + "))"
+				$(waveEngineSettings[activeComp]["changable"]).css(style);
+			}
+		}
+	}
+}
+
+function waveEngineComp(fn) {
+	fn(waveModulator);
+}
 
 async function waveInitColors(colorObj) {
 	elementLoaded("body", async () => {
@@ -107,6 +149,7 @@ async function waveConfig(settings) {
 	if (settings !== undefined) {
 		if (settings["path"] !== undefined) {
 			waveFrom = settings["path"];
+			console.log("[wave] Path set to: " + settings["path"])
 		}
 		if (settings["init"] !== undefined) {
 			waveInit = settings.init;
@@ -115,13 +158,28 @@ async function waveConfig(settings) {
 		}
 	}
 }
+
+function waveAwaitEngine(fn) {
+	var waveReloader = setInterval(() => {
+		if (waveTotalComponents !== -1) {
+			if (waveTotalComponents === waveImportedComponents) {
+				fn();
+				clearInterval(waveReloader);
+			}
+		}
+	}, 250);
+}
+
 waveSetup = false;
 waveD = false;
 waveImported = {};
 waveInit = true;
 waveFrom = "./";
+waveTotalComponents = -1;
+waveImportedComponents = 0;
 
 async function waveImport(component) {
+	waveTotalComponents = component.length;
 	console.log(component);
 	try {
 		if (!waveSetup) {
@@ -144,6 +202,7 @@ async function waveImport(component) {
 								await loadInit(waveFrom + "components/" + comp + "/init.js");
 							}
 							waveImported[comp] = true;
+							waveImportedComponents += 1;
 						}
 					} catch(e) {
 						console.error("[wave] Failed to load " + comp);
@@ -185,17 +244,24 @@ $(document).ready(function() {
 	$("body").append("<div class='wave--background'></div>");
 	waveBoxOpen = false;
 
-	var all = {
-		config: function(s){waveConfig(s);return all;},
-		import: function(s){waveImport(s);return all;},
-		then: function(s){waveThen(s);return all;},
-		log: function(s){waveLog(s);return all;},
-		color: function(s){waveInitColors(s);return all;},
-		css: function(s){waveCss(s);return all;},
-		autoInit: function(s){waveAutoInit(s);return all;}
+	var waveInit = {
+		config: function(s){waveConfig(s);return waveInit;},
+		import: function(s){waveImport(s);return waveInit;},
+		log: function(s){waveLog(s);return waveInit;},
+		color: function(s){waveInitColors(s);return waveInit;},
+		css: function(s){waveCss(s);return waveInit;},
+		autoInit: function(s){waveAutoInit(s);return waveInit;},
+		then: function(s){waveAwaitEngine(s);return waveInit;}
 	}
 
-	wave = all;
+	var waveEngine = function(fn) {
+		fn(waveEngineComponents);
+	}
+
+	var waveRoot = waveInit;
+	waveRoot["engine"] = waveEngine;
+
+	wave = waveRoot;
 });
 
 $(document).ready(function(){

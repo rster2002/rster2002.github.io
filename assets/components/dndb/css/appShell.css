@@ -12,6 +12,11 @@ html, body {
 	height: 100%;
 }
 
+h1, p {
+	margin: 0;
+	padding: 0;
+}
+
 .noMargin {
 	margin: 0;
 }

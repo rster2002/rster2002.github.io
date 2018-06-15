@@ -4,5 +4,22 @@ $(document).ready(() => {
 	}).import([
 		"shadow",
 		"buttons"
-	]);
+	]).then(() => {
+		wave.engine((engine) => {
+			engine.custom(".fab", (comp) => {
+				comp.corners([
+					{
+						"place": "bottomLeft",
+						"shape": "cut",
+						"size": "1vh"
+					},
+					{
+						"place": "bottomRight",
+						"shape": "cut",
+						"size": "1vh"
+					}
+				]);
+			});
+		});
+	});
 })

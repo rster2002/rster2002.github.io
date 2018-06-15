@@ -6,7 +6,6 @@ waveCheckboxes = 0;
 
 elementLoaded("input:checkbox.wave", () => {
 	$("input:checkbox.wave").each((index, item) => {
-		console.log(item);
 		if (!$(item).hasClass("setup")) {
 			waveCheckboxes += 1;
 			waveSetupCheckbox(item, waveCheckboxes);
@@ -29,7 +28,6 @@ function waveCheckboxesAddInput(i) {
 	} else {
 		$(s).append("<i class='material-icons'>check</i>")
 	}
-	console.log(s, i);
 	if ($(s).parent().hasClass("radio")) {
 		$(s).on("click", () => {
 			$(s).parent().children(".wave.checkbox").each((index, k) => {

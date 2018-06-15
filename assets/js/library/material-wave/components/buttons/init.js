@@ -1,5 +1,4 @@
 var colorFunction = function(color) {
-	console.log(color);
 	$("button.wave.flat").css("color", color.action);
 	$("button.wave.prime").css("background-color", color.action);
 }
@@ -24,3 +23,11 @@ elementLoaded("button.wave", function(here) {
 });
 
 waveColor.unshift(colorFunction);
+console.log(waveEngineComponents);
+waveEngineComponents["buttons"] = function(fn) {
+	activeComp = "buttons";
+	fn(waveModulator);
+};
+waveEngineSettings["buttons"] = {
+	changable: "button.wave"
+};
