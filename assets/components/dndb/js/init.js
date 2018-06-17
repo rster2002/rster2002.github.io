@@ -3,7 +3,9 @@ $(document).ready(() => {
 		path: "../assets/js/library/material-wave/"
 	}).import([
 		"shadow",
-		"buttons"
+		"buttons",
+		"select",
+		"dialog"
 	]).then(() => {
 		wave.engine((engine) => {
 			engine.custom(".fab", (comp) => {

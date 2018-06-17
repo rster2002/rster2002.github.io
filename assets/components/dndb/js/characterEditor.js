@@ -42,7 +42,7 @@ function localError(error) {
 }
 
 function t(here) {
-	if ($(here).hasClass("open")) {
+	if ($(here).parent().hasClass("open")) {
 		c(here);
 	} else {
 		o(here);
@@ -50,21 +50,21 @@ function t(here) {
 }
 
 function o(here) {
-	$(here).addClass("open");
+	$(here).parent().addClass("open");
 	setTimeout(function() {
-		$(here).children(".content").addClass("open");
+		$(here).parent().children(".content").addClass("open");
 	}, 75);
 	setTimeout(function() {
-		$(here).addClass("h");
+		$(here).parent().addClass("h");
 	}, 80);
 }
 
 function c(here) {
-	$(here).removeClass("h");
+	$(here).parent().removeClass("h");
 	setTimeout(function() {
-		$(here).removeClass("open");
+		$(here).parent().removeClass("open");
 	}, 80);
-	$(here).children(".content").removeClass("open");
+	$(here).parent().children(".content").removeClass("open");
 }
 
 console.log("hmm");
@@ -174,29 +174,219 @@ function addSpellToList(spell, index) {
 
 	var levelText = spell.level == 0 ? "Cantrip" : "Level " + spell.level;
 
-	$(".spellList").prepend("<div class='spell s2 rounded centerHorizontal' id='spell" + index + "'><div class='shared'><div class='icon'><div class='circle'></div></div><div class='text'><div class='wrapper'><h1>" + spell.name + "</h1><p>" + levelText + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='text'>" + out + "</div><div class='actions'><button class='wave del'>Delete</button></div></div></div>");
+	$("#spellsListing").append("<div class='item s2 rounded centerHorizontal' id='spell" + index + "'><div class='shared'><div class='icon'><div class='circle'></div></div><div class='text'><div class='wrapper'><h1>" + spell.name + "</h1><p>" + levelText + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='text'>" + out + "</div><div class='actions'><button onclick='deleteSpell(" + index + ")' icon-left='delete' class='wave del'>Delete</button></div></div></div>");
 
-	$("#spell" + index).on("click", function(e) {
+	$("#spell" + index).children(".shared").on("click", function(e) {
 		console.log("click")
 		e.stopPropagation();
 		t(this);
 	});
 
-	$("#spell" + index + " .del").on("click", function(e) {
-		e.stopPropagation();
-		if (confirm("Are you sure you want to delete this spell from your list?")) {
-			deleteSpell(this);
+	var thisthis = this;
+
+	// $("#spell" + index + " .del").on("click", function(e) {
+	// 	e.stopPropagation();
+	// 	wave.dialog.open("Confirm", "Are you sure you want to delete this spell from your list?", [
+	// 		{
+	// 			"text": "Confirm",
+	// 			"function": function() {
+	// 				deleteSpell(thisthis);
+	// 			}
+	// 		},
+	// 		{
+	// 			"text": "Cancel",
+	// 			"function": function() {
+	// 				wave.dialog.close();
+	// 			}
+	// 		}
+	// 	])
+	// });
+}
+
+function addItemToList(itemObj, index) {
+	function prop(text) {
+		return "<div class='tag'><p>" + text + "</p></div>"
+	}
+	var properties = "";
+	if (itemObj.magic) {
+		properties += prop("Magic");
+	}
+	if (itemObj.maxCharges !== 0) {
+		properties += prop("Max charges: " + itemObj.maxCharges);
+	}
+	if (itemObj.weapon === true) {
+		properties += prop("Weapon")
+	}
+	if (itemObj.damageDie !== "") {
+		properties += prop("Damage die: " + itemObj.damageDie);
+	}
+	if (itemObj.light === true) {
+		properties += prop("Light");
+	}
+	if (itemObj.finess === true) {
+		properties += prop("Finess");
+	}
+	if (itemObj.twoHanded === true) {
+		properties += prop("Two-handed");
+	}
+	if (itemObj.heavy === true) {
+		properties += prop("Heavy");
+	}
+	if (itemObj.reach === true) {
+		properties += prop("Reach");
+	}
+	if (itemObj.throw !== "") {
+		properties += prop("Throw: " + itemObj.throw);
+	}
+	if (itemObj.vercitile !== "") {
+		properties += prop("Vercitile: " + itemObj.vercitile);
+	}
+	if (itemObj.ammunition !== "") {
+		properties += prop("Ammunition: " + itemObj.ammunition);
+	}
+	if (itemObj.melee === true) {
+		properties += prop("Melee weapon");
+	}
+	if (itemObj.ranged === true) {
+		properties += prop("Ranged weapon");
+	}
+	if (itemObj.loading === true) {
+		properties += prop("Loading");
+	}
+
+	var description = itemObj.description;
+	var desc = description.split("\n");
+	var out = "";
+	for (var i = 0; i < desc.length; ++i) {
+		var text = desc[i];
+		if (text === "") {
+			out += "<br>";
+		} else {
+			out += "<p>" + text + "</p>";
 		}
+	}
+	var note = "";
+	var colorGrad = "";
+	if (itemObj.magic === true && itemObj.weapon) {
+		note = "Magical weapon";
+		colorGrad = "background-color: #ff4e00;background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);"
+	} else if (itemObj.magic === true) {
+		note = "Magical item";
+		colorGrad = "background-color: #fbb034;background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);"
+	} else if (itemObj.weapon === true) {
+		note = "Weapon";
+		colorGrad = "background-color: #6b0f1a;background-image: linear-gradient(315deg, #6b0f1a 0%, #b91372 74%);"
+	} else {
+		note = "Normal item";
+		colorGrad = "background-color: #2a2a72;background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);"
+	}
+	var chargeControlls = "";
+	if (itemObj.magic === true) {
+		chargeControlls = "<div class='controll'><h1>Charge: </h1><button class='wave prime' onclick='addCharge(" + index + ")'><i class='material-icons'>add</i></button><h1 id='itemCharge" + index + "'>" + itemObj.charges + "</h1><button class='wave prime' onclick='removeCharge(" + index + ")'><i class='material-icons'>remove</i></button></div>"
+	}
+
+	$("#itemsList").append("<div class='item s2 rounded centerHorizontal' id='item" + index + "'><div class='shared'><div class='icon'><div class='circle' style='" + colorGrad + "'></div></div><div class='text'><div class='wrapper'><h1>" + itemObj.name + "</h1><p>" + note + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='controlls'><div class='controll'><h1>Quantity: </h1><button class='wave prime' onclick='addQuantity(" + index + ")'><i class='material-icons'>add</i></button><h1 id='itemQuantity" + index + "'>" + itemObj.quantity + "</h1><button class='wave prime' onclick='removeQuantity(" + index + ")'><i class='material-icons'>remove</i></button></div>" + chargeControlls + "</div><div class='text'>" + out + "</div><div class='actions'><button onclick='deleteItem(" + index + ")' icon-left='delete' class='wave del'>Delete</button></div></div></div>");
+
+	$("#item" + index).children(".shared").on("click", function(e) {
+		console.log("click")
+		e.stopPropagation();
+		t(this);
+	});
+
+	var thisthis = this;
+}
+
+function addQuantity(index) {
+	var item = itemObj[index];
+	var currentQuantity = item.quantity;
+	currentQuantity += 1;
+	itemObj[index]["quantity"] = currentQuantity;
+	$("#itemQuantity" + index).text(currentQuantity);
+	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("items").doc(item.__id).update({
+		quantity: currentQuantity
+	}).catch((e) => {
+		error(e);
+	})
+}
+
+function removeQuantity(index) {
+	var item = itemObj[index];
+	var currentQuantity = item.quantity;
+	currentQuantity -= 1;
+	itemObj[index]["quantity"] = currentQuantity;
+	$("#itemQuantity" + index).text(currentQuantity);
+	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("items").doc(item.__id).update({
+		quantity: currentQuantity
+	}).catch((e) => {
+		error(e);
 	});
 }
 
-function deleteSpell(here) {
-	var k = $(here).parent().parent().parent().attr("id");
-	var elementId = Number(k.replace("spell", ""));
-	var spellId = spellObj[elementId]["__id"];
-	userRef.collection("characters").doc(sessionStorage.getItem("::saved") + "/spells/" + spellId).delete().catch(function(e){error(e)});
-	$(here).parent().parent().parent().remove();
-	note.open("delete", "Spell deleted", 2000);
+function addCharge(index) {
+	var item = itemObj[index];
+	var currentCharge = item.charges;
+	currentCharge += 1;
+	itemObj[index]["charges"] = currentCharge;
+	$("#itemCharge" + index).text(currentCharge);
+	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("items").doc(item.__id).update({
+		charges: currentCharge
+	}).catch((e) => {
+		error(e);
+	});
+}
+
+function removeCharge(index) {
+	var item = itemObj[index];
+	var currentCharge = item.charges;
+	currentCharge -= 1;
+	itemObj[index]["charges"] = currentCharge;
+	$("#itemCharge" + index).text(currentCharge);
+	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("items").doc(item.__id).update({
+		charges: currentCharge
+	}).catch((e) => {
+		error(e);
+	});
+}
+
+function deleteSpell(elementId) {
+	wave.dialog.open("Confirm", "Are you sure you want to delete this spell?", [
+		{
+			"text": "Accept",
+			"function": function() {
+				var spellId = spellObj[elementId]["__id"];
+				console.log(spellId);
+				userRef.collection("characters").doc(sessionStorage.getItem("::saved") + "/spells/" + spellId).delete().catch(function(e){error(e)});
+				$("#spell" + elementId).remove();
+				note.open("delete", "Spell deleted", 2000);
+			}
+		},
+		{
+			"text": "Cancel",
+			"function": function() {
+				wave.dialog.close();
+			}
+		}
+	]);
+}
+
+function deleteItem(elementId) {
+	wave.dialog.open("Confirm", "Are you sure you want to delete this item", [
+		{
+			"text": "Accept",
+			"function": function() {
+				var itemId = itemObj[elementId]["__id"];
+				userRef.collection("characters").doc(sessionStorage.getItem("::saved") + "/items/" + itemId).delete().catch(function(e){error(e)});
+				$("#item" + elementId).remove();
+				note.open("delete", "Item deleted", 2000);
+			}
+		},
+		{
+			"text": "Cancel",
+			"function": function() {
+				wave.dialog.close();
+			}
+		}
+	])
 }
 
 function loadCharacter(i) {
@@ -246,18 +436,16 @@ async function del() {
 	if (usedInCampaigns[0] === undefined) {
 		progress.hide();
 
-		if (confirm("Are you sure you want to delete this character?")) {
-			if (confirm("Are you realy sure?")) {
-				progress.show();
-				firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").delete().then(function() {
-					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).delete().then(function() {
-						progress.hide();
-						note.open("delete", "Character deleted", 2000);
-						openPage("characterList");
-					}).catch(function(e){error(e)});
+		wave.dialog.confirm("Are you sure you want to delete this character? This character will be lost forever.", () => {
+			progress.show();
+			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").delete().then(function() {
+				userRef.collection("characters").doc(sessionStorage.getItem("::saved")).delete().then(function() {
+					progress.hide();
+					note.open("delete", "Character deleted", 2000);
+					openPage("characterList");
 				}).catch(function(e){error(e)});
-			}
-		}
+			}).catch(function(e){error(e)});
+		})
 	} else {
 		alert("This character is in use in a campaign");
 		progress.hide();
@@ -303,6 +491,9 @@ function dupe() {
 	}
 }
 
+addSpellIndex = 5000;
+addItemIndex = 5000;
+
 function addSpell() {
 	var spellId = genId();
 	if ($("#level").val() !== "") {
@@ -323,10 +514,41 @@ function addSpell() {
 
 		userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("spells").add(spellObj).catch(function(e){error(e)});;
 
-		addSpellToList(spellObj);
+		addSpellToList(spellObj, addSpellToList);
+		addSpellIndex += 1;
 	} else {
-		alert("You didn't select a level");
+		alert("You didn't select a spell level");
 	}
+}
+
+function addItem() {
+	var itemId = genId();
+	var newItemObj = {
+		name: $("#itemName").val(),
+		magic: $(".magic").hasClass("selected"),
+		description: $("#itemDescription").val(),
+		maxCharges: Number($("#itemCharges").val()),
+		charges: Number($("#itemCharges").val()),
+		quantity: Number($("#itemCount").val()),
+		weapon: $("#itemWeapon").hasClass("selected"),
+		damageDie: $("#itemDamageDie").val(),
+		light: $("#itemLight").hasClass("selected"),
+		finess: $("#itemFiness").hasClass("selected"),
+		twoHanded: $("#itemTwoHanded").hasClass("selected"),
+		heavy: $("#itemHeavy").hasClass("selected"),
+		reach: $("#itemReach").hasClass("selected"),
+		throw: $("#itemThrow").val(),
+		vercitile: $("#itemVercitile").val(),
+		ammunition: $("#itemAmmunition").val(),
+		melee: $("#itemMelee").hasClass("selected"),
+		ranged: $("#itemRanged").hasClass("selected"),
+		loading: $("#itemLoading").hasClass("selected")
+	}
+	itemObj[addItemIndex] = newItemObj;
+	itemObj[addItemIndex]["__id"] = itemId;
+	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("items").doc(itemId).set(newItemObj).catch(e => {error(e)});
+	addItemToList(newItemObj, addItemIndex);
+	addItemIndex += 1;
 }
 
 var inputs = [
@@ -371,16 +593,13 @@ var modifiers = [
 ]
 
 var spellObj = {};
+var itemObj = {};
 
 async function querySpells() {
-	console.log("Query spells")
 	progress.show();
 	var spellArray = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("level", "desc").orderBy("name", "desc"));
 
-	console.log(spellArray);
-	console.log(spellArray);
-
-	for (var i = 0; i < spellArray.length; ++i) {
+	for (var i = 0; i < spellArray.length; i++) {
 		addSpellToList(spellArray[i], i);
 		spellObj[i] = spellArray[i];
 	}
@@ -388,10 +607,20 @@ async function querySpells() {
 	progress.hide();
 }
 
+async function queryItems() {
+	var itemArray = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("items").orderBy("name", "desc"));
+
+	for (var i = 0; i < itemArray.length; i++) {
+		addItemToList(itemArray[i], i);
+		itemObj[i] = itemArray[i];
+	}
+}
+
 async function onload() {
 	loader.show();
 	await loadCharacter(sessionStorage.getItem("::openCharacter"));
 	await querySpells();
+	await queryItems();
 	loader.hide();
 }
 
@@ -414,11 +643,12 @@ function saveOptions() {
 var onExit = function() {
 	inputCard.close();
 }
-currentSlide = 1;
+currentSlide = 0;
 slideNames = {
-	0: "Spells",
-	1: "Character sheet",
-	2: "Inventory"
+	0: "Character sheet",
+	1: "Inventory",
+	2: "Spells",
+	3: "Settings"
 }
 
 function slideLeft() {

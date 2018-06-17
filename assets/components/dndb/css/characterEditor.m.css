@@ -9,20 +9,20 @@
 	font-size: 3rem;
 }
 
-.spells .addSpell {
+.itemList .addItem {
 	width: 90%;
 }
 
-.addSpell .title h1 {
+.addItem .title h1 {
 	font-size: 4em;
 }
 
-.addSpell .spellName input {
+.addItem .spellName input {
 	width: 98%;
 	font-size: 3em;
 }
 
-.addSpell .select h1 {
+.addItem .select h1 {
 	font-size: 3.4em;
 }
 
@@ -30,29 +30,33 @@
 	font-size: 3.4em;
 }
 
-.addSpell textarea {
+.addItem textarea {
 	font-size: 2.5em;
 }
 
-.addSpell .confirm h1 {
+.addItem .confirm h1 {
 	font-size: 3.5em;
 }
 
-.spellList .spell {
+.itemList .item {
 	width: 90%;
 }
 
-.spell .shared h1 {
+.item .shared h1 {
 	font-size: 4em;
 }
 
-.spell p {
+.item p {
 	font-size: 2.4em;
 }
 
-.spellList .spell.open {
+.itemList .item.open {
 	width: 100%;
 	border-radius: 0vh;
+}
+
+.itemList .item .controlls .controll h1 {
+	font-size: 2.4rem;
 }
 
 .characterInfo {

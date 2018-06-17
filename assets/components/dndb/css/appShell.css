@@ -17,6 +17,26 @@ h1, p {
 	padding: 0;
 }
 
+h1, p, input, textarea {
+	font-family: var(--font);
+}
+
+input, textarea {
+	border: 2px solid rgb(0,128,255);
+	background-color: transparent;
+	border-radius: 1vh;
+	outline: 0;
+}
+
+input::placeholder {
+    color: rgb(0,128,255);
+    opacity: 1;
+}
+
+input::-ms-input-placeholder {
+	color: rgb(0,128,255);
+}
+
 .noMargin {
 	margin: 0;
 }
@@ -120,7 +140,7 @@ h1, p {
 	height: 100vh;
 	background-color: white;
 	transition: 200ms all cubic-bezier(0.4, 0.0, 0.6, 1);
-	left: -31vw;
+	left: -35vw;
 }
 
 .sidebar.open {

@@ -1,0 +1,19 @@
+.wave--dialogBackground .wave--dialog {
+	width: 95vw;
+	min-width: 280px;
+	line-height: 2rem;
+}
+
+.wave--dialogBackground .wave--dialog .wave--head .wave--title {
+	font-size: 3.5rem;
+	width: 90%;
+}
+
+.wave--dialogBackground .wave--dialog .wave--content p {
+	font-size: 3rem;
+	width: 90%;
+}
+
+.wave--dialogBackground .wave--dialog .wave--actions button {
+	font-size: 2.4rem;
+}

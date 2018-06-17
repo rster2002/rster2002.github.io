@@ -8,9 +8,9 @@
 }
 
 .slider .sliding {
-	width: 200vw;
+	width: 400vw;
 	height: 100%;
-	margin-left: -100vw;
+	margin-left: -0vw;
 	transition: 350ms all cubic-bezier(0.4, 0.0, 0.6, 1);
 }
 
@@ -113,66 +113,70 @@
 	width: 100%;
 }
 
-.spells .addSpell {
+.addItem {
 	width: 60%;
 	display: inline-block;
 	background-color: white;
 	border-radius: 1vh;
 }
 
-.spells .addSpell div {
+.addItem div {
 	display: inline-block;
 }
 
-.addSpell .title {
+.addItem .title {
 	width: 100%;
 }
 
-.addSpell .title h1 {
+.addItem .title h1 {
 	width: 98%;
 	margin-left: 2%;
 }
 
-.addSpell .spellName {
+.addItem .spellName {
 	width: 100%;
 	height: 9vh;
 }
 
-.addSpell .spellName input {
-	width: 98%;
+.addItem .spellName input {
+	width: 95%;
 	font-size: 1.5em;
 }
 
-.addSpell .components {
+.addItem .components {
 	height: 9vh;
 	width: 100%;
 }
 
-.addSpell .description {
+.addItem .description {
 	height: 40vh;
 	width: 100%;
 }
 
-.addSpell .description textarea {
-	width: 90%;
+.addItem .description textarea {
+	width: 95%;
 	height: 90%;
 	resize: none;
 	font-size: 1.3em;
 }
 
-.addSpell .confirm {
+.addItem .confirm {
 	height: 9vh;
 	width: 100%;
 	text-align: center;
 	cursor: pointer;
 }
 
-.addSpell .confirm:hover {
+.addItem .confirm:hover {
 	background-color: rgb(235, 235, 235);
 }
 
+.addItem .props {
+	width: 100%;
+}
 
-.addSpell .other {
+
+.addItem .other {
 	height: 9vh;
 	width: 100%;
 }
@@ -186,9 +190,9 @@
 }
 
 .select.input input {
-	height: 80%;
+	height: 90%;
 	position: relative;
-	top: 10%;
+	top: 5%;
 	left: 2%;
 }
 
@@ -196,25 +200,25 @@
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-.addSpell .select {
-	padding: 1%;
+.addItem .select {
+	padding: 1vh;
 	background-color: rgb(235, 235, 235);
-	float: left;
-	margin-left: 2%;
+	/* float: left; */
+	margin-left: 1%;
 	cursor: pointer;
 	margin-top: .5%;
 	border-radius: 1vh;
 }
 
-.addSpell .select h1 {
+.addItem .select h1 {
 	font-size: 1.1em;
 }
 
-.spellList {
+.itemList {
 	width: 100%;
 }
 
-.spellList .spell {
+.itemList .item {
 	margin-top: 1%;
 	width: 60%;
 	max-height: 10vh;
@@ -224,25 +228,25 @@
 	border-radius: 1vh;
 }
 
-.spellList .spell .shared {
+.itemList .item .shared {
 	height: 10vh;
 	width: 100%;
 	cursor: pointer;
 }
 
-.spellList .spell.open .shared {
+.itemList .item.open .shared {
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 	border-bottom: 1px solid rgb(235, 235, 235);
 }
 
-.spellList .spell .shared .icon {
+.itemList .item .shared .icon {
 	height: 10vh;
 	width: 10vh;
 	float: left;
 }
 
-.spellList .spell .shared .icon .circle {
+.itemList .item .shared .icon .circle {
 	width: 70%;
 	height: 70%;
 	background-color: #00BCD4;
@@ -252,27 +256,49 @@
 	left: 15%;
 }
 
-.spellList .spell .shared .text {
+.itemList .item .shared .text {
 	height: 10vh;
 	width: calc(100% - 10vh);
 	float: left;
 }
 
-.spellList .spell .shared .text .wrapper {
+.itemList .item .shared .text .wrapper {
 	height: 70%;
 	position: relative;
 	top: 15%;
 }
 
-.spellList .spell .shared .text .wrapper h1 {
+.itemList .item .shared .text .wrapper h1 {
 	width: 100%;
 }
 
-.spellList .spell .shared .text .wrapper p {
+.itemList .item .shared .text .wrapper p {
 	width: 100%;
 }
 
-.spellList .spell .content {
+.itemList .item .controlls {
+	width: 100%;
+	height: 6vh;
+	margin-top: .5%;
+}
+
+.itemList .item .controlls .controll {
+	width: 100%;
+	height: 100%;
+}
+
+.itemList .item .controlls .controll button {
+	float: left;
+}
+
+.itemList .item .controlls .controll h1 {
+	float: left;
+	margin-left: 2%;
+	margin-right: 2%;
+	font-weight: 100;
+}
+
+.itemList .item .content {
 	opacity: 0;
 	display: inline-block;
 	padding: 1%;
@@ -280,7 +306,7 @@
 	transition: 150ms all cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-.spellList .spell .actions button {
+.itemList .item .actions button {
 	padding: 0.5%;
     float: right;
     margin-right: 1%;
@@ -289,30 +315,30 @@
 
 /* Spell open */
 
-.spellList .spell.open {
+.itemList .item.open {
 	display: inline-block;
 	width: 70%;
 	transition: 295ms all cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-.spellList .spell.h {
+.itemList .item.h {
 	max-height: 1000vh;
 	transition: 295ms all cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-.spellList .spell.open .content.open {
+.itemList .item.open .content.open {
 	opacity: 1;
 	transition: 150ms all cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 /* Content */
 
-.spell .tags {
+.item .tags {
 	width: 100%;
 	display: inline-block;
 }
 
-.spell .tags .tag {
+.item .tags .tag {
 	padding: 1%;
 	background-color: rgb(235, 235, 235);
 	border-radius: 1vh;
@@ -321,13 +347,13 @@
 	margin-left: .5%;
 }
 
-.spell .content .text {
+.item .content .text {
 	width: 98%;
 	padding: 1%;
 	display: inline-block;
 }
 
-.spell .content .text p {
+.item .content .text p {
 	white-space: normal;
 }
 
@@ -396,9 +422,10 @@
 }
 
 .characterOptions {
-	width: 50%;
+	width: 935px;
 	position: relative;
-	left: 25%;
+	background-color: white;
+	border-radius: 1vh;
 }
 
 .characterOptions .r {
@@ -406,21 +433,46 @@
 	width: 100%;
 }
 
-.characterOptions .r p {
-	margin: 0;
+.characterOptions .r .text {
+	height: 100%;
+	width: 70%;
 	float: left;
 }
 
-.characterOptions .r button {
+.characterOptions .r .text p {
+	width: 98%;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.characterOptions .r .controll {
+	float: left;
+	width: 30%;
+	height: 100%;
+}
+
+.characterOptions .r .controll button {
 	float: 0;
 	margin: 0;
-	float: right;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .characterOptions .r select {
-	float: right;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .characterBuilding p {
 	white-space: normal;
+}
+
+.items {
+	width: 100%;
 }

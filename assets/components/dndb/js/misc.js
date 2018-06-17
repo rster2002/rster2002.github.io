@@ -26,6 +26,9 @@ if (!DEV) {
 
 const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+function alert(text) {
+	wave.dialog.alert(text);
+}
 
 function onLoaded() {
 	loader.hide();

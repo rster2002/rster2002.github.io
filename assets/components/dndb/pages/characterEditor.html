@@ -11,7 +11,7 @@
 		</div>
 	</div>
 	<div class="buttons">
-		<div class="contr left" onclick="slideLeft()">
+		<div class="contr left faded" onclick="slideLeft()">
 			<i class="material-icons center">arrow_back_ios</i>
 		</div>
 		<div class="controll">
@@ -26,8 +26,89 @@
 	<div class="slider">
 		<div class="sliding">
 			<div class="slide" slide="0">
-				<div class="spells">
-					<div class="addSpell centerHorizontal shadow-1 rounded">
+				<div class="sheet">
+					<div class="characterContainer">
+
+					</div>
+				</div>
+			</div>
+			<div class="slide" slide="1">
+				<div class="itemList" id="itemsList">
+					<div class="addItem centerHorizontal shadow-1 rounded">
+						<div class="title">
+							<h1>Add item</h1>
+						</div>
+						<div class="spellName">
+							<input placeholder="Item name" id="itemName" class="center">
+						</div>
+						<div class="props">
+							<div class="select magic rounded">
+								<h1>Magic</h1>
+							</div>
+							<div class="select input maxCharges rounded">
+								<h1>Max charges</h1>
+								<input placeholder="Charges" id="itemCharges" type="number">
+							</div>
+							<div class="select input">
+								<h1>Quantity</h1>
+								<input placeholder="Count" id="itemCount" type="number">
+							</div>
+							<div class="select rounded" id="itemWeapon">
+								<h1>Weapon</h1>
+							</div>
+							<div class="select rounded" id="itemLight">
+								<h1>Light</h1>
+							</div>
+							<div class="select rounded" id="itemFiness">
+								<h1>Finess</h1>
+							</div>
+							<div class="select rounded" id="itemTwoHanded">
+								<h1>Two-handed</h1>
+							</div>
+							<div class="select rounded" id="itemHeavy">
+								<h1>Heavy</h1>
+							</div>
+							<div class="select rounded" id="itemReach">
+								<h1>Reach</h1>
+							</div>
+							<div class="select input rounded">
+								<h1>Damage die</h1>
+								<input placeholder="Count" id="itemDamageDie" type="text">
+							</div>
+							<div class="select input rounded">
+								<h1>Throw</h1>
+								<input placeholder="Count" id="itemThrow" type="text">
+							</div>
+							<div class="select input rounded">
+								<h1>Vercitile</h1>
+								<input placeholder="Count" id="itemVercitile" type="text">
+							</div>
+							<div class="select input rounded">
+								<h1>Ammunition</h1>
+								<input placeholder="Count" id="itemAmmunition" type="text">
+							</div>
+							<div class="select rounded" id="itemLoading">
+								<h1>Loading</h1>
+							</div>
+							<div class="select rounded" id="itemMelee">
+								<h1>Melee</h1>
+							</div>
+							<div class="select rounded" id="itemRanged">
+								<h1>Ranged</h1>
+							</div>
+						</div>
+						<div class="description">
+							<textarea id="itemDescription" class="center"></textarea>
+						</div>
+						<div class="confirm" onclick="addItem()">
+							<h1 class="center">Add</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slide" slide="2">
+				<div class="itemList" id="spellsListing">
+					<div class="addItem centerHorizontal shadow-1 rounded">
 						<div class="title">
 							<h1>Add spell</h1>
 						</div>
@@ -75,20 +156,41 @@
 							<h1 class="center">Add</h1>
 						</div>
 					</div>
-					<div class="spellList">
+					<div class="spellList itemList">
 
 					</div>
 				</div>
 			</div>
-			<div class="slide" slide="1">
-				<div class="sheet">
-					<div class="characterContainer">
-
+			<div class="slide" slide="3">
+				<div class="characterOptions shadow-1 centerHorizontal">
+					<div class="r">
+						<div class="text">
+							<p>Allow edit</p>
+						</div>
+						<div class="controll">
+							<select class="allowEdit wave">
+								<option value="0">Only me</option>
+								<option value="1">DM</option>
+							</select>
+						</div>
+					</div>
+					<div class="r">
+						<div class="text">
+							<p>Duplicate character</p>
+						</div>
+						<div class="controll">
+							<button class="wave" onclick="dupe()" class="">Duplicate</button>
+						</div>
+					</div>
+					<div class="r">
+						<div class="text">
+							<p>Save character settings</p>
+						</div>
+						<div class="controll">
+							<button class="wave prime" onclick="saveOptions()">Save</button>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="slide" slide="2">
-
 			</div>
 		</div>
 	</div>
@@ -128,27 +230,7 @@
 			c(".spell");
 		});
 	</script>
-	<div class="characterInfo">
-		<p class="characterId"></p>
-	</div>
-	<div class="characterOptions">
-		<div class="r">
-			<p>Allow edit</p>
-			<select class="allowEdit">
-				<option value="0">Only me</option>
-				<option value="1">DM</option>
-			</select>
-		</div>
-		<div class="r">
-			<p>Save character options</p>
-			<button style="float: right;" onclick="saveOptions()">Save</button>
-		</div>
-		<div class="r">
-			<p>Duplicate character</p>
-			<button onclick="dupe()">Duplicate</button>
-		</div>
-	</div>
-	<div class="characterBuilding" style="display: none;">
+	<!-- <div class="characterBuilding" style="display: none;">
 		<h1>Ability scores</h1>
 		<p>You can get your ability scores in three different ways.</p>
 		<br />
@@ -167,7 +249,7 @@
 		<p>This is 10 + your perception skill.</p>
 		<h1>Initiative</h1>
 		<p>This is your dexterity modifier.</p>
-	</div>
+	</div> -->
 	<script>onLoaded();</script>
 	<div class="push"></div>
 </div>
