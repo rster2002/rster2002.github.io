@@ -231,7 +231,7 @@ async function a() {
 $(document).ready(function() {
 
 	var reqwavered = [
-		"https://fonts.googleapis.com/css?family=Roboto",
+		"https://fonts.googleapis.com/css?family=Roboto:300,400,500",
 		"https://fonts.googleapis.com/icon?family=Material+Icons"
 	];
 

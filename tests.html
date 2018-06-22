@@ -6,59 +6,35 @@
 		<script src="assets/js/library/jquery.js"></script>
 		<script src="assets/js/library/material-wave/wave.js"></script>
 		<script>
-			$(document).ready(() => {
-				wave.config({path: "assets/js/library/material-wave/"}).import(["buttons"]).then(() => {
-					wave.engine((engine) => {
-						engine.buttons((comp) => {
-							comp.corners([
-								{
-									"place": "topLeft",
-									"shape": "cut",
-									"size": "5px"
-								}
-							]);
-						});
-
-						engine.custom(".test", (comp) => {
-							comp.corners([
-								{
-									"place": "topRight",
-									"shape": "cut",
-									"size": "10px"
-								},
-								{
-									"place": "bottomLeft",
-									"shape": "cut",
-									"size": "10px"
-								},
-								{
-									"place": "topLeft",
-									"shape": "cut",
-									"size": "40%"
-								},
-								{
-									"place": "bottomRight",
-									"shape": "cut",
-									"size": "40%"
-								}
-							]);
-						})
-					});
-				});
+			$(document).ready(function() {
+				wave.config({
+					path: "assets/js/library/material-wave/"
+				}).import([
+					"buttons",
+					"menu"
+				])
 			});
 		</script>
-		<style>
-			.test {
-				width: 100px;
-				height: 100px;
-				background-color: red;
-			}
-		</style>
 	</head>
 	<body>
-		<button class="wave prime">Hello World</button>
-		<div class="test">
-
+		<div class="wave menu" id="menu">
+			<a>Sort by name</a>
+			<a>Sort by last modified</a>
+			<a>Sort by race</a>
+			<a>Sort by class</a>
+			<a>Sort by dupe</a>
 		</div>
+		<button id="btn" class="wave icon">sort</button>
+		<p id="output"></p>
+		<script>
+			$("#btn").on("click", function() {
+				$(this).openMenu("#menu");
+			});
+
+			$("a").on("click", function() {
+				var t = $(this).text();
+				$("#output").text(t);
+			})
+		</script>
 	</body>
 </html>

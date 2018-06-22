@@ -308,13 +308,20 @@ input::-ms-input-placeholder {
 	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 250ms;
 }
 
+.cardWrapper .card .colorWrapper {
+	height: 2vh;
+	width: 100%;
+}
+
 .cardWrapper .card .color {
 	background-color: #36096d;
 	background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
-	width: 100%;
+	width: 95%;
 	height: 1vh;
-	border-top-left-radius: 1vh;
-	border-top-right-radius: 1vh;
+	border-radius: 0.5vh;
+	top: 0.5vh;
+	left: 2.5%;
+	position: relative;
 }
 
 .cardWrapper .card .content {

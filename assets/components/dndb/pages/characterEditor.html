@@ -10,7 +10,7 @@
 			<h1 class="center noMargin" style="text-align: center;" id="slideTitle">Character sheet</h1>
 		</div>
 	</div>
-	<div class="buttons">
+	<div class="buttons wave default">
 		<div class="contr left faded" onclick="slideLeft()">
 			<i class="material-icons center">arrow_back_ios</i>
 		</div>
@@ -21,6 +21,19 @@
 		</div>
 		<div class="contr right" onclick="slideRight()">
 			<i class="material-icons center">arrow_forward_ios</i>
+		</div>
+	</div>
+	<div class="buttons wave mobile">
+		<div class="contr left faded" onclick="slideLeft()">
+			<i class="material-icons center">arrow_back_ios</i>
+		</div>
+		<div class="contr right" onclick="slideRight()">
+			<i class="material-icons center">arrow_forward_ios</i>
+		</div>
+		<div class="controll">
+			<div class="button left" onclick="saveCharacter(true)"><h1 class="noMargin">Save</h1></div>
+			<div class="button" onclick="del()"><h1 class="noMargin">Delete</h1></div>
+			<div class="button right" onclick="openPage('characterList')"><h1 class="noMargin">Back</h1></div>
 		</div>
 	</div>
 	<div class="slider">
@@ -168,9 +181,21 @@
 							<p>Allow edit</p>
 						</div>
 						<div class="controll">
-							<select class="allowEdit wave">
+							<select id="allowEdit" class="wave">
 								<option value="0">Only me</option>
 								<option value="1">DM</option>
+							</select>
+						</div>
+					</div>
+					<div class="r">
+						<div class="text">
+							<p>Allow view</p>
+						</div>
+						<div class="controll">
+							<select id="allowView" class="wave">
+								<option value="0">Only me</option>
+								<option value="1">Only DM</option>
+								<option value="2">Everyone in campaign</option>
 							</select>
 						</div>
 					</div>

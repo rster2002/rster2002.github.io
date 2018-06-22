@@ -5,7 +5,9 @@ $(document).ready(() => {
 		"shadow",
 		"buttons",
 		"select",
-		"dialog"
+		"dialog",
+		"html",
+		"menu"
 	]).then(() => {
 		wave.engine((engine) => {
 			engine.custom(".fab", (comp) => {

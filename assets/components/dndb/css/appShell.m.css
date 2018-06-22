@@ -69,14 +69,20 @@ p {
 	padding-bottom: 0.5vh;
 }
 
+/* .cardWrapper .card .colorWrapper {
+	height: 2vh;
+	width: 100%;
+}
+
 .cardWrapper .card .color {
 	background-color: #a4508b;
 	background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
-	width: 100%;
+	width: 90%;
 	height: 1vh;
-	border-top-left-radius: 1vh;
-	border-top-right-radius: 1vh;
-}
+	border-radius: 0.5vh;
+	top: 0.5vh;
+	left: 10%;
+} */
 
 .cardWrapper .card h1 {
 	font-size: 4vh;
@@ -88,4 +94,21 @@ p {
 .cardWrapper .card p {
 	width: 95%;
 	font-size: 2vh;
+}
+
+.buttons.mobile {
+	width: 100%;
+}
+
+.buttons.mobile .contr {
+	width: 50%;
+	float: left;
+}
+
+.buttons.mobile .contr.right {
+	margin-left: 0;
+}
+
+.button.mobile .contr.left {
+	margin-right: 0;
 }

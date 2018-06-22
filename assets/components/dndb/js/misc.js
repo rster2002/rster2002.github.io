@@ -140,6 +140,7 @@ function openPage(page) {
 	$(".page.innerPage").remove();
 	$(".page").load("../assets/components/dndb/pages/" + page + ".html");
 	sessionStorage.setItem("::openPage", page);
+	$("#menuOption").html("");
 	sidebar.close();
 	if (onExit !== null) {
 		onExit();

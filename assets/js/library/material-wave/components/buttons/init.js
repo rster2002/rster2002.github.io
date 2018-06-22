@@ -11,6 +11,16 @@ elementLoaded("button.wave", function(here) {
 				$(this).addClass("flat");
 			}
 
+			if (!$(this).hasClass("icon")) {
+				var t = $(this).text();
+				var rtrnt = t.toUpperCase();
+				$(this).text(rtrnt);
+			} else {
+				var t = $(this).text();
+				var rtrnt = "<i class='material-icons'>" + t + "</i>";
+				$(this).html(rtrnt);
+			}
+
 			if ($(this).attr("icon-right") !== undefined) {
 				$(this).append("<i class='material-icons right'>" + $(this).attr("icon-right") + "</i>")
 			}

@@ -13,26 +13,6 @@ function ctrlS() {
 	}
 }
 
-// sessionStorage.setItem("current", "0");
-
-// $(".innerPage").scroll(function () {
-// 	inputCard.peek.open();
-// 	var scrolled = $(".innerPage").scrollTop();
-// 	var height = $(".characterSheet").css("height");
-// 	var height = height.replace("px", "");
-// 	var tumble = Number(height);
-
-// 	if (scrolled < tumble && sessionStorage.getItem("current") !== "1") {
-// 		inputCard.slideUp("Creating a character");
-// 		inputCard.loadContent($(".characterBuilding").html(), "Down", "characterBuilding");
-// 		sessionStorage.setItem("current", "1");
-// 	} else if (scrolled > tumble && sessionStorage.getItem("current") !== "2") {
-// 		inputCard.slideDown("Add a spell");
-// 		inputCard.loadContent("<p>Spell form</p>", "Down");
-// 		sessionStorage.setItem("current", "2");
-// 	}
-// });
-
 allowSave = false;
 
 function localError(error) {
@@ -400,6 +380,7 @@ function loadCharacter(i) {
 					var data = doc.data();
 					l(data);
 					allowSave = true;
+					window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
 					progress.hide();
 				} else {
 					error("Couldn't find this character in the database");
@@ -636,7 +617,8 @@ function calcMod(selector, modSelector) {
 
 function saveOptions() {
 	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).update({
-		allowEdit: $(".allowEdit").val()
+		allowEdit: $("#allowEdit").val(),
+		allowView: $("#allowView").val()
 	}).catch(function(e){error(e)});
 }
 
