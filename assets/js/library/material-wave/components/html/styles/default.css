@@ -5,3 +5,11 @@
 .wave.mobile {
 	display: none;
 }
+
+.waveRuler {
+	display: none;
+	height: 100vh;
+	width: 100vw;
+	position: fixed;
+	z-index: -1;
+}

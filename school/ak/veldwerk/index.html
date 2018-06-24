@@ -20,7 +20,6 @@
         <div class="content page1">
             <h1>Inleiding</h1>
             <p>In dit veldwerk ga je onderzoek doen naar de stad van de zon, een wijk in Heerhugowaard. Je doet dit door opdrachten te doen.</p>
-            <input class="wave" placeholder="Je naam" />
         </div>
         <div class="content">
             <h1>Opdracht 1</h1>
@@ -72,29 +71,55 @@
               src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBYwImjxZnBRJSi8Cr7rb6Uwl7TkNiOhbs
                 &q=52.647051+4.808868" allowfullscreen>
             </iframe>
-            <p>Deze plaats hier ligt in het midden van de stad van de zon. Op basis van wat je om je heen ziet, waarom zou dat zo zijn.</p>
+            <p>Deze plaats hier ligt centraal in de stad van de zon. Op basis van wat je om je heen ziet, waarom zou dat zo zijn.</p>
             <input class="wave" placeholder="Je antwoord" />
             <p class="ant2" style="color: #81B59D;display: none;">Het zijn basis voorzieningen waardoor je voor het meeste niet zo ver hoeft te gaan om iets te halen.</p>
             <button class="wave" onclick="$('.ant2').show();">Antwoorden</button>
+			<p>Wat zal het verzorgingsgebied van deze voorzieningen zijn? Middenwaard (een groot winkel centrum) is op 10 minuten rijden.</p>
+			<div class="radio">
+				<input class="wave" type="checkbox" /><p>Heel Heerhugowaard en alkmaar</p>
+				<input class="wave" type="checkbox" /><p>Heel Heerhugowaard</p>
+				<input class="wave" type="checkbox" id="ant3" /><p>De stad van de zon en wijken erom heen</p>
+				<input class="wave" type="checkbox" /><p>Alleen de stad van de zon</p>
+			</div>
+			<p class="ant3" style="display: none;">Antwoord: 64, er zijn 4 palen met elk 16 zonnepanelen.</p>
+			<button class="wave" id="btn3">Antwoorden</button>
+			<script>
+				$("#btn3").on("click", () => {
+					if ($("#ant3").is(":checked")) {
+                        $(".ant3").css("color", "#45b001");
+                        $(".ant3").text("Dat is goed!");
+                        $(".ant3").show();
+                        score += 1;
+                        $("#score").text("Score: " + score);
+                        $("#btn3").prop("disabled", true);
+                    } else {
+                        $(".ant3").css("color", "#f24141");
+                        $(".ant3").text("Dat is niet goed.");
+						$("#btn3").prop("disabled", true);
+                        $(".ant3").show();
+                    }
+				})
+			</script>
         </div>
         <div class="content">
             <h1>Opdracht 3</h1>
-            <p>Deze flat heeft geen eigen zonnepanelen. Waar zou deze flat de energie vandaan halen?</p>
-            <iframe
+            <p>Wat valt er op als je naar de verschillende gebouwen kijkt in de stad van de zon?</p>
+            <!-- <iframe
               width="100%"
               height="450"
               frameborder="0" style="border:0"
               src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBYwImjxZnBRJSi8Cr7rb6Uwl7TkNiOhbs
                 &q=Hof+van+Ra,+Heerhugowaard" allowfullscreen>
-            </iframe>
-            <div class="radio">
-                <input class="wave" type="checkbox" /><p>Van een centrale</p>
-                <input class="wave" type="checkbox" /><p>Van andere huizen</p>
-                <input class="wave" type="checkbox" /><p>Van de zonnepanelen op de dijk</p>
-            </div>
+            </iframe> -->
+            <input class="wave" placeholder="Je antwoord" />
+			<p id="ant4" style="color: #81B59D;display:none;">Er zijn veel verschillende stijlen architectuur.</p>
+			<button class="wave" id="$('#ant4').show()">Antwoorden</button>
         </div>
         <div class="content">
             <h1>Opdracht 4</h1>
+			<p>Zoek op internet op of er een huis tekoop staat in de stad van de zon. Als je er een heb gevonden, verklaar dan de prijs en waarom die hoog of juist laag is.</p>
+			<input class="wave" placeholder="Je antwoord" />
         </div>
         <div class="content">
             <h1>Je score</h1>

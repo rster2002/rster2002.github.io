@@ -37,6 +37,10 @@ input::-ms-input-placeholder {
 	color: rgb(0,128,255);
 }
 
+html div.wave.menu a {
+	font-size: 2vh;
+}
+
 .noMargin {
 	margin: 0;
 }

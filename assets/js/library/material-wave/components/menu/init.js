@@ -33,10 +33,6 @@ function waveCloseMenu() {
 	selector.hide();
 }
 
-function waveRemovePx(intt) {
-	return Number(intt.replace("px", ""));
-}
-
 function waveCalculatePosition(here, hook) {
 	var width, widthMenu, distanceWidth, left, top;
 	if ($(hook).hasClass("alignRight")) {

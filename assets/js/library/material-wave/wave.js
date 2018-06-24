@@ -23,6 +23,10 @@ waveEngineSettings = {};
 // 	}
 // }
 
+function waveRemovePx(intt) {
+	return Number(intt.replace("px", ""));
+}
+
 waveModulator = {
 	corners: function(s) {
 		size = {
