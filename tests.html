@@ -12,21 +12,50 @@
 					"path": "assets/js/library/material-wave/"
 				}).import([
 					"bar",
-					"buttons"
+					"buttons",
+					"card",
+					"grid"
 				]);
 			})
 		</script>
 	</head>
 	<body style="overflow: hidden;">
+		<style>
+			.card {
+				float: left;
+			}
+		</style>
 		<div class="wave top bar shadow">
 			<button>menu</button>
 			<h1>My awesome app</h1>
 			<button class="right">filter_list</button>
 		</div>
-		<div class="wave page" style="padding: 24px;width: calc(100% - 48px)">
-			<button class="wave prime">Prime</button>
-			<button class="wave">Flat</button>
-			<button class="wave fab">fingerprint</button>
+		<div class="wave page grid" style="width: 100%">
+			<div class="wave card m12 t6 d3">
+				<div class="title">
+					<h1>Hello World</h1>
+					<p>by Bjørn Reemer</p>
+				</div>
+				<div class="content">
+					<p>This is an card</p>
+				</div>
+				<div class="actions">
+					<button>Edit</button>
+					<button>Change</button>
+				</div>
+			</div>
+			<div class="wave card m12 t6 d3">
+				<div class="title">
+					<h1>Hello World</h1>
+					<p>by Bjørn Reemer</p>
+				</div>
+				<div class="content">
+					<p>This is an card</p>
+				</div>
+				<div class="actions">
+					<button>Edit</button>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

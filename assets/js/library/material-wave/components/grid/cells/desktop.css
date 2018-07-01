@@ -1,0 +1,59 @@
+div.wave.grid .d12 {
+	margin: 24px;
+	width: calc(100% - 48px);
+}
+
+div.wave.grid .d11 {
+	margin: 24px;
+	width: calc(83.3333333333% - 48px);
+}
+
+div.wave.grid .d10 {
+	margin: 24px;
+	width: calc(83.3333333333% - 48px);
+}
+
+div.wave.grid .d9 {
+	margin: 24px;
+	width: calc(75% - 48px);
+}
+
+div.wave.grid .d8 {
+	margin: 24px;
+	width: calc(66.6666666667% - 48px);
+}
+
+div.wave.grid .d7 {
+	margin: 24px;
+	width: calc(58.3333333333% - 48px);
+}
+
+div.wave.grid .d6 {
+	margin: 24px;
+	width: calc(50% - 48px);
+}
+
+div.wave.grid .d5 {
+	margin: 24px;
+	width: calc(41.6666666667% - 48px);
+}
+
+div.wave.grid .d4 {
+	margin: 24px;
+	width: calc(33.333333333333% - 48px);
+}
+
+div.wave.grid .d3 {
+	margin: 24px;
+	width: calc(25% - 48px);
+}
+
+div.wave.grid .d2 {
+	margin: 24px;
+	width: calc(18.666666666666% - 48px);
+}
+
+div.wave.grid .d1 {
+	margin: 24px;
+	width: calc(8.333333333333% - 48px);
+}
