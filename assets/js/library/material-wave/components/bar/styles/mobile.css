@@ -2,6 +2,12 @@
 	height: 56px;
 }
 
+.wave.page {
+	height: calc(100% - 56px);
+	width: 100%;
+	overflow-y: auto;
+}
+
 .wave.top.bar > .section {
     height: 56px;
     width: 56px;
