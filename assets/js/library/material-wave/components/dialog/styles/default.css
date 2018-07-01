@@ -42,6 +42,8 @@
 	transform: translate(-50%, -50%);
 	font-size: 1.25rem;
 	letter-spacing: .0125em;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
 }
 
 .wave--dialogBackground .wave--dialog .wave--content {
@@ -52,6 +54,7 @@
 
 .wave--dialogBackground .wave--dialog .wave--content p {
 	color: rgba(0,0,0,.7);
+	font-family: 'Roboto', sans-serif;
 }
 
 .wave--dialogBackground .wave--dialog .wave--actions {

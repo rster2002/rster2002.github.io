@@ -34,17 +34,18 @@
 }
 
 .wave--input > p {
+	font-family: "Roboto", sans-serif;
 	color: #424242;
 	position: absolute;
 	margin-top: 0%;
 	font-size: 20px;
-	left: 4.5%;
+	/* left: 4.5%; */
 	z-index: 1;
 	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
 }
 
 .wave--input > p.move {
-	margin-top: -1.7%;
+	margin-top: -1%;
 	font-size: 15px;
 	color: #0080ff;
 	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;

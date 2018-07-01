@@ -2,39 +2,31 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title></title>
 		<script src="assets/js/library/jquery.js"></script>
 		<script src="assets/js/library/material-wave/wave.js"></script>
 		<script>
-			$(document).ready(function() {
+			$(document).ready(() => {
 				wave.config({
-					path: "assets/js/library/material-wave/"
+					"path": "assets/js/library/material-wave/"
 				}).import([
-					"buttons",
-					"menu"
-				])
-			});
-		</script>
-	</head>
-	<body>
-		<div class="wave menu" id="menu">
-			<a>Sort by name</a>
-			<a>Sort by last modified</a>
-			<a>Sort by race</a>
-			<a>Sort by class</a>
-			<a>Sort by dupe</a>
-		</div>
-		<button id="btn" class="wave icon">sort</button>
-		<p id="output"></p>
-		<script>
-			$("#btn").on("click", function() {
-				$(this).openMenu("#menu");
-			});
-
-			$("a").on("click", function() {
-				var t = $(this).text();
-				$("#output").text(t);
+					"bar",
+					"buttons"
+				]);
 			})
 		</script>
+	</head>
+	<body style="overflow: hidden;">
+		<div class="wave top bar shadow">
+			<button>menu</button>
+			<h1>My awesome app</h1>
+			<button class="right">filter_list</button>
+		</div>
+		<div class="wave page" style="padding: 24px;width: calc(100% - 48px)">
+			<button class="wave prime">Prime</button>
+			<button class="wave">Flat</button>
+			<button class="wave fab">fingerprint</button>
+		</div>
 	</body>
 </html>

@@ -41,3 +41,16 @@ function processInput(i) {
 		});
 	}
 }
+
+var colorFunction = function(color) {
+	if (typeof color.primary === "object") {
+		$(".wave--input:disabled > .bar .color").css("background-color", color["action"]);
+		$(".wave.top.bar button i").css("color", color["primary"]["front"]);
+		$(".wave.top.bar h1").css("color", color["primary"]["front"]);
+	} else {
+		$(".wave--input > .bar .color").css("background-color", color["action"]);
+		$(".wave--input > p").css("color", color["action"]);
+	}
+}
+
+waveColor.push(colorFunction);

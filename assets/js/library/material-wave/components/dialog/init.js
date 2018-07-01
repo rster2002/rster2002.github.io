@@ -49,3 +49,11 @@ wave["dialog"] = {
 		fn();
 	}
 }
+
+waveGlobalSettings.push({
+	"corners": function(a) {
+		if (a.shape === "rounded") {
+			$(".wave--dialogBackground .wave--dialog").css("border-radius", a.size);
+		}
+	}
+})

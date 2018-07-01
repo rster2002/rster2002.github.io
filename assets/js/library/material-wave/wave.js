@@ -8,9 +8,25 @@ waveEngineComponents = {
 		waveEngineSettings[se] = {changable: se};
 		activeComp = se;
 		fn(waveModulator);
+	},
+	global: function(fn) {
+		fn(waveGlobalModulator);
 	}
 };
 waveEngineSettings = {};
+waveGlobalSettings = [];
+
+waveGlobalModulator = {
+	"corners": function(a) {
+		for (var i = 0; i < a.length; i++) {
+			var b = a[i];
+			for (var p = 0; p < waveGlobalSettings.length; p++) {
+				var compFn = waveGlobalSettings[p]["corners"];
+				compFn(b);
+			}
+		}
+	}
+}
 
 // dev(false);
 //
