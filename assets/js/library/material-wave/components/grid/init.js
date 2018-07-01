@@ -11,8 +11,6 @@ async function loadCellStyles(url, media) {
 	// 	link.media = 'all';
 	// }
 	head.appendChild(link);
-
-	sessionStorage.setItem("wave--css", cssId);
 }
 
 loadCellStyles(waveFrom + "components/grid/cells/desktop.css", "all");
