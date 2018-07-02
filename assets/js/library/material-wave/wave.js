@@ -70,6 +70,14 @@ waveModulator = {
 				$(waveEngineSettings[activeComp]["changable"]).css(style);
 			}
 		}
+
+		if (rule.shape === "rounded") {
+			if (rule.place === "all") {
+				$(waveEngineSettings[activeComp]["changable"]).css({
+					"border-radius": rule.size
+				});
+			}
+		}
 	}
 }
 

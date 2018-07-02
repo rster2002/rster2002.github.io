@@ -2,6 +2,7 @@
 
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title id="pageTitle">Dungeons and Dragons online</title>
 		<link href="manifest.json" rel="manifest" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -78,7 +79,17 @@
 		<div class="loader">
 			<div class="animation"></div>
 		</div>
-		<div class="menubar shadow-1">
+		<div class="wave bar top shadow">
+			<button onclick="sidebar.open();">menu</button>
+			<h1 id="pageName">Dashboard</h1>
+		</div>
+		<div class='wave pusher top'></div>
+		<div class="wave page">
+			<div class="innerPage">
+
+			</div>
+		</div>
+		<!-- <div class="menubar shadow-1">
 			<div class="menu left">
 				<i class="material-icons center" onclick="sidebar.open();">menu</i>
 			</div>
@@ -88,7 +99,7 @@
 			<div class="menu right" id="menuOption">
 
 			</div>
-		</div>
+		</div> -->
 		<div class="error">
 			<div class="center inner">
 				<h1>Whoops... <span style="color: red;">Critical error</span></h1>
@@ -99,9 +110,9 @@
 				<p style="font-size: 1em; color: #585858;" id="errorText">ERROR</p>
 			</div>
 		</div>
-		<div class="page">
+		<!-- <div class="page">
 
-		</div>
+		</div> -->
 		<script>
 			loader.hide();
 		</script>

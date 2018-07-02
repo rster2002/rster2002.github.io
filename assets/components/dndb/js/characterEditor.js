@@ -380,7 +380,7 @@ function loadCharacter(i) {
 					var data = doc.data();
 					l(data);
 					allowSave = true;
-					window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
+					// window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
 					progress.hide();
 				} else {
 					error("Couldn't find this character in the database");

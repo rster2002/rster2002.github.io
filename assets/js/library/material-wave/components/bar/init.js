@@ -1,4 +1,4 @@
-$("body").prepend("<div class='wave pusher top'></div>");
+// $("body").prepend("<div class='wave pusher top'></div>");
 var waveSections = 0;
 
 $(".wave.top.bar").find("button").each(function() {

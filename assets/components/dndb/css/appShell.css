@@ -137,6 +137,10 @@ html div.wave.menu a {
 	border-radius: 50%;
 }
 
+div.wave.card {
+	float: left;
+}
+
 .sidebar {
 	position: fixed;
 	z-index: 30;
@@ -258,12 +262,12 @@ html div.wave.menu a {
 	left: 20%;
 }
 
-.page {
+/* .page {
 	height: 91vh;
 	position: relative;
 	top: 9vh;
 	width: 100vw;
-}
+} */
 
 .innerPage {
 	width: 100%;
@@ -368,7 +372,7 @@ html div.wave.menu a {
 	float: right;
 }
 
-.fab {
+/* .fab {
 	width: 4.5vw;
     height: 4.5vw;
 	min-width: 72px;
@@ -419,4 +423,4 @@ html div.wave.menu a {
 	100% {
 		transform: translate(-50%, -50%) scale(1);
 	}
-}
+} */

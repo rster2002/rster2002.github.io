@@ -14,12 +14,34 @@
 					"bar",
 					"buttons",
 					"card",
-					"grid"
+					"grid",
+					"elevation"
 				]).color({
 					"primary": {
 						"back": "#4fc3f7",
 						"front": "black"
 					}
+				}).then(() => {
+					wave.engine(engine => {
+						engine.global(comp => {
+							comp.corners([
+								{
+									"shape": "rounded",
+									"size": "12px"
+								}
+							])
+						});
+
+						engine.bar(comp => {
+							comp.corners([
+								{
+									"place": "all",
+									"shape": "rounded",
+									"size": "0px"
+								}
+							]);
+						})
+					})
 				});
 			})
 		</script>
@@ -35,8 +57,11 @@
 			<h1>Character's</h1>
 			<button class="right">filter_list</button>
 		</div>
-		<div class="wave page grid" style="width: 100%; overflow-y: scroll;">
+		<!-- <div class="wave page grid" style="width: 100%; overflow-y: scroll;">
 			<div class="wave card m12 t6 d3">
+				<div class="image" style="background-image: url('https://i.pinimg.com/originals/75/49/f8/7549f840f272dd8a1119ed8223208bb5.jpg')">
+
+				</div>
 				<div class="title">
 					<h1>Phonor Lygal</h1>
 					<p>Human wizard</p>
@@ -57,6 +82,11 @@
 				</div>
 			</div>
 			<button class="wave fab">add</button>
+		</div> -->
+		<div class="wave page" style="width: 100%; overflow-y: scroll;">
+			<ul class="wave">
+
+			</ul>
 		</div>
 	</body>
 </html>

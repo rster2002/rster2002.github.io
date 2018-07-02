@@ -1,4 +1,5 @@
 var sUid = sessionStorage.getItem("::uid");
+$("#pageName").text("Character list")
 
 obj = {};
 characters = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -10,14 +11,22 @@ async function addTolist(i, characterInfo, delay) {
 		if (o && o.exists) {
 			var characterObj = o.data();
 
+			var info = "";
+			var race = characterObj["95_1"];
+			var classAndLevel = characterObj["94_1"];
+			var r = classAndLevel.split(" ");
+			var rr = r[0];
+			var Class = rr.toLowerCase();
+			info += race + " " + Class;
 
 			if (characterObj["96_1"] !== "") {
 				characterName = characterObj["96_1"];
 			} else {
 				characterName = "Unnamed character"
 			}
-			var dupe = characterInfo.dupe !== undefined ? "Dupe: " + characterInfo.dupe : "";
-			$(".cards").append("<div class='cardWrapper'><div class='card shadow-2 select' onclick='loadCharacter(" + i + ")'><div class='colorWrapper'><div class='color'></div></div><div class='content'><h1>" + characterName + "</h1><p>" + characterObj["95_1"] + " " + characterObj["94_1"] + "</p><p>" + dupe + "</p></div></div></div>")
+			var dupe = characterInfo.dupe !== undefined ? " (dupe: " + characterInfo.dupe + ")" : "";
+			info += dupe;
+			$(".cards").append("<div class='wave card m12 t6 d3' style='border-radius: 10px;'><div class='title'><h1>" + characterName + "</h1><p>" + info + "</p></div><div class='actions'><button style='border-radius: 10px;' onclick='loadCharacter(" + i + ")'>Edit</button></div></div>")
 			// if (characterInfo.dupe !== undefined) {
 			//
 			// } else {
