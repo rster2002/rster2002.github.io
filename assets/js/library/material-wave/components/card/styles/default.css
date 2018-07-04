@@ -29,6 +29,9 @@ div.wave.card > div.title h1 {
 	letter-spacing: .0125em;
 	line-height: 2rem;
 	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 div.wave.card > div.title p {

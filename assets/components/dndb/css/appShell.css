@@ -64,13 +64,13 @@ html div.wave.menu a {
 	transform: translate(-50%, 0%);
 }
 
-.left {
+/* .left {
 	float: left;
 }
 
 .right {
 	float: right;
-}
+} */
 
 .error {
 	display: none;

@@ -15,8 +15,12 @@ async function addTolist(i, characterInfo, delay) {
 			var race = characterObj["95_1"];
 			var classAndLevel = characterObj["94_1"];
 			var r = classAndLevel.split(" ");
-			var rr = r[0];
-			var Class = rr.toLowerCase();
+			r[r.length - 1] = "";
+			var rrr = "";
+			for (var rep = 0; rep < r.length; ++rep) {
+				rrr += r[rep] + " ";
+			}
+			var Class = rrr.toLowerCase();
 			info += race + " " + Class;
 
 			if (characterObj["96_1"] !== "") {
