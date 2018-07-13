@@ -32,7 +32,7 @@ p {
 
 .sidebar {
 	width: 80vw;
-	left: -85vw;
+	transform: translateX(-85vw);
 }
 
 .sidebarBackground .sidebarExit {

@@ -294,84 +294,12 @@ div.wave.card {
 	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
 }
 
-.cardWrapper {
-	width: 21%;
-	padding: 2%;
-	display: inline-block;
-	float: left;
+html div.wave.card {
+	border-radius: 10px;
 }
 
-.cardWrapper .card {
-	width: 90%;
-	border-radius: 1vh;
-	padding-bottom: 0.5vh;
-}
-
-.cardWrapper .card.select {
-	cursor: pointer;
-	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
-}
-
-.cardWrapper .card.select:hover {
-	transform: scale(1.02);
-	box-shadow: 0 8px 17px 2px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2);
-	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 250ms;
-}
-
-.cardWrapper .card .colorWrapper {
-	height: 2vh;
-	width: 100%;
-}
-
-.cardWrapper .card .color {
-	background-color: #36096d;
-	background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
-	width: 95%;
-	height: 1vh;
-	border-radius: 0.5vh;
-	top: 0.5vh;
-	left: 2.5%;
-	position: relative;
-}
-
-.cardWrapper .card .content {
-	height: calc(85% - 1vh);
-	width: 100%;
-}
-
-.cardWrapper .card .content h1 {
-	font-size: 4vh;
-	margin: 0.5vh;
-	margin-top: 0;
-	font-weight: 500;
-	width: 95%;
-	position: relative;
-	left: 50%;
-	transform: translate(-50%, 0%);
-}
-
-.cardWrapper .card p {
-	width: 95%;
-	font-size: 2vh;
-	position: relative;
-	left: 50%;
-	transform: translate(-50%, 0%);
-}
-
-.cardWrapper .card .actions {
-	height: calc(15% + 1vh);
-	min-height: 48px;
-	width: 100%;
-	background-color: rgb(0,128,255);
-}
-
-.cardWrapper .card .actions button {
-	position: relative;
-	top: 50%;
-	transform: translate(0%, -50%);
-	margin-left: 5px;
-	margin-right: 5px;
-	float: right;
+html div.wave.card > div.actions button {
+	border-radius: 10px;
 }
 
 /* .fab {

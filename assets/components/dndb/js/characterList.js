@@ -30,7 +30,7 @@ async function addTolist(i, characterInfo, delay) {
 			}
 			var dupe = characterInfo.dupe !== undefined ? " (dupe: " + characterInfo.dupe + ")" : "";
 			info += dupe;
-			$(".cards").append("<div class='wave card m12 t6 d3' style='border-radius: 10px;'><div class='title'><h1>" + characterName + "</h1><p>" + info + "</p></div><div class='actions'><button style='border-radius: 10px;' onclick='loadCharacter(" + i + ")'>Edit</button></div></div>")
+			$(".cards").append("<div class='wave card m12 t6 d3'><div class='title'><h1>" + characterName + "</h1><p>" + info + "</p></div><div class='actions'><button onclick='loadCharacter(" + i + ")'>Edit</button></div></div>")
 			// if (characterInfo.dupe !== undefined) {
 			//
 			// } else {
