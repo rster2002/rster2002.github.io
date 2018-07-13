@@ -60,12 +60,12 @@ async function addList(id, place) {
 			var playerArray = await createQuery(firestore.collection("campaigns").doc(id).collection("users").where("type", "==", "player"));
 			console.log(id, place, campaignObj, playerArray);
 			localCampaigns[place] = campaignName;
-			if (playerArray[0] !== undefined) {
-				var players = playerArray.length;
-				$(".partyList").append("<div class='party' onclick='clickParty(" + place + ")'><h1>" + campaignName + "</h1><p>" + players + " players in this campaign</p></div>");
-			} else {
-				$(".partyList").append("<div class='party' onclick='clickParty(" + place + ")'><h1>" + campaignName + "</h1><p>There are no players in this campaign</p></div>");
-			}
+			$(".campaignList").append("<div class='wave card d3 t6 m12'><div class='title'><h1>" + campaignName + "</h1></div><div class='actions'><button onclick='clickParty(" + place + ")'>Open</button></div></div>");
+			// if (playerArray[0] !== undefined) {
+			// 	var players = playerArray.length;
+			// } else {
+			// 	$(".partyList").append("<div class='party' onclick='clickParty(" + place + ")'><h1>" + campaignName + "</h1><p>There are no players in this campaign</p></div>");
+			// }
 		} else {
 			error("Error when fetching campaign, maybe it doesn't exists anymore");
 			hide();
@@ -73,6 +73,8 @@ async function addList(id, place) {
 	}).catch(function(e) {
 		error(e);
 	});
+
+
 //	console.log(playerArray);
 //	var players = playerArray.length;
 //	localCampaigns[place] = name;
@@ -105,7 +107,7 @@ async function getCampaigns() {
 }
 
 function fillCampaignList() {
-	$(".partyList").append("<div class='createParty'><div class='deletable'><h1>Add Campaign</h1></div><div class='addParty'><input id='partyId' placeholder='party id' type='text'><button id='join'>Join</button><button id='host'>Create</button></div></div>");
+	// $(".partyList").append("<div class='createParty'><div class='deletable'><h1>Add Campaign</h1></div><div class='addParty'><input id='partyId' placeholder='party id' type='text'><button id='join'>Join</button><button id='host'>Create</button></div></div>");
 	$(".createParty").on("click",function(){
 		$(".deletable").hide();
 		$(".addParty").show();
@@ -320,4 +322,8 @@ function afterSelect(index) {
 			});
 		});
 	}
+}
+
+function joinDialog() {
+	var i = prompt("Type campaign id");
 }

@@ -10,6 +10,7 @@ html, body {
 	overflow: hidden;
 	font-family: var(--font);
 	height: 100%;
+	width: 100%;
 }
 
 h1, p {
@@ -147,13 +148,13 @@ div.wave.card {
 	width: 25vw;
 	height: 100vh;
 	background-color: white;
-	transition: 200ms all cubic-bezier(0.4, 0.0, 0.6, 1);
-	left: -35vw;
+	transition: 200ms transform cubic-bezier(0.4, 0.0, 0.6, 1);
+	transform: translateX(-35vw);
 }
 
 .sidebar.open {
-	left: 0vw;
-	transition: 250ms all cubic-bezier(0.0, 0.0, 0.2, 1);
+	transform: translateX(0vw);
+	transition: 250ms transform cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
 .sidebar .userWrapper {
@@ -227,32 +228,33 @@ div.wave.card {
 	background-color: rgb(235, 235, 235);
 }
 
-.divider {
+.sidebar .divider {
 	width: 100%;
 	height: 1px;
 	margin-top: 1%;
 	margin-bottom: 1%;
 }
 
-.divider .dividerInner {
+.sidebar .divider .dividerInner {
 	width: 90%;
 	height: 100%;
 	background-color: rgb(235, 235, 235);
 }
 
 .sidebarBackground {
-	transition: 150ms all cubic-bezier(0.4, 0.0, 0.6, 1);
+	transition: 150ms opacity cubic-bezier(0.4, 0.0, 0.6, 1);
 	position: fixed;
-	z-index: 10;
+	z-index: -2;
 	width: 100vw;
 	height: 100vh;
-	background-color: rgba(235, 235, 235, .5);
-	left: -101vw;
+	background-color: rgba(0, 0, 0, .5);
+	opacity: 0;
 }
 
 .sidebarBackground.open {
-	left: 0vw;
-	transition: 200ms all cubic-bezier(0.0, 0.0, 0.2, 1);
+	opacity: 1;
+	z-index: 10;
+	transition: 200ms opacity cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
 .sidebarBackground .sidebarExit {

@@ -16,7 +16,7 @@ p {
 	font-size: 3em;
 }
 
-.fab {
+/* .fab {
 	width: 15vw;
     height: 15vw;
 	left: calc(97vw - 15vw);
@@ -28,7 +28,7 @@ p {
 
 .fab i {
 	font-size: 5em;
-}
+} */
 
 .sidebar {
 	width: 80vw;
@@ -40,13 +40,13 @@ p {
 	width: 20%;
 }
 
-.sidebar .nameWrapper h1 {
+/* .sidebar .nameWrapper h1 {
 	font-size: 4em;
-}
+} */
 
-.sidebar .menubutton p {
+/* .sidebar .menubutton p {
 	font-size: 3em;
-}
+} */
 
 .page {
 	height: 100vh;

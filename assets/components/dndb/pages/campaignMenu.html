@@ -1,14 +1,22 @@
 <div class="innerPage scroll">
 	<script>
-		$("#T1").attr("src", "../assets/components/dnd/js/" + sessionStorage.getItem("::openPage") + ".js");
-		$("#T2").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".css");
-		$("#T3").attr("href", "../assets/components/dnd/css/" + sessionStorage.getItem("::openPage") + ".m.css");
+		$("#T1").attr("src", "../assets/components/dndb/js/" + sessionStorage.getItem("::openPage") + ".js");
+		$("#T2").attr("href", "../assets/components/dndb/css/" + sessionStorage.getItem("::openPage") + ".css");
+		$("#T3").attr("href", "../assets/components/dndb/css/" + sessionStorage.getItem("::openPage") + ".m.css");
 	</script>
 	<script id="T1" type="text/javascript"></script>
 	<link id="T2" rel="stylesheet" type="text/css">
 	<link id="T3" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
-	<div class="campaignList">
-		
+	<div class="campaignList wave grid">
+		<div class="wave card d3 t6 m12">
+			<div class="title">
+				<h1>Add campaign</h1>
+			</div>
+			<div class="actions">
+				<button onclick="joinDialog();">Join</button>
+				<button onclick="host();">Host</button>
+			</div>
+		</div>
 	</div>
 	<script>loader.hide();</script>
 </div>

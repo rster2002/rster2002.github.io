@@ -10,6 +10,7 @@ $(document).ready(() => {
 		"menu",
 		"bar",
 		"card",
-		"grid"
+		"grid",
+		"elevation"
 	]);
 })
