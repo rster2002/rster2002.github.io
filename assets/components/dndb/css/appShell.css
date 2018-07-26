@@ -13,10 +13,10 @@ html, body {
 	width: 100%;
 }
 
-h1, p {
+/* h1, p {
 	margin: 0;
 	padding: 0;
-}
+} */
 
 h1, p, input, textarea {
 	font-family: var(--font);
@@ -203,17 +203,25 @@ div.wave.card {
 }
 
 .sidebar .menubutton {
-	width: 100%;
+	width: 90%;
 	height: 7%;
 	background-color: white;
 	cursor: pointer;
+	position: relative;
+	left: 5%;
+	border-radius: 5px;
+	margin: 0 1px;
+}
+
+.sidebar .menubutton.selected {
+	background-color: rgba(0, 128, 255, 0.05);
 }
 
 .sidebar .menubutton p {
 	color: #505050;
-	width: 70%;
+	width: 90%;
 	position: relative;
-	left: 10%;
+	left: 5%;
 	font-size: 1.4em;
 	margin: 0;
 }
@@ -221,7 +229,11 @@ div.wave.card {
 .sidebar .menubutton p i {
 	font-size: inherit;
 	transform: translate(0%, 13%);
-    margin-right: 5%;
+    margin-right: 10%;
+}
+
+.sidebar .menubutton.selected p i {
+	color: rgb(0,128,255);
 }
 
 .sidebar .menubutton:hover {

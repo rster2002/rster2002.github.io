@@ -140,6 +140,10 @@ function openPage(page) {
 	$(".page.innerPage").remove();
 	$(".page").load("../assets/components/dndb/pages/" + page + ".html");
 	sessionStorage.setItem("::openPage", page);
+	if ($(".sidebar .menubutton.page-" + page).length > 0) {
+		$(".sidebar .menubutton").removeClass("selected");
+		$(".sidebar .menubutton.page-" + page).addClass("selected");
+	}
 	$("#menuOption").html("");
 	sidebar.close();
 	if (onExit !== null) {
