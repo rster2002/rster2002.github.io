@@ -26,6 +26,7 @@ button.wave {
 	color: rgb(0,128,255);
 	outline: none;
 	cursor: pointer;
+	text-transform: uppercase;
 }
 
 button.wave.icon {

@@ -486,6 +486,10 @@
 	white-space: normal;
 }
 
+.characterSheet {
+	overflow-x: auto;
+}
+
 .items {
 	width: 100%;
 }
