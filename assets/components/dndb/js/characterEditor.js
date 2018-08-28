@@ -3,6 +3,35 @@ characters = "abcdefghijklmnopqrstuvwxyz0123456789";
 
 sessionStorage.setItem("::saved", "false");
 
+
+var vueInventory = new Vue({
+	el: "#inventory",
+	data: {
+		items: [
+			{
+				name: "Torch",
+				description: "Hello World",
+				shown: false
+			},
+			{
+				name: "Tinderbox",
+				description: "Used to set things on fire",
+				shown: true
+			}
+		]
+	},
+	methods: {
+		toggleShown(item) {
+			if (item.shown === true) {
+				item.shown === false;
+			} else {
+				item.shown === true;
+			}
+		}
+	}
+})
+
+
 $(".innerPage").ready(() => {
 	$(".characterContainer").load("../assets/components/dndb/pages/characterSheet.html");
 });

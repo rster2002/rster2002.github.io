@@ -6,11 +6,13 @@ $(document).ready(() => {
 		"buttons",
 		"select",
 		"dialog",
-		"html",
 		"menu",
 		"bar",
 		"card",
 		"grid",
-		"elevation"
-	]);
+		"elevation",
+		"form"
+	]).color({
+		action: "rgb(0,128,255)"
+	});
 })

@@ -11,3 +11,9 @@
 .cardWrapper .card {
 	height: 90%;
 }
+
+.wave.card .title p {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

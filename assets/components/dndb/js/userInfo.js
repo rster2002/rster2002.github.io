@@ -13,6 +13,8 @@ async function getUser(f) {
 async function configUserDb(authObj) {
 	userRef.get().then(function(doc) {
 		if (doc && doc.exists) {
+			globalUser = doc.data();
+			vueTerminal.user = globalUser;
 			userRef.update({
 				lastLogin: Date.now()
 			}).then(function() {

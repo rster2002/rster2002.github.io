@@ -15,26 +15,28 @@
 	transition: 250ms all cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-.wave--dialogBackground .wave--dialog {
+.wave--dialog {
 	width: calc(100% - 30px);
+	z-index: 1001;
 	min-width: 640px;
 	max-width: 865px;
-	position: relative;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: white;
 	border-radius: 2px;
 	box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+	display: none;
 }
 
-.wave--dialogBackground .wave--dialog .wave--head {
+.wave--dialog .wave--head {
 	height: 10vh;
 	width: 100%;
-	border-bottom: 1px solid rgba(0,0,0,.1);
+	border-bottom: 1px solid white;
 }
 
-.wave--dialogBackground .wave--dialog .wave--head .wave--title {
+.wave--dialog .wave--head .wave--title {
 	width: 95%;
 	position: relative;
 	top: 50%;
@@ -46,24 +48,24 @@
 	font-weight: 500;
 }
 
-.wave--dialogBackground .wave--dialog .wave--content {
+.wave--dialog .wave--content {
 	padding: 24px;
 	max-height: 20vh;
 	overflow-y: auto;
 }
 
-.wave--dialogBackground .wave--dialog .wave--content p {
+.wave--dialog .wave--content p {
 	color: rgba(0,0,0,.7);
 	font-family: 'Roboto', sans-serif;
 }
 
-.wave--dialogBackground .wave--dialog .wave--actions {
+.wave--dialog .wave--actions {
 	height: 6vh;
 	width: 100%;
-	border-top: 1px solid rgba(0,0,0,.1);
+	border-top: 1px solid white;
 }
 
-.wave--dialogBackground .wave--dialog .wave--actions button {
+.wave--dialog .wave--actions button {
 	background-color: white;
 	padding-top: 8px;
 	padding-bottom: 8px;
@@ -86,6 +88,6 @@
 	transform: translate(0%, -50%);
 }
 
-.wave--dialogBackground .wave--dialog .wave--actions button:hover {
+.wave--dialog .wave--actions button:hover {
 	background-color: rgba(235, 235, 235, .5);
 }

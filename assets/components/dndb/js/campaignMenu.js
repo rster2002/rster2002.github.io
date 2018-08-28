@@ -1,7 +1,21 @@
-console.log("partyMenu.js");
+if (DEV) {
+	console.log("partyMenu.js");
+}
 sUid = sessionStorage.getItem("::uid");
 
 obj = {};
+
+var vueInstance = new Vue({
+	el: '#vueGrid',
+	data: {
+		campaigns: []
+	},
+	methods: {
+		openCampaign: function(name) {
+			join(name);
+		}
+	}
+})
 
 function checkInput(input) {
 	if (input === "" || input === '' || input === undefined || input === null) {
@@ -52,15 +66,21 @@ function invalidId() {
 var localCampaigns = {};
 
 async function addList(id, place) {
-	console.log(id, place);
 	firestore.collection("campaigns").doc(id).get().then(async function(doc) {
 		if (doc && doc.exists) {
 			var campaignObj = doc.data();
-			var campaignName = campaignObj.name;
-			var playerArray = await createQuery(firestore.collection("campaigns").doc(id).collection("users").where("type", "==", "player"));
-			console.log(id, place, campaignObj, playerArray);
-			localCampaigns[place] = campaignName;
-			$(".campaignList").append("<div class='wave card d3 t6 m12'><div class='title'><h1>" + campaignName + "</h1></div><div class='actions'><button onclick='clickParty(" + place + ")'>Open</button></div></div>");
+			// var campaignName = campaignObj.name;
+			// var playerArray = await createQuery(firestore.collection("campaigns").doc(id).collection("users").where("type", "==", "player"));
+			// console.log(id, place, campaignObj, playerArray);
+			// localCampaigns[place] = campaignName;
+
+			vueInstance.campaigns.push(campaignObj);
+
+			// $(".campaignList").append();
+			//
+			// $("#campaign" + campaignName).on("click", function() {
+			// 	join($(this).attr("campaign-name"));
+			// })
 			// if (playerArray[0] !== undefined) {
 			// 	var players = playerArray.length;
 			// } else {
@@ -75,12 +95,10 @@ async function addList(id, place) {
 	});
 
 
-//	console.log(playerArray);
 //	var players = playerArray.length;
 //	localCampaigns[place] = name;
 
 //	dbCampaign.child(id).once("value",e => {
-//		console.log(id);
 //		try {
 //			var party = e.val();
 //			var playerArray = party.playerList;
@@ -96,11 +114,9 @@ async function addList(id, place) {
 
 async function getCampaigns() {
 	var campaigns = await createQuery(userRef.collection("campaigns").orderBy("name", "desc"));
-	console.log(campaigns);
 	if (campaigns) {
 		for (var i = 0; i < campaigns.length; ++i) {
 			var campaignObj = campaigns[i];
-			console.log(campaignObj, i);
 			addList(campaignObj.id, i);
 		}
 	}
@@ -115,7 +131,6 @@ function fillCampaignList() {
 
 	$("#join").on("click", async function(){
 		var campaignName = await $("#partyId").val();
-		console.log(campaignName);
 		var query = await createQuery(firestore.collection("campaigns").where("name", "==", campaignName));
 		if (query[0] !== undefined) {
 			var campaignObj = query[0];
@@ -138,7 +153,6 @@ fillCampaignList();
 
 function clickParty(index) {
 	var campaignName = localCampaigns[index];
-	console.log(localCampaigns, partyId);
 	join(campaignName, false);
 }
 
@@ -155,12 +169,9 @@ host checklist
 
 async function host(campaignName) {
 
-	console.log(campaignName);
-
 	show();
 
 	var exists = await createQuery(firestore.collection("campaigns").where("name", "==", campaignName));
-	console.log(exists);
 
 	if (exists[0] === undefined) {
 		var campaignId = "party-" + genId();
@@ -211,13 +222,11 @@ join checklist:
 
 async function join(campaignName) {
 	show();
-	console.log(campaignName);
 
 	// creates a query to check if a campaign with that campaign name exists
 	var query = await createQuery(firestore.collection("campaigns").where("name", "==", campaignName));
 	if (query[0] !== undefined) {
 		var campaign = query[0];
-		console.log(campaign);
 
 		// gets the shared campaign obj
 		var campaignId = campaign.id;
@@ -251,7 +260,6 @@ async function join(campaignName) {
 var charactersObj = {};
 
 function addToList(i, characterId) {
-	console.log(characterId);
 	userRef.collection("characters").doc(characterId).get().then(function(doc) {
 		if (doc && doc.exists) {
 			var characterInfo = doc.data();
@@ -325,5 +333,11 @@ function afterSelect(index) {
 }
 
 function joinDialog() {
-	var i = prompt("Type campaign id");
+	var i = prompt("Enter campaign id");
+	join(i)
+}
+
+function hostDialog() {
+	var i = prompt("Enter campaign id");
+	host(i)
 }

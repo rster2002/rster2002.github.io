@@ -1,6 +1,10 @@
 {
 	"short_name": "D&D online",
 	"name": "Dungeons and Dragons online",
+	"display": "minimal-ui",
+	"start_url": "/dnd/dndb.html",
+	"theme_color": "#ffa700",
+	"background_color": "#ffffff",
 	"icons": [
 		{
 			"src": "../../images/icons/app/app/icon-72x72.png",

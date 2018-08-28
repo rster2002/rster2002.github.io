@@ -6,28 +6,35 @@
 		<title id="pageTitle">Dungeons and Dragons online</title>
 		<link href="manifest.json" rel="manifest" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 		<!-- API and Library scripts -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
-		<script src="https://raw.githubusercontent.com/lodash/lodash/4.17.10-npm/core.js"></script>
+		<!-- <script src="https://raw.githubusercontent.com/lodash/lodash/4.17.10-npm/core.js"></script> -->
+		<script id="vueLib" src="https://cdn.jsdelivr.net/npm/vue"></script>
 <!--		<script src="../assets/js/api/ui.js"></script>-->
 		<script src="../assets/js/library/material-wave/wave.js"></script>
+
 		<!-- App Scripts -->
-		<!-- <script src="../assets/components/dndb/js/app.js"></script> -->
+		<script src="../assets/components/dndb/js/app.js"></script>
 		<script src="../assets/components/dndb/js/misc.js"></script>
 		<script src="../assets/components/dndb/js/dndinfo.js"></script>
 		<script src="../assets/components/dndb/js/firebase.js"></script>
 		<script src="../assets/components/dndb/js/userInfo.js"></script>
+
 		<!-- Link styles -->
 		<link href="../assets/images/icons/tab%20icons/dnd.png" rel="icon">
 		<link href="../assets/components/dndb/css/appShell.css" rel="stylesheet" type="text/css">
 		<link href="../assets/components/dndb/css/appShell.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
 	</head>
 	<body>
+		<div class="overlay terminal z4" id="vueTerminal">
+			<h3 v-for="(value, key) in user"><span class="key">{{ key }}: </span>{{ value }}</h3>
+		</div>
 		<div class="sidebar shadow-5">
 			<div class="userWrapper">
-				<div class="userCard center shadow-2">
+				<div class="userCard center z1">
 					<div class="iconWrapper">
 						<img class="userIcon center userimg">
 					</div>

@@ -4,14 +4,18 @@ waveColor.push((color) => {
 });
 waveCheckboxes = 0;
 
-elementLoaded("input:checkbox.wave", () => {
+elementLoaded("input.wave:checkbox", () => {
+	function waveCreateCheckboxes()
+});
+
+waveCreateCheckboxes = function() {
 	$("input:checkbox.wave").each((index, item) => {
 		if (!$(item).hasClass("setup")) {
 			waveCheckboxes += 1;
 			waveSetupCheckbox(item, waveCheckboxes);
 		}
 	});
-});
+}
 
 function waveSetupCheckbox(here, ii) {
 	$(here).addClass("setup");
@@ -54,7 +58,7 @@ function waveCheckboxesAddInput(i) {
 			$(s).css("background-color", waveCheckboxColor);
 			setTimeout(() => {
 				$(s).children("i").addClass("checked");
-			}, 100);
+			}, 50);
 		}
 	});
 

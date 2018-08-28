@@ -1,495 +1,285 @@
-.innerPage {
-	height: calc(100% - 52px);
-}
 
-.bottomNav {
-	height: 52px;
+/* Controlls like save and delete */
+.controlls {
 	width: 100%;
-	position: fixed;
-	background-color: white;
-	top: calc(100% - 52px);
-	z-index: 3;
-}
-
-.wave--popover {
-	z-index: 10;
-}
-
-.slider {
-	display: inline-block;
-	width: 100vw;
-}
-
-.slider .sliding {
-	width: 400vw;
-	height: 100%;
-	margin-left: -0vw;
-	transition: 350ms all cubic-bezier(0.4, 0.0, 0.6, 1);
-}
-
-.slider .sliding .slide {
-	width: 100vw;
-	float: left;
-	padding-top: 10vh;
-	padding-bottom: 10vh;
-}.
-
-.innerPage {
-	overflow-x: hidden;
-}
-
-.buttons {
-	height: 10vh;
-	width: 935px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+	max-width: 935px;
+	height: 68px;
+	border-radius: 10px;
 	position: relative;
-	top: 5vh;
-}
-
-.buttons .contr {
-	height: 100%;
-	width: 5vw;
-	background-color: white;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-	border-radius: 1vh;
-	float: left;
-	cursor: pointer;
-	opacity: 1;
-	transition: 150ms all cubic-bezier(0.4, 0.0, 0.6, 1);
-}
-
-.buttons .contr.faded {
-	opacity: 0;
-	transition: 200ms all cubic-bezier(0.4, 0.0, 0.6, 1);
-}
-
-.buttons .contr:hover {
-	background-color: rgb(235,235,235);
-}
-
-.buttons .contr.left {
-	margin-right: 3vw;
-}
-
-.buttons .contr.right {
-	margin-left: 3vw;
-}
-
-.buttons .controll {
-	float: left;
-	height: 100%;
-	width: 935px;
-	background-color: white;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-	border-radius: 1vh;
-}
-
-.buttons .controll .button {
-	float: left;
-	height: 100%;
-	width: 33.333333333333333333333333333%;
-	cursor: pointer;
-	transition: 150ms all cubic-bezier(0.4, 0.0, 0.6, 1)
-}
-
-.buttons .controll .button.left {
-	border-top-left-radius: 1vh;
-	border-bottom-left-radius: 1vh;
-}
-
-.buttons .controll .button.right {
-	border-top-right-radius: 1vh;
-	border-bottom-right-radius: 1vh;
-}
-
-.buttons .controll .button h1 {
-	position: relative;
-	top: 50%;
+	top: 56px;
 	left: 50%;
-	transform: translate(-50%,-50%);
-	text-align: center;
-	font-size: 2em;
+	transform: translate(-50%, 0%);
 }
 
-.buttons .controll .button:hover {
-	background-color: rgb(235,235,235);
-}
-
-.pageArea {
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-	border-radius: 1vh;
-}
-
-.spells {
-	width: 100%;
-}
-
-.addItem {
-	width: 60%;
-	display: inline-block;
-	background-color: white;
-	border-radius: 1vh;
-}
-
-.addItem div {
-	display: inline-block;
-}
-
-.addItem .title {
-	width: 100%;
-}
-
-.addItem .title h1 {
-	width: 98%;
-	margin-left: 2%;
-}
-
-.addItem .spellName {
-	width: 100%;
-	height: 9vh;
-}
-
-.addItem .spellName input {
-	width: 95%;
-	font-size: 1.5em;
-}
-
-.addItem .components {
-	height: 9vh;
-	width: 100%;
-}
-
-.addItem .description {
-	height: 40vh;
-	width: 100%;
-}
-
-.addItem .description textarea {
-	width: 95%;
-	height: 90%;
-	resize: none;
-	font-size: 1.3em;
-}
-
-.addItem .confirm {
-	height: 9vh;
-	width: 100%;
-	text-align: center;
-	cursor: pointer;
-}
-
-.addItem .confirm:hover {
-	background-color: rgb(235, 235, 235);
-}
-
-.addItem .props {
-	width: 100%;
-}
-
-
-.addItem .other {
-	height: 9vh;
-	width: 100%;
-}
-
-.select.input {
-	cursor: default;
-}
-
-.select.input h1 {
-	float: left;
-}
-
-.select.input input {
-	height: 90%;
-	position: relative;
-	top: 5%;
-	left: 2%;
-}
-
-.select.selected {
-	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-
-.addItem .select {
-	padding: 1vh;
-	background-color: rgb(235, 235, 235);
-	/* float: left; */
-	margin-left: 1%;
-	cursor: pointer;
-	margin-top: .5%;
-	border-radius: 1vh;
-}
-
-.addItem .select h1 {
-	font-size: 1.1em;
-}
-
-.itemList {
-	width: 100%;
-}
-
-.itemList .item {
-	margin-top: 1%;
-	width: 60%;
-	max-height: 10vh;
-	transition: 375ms all cubic-bezier(0.4, 0.0, 0.2, 1);
-	background-color: white;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
-	border-radius: 1vh;
-}
-
-.itemList .item .shared {
-	height: 10vh;
-	width: 100%;
-	cursor: pointer;
-}
-
-.itemList .item.open .shared {
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom: 1px solid rgb(235, 235, 235);
-}
-
-.itemList .item .shared .icon {
-	height: 10vh;
-	width: 10vh;
-	float: left;
-}
-
-.itemList .item .shared .icon .circle {
-	width: 70%;
-	height: 70%;
-	background-color: #00BCD4;
-	border-radius: 50%;
-	position: relative;
-	top: 15%;
-	left: 15%;
-}
-
-.itemList .item .shared .text {
-	height: 10vh;
-	width: calc(100% - 10vh);
-	float: left;
-}
-
-.itemList .item .shared .text .wrapper {
-	height: 70%;
-	position: relative;
-	top: 15%;
-}
-
-.itemList .item .shared .text .wrapper h1 {
-	width: 100%;
-}
-
-.itemList .item .shared .text .wrapper p {
-	width: 100%;
-}
-
-.itemList .item .controlls {
-	width: 100%;
-	height: 6vh;
-	margin-top: .5%;
-}
-
-.itemList .item .controlls .controll {
-	width: 100%;
+.controlls .button {
+	width: 33.3333333333%;
 	height: 100%;
-}
-
-.itemList .item .controlls .controll button {
+	border-radius: 10px;
 	float: left;
+	cursor: pointer;
 }
 
-.itemList .item .controlls .controll h1 {
-	float: left;
-	margin-left: 2%;
-	margin-right: 2%;
-	font-weight: 100;
+.controlls .button:hover {
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
-.itemList .item .content {
-	opacity: 0;
-	display: inline-block;
-	padding: 1%;
-	width: 98%;
-	transition: 150ms all cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-.itemList .item .actions button {
-	padding: 0.5%;
-    float: right;
-    margin-right: 1%;
-}
-
-
-/* Spell open */
-
-.itemList .item.open {
-	display: inline-block;
-	width: 70%;
-	transition: 295ms all cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-.itemList .item.h {
-	max-height: 1000vh;
-	transition: 295ms all cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-.itemList .item.open .content.open {
-	opacity: 1;
-	transition: 150ms all cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-/* Content */
-
-.item .tags {
-	width: 100%;
-	display: inline-block;
-}
-
-.item .tags .tag {
-	padding: 1%;
-	background-color: rgb(235, 235, 235);
-	border-radius: 1vh;
-	display: inline-block;
-	margin-top: .4%;
-	margin-left: .5%;
-}
-
-.item .content .text {
-	width: 98%;
-	padding: 1%;
-	display: inline-block;
-}
-
-.item .content .text p {
-	white-space: normal;
-}
-
-/*
-.spellList .spell {
-	width: 60%;
-	margin-top: 3%;
-}
-
-.spellList .spell .title {
-	width: 100%;
-}
-
-.spellList .spell .title h1 {
-	width: 98%;
-	margin-left: 2%;
-}
-
-.spellList .spell .properties {
-	margin-top: 1%;
-	width: 100%;
-	float: none;
-	display: inline-block;
-}
-
-.spellList .spell .property {
-	padding: 1%;
-	font-size: 1.1em;
-	background-color: rgb(235, 235, 235);
-	display: inline-block;
-	margin-left: 1%;
-	border-radius: 1vh;
-	float: left;
-	margin-top: .5%;
-}
-
-.spellList .spell .property p {
-	white-space: nowrap;
-}
-
-.spellList .spell .description {
-	width: 100%;
-	display: inline-block;
-	margin-top: 1%;
-}
-
-.spellList .spell .description p {
-	font-size: 1.1em;
-	width: 90%;
-	position: relative;
-	left: 1%;
-	white-space: normal;
-}
-*/
-
-.characterInfo {
-	margin-top: 2%;
-	width: 50%;
-	position: relative;
-	left: 25%;
-}
-
-.characterInfo p {
-	width: 100%;
-	text-align: center;
-}
-
-.characterOptions {
-	width: 935px;
-	position: relative;
-	background-color: white;
-	border-radius: 1vh;
-}
-
-.characterOptions .r {
-	height: 5vh;
-	width: 100%;
-}
-
-.characterOptions .r .text {
-	height: 100%;
-	width: 70%;
-	float: left;
-}
-
-.characterOptions .r .text p {
-	width: 98%;
+.controlls .button p {
 	position: relative;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-}
-
-.characterOptions .r .controll {
-	float: left;
-	width: 30%;
-	height: 100%;
-}
-
-.characterOptions .r .controll button {
-	float: 0;
+	font-family: 'Roboto', sans-serif;
 	margin: 0;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	text-align: center;
+	font-size: 24px;
+	font-weight: 700;
 }
 
-.characterOptions .r select {
+/* Character sheet self */
+.characterContainer {
+	width: 100%;
+	overflow-x: auto;
 	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.characterBuilding p {
-	white-space: normal;
+    top: 64px;
 }
 
 .characterSheet {
-	overflow-x: auto;
+	padding-bottom: 16px;
 }
 
-.items {
+.characterSheet .pageArea {
+	border-radius: 10px;
+	box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+/* Lists like inventory and spells */
+
+.lists {
+	position: relative;
+	top: 64px;
 	width: 100%;
+	max-width: 935px;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
+
+.lists .nav {
+	width: 100%;
+	height: 66px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.lists .nav .buttons {
+	height: 64px;
+	width: 100%;
+}
+
+.lists .nav .buttons .button {
+	width: 33.3333333333%;
+	height: 100%;
+	float: left;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	cursor: pointer;
+}
+
+.lists .nav .buttons .button:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.lists .nav .buttons .button p {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	text-align: center;
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.lists .nav .line {
+	height: 2px;
+	width: 100%;
+}
+
+.lists .nav .line .parser {
+	width: 33.3333333333%;
+	height: 100%;
+	background-color: #0080ff;
+	transform: translateX(0%);
+}
+
+.lists .section {
+	width: 100%;
+	padding: 0px 0px 24px 0px;
+}
+
+.lists .section .inputCard {
+	width: 100%;
+	padding: 12px 0px;
+	box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+	border-radius: 0px 0px 10px 10px;
+}
+
+.lists .section .inputCard h1 {
+	font-family: 'Roboto', sans-serif;
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	margin: 12px 0px;
+	font-size: 46px;
+	font-weight: 900;
+}
+
+.lists .section .inputCard input {
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	margin: 12px 0px;
+	font-size: 24px;
+	background-color: transparent;
+	outline: 0;
+	border: solid 2px #0080ff;
+	border-radius: 4px;
+	color: black;
+	padding: 4px 6px;
+	font-weight: 500;
+}
+
+.lists .section .inputCard input::placeholder {
+	color: #0080ff;
+	opacity: 1;
+}
+
+.lists .section .inputCard input::-ms-input-placeholder {
+	color: #0080ff;
+}
+
+.lists .section .inputCard textarea {
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	margin: 12px 0px;
+	font-size: 18px;
+	background-color: transparent;
+	outline: 0;
+	border: solid 2px #0080ff;
+	border-radius: 4px;
+	color: black;
+	padding: 4px 6px;
+	font-weight: 500;
+	height: 240px;
+	resize: none;
+}
+
+.lists .section .inputCard textarea::placeholder {
+	color: #0080ff;
+	opacity: 1;
+}
+
+.lists .section .inputCard textarea::-ms-input-placeholder {
+	color: #0080ff;
+}
+
+.lists .section .inputCard .row {
+	width: 94%;
+	padding: 0px;
+	display: inline-block;
+	position: relative;
+	left: 3%;
+}
+
+.lists .section .inputCard .row input {
+	float: left;
+	width: 80%;
+	left: 0%;
+	transform: translate(0%, 0%);
+	border-right: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.lists .section .inputCard .row button {
+	float: left;
+    width: calc(20% - 14px);
+    background-color: transparent;
+    border: solid 2px #0080ff;
+	border-left: 1px;
+    border-radius: 4px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+    color: #0080ff;
+    margin: 12px 0px;
+    padding: 5px 0px;
+	outline: 0;
+	cursor: pointer;
+}
+
+.lists .section .inputCard .row button:hover {
+	background-color: rgba(0, 0, 0, .1);
+}
+
+.lists .section .inputCard .tags {
+	width: calc(100% - 24px);
+    padding: 16px 12px;
+}
+
+.lists .section .inputCard .tags .tag {
+	display: inline-block;
+	padding: 4px 8px;
+	font-size: 18px;
+	margin: 2px;
+	cursor: pointer;
+}
+
+.lists .section .inputCard .tags .tag p {
+	display: inline-block;
+	padding: 4px 16px;
+	font-size: 18px;
+	background-color: rgb(235, 235, 235);
+	border-radius: 5px;
+	margin: 0;
+}
+
+/* List item */
+
+.lists .section .item {
+	width: 100%;
+	max-width: 935px;
+	padding: 12px 8px;
+	margin: 24px 0px;
+	border-radius: 10px;
+	box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+.lists .section .item h1 {
+	font-family: 'Roboto', sans-serif;
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	margin: 12px 0px;
+	font-size: 36px;
+	font-weight: 900;
+}
+
+.lists .section .item .hidden {
+	width: 100%;
+	display: inline-block;
+}
+
+.lists .section .item p {
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	margin: 8px 0px;
+	font-size: 18px;
+	font-weight: 600;
 }

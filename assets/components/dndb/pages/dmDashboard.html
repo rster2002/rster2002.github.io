@@ -7,28 +7,9 @@
 	<script id="T1" type="text/javascript"></script>
 	<link id="T2" rel="stylesheet" type="text/css">
 	<link id="T3" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
-	<div class="wave grid cards fill" id="vueGrid">
-		<div class="wave noContent">
-			<h1>Nothing here</h1>
-			<p>You are not a DM of a campaign</p>
-		</div>
-		<!-- <div class="wave card d6 t12 m24">
-			<div class="title">
-				<h1>5ti1G</h1>
-				<p>3 players</p>
-			</div>
-			<div class="actions">
-				<button>Open</button>
-			</div>
-		</div> -->
-		<div class='wave card d3 t6 m12' v-for="campaign in campaigns">
-			<div class='title'>
-				<h1>{{ campaign.name }}</h1>
-				<p>Private: {{ campaign.private }}</p>
-			</div>
-			<div class='actions' v-on:click="openCampaign(campaign.id)">
-				<button>Open</button>
-			</div>
+	<div class="wave grid cards fill" id="optionGrid">
+		<div class="input z1">
+
 		</div>
 	</div>
 	<script>

@@ -2,16 +2,16 @@
 	<script src="../assets/components/dndb/js/characterList.js"></script>
 	<link href="../assets/components/dndb/css/characterList.css" type="text/css" rel="stylesheet">
 	<link href="../assets/components/dndb/css/characterList.m.css" media="screen and (max-device-width: 800px)" type="text/css" rel="stylesheet">
-	<div class="cards wave grid">
-		<!-- <div class="cardWrapper">
-			<div class="card shadow-2 select">
-				<div class="color"></div>
-				<div class="content">
-					<h1>Name</h1>
-					<p>Wizard 1, human</p>
-				</div>
+	<div class="cards wave grid" id="vue-grid">
+		<div class='wave card m12 t6 d3' v-for="character in characters">
+			<div class='title'>
+				<h1>{{ character.name }}</h1>
+				<p>{{ character.info }}</p>
 			</div>
-		</div> -->
+			<div class='actions'>
+				<button v-on:click='oc(character.index)'>Edit</button>
+			</div>
+		</div>
 	</div>
 	<button class="wave fab" onclick="add();">
 		<i class="material-icons">add</i>

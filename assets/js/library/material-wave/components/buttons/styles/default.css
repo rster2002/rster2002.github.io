@@ -89,8 +89,8 @@ button.wave.fab {
 	z-index: 3;
 	position: fixed;
 	background-color: rgb(0,128,255);
-	bottom: 20px;
-	right: 20px;
+	bottom: 40px;
+	right: 40px;
 	transition: cubic-bezier(0.4, 0.0, 0.2, 1) box-shadow 15ms;
 }
 
@@ -106,4 +106,5 @@ button.wave.fab i {
 	position: relative;
 	transform: none;
 	color: white;
+	transform: translateY(2px);
 }

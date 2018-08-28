@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto:900');
 
 :root {
 	--font: 'Roboto', sans-serif;
@@ -40,6 +41,18 @@ input::-ms-input-placeholder {
 
 html div.wave.menu a {
 	font-size: 2vh;
+}
+
+html .wave.bar.top {
+	background-color: white;
+}
+
+html .wave.top.bar > .section.text h1 {
+	color: black;
+}
+
+html .wave.top.bar > .section button i {
+	color: black;
 }
 
 .noMargin {
@@ -304,6 +317,38 @@ div.wave.card {
 	margin-top: 2%;
 	border-radius: 1vh;
 	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+}
+
+.overlay {
+	width: 80%;
+	height: 80%;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
+	display: none;
+}
+
+.overlay.open {
+	display: block;
+}
+
+.terminal {
+	z-index: 2000;
+	overflow: scroll;
+}
+
+.overlay h2, h3 {
+	width: 98%;
+	position: relative;
+	left: 1%;
+	margin: 2px;
+	font-weight: 500;
+}
+
+.overlay .key {
+	color: rgb(135, 135, 135);
 }
 
 html div.wave.card {

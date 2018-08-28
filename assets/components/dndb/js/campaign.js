@@ -19,8 +19,9 @@ progress.show();
 //	}
 //});
 
-
-console.log("party.js");
+if (DEV) {
+	console.log("party.js");
+}
 
 loadedUid = false;
 
@@ -174,7 +175,6 @@ function loadCharacter(uid) {
 
 								if (characterInfo.hasImg !== undefined && characterInfo.hasImg === true) {
 									cloudStorage.child(loadedUid).child(sessionStorage.getItem("::saved")).getDownloadURL().then(function(url) {
-										console.log(url);
 										$('#form12_2').css('background-image', "url('" + url + "')");
 									}).catch(function(err) {
 										error(err);
@@ -554,7 +554,6 @@ async function toggleBanList() {
 			$(".pardon" + i).on("click", async function() {
 				var name = $(this).attr("name");
 				var banQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("banList").where("username", "==", name));
-				console.log(name, banQuery);
 				if (banQuery[0] !== undefined) {
 					var docId = banQuery[0]["__id"];
 					firestore.collection("campaigns").doc(campaignId).collection("banList").doc(docId).delete();

@@ -1,9 +1,5 @@
 console.log("app.js");
 
-if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register("./sw.js").then(() => {
-		console.log("serviceWorker registered");
-	}).catch((e) => {
-		console.error(e);
-	});
-}
+navigator.serviceWorker && navigator.serviceWorker.register('../assets/components/dndb/js/pwa/sw.js').then(function(registration) {
+  console.log('Excellent, registered with scope: ', registration.scope);
+});

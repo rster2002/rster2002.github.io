@@ -18,7 +18,7 @@ const firestore = firestoreFunction.collection(dbNew).doc("dnd");
 var wait = firebase.storage();
 const cloudStorage = wait.ref("dnd" + dbNew);
 
-console.log("firebase init");
+
 database = firebase.database().ref("dnd" + db);
 dbUsers = database.child("users");
 dbCampaign = database.child("campaign");
@@ -38,10 +38,5 @@ firestore.get().then(function(doc) {
 		} else if (state.function === "message") {
 			alert(state.message);
 		}
-	} else {
-		firestore.set({
-			function: "online",
-			message: ""
-		});
 	}
 });
