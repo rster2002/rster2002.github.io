@@ -110,6 +110,7 @@
 	height: 100%;
 	background-color: #0080ff;
 	transform: translateX(0%);
+	transition: cubic-bezier(0.4, 0.0, 0.2, 1) 200ms transform;
 }
 
 .lists .section {
@@ -122,6 +123,7 @@
 	padding: 12px 0px;
 	box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
 	border-radius: 0px 0px 10px 10px;
+	display: inline-block;
 }
 
 .lists .section .inputCard h1 {
@@ -187,6 +189,27 @@
 	color: #0080ff;
 }
 
+.lists .section .inputCard > button {
+	float: left;
+    width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+    background-color: transparent;
+    border: solid 2px #0080ff;
+    border-radius: 4px;
+    color: #0080ff;
+    margin: 12px 0px;
+    padding: 5px 0px;
+	outline: 0;
+	cursor: pointer;
+	font-size: 24px;
+}
+
+.lists .section .inputCard button:hover {
+	background-color: rgba(0, 0, 0, .1);
+}
+
 .lists .section .inputCard .row {
 	width: 94%;
 	padding: 0px;
@@ -236,26 +259,35 @@
 	font-size: 18px;
 	margin: 2px;
 	cursor: pointer;
+	background-color: rgb(235, 235, 235);
+	border-radius: 5px;
 }
 
 .lists .section .inputCard .tags .tag p {
 	display: inline-block;
 	padding: 4px 16px;
 	font-size: 18px;
-	background-color: rgb(235, 235, 235);
-	border-radius: 5px;
 	margin: 0;
+}
+
+.lists .section .inputCard .tags .tag i {
+	transform: translateY(5px);
 }
 
 /* List item */
 
 .lists .section .item {
 	width: 100%;
-	max-width: 935px;
 	padding: 12px 8px;
 	margin: 24px 0px;
 	border-radius: 10px;
 	box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+	display: inline-block;
+}
+
+.lists .section .item .shared {
+	cursor: pointer;
+	padding: 12px 0px;
 }
 
 .lists .section .item h1 {
@@ -264,7 +296,7 @@
 	position: relative;
 	left: 50%;
 	transform: translate(-50%, 0%);
-	margin: 12px 0px;
+	margin: 0;
 	font-size: 36px;
 	font-weight: 900;
 }
@@ -274,7 +306,32 @@
 	display: inline-block;
 }
 
-.lists .section .item p {
+.lists .section .item input {
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	margin: 12px 0px;
+	font-size: 24px;
+	background-color: transparent;
+	outline: 0;
+	border: solid 2px #0080ff;
+	border-radius: 4px;
+	color: black;
+	padding: 4px 6px;
+	font-weight: 500;
+}
+
+.lists .section .item input::placeholder {
+	color: #0080ff;
+	opacity: 1;
+}
+
+.lists .section .inputCard input::-ms-input-placeholder {
+	color: #0080ff;
+}
+
+.lists .section .item .expanded > p {
 	width: 94%;
 	position: relative;
 	left: 50%;
@@ -282,4 +339,42 @@
 	margin: 8px 0px;
 	font-size: 18px;
 	font-weight: 600;
+}
+
+.lists .section .item .expanded > button {
+	float: left;
+    background-color: transparent;
+    border: solid 2px #0080ff;
+    border-radius: 4px;
+    color: #0080ff;
+    margin: 12px 16px;
+    padding: 4px 8px;
+	outline: 0;
+	cursor: pointer;
+	font-size: 24px;
+}
+
+.lists .section .item .expanded > button:hover {
+	background-color: rgba(0, 0, 0, .1);
+}
+
+.lists .section .item .tags {
+	width: calc(100% - 24px);
+    padding: 16px 12px;
+}
+
+.lists .section .item .tags .tag {
+	display: inline-block;
+	padding: 4px 8px;
+	font-size: 18px;
+	margin: 2px;
+	background-color: rgb(235, 235, 235);
+	border-radius: 5px;
+}
+
+.lists .section .item .tags .tag p {
+	display: inline-block;
+	padding: 4px 16px;
+	font-size: 18px;
+	margin: 0;
 }

@@ -3,33 +3,152 @@ characters = "abcdefghijklmnopqrstuvwxyz0123456789";
 
 sessionStorage.setItem("::saved", "false");
 
-
-var vueInventory = new Vue({
+var vueInventoryObj = {
 	el: "#inventory",
 	data: {
-		items: [
-			{
-				name: "Torch",
-				description: "Hello World",
-				shown: false
-			},
-			{
-				name: "Tinderbox",
-				description: "Used to set things on fire",
-				shown: true
-			}
-		]
+		items: [],
+		working: {
+			name: "",
+			count: 0,
+			description: "",
+			tag: "",
+			tags: [],
+			shown: false
+		}
 	},
 	methods: {
 		toggleShown(item) {
-			if (item.shown === true) {
-				item.shown === false;
-			} else {
-				item.shown === true;
+			this.items[this.items.indexOf(item)].shown = !this.items[this.items.indexOf(item)].shown;
+		},
+		addTag() {
+			this.working.tags.push(this.working.tag);
+			this.working.tag = "";
+		},
+		deleteTag(tag) {
+			this.working.tags.splice(this.working.tags.indexOf(tag), 1);
+		},
+		addItem() {
+			var i = Object.assign({}, this.working);
+			var d = i.description.split("\n");
+			var rtrn = [];
+			for (var p = 0; p < d.length; ++p) {
+				var temp = d[p];
+				if (temp === "") {
+					temp = " ";
+				}
+				rtrn.push(temp);
+			}
+			i.description = rtrn;
+			this.items.push(i);
+		},
+		deleteItem(item) {
+			if (confirm("Are you sure you want to delete this item?")) {
+				this.items.splice(this.items.indexOf(item), 1);
 			}
 		}
 	}
-})
+}
+
+var vueAbilitiesObj = {
+	el: "#abilities",
+	data: {
+		items: [],
+		working: {
+			name: "",
+			description: "",
+			tag: "",
+			tags: [],
+			shown: false
+		}
+	},
+	methods: {
+		toggleShown(item) {
+			this.items[this.items.indexOf(item)].shown = !this.items[this.items.indexOf(item)].shown;
+		},
+		addTag() {
+			this.working.tags.push(this.working.tag);
+			this.working.tag = "";
+		},
+		deleteTag(tag) {
+			this.working.tags.splice(this.working.tags.indexOf(tag), 1);
+		},
+		addItem() {
+			var i = Object.assign({}, this.working);
+			var d = i.description.split("\n");
+			var rtrn = [];
+			for (var p = 0; p < d.length; ++p) {
+				var temp = d[p];
+				if (temp === "") {
+					temp = " ";
+				}
+				rtrn.push(temp);
+			}
+			i.description = rtrn;
+			this.items.push(i);
+		},
+		deleteItem(item) {
+			if (confirm("Are you sure you want to delete this ability?")) {
+				this.items.splice(this.items.indexOf(item), 1);
+			}
+		}
+	}
+}
+
+var vueSpellsObj = {
+	el: "#spells",
+	data: {
+		items: [],
+		working: {
+			name: "",
+			description: "",
+			level: 0,
+			tag: "",
+			tags: [],
+			shown: false
+		}
+	},
+	methods: {
+		toggleShown(item) {
+			this.items[this.items.indexOf(item)].shown = !this.items[this.items.indexOf(item)].shown;
+		},
+		addTag() {
+			this.working.tags.push(this.working.tag);
+			this.working.tag = "";
+		},
+		deleteTag(tag) {
+			this.working.tags.splice(this.working.tags.indexOf(tag), 1);
+		},
+		addItem() {
+			if (this.working.level === 0) {
+				this.working.tags.push("Cantrip");
+			} else {
+				this.working.tags.push("Level: " + this.working.level);
+			}
+
+			var i = Object.assign({}, this.working);
+			var d = i.description.split("\n");
+			var rtrn = [];
+			for (var p = 0; p < d.length; ++p) {
+				var temp = d[p];
+				if (temp === "") {
+					temp = " ";
+				}
+				rtrn.push(temp);
+			}
+			i.description = rtrn;
+			this.items.push(i);
+		},
+		deleteItem(item) {
+			if (confirm("Are you sure you want to delete this spell?")) {
+				this.items.splice(this.items.indexOf(item), 1);
+			}
+		}
+	}
+}
+
+var vueInventory = new Vue(vueInventoryObj);
+var vueAbilities = new Vue(vueAbilitiesObj);
+var vueSpells = new Vue(vueSpellsObj);
 
 
 $(".innerPage").ready(() => {
@@ -40,6 +159,13 @@ function ctrlS() {
 	if (sessionStorage.getItem("::openPage") === "characterEditor") {
 		saveCharacter(true);
 	}
+}
+
+function openSection(id, index) {
+	$(".page .section").hide();
+	$("#" + id).show();
+	var i = 100 * index;
+	$(".parser").css("transform", "translateX(" + i + "%)");
 }
 
 allowSave = false;
@@ -86,13 +212,11 @@ function saveCharacter(show) {
 
 	try {
 		s();
+		console.log('c');
 		if (sessionStorage.getItem("::saved") !== "false") {
 			progress.show();
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").update(characterObj).then(function() {
 				progress.hide();
-				if (show) {
-					note.open("save", "Saved", 1000);
-				}
 			}).then(function() {
 				if (file !== null) {
 					var task = userBucket.child(sessionStorage.getItem("::saved")).put(file);
@@ -112,290 +236,35 @@ function saveCharacter(show) {
 						}
 					);
 				}
-			}).catch(function(error) {
+			}).then(function() {
+				if (vueInventory) {
+					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("lists").doc("inventory").set({
+						data: vueInventory.items
+					});
+				}
+
+				if (vueAbilities) {
+					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("lists").doc("abilities").set({
+						data: vueAbilities.items
+					});
+				}
+
+				if (vueSpells) {
+					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("lists").doc("spells").set({
+						data: vueSpells.items
+					});
+				}
+			}).then(function() {
+				showSnackbar("Character saved");
+			}).catch(function(e) {
 				error(e);
 			})
 		} else {
-			promptName();
+			error("No character found in session");
 		}
 	} catch(e) {
 		error(e);
 	}
-}
-
-function addSpellToList(spell, index) {
-	function prop(text) {
-		return "<div class='tag'><p>" + text + "</p></div>"
-	}
-
-	var properties = "";
-	console.log(spell);
-	if (spell.level == 0) {
-		properties += prop("Cantrip");
-	} else {
-		properties += prop("Level " + spell.level);
-	}
-
-	if (spell.verbal === true) {
-		properties += prop("Verbal");
-	}
-
-	if (spell.somatic === true) {
-		properties += prop("Somatic");
-	}
-
-	if (spell.material !== '') {
-		properties += prop("Material " + spell.material);
-	}
-
-	if (spell.range !== '') {
-		properties += prop("Range " + spell.range);
-	}
-
-	if (spell.castingTime !== '') {
-		properties += prop("Casting time " + spell.castingTime);
-	}
-
-	if (spell.duration !== '') {
-		properties += prop("Duration " + spell.duration);
-	}
-
-	if (spell.concentration === true) {
-		properties += prop("Concentration");
-	}
-
-	if (spell.ritual === true) {
-		properties += prop("Ritual");
-	}
-
-	var description = spell.description;
-	var desc = description.split("\n");
-	console.log(desc);
-	var out = "";
-	for (var i = 0; i < desc.length; ++i) {
-		var text = desc[i];
-		if (text === "") {
-			out += "<br>";
-		} else {
-			out += "<p>" + text + "</p>";
-		}
-	}
-
-	var levelText = spell.level == 0 ? "Cantrip" : "Level " + spell.level;
-
-	$("#spellsListing").append("<div class='item s2 rounded centerHorizontal' id='spell" + index + "'><div class='shared'><div class='icon'><div class='circle'></div></div><div class='text'><div class='wrapper'><h1>" + spell.name + "</h1><p>" + levelText + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='text'>" + out + "</div><div class='actions'><button onclick='deleteSpell(" + index + ")' icon-left='delete' class='wave del'>Delete</button></div></div></div>");
-
-	$("#spell" + index).children(".shared").on("click", function(e) {
-		console.log("click")
-		e.stopPropagation();
-		t(this);
-	});
-
-	var thisthis = this;
-
-	// $("#spell" + index + " .del").on("click", function(e) {
-	// 	e.stopPropagation();
-	// 	wave.dialog.open("Confirm", "Are you sure you want to delete this spell from your list?", [
-	// 		{
-	// 			"text": "Confirm",
-	// 			"function": function() {
-	// 				deleteSpell(thisthis);
-	// 			}
-	// 		},
-	// 		{
-	// 			"text": "Cancel",
-	// 			"function": function() {
-	// 				wave.dialog.close();
-	// 			}
-	// 		}
-	// 	])
-	// });
-}
-
-function addItemToList(itemObj, index) {
-	function prop(text) {
-		return "<div class='tag'><p>" + text + "</p></div>"
-	}
-	var properties = "";
-	if (itemObj.magic) {
-		properties += prop("Magic");
-	}
-	if (itemObj.maxCharges !== 0) {
-		properties += prop("Max charges: " + itemObj.maxCharges);
-	}
-	if (itemObj.weapon === true) {
-		properties += prop("Weapon")
-	}
-	if (itemObj.damageDie !== "") {
-		properties += prop("Damage die: " + itemObj.damageDie);
-	}
-	if (itemObj.light === true) {
-		properties += prop("Light");
-	}
-	if (itemObj.finess === true) {
-		properties += prop("Finess");
-	}
-	if (itemObj.twoHanded === true) {
-		properties += prop("Two-handed");
-	}
-	if (itemObj.heavy === true) {
-		properties += prop("Heavy");
-	}
-	if (itemObj.reach === true) {
-		properties += prop("Reach");
-	}
-	if (itemObj.throw !== "") {
-		properties += prop("Throw: " + itemObj.throw);
-	}
-	if (itemObj.vercitile !== "") {
-		properties += prop("Vercitile: " + itemObj.vercitile);
-	}
-	if (itemObj.ammunition !== "") {
-		properties += prop("Ammunition: " + itemObj.ammunition);
-	}
-	if (itemObj.melee === true) {
-		properties += prop("Melee weapon");
-	}
-	if (itemObj.ranged === true) {
-		properties += prop("Ranged weapon");
-	}
-	if (itemObj.loading === true) {
-		properties += prop("Loading");
-	}
-
-	var description = itemObj.description;
-	var desc = description.split("\n");
-	var out = "";
-	for (var i = 0; i < desc.length; ++i) {
-		var text = desc[i];
-		if (text === "") {
-			out += "<br>";
-		} else {
-			out += "<p>" + text + "</p>";
-		}
-	}
-	var note = "";
-	var colorGrad = "";
-	if (itemObj.magic === true && itemObj.weapon) {
-		note = "Magical weapon";
-		colorGrad = "background-color: #ff4e00;background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);"
-	} else if (itemObj.magic === true) {
-		note = "Magical item";
-		colorGrad = "background-color: #fbb034;background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);"
-	} else if (itemObj.weapon === true) {
-		note = "Weapon";
-		colorGrad = "background-color: #6b0f1a;background-image: linear-gradient(315deg, #6b0f1a 0%, #b91372 74%);"
-	} else {
-		note = "Normal item";
-		colorGrad = "background-color: #2a2a72;background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);"
-	}
-	var chargeControlls = "";
-	if (itemObj.magic === true) {
-		chargeControlls = "<div class='controll'><h1>Charge: </h1><button class='wave prime' onclick='addCharge(" + index + ")'><i class='material-icons'>add</i></button><h1 id='itemCharge" + index + "'>" + itemObj.charges + "</h1><button class='wave prime' onclick='removeCharge(" + index + ")'><i class='material-icons'>remove</i></button></div>"
-	}
-
-	$("#itemsList").append("<div class='item s2 rounded centerHorizontal' id='item" + index + "'><div class='shared'><div class='icon'><div class='circle' style='" + colorGrad + "'></div></div><div class='text'><div class='wrapper'><h1>" + itemObj.name + "</h1><p>" + note + "</p></div></div></div><div class='content'><div class='tags'>" + properties + "</div><div class='controlls'><div class='controll'><h1>Quantity: </h1><button class='wave prime' onclick='addQuantity(" + index + ")'><i class='material-icons'>add</i></button><h1 id='itemQuantity" + index + "'>" + itemObj.quantity + "</h1><button class='wave prime' onclick='removeQuantity(" + index + ")'><i class='material-icons'>remove</i></button></div>" + chargeControlls + "</div><div class='text'>" + out + "</div><div class='actions'><button onclick='deleteItem(" + index + ")' icon-left='delete' class='wave del'>Delete</button></div></div></div>");
-
-	$("#item" + index).children(".shared").on("click", function(e) {
-		console.log("click")
-		e.stopPropagation();
-		t(this);
-	});
-
-	var thisthis = this;
-}
-
-function addQuantity(index) {
-	var item = itemObj[index];
-	var currentQuantity = item.quantity;
-	currentQuantity += 1;
-	itemObj[index]["quantity"] = currentQuantity;
-	$("#itemQuantity" + index).text(currentQuantity);
-	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("items").doc(item.__id).update({
-		quantity: currentQuantity
-	}).catch((e) => {
-		error(e);
-	})
-}
-
-function removeQuantity(index) {
-	var item = itemObj[index];
-	var currentQuantity = item.quantity;
-	currentQuantity -= 1;
-	itemObj[index]["quantity"] = currentQuantity;
-	$("#itemQuantity" + index).text(currentQuantity);
-	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("items").doc(item.__id).update({
-		quantity: currentQuantity
-	}).catch((e) => {
-		error(e);
-	});
-}
-
-function addCharge(index) {
-	var item = itemObj[index];
-	var currentCharge = item.charges;
-	currentCharge += 1;
-	itemObj[index]["charges"] = currentCharge;
-	$("#itemCharge" + index).text(currentCharge);
-	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("items").doc(item.__id).update({
-		charges: currentCharge
-	}).catch((e) => {
-		error(e);
-	});
-}
-
-function removeCharge(index) {
-	var item = itemObj[index];
-	var currentCharge = item.charges;
-	currentCharge -= 1;
-	itemObj[index]["charges"] = currentCharge;
-	$("#itemCharge" + index).text(currentCharge);
-	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("items").doc(item.__id).update({
-		charges: currentCharge
-	}).catch((e) => {
-		error(e);
-	});
-}
-
-function deleteSpell(elementId) {
-	wave.dialog.open("Confirm", "Are you sure you want to delete this spell?", [
-		{
-			"text": "Accept",
-			"function": function() {
-				var spellId = spellObj[elementId]["__id"];
-				console.log(spellId);
-				userRef.collection("characters").doc(sessionStorage.getItem("::saved") + "/spells/" + spellId).delete().catch(function(e){error(e)});
-				$("#spell" + elementId).remove();
-				note.open("delete", "Spell deleted", 2000);
-			}
-		},
-		{
-			"text": "Cancel",
-			"function": function() {
-				wave.dialog.close();
-			}
-		}
-	]);
-}
-
-function deleteItem(elementId) {
-	wave.dialog.open("Confirm", "Are you sure you want to delete this item", [
-		{
-			"text": "Accept",
-			"function": function() {
-				var itemId = itemObj[elementId]["__id"];
-				userRef.collection("characters").doc(sessionStorage.getItem("::saved") + "/items/" + itemId).delete().catch(function(e){error(e)});
-				$("#item" + elementId).remove();
-				note.open("delete", "Item deleted", 2000);
-			}
-		},
-		{
-			"text": "Cancel",
-			"function": function() {
-				wave.dialog.close();
-			}
-		}
-	])
 }
 
 function loadCharacter(i) {
@@ -428,8 +297,12 @@ function loadCharacter(i) {
 							});
 						}
 					}
-				}).catch(function(e){error(e)});
-			}).catch(function(e){error(e)});
+				}).catch(function(e){
+					error(e)
+				});
+			}).catch(function(e){
+				error(e)
+			});
 
 			loader.hide();
 		}
@@ -438,7 +311,7 @@ function loadCharacter(i) {
 	}
 }
 
-async function del() {
+async function deleteCharacter() {
 	console.log("Delete");
 
 	progress.show();
@@ -453,7 +326,10 @@ async function del() {
 					progress.hide();
 					note.open("delete", "Character deleted", 2000);
 					openPage("characterList");
-				}).catch(function(e){error(e)});
+					wave.dialog.close();
+				}).catch(function(e) {
+					error(e)
+				});
 			}).catch(function(e){error(e)});
 		})
 	} else {
@@ -493,7 +369,22 @@ function dupe() {
 					});
 				}).catch(function(error) {
 					localError(error);
-				});;
+				});
+
+				userRef.collection("characters").doc(newCharacterId).collection("lists").doc("inventory").set(vueInventory.items)
+					.catch(err => {
+						error(err);
+					});
+
+				userRef.collection("characters").doc(newCharacterId).collection("lists").doc("abilities").set(vueAbilities.items)
+					.catch(err => {
+						error(err);
+					});
+
+				userRef.collection("characters").doc(newCharacterId).collection("lists").doc("inventory").set(vueSpells.items)
+					.catch(err => {
+						error(err);
+					});
 			}
 		}).catch(function(error) {
 			localError(error);
@@ -503,63 +394,6 @@ function dupe() {
 
 addSpellIndex = 5000;
 addItemIndex = 5000;
-
-function addSpell() {
-	var spellId = genId();
-	if ($("#level").val() !== "") {
-		var spellObj = {
-			name: $("#spellName").val(),
-			verbal: $(".verbal").hasClass("selected"),
-			somatic: $(".somatic").hasClass("selected"),
-			material: $("#materialComponent").val(),
-			range: $("#range").val(),
-			castingTime: $("#castingTime").val(),
-			duration: $("#duration").val(),
-			description: $("#description").val(),
-			level: Number($("#level").val()),
-			concentration: $(".concentration").hasClass("selected"),
-			ritual: $(".ritual").hasClass("selected"),
-			id: spellId
-		};
-
-		userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("spells").add(spellObj).catch(function(e){error(e)});;
-
-		addSpellToList(spellObj, addSpellToList);
-		addSpellIndex += 1;
-	} else {
-		alert("You didn't select a spell level");
-	}
-}
-
-function addItem() {
-	var itemId = genId();
-	var newItemObj = {
-		name: $("#itemName").val(),
-		magic: $(".magic").hasClass("selected"),
-		description: $("#itemDescription").val(),
-		maxCharges: Number($("#itemCharges").val()),
-		charges: Number($("#itemCharges").val()),
-		quantity: Number($("#itemCount").val()),
-		weapon: $("#itemWeapon").hasClass("selected"),
-		damageDie: $("#itemDamageDie").val(),
-		light: $("#itemLight").hasClass("selected"),
-		finess: $("#itemFiness").hasClass("selected"),
-		twoHanded: $("#itemTwoHanded").hasClass("selected"),
-		heavy: $("#itemHeavy").hasClass("selected"),
-		reach: $("#itemReach").hasClass("selected"),
-		throw: $("#itemThrow").val(),
-		vercitile: $("#itemVercitile").val(),
-		ammunition: $("#itemAmmunition").val(),
-		melee: $("#itemMelee").hasClass("selected"),
-		ranged: $("#itemRanged").hasClass("selected"),
-		loading: $("#itemLoading").hasClass("selected")
-	}
-	itemObj[addItemIndex] = newItemObj;
-	itemObj[addItemIndex]["__id"] = itemId;
-	userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("items").doc(itemId).set(newItemObj).catch(e => {error(e)});
-	addItemToList(newItemObj, addItemIndex);
-	addItemIndex += 1;
-}
 
 var inputs = [
 	"form83_1",
@@ -605,32 +439,75 @@ var modifiers = [
 var spellObj = {};
 var itemObj = {};
 
-async function querySpells() {
-	progress.show();
-	var spellArray = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("level", "desc").orderBy("name", "desc"));
-
-	for (var i = 0; i < spellArray.length; i++) {
-		addSpellToList(spellArray[i], i);
-		spellObj[i] = spellArray[i];
-	}
-
-	progress.hide();
+function loadInventory() {
+	userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("lists").doc("inventory").get().then(doc => {
+		if (doc && doc.exists) {
+			vueInventory.items = doc.data().data;
+		} else {
+			vueInventory.items = [];
+		}
+	});
 }
 
-async function queryItems() {
-	var itemArray = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("items").orderBy("name", "desc"));
+function loadAbilities() {
+	userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("lists").doc("abilities").get().then(doc => {
+		if (doc && doc.exists) {
+			vueAbilities.items = doc.data().data;
+		} else {
+			vueAbilities.items = []
+		}
+	})
+}
 
-	for (var i = 0; i < itemArray.length; i++) {
-		addItemToList(itemArray[i], i);
-		itemObj[i] = itemArray[i];
+async function loadSpells() {
+	userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("lists").doc("spells").get().then(doc => {
+		if (doc && doc.exists) {
+			vueSpells.items = doc.data().data;
+		} else {
+			vueSpells.items = [];
+		}
+	});
+
+	var query = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells"));
+	for (var i = 0; i < query.length; ++i) {
+		var spell = query[i];
+		userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").doc(spell.__id).delete().catch(err => {
+			error(err);
+		});
+		var spellObj = {
+			name: spell.name,
+			description: [],
+			shown: false,
+			tags: []
+		}
+
+		var temp = spell.description.split("\n")
+		for (var p = 0; p < temp.length; ++p) {
+			var rtrn = temp[p];
+			if (rtrn === "") {
+				rtrn = " ";
+			}
+			spellObj.description.push(rtrn);
+		}
+
+		if (spell.level === 0) {spellObj.tags.push("Cantrip")} else {spellObj.tags.push("Level: " + spell.level)}
+		if (spell.verbal === true) {spellObj.tags.push("Verbal")}
+		if (spell.somatic === true) {spellObj.tags.push("Somatic")}
+		if (spell.material !== "") {spellObj.tags.push("Material component: " + spell.material)}
+		if (spell.castingTime !== "") {spellObj.tags.push("Casting time: " + spell.castingTime)}
+		if (spell.ritual === true) {spellObj.tags.push("Ritual")}
+		if (spell.concentration === true) {spellObj.tags.push("Concentration")}
+		if (spell.range !== "") {spellObj.tags.push("Range: " + spell.range)}
+
+		vueSpells.items.push(spellObj);
 	}
 }
 
-async function onload() {
+async function loadLists() {
 	loader.show();
-	await loadCharacter(sessionStorage.getItem("::openCharacter"));
-	await querySpells();
-	await queryItems();
+	await loadSpells();
+	await loadInventory();
+	await loadAbilities();
 	loader.hide();
 }
 
@@ -697,4 +574,15 @@ function slideRight() {
 	}
 	$("#slideTitle").text(slideNames[currentSlide]);
 	$(".sliding").css("margin-left", "-" + currentSlide * 100 + "vw");
+}
+
+var loaded = false;
+
+function onload() {
+	if (!loaded) {
+		console.log("C");
+		loadLists();
+		loadCharacter(sessionStorage.getItem("::openCharacter"));
+		loaded = true;
+	}
 }

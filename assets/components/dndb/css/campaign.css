@@ -1,215 +1,25 @@
-.pageArea {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.innerPage {
-	padding-bottom: 5vh;
-}
-
-.head {
-	width: 100%;
-	height: 50%;
-}
-
-.head .top {
-	width: 100%;
-	height: 50%;
-}
-
-.head .top h1 {
-	font-size: 4rem;
+.topUserImage {
+	width: 56px;
+	height: 56px;
 	position: relative;
-	top: 50%;
 	left: 50%;
-	transform: translate(-50%,-50%);
-	text-align: center;
-}
-
-.head .bottom {
-	width: 100%;
-	height: 50%;
-}
-
-.DM {
-	height: 50%;
-	width: 60%;
-	background-color: rgb(235,235,235);
-	border-radius: 5px;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-}
-
-.DM img {
-	height: 90%;
-	position: relative;
-	top: 5%;
-	left: 2%;
-	border-radius: 100%;
-	float: left;
-}
-
-.DM h1 {
-	float: left;
-	position: relative;
-	top: 50%;
-	left: 5%;
-	transform: translate(0%,-50%);
-}
-
-.playerList {
-	border-top: rgb(235,235,235) solid 1px;
-	border-bottom: rgb(235,235,235) solid 1px;
-	width: 100%;
-}
-
-.playerList .innerList {
-	height: 100%;
-	width: 100%;
-}
-
-.player {
-	height: 10vh;
-	width: 60%;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	cursor: pointer;
-}
-
-.player img {
-	height: 90%;
-	position: relative;
-	top: 5%;
-	left: 2%;
-	border-radius: 100%;
-	float: left;
-}
-
-.player h1 {
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	display: block;
-	overflow: hidden;
-	width: 60%;
-	float: left;
-	position: relative;
-	top: 50%;
-	left: 5%;
-	transform: translate(0%,-50%);
-	text-overflow: ellipsis;
-}
-
-.player:hover {
-	background-color: rgb(235,235,235);
-}
-
-/*
-.ban {
-	display: none;
-	cursor: pointer;
-	width: 100%;
-	height: 15vh;
-}
-
-.ban:hover {
-	background-color: rgb(235,235,235);
-}
-
-.ban h1 {
-	text-align: center;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-}
-*/
-
-.characterSheet {
-	margin-bottom: 10vh;
-}
-
-.banList {
-	width: 100%;
-	margin-top: 1%;
-	display: none;
-}
-
-.banList.open {
-	display: inline-block;
-}
-
-.listItemWrapper {
-	width: 60%;
-	height: 12vh;
-}
-
-.banList .listItem {
-	position: relative;
-	width: 100%;
-	height: 10vh;
-	opacity: 0;
-	transition: all cubic-bezier(0.4, 0.0, 0.6, 1) 200ms;
-	top: 10%;
-}
-
-.banList .listItem.open {
-	opacity: 1;
-	transition: all cubic-bezier(0.4, 0.0, 0.6, 1) 200ms;
-	top: 0%;
-}
-
-.listItem .icon {
-	width: 10vh;
-	height: 10vh;
-	float: left;
-}
-
-.listItem .icon img {
-	width: 70%;
-	height: 70%;
-	background-color: #00BCD4;
+	transform: translateX(-50%);
 	border-radius: 50%;
-	position: relative;
-	top: 15%;
-	left: 15%;
+	border: 4px solid rgba(0, 0, 0, .1);
+	margin-top: -44px;
 }
 
-.listItem .text {
-	height: 10vh;
+.datePicker, .timePicker {
 	display: inline-block;
-	width: calc(60% - 10vh);
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.datePicker select {
 	float: left;
 }
 
-.listItem .text .wrapper {
-	height: 70%;
-	position: relative;
-	top: 15%;
-}
-
-.listItem .text h1 {
-	margin-left: 1%;
-	width: 99%;
-}
-
-.listItem .text p {
-	margin-left: 1%;
-	width: 99%;
-}
-
-.listItem .buttons .buttonsWrapper {
-	float: right;
-}
-
-.listItem .buttons {
-	height: 10vh;
-	display: inline-block;
-	width: calc(40% - 0.5vh);
+.timePicker select {
 	float: left;
-}
-
-.listItem .buttons button {
-	margin-left: -10%;
 }

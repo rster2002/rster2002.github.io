@@ -80,6 +80,11 @@ function initUser() {
 		}
 		realUid = p.uid;
 		sessionStorage.setItem("::uid", uid);
+		userInformation = {
+			username: p.displayName,
+			profileImage: p.photoURL,
+			uid: p.uid
+		}
 		userRef = firestore.collection("users").doc(uid);
 		userBucket = cloudStorage.child(uid);
 		$(".userimg").attr("src", p.photoURL);
@@ -87,61 +92,6 @@ function initUser() {
 		configUserDb();
 	});
 }
-
-// async function initUser(f) {
-// 	await getUser(async (authObj) => {
-// 		await createReferences(authObj);
-// 		await configUserDb(authObj);
-// 		ii = authObj;
-// 	});
-// 	return ii;
-// }
-
-// waveImported = function(){
-// 	var user = firebase.auth().currentUser;
-// 	firebase.auth().onAuthStateChanged(function(user) {
-// 		if (user != null) {
-// 			console.log(user);
-// 			// catches user data
-// 			username = user.displayName;
-// 			userIcon = user.photoURL;
-// 			uid = user.uid;
-// 			realUid = uid;
-// 			userCode = "dnd-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
-// 			if (sessionStorage.getItem("::emuUid") !== null) {
-// 				uid = sessionStorage.getItem("::emuUid");
-// 			}
-//
-//             sessionStorage.setItem("::uid", uid);
-//             sUid = uid;
-//
-// 			userRef = firestore.collection("users").doc(sessionStorage.getItem("::uid"));
-// 			userBucket = cloudStorage.child(uid);
-// 			if (userIcon === undefined || userIcon === null) {
-// 				userIcon = "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg";
-// 			}
-//
-// 			sessionStorage.setItem("::uid",uid)
-//
-// 			setTimeout(() => {
-// 				$(".userimg").attr("src", userIcon);
-// 				$(".username").text(username);
-// 			}, 100)
-//
-// 			setUserinfo(username, userIcon);
-// 			$(".ui--sidenavWrapper").addClass("modified");
-//
-//
-//
-// 			// Check for user and returns stored user info
-//
-// 			progress.show();
-//
-// 		} else {
-// 			logout();
-// 		}
-// 	});
-// };
 
 initUser();
 

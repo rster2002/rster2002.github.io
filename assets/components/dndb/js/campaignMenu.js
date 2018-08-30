@@ -222,38 +222,40 @@ join checklist:
 
 async function join(campaignName) {
 	show();
+	if (campaignName) {
+		// creates a query to check if a campaign with that campaign name exists
+		var query = await createQuery(firestore.collection("campaigns").where("name", "==", campaignName));
+		if (query[0] !== undefined) {
+			var campaign = query[0];
 
-	// creates a query to check if a campaign with that campaign name exists
-	var query = await createQuery(firestore.collection("campaigns").where("name", "==", campaignName));
-	if (query[0] !== undefined) {
-		var campaign = query[0];
+			// gets the shared campaign obj
+			var campaignId = campaign.id;
+			var campaignName = campaign.name;
+			sessionStorage.setItem("::campaignId", campaignId);
+			sessionStorage.setItem("::campaignName", campaignName);
 
-		// gets the shared campaign obj
-		var campaignId = campaign.id;
-		var campaignName = campaign.name;
-		sessionStorage.setItem("::campaignId", campaignId);
-		sessionStorage.setItem("::campaignName", campaignName);
+			// creates a query to check if the user is banned
+			var bannedQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("banList").where("uid", "==", sUid));
+			if (bannedQuery[0] === undefined) {
 
-		// creates a query to check if the user is banned
-		var bannedQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("banList").where("uid", "==", sUid));
-		if (bannedQuery[0] === undefined) {
-
-			// creates a query to see if the current user already joined the campaign
-			var userQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("users").where("id", "==", sUid));
-			if (userQuery[0] !== undefined) {
-				hide();
-				openPage("campaign");
+				// creates a query to see if the current user already joined the campaign
+				var userQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("users").where("id", "==", sUid));
+				if (userQuery[0] !== undefined) {
+					hide();
+					sessionStorage.setItem("::firstTimeJoin", false);
+					openPage("campaign");
+				} else {
+					hide();
+					selectCharacter();
+				}
 			} else {
+				alert("You are banned from this campaign");
 				hide();
-				selectCharacter();
 			}
 		} else {
-			alert("You are banned from this campaign");
+			alert("Can't find this campaign");
 			hide();
 		}
-	} else {
-		alert("Can't find this campaign");
-		hide();
 	}
 }
 
@@ -326,6 +328,7 @@ function afterSelect(index) {
 			}).then(function() {
 				sessionStorage.setItem("::party", campaignId);
 				hide();
+				sessionStorage.setItem("::firstTimeJoin", true);
 				openPage("campaign");
 			});
 		});

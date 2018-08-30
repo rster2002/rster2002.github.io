@@ -31,8 +31,10 @@ if (!DEV) {
 
 const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 const pageTitles = {
-	characterList: "Character editor",
-	campaignMenu: "Campaign",
+	characterList: "Character List",
+	characterEditor: "Character Editor",
+	campaign: "Campaign",
+	campaignMenu: "Campaign's",
 	dm: "Dungeon Master Tools",
 }
 
@@ -382,4 +384,12 @@ inputCard = {
 			}, 100);
 		}
 	}
+}
+
+function showSnackbar(text) {
+	$(".snackbar p").text(text);
+	$(".snackbar").addClass("open");
+	setTimeout(() => {
+		$(".snackbar").removeClass("open");
+	}, 1500);
 }
