@@ -8,6 +8,7 @@ var vueInstance = new Vue({
 	data: {
 		welcomeText: "",
 		isDM: false,
+		timerOutput: "",
 		dm: {
 			uid: "",
 			profileImage: "",
@@ -24,6 +25,29 @@ var vueInstance = new Vue({
 			years: [],
 			hours: [],
 			minutes: []
+		},
+		pickedDate: {
+			day: 1,
+			month: "Jan",
+			year: 2018,
+			hour: 0,
+			minute: 0
+		},
+		countDownDate: "Jan 1, 2018 12:00:00"
+	},
+	methods: {
+		setTime() {
+			var m = String(this.pickedDate.minute)[1] === undefined ? "0" + String(this.pickedDate.minute) : String(this.pickedDate.minute);
+			var h = String(this.pickedDate.hour)[1] === undefined ? "0" + String(this.pickedDate.hour) : String(this.pickedDate.hour);
+			var d = this.pickedDate.month + " " + this.pickedDate.day + ", " + this.pickedDate.year + " " + h + ":" + m + ":00";
+			firestore.collection("campaigns").doc(campaignId).collection("misc").doc("timer").set({
+				countDownDate: d,
+				pickedDate: this.pickedDate
+			}).then(() => {
+				showSnackbar("Set session date");
+			}).catch(err => {
+				error(err);
+			});
 		}
 	}
 });
@@ -32,10 +56,21 @@ var vueInstance = new Vue({
 for (var i = 1; i <= 31; ++i) {
 	vueInstance.datePicker.days.push(i);
 }
-for (var i = 1; i <= 12; ++i) {
-	vueInstance.datePicker.months.push(i);
-}
-for (var i = 2017; i <= 2100; ++i) {
+vueInstance.datePicker.months = [
+	"Jan",
+	"Feb",
+	"Mar",
+	"Apr",
+	"May",
+	"Jun",
+	"Jul",
+	"Aug",
+	"Sep",
+	"Oct",
+	"Nov",
+	"Dec"
+]
+for (var i = 2018; i <= 2100; ++i) {
 	vueInstance.datePicker.years.push(i);
 }
 for (var i = 0; i <= 23; ++i) {
@@ -44,6 +79,41 @@ for (var i = 0; i <= 23; ++i) {
 for (var i = 0; i <= 59; ++i) {
 	vueInstance.datePicker.minutes.push(i);
 }
+
+// database stuff for datepicker
+firestore.collection("campaigns").doc(campaignId).collection("misc").doc("timer").onSnapshot(doc => {
+	if (doc && doc.exists) {
+		vueInstance.countDownDate = doc.data().countDownDate;
+		vueInstance.pickedDate = doc.data().pickedDate;
+	} else {
+		vueInstance.countDownDate = "Jan 1, 2018 12:00:00";
+	}
+});
+
+
+var x = setInterval(function() {
+	var now = new Date().getTime();
+	var c = new Date(vueInstance.countDownDate).getTime();
+	var distance = c - now;
+
+	// Time calculations for days, hours, minutes and seconds
+	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+	// Display the result in the element with id="demo"
+	vueInstance.timerOutput = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+	// If the count down is finished, write some text
+	if (distance < 0) {
+		if (distance < 3600000) {
+			vueInstance.timerOutput = "No time set";
+		} else {
+			vueInstance.timerOutput = "Game time";
+		}
+	}
+}, 1000);
 
 // change welcome message if this is first time joining
 if (sessionStorage.getItem("::firstTimeJoin") === true) {
@@ -74,6 +144,8 @@ async function getDm() {
 getDm();
 
 vueInstance.currentUser = userInformation;
+
+
 
 
 // loader.show();

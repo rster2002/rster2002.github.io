@@ -392,7 +392,7 @@ html div.wave.card > div.actions button {
 
 /* Styling for lane and entries */
 .innerPage .lane {
-	width: 100%;
+	width: 95%;
 	max-width: 935px;
 	position: relative;
 	top: 56px;
@@ -423,6 +423,23 @@ html div.wave.card > div.actions button {
 	color: black;
 	padding: 4px 6px;
 	font-weight: 500;
+}
+
+.innerPage .lane .entry button {
+	margin: 8px 4px;
+	font-size: 24px;
+	background-color: transparent;
+	outline: 0;
+	border: solid 2px #0080ff;
+	border-radius: 4px;
+	color: #0080ff;
+	padding: 4px 6px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.innerPage .lane .entry button:hover {
+	background-color: rgba(0, 0, 0, .1);
 }
 
 .innerPage .lane .entry h1 {
