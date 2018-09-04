@@ -60,6 +60,10 @@ html .wave.top.bar > .section button i {
 	margin: 0;
 }
 
+.pointer {
+	cursor: pointer;
+}
+
 .center {
 	position: relative;
 	top: 50%;
@@ -450,6 +454,10 @@ html div.wave.card > div.actions button {
 	margin: 12px 0px;
 }
 
+.innerPage .lane .entry h1.ch {
+	text-align: center;
+}
+
 .innerPage .lane .entry h2 {
 	width: 94%;
 	position: relative;
@@ -459,4 +467,80 @@ html div.wave.card > div.actions button {
 	color: rgba(0, 0, 0, .3);
 	font-size: 18px;
 	font-weight: 400;
+}
+
+.innerPage .lane .entry h2.ch {
+	text-align: center;
+}
+
+.innerPage .lane .entry input {
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	margin: 12px 0px;
+	font-size: 24px;
+	background-color: transparent;
+	outline: 0;
+	border: solid 2px #0080ff;
+	border-radius: 4px;
+	color: black;
+	padding: 4px 6px;
+	font-weight: 500;
+}
+
+.innerPage .lane .entry input::placeholder {
+	color: #0080ff;
+	opacity: 1;
+}
+
+.innerPage .lane .entry input::-ms-input-placeholder {
+	color: #0080ff;
+}
+
+.innerPage .lane .entry .listItem {
+	width: 95%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin: 4px 0px;
+	border-radius: 10px;
+	box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+	padding: 12px 8px;
+	display: inline-block;
+}
+
+.innerPage .lane .entry .listItem h1 {
+	font-size: 36px;
+}
+
+.overlayList {
+	display: block;
+	position: fixed;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, .1);
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+}
+
+.overlayList .inner {
+	max-width: 935px;
+	width: 95%;
+	height: 95%;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+}
+
+.overlayList .inner .listItem {
+	width: 95%;
+	margin: 12px 2.5%;
+	border-radius: 10px;
+	box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
 }

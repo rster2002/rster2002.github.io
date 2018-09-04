@@ -1,31 +1,46 @@
+vueInstance = new Vue({
+	el: "#vueInstance",
+	data: {
+		users: []
+	},
+	methods: {
+		stopEmulation() {
+			sessionStorage.removeItem("::emuUid");
+			if (DEV) {
+				location.href = "appb.html";
+			} else {
+				location.href = "appb.html?pro";
+			}
+		},
+		startEmulation(u) {
+			sessionStorage.setItem("::emuUid", u);
+			if (DEV) {
+				location.href = "appb.html";
+			} else {
+				location.href = "appb.html?pro";
+			}
+		},
+		toggleOpen(u) {
+			this.users[this.users.indexOf(u)].shown = !this.users[this.users.indexOf(u)].shown;
+		}
+	}
+})
+
 async function refreshUsers() {
 	userArray = await createQuery(firestore.collection("users").orderBy("username", "asc"));
 	console.log(userArray);
 	for (var i = 0; i < userArray.length; ++i) {
 		var userObj = userArray[i];
-		$(".users").append("<div class='user' id='" + userObj.uid + "'><div class='icon'><img src='" + userObj.usericon + "'/></div><div class='username centerVertical'><h1>" + userObj.username + "</h1></div></div>");
-		$("#" + userObj.uid).on("click", function() {
-			userClick(this);
-		});
+		userObj.shown = false;
+		vueInstance.users.push(userObj);
 	}
 }
 
 function startEmulatetSession() {
-	sessionStorage.setItem("::emuUid", lUid);
-	if (DEV) {
-		location.href = "app.html";
-	} else {
-		location.href = "app.html?pro";
-	}
+
 }
 
 function stopEmulatetSession() {
-	sessionStorage.removeItem("::emuUid");
-	if (DEV) {
-		location.href = "app.html";
-	} else {
-		location.href = "app.html?pro";
-	}
 }
 
 function deleteAccount() {

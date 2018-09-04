@@ -11,73 +11,131 @@ async function getUser(f) {
 }
 
 async function configUserDb(authObj) {
+
+	// requests the user document
 	userRef.get().then(function(doc) {
+
+		// checks if the document exists.
 		if (doc && doc.exists) {
+
+			// gets the data
 			globalUser = doc.data();
 			vueTerminal.user = globalUser;
+
+			// updates the document
 			userRef.update({
 				lastLogin: Date.now()
 			}).then(function() {
 				progress.hide();
-			}).catch(function(e){error(e)});
+			}).catch(err => {
+				error(err);
+			});
+
+			var userId;
+			// checks if the user document has an userId
+			if (globalUser.userId === undefined) {
+				userId = "dnd-" + genId();
+				userRef.update({
+					userId: userId
+				});
+			} else {
+				userId = globalUser.userId;
+			}
+
+			userInformation["userId"] = userId;
 		} else {
-			var userCode = "dnd-" + genId();
+
+			// creates the user document
+			var userId = "dnd-" + genId();
+			userInformation["userId"] = userId;
 			userRef.set({
 				uid: authObj.uid,
 				username: authObj.displayName,
 				usericon: authObj.photoURL,
 				firstLogin: Date.now(),
 				lastLogin: Date.now(),
-				userCode: userCode
-			}).then(function() {
+				userId: userId
+			}).then(() => {
+				firestore.collection("userId").doc(userId).set({
+					uid: authObj.uid,
+					username: authObj.displayName,
+					usericon: authObj.photoURL
+				}).catch(err => {
+
+				})
+			}).then(() => {
 				progress.hide();
-			}).catch(function(e){error(e)});
+			}).catch(err => {
+				error(err);
+			});
 		}
 	}).then(function() {
+
+		// requests the misc data
 		firestore.collection("users").doc(realUid).collection("misc").doc("info").get().then(function(doc) {
 			if (doc && doc.exists) {
+
+				// gets the data
 				var miscInfo = doc.data();
 				sessionStorage.setItem("::wait", "0");
+
+				// check if the user is a system user
 				if (miscInfo.type === "system" && sessionStorage.getItem("::wait") === "0") {
+
+					// checks if the user is emulating an other uid and sets the border color
 					if (sessionStorage.getItem("::emuUid") === null) {
 						$(".userIcon").css("border", "1px solid #169afd");
 					} else {
 						$(".userIcon").css("border", "1px solid #6dec1c");
 					}
+
+					// adds the system tab to the menu
 					$(".sidebar .menu").append("<div class='menubutton' onclick='openSystemPage()'><p class='centerVertical'><i class='material-icons'>code</i>System</p></div>")
 					sessionStorage.setItem("::wait", "1");
 				}
 			} else {
+
+				// registers the user as a default user
 				firestore.collection("users").doc(realUid).collection("misc").doc("info").set({
 					type: "default"
-				}).catch(function(e){error(e)});
+				}).catch(err => {
+					error(err);
+				});
 			}
 		});
-	}).catch((e) => {
-		error(e);
+	}).catch(err => {
+		error(err);
 	});
 }
 
 async function createReferences(authObj) {
-	console.log(authObj);
+
+	// checks if the user is emulating and if so uses the emulated uid.
 	if (sessionStorage.getItem("::emuUid") !== null) {
 		uid = sessionStorage.getItem("::emuUid")
 	} else {
 		uid = authObj.uid;
 	}
+
+	// sets some vars used later.
 	realUid = authObj.uid;
 	userRef = firestore.collection("users").doc(uid);
 	userBucket = cloudStorage.child(uid);
 }
 
 function initUser() {
-	getUser((p) => {
-		console.log(p);
+
+	// gets the suer
+	getUser(p => {
+
+		// checks if the user is emulating and if so sets the uid to the emulated uid
 		if (sessionStorage.getItem("::emuUid") !== null) {
 			uid = sessionStorage.getItem("::emuUid")
 		} else {
 			uid = p.uid;
 		}
+
+		// sets some vars
 		realUid = p.uid;
 		sessionStorage.setItem("::uid", uid);
 		userInformation = {
@@ -89,7 +147,7 @@ function initUser() {
 		userBucket = cloudStorage.child(uid);
 		$(".userimg").attr("src", p.photoURL);
 		$(".username").text(p.displayName);
-		configUserDb();
+		configUserDb(p);
 	});
 }
 

@@ -1,8 +1,9 @@
 <div class="innerPage scroll">
-	<script src="../assets/components/dndb/js/characterLoader.js"></script>
-	<link href="../assets/components/dndb/css/campaign.css" rel="stylesheet" type="text/css">
-	<link href="../assets/components/dndb/css/campaign.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
-	<script src="../assets/components/dndb/js/campaign.js"></script>
+	<script>
+		tempImport([
+			"--default"
+		])
+	</script>
 	<div class="lane" id="vueInstance">
 		<div class="entry" style="margin-top: 24px;">
 			<img class="topUserImage" v-bind:src="currentUser.profileImage" />

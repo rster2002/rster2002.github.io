@@ -29,6 +29,13 @@ if (!DEV) {
 	ga('send', 'pageview');
 }
 
+log = console.log;
+console.log = function(t) {
+	if (DEV) {
+		log(t)
+	}
+}
+
 const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 const pageTitles = {
 	characterList: "Character List",
@@ -36,6 +43,7 @@ const pageTitles = {
 	campaign: "Campaign",
 	campaignMenu: "Campaign's",
 	dm: "Dungeon Master Tools",
+	profile: "Profile"
 }
 
 $(document).ready(function() {
@@ -138,7 +146,7 @@ sidebar = {
 function logout() {
 	firebase.auth().signOut().then(function() {
 		localStorage.removeItem("firebaseui::rememberedAccounts");
-		location.href="../dnd.html";
+		location.href="../dndb.html";
 	}, function(error) {
 		error(error);
 	});
@@ -169,8 +177,9 @@ loaded = null;
 
 function openPage(page) {
 	loader.show();
-	$(".page.innerPage").remove();
-	$(".page").load("../assets/components/dndb/pages/" + page + ".html");
+	$(".page .innerPage").remove();
+	$(".page .innerResources").remove();
+	$(".page").load("../assets/components/dndb/pages/" + page + "/page.html");
 	sessionStorage.setItem("::openPage", page);
 	if ($(".sidebar .menubutton.page-" + page).length > 0) {
 		$(".sidebar .menubutton").removeClass("selected");
@@ -392,4 +401,27 @@ function showSnackbar(text) {
 	setTimeout(() => {
 		$(".snackbar").removeClass("open");
 	}, 1500);
+}
+
+// used for importing scripts and styling
+function tempImport(arr) {
+	$(".page").prepend("<div class='innerResources'></div>");
+	var opened = sessionStorage.getItem("::openPage");
+	for (var i = 0; i < arr.length; ++i) {
+		var imp = arr[i];
+		if (imp.includes(".js")) {
+			$(".innerResources").append("<script src='../assets/components/dndb/js/" + imp + "'></script>");
+		} else if (imp.includes(".css")) {
+			$(".innerResources").append("<script src='../assets/components/dndb/css/" + imp + "'></script>");
+		} else if (imp.includes("--default")) {
+			if (!imp.includes("-js")) {
+				$(".innerResources").append("<script src='../assets/components/dndb/pages/" + opened + "/script.js'></script>");
+			}
+			if (!imp.includes("-css")) {
+				$(".innerResources").append("<link rel='stylesheet' href='../assets/components/dndb/pages/" + opened + "/style.css'></script>");
+			}
+		} else if (imp === "--mobile") {
+			$(".innerResources").append("<link rel='stylesheet' media='screen and (max-device-width: 800px)' href='../assets/components/dndb/pages/" + opened + "/mobile.css'></script>");
+		}
+	}
 }

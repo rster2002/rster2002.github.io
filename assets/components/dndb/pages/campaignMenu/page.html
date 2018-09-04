@@ -1,0 +1,32 @@
+<div class="innerPage scroll">
+	<script>
+		tempImport([
+			"--default",
+			"--mobile"
+		]);
+	</script>
+	<div class="selectCharacter">
+		<div class="inner shadow-5">
+		</div>
+	</div>
+	<div class="campaignList wave grid" id="vueGrid">
+		<div class="wave card d3 t6 m12">
+			<div class="title">
+				<h1>Add campaign</h1>
+			</div>
+			<div class="actions">
+				<button onclick="joinDialog();">Join</button>
+				<button onclick="hostDialog();">Host</button>
+			</div>
+		</div>
+		<div class='wave card d3 t6 m12' v-for="campaign in campaigns">
+			<div class='title'>
+				<h1>{{ campaign.name }}</h1>
+			</div>
+			<div class='actions'>
+				<button v-on:click="openCampaign(campaign.name)">Open</button>
+			</div>
+		</div>
+	</div>
+	<script>loader.hide();</script>
+</div>
