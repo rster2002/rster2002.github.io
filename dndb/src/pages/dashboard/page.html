@@ -1,4 +1,21 @@
 <div class="innerPage">
-	
-	<script>loader.hide();</script>
+	<script>
+		tempImport([
+			"--default"
+		])
+	</script>
+	<div class="lane" id="vueDashboard">
+		<div class="entry" v-if="recent.length > 0">
+			<h2>Get back into editing</h2>
+			<div class="listItem" v-for="activity in recent" @click="openCharacter(activity)">
+				<h1>{{ activity.characterName }}</h1>
+			</div>
+		</div>
+		<div class="entry" v-if="upcomming.length > 0">
+			<h2>Upcomming sessions</h2>
+		</div>
+	</div>
+	<script>
+		loader.hide();
+	</script>
 </div>

@@ -148,6 +148,7 @@ function initUser() {
 		$(".userimg").attr("src", p.photoURL);
 		$(".username").text(p.displayName);
 		configUserDb(p);
+		openPage("dashboard");
 	});
 }
 

@@ -45,7 +45,8 @@ const pageTitles = {
 	campaign: "Campaign",
 	campaignMenu: "Campaign's",
 	dm: "Dungeon Master Tools",
-	profile: "Profile"
+	profile: "Profile",
+	dashboard: "Dashboard"
 }
 
 $(document).ready(function() {
