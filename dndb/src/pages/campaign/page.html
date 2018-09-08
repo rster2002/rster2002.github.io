@@ -45,8 +45,9 @@
 		</div>
 		<div class="entry">
 			<h2>Characters</h2>
-			<div class="listItem" v-for="player in players">
-				<h1></h1>
+			<div class="listItem playerItem" v-for="player in players">
+				<img v-bind:src="player.profile.usericon" />
+				<h1>{{ player.profile.username }}</h1>
 			</div>
 		</div>
 	</div>

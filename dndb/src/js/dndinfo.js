@@ -1214,7 +1214,7 @@ backgroundStats = {
 			"Insight",
 			"Religion"
 		],
-		equepment: [
+		equipment: [
 			"A holy sym bol (a gift to you w hen youentered the priesthood)",
 			"A prayer book",
 			"5 sticks of incense",
@@ -1229,7 +1229,7 @@ backgroundStats = {
 			"Dexeption",
 			"Sleight of Hand"
 		],
-		equepment: [
+		equipment: [
 			"A set of fine clothes",
 			"A disguise kit",
 			"tools of the con of your choice (ten stoppered bottles filled with colored liquid, a set of weighted dice, a deck of marked cards, or a signet ring of an imaginary duke)",
@@ -1242,7 +1242,7 @@ backgroundStats = {
 			"Dexeption",
 			"Stealth"
 		],
-		equepment: [
+		equipment: [
 			"A crowbar",
 			"A set of dark common clothes including a hood",
 			"And a belt pouch containing 15 GP"
@@ -1254,7 +1254,7 @@ backgroundStats = {
 			"Acrobatics",
 			"Performance"
 		],
-		equepment: [
+		equipment: [
 			"A musical instrument (one of your choice)",
 			"The favor of an admirer (love letter, lock of hair, or trinket)",
 			"A costume",
@@ -1267,7 +1267,7 @@ backgroundStats = {
 			"Animal Handling",
 			"Survival"
 		],
-		equepment: [
+		equipment: [
 			"A set of artisan's tools (one of your choice)",
 			"A shovel",
 			"An iron pot",
@@ -1281,7 +1281,7 @@ backgroundStats = {
 			"Insight",
 			"Persuasion"
 		],
-		equepment: [
+		equipment: [
 			"A set of artisan's tools (one of your choice)",
 			"A letter of introduction from your guild",
 			"A set of traveler's cloths",
@@ -1294,7 +1294,7 @@ backgroundStats = {
 			"Medicine",
 			"Religion"
 		],
-		equepment: [
+		equipment: [
 			"A scroll case stuffed full of notes from your studies or prayers",
 			"A winter blanket",
 			"A set of common cloths",
@@ -1308,7 +1308,7 @@ backgroundStats = {
 			"Athletics",
 			"Survival"
 		],
-		equepment: [
+		equipment: [
 			"A staff",
 			"A hunting trap",
 			"A trophy from an animal you killed",
@@ -1322,7 +1322,7 @@ backgroundStats = {
 			"Arcana",
 			"History"
 		],
-		equepment: [
+		equipment: [
 			"A bottle of ink",
 			"A quill",
 			"A small knife",
@@ -1337,7 +1337,7 @@ backgroundStats = {
 			"Athletics",
 			"Perception"
 		],
-		equepment: [
+		equipment: [
 			"A belaying pin",
 			"50 feet of slik rope",
 			"A lucky charm such as a rabbit foot or small stone with a hole in the center",
@@ -1351,7 +1351,7 @@ backgroundStats = {
 			"Athletics",
 			"Intimidation"
 		],
-		equepment: [
+		equipment: [
 			"An insignia of rank",
 			"A trophy taken from a fallen enemy (a dagger, broken blade, or a piece of banner)",
 			"A set of bone dice or dice of cards",

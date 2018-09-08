@@ -149,8 +149,10 @@ async function getPlayerList() {
 		for (var i = 0; i < query.length; ++i) {
 			var user = query[i];
 			if (user.type === "player") {
-				user["profile"] = await getProfile(user.id);
-				console.log(user)
+				getProfile(user.id, rtrn => {
+					user["profile"] = rtrn;
+					vueInstance.players.push(user);
+				});
 			}
 		}
 	} else {

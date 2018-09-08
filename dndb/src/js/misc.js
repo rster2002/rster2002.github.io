@@ -438,23 +438,23 @@ function isUid(id) {
 	return id.includes("dnd-") === false ? true : false;
 }
 
-async function getUidFromId(id) {
+async function getUidFromId(id, f) {
 	firestore.collection("userId").doc(id).get().then(doc => {
 		if (doc && doc.exists) {
-			return doc.data().uid;
+			f(doc.data().uid);
 		} else {
 			error("Could not find this user id");
 		}
 	})
 }
 
-async function getProfile(id) {
+async function getProfile(id, f) {
 	console.log(id)
 	if (isUid(id)) {
 		await firestore.collection("users").doc(id).get().then(doc => {
 			if (doc && doc.exists) {
 				console.log(doc.data())
-				return doc.data();
+				f(doc.data());
 			} else {
 				error("Could not get user data");
 			}

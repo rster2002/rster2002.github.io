@@ -452,6 +452,9 @@ html div.wave.card > div.actions button {
 	left: 50%;
 	transform: translateX(-50%);
 	margin: 12px 0px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .innerPage .lane .entry h1.ch {
@@ -467,6 +470,9 @@ html div.wave.card > div.actions button {
 	color: rgba(0, 0, 0, .3);
 	font-size: 18px;
 	font-weight: 400;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .innerPage .lane .entry h2.ch {
@@ -512,6 +518,9 @@ html div.wave.card > div.actions button {
 
 .innerPage .lane .entry .listItem h1 {
 	font-size: 36px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .overlayList {
