@@ -1,3 +1,5 @@
+global = {}
+
 var url = document.URL;
 if (url.includes("pro")) {
 	DEV = false;
@@ -146,7 +148,7 @@ sidebar = {
 function logout() {
 	firebase.auth().signOut().then(function() {
 		localStorage.removeItem("firebaseui::rememberedAccounts");
-		location.href="../dndb.html";
+		location.href="./index.html";
 	}, function(error) {
 		error(error);
 	});
@@ -438,26 +440,54 @@ function isUid(id) {
 	return id.includes("dnd-") === false ? true : false;
 }
 
-async function getUidFromId(id, f) {
+function getUidFromId(id, f) {
 	firestore.collection("userId").doc(id).get().then(doc => {
 		if (doc && doc.exists) {
 			f(doc.data().uid);
 		} else {
 			error("Could not find this user id");
 		}
+	}).catch(err => {
+		error(err);
 	})
 }
 
-async function getProfile(id, f) {
+function getProfile(id, f) {
 	console.log(id)
 	if (isUid(id)) {
-		await firestore.collection("users").doc(id).get().then(doc => {
+		firestore.collection("users").doc(id).get().then(doc => {
 			if (doc && doc.exists) {
 				console.log(doc.data())
 				f(doc.data());
 			} else {
 				error("Could not get user data");
 			}
+		}).catch(err => {
+			error(err);
 		})
 	}
+}
+
+function getCharacter(id, characterId, f) {
+	if (isUid(id)) {
+		firestore.collection("users").doc(id).collection("characters").doc(characterId).collection("data").doc("characterObj").get().then(doc => {
+			if (doc && doc.exists) {
+				f(doc.data());
+			} else {
+				error("Could not get character Object");
+			}
+		}).catch(err => {
+			error(err);
+		})
+	}
+}
+
+global["viewCharacter"] = function(userId, characterId) {
+	global["viewCharacterInfo"] = {
+		userId: userId,
+		characterId: characterId,
+		returnPage: sessionStorage.getItem("::openPage")
+	}
+
+	openPage("characterViewer");
 }

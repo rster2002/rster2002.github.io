@@ -50,6 +50,48 @@ var vueInstance = new Vue({
 			}).catch(err => {
 				error(err);
 			});
+		},
+		togglePlayerOpen(player) {
+			this.players[this.players.indexOf(player)].open = !this.players[this.players.indexOf(player)].open;
+		},
+		kick(player, ban, f) {
+
+			show();
+
+			var loadedUid = player.id;
+			var loadedCharacter = player.character;
+
+			function next() {
+				firestore.collection("campaigns").doc(campaignId + "/users/" + loadedUid).delete().then(function() {
+					firestore.collection("users").doc(loadedUid).collection("campaigns").doc(campaignId).delete().then(function() {
+						firestore.collection("users").doc(loadedUid + "/characters/" + loadedCharacter + "usedInCampaigns" + campaignId).delete().then(function() {
+							firestore.collection("campaigns").doc(campaignId).update({
+								liveState: "update"
+							}).then(function() {
+								$(".kick").hide();
+								$(".ban").hide();
+								$(".save").hide();
+								hide();
+
+								if (f !== undefined) {
+									f();
+								}
+							});
+						});
+					});
+				});
+			}
+
+			if (ban) {
+				next();
+			} else {
+				if (confirm("Are you sure you want to kick this person?")) {
+					next();
+				}
+			}
+		},
+		viewCharacter(user) {
+			global.viewCharacter(user.id, user.character);
 		}
 	}
 });
@@ -91,6 +133,8 @@ campaignRef.collection("misc").doc("timer").onSnapshot(doc => {
 		vueInstance.countDownDate = "Jan 1, 2018 12:00:00";
 	}
 });
+
+// campaignRef.onSnapshot()
 
 
 var x = setInterval(function() {
@@ -144,16 +188,26 @@ async function getDm() {
 }
 
 async function getPlayerList() {
+
+	function addToPlayerArray(user) {
+		if (user.type === "player") {
+			getProfile(user.id, rtrn => {
+				user["profile"] = rtrn;
+				getCharacter(user.id, user.character, characterObj => {
+					console.log(user);
+					user["characterObj"] = characterObj;
+					user["characterObj"]["characterName"] = characterObj["96_1"];
+					user["open"] = false;
+					vueInstance.players.push(user);
+				});
+			});
+		}
+	}
 	var query = await createQuery(campaignRef.collection("users"));
 	if (query[0] !== undefined) {
 		for (var i = 0; i < query.length; ++i) {
 			var user = query[i];
-			if (user.type === "player") {
-				getProfile(user.id, rtrn => {
-					user["profile"] = rtrn;
-					vueInstance.players.push(user);
-				});
-			}
+			addToPlayerArray(user);
 		}
 	} else {
 		error("Users query didn't return data");
@@ -483,7 +537,7 @@ vueInstance.currentUser = userInformation;
 //
 // // DM functions
 //
-// function changeId() {
+// changeId() {
 //
 // 	// Creates a function required later
 // 	function updateList(wUid) {
@@ -574,46 +628,6 @@ vueInstance.currentUser = userInformation;
 // }
 //
 //
-// function kick(ban, f) {
-//
-// 	show();
-//
-// 	function next() {
-// 		firestore.collection("campaigns").doc(campaignId + "/users/" + loadedUid).delete().then(function() {
-// 			firestore.collection("users").doc(loadedUid).collection("campaigns").doc(campaignId).delete().then(function() {
-// 				firestore.collection("users").doc(loadedUid + "/characters/" + loadedCharacter + "usedInCampaigns" + campaignId).delete().then(function() {
-// 					firestore.collection("campaigns").doc(campaignId).update({
-// 						liveState: "update"
-// 					}).then(function() {
-// 						$(".kick").hide();
-// 						$(".ban").hide();
-// 						$(".save").hide();
-// 						hide();
-//
-// 						if (f !== undefined) {
-// 							f();
-// 						}
-// 					});
-// 				});
-// 			});
-// 		});
-// 	}
-//
-// 	if (ban) {
-// 		next();
-// 	} else {
-// //		uijs.box.open({
-// //			title: "Confirm",
-// //			content: "Are you sure you want to kick this person?",
-// //			btnTrue: "Yes",
-// //			btnFalse: "no",
-// //			onTrue: next()
-// //		})
-// 		if (confirm("Are you sure you want to kick this person?")) {
-// 			next();
-// 		}
-// 	}
-// }
 //
 // function ban() {
 // 	if (confirm("Are you sure you want to ban this person?")){

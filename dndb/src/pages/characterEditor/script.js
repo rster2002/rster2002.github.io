@@ -39,6 +39,7 @@ var vueInventoryObj = {
 				rtrn.push(temp);
 			}
 			i.description = rtrn;
+			i.tags = Object.assign([], this.working.tags);
 			this.items.push(i);
 		},
 		deleteItem(item) {
@@ -84,6 +85,7 @@ var vueAbilitiesObj = {
 				rtrn.push(temp);
 			}
 			i.description = rtrn;
+			i.tags = Object.assign([], this.working.tags);
 			this.items.push(i);
 		},
 		deleteItem(item) {
@@ -126,6 +128,7 @@ var vueSpellsObj = {
 			}
 
 			var i = Object.assign({}, this.working);
+			i.tags = Object.assign([], this.working.tags);
 			var d = i.description.split("\n");
 			var rtrn = [];
 			for (var p = 0; p < d.length; ++p) {
@@ -151,9 +154,9 @@ var vueAbilities = new Vue(vueAbilitiesObj);
 var vueSpells = new Vue(vueSpellsObj);
 
 
-$(".innerPage").ready(() => {
-	$(".characterContainer").load("../assets/components/dndb/pages/characterSheet.html");
-});
+// $(".innerPage").ready(() => {
+// 	$(".characterContainer").load("./src/pages/characterSheet.html");
+// });
 
 function ctrlS() {
 	if (sessionStorage.getItem("::openPage") === "characterEditor") {
@@ -162,6 +165,9 @@ function ctrlS() {
 }
 
 function openSection(id, index) {
+	$(".lists .nav .buttons .button").removeClass("selected");
+	var i = index + 1;
+	$(".lists .nav .buttons .button:nth-of-type(" + i + ")").addClass("selected");
 	$(".page .section").hide();
 	$("#" + id).show();
 	var i = 100 * index;
@@ -176,34 +182,10 @@ function localError(error) {
 	openPage("characterList");
 }
 
-function t(here) {
-	if ($(here).parent().hasClass("open")) {
-		c(here);
-	} else {
-		o(here);
-	}
-}
-
-function o(here) {
-	$(here).parent().addClass("open");
-	setTimeout(function() {
-		$(here).parent().children(".content").addClass("open");
-	}, 75);
-	setTimeout(function() {
-		$(here).parent().addClass("h");
-	}, 80);
-}
-
-function c(here) {
-	$(here).parent().removeClass("h");
-	setTimeout(function() {
-		$(here).parent().removeClass("open");
-	}, 80);
-	$(here).parent().children(".content").removeClass("open");
-}
 
 console.log("hmm");
 
+// save function for the character
 function saveCharacter(show) {
 
 	progress.show();
@@ -238,27 +220,48 @@ function saveCharacter(show) {
 				}
 			}).then(function() {
 				if (vueInventory) {
+					let rtrn = [];
+					for (var i = 0; i < vueInventory.items.length; ++i) {
+						let item = vueInventory["items"][i];
+						item.shown = false;
+						rtrn.push(item);
+					}
+
 					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("lists").doc("inventory").set({
-						data: vueInventory.items
+						data: rtrn
 					});
 				}
 
 				if (vueAbilities) {
+					let rtrn = [];
+					for (var i = 0; i < vueAbilities.items.length; ++i) {
+						let item = vueAbilities["items"][i];
+						item.shown = false;
+						rtrn.push(item);
+					}
+
 					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("lists").doc("abilities").set({
-						data: vueAbilities.items
+						data: rtrn
 					});
 				}
 
 				if (vueSpells) {
+					let rtrn = [];
+					for (var i = 0; i < vueSpells.items.length; ++i) {
+						let item = vueSpells["items"][i];
+						item.shown = false;
+						rtrn.push(item);
+					}
+
 					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("lists").doc("spells").set({
-						data: vueSpells.items
+						data: rtrn
 					});
 				}
 			}).then(function() {
 				showSnackbar("Character saved");
 			}).catch(function(e) {
 				error(e);
-			})
+			});
 		} else {
 			error("No character found in session");
 		}

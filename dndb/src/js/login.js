@@ -10,7 +10,7 @@ firebase.initializeApp(config);
 
 // FirebaseUI config.
 var uiConfig = {
-	signInSuccessUrl: 'dnd/appb.html',
+	signInSuccessUrl: './app.html',
 	signInOptions: [
 		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
 		firebase.auth.EmailAuthProvider.PROVIDER_ID

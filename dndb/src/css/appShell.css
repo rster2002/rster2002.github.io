@@ -430,6 +430,7 @@ html div.wave.card > div.actions button {
 }
 
 .innerPage .lane .entry button {
+	transition: all 100ms cubic-bezier(0.4, 0.0, 0.2, 1);
 	margin: 8px 4px;
 	font-size: 24px;
 	background-color: transparent;
@@ -443,7 +444,21 @@ html div.wave.card > div.actions button {
 }
 
 .innerPage .lane .entry button:hover {
-	background-color: rgba(0, 0, 0, .1);
+	color: white;
+	background-color: #0080ff;
+	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.innerPage .lane .entry button.danger {
+	color: #ff3300;
+	border-color: #ff3300;
+	transition: all 100ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.innerPage .lane .entry button.danger:hover {
+	color: white;
+	background-color: #ff3300;
+	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 .innerPage .lane .entry h1 {
@@ -459,6 +474,11 @@ html div.wave.card > div.actions button {
 
 .innerPage .lane .entry h1.ch {
 	text-align: center;
+}
+
+.innerPage .lane .entry h1.noOverflow {
+	white-space: pre-wrap;
+	text-overflow: clip;
 }
 
 .innerPage .lane .entry h2 {

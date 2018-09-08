@@ -7,17 +7,17 @@ vueInstance = new Vue({
 		stopEmulation() {
 			sessionStorage.removeItem("::emuUid");
 			if (DEV) {
-				location.href = "appb.html";
+				location.href = "app.html";
 			} else {
-				location.href = "appb.html?pro";
+				location.href = "app.html?pro";
 			}
 		},
 		startEmulation(u) {
 			sessionStorage.setItem("::emuUid", u);
 			if (DEV) {
-				location.href = "appb.html";
+				location.href = "app.html";
 			} else {
-				location.href = "appb.html?pro";
+				location.href = "app.html?pro";
 			}
 		},
 		toggleOpen(u) {

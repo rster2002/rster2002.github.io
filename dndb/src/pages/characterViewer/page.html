@@ -5,15 +5,16 @@
 			"--default"
 		])
 	</script>
+	<!-- <script src="../assets/components/dndb/js/characterLoader.js"></script>
+	<script src="../assets/components/dndb/js/characterEditor.js"></script>
+	<link href="../assets/components/dndb/css/characterEditor.css" type="text/css" rel="stylesheet">
+	<link href="../assets/components/dndb/css/characterEditor.m.css" media="screen and (max-device-width: 800px)" type="text/css" rel="stylesheet"> -->
+	<!-- <link rel="stylesheet" href="../assets/components/dndb/css/itemList.css" />
+	<link href="../assets/components/dndb/css/itemList.m.css" media="screen and (max-device-width: 800px)" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/components/dndb/css/form.css"> -->
 
 	<div class="controlls z1">
-		<div class="button" onclick="saveCharacter()">
-			<p>save</p>
-		</div>
-		<div class="button" onclick="deleteCharacter()">
-			<p>delete</p>
-		</div>
-		<div class="button" onclick="openPage('characterList')">
+		<div class="button" onclick="back()">
 			<p>back</p>
 		</div>
 	</div>
@@ -45,23 +46,6 @@
 			</div>
 		</div>
 		<div class="section" id="inventory">
-			<div class="inputCard">
-				<h1>Inventory</h1>
-				<input placeholder="Item name" v-model="working.name" />
-				<input placeholder="Count" v-model="working.count" type="number" />
-				<textarea v-model="working.description" placeholder="Description"></textarea>
-				<div class="row">
-					<input @keyup.enter="addTag()" v-model="working.tag" placeholder="Tag" />
-					<button @click="addTag()"><i class="material-icons">add</i></button>
-				</div>
-				<div class="tags">
-					<div class="tag" v-for="tag in working.tags" @click="deleteTag(tag)">
-						<p>{{ tag }}</p>
-						<i class="material-icons">clear</i>
-					</div>
-				</div>
-				<button @click="addItem()">Add</button>
-			</div>
 			<div class="item" v-for="item in items">
 				<div class="shared" @click="toggleShown(item)">
 					<h1>{{ item.name }}</h1>
@@ -79,22 +63,6 @@
 			</div>
 		</div>
 		<div class="section" id="abilities" style="display: none;">
-			<div class="inputCard">
-				<h1>Abilities</h1>
-				<input placeholder="Ability" v-model="working.name" />
-				<textarea v-model="working.description" placeholder="Description"></textarea>
-				<div class="row">
-					<input @keyup.enter="addTag()" v-model="working.tag" placeholder="Tag" />
-					<button @click="addTag()"><i class="material-icons">add</i></button>
-				</div>
-				<div class="tags">
-					<div class="tag" v-for="tag in working.tags" @click="deleteTag(tag)">
-						<p>{{ tag }}</p>
-						<i class="material-icons">clear</i>
-					</div>
-				</div>
-				<button @click="addItem()">Add</button>
-			</div>
 			<div class="item" v-for="item in items">
 				<div class="shared" @click="toggleShown(item)">
 					<h1>{{ item.name }}</h1>
@@ -111,23 +79,6 @@
 			</div>
 		</div>
 		<div class="section" id="spells" style="display: none;">
-			<div class="inputCard">
-				<h1>Spells</h1>
-				<input placeholder="Spell name" v-model="working.name" />
-				<input placeholder="Level" v-model="working.level" type="number" />
-				<textarea v-model="working.description" placeholder="Description"></textarea>
-				<div class="row">
-					<input @keyup.enter="addTag()" v-model="working.tag" placeholder="Tag" />
-					<button @click="addTag()"><i class="material-icons">add</i></button>
-				</div>
-				<div class="tags">
-					<div class="tag" v-for="tag in working.tags" @click="deleteTag(tag)">
-						<p>{{ tag }}</p>
-						<i class="material-icons">clear</i>
-					</div>
-				</div>
-				<button @click="addItem()">Add</button>
-			</div>
 			<div class="item" v-for="item in items">
 				<div class="shared" @click="toggleShown(item)">
 					<h1>{{ item.name }}</h1>

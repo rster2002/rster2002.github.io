@@ -42,9 +42,9 @@ function setImage(input, state) {
 function getSrc(input, state) {
     var src;
     if (is64) {
-        src = inputs[input].getAttribute(states64[state]);
+        src = "./src/pages/characterSheet/" + inputs[input].getAttribute(states64[state]);
     } else {
-        src = inputs[input].getAttribute('imageName') + states[state];
+        src = "./src/pages/characterSheet/" + inputs[input].getAttribute('imageName') + states[state];
     }
     return src;
 }
@@ -421,17 +421,17 @@ function checkOver(i) {
 
 @font-face {
 	font-family: ScalaSansOffc-Bold_1sy;
-	src: url("fonts/ScalaSansOffc-Bold_1sy.woff") format("woff");
+	src: url("./src/pages/characterSheet/fonts/ScalaSansOffc-Bold_1sy.woff") format("woff");
 }
 
 @font-face {
 	font-family: Interstate-Light_1sx;
-	src: url("fonts/Interstate-Light_1sx.woff") format("woff");
+	src: url("./src/pages/characterSheet/fonts/Interstate-Light_1sx.woff") format("woff");
 }
 
 @font-face {
 	font-family: ScalaSansOffc_1sw;
-	src: url("fonts/ScalaSansOffc_1sw.woff") format("woff");
+	src: url("./src/pages/characterSheet/fonts/ScalaSansOffc_1sw.woff") format("woff");
 }
 
 </style>
@@ -439,7 +439,7 @@ function checkOver(i) {
 
 <!-- Begin page background -->
 <div id="pg1Overlay" style="width:100%; height:100%; position:absolute; z-index:1; background-color:rgba(0,0,0,0); -webkit-user-select: none;"></div>
-<div id="pg1" style="-webkit-user-select: none;"><object width="935" height="1210" data="1/1.svg" type="image/svg+xml" id="pdf1" style="width:935px; height:1210px; background-color:white; -moz-transform:scale(1); z-index: 0;"></object></div>
+<div id="pg1" style="-webkit-user-select: none;"><object width="935" height="1210" data="./src/pages/characterSheet/1/1.svg" type="image/svg+xml" id="pdf1" style="width:935px; height:1210px; background-color:white; -moz-transform:scale(1); z-index: 0;"></object></div>
 <!-- End page background -->
 
 
@@ -753,12 +753,12 @@ replaceChecks(false);
 
 @font-face {
 	font-family: ScalaSansOffc-Bold_1ot;
-	src: url("fonts/ScalaSansOffc-Bold_1ot.woff") format("woff");
+	src: url("./src/pages/characterSheet/fonts/ScalaSansOffc-Bold_1ot.woff") format("woff");
 }
 
 @font-face {
 	font-family: ScalaSansOffc_1or;
-	src: url("fonts/ScalaSansOffc_1or.woff") format("woff");
+	src: url("./src/pages/characterSheet/fonts/ScalaSansOffc_1or.woff") format("woff");
 }
 
 </style>
@@ -766,7 +766,7 @@ replaceChecks(false);
 
 <!-- Begin page background -->
 <div id="pg2Overlay" style="width:100%; height:100%; position:absolute; z-index:1; background-color:rgba(0,0,0,0); -webkit-user-select: none;"></div>
-<div id="pg2" style="-webkit-user-select: none;"><object width="935" height="1210" data="2/2.svg" type="image/svg+xml" id="pdf2" style="width:935px; height:1210px; background-color:white; -moz-transform:scale(1); z-index: 0;"></object></div>
+<div id="pg2" style="-webkit-user-select: none;"><object width="935" height="1210" data="./src/pages/characterSheet/2/2.svg" type="image/svg+xml" id="pdf2" style="width:935px; height:1210px; background-color:white; -moz-transform:scale(1); z-index: 0;"></object></div>
 <!-- End page background -->
 
 
@@ -839,9 +839,9 @@ function setImage(input, state) {
 function getSrc(input, state) {
     var src;
     if (is64) {
-        src = inputs[input].getAttribute(states64[state]);
+        src = "./src/pages/characterSheet" + inputs[input].getAttribute(states64[state]);
     } else {
-        src = inputs[input].getAttribute('imageName') + states[state];
+        src = "./src/pages/characterSheet" + inputs[input].getAttribute('imageName') + states[state];
     }
     return src;
 }
@@ -1343,17 +1343,17 @@ function checkOver(i) {
 
 @font-face {
 	font-family: ScalaSansOffc-Bold_2d7;
-	src: url("fonts/ScalaSansOffc-Bold_2d7.woff") format("woff");
+	src: url("./src/pages/characterSheet/fonts/ScalaSansOffc-Bold_2d7.woff") format("woff");
 }
 
 @font-face {
 	font-family: ScalaSansOffc_2d5;
-	src: url("fonts/ScalaSansOffc_2d5.woff") format("woff");
+	src: url("./src/pages/characterSheet/fonts/ScalaSansOffc_2d5.woff") format("woff");
 }
 
 @font-face {
 	font-family: Interstate-Light_2d6;
-	src: url("fonts/Interstate-Light_2d6.woff") format("woff");
+	src: url("./src/pages/characterSheet/fonts/Interstate-Light_2d6.woff") format("woff");
 }
 
 </style>
@@ -1361,7 +1361,7 @@ function checkOver(i) {
 
 <!-- Begin page background -->
 <div id="pg3Overlay" style="width:100%; height:100%; position:absolute; z-index:1; background-color:rgba(0,0,0,0); -webkit-user-select: none;"></div>
-<div id="pg3" style="-webkit-user-select: none;"><object width="935" height="1210" data="3/3.svg" type="image/svg+xml" id="pdf3" style="width:935px; height:1210px; background-color:white; -moz-transform:scale(1); z-index: 0;"></object></div>
+<div id="pg3" style="-webkit-user-select: none;"><object width="935" height="1210" data="./src/pages/characterSheet/3/3.svg" type="image/svg+xml" id="pdf3" style="width:935px; height:1210px; background-color:white; -moz-transform:scale(1); z-index: 0;"></object></div>
 <!-- End page background -->
 
 

@@ -7,12 +7,12 @@
 	<div class="lane" id="vueInstance">
 		<div class="entry" style="margin-top: 24px;">
 			<img class="topUserImage" v-bind:src="currentUser.profileImage" />
-			<h1 class="textCenter">{{ welcomeText }} {{ currentUser.username }}</h1>
+			<h1 class="textCenter noOverflow">{{ welcomeText }} {{ currentUser.username }}</h1>
 		</div>
 		<div class="entry">
 			<h2>Next session</h2>
 			<h1 class="textCenter">{{ timerOutput }}</h1>
-			<div v-if="isDM == true">
+			<div v-if="isDM">
 				<div>
 					<div class="datePicker">
 						<select v-model="pickedDate.day">
@@ -46,8 +46,13 @@
 		<div class="entry">
 			<h2>Characters</h2>
 			<div class="listItem playerItem" v-for="player in players">
-				<img v-bind:src="player.profile.usericon" />
-				<h1>{{ player.profile.username }}</h1>
+				<img @click="togglePlayerOpen(player)" v-bind:src="player.profile.usericon" />
+				<h1 @click="togglePlayerOpen(player)">{{ player.characterObj.characterName }}</h1>
+				<div class="content" v-if="player.open == true">
+					<button @click="viewCharacter(player)">Open character</button>
+					<button class="danger" @click="kick(player)" v-if="isDM">Kick</button>
+					<!-- <button class="danger" v-if="isDM">Ban</button> -->
+				</div>
 			</div>
 		</div>
 	</div>

@@ -29,6 +29,7 @@ html .innerPage .lane .entry .playerItem h1 {
 	left: 8px;
 	transform: translateX(0%);
 	width: calc(100% - 72px);
+	cursor: pointer;
 }
 
 .playerItem img {
@@ -36,5 +37,6 @@ html .innerPage .lane .entry .playerItem h1 {
 	width: 56px;
 	height: 56px;
 	border-radius: 50%;
-	margin: 5.5px 0px;
+	margin: 5.5px 8px;
+	cursor: pointer;
 }
