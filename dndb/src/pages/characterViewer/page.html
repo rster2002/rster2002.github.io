@@ -51,7 +51,7 @@
 					<h1>{{ item.name }}</h1>
 				</div>
 				<div class="expanded" v-if="item.shown == true">
-					<input v-model="item.count" placeholder="Count" type="number" />
+					<input v-model="item.count" placeholder="Count" type="number" disabled />
 					<p v-for="text in item.description">{{ text }}</p>
 					<div class="tags">
 						<div class="tag" v-for="tag in item.tags">

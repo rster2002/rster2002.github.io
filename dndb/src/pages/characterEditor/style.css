@@ -1,7 +1,7 @@
 
 /* Controlls like save and delete */
 .controlls {
-	width: 100%;
+	width: 95%;
 	max-width: 935px;
 	height: 68px;
 	border-radius: 10px;
@@ -58,7 +58,7 @@
 .lists {
 	position: relative;
 	top: 64px;
-	width: 100%;
+	width: 95%;
 	max-width: 935px;
 	left: 50%;
 	transform: translate(-50%, 0%);
@@ -284,7 +284,7 @@
 /* List item */
 
 .lists .section .item {
-	width: 100%;
+	width: calc(100% - 16px);
 	padding: 12px 8px;
 	margin: 24px 0px;
 	border-radius: 10px;
