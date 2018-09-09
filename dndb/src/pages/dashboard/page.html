@@ -9,10 +9,14 @@
 			<h2>Get back into editing</h2>
 			<div class="listItem" v-for="activity in recent" @click="openCharacter(activity)">
 				<h1>{{ activity.characterName }}</h1>
+				<h2 v-if="activity.description != '  '">{{ activity.description }}</h2>
 			</div>
 		</div>
-		<div class="entry" v-if="upcomming.length > 0">
+		<div class="entry" v-if="nextUpcomming.length > 0">
 			<h2>Upcomming sessions</h2>
+			<div class="listItem" v-for="activity in nextUpcomming" @click="openCampaign(activity)">
+				<h1 class="noOverflow">{{ activity.text }}</h1>
+			</div>
 		</div>
 	</div>
 	<script>

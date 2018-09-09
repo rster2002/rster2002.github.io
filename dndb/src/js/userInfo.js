@@ -40,6 +40,7 @@ async function configUserDb(authObj) {
 				});
 			} else {
 				userId = globalUser.userId;
+				firestore.collection("userId").doc(userId).set(globalUser);
 			}
 
 			userInformation["userId"] = userId;

@@ -320,7 +320,7 @@ function afterSelect(index) {
 				campaignName: campaignName
 			});
 		}).then(function() {
-			firestore.collection("campaigns").doc(campaignId).collection("users").doc(sUid).set({
+			firestore.collection("campaigns").doc(campaignId).collection("users").doc(userInformation.uid).set({
 				id: sUid,
 				banned: false,
 				character: character,
@@ -330,6 +330,8 @@ function afterSelect(index) {
 				hide();
 				sessionStorage.setItem("::firstTimeJoin", true);
 				openPage("campaign");
+			}).catch(err => {
+				error(err);
 			});
 		});
 	}

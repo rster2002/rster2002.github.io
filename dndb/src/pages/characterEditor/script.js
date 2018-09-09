@@ -1,5 +1,6 @@
 sUid = sessionStorage.getItem("::uid");
 characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+characterRef = userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter"));
 
 sessionStorage.setItem("::saved", "false");
 
@@ -153,6 +154,41 @@ var vueInventory = new Vue(vueInventoryObj);
 var vueAbilities = new Vue(vueAbilitiesObj);
 var vueSpells = new Vue(vueSpellsObj);
 
+var vuePermissions = new Vue({
+	el: "#permissions",
+	data: {
+		userId: "",
+		permissions: [],
+		uidPermissions: []
+	},
+	methods: {
+		addPermission() {
+			var userId = this.userId;
+			getUidFromId(userId, returnedUid => {
+				getProfile(returnedUid, returnedProfile => {
+					this.permissions.push(returnedProfile);
+					this.uidPermissions.push(returnedUid);
+					characterRef.update({
+						permissions: this.permissions,
+						uidPermissions: this.uidPermissions
+					});
+				});
+			});
+		},
+		revoke(permission) {
+			if (confirm("Are you sure?")) {
+
+				var revokeUid = permission.uid;
+				this.uidPermissions.splice(this.uidPermissions.indexOf(revokeUid), 1);
+				this.permissions.splice(this.permissions.indexOf(permission), 1);
+				characterRef.update({
+					permissions: this.permissions,
+					uidPermissions: this.uidPermissions
+				});
+			}
+		}
+	}
+})
 
 // $(".innerPage").ready(() => {
 // 	$(".characterContainer").load("./src/pages/characterSheet.html");
@@ -224,12 +260,14 @@ function saveCharacter(show) {
 					for (var i = 0; i < vueInventory.items.length; ++i) {
 						let item = vueInventory["items"][i];
 						item.shown = false;
-						rtrn.push(item);
+						if (item.__id === undefined) {
+							let id = genId();
+							characterRef.collection("inventory").doc(id).set(r);
+							vueInventory["items"][i]["__id"] = id;
+						} else {
+							characterRef.collection("inventory").doc(item.__Id).set(r);
+						}
 					}
-
-					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("lists").doc("inventory").set({
-						data: rtrn
-					});
 				}
 
 				if (vueAbilities) {
@@ -442,14 +480,21 @@ var modifiers = [
 var spellObj = {};
 var itemObj = {};
 
-function loadInventory() {
-	userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("lists").doc("inventory").get().then(doc => {
-		if (doc && doc.exists) {
-			vueInventory.items = doc.data().data;
-		} else {
-			vueInventory.items = [];
-		}
-	});
+async function loadInventory() {
+	var query = await createQuery(characterRef.collection("inventory"));
+	console.log(query);
+	if (query[0] !== undefined) {
+		vueInventory.items = query;
+	} else {
+		vueInventory.items = [];
+	}
+	// userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("lists").doc("inventory").get().then(doc => {
+	// 	if (doc && doc.exists) {
+	// 		vueInventory.items = doc.data().data;
+	// 	} else {
+	// 		vueInventory.items = [];
+	// 	}
+	// });
 }
 
 function loadAbilities() {
@@ -531,52 +576,26 @@ function saveOptions() {
 	}).catch(function(e){error(e)});
 }
 
+function loadPermissions() {
+	characterRef.get().then(doc => {
+		if (doc && doc.exists) {
+			if (doc.data().permissions !== undefined) {
+				vuePermissions.permissions = doc.data().permissions;
+			} else {
+				vuePermissions.permissions = [];
+			}
+
+			if (doc.data().uidPermissions !== undefined) {
+				vuePermissions.uidPermissions = doc.data().uidPermissions;
+			} else {
+				vuePermissions.uidPermissions = [];
+			}
+		}
+	})
+}
+
 var onExit = function() {
 	inputCard.close();
-}
-currentSlide = 0;
-slideNames = {
-	0: "Character sheet",
-	1: "Inventory",
-	2: "Spells",
-	3: "Settings"
-}
-
-function slideLeft() {
-	currentSlide -= 1;
-	if (currentSlide === 0) {
-		$(".contr.left").addClass("faded");
-		setTimeout(() => {
-			$(".buttons .controll").css("margin-left", "8vw");
-			$(".contr.left").hide();
-		}, 200);
-	}
-
-	$("#slideTitle").text(slideNames[currentSlide]);
-
-	$(".contr.right").removeClass("faded");
-	$(".buttons .controll").css("margin-right", "0vw");
-	$(".contr.right").show();
-	$(".sliding").css("margin-left", "-" + currentSlide * 100 + "vw");
-}
-
-function slideRight() {
-	currentSlide += 1;
-	if (currentSlide === 1) {
-		$(".contr.left").removeClass("faded");
-		$(".buttons .controll").css("margin-left", "0vw");
-		$(".contr.left").show();
-	}
-
-	if (slideNames[currentSlide + 1] === undefined) {
-		$(".contr.right").addClass("faded");
-		setTimeout(() => {
-			$(".buttons .controll").css("margin-right", "8vw");
-			$(".contr.right").hide();
-		}, 200);
-	}
-	$("#slideTitle").text(slideNames[currentSlide]);
-	$(".sliding").css("margin-left", "-" + currentSlide * 100 + "vw");
 }
 
 var loaded = false;
@@ -586,6 +605,7 @@ function onload() {
 		console.log("C");
 		loadLists();
 		loadCharacter(sessionStorage.getItem("::openCharacter"));
+		loadPermissions();
 		loaded = true;
 	}
 }

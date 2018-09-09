@@ -145,5 +145,18 @@
 		</div>
 	</div>
 
+	<div class="lane">
+		<div class="entry" id="permissions">
+			<h2>Permissions</h2>
+			<input v-model="userId" placeholder="User id" />
+			<button @click="addPermission()">Add user</button>
+			<div class="listItem" v-for="permission in permissions">
+				<h1>{{ permission.username }}</h1>
+				<h2>{{ permission.userId }}</h2>
+				<button class="danger" @click="revoke(permission)">Revoke</button>
+			</div>
+		</div>
+	</div>
+
 	<div class="push"></div>
 </div>

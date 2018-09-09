@@ -1,13 +1,16 @@
 <div class="innerPage">
-	<link href="../assets/components/dndb/css/profile.css" rel="stylesheet" type="text/css">
-	<script src="../assets/components/dndb/js/profile.js"></script>
+	<script>
+		tempImport([
+			"--default"
+		])
+	</script>
 	<div class="lane" id="vueProfile">
 		<div class="entry" style="margin-top: 24px;">
 			<img class="topUserImage" v-bind:src="profileImage" />
 			<h1 class="ch">{{ username }}</h1>
 			<h2 class="ch">{{ userId }}</h2>
 		</div>
-		<div class="entry">
+		<!-- <div class="entry">
 			<h2>Actions</h2>
 			<button @click="toggleVisible('permissions')">View permissions</button>
 		</div>
@@ -16,6 +19,6 @@
 			<h1>Add permission</h1>
 			<input placeholder="User id" />
 
-		</div>
+		</div> -->
 	</div>
 </div>

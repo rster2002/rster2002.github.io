@@ -2,7 +2,7 @@
 	<script>
 		tempImport([
 			"--default"
-		])
+		]);
 	</script>
 	<div class="lane" id="vueInstance">
 		<div class="entry" style="margin-top: 24px;">
@@ -54,6 +54,10 @@
 					<!-- <button class="danger" v-if="isDM">Ban</button> -->
 				</div>
 			</div>
+		</div>
+		<div class="entry">
+			<h2>Options</h2>
+			<button v-if="!isDM" class="danger" @click="kick(self, 'self', 'campaignMenu')">Leave campaign</button>
 		</div>
 	</div>
 	<div class="push"></div>

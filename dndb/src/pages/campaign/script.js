@@ -7,6 +7,7 @@ var isDM = false;
 var vueInstance = new Vue({
 	el: "#vueInstance",
 	data: {
+		self: {},
 		players: [],
 		welcomeText: "",
 		isDM: false,
@@ -74,16 +75,32 @@ var vueInstance = new Vue({
 								hide();
 
 								if (f !== undefined) {
-									f();
+									if (typeof f === "function") {
+										f();
+									} else {
+										openPage(f);
+									}
 								}
+							}).catch(err => {
+								error(err);
 							});
+						}).catch(err => {
+							error(err);
 						});
+					}).catch(err => {
+						error(err);
 					});
+				}).catch(err => {
+					error(err);
 				});
 			}
 
-			if (ban) {
+			if (ban === true) {
 				next();
+			} else if (ban === "self") {
+				if (confirm("Are you sure you want to leave this campaign?")) {
+					next();
+				}
 			} else {
 				if (confirm("Are you sure you want to kick this person?")) {
 					next();
@@ -95,6 +112,10 @@ var vueInstance = new Vue({
 		}
 	}
 });
+
+vueInstance.self = userInformation;
+vueInstance.self.id = userInformation.uid;
+vueInstance.self.name = userInformation.username;
 
 // initializes the datapicker
 for (var i = 1; i <= 31; ++i) {

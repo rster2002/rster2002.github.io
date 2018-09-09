@@ -64,6 +64,11 @@ html .wave.top.bar > .section button i {
 	cursor: pointer;
 }
 
+.noOverflow {
+	white-space: pre-wrap !important;
+	text-overflow: clip !important;
+}
+
 .center {
 	position: relative;
 	top: 50%;
@@ -443,6 +448,11 @@ html div.wave.card > div.actions button {
 	cursor: pointer;
 }
 
+.innerPage .lane .entry button:nth-of-type(1) {
+	position: relative;
+	left: 24px;
+}
+
 .innerPage .lane .entry button:hover {
 	color: white;
 	background-color: #0080ff;
@@ -500,7 +510,7 @@ html div.wave.card > div.actions button {
 }
 
 .innerPage .lane .entry input {
-	width: 94%;
+	width: calc(100% - 74px);
 	position: relative;
 	left: 50%;
 	transform: translate(-50%, 0%);
