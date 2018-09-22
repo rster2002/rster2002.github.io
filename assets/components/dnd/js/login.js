@@ -10,7 +10,7 @@ firebase.initializeApp(config);
 
 // FirebaseUI config.
 var uiConfig = {
-	signInSuccessUrl: 'dnd/app.html',
+	signInSuccessUrl: '../../../dnd/app.html',
 	signInOptions: [
 		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
 		firebase.auth.EmailAuthProvider.PROVIDER_ID
@@ -20,7 +20,7 @@ var uiConfig = {
 };
 
 if (localStorage.getItem("firebaseui::rememberedAccounts")) {
-	location.href = "dnd/app.html";
+	location.href = "../../../dnd/app.html";
 }
 
 // Initialize the FirebaseUI Widget using Firebase.

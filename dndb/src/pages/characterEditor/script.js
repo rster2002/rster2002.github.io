@@ -41,11 +41,23 @@ var vueInventoryObj = {
 			}
 			i.description = rtrn;
 			i.tags = Object.assign([], this.working.tags);
+			i.__id = genId();
 			this.items.push(i);
+			this.resetWorking();
 		},
 		deleteItem(item) {
 			if (confirm("Are you sure you want to delete this item?")) {
 				this.items.splice(this.items.indexOf(item), 1);
+			}
+		},
+		resetWorking() {
+			this.working = {
+				name: "",
+				description: "",
+				level: 0,
+				tag: "",
+				tags: [],
+				shown: false
 			}
 		}
 	}
@@ -87,11 +99,23 @@ var vueAbilitiesObj = {
 			}
 			i.description = rtrn;
 			i.tags = Object.assign([], this.working.tags);
+			i.__id = genId();
 			this.items.push(i);
+			this.resetWorking();
 		},
 		deleteItem(item) {
 			if (confirm("Are you sure you want to delete this ability?")) {
 				this.items.splice(this.items.indexOf(item), 1);
+			}
+		},
+		resetWorking() {
+			this.working = {
+				name: "",
+				description: "",
+				level: 0,
+				tag: "",
+				tags: [],
+				shown: false
 			}
 		}
 	}
@@ -140,11 +164,24 @@ var vueSpellsObj = {
 				rtrn.push(temp);
 			}
 			i.description = rtrn;
+			i.tags = Object.assign([], this.working.tags);
+			i.__id = genId();
 			this.items.push(i);
+			this.resetWorking();
 		},
 		deleteItem(item) {
 			if (confirm("Are you sure you want to delete this spell?")) {
 				this.items.splice(this.items.indexOf(item), 1);
+			}
+		},
+		resetWorking() {
+			this.working = {
+				name: "",
+				description: "",
+				level: 0,
+				tag: "",
+				tags: [],
+				shown: false
 			}
 		}
 	}
@@ -177,7 +214,6 @@ var vuePermissions = new Vue({
 		},
 		revoke(permission) {
 			if (confirm("Are you sure?")) {
-
 				var revokeUid = permission.uid;
 				this.uidPermissions.splice(this.uidPermissions.indexOf(revokeUid), 1);
 				this.permissions.splice(this.permissions.indexOf(permission), 1);
@@ -188,7 +224,7 @@ var vuePermissions = new Vue({
 			}
 		}
 	}
-})
+});
 
 // $(".innerPage").ready(() => {
 // 	$(".characterContainer").load("./src/pages/characterSheet.html");
@@ -260,13 +296,7 @@ function saveCharacter(show) {
 					for (var i = 0; i < vueInventory.items.length; ++i) {
 						let item = vueInventory["items"][i];
 						item.shown = false;
-						if (item.__id === undefined) {
-							let id = genId();
-							characterRef.collection("inventory").doc(id).set(r);
-							vueInventory["items"][i]["__id"] = id;
-						} else {
-							characterRef.collection("inventory").doc(item.__Id).set(r);
-						}
+						characterRef.collection("inventory").doc(item.__id).set(item);
 					}
 				}
 
@@ -275,12 +305,8 @@ function saveCharacter(show) {
 					for (var i = 0; i < vueAbilities.items.length; ++i) {
 						let item = vueAbilities["items"][i];
 						item.shown = false;
-						rtrn.push(item);
+						characterRef.collection("abilities").doc(item.__id).set(item);
 					}
-
-					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("lists").doc("abilities").set({
-						data: rtrn
-					});
 				}
 
 				if (vueSpells) {
@@ -288,12 +314,8 @@ function saveCharacter(show) {
 					for (var i = 0; i < vueSpells.items.length; ++i) {
 						let item = vueSpells["items"][i];
 						item.shown = false;
-						rtrn.push(item);
+						characterRef.collection("spells").doc(item.__id).set(item);
 					}
-
-					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("lists").doc("spells").set({
-						data: rtrn
-					});
 				}
 			}).then(function() {
 				showSnackbar("Character saved");
@@ -498,7 +520,7 @@ async function loadInventory() {
 }
 
 function loadAbilities() {
-	userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("lists").doc("abilities").get().then(doc => {
+	characterRef.collection("lists").doc("abilities").get().then(doc => {
 		if (doc && doc.exists) {
 			vueAbilities.items = doc.data().data;
 		} else {
@@ -508,13 +530,19 @@ function loadAbilities() {
 }
 
 async function loadSpells() {
-	userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("lists").doc("spells").get().then(doc => {
-		if (doc && doc.exists) {
-			vueSpells.items = doc.data().data;
-		} else {
-			vueSpells.items = [];
-		}
-	});
+	// var query = await createQuery(characterRef.collection("spells"));
+	// if (query[0] !== undefined) {
+	// 	vueSpells.items = query;
+	// } else {
+	// 	vueSpells.items = [];
+	// }
+	// userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("lists").doc("spells").get().then(doc => {
+	// 	if (doc && doc.exists) {
+	// 		vueSpells.items = doc.data().data;
+	// 	} else {
+	// 		vueSpells.items = [];
+	// 	}
+	// });
 
 	var query = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells"));
 	for (var i = 0; i < query.length; ++i) {
@@ -524,6 +552,7 @@ async function loadSpells() {
 		});
 		var spellObj = {
 			name: spell.name,
+			"__id": spell.__id,
 			description: [],
 			shown: false,
 			tags: []

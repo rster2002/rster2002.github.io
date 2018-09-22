@@ -471,6 +471,18 @@ html div.wave.card > div.actions button {
 	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
+.innerPage .lane .entry button.toggled {
+	color: white;
+	background-color: #0080ff;
+	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.innerPage .lane .entry button.toggled:hover {
+	background-color: rgba(0, 0, 0, .1);
+	color: black;
+	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
 .innerPage .lane .entry h1 {
 	width: 94%;
 	position: relative;
