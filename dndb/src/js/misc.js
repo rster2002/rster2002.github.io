@@ -92,6 +92,10 @@ function genId() {
 	return randomString(idCharacters, 25);
 }
 
+function shortId() {
+	return randomString(idCharacters, 4);
+}
+
 $(document).keydown(function(event) {
 	// If Control or Command key is pressed and the S key is pressed
 	// run save function. 83 is the key code for S.
@@ -280,6 +284,10 @@ function error(error) {
 	if (!DEV) {
 		ga('send', 'event', "dnd-error", error);
 	}
+}
+
+function thr(error) {
+	error(error);
 }
 
 function closeError() {

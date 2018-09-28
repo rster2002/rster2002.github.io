@@ -8,7 +8,8 @@ emptyCharacterObj = {"1_1":false,"2_1":false,"3_1":false,"4_1":false,"5_1":false
 var vueInstance = new Vue({
 	el: "#vue-grid",
 	data: {
-		characters: []
+		characters: [],
+		loaded: false
 	},
 	methods: {
 		oc: function(index) {
@@ -19,7 +20,6 @@ var vueInstance = new Vue({
 
 async function addTolist(i, characterInfo, delay) {
 	userRef.collection("characters").doc(characterInfo.id + "/data/characterObj").get().then(function(o) {
-
 		if (o && o.exists) {
 			var characterObj = o.data();
 
@@ -48,10 +48,9 @@ async function addTolist(i, characterInfo, delay) {
 				index: i
 			};
 
-			vueInstance.characters.push(u)
 
 			setTimeout(function() {
-				$("#an" + i + " .inner").addClass("fadeIn");
+				vueInstance.characters.push(u)
 			}, delay)
 			obj[i] = characterInfo.id;
 		} else {
@@ -69,7 +68,7 @@ function loadCharacter(index) {
 		sessionStorage.setItem("::openCharacter", characterName);
 		progress.hide();
 		openPage("characterEditor");
-	})
+	});
 }
 
 function add() {
@@ -100,7 +99,10 @@ async function loadList() {
 	for (var i = 0; i < characterArray.length; ++i) {
 		var c = characterArray[i];
 		await addTolist(i, c, delay);
-		delay += 20;
+		delay += 50;
+	}
+	if (characterArray.length === 0) {
+		vueInstance.loaded = true;
 	}
 	progress.hide();
 }
@@ -115,7 +117,7 @@ function animateFade() {
 	var delay = 0;
 	$(".item .inner").each(function(index) {
 		characterCardFade(this, delay);
-		delay += 20;
+		delay += 100;
 	});
 }
 

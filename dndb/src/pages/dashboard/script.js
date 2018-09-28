@@ -2,7 +2,8 @@ vueInstance = new Vue({
 	el: "#vueDashboard",
 	data: {
 		recent: [],
-		upcomming: []
+		upcomming: [],
+		loaded: false
 	},
 	methods: {
 		openCharacter(character) {
@@ -89,14 +90,18 @@ async function refresh() {
 
 	vueInstance.recent = [];
 	vueInstance.upcomming = [];
-	var query = await createQuery(userRef.collection("characters").orderBy("lastEdited", "desc").limit(3));
-	for (var i = 0; i < query.length; ++i) {
-		addRecent(query[i]);
+	var characterQuery = await createQuery(userRef.collection("characters").orderBy("lastEdited", "desc").limit(3));
+	for (var i = 0; i < characterQuery.length; ++i) {
+		addRecent(characterQuery[i]);
 	}
 
-	var query = await createQuery(userRef.collection("campaigns"));
-	for (var i = 0; i < query.length; ++i) {
+	var campaignQuery = await createQuery(userRef.collection("campaigns"));
+	for (var i = 0; i < campaignQuery.length; ++i) {
 		addUpcomming(query[i]);
+	}
+
+	if (characterQuery.length === 0 && campaignQuery.length === 0) {
+		vueInstance.loaded = true;
 	}
 
 	setTimeout(startVueTimers, 500)

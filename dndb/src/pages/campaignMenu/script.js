@@ -8,7 +8,8 @@ obj = {};
 var vueInstance = new Vue({
 	el: '#vueGrid',
 	data: {
-		campaigns: []
+		campaigns: [],
+		loaded: false
 	},
 	methods: {
 		openCampaign: function(name) {
@@ -65,27 +66,14 @@ function invalidId() {
 
 var localCampaigns = {};
 
-async function addList(id, place) {
+async function addList(id, place, delay) {
 	firestore.collection("campaigns").doc(id).get().then(async function(doc) {
 		if (doc && doc.exists) {
 			var campaignObj = doc.data();
-			// var campaignName = campaignObj.name;
-			// var playerArray = await createQuery(firestore.collection("campaigns").doc(id).collection("users").where("type", "==", "player"));
-			// console.log(id, place, campaignObj, playerArray);
-			// localCampaigns[place] = campaignName;
 
-			vueInstance.campaigns.push(campaignObj);
-
-			// $(".campaignList").append();
-			//
-			// $("#campaign" + campaignName).on("click", function() {
-			// 	join($(this).attr("campaign-name"));
-			// })
-			// if (playerArray[0] !== undefined) {
-			// 	var players = playerArray.length;
-			// } else {
-			// 	$(".partyList").append("<div class='party' onclick='clickParty(" + place + ")'><h1>" + campaignName + "</h1><p>There are no players in this campaign</p></div>");
-			// }
+			setTimeout(function() {
+				vueInstance.campaigns.push(campaignObj);
+			}, delay);
 		} else {
 			error("Error when fetching campaign, maybe it doesn't exists anymore");
 			hide();
@@ -93,32 +81,18 @@ async function addList(id, place) {
 	}).catch(function(e) {
 		error(e);
 	});
-
-
-//	var players = playerArray.length;
-//	localCampaigns[place] = name;
-
-//	dbCampaign.child(id).once("value",e => {
-//		try {
-//			var party = e.val();
-//			var playerArray = party.playerList;
-//			var players = playerArray.length;
-//			players -= 1;
-//			localcampaigns[place] = id;
-//			$(".partyList").append("<div class='party' onclick='clickParty(" + place + ")'><h1>" + id + "</h1><p>" + players + " players in this campaign</p></div>");
-//		} catch(e) {
-//			error(e);
-//		}
-//	});
 }
 
 async function getCampaigns() {
 	var campaigns = await createQuery(userRef.collection("campaigns").orderBy("name", "desc"));
 	if (campaigns) {
+		var delay = 0;
 		for (var i = 0; i < campaigns.length; ++i) {
 			var campaignObj = campaigns[i];
-			addList(campaignObj.id, i);
+			addList(campaignObj.id, i, delay);
+			delay += 50;
 		}
+		vueInstance.loaded = true;
 	}
 }
 

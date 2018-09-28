@@ -1,22 +1,33 @@
-<div class="innerPage scroll">
+<div class="innerResources">
 	<script>
 		tempImport([
 			"--default"
-		])
+		]);
 	</script>
-	<!-- <script src="../assets/components/dndb/js/characterList.js"></script>
-	<link href="../assets/components/dndb/css/characterList.css" type="text/css" rel="stylesheet">
-	<link href="../assets/components/dndb/css/characterList.m.css" media="screen and (max-device-width: 800px)" type="text/css" rel="stylesheet"> -->
-	<div class="cards wave grid" id="vue-grid">
-		<div class='wave card m12 t6 d3' v-for="character in characters">
-			<div class='title'>
-				<h1>{{ character.name }}</h1>
-				<p>{{ character.info }}</p>
-			</div>
-			<div class='actions'>
-				<button v-on:click='oc(character.index)'>Edit</button>
-			</div>
+</div>
+<!-- <script>onLoaded();</script> -->
+<div class="innerPage scroll" id="vue-grid">
+	<div class="spinner" v-if="characters.length == 0 && loaded == false">
+		<div class="inner"></div>
+	</div>
+	<div class="noItems" v-if="loaded == true">
+		<div class="inner">
+			<h1>Bit quiet here</h1>
+			<p>Maybe build a character?</p>
 		</div>
+	</div>
+	<div class="cards wave grid">
+		<transition-group name="list">
+			<div class='wave card m12 t6 d3' v-for="character in characters" v-bind:key="character.name">
+				<div class='title'>
+					<h1>{{ character.name }}</h1>
+					<p>{{ character.info }}</p>
+				</div>
+				<div class='actions'>
+					<button v-on:click='oc(character.index)'>Edit</button>
+				</div>
+			</div>
+		</transition-group>
 	</div>
 	<button class="wave fab" onclick="add();">
 		<i class="material-icons">add</i>
@@ -25,6 +36,5 @@
 		<a>Sort by name</a>
 		<a>Sort by last modified</a>
 	</div>
-	<script>onLoaded();</script>
 	<div class="push"></div>
 </div>

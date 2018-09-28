@@ -1,6 +1,7 @@
 sUid = sessionStorage.getItem("::uid");
 characters = "abcdefghijklmnopqrstuvwxyz0123456789";
 characterRef = userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter"));
+var characterInfo;
 
 sessionStorage.setItem("::saved", "false");
 
@@ -47,7 +48,12 @@ var vueInventoryObj = {
 		},
 		deleteItem(item) {
 			if (confirm("Are you sure you want to delete this item?")) {
-				this.items.splice(this.items.indexOf(item), 1);
+				var i = this;
+				characterRef.collection("inventory").doc(item.__id).delete().then(function() {
+					i.items.splice(i.items.indexOf(item), 1);
+				}).catch(err => {
+					error(err);
+				});
 			}
 		},
 		resetWorking() {
@@ -105,7 +111,12 @@ var vueAbilitiesObj = {
 		},
 		deleteItem(item) {
 			if (confirm("Are you sure you want to delete this ability?")) {
-				this.items.splice(this.items.indexOf(item), 1);
+				var i = this;
+				characterRef.collection("abilities").doc(item.__id).delete().then(function() {
+					i.items.splice(i.items.indexOf(item), 1);
+				}).catch(err => {
+					error(err);
+				});
 			}
 		},
 		resetWorking() {
@@ -147,9 +158,9 @@ var vueSpellsObj = {
 		},
 		addItem() {
 			if (this.working.level === 0) {
-				this.working.tags.push("Cantrip");
+				this.working.tags.unshift("Cantrip");
 			} else {
-				this.working.tags.push("Level: " + this.working.level);
+				this.working.tags.unshift("Level: " + this.working.level);
 			}
 
 			var i = Object.assign({}, this.working);
@@ -166,12 +177,18 @@ var vueSpellsObj = {
 			i.description = rtrn;
 			i.tags = Object.assign([], this.working.tags);
 			i.__id = genId();
+			i.version = "b";
 			this.items.push(i);
 			this.resetWorking();
 		},
 		deleteItem(item) {
 			if (confirm("Are you sure you want to delete this spell?")) {
-				this.items.splice(this.items.indexOf(item), 1);
+				var i = this;
+				characterRef.collection("spells").doc(item.__id).delete().then(function() {
+					i.items.splice(i.items.indexOf(item), 1);
+				}).catch(err => {
+					error(err);
+				});
 			}
 		},
 		resetWorking() {
@@ -191,40 +208,40 @@ var vueInventory = new Vue(vueInventoryObj);
 var vueAbilities = new Vue(vueAbilitiesObj);
 var vueSpells = new Vue(vueSpellsObj);
 
-var vuePermissions = new Vue({
-	el: "#permissions",
-	data: {
-		userId: "",
-		permissions: [],
-		uidPermissions: []
-	},
-	methods: {
-		addPermission() {
-			var userId = this.userId;
-			getUidFromId(userId, returnedUid => {
-				getProfile(returnedUid, returnedProfile => {
-					this.permissions.push(returnedProfile);
-					this.uidPermissions.push(returnedUid);
-					characterRef.update({
-						permissions: this.permissions,
-						uidPermissions: this.uidPermissions
-					});
-				});
-			});
-		},
-		revoke(permission) {
-			if (confirm("Are you sure?")) {
-				var revokeUid = permission.uid;
-				this.uidPermissions.splice(this.uidPermissions.indexOf(revokeUid), 1);
-				this.permissions.splice(this.permissions.indexOf(permission), 1);
-				characterRef.update({
-					permissions: this.permissions,
-					uidPermissions: this.uidPermissions
-				});
-			}
-		}
-	}
-});
+// var vuePermissions = new Vue({
+// 	el: "#permissions",
+// 	data: {
+// 		userId: "",
+// 		permissions: [],
+// 		uidPermissions: []
+// 	},
+// 	methods: {
+// 		addPermission() {
+// 			var userId = this.userId;
+// 			getUidFromId(userId, returnedUid => {
+// 				getProfile(returnedUid, returnedProfile => {
+// 					this.permissions.push(returnedProfile);
+// 					this.uidPermissions.push(returnedUid);
+// 					characterRef.update({
+// 						permissions: this.permissions,
+// 						uidPermissions: this.uidPermissions
+// 					});
+// 				});
+// 			});
+// 		},
+// 		revoke(permission) {
+// 			if (confirm("Are you sure?")) {
+// 				var revokeUid = permission.uid;
+// 				this.uidPermissions.splice(this.uidPermissions.indexOf(revokeUid), 1);
+// 				this.permissions.splice(this.permissions.indexOf(permission), 1);
+// 				characterRef.update({
+// 					permissions: this.permissions,
+// 					uidPermissions: this.uidPermissions
+// 				});
+// 			}
+// 		}
+// 	}
+// });
 
 // $(".innerPage").ready(() => {
 // 	$(".characterContainer").load("./src/pages/characterSheet.html");
@@ -259,6 +276,10 @@ console.log("hmm");
 
 // save function for the character
 function saveCharacter(show) {
+
+	if (show === undefined) {
+		show = true;
+	}
 
 	progress.show();
 
@@ -318,7 +339,9 @@ function saveCharacter(show) {
 					}
 				}
 			}).then(function() {
-				showSnackbar("Character saved");
+				if (show) {
+					showSnackbar("Character saved");
+				}
 			}).catch(function(e) {
 				error(e);
 			});
@@ -350,7 +373,7 @@ function loadCharacter(i) {
 			}).then(function() {
 				userRef.collection("characters").doc(sessionStorage.getItem("::saved")).get().then(function(doc) {
 					if (doc && doc.exists) {
-						var characterInfo = doc.data();
+						characterInfo = doc.data();
 						if (characterInfo.hasImg !== undefined && characterInfo.hasImg === true) {
 							userBucket.child(sessionStorage.getItem("::saved")).getDownloadURL().then(function(url) {
 								console.log(url);
@@ -382,19 +405,29 @@ async function deleteCharacter() {
 	if (usedInCampaigns[0] === undefined) {
 		progress.hide();
 
-		wave.dialog.confirm("Are you sure you want to delete this character? This character will be lost forever.", () => {
-			progress.show();
-			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").delete().then(function() {
-				userRef.collection("characters").doc(sessionStorage.getItem("::saved")).delete().then(function() {
-					progress.hide();
-					note.open("delete", "Character deleted", 2000);
-					openPage("characterList");
-					wave.dialog.close();
-				}).catch(function(e) {
-					error(e)
-				});
-			}).catch(function(e){error(e)});
-		})
+		if (confirm("Are you sure you want to delete this character? This character will be lost forever.")) {
+			characterRef.collection("data").doc("characterObj").delete().catch(e => {thr(e)});
+			var inventoryQuery = createQuery(characterRef.collection("inventory"));
+			for (var i = 0; i < inventoryQuery.length; ++i) {
+				var id = inventoryQuery[i]["__id"];
+				characterRef.collection("inventory").doc(id).delete().catch(e => {thr(e)});
+			}
+
+			var abilitiesQuery = createQuery(characterRef.collection("abilities"));
+			for (var i = 0; i < abilitiesQuery.length; ++i) {
+				var id = abilitiesQuery[i]["__id"];
+				characterRef.collection("abilities").doc(id).delete().catch(e => {thr(e)});
+			}
+
+			var spellsQuery = createQuery(characterRef.collection("spells"));
+			for (var i = 0; i < spellsQuery.length; ++i) {
+				var id = spellsQuery[i]["__id"];
+				characterRef.collection("spells").doc(id).delete().catch(e => {thr(e)});
+			}
+
+			characterRef.delete().catch(e => {thr(e)});
+			openPage("characterList");
+		}
 	} else {
 		alert("This character is in use in a campaign");
 		progress.hide();
@@ -402,56 +435,48 @@ async function deleteCharacter() {
 }
 
 function dupe() {
-	var characterId = sessionStorage.getItem("::saved");
-	var newCharacterId = "character-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
-	if (confirm("Do you wan't to dupe this character?")) {
-		progress.show();
-		firestore.collection("users").doc(sUid + "/characters/" + characterId).get().then(function(doc) {
-			if (doc && doc.exists) {
-				var characterInfo = doc.data();
-				console.log(characterInfo);
-				if (characterInfo["dupe"] !== undefined) {
-					characterInfo["dupe"] += 1;
-				} else {
-					characterInfo["dupe"] = 1;
-				}
-				characterInfo["id"] = newCharacterId;
-				console.log(characterInfo);
-				firestore.collection("users").doc(sUid + "/characters/" + newCharacterId).set(characterInfo).then(function() {
-					firestore.collection("users").doc(sUid + "/characters/" + characterId + "/data/characterObj").get().then(function(doc) {
-						if (doc && doc.exists) {
-							var characterObj = doc.data();
-							firestore.collection("users").doc(sUid + "/characters/" + newCharacterId + "/data/characterObj").set(characterObj).then(function() {
-								progress.hide();
-								note.open("file_copy", "Duped characer", 2000);
-								loadCharacter(newCharacterId);
-							});
-						}
-					}).catch(function(error) {
-						localError(error);
-					});
-				}).catch(function(error) {
-					localError(error);
-				});
-
-				userRef.collection("characters").doc(newCharacterId).collection("lists").doc("inventory").set(vueInventory.items)
-					.catch(err => {
-						error(err);
-					});
-
-				userRef.collection("characters").doc(newCharacterId).collection("lists").doc("abilities").set(vueAbilities.items)
-					.catch(err => {
-						error(err);
-					});
-
-				userRef.collection("characters").doc(newCharacterId).collection("lists").doc("inventory").set(vueSpells.items)
-					.catch(err => {
-						error(err);
-					});
+	if (confirm("Are you sure you want to dupe this character?")) {
+		var dupeName = prompt("You can name this dupe, but is not mandatory.");
+		var newCharacterId = "character_" + genId();
+		if (dupeName === null || dupeName === "") {
+			dupeName = shortId();
+		}
+		s();
+		var newCharacterInfo = characterInfo;
+		newCharacterInfo.dupe = dupeName;
+		newCharacterInfo.id = newCharacterId;
+		console.log(newCharacterInfo);
+		var newCharacterRef = userRef.collection("characters").doc(newCharacterId);
+		newCharacterRef.set(newCharacterInfo).catch(e => {thr(e)});
+		newCharacterRef.collection("data").doc("characterObj").set(characterObj).catch(e => {thr(e)});
+		if (vueInventory) {
+			let rtrn = [];
+			for (var i = 0; i < vueInventory.items.length; ++i) {
+				let item = vueInventory["items"][i];
+				item.shown = false;
+				newCharacterRef.collection("inventory").doc(item.__id).set(item).catch(e => {thr(e)});
 			}
-		}).catch(function(error) {
-			localError(error);
-		});
+		}
+
+		if (vueAbilities) {
+			let rtrn = [];
+			for (var i = 0; i < vueAbilities.items.length; ++i) {
+				let item = vueAbilities["items"][i];
+				item.shown = false;
+				newCharacterRef.collection("abilities").doc(item.__id).set(item).catch(e => {thr(e)});
+			}
+		}
+
+		if (vueSpells) {
+			let rtrn = [];
+			for (var i = 0; i < vueSpells.items.length; ++i) {
+				let item = vueSpells["items"][i];
+				item.shown = false;
+				newCharacterRef.collection("spells").doc(item.__id).set(item).catch(e => {thr(e)});
+			}
+		}
+
+		showSnackbar("Character dupelicated");
 	}
 }
 
@@ -510,73 +535,60 @@ async function loadInventory() {
 	} else {
 		vueInventory.items = [];
 	}
-	// userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("lists").doc("inventory").get().then(doc => {
-	// 	if (doc && doc.exists) {
-	// 		vueInventory.items = doc.data().data;
-	// 	} else {
-	// 		vueInventory.items = [];
-	// 	}
-	// });
 }
 
-function loadAbilities() {
-	characterRef.collection("lists").doc("abilities").get().then(doc => {
-		if (doc && doc.exists) {
-			vueAbilities.items = doc.data().data;
-		} else {
-			vueAbilities.items = []
-		}
-	})
+async function loadAbilities() {
+	var query = await createQuery(characterRef.collection("abilities"));
+	console.log(query);
+	if (query[0] !== undefined) {
+		vueAbilities.items = query;
+	} else {
+		vueAbilities.items = [];
+	}
 }
 
 async function loadSpells() {
-	// var query = await createQuery(characterRef.collection("spells"));
-	// if (query[0] !== undefined) {
-	// 	vueSpells.items = query;
-	// } else {
-	// 	vueSpells.items = [];
-	// }
-	// userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("lists").doc("spells").get().then(doc => {
-	// 	if (doc && doc.exists) {
-	// 		vueSpells.items = doc.data().data;
-	// 	} else {
-	// 		vueSpells.items = [];
-	// 	}
-	// });
+	var query = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("level", "desc").orderBy("name", "desc"));
+	console.log(query);
+	if (query.length > 0) {
+		for (var i = 0; i < query.length; ++i) {
+			var spell = query[i];
+			if (spell.version === undefined || spell.version !== 'b') {
+				userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").doc(spell.__id).delete().catch(err => {
+					error(err);
+				});
+				var spellObj = {
+					name: spell.name,
+					description: [],
+					shown: false,
+					tags: []
+				}
 
-	var query = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells"));
-	for (var i = 0; i < query.length; ++i) {
-		var spell = query[i];
-		userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").doc(spell.__id).delete().catch(err => {
-			error(err);
-		});
-		var spellObj = {
-			name: spell.name,
-			"__id": spell.__id,
-			description: [],
-			shown: false,
-			tags: []
-		}
+				var temp = spell.description.split("\n")
+				for (var p = 0; p < temp.length; ++p) {
+					var rtrn = temp[p];
+					if (rtrn === "") {
+						rtrn = " ";
+					}
+					spellObj.description.push(rtrn);
+				}
 
-		var temp = spell.description.split("\n")
-		for (var p = 0; p < temp.length; ++p) {
-			var rtrn = temp[p];
-			if (rtrn === "") {
-				rtrn = " ";
+				if (spell.level === 0) {spellObj.tags.push("Cantrip")} else {spellObj.tags.push("Level: " + spell.level)}
+				if (spell.verbal === true) {spellObj.tags.push("Verbal")}
+				if (spell.somatic === true) {spellObj.tags.push("Somatic")}
+				if (spell.material !== "") {spellObj.tags.push("Material component: " + spell.material)}
+				if (spell.castingTime !== "") {spellObj.tags.push("Casting time: " + spell.castingTime)}
+				if (spell.ritual === true) {spellObj.tags.push("Ritual")}
+				if (spell.concentration === true) {spellObj.tags.push("Concentration")}
+				if (spell.range !== "") {spellObj.tags.push("Range: " + spell.range)}
+				spellObj.__id = genId();
+				spellObj.version = "b";
+
+				vueSpells.items.push(spellObj);
+			} else {
+				vueSpells.items.push(spell);
 			}
-			spellObj.description.push(rtrn);
 		}
-
-		if (spell.level === 0) {spellObj.tags.push("Cantrip")} else {spellObj.tags.push("Level: " + spell.level)}
-		if (spell.verbal === true) {spellObj.tags.push("Verbal")}
-		if (spell.somatic === true) {spellObj.tags.push("Somatic")}
-		if (spell.material !== "") {spellObj.tags.push("Material component: " + spell.material)}
-		if (spell.castingTime !== "") {spellObj.tags.push("Casting time: " + spell.castingTime)}
-		if (spell.ritual === true) {spellObj.tags.push("Ritual")}
-		if (spell.concentration === true) {spellObj.tags.push("Concentration")}
-		if (spell.range !== "") {spellObj.tags.push("Range: " + spell.range)}
-
-		vueSpells.items.push(spellObj);
 	}
 }
 
@@ -586,6 +598,7 @@ async function loadLists() {
 	await loadInventory();
 	await loadAbilities();
 	loader.hide();
+	saveCharacter(false);
 }
 
 function calcMod(selector, modSelector) {
@@ -634,7 +647,7 @@ function onload() {
 		console.log("C");
 		loadLists();
 		loadCharacter(sessionStorage.getItem("::openCharacter"));
-		loadPermissions();
+		// loadPermissions();
 		loaded = true;
 	}
 }
