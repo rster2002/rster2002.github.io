@@ -32,6 +32,8 @@ async function refreshUsers() {
 	for (var i = 0; i < userArray.length; ++i) {
 		var userObj = userArray[i];
 		userObj.shown = false;
+		userObj.lastLogin = new Date(userObj.lastLogin).toString();
+		userObj.firstLogin = new Date(userObj.firstLogin).toString();
 		vueInstance.users.push(userObj);
 	}
 }
@@ -41,6 +43,7 @@ function startEmulatetSession() {
 }
 
 function stopEmulatetSession() {
+
 }
 
 function deleteAccount() {

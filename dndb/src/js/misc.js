@@ -184,6 +184,7 @@ loaded = null;
 
 function openPage(page) {
 	loader.show();
+	characterSheetLoaded = false;
 	$(".page .innerPage").remove();
 	$(".page .innerResources").remove();
 	$(".page").load("./src/pages/" + page + "/page.html");

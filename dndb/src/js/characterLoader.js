@@ -41,7 +41,7 @@ function l(characterObj) {
 					} else if ($("input#form" + i + "_" + page).is(":checkbox")) {
 						if (characterObj[i + "_" + page]) {
 							$("input#form" + i + "_" + page).prop("checked",true);
-							$("img#form" + i + "_" + page).attr("src","1/form/3011 0 ROn.png");
+							$("img#form" + i + "_" + page).attr("src","./src/pages/characterSheet/1/form/3011 0 ROn.png");
 						}
 					}
 				}
@@ -67,10 +67,10 @@ function lDisabled(characterObj) {
 					} else if ($("input#form" + i + "_" + page).is(":checkbox")) {
 						if (characterObj[i + "_" + page] === true) {
 							$("input#form" + i + "_" + page).prop("checked",true);
-							$("img#form" + i + "_" + page).attr("src","1/form/3011 0 ROn.png");
+							$("img#form" + i + "_" + page).attr("src","./src/pages/characterSheet/1/form/3011 0 ROn.png");
 						} else {
 							$("input#form" + i + "_" + page).prop("checked",false);
-							$("img#form" + i + "_" + page).attr("src","1/form/3015 0 ROff.png");
+							$("img#form" + i + "_" + page).attr("src","./src/pages/characterSheet/1/form/3015 0 ROff.png");
 						}
 					}
 				}

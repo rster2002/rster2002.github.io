@@ -85,7 +85,7 @@ async function configUserDb(authObj) {
 
 					// checks if the user is emulating an other uid and sets the border color
 					if (sessionStorage.getItem("::emuUid") === null) {
-						$(".userIcon").css("border", "1px solid #169afd");
+						// $(".userIcon").css("border", "1px solid #169afd");
 					} else {
 						$(".userIcon").css("border", "1px solid #6dec1c");
 					}
@@ -148,6 +148,7 @@ function initUser() {
 		userBucket = cloudStorage.child(uid);
 		$(".userimg").attr("src", p.photoURL);
 		$(".username").text(p.displayName);
+		$(".userEmail").text(p.email);
 		configUserDb(p);
 		openPage("dashboard");
 	});
