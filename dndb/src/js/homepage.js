@@ -9,5 +9,5 @@ $(document).ready(() => {
 });
 
 if (localStorage.getItem("firebaseui::rememberedAccounts")) {
-	location.href = "../assets/components/dnd/login.html";
+	location.href = "../dndb/";
 }
