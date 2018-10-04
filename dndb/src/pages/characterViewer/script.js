@@ -282,6 +282,7 @@ function onload() {
 		console.log("C");
 		loadLists();
 		loadCharacter(global["viewCharacterInfo"]["userId"], global["viewCharacterInfo"]["characterId"]);
+		refreshLayout();
 		loaded = true;
 	}
 }
