@@ -289,7 +289,7 @@ function afterSelect(index) {
 			id: campaignId,
 			added: Date.now()
 		}).then(function() {
-			userRef.collection("characters").doc(character).collection("usedInCampaigns").add({
+			userRef.collection("characters").doc(character).collection("usedInCampaigns").doc(campaignId).set({
 				campaignId: campaignId,
 				campaignName: campaignName
 			});

@@ -58,12 +58,7 @@ $(document).ready(function() {
 			}
 		}
 	})
-})
-
-
-function alert(text) {
-	wave.dialog.alert(text);
-}
+});
 
 function onLoaded() {
 	loader.hide();

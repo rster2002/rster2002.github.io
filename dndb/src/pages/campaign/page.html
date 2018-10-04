@@ -1,9 +1,11 @@
-<div class="innerPage scroll">
+<div class="innerResources">
 	<script>
 		tempImport([
 			"--default"
 		]);
 	</script>
+</div>
+<div class="innerPage scroll">
 	<div class="lane" id="vueInstance">
 		<div class="entry" style="margin-top: 24px;">
 			<img class="topUserImage" v-bind:src="currentUser.profileImage" />
@@ -50,7 +52,7 @@
 				<h1 @click="togglePlayerOpen(player)">{{ player.characterObj.characterName }}</h1>
 				<div class="content" v-if="player.open == true">
 					<button @click="viewCharacter(player)">Open character</button>
-					<button class="danger" @click="kick(player)" v-if="isDM">Kick</button>
+					<button class="danger" @click="kick(player, false, true)" v-if="isDM">Kick</button>
 					<!-- <button class="danger" v-if="isDM">Ban</button> -->
 				</div>
 			</div>

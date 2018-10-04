@@ -97,7 +97,7 @@ async function refresh() {
 
 	var campaignQuery = await createQuery(userRef.collection("campaigns"));
 	for (var i = 0; i < campaignQuery.length; ++i) {
-		addUpcomming(query[i]);
+		addUpcomming(campaignQuery[i]);
 	}
 
 	if (characterQuery.length === 0 && campaignQuery.length === 0) {

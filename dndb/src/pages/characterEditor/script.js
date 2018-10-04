@@ -2,6 +2,7 @@ sUid = sessionStorage.getItem("::uid");
 characters = "abcdefghijklmnopqrstuvwxyz0123456789";
 characterRef = userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter"));
 var characterInfo;
+var file = null;
 
 sessionStorage.setItem("::saved", "false");
 
@@ -378,6 +379,7 @@ function loadCharacter(i) {
 							userBucket.child(sessionStorage.getItem("::saved")).getDownloadURL().then(function(url) {
 								console.log(url);
 								$('#form12_2').css('background-image', "url('" + url + "')");
+								file = url;
 							}).catch(function(err) {
 								error(err)
 							});
@@ -445,6 +447,7 @@ function dupe() {
 		var newCharacterInfo = characterInfo;
 		newCharacterInfo.dupe = dupeName;
 		newCharacterInfo.id = newCharacterId;
+		newCharacterInfo.hasImg = false;
 		console.log(newCharacterInfo);
 		var newCharacterRef = userRef.collection("characters").doc(newCharacterId);
 		newCharacterRef.set(newCharacterInfo).catch(e => {thr(e)});
@@ -475,6 +478,10 @@ function dupe() {
 				newCharacterRef.collection("spells").doc(item.__id).set(item).catch(e => {thr(e)});
 			}
 		}
+
+		// if (file !== null) {
+		// 	userBucket.child(newCharacterId).put(file);
+		// }
 
 		showSnackbar("Character dupelicated");
 	}
@@ -647,6 +654,7 @@ function onload() {
 		console.log("C");
 		loadLists();
 		loadCharacter(sessionStorage.getItem("::openCharacter"));
+		refreshLayout();
 		// loadPermissions();
 		loaded = true;
 	}
