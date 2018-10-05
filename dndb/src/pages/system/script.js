@@ -33,6 +33,9 @@ vueInstance = new Vue({
 			this.users[this.users.indexOf(u)].shown = !this.users[this.users.indexOf(u)].shown;
 		},
 		updateStatus() {
+			if (this.newStatus.status === "") {
+				this.newStatus.status = "online";
+			}
 			firestore.update({
 				status: this.newStatus.status,
 				info: this.newStatus.info
@@ -46,6 +49,8 @@ firestore.onSnapshot(doc => {
 		let d = doc.data();
 		vueInstance.status.status = d.status;
 		vueInstance.status.info = d.info;
+		vueInstance.newStatus.status = d.status;
+		vueInstance.newStatus.info = d.info;
 		if (d.status === "online") {
 			vueInstance.status.style = {
 				color: "#30f30f"
@@ -59,7 +64,7 @@ firestore.onSnapshot(doc => {
 })
 
 async function refreshUsers() {
-	userArray = await createQuery(firestore.collection("users").orderBy("username", "asc"));
+	userArray = await createQuery(firestore.collection("users").orderBy("lastLogin", "desc"));
 	console.log(userArray);
 	for (var i = 0; i < userArray.length; ++i) {
 		var userObj = userArray[i];
