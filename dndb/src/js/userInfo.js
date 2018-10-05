@@ -62,7 +62,7 @@ async function configUserDb(authObj) {
 					username: authObj.displayName,
 					usericon: authObj.photoURL
 				}).catch(err => {
-
+					thr(err);
 				})
 			}).then(() => {
 				progress.hide();
@@ -91,8 +91,23 @@ async function configUserDb(authObj) {
 					}
 
 					// adds the system tab to the menu
-					$(".sidebar .menu").append("<div class='menubutton' onclick='openSystemPage()'><p class='centerVertical'><i class='material-icons'>code</i>System</p></div>")
+					$(".sidebar .menu").append("<div class='menubutton' onclick='openSystemPage()'><p class='centerVertical'><i class='material-icons'>code</i>System</p></div>");
 					sessionStorage.setItem("::wait", "1");
+				}
+				if (miscInfo.type !== "system") {
+					firestore.onSnapshot(function(doc) {
+						if (doc && doc.exists) {
+							let d = doc.data();
+							if (d.status !== "online") {
+								if (d.info === undefined) {
+									d.info = "Application is not available at the moment.";
+								}
+
+								alert("Status: " + d.status + "\n\n" + d.info + "\n\nTo make sure no data is lost, you'll be logged out.");
+								logout();
+							}
+						}
+					});
 				}
 			} else {
 
