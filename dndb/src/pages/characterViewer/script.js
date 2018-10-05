@@ -355,9 +355,6 @@ async function loadSpells() {
 		for (var i = 0; i < query.length; ++i) {
 			var spell = query[i];
 			if (spell.version === undefined || spell.version !== 'b') {
-				userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").doc(spell.__id).delete().catch(err => {
-					error(err);
-				});
 				var spellObj = {
 					name: spell.name,
 					description: [],
@@ -399,7 +396,6 @@ async function loadLists() {
 	await loadInventory();
 	await loadAbilities();
 	loader.hide();
-	saveCharacter(false);
 }
 
 function calcMod(selector, modSelector) {
