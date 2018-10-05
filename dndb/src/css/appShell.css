@@ -25,7 +25,6 @@ h1, p, input, textarea {
 input, textarea {
 	border: 2px solid rgb(0,128,255);
 	background-color: transparent;
-	border-radius: 1vh;
 	outline: 0;
 }
 

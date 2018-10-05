@@ -64,6 +64,7 @@ firestore.onSnapshot(doc => {
 })
 
 async function refreshUsers() {
+	vueInstance.users = [];
 	userArray = await createQuery(firestore.collection("users").orderBy("lastLogin", "desc"));
 	console.log(userArray);
 	for (var i = 0; i < userArray.length; ++i) {
