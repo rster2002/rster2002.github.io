@@ -1,10 +1,15 @@
 sUid = sessionStorage.getItem("::uid");
 characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-characterRef = userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter"));
 var characterInfo;
 var file = null;
+var sUid = global["viewCharacterInfo"]["userId"];
+characterRef = firestore.collection("users").doc(sUid).collection("characters").doc(sessionStorage.getItem("::openCharacter"));
 
 sessionStorage.setItem("::saved", "false");
+
+function back() {
+	openPage(global["viewCharacterInfo"]["returnPage"]);
+}
 
 var vueInventoryObj = {
 	el: "#inventory",
@@ -245,7 +250,7 @@ function loadCharacter(i) {
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get().then(function(doc) {
 				if (doc && doc.exists) {
 					var data = doc.data();
-					l(data);
+					lDisabled(data);
 					allowSave = true;
 					// window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
 					progress.hide();
@@ -443,7 +448,7 @@ function onload() {
 	if (!loaded) {
 		console.log("C");
 		loadLists();
-		loadCharacter(sessionStorage.getItem("::openCharacter"));
+		loadCharacter(global["viewCharacterInfo"]["characterId"]);
 		refreshLayout();
 		// loadPermissions();
 		loaded = true;

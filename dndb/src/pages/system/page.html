@@ -1,10 +1,20 @@
-<div class="innerPage scroll">
+<div class="innerResources">
 	<script>
 		tempImport([
 			"--default"
 		])
 	</script>
+</div>
+<div class="innerPage scroll">
 	<div class="lane" id="vueInstance">
+		<div class="entry">
+			<h2>Status</h2>
+			<h1 v-bind:style="status.style">{{ status.status }}</h1>
+			<p>{{ status.info }}</p>
+			<input v-model="newStatus.status" placeholder="Status" />
+			<textarea v-model="newStatus.info" placeholder="Info"></textarea>
+			<button @click="updateStatus()">Update status</button>
+		</div>
 		<div class="entry">
 			<h2>Controlls</h2>
 			<button @click="stopEmulation()">Stop emulation</button>

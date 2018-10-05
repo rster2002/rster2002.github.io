@@ -171,7 +171,7 @@ div.wave.card {
 	z-index: 30;
 	width: 80vw;
 	max-width: 360px;
-	height: 100vh;
+	height: 100%;
 	background-color: white;
 	transition: 200ms transform cubic-bezier(0.4, 0.0, 0.6, 1);
 	transform: translateX(-35vw);
@@ -553,6 +553,33 @@ html div.wave.card > div.actions button {
 }
 
 .innerPage .lane .entry input::-ms-input-placeholder {
+	color: #0080ff;
+}
+
+.innerPage .lane .entry textarea {
+	width: calc(100% - 74px);
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	margin: 12px 0px;
+	font-size: 18px;
+	background-color: transparent;
+	outline: 0;
+	border: solid 2px #0080ff;
+	border-radius: 4px;
+	color: black;
+	padding: 4px 6px;
+	font-weight: 500;
+	height: 240px;
+	resize: none;
+}
+
+.innerPage .lane .entry textarea::placeholder {
+	color: #0080ff;
+	opacity: 1;
+}
+
+.innerPage .lane .entry textarea::-ms-input-placeholder {
 	color: #0080ff;
 }
 

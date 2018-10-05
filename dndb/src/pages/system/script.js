@@ -1,6 +1,15 @@
 vueInstance = new Vue({
 	el: "#vueInstance",
 	data: {
+		status: {
+			style: {
+				color: "#000000"
+			}
+		},
+		newStatus: {
+			status: "",
+			info: ""
+		},
 		users: []
 	},
 	methods: {
@@ -22,6 +31,29 @@ vueInstance = new Vue({
 		},
 		toggleOpen(u) {
 			this.users[this.users.indexOf(u)].shown = !this.users[this.users.indexOf(u)].shown;
+		},
+		updateStatus() {
+			firestore.update({
+				status: this.newStatus.status,
+				info: this.newStatus.info
+			});
+		}
+	}
+});
+
+firestore.onSnapshot(doc => {
+	if (doc && doc.exists) {
+		let d = doc.data();
+		vueInstance.status.status = d.status;
+		vueInstance.status.info = d.info;
+		if (d.status === "online") {
+			vueInstance.status.style = {
+				color: "#30f30f"
+			}
+		} else {
+			vueInstance.status.style = {
+				color: "#ff3030"
+			}
 		}
 	}
 })
