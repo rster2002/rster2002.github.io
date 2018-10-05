@@ -3,7 +3,7 @@ characters = "abcdefghijklmnopqrstuvwxyz0123456789";
 var characterInfo;
 var file = null;
 var sUid = global["viewCharacterInfo"]["userId"];
-characterRef = firestore.collection("users").doc(sUid).collection("characters").doc(sessionStorage.getItem("::openCharacter"));
+characterRef = firestore.collection("users").doc(sUid).collection("characters").doc(global["viewCharacterInfo"]["characterId"]);
 
 sessionStorage.setItem("::saved", "false");
 
