@@ -354,7 +354,7 @@ async function loadAbilities() {
 }
 
 async function loadSpells() {
-	var query = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("level", "desc").orderBy("name", "desc"));
+	var query = await createQuery(characterRef.collection("spells").orderBy("level", "desc").orderBy("name", "desc"));
 	console.log(query);
 	if (query.length > 0) {
 		for (var i = 0; i < query.length; ++i) {
