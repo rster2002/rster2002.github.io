@@ -28,15 +28,3 @@ dbUserCodes = database.child("userCodes");
 dbBackups = firebase.database().ref("backups" + dbNew);
 
 console.log(dbNew);
-firestore.get().then(function(doc) {
-	console.log(doc);
-	if (doc && doc.exists) {
-		var state = doc.data();
-		if (state.function === "logout") {
-			alert(state.message);
-			logout();
-		} else if (state.function === "message") {
-			alert(state.message);
-		}
-	}
-});

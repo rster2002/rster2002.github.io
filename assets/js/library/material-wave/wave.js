@@ -144,7 +144,16 @@ function elementLoaded(selector, callback){
 }
 
 async function loadCss(url) {
-	var cssId = Number(sessionStorage.getItem("wave--css")) + 1;
+	var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	function randomString(characters, l) {
+		var retn = "";
+		for (var i = 0; i < l; i++) {
+			var r = Math.floor(Math.random() * characters.length);
+			retn += characters[r];
+		}
+		return retn;
+	}
+	var cssId = "waveCSS_" + randomString(characters, 6);
 	var head  = document.getElementsByTagName('head')[0];
 	var link  = document.createElement('link');
 	link.id   = cssId;
@@ -162,7 +171,16 @@ async function loadCss(url) {
 }
 
 async function loadInit(url) {
-	var initId = Number(sessionStorage.getItem("wave--init")) + 1;
+	var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	function randomString(characters, l) {
+		var retn = "";
+		for (var i = 0; i < l; i++) {
+			var r = Math.floor(Math.random() * characters.length);
+			retn += characters[r];
+		}
+		return retn;
+	}
+	var initId = "waveJS_" + randomString(characters, 6);
 	var head  = document.getElementsByTagName('head')[0];
 	var link  = document.createElement('script');
 	link.id   = initId;
