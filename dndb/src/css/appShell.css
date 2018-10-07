@@ -173,7 +173,7 @@ div.wave.card {
 	height: 100%;
 	background-color: white;
 	transition: 200ms transform cubic-bezier(0.4, 0.0, 0.6, 1);
-	transform: translateX(-35vw);
+	transform: translateX(-200%);
 	overflow-y: auto;
 }
 
@@ -416,6 +416,15 @@ html div.wave.card > div.actions button {
 	padding: 0;
 }
 
+.innerPage .lane .entry .divider {
+	height: 2px;
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: rgb(0, 0, 0, .3);
+}
+
 .innerPage .lane .entry select {
 	margin: 8px 4px;
 	font-size: 24px;
@@ -492,6 +501,21 @@ html div.wave.card > div.actions button {
 	text-align: center;
 }
 
+.innerPage .lane .entry h3 {
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin: 12px 0px;
+	margin-top: 24px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 24px;
+	font-weight: 500;
+	color: rgba(0, 0, 0, .7);
+}
+
 .innerPage .lane .entry h1.noOverflow {
 	white-space: pre-wrap;
 	text-overflow: clip;
@@ -553,6 +577,56 @@ html div.wave.card > div.actions button {
 
 .innerPage .lane .entry input::-ms-input-placeholder {
 	color: #0080ff;
+}
+
+.innerPage .lane .entry .multiInput {
+	width: calc(100% - 74px);
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	margin: 12px 0px;
+	background-color: transparent;
+}
+
+.innerPage .lane .entry .multiInput > input {
+	margin: 0;
+	width: 100%;
+	float: left;
+	position: relative;
+	left: 0%;
+	transform: translateX(0%);
+}
+
+.innerPage .lane .entry .multiInput.tennine > input:nth-of-type(1) {
+	border-radius: 0px;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-right: 0px;
+	width: calc(10% - 2px);
+}
+
+.innerPage .lane .entry .multiInput.tennine > input:last-child {
+	border-radius: 0px;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-left: 0px;
+	width: calc(90% - 26px);
+}
+
+.innerPage .lane .entry .multiInput.fithteen > input:nth-of-type(1) {
+	border-radius: 0px;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-right: 0px;
+	width: calc(15% - 2px);
+}
+
+.innerPage .lane .entry .multiInput.fithteen > input:last-child {
+	border-radius: 0px;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-left: 0px;
+	width: calc(85% - 26px);
 }
 
 .innerPage .lane .entry textarea {

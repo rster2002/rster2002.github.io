@@ -1,38 +1,16 @@
-<div class="innerPage scroll">
+<div class="innerResources">
 	<script>
-		$("#T1").attr("src", "../assets/components/dndb/js/" + sessionStorage.getItem("::openPage") + ".js");
-		$("#T2").attr("href", "../assets/components/dndb/css/" + sessionStorage.getItem("::openPage") + ".css");
-		$("#T3").attr("href", "../assets/components/dndb/css/" + sessionStorage.getItem("::openPage") + ".m.css");
+		tempImport([
+			"--default"
+		]);
 	</script>
-	<script id="T1" type="text/javascript"></script>
-	<link id="T2" rel="stylesheet" type="text/css">
-	<link id="T3" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
-	<div class="wave grid cards fill" id="vueGrid">
-		<div class="wave noContent">
-			<h1>Nothing here</h1>
-			<p>You are not a DM of a campaign</p>
-		</div>
-		<!-- <div class="wave card d6 t12 m24">
-			<div class="title">
-				<h1>5ti1G</h1>
-				<p>3 players</p>
-			</div>
-			<div class="actions">
-				<button>Open</button>
-			</div>
-		</div> -->
-		<div class='wave card d3 t6 m12' v-for="campaign in campaigns">
-			<div class='title'>
-				<h1>{{ campaign.name }}</h1>
-				<p>Private: {{ campaign.private }}</p>
-			</div>
-			<div class='actions' v-on:click="openCampaign(campaign.id)">
-				<button>Open</button>
-			</div>
+</div>
+<div class="innerPage">
+	<div class="lane">
+		<div class="entry">
+			<h1>Monsters</h1>
+			<p>Calculate encounters or find the next challenge for your players.</p>
+			<button onclick="openPage('monsters')">View</button>
 		</div>
 	</div>
-	<script>
-		loader.hide();
-	</script>
-	<div class="push"></div>
 </div>
