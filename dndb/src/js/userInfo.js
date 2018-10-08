@@ -91,7 +91,7 @@ async function configUserDb(authObj) {
 					}
 
 					// adds the system tab to the menu
-					$(".sidebar .menu").append("<div class='menubutton' onclick='openSystemPage()'><p class='centerVertical'><i class='material-icons'>code</i>System</p></div>");
+					$(".sidebar .menu").append("<div class='menubutton page-system' onclick='openSystemPage()'><p class='centerVertical'><i class='material-icons'>code</i>System</p></div>");
 					sessionStorage.setItem("::wait", "1");
 				}
 				if (miscInfo.type !== "system") {

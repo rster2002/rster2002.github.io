@@ -59,6 +59,7 @@
 					<p v-if="monster.skills != ''"><b>Skills</b> {{ monster.skills }}</p>
 					<p v-if="monster.damage_vulnerabilities != ''"><b>Vulnerabilities</b> {{ monster.damage_vulnerabilities }}</p>
 					<p v-if="monster.damage_resistances != ''"><b>Damage Resistances</b> {{ monster.damage_resistances }}</p>
+					<p v-if="monster.condition_immunities != ''"><b>Condition Immunities</b> {{ monster.condition_immunities }}</p>
 					<p v-if="monster.damage_immunities != ''"><b>Damage Immunities</b> {{ monster.damage_immunities }}</p>
 					<p v-if="monster.senses != ''"><b>Senses</b> {{ monster.senses }}</p>
 					<p><b>Languages</b> <span v-if="monster.languages != ''">{{ monster.languages }}</span><span v-if="monster.languages == ''">-</span></p>
