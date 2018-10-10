@@ -105,8 +105,9 @@ html .wave.top.bar > .section button i {
 }
 
 .error .inner {
-	width: 60%;
+	width: 95%;
 	height: 60%;
+	max-width: 935px;
 }
 
 .error .inner h1 {
@@ -778,3 +779,5 @@ html div.wave.card > div.actions button {
 	font-size: 16px;
 	color: rgba(0, 0, 0, .8);
 }
+
+/* Drawup card */

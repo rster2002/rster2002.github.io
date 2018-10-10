@@ -206,6 +206,9 @@ var vueInstance = new Vue({
 			this.calculator.hard = hard;
 			this.calculator.deadly = deadly;
 			this.calculator.calculated = true;
+		},
+		setQuery(monster) {
+			this.query = monster.name;
 		}
 	}
 });

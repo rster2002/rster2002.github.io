@@ -283,8 +283,8 @@ function error(error) {
 	}
 }
 
-function thr(error) {
-	error(error);
+function thr(e) {
+	error(e);
 }
 
 function closeError() {

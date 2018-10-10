@@ -57,21 +57,30 @@
 						<i class="material-icons">clear</i>
 					</div>
 				</div>
-				<button @click="addItem()">Add</button>
+				<button @click="addItem()" v-if="editing == false">Add</button>
+				<button @click="saveEdit()" v-if="editing == true">Save</button>
 			</div>
 			<div class="item" v-for="item in items">
-				<div class="shared" @click="toggleShown(item)">
-					<h1>{{ item.name }}</h1>
-				</div>
-				<div class="expanded" v-if="item.shown == true">
-					<input v-model="item.count" placeholder="Count" type="number" />
-					<p v-for="text in item.description">{{ text }}</p>
-					<div class="tags">
-						<div class="tag" v-for="tag in item.tags">
-							<p>{{ tag }}</p>
-						</div>
+				<div v-if="item.editing == true">
+					<div class="shared">
+						<h1>Being edited...</h1>
 					</div>
-					<button @click="deleteItem(item)">Delete</button>
+				</div>
+				<div v-if="item.editing != true">
+					<div class="shared" @click="toggleShown(item)">
+						<h1>{{ item.name }}</h1>
+					</div>
+					<div class="expanded" v-if="item.shown == true">
+						<input v-model="item.count" placeholder="Count" type="number" />
+						<p v-for="text in item.description">{{ text }}</p>
+						<div class="tags">
+							<div class="tag" v-for="tag in item.tags">
+								<p>{{ tag }}</p>
+							</div>
+						</div>
+						<button @click="editItem(item)">Edit</button>
+						<button @click="deleteItem(item)" class="danger">Delete</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -90,20 +99,29 @@
 						<i class="material-icons">clear</i>
 					</div>
 				</div>
-				<button @click="addItem()">Add</button>
+				<button @click="addItem()" v-if="editing == false">Add</button>
+				<button @click="saveEdit()" v-if="editing == true">Save</button>
 			</div>
 			<div class="item" v-for="item in items">
-				<div class="shared" @click="toggleShown(item)">
-					<h1>{{ item.name }}</h1>
-				</div>
-				<div class="expanded" v-if="item.shown == true">
-					<p v-for="text in item.description">{{ text }}</p>
-					<div class="tags">
-						<div class="tag" v-for="tag in item.tags">
-							<p>{{ tag }}</p>
-						</div>
+				<div v-if="item.editing == true">
+					<div class="shared">
+						<h1>Being edited...</h1>
 					</div>
-					<button @click="deleteItem(item)">Delete</button>
+				</div>
+				<div v-if="item.editing != true">
+					<div class="shared" @click="toggleShown(item)">
+						<h1>{{ item.name }}</h1>
+					</div>
+					<div class="expanded" v-if="item.shown == true">
+						<p v-for="text in item.description">{{ text }}</p>
+						<div class="tags">
+							<div class="tag" v-for="tag in item.tags">
+								<p>{{ tag }}</p>
+							</div>
+						</div>
+						<button @click="editItem(item)">Edit</button>
+						<button @click="deleteItem(item)" class="danger">Delete</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -123,20 +141,29 @@
 						<i class="material-icons">clear</i>
 					</div>
 				</div>
-				<button @click="addItem()">Add</button>
+				<button @click="addItem()" v-if="editing == false">Add</button>
+				<button @click="saveEdit()" v-if="editing == true">Save</button>
 			</div>
 			<div class="item" v-for="item in items">
-				<div class="shared" @click="toggleShown(item)">
-					<h1>{{ item.name }}</h1>
-				</div>
-				<div class="expanded" v-if="item.shown == true">
-					<p v-for="text in item.description">{{ text }}</p>
-					<div class="tags">
-						<div class="tag" v-for="tag in item.tags">
-							<p>{{ tag }}</p>
-						</div>
+				<div v-if="item.editing == true">
+					<div class="shared">
+						<h1>Being edited...</h1>
 					</div>
-					<button @click="deleteItem(item)">Delete</button>
+				</div>
+				<div v-if="item.editing != true">
+					<div class="shared" @click="toggleShown(item)">
+						<h1>{{ item.name }}</h1>
+					</div>
+					<div class="expanded" v-if="item.shown == true">
+						<p v-for="text in item.description">{{ text }}</p>
+						<div class="tags">
+							<div class="tag" v-for="tag in item.tags">
+								<p>{{ tag }}</p>
+							</div>
+						</div>
+						<button @click="editItem(item)">Edit</button>
+						<button @click="deleteItem(item)" class="danger">Delete</button>
+					</div>
 				</div>
 			</div>
 		</div>

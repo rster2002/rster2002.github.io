@@ -25,6 +25,7 @@
 
 					var scale = 0.0002698145 * px($("#pg1").css("width"));
 					$(".t").css("transform", "scale(" + scale + ")");
+					$(".t.m1_3.s3_3").css("transform", "scale(" + scale + ") rotate(-90deg)");
 					console.log({
 						scale: scale,
 						width: px($("#pg1").css("width"))
@@ -941,9 +942,9 @@ function setImage(input, state) {
 function getSrc(input, state) {
     var src;
     if (is64) {
-        src = "./src/pages/characterSheet" + inputs[input].getAttribute(states64[state]);
+        src = "./src/pages/characterSheet/" + inputs[input].getAttribute(states64[state]);
     } else {
-        src = "./src/pages/characterSheet" + inputs[input].getAttribute('imageName') + states[state];
+        src = "./src/pages/characterSheet/" + inputs[input].getAttribute('imageName') + states[state];
     }
     return src;
 }

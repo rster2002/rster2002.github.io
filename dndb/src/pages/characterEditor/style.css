@@ -202,19 +202,24 @@
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
-    background-color: transparent;
-    border: solid 2px #0080ff;
-    border-radius: 4px;
-    color: #0080ff;
-    margin: 12px 0px;
-    padding: 5px 0px;
-	outline: 0;
-	cursor: pointer;
 	font-size: 24px;
+	transition: all 100ms cubic-bezier(0.4, 0.0, 0.2, 1);
+	margin: 8px 4px;
+	font-size: 24px;
+	background-color: transparent;
+	outline: 0;
+	border: solid 2px #0080ff;
+	border-radius: 4px;
+	color: #0080ff;
+	padding: 4px 6px;
+	font-weight: 500;
+	cursor: pointer;
 }
 
 .lists .section .inputCard button:hover {
-	background-color: rgba(0, 0, 0, .1);
+	color: white;
+	background-color: #0080ff;
+	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 .lists .section .inputCard .row {
@@ -252,7 +257,9 @@
 }
 
 .lists .section .inputCard .row button:hover {
-	background-color: rgba(0, 0, 0, .1);
+	color: white;
+	background-color: #0080ff;
+	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 .lists .section .inputCard .tags {
@@ -362,7 +369,19 @@
 }
 
 .lists .section .item .expanded > button:hover {
-	background-color: rgba(0, 0, 0, .1);
+	color: white;
+	background-color: #0080ff;
+	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.lists .section .item .expanded > button.danger {
+    border: solid 2px #ff3030;
+    color: #ff3030;
+}
+
+.lists .section .item .expanded > button.danger:hover {
+	color: white;
+	background-color: #ff3030;
 }
 
 .lists .section .item .tags {

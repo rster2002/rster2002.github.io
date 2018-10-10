@@ -31,7 +31,7 @@
 			<div v-if="selectedMonsters.length > 0">
 				<h3>Monsters</h3>
 				<div class="listItem" v-for="monster in selectedMonsters">
-					<h1>{{ monster.name }}</h1>
+					<h1 @click="setQuery(monster)" style="cursor: pointer;">{{ monster.name }}</h1>
 					<input v-model="monster.count" placeholder="Number of monsters" type="number" />
 					<button @click="removeMonster(monster)">Remove</button>
 				</div>

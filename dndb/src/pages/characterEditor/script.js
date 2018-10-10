@@ -10,9 +10,11 @@ var vueInventoryObj = {
 	el: "#inventory",
 	data: {
 		items: [],
+		editing: false,
+		editingItem: {},
 		working: {
 			name: "",
-			count: 0,
+			count: 1,
 			description: "",
 			tag: "",
 			tags: [],
@@ -21,6 +23,7 @@ var vueInventoryObj = {
 	},
 	methods: {
 		toggleShown(item) {
+			console.log("het")
 			this.items[this.items.indexOf(item)].shown = !this.items[this.items.indexOf(item)].shown;
 		},
 		addTag() {
@@ -48,7 +51,7 @@ var vueInventoryObj = {
 			this.resetWorking();
 		},
 		deleteItem(item) {
-			if (confirm("Are you sure you want to delete this item?")) {
+			if (confirm("Are you sure you want to delete this item? This can't be undone!")) {
 				var i = this;
 				characterRef.collection("inventory").doc(item.__id).delete().then(function() {
 					i.items.splice(i.items.indexOf(item), 1);
@@ -61,11 +64,54 @@ var vueInventoryObj = {
 			this.working = {
 				name: "",
 				description: "",
-				level: 0,
+				count: 1,
 				tag: "",
 				tags: [],
 				shown: false
 			}
+		},
+		editItem(item) {
+			let index = this.items.indexOf(this.editingItem);
+			if (index !== -1) {
+				var d = this.editingItem.description.split("\n");
+				var rtrn = [];
+				for (var p = 0; p < d.length; ++p) {
+					var temp = d[p];
+					if (temp === "") {
+						temp = " ";
+					}
+					rtrn.push(temp);
+				}
+				this.items[index].description = rtrn;
+				this.items[index].editing = false;
+			}
+			this.editing = true;
+			this.editingItem = item;
+			this.items[this.items.indexOf(item)].editing = true;
+			item.description = item.description.join("\n");
+			this.working = item;
+		},
+		saveEdit() {
+			var i = Object.assign({}, this.working);
+			var d = i.description.split("\n");
+			var rtrn = [];
+			for (var p = 0; p < d.length; ++p) {
+				var temp = d[p];
+				if (temp === "") {
+					temp = " ";
+				}
+				rtrn.push(temp);
+			}
+			i.description = rtrn;
+			i.tags = Object.assign([], this.working.tags);
+			i.__id = this.editingItem.__id;
+			i.editing = false;
+			i.shown = false;
+			let index = this.items.indexOf(this.editingItem);
+			this.items.splice(index, 1);
+			this.items.splice(index, 0, i);
+			this.editing = false;
+			this.resetWorking();
 		}
 	}
 }
@@ -74,6 +120,8 @@ var vueAbilitiesObj = {
 	el: "#abilities",
 	data: {
 		items: [],
+		editing: false,
+		editingItem: {},
 		working: {
 			name: "",
 			description: "",
@@ -129,6 +177,49 @@ var vueAbilitiesObj = {
 				tags: [],
 				shown: false
 			}
+		},
+		editItem(item) {
+			let index = this.items.indexOf(this.editingItem);
+			if (index !== -1) {
+				var d = this.editingItem.description.split("\n");
+				var rtrn = [];
+				for (var p = 0; p < d.length; ++p) {
+					var temp = d[p];
+					if (temp === "") {
+						temp = " ";
+					}
+					rtrn.push(temp);
+				}
+				this.items[index].description = rtrn;
+				this.items[index].editing = false;
+			}
+			this.editing = true;
+			this.editingItem = item;
+			this.items[this.items.indexOf(item)].editing = true;
+			item.description = item.description.join("\n");
+			this.working = item;
+		},
+		saveEdit() {
+			var i = Object.assign({}, this.working);
+			var d = i.description.split("\n");
+			var rtrn = [];
+			for (var p = 0; p < d.length; ++p) {
+				var temp = d[p];
+				if (temp === "") {
+					temp = " ";
+				}
+				rtrn.push(temp);
+			}
+			i.description = rtrn;
+			i.tags = Object.assign([], this.working.tags);
+			i.__id = this.editingItem.__id;
+			i.editing = false;
+			i.shown = false;
+			let index = this.items.indexOf(this.editingItem);
+			this.items.splice(index, 1);
+			this.items.splice(index, 0, i);
+			this.editing = false;
+			this.resetWorking();
 		}
 	}
 }
@@ -137,6 +228,8 @@ var vueSpellsObj = {
 	el: "#spells",
 	data: {
 		items: [],
+		editing: false,
+		editingItem: {},
 		working: {
 			name: "",
 			description: "",
@@ -201,6 +294,49 @@ var vueSpellsObj = {
 				tags: [],
 				shown: false
 			}
+		},
+		editItem(item) {
+			let index = this.items.indexOf(this.editingItem);
+			if (index !== -1) {
+				var d = this.editingItem.description.split("\n");
+				var rtrn = [];
+				for (var p = 0; p < d.length; ++p) {
+					var temp = d[p];
+					if (temp === "") {
+						temp = " ";
+					}
+					rtrn.push(temp);
+				}
+				this.items[index].description = rtrn;
+				this.items[index].editing = false;
+			}
+			this.editing = true;
+			this.editingItem = item;
+			this.items[this.items.indexOf(item)].editing = true;
+			item.description = item.description.join("\n");
+			this.working = item;
+		},
+		saveEdit() {
+			var i = Object.assign({}, this.working);
+			var d = i.description.split("\n");
+			var rtrn = [];
+			for (var p = 0; p < d.length; ++p) {
+				var temp = d[p];
+				if (temp === "") {
+					temp = " ";
+				}
+				rtrn.push(temp);
+			}
+			i.description = rtrn;
+			i.tags = Object.assign([], this.working.tags);
+			i.__id = this.editingItem.__id;
+			i.editing = false;
+			i.shown = false;
+			let index = this.items.indexOf(this.editingItem);
+			this.items.splice(index, 1);
+			this.items.splice(index, 0, i);
+			this.editing = false;
+			this.resetWorking();
 		}
 	}
 }
