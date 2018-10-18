@@ -274,7 +274,7 @@ function getSelected(selector) {
 }
 
 a = {
-	ev(action) {
+	ev(action, label, value) {
 		if (!DEV) {
 			ga('send', 'event', "dnd-" + global.version, action, label, `Uid: ${uid}: ` + value);
 		}
