@@ -276,6 +276,11 @@ function getSelected(selector) {
 a = {
 	ev(action, label, value) {
 		if (!DEV) {
+			// if (uid) {
+			// 	ga('send', 'event', "dnd-" + global.version, action, label, value);
+			// } else {
+			// 	ga('send', 'event', "dnd-" + global.version, action, label, `Uid: ${uid}: ` + value);
+			// }
 			ga('send', 'event', "dnd-" + global.version, action, label, `Uid: ${uid}: ` + value);
 		}
 	}

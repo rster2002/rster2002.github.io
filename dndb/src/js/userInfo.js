@@ -1,4 +1,5 @@
 characters = "abcdefghijklmnopqrstuvwxuz";
+uid = "";
 
 async function getUser(f) {
 	var user = firebase.auth().currentUser;
