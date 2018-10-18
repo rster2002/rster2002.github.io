@@ -63,6 +63,7 @@ var vueInstance = new Vue({
 			var loadedCharacter = player.character;
 
 			function next() {
+				a.ev("player kicked", "user interaction", `Campaign: ${campaignId}, User kicked: ${loadedUid}`);
 				firestore.collection("campaigns").doc(campaignId + "/users/" + loadedUid).delete().then(function() {
 					firestore.collection("users").doc(loadedUid).collection("campaigns").doc(campaignId).delete().then(function() {
 						firestore.collection("users").doc(loadedUid + "/characters/" + loadedCharacter + "/usedInCampaigns/" + campaignId).delete().then(function() {

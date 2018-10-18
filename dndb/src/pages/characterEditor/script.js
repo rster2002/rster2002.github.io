@@ -1,6 +1,7 @@
 sUid = sessionStorage.getItem("::uid");
 characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-characterRef = userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter"));
+characterId = sessionStorage.getItem("::openCharacter");
+characterRef = userRef.collection("characters").doc(characterId);
 var characterInfo;
 var file = null;
 
@@ -47,14 +48,17 @@ var vueInventoryObj = {
 			i.description = rtrn;
 			i.tags = Object.assign([], this.working.tags);
 			i.__id = genId();
+			a.ev("Item created (inventory)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 			this.items.push(i);
 			this.resetWorking();
 		},
 		deleteItem(item) {
 			if (confirm("Are you sure you want to delete this item? This can't be undone!")) {
 				var i = this;
+
 				characterRef.collection("inventory").doc(item.__id).delete().then(function() {
 					i.items.splice(i.items.indexOf(item), 1);
+					a.ev("Item deleted (inventory)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 				}).catch(err => {
 					error(err);
 				});
@@ -90,6 +94,7 @@ var vueInventoryObj = {
 			this.items[this.items.indexOf(item)].editing = true;
 			item.description = item.description.join("\n");
 			this.working = item;
+
 		},
 		saveEdit() {
 			var i = Object.assign({}, this.working);
@@ -112,6 +117,7 @@ var vueInventoryObj = {
 			this.items.splice(index, 0, i);
 			this.editing = false;
 			this.resetWorking();
+			a.ev("Item edited (inventory)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 		}
 	}
 }
@@ -157,12 +163,15 @@ var vueAbilitiesObj = {
 			i.__id = genId();
 			this.items.push(i);
 			this.resetWorking();
+
+			a.ev("Item created (abilities)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 		},
 		deleteItem(item) {
 			if (confirm("Are you sure you want to delete this ability?")) {
 				var i = this;
 				characterRef.collection("abilities").doc(item.__id).delete().then(function() {
 					i.items.splice(i.items.indexOf(item), 1);
+					a.ev("Item deleted (abilities)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 				}).catch(err => {
 					error(err);
 				});
@@ -220,6 +229,8 @@ var vueAbilitiesObj = {
 			this.items.splice(index, 0, i);
 			this.editing = false;
 			this.resetWorking();
+
+			a.ev("Item edited (abilities)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 		}
 	}
 }
@@ -274,12 +285,15 @@ var vueSpellsObj = {
 			i.version = "b";
 			this.items.push(i);
 			this.resetWorking();
+
+			a.ev("Item created (spells)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 		},
 		deleteItem(item) {
 			if (confirm("Are you sure you want to delete this spell?")) {
 				var i = this;
 				characterRef.collection("spells").doc(item.__id).delete().then(function() {
 					i.items.splice(i.items.indexOf(item), 1);
+					a.ev("Item deleted (spells)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 				}).catch(err => {
 					error(err);
 				});
@@ -337,6 +351,8 @@ var vueSpellsObj = {
 			this.items.splice(index, 0, i);
 			this.editing = false;
 			this.resetWorking();
+
+			a.ev("Item edited (spells)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 		}
 	}
 }
@@ -386,6 +402,7 @@ var vueSpells = new Vue(vueSpellsObj);
 
 function ctrlS() {
 	if (sessionStorage.getItem("::openPage") === "characterEditor") {
+		a.ev("ctrl+s", "user interaction", `Uid: ${uid}, characterId: ${characterId}`);
 		saveCharacter(true);
 	}
 }
@@ -477,6 +494,8 @@ function saveCharacter(show) {
 				}
 			}).then(function() {
 				if (show) {
+
+					a.ev("Character saved", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 					showSnackbar("Character saved");
 				}
 			}).catch(function(e) {
@@ -500,6 +519,7 @@ function loadCharacter(i) {
 				if (doc && doc.exists) {
 					var data = doc.data();
 					l(data);
+					a.ev("Character loaded", "passive", `Uid: ${uid}, characterId: ${characterId}`);
 					allowSave = true;
 					// window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
 					progress.hide();
@@ -564,6 +584,7 @@ async function deleteCharacter() {
 			}
 
 			characterRef.delete().catch(e => {thr(e)});
+			a.ev("Character deleted", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 			openPage("characterList");
 		}
 	} else {
@@ -619,7 +640,9 @@ function dupe() {
 		// 	userBucket.child(newCharacterId).put(file);
 		// }
 
-		showSnackbar("Character dupelicated");
+		a.ev("Character duplicated", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+
+		showSnackbar("Character duplicated");
 	}
 }
 
@@ -726,6 +749,8 @@ async function loadSpells() {
 				if (spell.range !== "") {spellObj.tags.push("Range: " + spell.range)}
 				spellObj.__id = genId();
 				spellObj.version = "b";
+
+				a.ev("Spell updated", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 
 				vueSpells.items.push(spellObj);
 			} else {

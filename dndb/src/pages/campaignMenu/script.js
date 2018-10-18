@@ -170,6 +170,7 @@ async function host(campaignName) {
 				}).then(function() {
 					sessionStorage.setItem("::party", campaignId);
 					sessionStorage.setItem("::cache", campaignId);
+					a.ev("host campaign", "user action", `By: ${uid}, Campaign Id: ${campaignId}`);
 					openPage("campaign");
 					hide();
 				});
@@ -217,6 +218,7 @@ async function join(campaignName) {
 				if (userQuery[0] !== undefined) {
 					hide();
 					sessionStorage.setItem("::firstTimeJoin", false);
+					a.ev("join campaign", "user action", `Uid: ${uid}, CampaignId: ${campaignId}`);
 					openPage("campaign");
 				} else {
 					hide();
@@ -303,6 +305,7 @@ function afterSelect(index) {
 				sessionStorage.setItem("::party", campaignId);
 				hide();
 				sessionStorage.setItem("::firstTimeJoin", true);
+				a.ev("join campaign (first)", "user action", `Uid: ${uid}, campaignId: ${campaignId}`);
 				openPage("campaign");
 			}).catch(err => {
 				error(err);

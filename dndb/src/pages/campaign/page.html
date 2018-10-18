@@ -57,6 +57,22 @@
 				</div>
 			</div>
 		</div>
+		<!-- <div class="entry">
+			<h2>House rules</h2>
+			<div>
+				<div class="listItem" v-for="rule in houserules">
+					<h1>{{ rule.title }}</h1>
+					<div>
+						<p v-for="line in rule.description">{{ line }}</p>
+					</div>
+				</div>
+			</div>
+			<div v-if="isDM">
+				<input placeholder="Title">
+				<textarea placeholder="Description"></textarea>
+				<button class="full">Add</button>
+			</div>
+		</div> -->
 		<div class="entry">
 			<h2>Options</h2>
 			<button v-if="!isDM" class="danger" @click="kick(self, 'self', 'campaignMenu')">Leave campaign</button>

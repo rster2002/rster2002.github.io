@@ -86,6 +86,7 @@ function add() {
 	userRef.collection("characters").doc(characterId + "/data/characterObj").set(emptyCharacterObj).then(function() {
 		progress.hide();
 		sessionStorage.setItem("::openCharacter", characterId);
+		a.ev("Character created", "user action", `characterId: ${characterId}`);
 		openPage("characterEditor");
 	}).catch(function(e){error(e)});
 }

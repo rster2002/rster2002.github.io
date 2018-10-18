@@ -144,6 +144,8 @@ function initUser() {
 	// gets the suer
 	getUser(p => {
 
+		a.ev("user login", "passive", p.uid);
+
 		// checks if the user is emulating and if so sets the uid to the emulated uid
 		if (sessionStorage.getItem("::emuUid") !== null) {
 			uid = sessionStorage.getItem("::emuUid")

@@ -1,4 +1,6 @@
-global = {}
+global = {
+	version: "vB1.5"
+}
 
 var url = document.URL;
 if (url.includes("pro")) {
@@ -195,6 +197,8 @@ function openPage(page) {
 		$("#pageName").text(pageTitles[page])
 	}
 
+	a.ev("open page", "user interaction", page);
+
 	sidebar.close();
 	if (onExit !== null) {
 		onExit();
@@ -269,6 +273,14 @@ function getSelected(selector) {
 	return e.options[e.selectedIndex].text;
 }
 
+a = {
+	ev(action) {
+		if (!DEV) {
+			ga('send', 'event', "dnd-" + global.version, action, label, `Uid: ${uid}: ` + value);
+		}
+	}
+}
+
 function error(error) {
 	loader.hide();
 	progress.hide();
@@ -278,9 +290,7 @@ function error(error) {
 	console.error(error);
 	$(".error").show();
 
-	if (!DEV) {
-		ga('send', 'event', "dnd-error", error);
-	}
+	a.ev("error", "error", error);
 }
 
 function thr(e) {
@@ -494,6 +504,8 @@ global["viewCharacter"] = function(userId, characterId) {
 		characterId: characterId,
 		returnPage: sessionStorage.getItem("::openPage")
 	}
+
+	a.ev("View character", "user action", `userId: ${userId}, characterId: ${characterId}, returnPage: ${sessionStorage.getItem("::openPage")}`)
 
 	openPage("characterViewer");
 }

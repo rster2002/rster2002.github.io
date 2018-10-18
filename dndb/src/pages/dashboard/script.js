@@ -13,11 +13,13 @@ vueInstance = new Vue({
 			}).then(function() {
 				sessionStorage.setItem("::openCharacter", characterId);
 				progress.hide();
+				a.ev("Open character (dashboard)", "user interaction", `characterId: ${characterId}`);
 				openPage("characterEditor");
 			});
 		},
 		openCampaign(campaign) {
-			join(campaign.info.name)
+			a.ev("Open campaign (dashboard)", "user interaction", `campaignName: ${campaign.info.name}`)
+			join(campaign.info.name);
 		}
 	},
 	computed: {
