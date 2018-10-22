@@ -219,6 +219,7 @@ async function join(campaignName) {
 					hide();
 					sessionStorage.setItem("::firstTimeJoin", false);
 					a.ev("join campaign", "user action", `Uid: ${uid}, CampaignId: ${campaignId}`);
+					userRef.collection("campaigns").doc(campaignId).update({lastOpened: Date.now()}).catch(e => thr(e));
 					openPage("campaign");
 				} else {
 					hide();
@@ -289,7 +290,8 @@ function afterSelect(index) {
 		userRef.collection("campaigns").doc(campaignId).set({
 			name: campaignName,
 			id: campaignId,
-			added: Date.now()
+			added: Date.now(),
+			lastOpened: Date.now()
 		}).then(function() {
 			userRef.collection("characters").doc(character).collection("usedInCampaigns").doc(campaignId).set({
 				campaignId: campaignId,

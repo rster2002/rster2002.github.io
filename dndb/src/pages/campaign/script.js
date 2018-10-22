@@ -36,6 +36,11 @@ var vueInstance = new Vue({
 			hour: 0,
 			minute: 0
 		},
+		houserules: [],
+		editingRule: {
+			title: "",
+			description: ""
+		},
 		countDownDate: "Jan 1, 2018 12:00:00"
 	},
 	methods: {
@@ -114,6 +119,34 @@ var vueInstance = new Vue({
 		},
 		viewCharacter(user) {
 			global.viewCharacter(user.id, user.character);
+		},
+		addHouserule() {
+			let houserule = Object.assign({}, this.editingRule);
+			houserule.description = houserule.description.split("\n");
+			houserule.__id = genId();
+			campaignRef.collection("houserules").doc(houserule.__id).set(houserule).catch(e => thr(e));
+			this.houserules.push(houserule);
+		},
+		editRule(rule) {
+			var index = this.houserules.indexOf(rule);
+			let description = this.houserules[index].description;
+			this.houserules[index].adescription = description.join("\n");
+			this.houserules[index].editing = true;
+		},
+		saveRule(rule) {
+			var index = this.houserules.indexOf(rule);
+			this.houserules[index].description = this.houserules[index].adescription.split("\n");
+			this.houserules[index].editing = false;
+			campaignRef.collection("houserules").doc(this.houserules[index].__id).set(this.houserules[index]).then(e => skb("Rule saved")).catch(e => thr(e));
+		},
+		deleteRule(rule) {
+			if (confirm("Are you sure you want to delete this houserule?\nThis action can't be undone.")) {
+				var index = this.houserules.indexOf(rule);
+				var id = this.houserules[index].__id;
+				console.log([index, id]);
+				campaignRef.collection("houserules").doc(id).delete().then(e => skb("Rule deleted")).catch(e => thr(e));
+				this.houserules.splice(index, 1);
+			}
 		}
 	}
 });
@@ -241,7 +274,15 @@ async function getPlayerList() {
 	}
 }
 
+async function getHouserules() {
+	var query = await createQuery(campaignRef.collection("houserules").orderBy("title", "desc"));
+	if (query.length > 0) {
+		vueInstance.houserules = query;
+	}
+}
+
 getPlayerList();
 getDm();
+getHouserules();
 
 vueInstance.currentUser = userInformation;

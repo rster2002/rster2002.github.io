@@ -21,7 +21,7 @@ async function configUserDb(authObj) {
 
 			// gets the data
 			globalUser = doc.data();
-			vueTerminal.user = globalUser;
+			vueTerminal.display = globalUser;
 
 			// updates the document
 			userRef.update({

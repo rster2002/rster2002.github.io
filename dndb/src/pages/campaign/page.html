@@ -57,22 +57,37 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="entry">
+		<div class="entry" v-if="houserules.length > 0 || isDM">
 			<h2>House rules</h2>
 			<div>
 				<div class="listItem" v-for="rule in houserules">
-					<h1>{{ rule.title }}</h1>
-					<div>
-						<p v-for="line in rule.description">{{ line }}</p>
+					<div v-if="rule.editing != true">
+						<div>
+							<h1>{{ rule.title }}</h1>
+							<div>
+								<p v-for="line in rule.description">{{ line }}</p>
+							</div>
+						</div>
+						<div class="btn" v-if="isDM">
+							<button @click="editRule(rule);">Edit</button>
+							<button @click="deleteRule(rule)" class="danger">Delete</button>
+						</div>
+					</div>
+					<div v-if="rule.editing == true">
+						<div>
+							<input v-model="rule.title" placeholder="Title">
+							<textarea v-model="rule.adescription"placeholder="Description"></textarea>
+							<button @click="saveRule(rule)" class="full">Save</button>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div v-if="isDM">
-				<input placeholder="Title">
-				<textarea placeholder="Description"></textarea>
-				<button class="full">Add</button>
+			<div v-if="isDM" class="listItem">
+				<input v-model="editingRule.title" placeholder="Title">
+				<textarea v-model="editingRule.description" placeholder="Description"></textarea>
+				<button @click="addHouserule();" class="full">Add</button>
 			</div>
-		</div> -->
+		</div>
 		<div class="entry">
 			<h2>Options</h2>
 			<button v-if="!isDM" class="danger" @click="kick(self, 'self', 'campaignMenu')">Leave campaign</button>

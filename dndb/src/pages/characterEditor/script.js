@@ -694,7 +694,7 @@ var spellObj = {};
 var itemObj = {};
 
 async function loadInventory() {
-	var query = await createQuery(characterRef.collection("inventory"));
+	var query = await createQuery(characterRef.collection("inventory").orderBy("name", "asc"));
 	console.log(query);
 	if (query[0] !== undefined) {
 		vueInventory.items = query;
@@ -704,7 +704,7 @@ async function loadInventory() {
 }
 
 async function loadAbilities() {
-	var query = await createQuery(characterRef.collection("abilities"));
+	var query = await createQuery(characterRef.collection("abilities").orderBy("name", "asc"));
 	console.log(query);
 	if (query[0] !== undefined) {
 		vueAbilities.items = query;
@@ -714,7 +714,7 @@ async function loadAbilities() {
 }
 
 async function loadSpells() {
-	var query = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("level", "desc").orderBy("name", "desc"));
+	var query = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("name", "asc"));
 	console.log(query);
 	if (query.length > 0) {
 		for (var i = 0; i < query.length; ++i) {
@@ -817,6 +817,7 @@ function onload() {
 		loadCharacter(sessionStorage.getItem("::openCharacter"));
 		refreshLayout();
 		// loadPermissions();
+		$("#characterSheetSpinner").hide();
 		loaded = true;
 	}
 }

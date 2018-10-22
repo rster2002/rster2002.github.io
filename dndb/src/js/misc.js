@@ -56,7 +56,7 @@ $(document).ready(function() {
 	vueTerminal = new Vue({
 		el: "#vueTerminal",
 		data: {
-			user: {
+			display: {
 				uid: ''
 			}
 		}
@@ -424,6 +424,10 @@ function showSnackbar(text) {
 	setTimeout(() => {
 		$(".snackbar").removeClass("open");
 	}, 1500);
+}
+
+function skb(text) {
+	showSnackbar(text);
 }
 
 // used for importing scripts and styling
