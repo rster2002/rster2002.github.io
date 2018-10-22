@@ -528,6 +528,10 @@ html div.wave.card > div.actions button {
 	text-overflow: ellipsis;
 }
 
+.innerPage .lane .entry h1.big {
+	font-size: 46px;
+}
+
 .innerPage .lane .entry h1.ch {
 	text-align: center;
 }
@@ -579,6 +583,10 @@ html div.wave.card > div.actions button {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.innerPage .lane .entry p.big {
+	font-size: 26px;
 }
 
 .innerPage .lane .entry h2.ch {

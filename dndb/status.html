@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta name="theme-color" content="#ffffff" />
+		<meta name="Description" content="Current status of the web app">
+		<title>D&D - status</title>
+
+		<!-- Styling -->
+		<link href="../assets/images/icons/tab%20icons/dnd.png" rel="icon">
+		<link href="./src/css/appShell.css" rel="stylesheet" type="text/css">
+
+		<!-- Libraries -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script id="vueLib" src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
+
+		<!-- App scripts -->
+		<script src="./src/js/misc.js"></script>
+		<script src="./src/js/firebase.js"></script>
+		<script src="./src/js/status.js"></script>
+	</head>
+	<body>
+		<div class="innerPage" id="vueApp">
+			<div class="lane">
+				<div class="entry">
+					<h2>Current status</h2>
+					<h1 class="big" v-bind:style="styling">{{ status }}</h1>
+					<p class="big noOverflow">{{ info }}</p>
+					<p><span>Last updated: </span><span style="color: #4a58ff;">{{ lastUpdated }}</span></p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

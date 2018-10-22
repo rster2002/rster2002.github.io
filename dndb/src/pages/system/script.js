@@ -36,9 +36,14 @@ vueInstance = new Vue({
 			if (this.newStatus.status === "") {
 				this.newStatus.status = "online";
 			}
+
+			let i = new Date();
+			lastUpdate = `${i.getHours()}:${i.getMinutes()} ${i.getDate()}.${i.getMonth() + 1}.${i.getFullYear()}`
+
 			firestore.update({
 				status: this.newStatus.status,
-				info: this.newStatus.info
+				info: this.newStatus.info,
+				lastUpdated: lastUpdate
 			});
 		}
 	}
