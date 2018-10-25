@@ -29,6 +29,7 @@ body, html {
 	top: 0px;
 	left: 0px;
 	z-index: 1;
+	background-size: cover !important;
 }
 
 .counter .forground {
@@ -115,4 +116,50 @@ body, html {
 	100% {
 		transform: translate(-50%, -50%);
 	}
+}
+
+.counter .settings {
+	background-color: white;
+	top: -200%;
+}
+
+.counter .settings .bar {
+	height: 45px;
+	width: 100%;
+	border-bottom: #cecece solid 1px;
+}
+
+.counter .settings .bar .button {
+	height: 45px;
+	width: 45px;
+}
+
+.counter .settings .bar .button i {
+	font-size: 24px;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.counter .settings input {
+	margin: 8px 4px;
+	width: calc(100% - 28px);
+	font-size: 18px;
+	outline: 0;
+	font-family: 'Roboto', sans-serif;
+	border: 2px solid #cecece;
+	border-radius: 2px;
+	padding: 4px 8px;
+}
+
+.counter .settings button {
+	margin: 8px 4px;
+	width: calc(100% - 8px);
+	font-size: 18px;
+	outline: 0;
+	font-family: 'Roboto', sans-serif;
+	border: 2px solid #cecece;
+	border-radius: 2px;
+	padding: 4px 8px;
 }
