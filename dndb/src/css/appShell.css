@@ -580,6 +580,11 @@ html div.wave.card > div.actions button {
 	color: black;
 	font-size: 18px;
 	font-weight: 400;
+	white-space: pre-wrap !important;
+	text-overflow: clip !important;
+}
+
+.innerPage .lane .entry p.overflow {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
