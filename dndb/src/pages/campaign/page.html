@@ -63,7 +63,7 @@
 				<div class="listItem" v-for="rule in houserules">
 					<div v-if="rule.editing != true">
 						<div>
-							<h1>{{ rule.title }}</h1>
+							<h1 class="noOverflow">{{ rule.title }}</h1>
 							<div>
 								<p v-for="line in rule.description">{{ line }}</p>
 							</div>
