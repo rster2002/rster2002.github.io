@@ -7,6 +7,7 @@ var isDM = false;
 var vueInstance = new Vue({
 	el: "#vueInstance",
 	data: {
+		spinning: true,
 		self: {},
 		players: [],
 		welcomeText: "",
@@ -62,8 +63,6 @@ var vueInstance = new Vue({
 		},
 		kick(player, ban, f) {
 
-			show();
-
 			var loadedUid = player.id;
 			var loadedCharacter = player.character;
 
@@ -78,7 +77,6 @@ var vueInstance = new Vue({
 								$(".kick").hide();
 								$(".ban").hide();
 								$(".save").hide();
-								hide();
 
 								if (ban !== "self") {
 									getPlayerList();
@@ -135,7 +133,16 @@ var vueInstance = new Vue({
 		},
 		saveRule(rule) {
 			var index = this.houserules.indexOf(rule);
-			this.houserules[index].description = this.houserules[index].adescription.split("\n");
+			var d = i.adescription.split("\n");
+			var rtrn = [];
+			for (var p = 0; p < d.length; ++p) {
+				var temp = d[p];
+				if (temp === "") {
+					temp = " ";
+				}
+				rtrn.push(temp);
+			}
+			this.houserules[index].description = rtrn;
 			this.houserules[index].editing = false;
 			campaignRef.collection("houserules").doc(this.houserules[index].__id).set(this.houserules[index]).then(e => skb("Rule saved")).catch(e => thr(e));
 		},
@@ -241,7 +248,7 @@ async function getDm() {
 			vueInstance.dm.username = dmObj.username;
 		} else {
 			error("Couldn't find DM");
-			progress.hide();
+
 		}
 	});
 }
@@ -269,6 +276,8 @@ async function getPlayerList() {
 			var user = query[i];
 			addToPlayerArray(user);
 		}
+
+		vueInstance.spinning = false;
 	} else {
 		error("Users query didn't return data");
 	}

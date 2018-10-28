@@ -26,8 +26,6 @@ async function configUserDb(authObj) {
 			// updates the document
 			userRef.update({
 				lastLogin: Date.now()
-			}).then(function() {
-				progress.hide();
 			}).catch(err => {
 				error(err);
 			});
@@ -65,8 +63,6 @@ async function configUserDb(authObj) {
 				}).catch(err => {
 					thr(err);
 				})
-			}).then(() => {
-				progress.hide();
 			}).catch(err => {
 				error(err);
 			});

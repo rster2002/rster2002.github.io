@@ -60,19 +60,19 @@ async function addTolist(i, characterInfo, delay) {
 }
 
 function loadCharacter(index) {
-	progress.show();
+	;
 	var characterName = obj[index];
 	userRef.collection("characters").doc(characterName).update({
 		lastEdited: Date.now()
 	}).then(function() {
 		sessionStorage.setItem("::openCharacter", characterName);
-		progress.hide();
+		
 		openPage("characterEditor");
 	});
 }
 
 function add() {
-	progress.show();
+	;
 
 	var characterId = "character-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4) + "-" + randomString(characters, 4);
 
@@ -84,7 +84,7 @@ function add() {
 	}).catch(function(e){error(e)});
 
 	userRef.collection("characters").doc(characterId + "/data/characterObj").set(emptyCharacterObj).then(function() {
-		progress.hide();
+		
 		sessionStorage.setItem("::openCharacter", characterId);
 		a.ev("Character created", "user action", `characterId: ${characterId}`);
 		openPage("characterEditor");
@@ -93,7 +93,7 @@ function add() {
 
 
 async function loadList() {
-	progress.show();
+	;
 	var characterArray = await createQuery(userRef.collection("characters").orderBy("lastEdited", "desc"));
 	$(".fab").addClass("show");
 	var delay = 0;
@@ -105,7 +105,7 @@ async function loadList() {
 	if (characterArray.length === 0) {
 		vueInstance.loaded = true;
 	}
-	progress.hide();
+	
 }
 
 function characterCardFade(here, delay) {

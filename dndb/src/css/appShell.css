@@ -184,6 +184,8 @@ div.wave.card {
 	transition: 200ms transform cubic-bezier(0.4, 0.0, 0.6, 1);
 	transform: translateX(-200%);
 	overflow-y: auto;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
 .sidebar.open {
@@ -242,7 +244,7 @@ div.wave.card {
 	background-color: white;
 	cursor: pointer;
 	position: relative;
-	border-radius: 5px;
+	border-radius: 10px;
 	margin: 4px 16px;
 }
 
@@ -382,7 +384,7 @@ html div.wave.card > div.actions button {
 	width: 100%;
 	max-width: 340px;
 	height: 36px;
-	border-radius: 5px;
+	border-radius: 10px;
 	box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
 	transition: transform cubic-bezier(0.4, 0.0, 1, 1) 100ms;
 }

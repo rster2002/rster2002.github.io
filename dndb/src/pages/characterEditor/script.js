@@ -421,7 +421,7 @@ allowSave = false;
 
 function localError(error) {
 	error(error);
-	progress.hide();
+	
 	openPage("characterList");
 }
 
@@ -435,7 +435,7 @@ function saveCharacter(show) {
 		show = true;
 	}
 
-	progress.show();
+	;
 
 	se = false;
 
@@ -443,9 +443,9 @@ function saveCharacter(show) {
 		s();
 		console.log('c');
 		if (sessionStorage.getItem("::saved") !== "false") {
-			progress.show();
+			;
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").update(characterObj).then(function() {
-				progress.hide();
+				
 			}).then(function() {
 				if (file !== null) {
 					var task = userBucket.child(sessionStorage.getItem("::saved")).put(file);
@@ -512,7 +512,7 @@ function saveCharacter(show) {
 function loadCharacter(i) {
 	try {
 		if (i) {
-			progress.show();
+			;
 			sessionStorage.setItem("::saved", i);
 			console.log(i);
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get().then(function(doc) {
@@ -522,7 +522,7 @@ function loadCharacter(i) {
 					a.ev("Character loaded", "passive", `Uid: ${uid}, characterId: ${characterId}`);
 					allowSave = true;
 					// window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
-					progress.hide();
+					
 				} else {
 					error("Couldn't find this character in the database");
 					openPage("characterList");
@@ -548,7 +548,7 @@ function loadCharacter(i) {
 				error(e)
 			});
 
-			loader.hide();
+			
 		}
 	} catch(e) {
 		error(e);
@@ -558,10 +558,10 @@ function loadCharacter(i) {
 async function deleteCharacter() {
 	console.log("Delete");
 
-	progress.show();
+	;
 	var usedInCampaigns = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("usedInCampaigns"));
 	if (usedInCampaigns[0] === undefined) {
-		progress.hide();
+		
 
 		if (confirm("Are you sure you want to delete this character? This character will be lost forever.")) {
 			characterRef.collection("data").doc("characterObj").delete().catch(e => {thr(e)});
@@ -589,7 +589,7 @@ async function deleteCharacter() {
 		}
 	} else {
 		alert("This character is in use in a campaign");
-		progress.hide();
+		
 	}
 }
 
@@ -761,11 +761,11 @@ async function loadSpells() {
 }
 
 async function loadLists() {
-	loader.show();
+	
 	await loadSpells();
 	await loadInventory();
 	await loadAbilities();
-	loader.hide();
+	
 	saveCharacter(false);
 }
 

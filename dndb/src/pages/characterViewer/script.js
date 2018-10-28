@@ -234,7 +234,7 @@ allowSave = false;
 
 function localError(error) {
 	error(error);
-	progress.hide();
+	
 	openPage("characterList");
 }
 
@@ -244,7 +244,7 @@ console.log("hmm");
 function loadCharacter(i) {
 	try {
 		if (i) {
-			progress.show();
+			;
 			sessionStorage.setItem("::saved", i);
 			console.log(i);
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get().then(function(doc) {
@@ -253,7 +253,7 @@ function loadCharacter(i) {
 					lDisabled(data);
 					allowSave = true;
 					// window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
-					progress.hide();
+					
 				} else {
 					error("Couldn't find this character in the database");
 					openPage("characterList");
@@ -279,7 +279,7 @@ function loadCharacter(i) {
 				error(e)
 			});
 
-			loader.hide();
+			
 		}
 	} catch(e) {
 		error(e);
@@ -396,11 +396,11 @@ async function loadSpells() {
 }
 
 async function loadLists() {
-	loader.show();
+	
 	await loadSpells();
 	await loadInventory();
 	await loadAbilities();
-	loader.hide();
+	
 }
 
 function calcMod(selector, modSelector) {

@@ -63,10 +63,6 @@ $(document).ready(function() {
 	})
 });
 
-function onLoaded() {
-	loader.hide();
-}
-
 async function createQuery(query) {
 	var snapshot = await query.get();
 	return snapshot.docs.map(doc => (Object.assign({__id: doc.id}, doc.data())));
@@ -113,23 +109,6 @@ $(document).keydown(function(event) {
 	}
 });
 
-note = {
-	open: function(icon, text, delay) {
-		$("#noteContent").text(text);
-		$(".note").addClass("open");
-		$(".icon .i").html(icon);
-		note.autoClose(delay);
-	},
-	close: function() {
-		$(".note").removeClass("open");
-	},
-	autoClose: function(delay) {
-		setTimeout(function(){
-			note.close();
-		},delay)
-	}
-}
-
 sidebar = {
 	open: function() {
 		$(".sidebar").addClass("open");
@@ -157,31 +136,11 @@ function logout() {
 	});
 }
 
-loader = {
-	show: function() {
-		$(".loader-background").show();
-		$(".loader").show();
-	},
-	hide: function() {
-		$(".loader-background").hide();
-		$(".loader").hide();
-	}
-}
-
-progress = {
-	show: function() {
-		$(".progressBar").addClass("active");
-	},
-	hide: function() {
-		$(".progressBar").removeClass("active");
-	}
-}
-
 onExit = null;
 loaded = null;
 
 function openPage(page) {
-	loader.show();
+
 	characterSheetLoaded = false;
 	$(".page .innerPage").remove();
 	$(".page .innerResources").remove();
@@ -207,53 +166,17 @@ function openPage(page) {
 }
 
 function openHomebrewary(url) {
-	loader.show();
+
 	$(".page.innerPage").remove();
 	$(".page").append("<div class='innerPage'><iframe src='" + url + "'></iframe></div>");
 	sidebar.close();
 }
 
 function onLoaded() {
-	loader.hide();
 	if (loaded !== null) {
 		loaded();
 		loaded = null;
 	}
-}
-
-function openOverlay(page) {
-    loader.show();
-    $(".overlay .content .innerPage").remove();
-
-    if (page.includes("http")) {
-        $(".overlay .content").load(page);
-    } else {
-        $(".overlay .content").load("./src/pages/" + page + ".html");
-    }
-
-    $(".background").show();
-    $(".overlay").show();
-    loader.hide();
-}
-
-function openOverlay(page) {
-    loader.show();
-    $(".overlay .content .innerPage").remove();
-
-    if (page.includes("http")) {
-        $(".overlay .content").load(page);
-    } else {
-        $(".overlay .content").load("./src/pages/" + page + ".html");
-    }
-
-    $(".background").show();
-    $(".overlay").show();
-    loader.hide();
-}
-
-function closeOverlay() {
-    $(".background").hide();
-    $(".overlay").hide();
 }
 
 function cal(number) {
@@ -287,9 +210,6 @@ a = {
 }
 
 function error(error) {
-	loader.hide();
-	progress.hide();
-
 	$("#errorText").text(error);
 
 	console.error(error);
@@ -320,17 +240,6 @@ function dynamicSort(property) {
     }
 }
 
-
-function show() {
-	loader.show();
-	progress.show();
-}
-
-function hide() {
-	loader.hide();
-	progress.hide();
-}
-
 function dynamicSortMultiple() {
     /*
      * save the arguments object as it will be overwritten
@@ -349,73 +258,6 @@ function dynamicSortMultiple() {
         }
         return result;
     }
-}
-
-inputCard = {
-	content: {
-		toggle: function() {
-			$(".inputCard").toggleClass("open");
-		},
-		open: function() {
-			$(".inputCard").addClass("open");
-		},
-		close: function() {
-			$(".inputCard").remoceClass("open");
-		}
-	},
-	peek: {
-		toggle: function() {
-			$(".inputCard").toggleClass("peek");
-		},
-		open: function() {
-			$(".inputCard").addClass("peek");
-		},
-		close: function() {
-			$(".inputCard").removeClass("peek");
-		}
-	},
-	slideUp: function(text) {
-		$(".newTitle").text(text);
-		$(".sliding").addClass("up");
-		setTimeout(function() {
-			$(".currentTitle").text(text);
-			$(".sliding").removeClass("up");
-		}, 201);
-	},
-	slideDown: function(text) {
-		$(".newTitle").text(text);
-		$(".sliding").addClass("down");
-		setTimeout(function() {
-			$(".currentTitle").text(text);
-			$(".sliding").removeClass("down");
-		}, 201);
-	},
-	close: function() {
-		$(".inputCard").removeClass("peek");
-		$(".inputCard").removeClass("open");
-	},
-	loadContent: function(html, direction, extraClass) {
-		if (extraClass === undefined) {
-			extraClass = "";
-		}
-		if (direction === "Up" || direction === "Down") {
-			var content = $(".inputCard .content");
-			content.addClass("fadeOut" + direction);
-			if (direction === "Down") {
-				$(".inputCard .contentWrapper").append("<div class='newContent enter" + direction + "'>" + html + "</div>");
-			} else {
-				$(".inputCard .contentWrapper").prepend("<div class='newContent enter" + direction + "'>" + html + "</div>");
-			}
-			$(".inputCard .newContent").addClass("fadeIn" + direction);
-			setTimeout(function() {
-				$(".inputCard .content").remove();
-				$(".inputCard .newContent").addClass("content");
-				$(".inputCard .newContent").addClass("open");
-				$(".inputCard .newContent").addClass(extraClass);
-				$(".inputCard .newContent").removeClass("newContent");
-			}, 100);
-		}
-	}
 }
 
 function showSnackbar(text) {

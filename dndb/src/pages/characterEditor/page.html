@@ -53,7 +53,7 @@
 				<textarea v-model="working.description" placeholder="Description"></textarea>
 				<div class="row">
 					<input @keyup.enter="addTag()" v-model="working.tag" placeholder="Tag" />
-					<button @click="addTag()"><i class="material-icons">add</i></button>
+					<button @click="addTag()" style="padding: 0px; height: 41px;"><i class="material-icons">add</i></button>
 				</div>
 				<div class="tags">
 					<div class="tag" v-for="tag in working.tags" @click="deleteTag(tag)">
@@ -95,7 +95,7 @@
 				<textarea v-model="working.description" placeholder="Description"></textarea>
 				<div class="row">
 					<input @keyup.enter="addTag()" v-model="working.tag" placeholder="Tag" />
-					<button @click="addTag()"><i class="material-icons">add</i></button>
+					<button @click="addTag()" style="padding: 0px; height: 41px;"><i class="material-icons">add</i></button>
 				</div>
 				<div class="tags">
 					<div class="tag" v-for="tag in working.tags" @click="deleteTag(tag)">
@@ -137,7 +137,7 @@
 				<textarea v-model="working.description" placeholder="Description"></textarea>
 				<div class="row">
 					<input @keyup.enter="addTag()" v-model="working.tag" placeholder="Tag" />
-					<button @click="addTag()"><i class="material-icons">add</i></button>
+					<button @click="addTag()" style="padding: 0px; height: 41px;"><i class="material-icons">add</i></button>
 				</div>
 				<div class="tags">
 					<div class="tag" v-for="tag in working.tags" @click="deleteTag(tag)">
@@ -188,8 +188,10 @@
 	<div class="lane">
 		<div class="entry">
 			<h2>Controlls</h2>
-			<button onclick="dupe();">Duplicate character</button>
-			<button onclick="deleteCharacter();" class="danger">Delete character</button>
+			<div class="btn">
+				<button onclick="dupe();">Duplicate character</button>
+				<button onclick="deleteCharacter();" class="danger">Delete character</button>
+			</div>
 		</div>
 	</div>
 

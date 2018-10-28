@@ -76,7 +76,6 @@ async function addList(id, place, delay) {
 			}, delay);
 		} else {
 			error("Error when fetching campaign, maybe it doesn't exists anymore");
-			hide();
 		}
 	}).catch(function(e) {
 		error(e);
@@ -143,8 +142,6 @@ host checklist
 
 async function host(campaignName) {
 
-	show();
-
 	var exists = await createQuery(firestore.collection("campaigns").where("name", "==", campaignName));
 
 	if (exists[0] === undefined) {
@@ -172,13 +169,11 @@ async function host(campaignName) {
 					sessionStorage.setItem("::cache", campaignId);
 					a.ev("host campaign", "user action", `By: ${uid}, Campaign Id: ${campaignId}`);
 					openPage("campaign");
-					hide();
 				});
 			});
 		});
 	} else {
 		alert("This id is already in use!");
-		hide();
 	}
 }
 
@@ -196,7 +191,6 @@ join checklist:
 */
 
 async function join(campaignName) {
-	show();
 	if (campaignName) {
 		// creates a query to check if a campaign with that campaign name exists
 		var query = await createQuery(firestore.collection("campaigns").where("name", "==", campaignName));
@@ -216,22 +210,18 @@ async function join(campaignName) {
 				// creates a query to see if the current user already joined the campaign
 				var userQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("users").where("id", "==", sUid));
 				if (userQuery[0] !== undefined) {
-					hide();
 					sessionStorage.setItem("::firstTimeJoin", false);
 					a.ev("join campaign", "user action", `Uid: ${uid}, CampaignId: ${campaignId}`);
 					userRef.collection("campaigns").doc(campaignId).update({lastOpened: Date.now()}).catch(e => thr(e));
 					openPage("campaign");
 				} else {
-					hide();
 					selectCharacter();
 				}
 			} else {
 				alert("You are banned from this campaign");
-				hide();
 			}
 		} else {
 			alert("Can't find this campaign");
-			hide();
 		}
 	}
 }
@@ -257,7 +247,6 @@ function addToList(i, characterId) {
 			})
 		} else {
 			alert("Couldn't fetch character");
-			hide();
 		}
 	});
 }
@@ -273,13 +262,10 @@ async function selectCharacter() {
 		}
 	} else {
 		$(".selectCharacter .inner").append("<div class='noCharacter'><h1>You don't have a character!</h1><p>Create one in the character editor.</p></div>");
-		hide();
 	}
 }
 
 function afterSelect(index) {
-
-	show();
 	$("selectCharacter").hide();
 
 	var character = charactersObj[index];
@@ -305,7 +291,6 @@ function afterSelect(index) {
 				type: "player"
 			}).then(function() {
 				sessionStorage.setItem("::party", campaignId);
-				hide();
 				sessionStorage.setItem("::firstTimeJoin", true);
 				a.ev("join campaign (first)", "user action", `Uid: ${uid}, campaignId: ${campaignId}`);
 				openPage("campaign");

@@ -104,4 +104,4 @@ Vue.component("counter", {
 
 var vueApp = new Vue({
 	el: "#app"
-})
+});

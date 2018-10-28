@@ -12,7 +12,7 @@ vueInstance = new Vue({
 				lastEdited: Date.now()
 			}).then(function() {
 				sessionStorage.setItem("::openCharacter", characterId);
-				progress.hide();
+
 				a.ev("Open character (dashboard)", "user interaction", `characterId: ${characterId}`);
 				openPage("characterEditor");
 			});
@@ -145,7 +145,6 @@ function startVueTimers() {
 }
 
 async function join(campaignName) {
-	show();
 	console.log(campaignName);
 	if (campaignName) {
 		// creates a query to check if a campaign with that campaign name exists
@@ -166,20 +165,16 @@ async function join(campaignName) {
 				// creates a query to see if the current user already joined the campaign
 				var userQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("users").where("id", "==", userInformation.uid));
 				if (userQuery[0] !== undefined) {
-					hide();
 					sessionStorage.setItem("::firstTimeJoin", false);
 					openPage("campaign");
 				} else {
-					hide();
 					selectCharacter();
 				}
 			} else {
 				alert("You are banned from this campaign");
-				hide();
 			}
 		} else {
 			alert("Can't find this campaign");
-			hide();
 		}
 	}
 }

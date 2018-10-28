@@ -5,8 +5,11 @@
 		]);
 	</script>
 </div>
-<div class="innerPage scroll">
-	<div class="lane" id="vueInstance">
+<div class="innerPage scroll" id="vueInstance">
+	<div class="spinner whiteBackground" v-if="spinning">
+		<div class="inner"></div>
+	</div>
+	<div class="lane">
 		<div class="entry" style="margin-top: 24px;">
 			<img class="topUserImage" v-bind:src="currentUser.profileImage" />
 			<h1 class="textCenter noOverflow">{{ welcomeText }} {{ currentUser.username }}</h1>
@@ -94,5 +97,4 @@
 		</div>
 	</div>
 	<div class="push"></div>
-	<script>onLoaded();</script>
 </div>

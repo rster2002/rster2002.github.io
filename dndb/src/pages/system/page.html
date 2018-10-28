@@ -17,8 +17,10 @@
 		</div>
 		<div class="entry">
 			<h2>Controlls</h2>
-			<button onclick="refreshUsers()">Refresh users</button>
-			<button @click="stopEmulation()">Stop emulation</button>
+			<div class="btn">
+				<button onclick="refreshUsers()">Refresh users</button>
+				<button @click="stopEmulation()">Stop emulation</button>
+			</div>
 		</div>
 		<div class="entry">
 			<h2>Users</h2>
@@ -34,5 +36,4 @@
 			</div>
 		</div>
 	</div>
-	<script>loader.hide();</script>
 </div>
