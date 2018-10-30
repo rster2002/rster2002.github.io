@@ -133,7 +133,7 @@ var vueInstance = new Vue({
 		},
 		saveRule(rule) {
 			var index = this.houserules.indexOf(rule);
-			var d = i.adescription.split("\n");
+			var d = rule.adescription.split("\n");
 			var rtrn = [];
 			for (var p = 0; p < d.length; ++p) {
 				var temp = d[p];

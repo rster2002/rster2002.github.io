@@ -421,7 +421,7 @@ allowSave = false;
 
 function localError(error) {
 	error(error);
-	
+
 	openPage("characterList");
 }
 
@@ -445,7 +445,7 @@ function saveCharacter(show) {
 		if (sessionStorage.getItem("::saved") !== "false") {
 			;
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").update(characterObj).then(function() {
-				
+
 			}).then(function() {
 				if (file !== null) {
 					var task = userBucket.child(sessionStorage.getItem("::saved")).put(file);
@@ -522,7 +522,7 @@ function loadCharacter(i) {
 					a.ev("Character loaded", "passive", `Uid: ${uid}, characterId: ${characterId}`);
 					allowSave = true;
 					// window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
-					
+
 				} else {
 					error("Couldn't find this character in the database");
 					openPage("characterList");
@@ -548,7 +548,7 @@ function loadCharacter(i) {
 				error(e)
 			});
 
-			
+
 		}
 	} catch(e) {
 		error(e);
@@ -561,7 +561,7 @@ async function deleteCharacter() {
 	;
 	var usedInCampaigns = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("usedInCampaigns"));
 	if (usedInCampaigns[0] === undefined) {
-		
+
 
 		if (confirm("Are you sure you want to delete this character? This character will be lost forever.")) {
 			characterRef.collection("data").doc("characterObj").delete().catch(e => {thr(e)});
@@ -589,7 +589,7 @@ async function deleteCharacter() {
 		}
 	} else {
 		alert("This character is in use in a campaign");
-		
+
 	}
 }
 
@@ -761,11 +761,11 @@ async function loadSpells() {
 }
 
 async function loadLists() {
-	
+
 	await loadSpells();
 	await loadInventory();
 	await loadAbilities();
-	
+
 	saveCharacter(false);
 }
 
@@ -802,10 +802,6 @@ function loadPermissions() {
 			}
 		}
 	})
-}
-
-var onExit = function() {
-	inputCard.close();
 }
 
 var loaded = false;
