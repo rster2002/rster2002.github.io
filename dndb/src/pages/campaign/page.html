@@ -91,6 +91,12 @@
 				<button @click="addHouserule();" class="full">Add</button>
 			</div>
 		</div>
+		<!-- <div class="entry" v-if="isDM">
+			<h2>DM Dashboard</h2>
+			<div class="btn">
+				<button @click="openDashboard()">Open</button>
+			</div>
+		</div> -->
 		<div class="entry">
 			<h2>Options</h2>
 			<button v-if="!isDM" class="danger" @click="kick(self, 'self', 'campaignMenu')">Leave campaign</button>

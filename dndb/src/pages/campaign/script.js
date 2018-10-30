@@ -154,6 +154,11 @@ var vueInstance = new Vue({
 				campaignRef.collection("houserules").doc(id).delete().then(e => skb("Rule deleted")).catch(e => thr(e));
 				this.houserules.splice(index, 1);
 			}
+		},
+		openDashboard() {
+			global.campaignId = campaignId;
+			global.campaignName = campaignName;
+			openPage("dmDashboard");
 		}
 	}
 });

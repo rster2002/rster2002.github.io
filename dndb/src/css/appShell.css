@@ -455,7 +455,7 @@ html div.wave.card > div.actions button {
 	font-size: 24px;
 	background-color: transparent;
 	outline: 0;
-	border: solid 2px #0080ff;
+	border: solid 2px #7dbeff;
 	border-radius: 4px;
 	color: #0080ff;
 	padding: 4px 6px;
@@ -478,19 +478,19 @@ html div.wave.card > div.actions button {
 
 .innerPage .lane .entry button:hover {
 	color: white;
-	background-color: #0080ff;
+	background-color: #7dbeff;
 	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 .innerPage .lane .entry button.danger {
 	color: #ff3300;
-	border-color: #ff3300;
+	border-color: #fd7250;
 	transition: all 100ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 .innerPage .lane .entry button.danger:hover {
 	color: white;
-	background-color: #ff3300;
+	background-color: #fd7250;
 	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
@@ -609,7 +609,7 @@ html div.wave.card > div.actions button {
 	font-size: 24px;
 	background-color: transparent;
 	outline: 0;
-	border: solid 2px #0080ff;
+	border: solid 2px #7dbeff;
 	border-radius: 4px;
 	color: black;
 	padding: 4px 6px;
@@ -684,7 +684,7 @@ html div.wave.card > div.actions button {
 	font-size: 18px;
 	background-color: transparent;
 	outline: 0;
-	border: solid 2px #0080ff;
+	border: solid 2px #7dbeff;
 	border-radius: 4px;
 	color: black;
 	padding: 4px 6px;
@@ -703,15 +703,15 @@ html div.wave.card > div.actions button {
 }
 
 .innerPage .lane .entry .listItem {
-	width: 95%;
+	width: calc(95% - 4px);
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
 	margin: 4px 0px;
 	border-radius: 10px;
-	box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
 	padding: 12px 8px;
 	display: inline-block;
+	border: 2px solid rgba(0, 0, 0, .1);
 }
 
 .innerPage .lane .entry .listItem h1 {
