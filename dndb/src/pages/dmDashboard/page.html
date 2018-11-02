@@ -13,13 +13,35 @@
 			<h1>NPC's</h1>
 			<p>Keeping track of NPC's your players encountered is essential to keep the world believable.</p>
 			<div class="btn">
-				<button @click="openSection('npc')">Open</button>
+				<button @click="openSection('npc', 'NPC\'s')">Open</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h1>Settlements</h1>
+			<p>Settlements are where your players are going to take on quests and start advantures.</p>
+			<div class="btn">
+				<button @click="openSection('settlements', 'Settlements')">Open</button>
 			</div>
 		</div>
 	</div>
 
 	<!-- Sections -->
 	<div class="section" id="section-npc">
-
+		<dmlist section="npc">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Job" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-settlements">
+		<dmlist section="settlements">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Type of settlement" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+			</template>
+		</dmlist>
 	</div>
 </div>

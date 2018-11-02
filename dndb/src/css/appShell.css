@@ -469,7 +469,7 @@ html div.wave.card > div.actions button {
 }
 
 .innerPage .lane .entry button.full {
-	width: calc(100% - 74px);
+	width: 94%;
 	position: relative;
 	left: 50%;
 	transform: translate(-50%, 0%);
@@ -572,6 +572,45 @@ html div.wave.card > div.actions button {
 	text-overflow: ellipsis;
 }
 
+.innerPage .lane .entry h4, h5, h6 {
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin: 8px 0px;
+	color: rgba(0, 0, 0, .3);
+	font-weight: 400;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.innerPage .lane .entry h5 {
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin: 8px 0px;
+	color: rgba(0, 0, 0, .3);
+	font-weight: 400;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.innerPage .lane .entry h6 {
+	width: 94%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin: 8px 0px;
+	color: rgba(0, 0, 0, .3);
+	font-weight: 400;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .innerPage .lane .entry p {
 	width: 94%;
 	font-family: 'Roboto', sans-serif;
@@ -601,7 +640,7 @@ html div.wave.card > div.actions button {
 }
 
 .innerPage .lane .entry input {
-	width: calc(100% - 74px);
+	width: calc(94% - 16px);
 	position: relative;
 	left: 50%;
 	transform: translate(-50%, 0%);
@@ -676,7 +715,7 @@ html div.wave.card > div.actions button {
 }
 
 .innerPage .lane .entry textarea {
-	width: calc(100% - 74px);
+	width: calc(94% - 16px);
 	position: relative;
 	left: 50%;
 	transform: translate(-50%, 0%);
@@ -714,11 +753,124 @@ html div.wave.card > div.actions button {
 	border: 2px solid rgba(0, 0, 0, .1);
 }
 
+.innerPage .lane .entry .listItem .shared {
+	cursor: pointer;
+}
+
 .innerPage .lane .entry .listItem h1 {
 	font-size: 36px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.innerPage .lane .entry .markdown h1 {
+	font-size: 34px;
+}
+
+.innerPage .lane .entry .markdown h2 {
+	font-size: 30px;
+}
+
+.innerPage .lane .entry .markdown h3 {
+	font-size: 26px;
+	margin-top: 12px;
+}
+
+.innerPage .lane .entry .markdown h4 {
+	font-size: 22px;
+}
+
+.innerPage .lane .entry .markdown h5 {
+	font-size: 18px;
+}
+
+.innerPage .lane .entry .markdown h6 {
+	font-size: 16px;
+}
+
+.innerPage .lane .entry .markdown h1 {
+	white-space: pre-wrap;
+	text-overflow: clip;
+	color: black;
+}
+
+.innerPage .lane .entry .markdown h2 {
+	white-space: pre-wrap;
+	text-overflow: clip;
+	color: black;
+}
+
+.innerPage .lane .entry .markdown h3 {
+	white-space: pre-wrap;
+	text-overflow: clip;
+	color: black;
+}
+
+.innerPage .lane .entry .markdown h4 {
+	white-space: pre-wrap;
+	text-overflow: clip;
+	color: black;
+}
+
+.innerPage .lane .entry .markdown h5 {
+	white-space: pre-wrap;
+	text-overflow: clip;
+	color: black;
+}
+
+.innerPage .lane .entry .markdown h6 {
+	white-space: pre-wrap;
+	text-overflow: clip;
+	color: black;
+}
+
+.innerPage .lane .entry .markdown img {
+	max-width: 100%;
+	border-radius: 10px;
+}
+
+.innerPage .lane .entry .markdown code {
+	font-family: "Roboto", sans-serif;
+    background-color: rgba(0, 0, 0, .05);
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+.innerPage .lane .entry .markdown pre {
+	width: 94%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+.innerPage .lane .entry .markdown pre code {
+	border: 2px solid rgba(0, 0, 0, .1);
+}
+
+.innerPage .lane .entry .markdown table {
+	width: 94%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.innerPage .lane .entry .markdown table thead tr th {
+	border-bottom: rgba(0, 0, 0, .1) 2px solid;
+	padding: 8px 0px;
+}
+
+.innerPage .lane .entry .markdown table tbody tr td {
+	padding: 8px 0px;
+}
+
+.innerPage .lane .entry .markdown blockquote {
+	margin: 12px 8px;
+}
+
+.innerPage .lane .entry .markdown blockquote p {
+	border-left: 4px solid rgba(0, 0, 0, .1);
+    padding-left: 8px;
 }
 
 .overlayList {
