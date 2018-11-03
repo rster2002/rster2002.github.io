@@ -10,6 +10,9 @@
 	<!-- Home screen -->
 	<div class="lane">
 		<div class="entry">
+			<button @click="back()">Back</button>
+		</div>
+		<div class="entry">
 			<h1>NPC's</h1>
 			<p>Keeping track of NPC's your players encountered is essential to keep the world believable.</p>
 			<div class="btn">
@@ -23,6 +26,48 @@
 				<button @click="openSection('settlements', 'Settlements')">Open</button>
 			</div>
 		</div>
+		<div class="entry">
+			<h1>Contracts</h1>
+			<p>Contracts are missions or quests that your players have started.</p>
+			<div class="btn">
+				<button @click="openSection('contracts', 'Contracts')">Open</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h1>Factions</h1>
+			<p>Factions form the bonds of people. Maybe factions are at war with each other of at peace.</p>
+			<div class="btn">
+				<button @click="openSection('factions', 'Factions')">Open</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h1>Gods</h1>
+			<p>Warshipped by the mortals. Who are they and what is their purpose in the world.</p>
+			<div class="btn">
+				<button @click="openSection('gods', 'Gods')">Open</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h1>Religions</h1>
+			<p>Maybe some religions are forbidden in your world.</p>
+			<div class="btn">
+				<button @click="openSection('religions', 'Religions')">Open</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h1>Legends</h1>
+			<p>A powerful legend can move mountains.</p>
+			<div class="btn">
+				<button @click="openSection('legends', 'Legends')">Open</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h1>History</h1>
+			<p>The history of your campaign setting is key to making your setting believable.</p>
+			<div class="btn">
+				<button @click="openSection('history', 'History')">Open</button>
+			</div>
+		</div>
 	</div>
 
 	<!-- Sections -->
@@ -32,6 +77,7 @@
 				<input placeholder="Name" v-model="working.name" />
 				<input placeholder="Job" v-model="working.subtitle" />
 				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be releaved to players)" v-model="working.dmDescription"></textarea>
 			</template>
 		</dmlist>
 	</div>
@@ -41,6 +87,67 @@
 				<input placeholder="Name" v-model="working.name" />
 				<input placeholder="Type of settlement" v-model="working.subtitle" />
 				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be releaved to players)" v-model="working.dmDescription"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-contracts">
+		<dmlist section="contracts">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Type of contract" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be releaved to players)" v-model="working.dmDescription"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-factions">
+		<dmlist section="factions">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Subtitle" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be releaved to players)" v-model="working.dmDescription"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-gods">
+		<dmlist section="gods">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Type of god" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be releaved to players)" v-model="working.dmDescription"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-religions">
+		<dmlist section="religions">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Subtitle" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be releaved to players)" v-model="working.dmDescription"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-legends">
+		<dmlist section="legends">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Subtitle" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be releaved to players)" v-model="working.dmDescription"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-history">
+		<dmlist section="history">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Subtitle" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be releaved to players)" v-model="working.dmDescription"></textarea>
 			</template>
 		</dmlist>
 	</div>

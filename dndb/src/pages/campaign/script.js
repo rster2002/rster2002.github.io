@@ -159,6 +159,11 @@ var vueInstance = new Vue({
 			global.campaignId = campaignId;
 			global.campaignName = campaignName;
 			openPage("dmDashboard");
+		},
+		openInformation() {
+			global.campaignId = campaignId;
+			global.campaignName = campaignName;
+			openPage("campaignInformation");
 		}
 	}
 });

@@ -455,7 +455,7 @@ html div.wave.card > div.actions button {
 	font-size: 24px;
 	background-color: transparent;
 	outline: 0;
-	border: solid 2px #7dbeff;
+	border: solid 2px #0080ff;
 	border-radius: 4px;
 	color: #0080ff;
 	padding: 4px 6px;
@@ -478,7 +478,7 @@ html div.wave.card > div.actions button {
 
 .innerPage .lane .entry button:hover {
 	color: white;
-	background-color: #7dbeff;
+	background-color: #0080ff;
 	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
@@ -648,7 +648,7 @@ html div.wave.card > div.actions button {
 	font-size: 24px;
 	background-color: transparent;
 	outline: 0;
-	border: solid 2px #7dbeff;
+	border: solid 2px #0080ff;
 	border-radius: 4px;
 	color: black;
 	padding: 4px 6px;
@@ -662,6 +662,19 @@ html div.wave.card > div.actions button {
 
 .innerPage .lane .entry input::-ms-input-placeholder {
 	color: #0080ff;
+}
+
+.innerPage .lane .entry input.red {
+	border: #ff3030;
+}
+
+.innerPage .lane .entry input.red::placeholder {
+	color: #ff3030;
+	opacity: 1;
+}
+
+.innerPage .lane .entry input.red::-ms-input-placeholder {
+	color: #ff3030;
 }
 
 .innerPage .lane .entry .multiInput {
@@ -723,7 +736,7 @@ html div.wave.card > div.actions button {
 	font-size: 18px;
 	background-color: transparent;
 	outline: 0;
-	border: solid 2px #7dbeff;
+	border: solid 2px #0080ff;
 	border-radius: 4px;
 	color: black;
 	padding: 4px 6px;
@@ -739,6 +752,19 @@ html div.wave.card > div.actions button {
 
 .innerPage .lane .entry textarea::-ms-input-placeholder {
 	color: #0080ff;
+}
+
+.innerPage .lane .entry textarea.red {
+	border-color: #ff3030;
+}
+
+.innerPage .lane .entry textarea.red::placeholder {
+	color: #ff3030;
+	opacity: 1;
+}
+
+.innerPage .lane .entry textarea.red::-ms-input-placeholder {
+	color: #ff3030;
 }
 
 .innerPage .lane .entry .listItem {
@@ -762,6 +788,12 @@ html div.wave.card > div.actions button {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.innerPage .lane .entry .markdown.red {
+	width: calc(100% - 4px);
+	border: 2px solid #ff3030;
+	border-radius: 10px;
 }
 
 .innerPage .lane .entry .markdown h1 {

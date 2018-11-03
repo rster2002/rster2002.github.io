@@ -143,6 +143,7 @@ function openPage(page) {
 
 	characterSheetLoaded = false;
 	$(".page .innerPage").remove();
+	$(".page .innerTemp").remove();
 	$(".page .innerResources").remove();
 	$(".page").load("./src/pages/" + page + "/page.html");
 	sessionStorage.setItem("::openPage", page);
@@ -274,23 +275,23 @@ function skb(text) {
 
 // used for importing scripts and styling
 function tempImport(arr) {
-	$(".page").prepend("<div class='innerResources'></div>");
+	$(".page").prepend("<div class='innerTemp'></div>");
 	var opened = sessionStorage.getItem("::openPage");
 	for (var i = 0; i < arr.length; ++i) {
 		var imp = arr[i];
 		if (imp.includes(".js")) {
-			$(".innerResources").append("<script src='./src/js/" + imp + "'></script>");
+			$(".innerTemp").append("<script src='./src/js/" + imp + "'></script>");
 		} else if (imp.includes(".css")) {
-			$(".innerResources").append("<script src='./src/css/" + imp + "'></script>");
+			$(".innerTemp").append("<script src='./src/css/" + imp + "'></script>");
 		} else if (imp.includes("--default")) {
 			if (!imp.includes("-js")) {
-				$(".innerResources").append("<script src='./src/pages/" + opened + "/script.js'></script>");
+				$(".innerTemp").append("<script src='./src/pages/" + opened + "/script.js'></script>");
 			}
 			if (!imp.includes("-css")) {
-				$(".innerResources").append("<link rel='stylesheet' href='./src/pages/" + opened + "/style.css'></script>");
+				$(".innerTemp").append("<link rel='stylesheet' href='./src/pages/" + opened + "/style.css'></script>");
 			}
 		} else if (imp === "--mobile") {
-			$(".innerResources").append("<link rel='stylesheet' media='screen and (max-device-width: 800px)' href='./src/pages/" + opened + "/mobile.css'></script>");
+			$(".innerTemp").append("<link rel='stylesheet' media='screen and (max-device-width: 800px)' href='./src/pages/" + opened + "/mobile.css'></script>");
 		}
 	}
 }
