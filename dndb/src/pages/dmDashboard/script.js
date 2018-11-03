@@ -10,13 +10,12 @@ Vue.component("dmlist", {
 				<button @click="addToList()">Add</button>
 			</div>
 		</div>
-
 		<div class="entry">
 			<h2>Entries</h2>
 			<div class="listItem">
 				<input v-model="query" placeholder="Search" />
 			</div>
-			<div class="listItem" v-for="entry in filteredEntries">
+			<div class="listItem" v-for="entry in filteredEntries" v-bind:class="{open: entry.open}">
 				<div v-if="entry.editing != true">
 					<div class="shared" @click="openEntry(entry)">
 						<h1>{{ entry.name }}</h1>
@@ -57,7 +56,11 @@ Vue.component("dmlist", {
 				if (item.name === undefined) {
 					return false;
 				} else {
-					return item.name.toLowerCase().includes(query);
+					if (item.name.toLowerCase().includes(query) || item.subtitle.toLowerCase().includes(query) || item.description.toLowerCase().includes("\`" + query) || item.dmDescription.toLowerCase().includes("\`" + query)) {
+						return true;
+					} else {
+						return false;
+					}
 				}
 			});
 		}
@@ -103,7 +106,7 @@ Vue.component("dmlist", {
 			var open = current.open;
 			var id = current.__id;
 			if (open === false) {
-				if (confirm("You are about to reveal this information to the players so they can see it. Are you sure?")) {
+				if (confirm("You are about to reveal this information to the players so they can see it. Private notes will not be revealed. Are you sure?")) {
 					this.entries[index].open = true;
 					var push = Object.assign({}, entry);
 					push.dmDescription = "";
@@ -141,7 +144,10 @@ Vue.component("dmlist", {
 		},
 		startEdit(entry) {
 			var index = this.entries.indexOf(entry);
-			vueInstance.working = entry;
+			var entries = Object.entries(entry);
+			for (var i = 0; i < entries.length; ++i) {
+				vueInstance.working[entries[i][0]] = entries[i][1];
+			}
 			this.entries[index].editing = true;
 		},
 		saveEdit(entry) {
@@ -169,10 +175,22 @@ Vue.component("dmlist", {
 			for (var i = 0; i < entries.length; ++i) {
 				this.entries[index][entries[i][0]] = entries[i][1];
 			}
+
+			var resetWorking = {
+				name: "",
+				subtitle: "",
+				description: "",
+				dmDescription: ""
+			}
+
+			var entries = Object.entries(resetWorking);
+			for (var i = 0; i < entries.length; ++i) {
+				vueInstance.working[entries[i][0]] = entries[i][1];
+			}
 		}
 	},
 	created: async function() {
-		var query = await createQuery(dmRef.doc(this.section).collection("dm").orderBy("name", "desc"));
+		var query = await createQuery(dmRef.doc(this.section).collection("dm").orderBy("name", "asc"));
 		if (query.length > 0) {
 			this.entries = query;
 		}

@@ -73,13 +73,17 @@ Vue.component("sectionlist", {
 				if (item.name === undefined) {
 					return false;
 				} else {
-					return item.name.toLowerCase().includes(query);
+					if (item.name.toLowerCase().includes(query) || item.subtitle.toLowerCase().includes(query) || item.description.toLowerCase().includes("\`" + query)) {
+						return true;
+					} else {
+						return false;
+					}
 				}
 			});
 		}
 	},
 	created: async function() {
-		var query = await createQuery(infoRef.doc(this.internalname).collection("players").orderBy("name", "desc"));
+		var query = await createQuery(infoRef.doc(this.internalname).collection("players").orderBy("name", "asc"));
 		if (query.length > 0) {
 			this.entries = query;
 		}

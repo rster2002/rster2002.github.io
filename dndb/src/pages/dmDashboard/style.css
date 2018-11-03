@@ -7,3 +7,7 @@
 	top: 64px;
 	overflow-y: auto;
 }
+
+.innerPage .lane .entry .listItem.open {
+	border-color: #a9f9a9;
+}
