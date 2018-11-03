@@ -11,7 +11,7 @@ Vue.component("sectionlist", {
 			<div v-if="showAll == false">
 				<div class="listItem" v-for="entry in limitedList">
 					<div @click="toggleOpen(entry)" class="shared">
-						<h1>{{ entry.name }}</h1>
+						<h1 class="noOverflow">{{ entry.name }}</h1>
 						<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
 					</div>
 					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
@@ -24,7 +24,7 @@ Vue.component("sectionlist", {
 			<div v-if="showAll == true">
 				<div class="listItem" v-for="entry in entries">
 					<div @click="toggleOpen(entry)" class="shared">
-						<h1>{{ entry.name }}</h1>
+						<h1 class="noOverflow">{{ entry.name }}</h1>
 						<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
 					</div>
 					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
@@ -38,7 +38,7 @@ Vue.component("sectionlist", {
 		<div v-else>
 			<div class="listItem" v-for="entry in queriedList">
 				<div @click="toggleOpen(entry)" class="shared">
-					<h1>{{ entry.name }}</h1>
+					<h1 class="noOverflow">{{ entry.name }}</h1>
 					<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
 				</div>
 				<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">

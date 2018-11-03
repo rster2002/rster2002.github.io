@@ -18,7 +18,7 @@ Vue.component("dmlist", {
 			<div class="listItem" v-for="entry in filteredEntries" v-bind:class="{open: entry.open}">
 				<div v-if="entry.editing != true">
 					<div class="shared" @click="openEntry(entry)">
-						<h1>{{ entry.name }}</h1>
+						<h1 class="noOverflow">{{ entry.name }}</h1>
 						<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
 					</div>
 					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
