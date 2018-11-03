@@ -108,6 +108,7 @@ Vue.component("dmlist", {
 					var push = Object.assign({}, entry);
 					push.dmDescription = "";
 					push.computedDmDescription = "";
+					push.show = false;
 					dmRef.doc(this.section).collection("players").doc(id).set(push).then(() => {
 						skb("Entry revealed to players");
 					}).catch(e => thr(e));

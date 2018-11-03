@@ -17,6 +17,9 @@ Vue.component("sectionlist", {
 					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
 					</div>
 				</div>
+				<div class="listItem" v-if="entries.length > 5" style="cursor: pointer;" @click="toggleViewAll()">
+					<h1>Show more</h1>
+				</div>
 			</div>
 			<div v-if="showAll == true">
 				<div class="listItem" v-for="entry in entries">
@@ -26,6 +29,9 @@ Vue.component("sectionlist", {
 					</div>
 					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
 					</div>
+				</div>
+				<div class="listItem" v-if="entries.length > 5" style="cursor: pointer;" @click="toggleViewAll()">
+					<h1>Show less</h1>
 				</div>
 			</div>
 		</div>
