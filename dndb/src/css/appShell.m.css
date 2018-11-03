@@ -16,6 +16,11 @@ p {
 	font-size: 3em;
 }
 
+.innerPage {
+	height: calc(100% + 12px);
+	margin-top: -12px;
+}
+
 /* .fab {
 	width: 15vw;
     height: 15vw;
