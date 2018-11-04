@@ -12,6 +12,20 @@
 				<button @click="back()">Back</button>
 			</div>
 		</div>
+		<div class="entry">
+			<h2>Search</h2>
+			<input placeholder="Search everything" v-model="query" />
+			<div v-if="query != ''">
+				<div class="listItem" v-for="entry in allEntriesQueried">
+					<div @click="toggleOpen(entry)" class="shared">
+						<h1 class="noOverflow">{{ entry.name }}</h1>
+						<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
+					</div>
+					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
+					</div>
+				</div>
+			</div>
+		</div>
 		<sectionlist internalname="npc" displayname="NPC's"></sectionlist>
 		<sectionlist internalname="settlements" displayname="Settlements"></sectionlist>
 		<sectionlist internalname="contracts" displayname="Contracts"></sectionlist>

@@ -14,6 +14,25 @@
 			<button @click="back()">Back</button>
 		</div>
 		<div class="entry">
+			<h2>Search</h2>
+			<input placeholder="Search everything" v-model="query" />
+			<div v-if="query != ''">
+				<div class="listItem" v-for="entry in allEntriesQueried" v-bind:class="{open: entry.open}">
+					<div class="shared" @click="openEntry(entry)">
+						<h1 class="noOverflow">{{ entry.name }}</h1>
+						<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
+					</div>
+					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
+					</div>
+					<div style="margin-top: 24px; width: calc(100% - 4px); border: 2px solid #ff3030; border-radius: 10px; padding: 8px 0px;" v-if="entry.show == true && entry.dmDescription != ''">
+						<h3 style="margin-top: 12px;">Private notes</h3>
+						<div v-html="entry.computedDmDescription" class="markdown">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="entry">
 			<h1>NPC's</h1>
 			<p>Keeping track of NPC's your players encountered is essential to keep the world believable.</p>
 			<div class="btn">

@@ -83,6 +83,7 @@ Vue.component("dmlist", {
 			}).catch(e => thr(e));
 
 			this.entries.push(entry);
+			vueInstance.allEntries.push(entry);
 
 			var resetWorking = {
 				name: "",
@@ -139,6 +140,9 @@ Vue.component("dmlist", {
 					dmRef.doc(this.section).collection("players").doc(id).delete().catch(e => thr(e));
 				}
 
+				var indexAll = vueInstance.allEntries.indexOf(entry);
+				vueInstance.allEntries.splice(indexAll, 1);
+
 				this.entries.splice(index, 1);
 			}
 		},
@@ -193,6 +197,8 @@ Vue.component("dmlist", {
 		var query = await createQuery(dmRef.doc(this.section).collection("dm").orderBy("name", "asc"));
 		if (query.length > 0) {
 			this.entries = query;
+
+			vueInstance.allEntries = vueInstance.allEntries.concat(query);
 		}
 	}
 })
@@ -203,11 +209,29 @@ var vueInstance = new Vue({
 		campaignId: "",
 		campaignName: "",
 		openedSection: "",
+		query: "",
+		allEntries: [],
 		working: {
 			name: "",
 			subtitle: "",
 			description: "",
 			dmDescription: ""
+		}
+	},
+	computed: {
+		allEntriesQueried() {
+			var query = this.query.toLowerCase();
+			return this.allEntries.filter(function (item) {
+				if (item.name === undefined) {
+					return false;
+				} else {
+					if (item.name.toLowerCase().includes(query) || item.subtitle.toLowerCase().includes(query) || item.description.toLowerCase().includes("\`" + query) || item.dmDescription.toLowerCase().includes("\`" + query)) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			});
 		}
 	},
 	methods: {
@@ -235,6 +259,10 @@ var vueInstance = new Vue({
 		},
 		back() {
 			openPage("campaign");
+		},
+		openEntry(entry) {
+			var index = this.allEntries.indexOf(entry);
+			this.allEntries[index].show = !this.allEntries[index].show;
 		}
 	}
 });

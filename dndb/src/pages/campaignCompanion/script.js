@@ -86,15 +86,41 @@ Vue.component("sectionlist", {
 		var query = await createQuery(infoRef.doc(this.internalname).collection("players").orderBy("name", "asc"));
 		if (query.length > 0) {
 			this.entries = query;
+
+			vueInstance.allEntries = vueInstance.allEntries.concat(query);
 		}
 	}
 })
 
 var vueInstance = new Vue({
 	el: "#app",
+	data: {
+		query: "",
+		allEntries: []
+	},
+	computed: {
+		allEntriesQueried() {
+			var query = this.query.toLowerCase();
+			return this.allEntries.filter(function (item) {
+				if (item.name === undefined) {
+					return false;
+				} else {
+					if (item.name.toLowerCase().includes(query) || item.subtitle.toLowerCase().includes(query) || item.description.toLowerCase().includes("\`" + query)) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			});
+		}
+	},
 	methods: {
 		back() {
 			openPage("campaign");
+		},
+		toggleOpen(entry) {
+			var index = this.allEntries.indexOf(entry);
+			this.allEntries[index].show = !this.allEntries[index].show;
 		}
 	}
 });
