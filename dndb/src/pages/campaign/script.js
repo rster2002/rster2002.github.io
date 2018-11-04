@@ -163,7 +163,7 @@ var vueInstance = new Vue({
 		openInformation() {
 			global.campaignId = campaignId;
 			global.campaignName = campaignName;
-			openPage("campaignInformation");
+			openPage("campaignCompanion");
 		}
 	}
 });

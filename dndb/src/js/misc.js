@@ -49,7 +49,9 @@ const pageTitles = {
 	dm: "Dungeon Master Tools",
 	profile: "Profile",
 	dashboard: "Dashboard",
-	system: "System page"
+	system: "System page",
+	campaignCompanion: "Campaign companion",
+	dmDashboard: "DM Dashboard"
 }
 
 $(document).ready(function() {
