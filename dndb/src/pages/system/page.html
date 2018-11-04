@@ -28,7 +28,7 @@
 				<h1 class="pointer" @click="toggleOpen(user)">{{ user.username }}</h1>
 				<div class="content" v-if="user.shown == true">
 					<p><b>Uid:</b> {{ user.uid }}</p>
-					<p><b>User code:</b> {{ user.userCode }}</p>
+					<p><b>User code:</b> {{ user.userId }}</p>
 					<p><b>Last login:</b> {{ user.lastLogin }}</p>
 					<p><b>First login:</b> {{ user.firstLogin }}</p>
 					<button @click="startEmulation(user.uid)">Emulate user</button>

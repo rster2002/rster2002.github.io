@@ -7,8 +7,14 @@
 	<div class="lane" id="vueProfile">
 		<div class="entry" style="margin-top: 24px;">
 			<img class="topUserImage" v-bind:src="profileImage" />
-			<h1 class="ch">{{ username }}</h1>
-			<h2 class="ch">{{ userId }}</h2>
+			<h1 class="ch noOverflow">{{ username }}</h1>
+			<h2 class="ch noOverflow">{{ userId }}</h2>
+		</div>
+		<div class="entry">
+			<h2>Controlls</h2>
+			<div class="btn">
+				<button @click="copyId()">Copy user ID</button>
+			</div>
 		</div>
 		<!-- <div class="entry">
 			<h2>Actions</h2>

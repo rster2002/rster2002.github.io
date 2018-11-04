@@ -361,40 +361,35 @@ var vueInventory = new Vue(vueInventoryObj);
 var vueAbilities = new Vue(vueAbilitiesObj);
 var vueSpells = new Vue(vueSpellsObj);
 
-// var vuePermissions = new Vue({
-// 	el: "#permissions",
-// 	data: {
-// 		userId: "",
-// 		permissions: [],
-// 		uidPermissions: []
-// 	},
-// 	methods: {
-// 		addPermission() {
-// 			var userId = this.userId;
-// 			getUidFromId(userId, returnedUid => {
-// 				getProfile(returnedUid, returnedProfile => {
-// 					this.permissions.push(returnedProfile);
-// 					this.uidPermissions.push(returnedUid);
-// 					characterRef.update({
-// 						permissions: this.permissions,
-// 						uidPermissions: this.uidPermissions
-// 					});
-// 				});
-// 			});
-// 		},
-// 		revoke(permission) {
-// 			if (confirm("Are you sure?")) {
-// 				var revokeUid = permission.uid;
-// 				this.uidPermissions.splice(this.uidPermissions.indexOf(revokeUid), 1);
-// 				this.permissions.splice(this.permissions.indexOf(permission), 1);
-// 				characterRef.update({
-// 					permissions: this.permissions,
-// 					uidPermissions: this.uidPermissions
-// 				});
-// 			}
-// 		}
-// 	}
-// });
+var vuePermissions = new Vue({
+	el: "#permissions",
+	data: {
+		userId: "",
+		permissions: []
+	},
+	methods: {
+		addPermission() {
+			var userId = this.userId;
+			getUidFromId(userId, returnedUid => {
+				getProfile(returnedUid, returnedProfile => {
+					characterRef.collection("permissions").doc(returnedProfile.uid).set(returnedProfile).then(() => {
+						this.permissions.push(returnedProfile);
+						skb("Permission added");
+					}).catch(e => thr(e));
+				});
+			});
+		},
+		revoke(permission) {
+			if (confirm("Are you sure?")) {
+				var revokeUid = permission.uid;
+				characterRef.collection("permissions").doc(revokeUid).delete().then(() => {
+					this.permissions.splice(this.permissions.indexOf(permission), 1);
+					skb("Permission revoked");
+				}).catch(e => thr(e));
+			}
+		}
+	}
+});
 
 // $(".innerPage").ready(() => {
 // 	$(".characterContainer").load("./src/pages/characterSheet.html");
