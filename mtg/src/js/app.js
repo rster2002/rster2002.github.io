@@ -1,3 +1,27 @@
+var sndNextPlayer = new Audio("./src/snd/next_player.ogg");
+sndNextPlayer.volume = 0.5;
+
+Vue.component("turnspinner", {
+	template: `<div @click="nextPlayer()" class="spinner" v-bind:style="{transform: rotated}"></div>`,
+	data: function() {
+		return {
+			rotation: 45
+		}
+	},
+	computed: {
+		rotated() {
+			return `translate(-50%, -50%) rotate(${this.rotation}deg)`;
+		}
+	},
+	methods: {
+		nextPlayer() {
+			this.rotation += 180;
+			this.rotated = `translate(-50%, -50%) rotate(${this.rotation})`;
+			sndNextPlayer.play();
+		}
+	}
+});
+
 Vue.component("counter", {
 	template: `
 		<div class="counter" v-bind:style="{transform: rotationStyle}">

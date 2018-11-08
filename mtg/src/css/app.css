@@ -120,6 +120,7 @@ body, html {
 
 .counter .settings {
 	background-color: white;
+	z-index: 2;
 	top: -200%;
 }
 
@@ -162,4 +163,18 @@ body, html {
 	border: 2px solid #cecece;
 	border-radius: 2px;
 	padding: 4px 8px;
+}
+
+.spinner {
+	position: fixed;
+	z-index: 1;
+	top: 50%;
+	left: 50%;
+	height: 64px;
+	width: 64px;
+	border-radius: 50%;
+	border-top-left-radius: 0px;
+	cursor: pointer;
+	background-color: white;
+	transition: 300ms cubic-bezier(0.4, 0.0, 0.2, 1) transform;
 }
