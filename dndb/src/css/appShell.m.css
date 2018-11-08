@@ -17,7 +17,7 @@ p {
 }
 
 .innerPage {
-	height: calc(100% + 12px);
+	height: 100%;
 	margin-top: -12px;
 }
 
