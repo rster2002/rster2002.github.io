@@ -363,3 +363,7 @@ global["viewCharacter"] = function(userId, characterId) {
 
 	openPage("characterViewer");
 }
+
+global["pickuser"] = function(array, callback) {
+
+}

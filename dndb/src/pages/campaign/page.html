@@ -51,11 +51,15 @@
 		<div class="entry">
 			<h2>Characters</h2>
 			<div class="listItem playerItem" v-for="player in players">
-				<img @click="togglePlayerOpen(player)" v-bind:src="player.profile.usericon" />
-				<h1 @click="togglePlayerOpen(player)">{{ player.characterObj.characterName }}</h1>
+				<div @click="togglePlayerOpen(player)" class="shared">
+					<img v-bind:src="player.profile.usericon" />
+					<h1>{{ player.characterObj.characterName }}</h1>
+				</div>
 				<div class="content" v-if="player.open == true">
-					<button @click="viewCharacter(player)">Open character</button>
-					<button class="danger" @click="kick(player, false, true)" v-if="isDM">Kick</button>
+					<div class="btn">
+						<button @click="viewCharacter(player)">Open character</button>
+						<button class="danger" @click="kick(player, false, true)" v-if="isDM">Kick</button>
+					</div>
 					<!-- <button class="danger" v-if="isDM">Ban</button> -->
 				</div>
 			</div>
