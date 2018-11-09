@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<!-- Meta / manifest / title -->
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta name="theme-color" content="#ffffff" />
+		<meta name="Description" content="A tool for players and DM's alike">
+		<title id="pageTitle">MTG: Health counter</title>
+		<link rel="manifest" href="./src/manifest.json">
+
+		<!-- API and Library scripts -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script id="vueLib" src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+		<!-- App Scripts -->
+
+		<!-- Link styles -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link href="../assets/images/icons/tab%20icons/main.png" rel="icon" />
+		<link rel="stylesheet" href="./src/css/lifecounter.css" />
+	</head>
+	<body>
+		<div class="lane" id="app">
+			<counter class="player1" player="player1" background="#ff3030"></counter>
+			<counter class="player2" player="player2" background="#3030ff"></counter>
+			<turnspinner></turnspinner>
+		</div>
+		<script src="./src/js/lifecounter.js" charset="utf-8"></script>
+	</body>
+</html>

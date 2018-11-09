@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
 	<head>
-		<!-- Meta / manifest / title -->
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<meta name="theme-color" content="#ffffff" />
-		<meta name="Description" content="A tool for players and DM's alike">
-		<title id="pageTitle">MTG: Health counter</title>
-		<link rel="manifest" href="./src/manifest.json">
+		<title>D&D - Login</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<!-- Styles -->
+		<link href="../assets/images/icons/tab%20icons/dnd.png" rel="icon">
+		<link type="text/css" rel="stylesheet" href="./src/css/login.css">
+		<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 
-		<!-- API and Library scripts -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script id="vueLib" src="https://cdn.jsdelivr.net/npm/vue"></script>
-
-		<!-- App Scripts -->
-
-		<!-- Link styles -->
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-		<link href="../assets/images/icons/tab%20icons/main.png" rel="icon" />
-		<link rel="stylesheet" href="./src/css/app.css" />
+		<!-- Scripts -->
+		<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/ui/2.3.0/firebase-ui-auth__en.js"></script>
+		<script src="./src/js/login.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
 	<body>
-		<div class="lane" id="app">
-			<counter class="player1" player="player1" background="#ff3030"></counter>
-			<counter class="player2" player="player2" background="#3030ff"></counter>
-			<turnspinner></turnspinner>
+		<div class="background">
+			<div class="color"></div>
+			<div class="white"></div>
 		</div>
-		<script src="./src/js/app.js" charset="utf-8"></script>
+		<div class="box z-depth-5">
+			<div class="title">
+				<h1>Login</h1>
+			</div>
+			<div class="content">
+				<div id="firebaseui-auth-container"></div>
+			</div>
+		</div>
 	</body>
+<!--	<div id="firebaseui-auth-container"></div>-->
 </html>
