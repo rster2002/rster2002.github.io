@@ -5,7 +5,9 @@ Vue.component("sectionlist", {
 		<h2>{{ displayname }}</h2>
 		<div class="listItem">
 			<input v-model="query" placeholder="Search" />
-			<button @click="toggleViewAll()"><span v-if="showAll == false">Show all</span><span v-else>Show limited</span></button>
+			<div class="btn">
+				<button @click="toggleViewAll()"><span v-if="showAll == false">Show all</span><span v-else>Show limited</span></button>
+			</div>
 		</div>
 		<div v-if="query == ''">
 			<div v-if="showAll == false">

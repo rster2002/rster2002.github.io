@@ -62,15 +62,18 @@
 					</div>
 				</div>
 			</div>
+			<h1 v-if="players.length == 0" class="textCenter">No player has joined yet</h1>
 		</div>
-		<div class="entry">
+		<div class="entry" v-if="!isDM">
 			<h2>Campaign companion</h2>
+			<p>Here you can find information provided by your DM about the current campaign with things like NPC's you've encountered and locations you've visited.</p>
 			<div class="btn">
 				<button @click="openInformation()">Open</button>
 			</div>
 		</div>
-		<div class="entry" v-if="isDM">
+		<div class="entry" v-if="isDM" v-if="isDM">
 			<h2>DM Dashboard</h2>
+			<p>Staying consistent across sessions is crusial to keeping the world you paint believable. This tool helps you with that. Not only can you keep track of important information like NPC's and locations and a whole lot more, but you also can help your players remember all the information they get in sessions.</p>
 			<div class="btn">
 				<button @click="openDashboard()">Open</button>
 			</div>
@@ -107,8 +110,19 @@
 			</div>
 		</div>
 		<div class="entry">
+			<h2>The Dungeon Master</h2>
+			<div class="listItem">
+				<div class="user">
+					<img v-bind:src="dm.profileImage">
+					<h1>{{ dm.username }}</h1>
+				</div>
+			</div>
+		</div>
+		<div class="entry" v-if="!isDM">
 			<h2>Options</h2>
-			<button v-if="!isDM" class="danger" @click="kick(self, 'self', 'campaignMenu')">Leave campaign</button>
+			<div class="btn">
+				<button v-if="!isDM" class="danger" @click="kick(self, 'self', 'campaignMenu')">Leave campaign</button>
+			</div>
 		</div>
 	</div>
 	<div class="push"></div>
