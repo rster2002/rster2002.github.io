@@ -22,7 +22,43 @@ var vueInventoryObj = {
 			shown: false
 		}
 	},
+	computed: {
+		withTag() {
+			return this.items.filter(function(item) {
+				return item.pinned;
+			});
+		},
+		withoutTag() {
+			return this.items.filter(function(item) {
+				return !item.pinned;
+			});
+		}
+	},
 	methods: {
+		isPinned(item) {
+			if (item.pinned === false) {
+				return "";
+			} else {
+				return "#0080ff solid 2px";
+			}
+		},
+		pin(item) {
+			var index = this.items.indexOf(item);
+			if (this.items[index].pinned === undefined || this.items[index].pinned === false) {
+				this.items[index].pinned = true;
+			} else {
+				this.items[index].pinned = false;
+			}
+		},
+		toMarkdown(description) {
+			let p = [];
+			for (var i = 0; i < description.length; ++i) {
+				p.push(description[i]);
+			}
+			let o = marked(p.join("\n"), { sanitize: true });
+			console.log(o);
+			return o;
+		},
 		toggleShown(item) {
 			console.log("het")
 			this.items[this.items.indexOf(item)].shown = !this.items[this.items.indexOf(item)].shown;
@@ -136,7 +172,43 @@ var vueAbilitiesObj = {
 			shown: false
 		}
 	},
+	computed: {
+		withTag() {
+			return this.items.filter(function(item) {
+				return item.pinned;
+			});
+		},
+		withoutTag() {
+			return this.items.filter(function(item) {
+				return !item.pinned;
+			});
+		}
+	},
 	methods: {
+		isPinned(item) {
+			if (item.pinned === false) {
+				return "";
+			} else {
+				return "#0080ff solid 2px";
+			}
+		},
+		pin(item) {
+			var index = this.items.indexOf(item);
+			if (this.items[index].pinned === undefined || this.items[index].pinned === false) {
+				this.items[index].pinned = true;
+			} else {
+				this.items[index].pinned = false;
+			}
+		},
+		toMarkdown(description) {
+			let p = [];
+			for (var i = 0; i < description.length; ++i) {
+				p.push(description[i]);
+			}
+			let o = marked(p.join("\n"), { sanitize: true });
+			console.log(o);
+			return o;
+		},
 		toggleShown(item) {
 			this.items[this.items.indexOf(item)].shown = !this.items[this.items.indexOf(item)].shown;
 		},
@@ -250,7 +322,43 @@ var vueSpellsObj = {
 			shown: false
 		}
 	},
+	computed: {
+		withTag() {
+			return this.items.filter(function(item) {
+				return item.pinned;
+			});
+		},
+		withoutTag() {
+			return this.items.filter(function(item) {
+				return !item.pinned;
+			});
+		}
+	},
 	methods: {
+		isPinned(item) {
+			if (item.pinned === false) {
+				return "";
+			} else {
+				return "#0080ff solid 2px";
+			}
+		},
+		pin(item) {
+			var index = this.items.indexOf(item);
+			if (this.items[index].pinned === undefined || this.items[index].pinned === false) {
+				this.items[index].pinned = true;
+			} else {
+				this.items[index].pinned = false;
+			}
+		},
+		toMarkdown(description) {
+			let p = [];
+			for (var i = 0; i < description.length; ++i) {
+				p.push(description[i]);
+			}
+			let o = marked(p.join("\n"), { sanitize: true });
+			console.log(o);
+			return o;
+		},
 		toggleShown(item) {
 			this.items[this.items.indexOf(item)].shown = !this.items[this.items.indexOf(item)].shown;
 		},
@@ -692,7 +800,14 @@ async function loadInventory() {
 	var query = await createQuery(characterRef.collection("inventory").orderBy("name", "asc"));
 	console.log(query);
 	if (query[0] !== undefined) {
-		vueInventory.items = query;
+		for (var i = 0; i < query.length; i++) {
+			var item = query[i];
+			if (item.pinned === undefined) {
+				item.pinned = false;
+			}
+
+			vueInventory.items.push(item);
+		}
 	} else {
 		vueInventory.items = [];
 	}
@@ -702,7 +817,14 @@ async function loadAbilities() {
 	var query = await createQuery(characterRef.collection("abilities").orderBy("name", "asc"));
 	console.log(query);
 	if (query[0] !== undefined) {
-		vueAbilities.items = query;
+		for (var i = 0; i < query.length; i++) {
+			var item = query[i];
+			if (item.pinned === undefined) {
+				item.pinned = false;
+			}
+
+			vueAbilities.items.push(item);
+		}
 	} else {
 		vueAbilities.items = [];
 	}
@@ -749,6 +871,10 @@ async function loadSpells() {
 
 				vueSpells.items.push(spellObj);
 			} else {
+
+				if (spell.pinned === undefined) {
+					spell.pinned = false;
+				}
 				vueSpells.items.push(spell);
 			}
 		}

@@ -45,9 +45,11 @@
 				<div class="parser"></div>
 			</div>
 		</div>
+	</div>
+	<div class="lane">
 		<div class="section" id="inventory">
-			<div class="inputCard">
-				<h1>Inventory</h1>
+			<div class="entry" style="border-top-left-radius: 0px; border-top-right-radius: 0px;">
+				<h1 style="font-size: 42px">Inventory</h1>
 				<input placeholder="Item name" v-model="working.name" />
 				<input placeholder="Count" v-model="working.count" type="number" />
 				<textarea v-model="working.description" placeholder="Description"></textarea>
@@ -61,36 +63,69 @@
 						<i class="material-icons">clear</i>
 					</div>
 				</div>
-				<button @click="addItem()" v-if="editing == false">Add</button>
-				<button @click="saveEdit()" v-if="editing == true">Save</button>
+				<button class="full" @click="addItem()" v-if="editing == false">Add</button>
+				<button class="full" @click="saveEdit()" v-if="editing == true">Save</button>
 			</div>
-			<div class="item" v-for="item in items">
-				<div v-if="item.editing == true">
-					<div class="shared">
-						<h1>Being edited...</h1>
+			<div class="entry" v-if="items.length > 0">
+				<div class="listItem" v-for="item in withTag" v-bind:style="{border: isPinned(item)}">
+					<div v-if="item.editing == true">
+						<div class="shared">
+							<h1>Being edited...</h1>
+						</div>
 					</div>
-				</div>
-				<div v-if="item.editing != true">
-					<div class="shared" @click="toggleShown(item)">
-						<h1>{{ item.name }}</h1>
-					</div>
-					<div class="expanded" v-if="item.shown == true">
-						<input v-model="item.count" placeholder="Count" type="number" />
-						<p v-for="text in item.description">{{ text }}</p>
-						<div class="tags">
-							<div class="tag" v-for="tag in item.tags">
-								<p>{{ tag }}</p>
+					<div v-if="item.editing != true">
+						<div class="shared" @click="toggleShown(item)">
+							<h1>{{ item.name }}</h1>
+						</div>
+						<div class="expanded" v-if="item.shown == true">
+							<input v-model="item.count" placeholder="Count" type="number" />
+							<div class="markdown" v-html="toMarkdown(item.description)"></div>
+							<!-- {{{ toMarkdown(item.description) }}} -->
+							<div class="tags">
+								<div class="tag" v-for="tag in item.tags">
+									<p>{{ tag }}</p>
+								</div>
+							</div>
+							<div class="btn icn">
+								<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
+								<button @click="editItem(item)"><span class="material-icons">edit</span></button>
+								<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-else class="material-icons">label</span></button>
 							</div>
 						</div>
-						<button @click="editItem(item)">Edit</button>
-						<button @click="deleteItem(item)" class="danger">Delete</button>
+					</div>
+				</div>
+				<div class="listItem" v-for="item in withoutTag" v-bind:style="{border: isPinned(item)}">
+					<div v-if="item.editing == true">
+						<div class="shared">
+							<h1>Being edited...</h1>
+						</div>
+					</div>
+					<div v-if="item.editing != true">
+						<div class="shared" @click="toggleShown(item)">
+							<h1>{{ item.name }}</h1>
+						</div>
+						<div class="expanded" v-if="item.shown == true">
+							<input v-model="item.count" placeholder="Count" type="number" />
+							<div class="markdown" v-html="toMarkdown(item.description)"></div>
+							<!-- {{{ toMarkdown(item.description) }}} -->
+							<div class="tags">
+								<div class="tag" v-for="tag in item.tags">
+									<p>{{ tag }}</p>
+								</div>
+							</div>
+							<div class="btn icn">
+								<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
+								<button @click="editItem(item)"><span class="material-icons">edit</span></button>
+								<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-else class="material-icons">label</span></button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="section" id="abilities" style="display: none;">
-			<div class="inputCard">
-				<h1>Abilities</h1>
+			<div class="entry">
+				<h1 style="font-size: 42px">Abilities</h1>
 				<input placeholder="Ability" v-model="working.name" />
 				<textarea v-model="working.description" placeholder="Description"></textarea>
 				<div class="row">
@@ -103,35 +138,65 @@
 						<i class="material-icons">clear</i>
 					</div>
 				</div>
-				<button @click="addItem()" v-if="editing == false">Add</button>
-				<button @click="saveEdit()" v-if="editing == true">Save</button>
+				<button class="full" @click="addItem()" v-if="editing == false">Add</button>
+				<button class="full" @click="saveEdit()" v-if="editing == true">Save</button>
 			</div>
-			<div class="item" v-for="item in items">
-				<div v-if="item.editing == true">
-					<div class="shared">
-						<h1>Being edited...</h1>
+			<div class="entry" v-if="items.length > 0">
+				<div class="listItem" v-for="item in withTag" v-bind:style="{border: isPinned(item)}">
+					<div v-if="item.editing == true">
+						<div class="shared">
+							<h1>Being edited...</h1>
+						</div>
 					</div>
-				</div>
-				<div v-if="item.editing != true">
-					<div class="shared" @click="toggleShown(item)">
-						<h1>{{ item.name }}</h1>
-					</div>
-					<div class="expanded" v-if="item.shown == true">
-						<p v-for="text in item.description">{{ text }}</p>
-						<div class="tags">
-							<div class="tag" v-for="tag in item.tags">
-								<p>{{ tag }}</p>
+					<div v-if="item.editing != true">
+						<div class="shared" @click="toggleShown(item)">
+							<h1>{{ item.name }}</h1>
+						</div>
+						<div class="expanded" v-if="item.shown == true">
+							<div class="markdown" v-html="toMarkdown(item.description)"></div>
+							<div class="tags">
+								<div class="tag" v-for="tag in item.tags">
+									<p>{{ tag }}</p>
+								</div>
+							</div>
+							<div class="btn icn">
+								<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
+								<button @click="editItem(item)"><span class="material-icons">edit</span></button>
+								<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-else class="material-icons">label</span></button>
 							</div>
 						</div>
-						<button @click="editItem(item)">Edit</button>
-						<button @click="deleteItem(item)" class="danger">Delete</button>
+					</div>
+				</div>
+				<div class="listItem" v-for="item in withoutTag" v-bind:style="{border: isPinned(item)}">
+					<div v-if="item.editing == true">
+						<div class="shared">
+							<h1>Being edited...</h1>
+						</div>
+					</div>
+					<div v-if="item.editing != true">
+						<div class="shared" @click="toggleShown(item)">
+							<h1>{{ item.name }}</h1>
+						</div>
+						<div class="expanded" v-if="item.shown == true">
+							<div class="markdown" v-html="toMarkdown(item.description)"></div>
+							<div class="tags">
+								<div class="tag" v-for="tag in item.tags">
+									<p>{{ tag }}</p>
+								</div>
+							</div>
+							<div class="btn icn">
+								<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
+								<button @click="editItem(item)"><span class="material-icons">edit</span></button>
+								<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-else class="material-icons">label</span></button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="section" id="spells" style="display: none;">
-			<div class="inputCard">
-				<h1>Spells</h1>
+			<div class="entry">
+				<h1 style="font-size: 42px">Spells</h1>
 				<input placeholder="Spell name" v-model="working.name" />
 				<input placeholder="Level" v-model="working.level" type="number" />
 				<textarea v-model="working.description" placeholder="Description"></textarea>
@@ -145,28 +210,58 @@
 						<i class="material-icons">clear</i>
 					</div>
 				</div>
-				<button @click="addItem()" v-if="editing == false">Add</button>
-				<button @click="saveEdit()" v-if="editing == true">Save</button>
+				<button class="full" @click="addItem()" v-if="editing == false">Add</button>
+				<button class="full" @click="saveEdit()" v-if="editing == true">Save</button>
 			</div>
-			<div class="item" v-for="item in items">
-				<div v-if="item.editing == true">
-					<div class="shared">
-						<h1>Being edited...</h1>
+			<div class="entry" v-if="items.length > 0">
+				<div class="listItem" v-for="item in withTag" v-bind:style="{border: isPinned(item)}">
+					<div v-if="item.editing == true">
+						<div class="shared">
+							<h1>Being edited...</h1>
+						</div>
 					</div>
-				</div>
-				<div v-if="item.editing != true">
-					<div class="shared" @click="toggleShown(item)">
-						<h1>{{ item.name }}</h1>
-					</div>
-					<div class="expanded" v-if="item.shown == true">
-						<p v-for="text in item.description">{{ text }}</p>
-						<div class="tags">
-							<div class="tag" v-for="tag in item.tags">
-								<p>{{ tag }}</p>
+					<div v-if="item.editing != true">
+						<div class="shared" @click="toggleShown(item)">
+							<h1>{{ item.name }}</h1>
+						</div>
+						<div class="expanded" v-if="item.shown == true">
+							<div class="markdown" v-html="toMarkdown(item.description)"></div>
+							<div class="tags">
+								<div class="tag" v-for="tag in item.tags">
+									<p>{{ tag }}</p>
+								</div>
+							</div>
+							<div class="btn icn">
+								<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
+								<button @click="editItem(item)"><span class="material-icons">edit</span></button>
+								<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-else class="material-icons">label</span></button>
 							</div>
 						</div>
-						<button @click="editItem(item)">Edit</button>
-						<button @click="deleteItem(item)" class="danger">Delete</button>
+					</div>
+				</div>
+				<div class="listItem" v-for="item in withoutTag" v-bind:style="{border: isPinned(item)}">
+					<div v-if="item.editing == true">
+						<div class="shared">
+							<h1>Being edited...</h1>
+						</div>
+					</div>
+					<div v-if="item.editing != true">
+						<div class="shared" @click="toggleShown(item)">
+							<h1>{{ item.name }}</h1>
+						</div>
+						<div class="expanded" v-if="item.shown == true">
+							<div class="markdown" v-html="toMarkdown(item.description)"></div>
+							<div class="tags">
+								<div class="tag" v-for="tag in item.tags">
+									<p>{{ tag }}</p>
+								</div>
+							</div>
+							<div class="btn icn">
+								<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
+								<button @click="editItem(item)"><span class="material-icons">edit</span></button>
+								<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-else class="material-icons">label</span></button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
