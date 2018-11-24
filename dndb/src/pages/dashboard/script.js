@@ -3,7 +3,7 @@ vueInstance = new Vue({
 	data: {
 		recent: [],
 		upcomming: [],
-		loaded: false
+		completedQueries: false
 	},
 	methods: {
 		openCharacter(character) {
@@ -27,6 +27,15 @@ vueInstance = new Vue({
 			return this.upcomming.sort(function(a, b) {
 				return a.countDownTime + b.countDownTime;
 			}).slice(0, 3);
+		},
+		loaded() {
+			if (this.completedQueries === true) {
+				if (this.recent.length === 0 && this.recent.length === 0) {
+					return true;
+				} else {
+					return false;
+				}
+			}
 		}
 	}
 });
@@ -102,9 +111,7 @@ async function refresh() {
 		addUpcomming(campaignQuery[i]);
 	}
 
-	if (characterQuery.length === 0 && campaignQuery.length === 0) {
-		vueInstance.loaded = true;
-	}
+	vueInstance.completedQueries = true;
 
 	setTimeout(startVueTimers, 500)
 }

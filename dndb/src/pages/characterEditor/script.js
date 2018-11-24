@@ -7,19 +7,114 @@ var file = null;
 
 sessionStorage.setItem("::saved", "false");
 
-var vueInventoryObj = {
-	el: "#inventory",
-	data: {
-		items: [],
-		editing: false,
-		editingItem: {},
-		working: {
-			name: "",
-			count: 1,
-			description: "",
-			tag: "",
-			tags: [],
-			shown: false
+Vue.component("editorlist", {
+	template: `
+	<div>
+		<div class="entry">
+			<h1 style="font-size: 42px">{{ displayname }}</h1>
+			<input v-bind:placeholder="itemname + ' name'" v-model="working.name" />
+			<input v-if="showcount === 'true'" v-bind:placeholder="countPlaceholder" v-model="working.count" type="number" />
+			<textarea v-model="working.description" placeholder="Description"></textarea>
+			<div class="row">
+				<input @keyup.enter="addTag()" v-model="working.tag" placeholder="Tag" />
+				<button @click="addTag()" style="padding: 0px; height: 41px;"><i class="material-icons">add</i></button>
+			</div>
+			<div class="tags">
+				<div class="tag" v-for="tag in working.tags" @click="deleteTag(tag)">
+					<p>{{ tag }}</p>
+					<i class="material-icons">clear</i>
+				</div>
+			</div>
+			<button class="full" @click="addItem()" v-if="editing == false">Add</button>
+			<button class="full" @click="saveEdit()" v-if="editing == true">Save</button>
+		</div>
+		<div class="entry" v-if="items.length > 0">
+			<div class="listItem" v-for="item in withTag" v-bind:style="{border: isPinned(item)}">
+				<div v-if="item.editing == true">
+					<div class="shared">
+						<h1>Being edited...</h1>
+					</div>
+				</div>
+				<div v-if="item.editing != true">
+					<div class="shared" @click="toggleShown(item)">
+						<h1>{{ item.name }}</h1>
+					</div>
+					<div class="expanded" v-if="item.shown == true">
+						<input v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />
+						<div class="markdown" v-html="toMarkdown(item.description)"></div>
+						<!-- {{{ toMarkdown(item.description) }}} -->
+						<div class="tags">
+							<div class="tag" v-for="tag in item.tags">
+								<p>{{ tag }}</p>
+							</div>
+						</div>
+						<div class="btn icn">
+							<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
+							<button @click="editItem(item)"><span class="material-icons">edit</span></button>
+							<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-if="item.pinned === false" class="material-icons">label</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="listItem" v-for="item in withoutTag" v-bind:style="{border: isPinned(item)}">
+				<div v-if="item.editing == true">
+					<div class="shared">
+						<h1>Being edited...</h1>
+					</div>
+				</div>
+				<div v-if="item.editing != true">
+					<div class="shared" @click="toggleShown(item)">
+						<h1>{{ item.name }}</h1>
+					</div>
+					<div class="expanded" v-if="item.shown == true">
+						<input v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />
+						<div class="markdown" v-html="toMarkdown(item.description)"></div>
+						<!-- {{{ toMarkdown(item.description) }}} -->
+						<div class="tags">
+							<div class="tag" v-for="tag in item.tags">
+								<p>{{ tag }}</p>
+							</div>
+						</div>
+						<div class="btn icn">
+							<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
+							<button @click="editItem(item)"><span class="material-icons">edit</span></button>
+							<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-if="item.pinned === false" class="material-icons">label</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>`,
+	props: ["internalname", "displayname", "itemname", "showcount", "todb"],
+	data() {
+		return {
+			items: [],
+			editing: false,
+			editingItem: {},
+			working: {
+				name: "",
+				count: 1,
+				description: "",
+				tag: "",
+				tags: [],
+				shown: false
+			}
+		}
+	},
+	watch: {
+		todb() {
+			if (this.todb.send < 3) {
+
+				let tempCharacterRef = userRef.collection("characters").doc(this.todb.toId);
+
+				for (var i = 0; i < this.items.length; ++i) {
+					let item = this["items"][i];
+					item.shown = false;
+					tempCharacterRef.collection(this.internalname).doc(item.__id).set(item).catch(e => {thr(e)}).then(e => {console.log("SAVHUFHAUHFUI")});
+				}
+
+				this.todb.send += 1;
+			}
 		}
 	},
 	computed: {
@@ -32,6 +127,15 @@ var vueInventoryObj = {
 			return this.items.filter(function(item) {
 				return !item.pinned;
 			});
+		},
+		countPlaceholder() {
+			if (this.internalname === "spells") {
+				return "Level"
+			} else if (this.internalname === "inventory") {
+				return "Amount"
+			} else {
+				return "COUNT"
+			}
 		}
 	},
 	methods: {
@@ -84,17 +188,18 @@ var vueInventoryObj = {
 			i.description = rtrn;
 			i.tags = Object.assign([], this.working.tags);
 			i.__id = genId();
-			a.ev("Item created (inventory)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+			i.pinned = false;
+			a.ev("Item created (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 			this.items.push(i);
 			this.resetWorking();
 		},
 		deleteItem(item) {
-			if (confirm("Are you sure you want to delete this item? This can't be undone!")) {
+			if (confirm("Are you sure you want to delete this " + this.itemname + "? This can't be undone!")) {
 				var i = this;
 
 				characterRef.collection("inventory").doc(item.__id).delete().then(function() {
 					i.items.splice(i.items.indexOf(item), 1);
-					a.ev("Item deleted (inventory)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+					a.ev("Item deleted (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 				}).catch(err => {
 					error(err);
 				});
@@ -143,331 +248,126 @@ var vueInventoryObj = {
 				}
 				rtrn.push(temp);
 			}
+
+			if (this.internalname === "spells") {
+				if (this.working.count === 0) {
+					this.working.tags.unshift("Cantrip");
+				} else {
+					this.working.tags.unshift("Level: " + this.working.level);
+				}
+			}
+
 			i.description = rtrn;
 			i.tags = Object.assign([], this.working.tags);
 			i.__id = this.editingItem.__id;
 			i.editing = false;
 			i.shown = false;
+
+			i.version = 2;
+
 			let index = this.items.indexOf(this.editingItem);
 			this.items.splice(index, 1);
 			this.items.splice(index, 0, i);
 			this.editing = false;
 			this.resetWorking();
-			a.ev("Item edited (inventory)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+			a.ev("Item edited (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+		}
+	},
+	created: async function() {
+		var internalName = this.internalname;
+		if (internalName === "spells") {
+			var query = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("name", "asc"));
+			console.log(query);
+			if (query.length > 0) {
+				for (var i = 0; i < query.length; ++i) {
+					var spell = query[i];
+					if (spell.version === "b") {
+						spell.version = 1;
+					}
+					console.log(spell);
+					if (spell.version === undefined || spell.version < 1) {
+						userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").doc(spell.__id).delete().catch(err => {
+							error(err);
+						});
+						var spellObj = {
+							name: spell.name,
+							description: [],
+							shown: false,
+							tags: []
+						}
+
+						var temp = spell.description.split("\n")
+						for (var p = 0; p < temp.length; ++p) {
+							var rtrn = temp[p];
+							if (rtrn === "") {
+								rtrn = " ";
+							}
+							spellObj.description.push(rtrn);
+						}
+
+						if (spell.level === 0) {spellObj.tags.push("Cantrip")} else {spellObj.tags.push("Level: " + spell.level)}
+						if (spell.verbal === true) {spellObj.tags.push("Verbal")}
+						if (spell.somatic === true) {spellObj.tags.push("Somatic")}
+						if (spell.material !== "") {spellObj.tags.push("Material component: " + spell.material)}
+						if (spell.castingTime !== "") {spellObj.tags.push("Casting time: " + spell.castingTime)}
+						if (spell.ritual === true) {spellObj.tags.push("Ritual")}
+						if (spell.concentration === true) {spellObj.tags.push("Concentration")}
+						if (spell.range !== "") {spellObj.tags.push("Range: " + spell.range)}
+						spellObj.__id = genId();
+						spellObj.version = "b";
+
+						a.ev("Spell updated", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+
+						this.items.push(spellObj);
+					} else {
+
+						if (spell.pinned === undefined) {
+							spell.pinned = false;
+						}
+						this.items.push(spell);
+					}
+				}
+			}
+		} else {
+			var query = await createQuery(characterRef.collection(internalName).orderBy("name", "asc"));
+			console.log(query);
+			if (query[0] !== undefined) {
+				for (var i = 0; i < query.length; i++) {
+					var item = query[i];
+					if (item.pinned === undefined) {
+						item.pinned = false;
+					}
+
+					this.items.push(item);
+				}
+			} else {
+				this.items = [];
+			}
 		}
 	}
-}
+});
 
-var vueAbilitiesObj = {
-	el: "#abilities",
+var vueLists = new Vue({
+	el: "#editorLists",
 	data: {
+		toDB: {
+			send: false,
+			toId: ""
+		},
 		items: [],
 		editing: false,
 		editingItem: {},
 		working: {
 			name: "",
+			count: 1,
 			description: "",
 			tag: "",
 			tags: [],
 			shown: false
 		}
-	},
-	computed: {
-		withTag() {
-			return this.items.filter(function(item) {
-				return item.pinned;
-			});
-		},
-		withoutTag() {
-			return this.items.filter(function(item) {
-				return !item.pinned;
-			});
-		}
-	},
-	methods: {
-		isPinned(item) {
-			if (item.pinned === false) {
-				return "";
-			} else {
-				return "#0080ff solid 2px";
-			}
-		},
-		pin(item) {
-			var index = this.items.indexOf(item);
-			if (this.items[index].pinned === undefined || this.items[index].pinned === false) {
-				this.items[index].pinned = true;
-			} else {
-				this.items[index].pinned = false;
-			}
-		},
-		toMarkdown(description) {
-			let p = [];
-			for (var i = 0; i < description.length; ++i) {
-				p.push(description[i]);
-			}
-			let o = marked(p.join("\n"), { sanitize: true });
-			console.log(o);
-			return o;
-		},
-		toggleShown(item) {
-			this.items[this.items.indexOf(item)].shown = !this.items[this.items.indexOf(item)].shown;
-		},
-		addTag() {
-			this.working.tags.push(this.working.tag);
-			this.working.tag = "";
-		},
-		deleteTag(tag) {
-			this.working.tags.splice(this.working.tags.indexOf(tag), 1);
-		},
-		addItem() {
-			var i = Object.assign({}, this.working);
-			var d = i.description.split("\n");
-			var rtrn = [];
-			for (var p = 0; p < d.length; ++p) {
-				var temp = d[p];
-				if (temp === "") {
-					temp = " ";
-				}
-				rtrn.push(temp);
-			}
-			i.description = rtrn;
-			i.tags = Object.assign([], this.working.tags);
-			i.__id = genId();
-			this.items.push(i);
-			this.resetWorking();
-
-			a.ev("Item created (abilities)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-		},
-		deleteItem(item) {
-			if (confirm("Are you sure you want to delete this ability?")) {
-				var i = this;
-				characterRef.collection("abilities").doc(item.__id).delete().then(function() {
-					i.items.splice(i.items.indexOf(item), 1);
-					a.ev("Item deleted (abilities)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-				}).catch(err => {
-					error(err);
-				});
-			}
-		},
-		resetWorking() {
-			this.working = {
-				name: "",
-				description: "",
-				level: 0,
-				tag: "",
-				tags: [],
-				shown: false
-			}
-		},
-		editItem(item) {
-			let index = this.items.indexOf(this.editingItem);
-			if (index !== -1) {
-				var d = this.editingItem.description.split("\n");
-				var rtrn = [];
-				for (var p = 0; p < d.length; ++p) {
-					var temp = d[p];
-					if (temp === "") {
-						temp = " ";
-					}
-					rtrn.push(temp);
-				}
-				this.items[index].description = rtrn;
-				this.items[index].editing = false;
-			}
-			this.editing = true;
-			this.editingItem = item;
-			this.items[this.items.indexOf(item)].editing = true;
-			item.description = item.description.join("\n");
-			this.working = item;
-		},
-		saveEdit() {
-			var i = Object.assign({}, this.working);
-			var d = i.description.split("\n");
-			var rtrn = [];
-			for (var p = 0; p < d.length; ++p) {
-				var temp = d[p];
-				if (temp === "") {
-					temp = " ";
-				}
-				rtrn.push(temp);
-			}
-			i.description = rtrn;
-			i.tags = Object.assign([], this.working.tags);
-			i.__id = this.editingItem.__id;
-			i.editing = false;
-			i.shown = false;
-			let index = this.items.indexOf(this.editingItem);
-			this.items.splice(index, 1);
-			this.items.splice(index, 0, i);
-			this.editing = false;
-			this.resetWorking();
-
-			a.ev("Item edited (abilities)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-		}
 	}
-}
+});
 
-var vueSpellsObj = {
-	el: "#spells",
-	data: {
-		items: [],
-		editing: false,
-		editingItem: {},
-		working: {
-			name: "",
-			description: "",
-			level: 0,
-			tag: "",
-			tags: [],
-			shown: false
-		}
-	},
-	computed: {
-		withTag() {
-			return this.items.filter(function(item) {
-				return item.pinned;
-			});
-		},
-		withoutTag() {
-			return this.items.filter(function(item) {
-				return !item.pinned;
-			});
-		}
-	},
-	methods: {
-		isPinned(item) {
-			if (item.pinned === false) {
-				return "";
-			} else {
-				return "#0080ff solid 2px";
-			}
-		},
-		pin(item) {
-			var index = this.items.indexOf(item);
-			if (this.items[index].pinned === undefined || this.items[index].pinned === false) {
-				this.items[index].pinned = true;
-			} else {
-				this.items[index].pinned = false;
-			}
-		},
-		toMarkdown(description) {
-			let p = [];
-			for (var i = 0; i < description.length; ++i) {
-				p.push(description[i]);
-			}
-			let o = marked(p.join("\n"), { sanitize: true });
-			console.log(o);
-			return o;
-		},
-		toggleShown(item) {
-			this.items[this.items.indexOf(item)].shown = !this.items[this.items.indexOf(item)].shown;
-		},
-		addTag() {
-			this.working.tags.push(this.working.tag);
-			this.working.tag = "";
-		},
-		deleteTag(tag) {
-			this.working.tags.splice(this.working.tags.indexOf(tag), 1);
-		},
-		addItem() {
-			if (this.working.level === 0) {
-				this.working.tags.unshift("Cantrip");
-			} else {
-				this.working.tags.unshift("Level: " + this.working.level);
-			}
-
-			var i = Object.assign({}, this.working);
-			i.tags = Object.assign([], this.working.tags);
-			var d = i.description.split("\n");
-			var rtrn = [];
-			for (var p = 0; p < d.length; ++p) {
-				var temp = d[p];
-				if (temp === "") {
-					temp = " ";
-				}
-				rtrn.push(temp);
-			}
-			i.description = rtrn;
-			i.tags = Object.assign([], this.working.tags);
-			i.__id = genId();
-			i.version = "b";
-			this.items.push(i);
-			this.resetWorking();
-
-			a.ev("Item created (spells)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-		},
-		deleteItem(item) {
-			if (confirm("Are you sure you want to delete this spell?")) {
-				var i = this;
-				characterRef.collection("spells").doc(item.__id).delete().then(function() {
-					i.items.splice(i.items.indexOf(item), 1);
-					a.ev("Item deleted (spells)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-				}).catch(err => {
-					error(err);
-				});
-			}
-		},
-		resetWorking() {
-			this.working = {
-				name: "",
-				description: "",
-				level: 0,
-				tag: "",
-				tags: [],
-				shown: false
-			}
-		},
-		editItem(item) {
-			let index = this.items.indexOf(this.editingItem);
-			if (index !== -1) {
-				var d = this.editingItem.description.split("\n");
-				var rtrn = [];
-				for (var p = 0; p < d.length; ++p) {
-					var temp = d[p];
-					if (temp === "") {
-						temp = " ";
-					}
-					rtrn.push(temp);
-				}
-				this.items[index].description = rtrn;
-				this.items[index].editing = false;
-			}
-			this.editing = true;
-			this.editingItem = item;
-			this.items[this.items.indexOf(item)].editing = true;
-			item.description = item.description.join("\n");
-			this.working = item;
-		},
-		saveEdit() {
-			var i = Object.assign({}, this.working);
-			var d = i.description.split("\n");
-			var rtrn = [];
-			for (var p = 0; p < d.length; ++p) {
-				var temp = d[p];
-				if (temp === "") {
-					temp = " ";
-				}
-				rtrn.push(temp);
-			}
-			i.description = rtrn;
-			i.tags = Object.assign([], this.working.tags);
-			i.__id = this.editingItem.__id;
-			i.editing = false;
-			i.shown = false;
-			let index = this.items.indexOf(this.editingItem);
-			this.items.splice(index, 1);
-			this.items.splice(index, 0, i);
-			this.editing = false;
-			this.resetWorking();
-
-			a.ev("Item edited (spells)", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-		}
-	}
-}
-
-var vueInventory = new Vue(vueInventoryObj);
-var vueAbilities = new Vue(vueAbilitiesObj);
-var vueSpells = new Vue(vueSpellsObj);
 
 var vuePermissions = new Vue({
 	el: "#permissions",
@@ -516,8 +416,9 @@ function openSection(id, index) {
 	$(".lists .nav .buttons .button:nth-of-type(" + i + ")").addClass("selected");
 	$(".page .section").hide();
 	$("#" + id).show();
+	var c = index * 24;
 	var i = 100 * index;
-	$(".parser").css("transform", "translateX(" + i + "%)");
+	$(".parser").css("transform", "translateX(calc(" + i + "% + " + c + "px))");
 }
 
 allowSave = false;
@@ -538,21 +439,18 @@ function saveCharacter(show) {
 		show = true;
 	}
 
-	;
-
 	se = false;
 
 	try {
 		s();
 		console.log('c');
-		if (sessionStorage.getItem("::saved") !== "false") {
-			;
-			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").update(characterObj).then(function() {
+		if (characterId !== "false") {
+			firestore.collection("users").doc(sUid + "/characters/" + characterId + "/data/characterObj").update(characterObj).then(function() {
 
 			}).then(function() {
 				if (file !== null) {
-					var task = userBucket.child(sessionStorage.getItem("::saved")).put(file);
-					userRef.collection("characters").doc(sessionStorage.getItem("::saved")).update({
+					var task = userBucket.child(characterId).put(file);
+					userRef.collection("characters").doc(characterId).update({
 						hasImg: true
 					});
 					task.on("state_changed",
@@ -569,35 +467,12 @@ function saveCharacter(show) {
 					);
 				}
 			}).then(function() {
-				if (vueInventory) {
-					let rtrn = [];
-					for (var i = 0; i < vueInventory.items.length; ++i) {
-						let item = vueInventory["items"][i];
-						item.shown = false;
-						characterRef.collection("inventory").doc(item.__id).set(item);
-					}
-				}
-
-				if (vueAbilities) {
-					let rtrn = [];
-					for (var i = 0; i < vueAbilities.items.length; ++i) {
-						let item = vueAbilities["items"][i];
-						item.shown = false;
-						characterRef.collection("abilities").doc(item.__id).set(item);
-					}
-				}
-
-				if (vueSpells) {
-					let rtrn = [];
-					for (var i = 0; i < vueSpells.items.length; ++i) {
-						let item = vueSpells["items"][i];
-						item.shown = false;
-						characterRef.collection("spells").doc(item.__id).set(item);
-					}
+				vueLists.toDB = {
+					send: 0,
+					toId: characterId
 				}
 			}).then(function() {
 				if (show) {
-
 					a.ev("Character saved", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 					showSnackbar("Character saved");
 				}
@@ -712,31 +587,9 @@ function dupe() {
 		var newCharacterRef = userRef.collection("characters").doc(newCharacterId);
 		newCharacterRef.set(newCharacterInfo).catch(e => {thr(e)});
 		newCharacterRef.collection("data").doc("characterObj").set(characterObj).catch(e => {thr(e)});
-		if (vueInventory) {
-			let rtrn = [];
-			for (var i = 0; i < vueInventory.items.length; ++i) {
-				let item = vueInventory["items"][i];
-				item.shown = false;
-				newCharacterRef.collection("inventory").doc(item.__id).set(item).catch(e => {thr(e)});
-			}
-		}
-
-		if (vueAbilities) {
-			let rtrn = [];
-			for (var i = 0; i < vueAbilities.items.length; ++i) {
-				let item = vueAbilities["items"][i];
-				item.shown = false;
-				newCharacterRef.collection("abilities").doc(item.__id).set(item).catch(e => {thr(e)});
-			}
-		}
-
-		if (vueSpells) {
-			let rtrn = [];
-			for (var i = 0; i < vueSpells.items.length; ++i) {
-				let item = vueSpells["items"][i];
-				item.shown = false;
-				newCharacterRef.collection("spells").doc(item.__id).set(item).catch(e => {thr(e)});
-			}
+		vueLists.toDB = {
+			send: 0,
+			toId: newCharacterId
 		}
 
 		// if (file !== null) {
@@ -883,21 +736,14 @@ async function loadSpells() {
 
 async function loadLists() {
 
-	await loadSpells();
-	await loadInventory();
-	await loadAbilities();
+	// await loadSpells();
+	// await loadInventory();
+	// await loadAbilities();
 
-	saveCharacter(false);
-}
-
-function calcMod(selector, modSelector) {
-	$(selector).focusout(function() {
-		var value = Number($(this).val());
-		var modValue = modifiers[value - 1];
-		console.log(selector, modSelector);
-		console.log(value, modValue);
-		$(modSelector).val(modValue);
-	});
+	vueLists.toDB = {
+		send: 0,
+		toId: characterId
+	}
 }
 
 function saveOptions() {
@@ -926,6 +772,137 @@ function loadPermissions() {
 }
 
 var loaded = false;
+
+
+function computeMods() {
+
+	var abilities = {
+		"strength": {
+			base: "#form83_1",
+			mod: "#form56_1",
+			saving: ["#form15_1", "#form42_1"],
+			skills: [
+				["#form2_1", "#form49_1"]
+			]
+		},
+		"dexterity": {
+			base: "#form84_1",
+			mod: "#form59_1",
+			saving: ["#form18_1", "#form54_1"],
+			skills: [
+				["#form19_1", "#form38_1"],
+				["#form4_1", "#form46_1"],
+				["#form23_1", "#form32_1"]
+			]
+		},
+		"constitution": {
+			base: "#form82_1",
+			mod: "#form58_1",
+			saving: ["#form22_1", "#form41_1"],
+			skills: []
+		},
+		"intelligence": {
+			base: "#form86_1",
+			mod: "#form57_1",
+			saving: ["#form6_1", "#form52_1"],
+			skills: [
+				["#form21_1", "#form40_1"],
+				["#form9_1", "#form48_1"],
+				["#form14_1", "#form31_1"],
+				["#form11_1", "#form37_1"],
+				["#form20_1", "#form33_1"]
+			]
+		},
+		"wisdom": {
+			base: "#form81_1",
+			mod: "#form60_1",
+			saving: ["#form10_1", "#form39_1"],
+			skills: [
+				["#form8_1", "#form50_1"],
+				["#form13_1", "#form35_1"],
+				["#form5_1", "#form53_1"],
+				["#form7_1", "#form43_1"],
+				["#form12_1", "#form47_1"]
+			]
+		},
+		"charisma": {
+			base: "#form85_1",
+			mod: "#form55_1",
+			saving: ["#form3_1", "#form51_1"],
+			skills: [
+				["#form17_1", "#form36_1"],
+				["#form24_1", "#form44_1"],
+				["#form16_1", "#form34_1"],
+				["#form1_1", "#form45_1"]
+			]
+		}
+	}
+
+	function calcMod(score) {
+		return Math.floor((score - 10) / 2);
+	}
+
+	function toTxt(mod) {
+		if (mod > 0) {
+			return "+" + mod;
+		} else {
+			return mod;
+		}
+	}
+
+	function populateMod(ab) {
+		var value = Number($(ab.base).val());
+		if (value !== NaN) {
+			var mod = calcMod(value);
+			$(ab.mod).val(toTxt(mod));
+			if ($("input" + ab.saving[0]).is(":checked")) {
+				$(ab.saving[1]).val(toTxt(mod + prof));
+			} else {
+				$(ab.saving[1]).val(toTxt(mod));
+			}
+
+			for (var i = 0; i < ab.skills.length; ++i) {
+				var	skill = ab.skills[i];
+
+				if ($("input" + skill[0]).is(":checked")) {
+					$(skill[1]).val(toTxt(mod + prof));
+				} else {
+					$(skill[1]).val(toTxt(mod));
+				}
+			}
+		}
+	}
+
+	function modToNumber(i) {
+		if (i.includes("-")) {
+			let p = i.replace("-", "");
+			return Number(p) * -1;
+		} else {
+			let p = i.replace("+", "");
+			return Number(p);
+		}
+	}
+
+	var prof = modToNumber($("#form61_1").val());
+
+
+	console.log(prof);
+
+	if (prof !== NaN) {
+
+		var entries = Object.entries(abilities);
+		for (var i = 0; i < entries.length; ++i) {
+			var entry = entries[i][1];
+			populateMod(entry);
+		}
+
+		$("#form63_1").val(10 + modToNumber($("#form43_1").val()));
+
+		$("#form88_1").val($("#form59_1").val());
+	}
+}
+
+
 
 function onload() {
 	if (!loaded) {

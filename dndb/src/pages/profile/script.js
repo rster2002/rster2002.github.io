@@ -6,6 +6,9 @@ var vueInstance = new Vue({
 		userId: userInformation.userId,
 		view: {
 			permissions: false
+		},
+		editing: {
+			username: ""
 		}
 	},
 	methods: {
@@ -20,6 +23,23 @@ var vueInstance = new Vue({
 			document.execCommand('copy');
 			document.body.removeChild(el);
 			skb("Id copied");
+		},
+		changeUsername() {
+			if (this.editing.username !== "") {
+				if (confirm("Are you sure you want to change your display name?")) {
+					userRef.update({
+						username: this.editing.username
+					}).then(e => {
+						firestore.collection("userId").doc(this.userId).update({
+							username: this.editing.username
+						}).then(e => {
+							skb("Username changed")
+						});
+					})
+				}
+			} else {
+				skb("You have to provide a name")
+			}
 		}
 	}
 });

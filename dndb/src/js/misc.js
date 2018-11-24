@@ -31,13 +31,8 @@ if (!DEV) {
 	gtag('config', 'UA-102147810-1', {
 		'page_title' : 'D&D Web app'
 	});
-}
 
-log = console.log;
-console.log = function(t) {
-	if (DEV) {
-		log(t)
-	}
+	console.log = function() {}
 }
 
 const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

@@ -11,9 +11,17 @@
 			<h2 class="ch noOverflow">{{ userId }}</h2>
 		</div>
 		<div class="entry">
-			<h2>Controlls</h2>
+			<h2>User id</h2>
 			<div class="btn">
 				<button @click="copyId()">Copy user ID</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h2>Display name</h2>
+			<input v-model="editing.username" placeholder="Display name">
+			<p>This only changes your public display name.</p>
+			<div class="btn">
+				<button @click="changeUsername()">Change</button>
 			</div>
 		</div>
 		<!-- <div class="entry">
