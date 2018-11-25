@@ -235,7 +235,7 @@ Vue.component("editorlist", {
 			if (confirm("Are you sure you want to delete this " + this.itemname + "? This can't be undone!")) {
 				var i = this;
 
-				characterRef.collection("inventory").doc(item.__id).delete().then(function() {
+				characterRef.collection(this.internalname).doc(item.__id).delete().then(function() {
 					i.items.splice(i.items.indexOf(item), 1);
 					a.ev("Item deleted (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 				}).catch(err => {
