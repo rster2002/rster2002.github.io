@@ -225,6 +225,8 @@ Vue.component("editorlist", {
 			i.__id = genId();
 			i.pinned = false;
 			i.color = "rgba(0, 0, 0, .1)";
+			i.version = 3;
+			i.count = this.working.count;
 			a.ev("Item created (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 			this.items.push(i);
 			this.resetWorking();
@@ -332,68 +334,24 @@ Vue.component("editorlist", {
 			if (query.length > 0) {
 				for (var i = 0; i < query.length; ++i) {
 					var spell = query[i];
-					if (spell.version === "b") {
-						spell.version = 1;
+					if (spell.version === "b" || spell.version === undefined) {
+						spell.version = 3;
 					}
 					console.log(spell);
-					if (spell.version === undefined || spell.version < 1) {
-						userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").doc(spell.__id).delete().catch(err => {
-							error(err);
-						});
-						var spellObj = {
-							name: spell.name,
-							description: [],
-							shown: false,
-							tags: []
-						}
 
-						var temp = spell.description.split("\n")
-						for (var p = 0; p < temp.length; ++p) {
-							var rtrn = temp[p];
-							if (rtrn === "") {
-								rtrn = " ";
-							}
-							spellObj.description.push(rtrn);
-						}
-
-						if (spell.level === 0) {spellObj.tags.push("Cantrip")} else {spellObj.tags.push("Level: " + spell.level)}
-						if (spell.verbal === true) {spellObj.tags.push("Verbal")}
-						if (spell.somatic === true) {spellObj.tags.push("Somatic")}
-						if (spell.material !== "") {spellObj.tags.push("Material component: " + spell.material)}
-						if (spell.castingTime !== "") {spellObj.tags.push("Casting time: " + spell.castingTime)}
-						if (spell.ritual === true) {spellObj.tags.push("Ritual")}
-						if (spell.concentration === true) {spellObj.tags.push("Concentration")}
-						if (spell.range !== "") {spellObj.tags.push("Range: " + spell.range)}
-						spellObj.__id = genId();
-						spellObj.version = "b";
-
-						a.ev("Spell updated", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-
-						if (spellObj.count === undefined) {
-							spellObj.count = spellObj.level;
-						}
-
-						if (spellObj.color === undefined) {
-							spellObj.color = "rgba(0, 0, 0, .1)"
-						}
-
-						this.items.push(spellObj);
-					} else {
-
-						if (spell.pinned === undefined) {
-							spell.pinned = false;
-						}
-
-						if (spell.count === undefined) {
-							spell.count = spell.level;
-						}
-
-						if (spell.color === undefined) {
-							spell.color = "rgba(0, 0, 0, .1)";
-						}
-
-						this.items.push(spell);
+					if (spell.pinned === undefined) {
+						spell.pinned = false;
 					}
+
+					if (spell.count === undefined) {
+						spell.count = spell.level;
+					}
+
+					if (spell.color === undefined) {
+						spell.color = "rgba(0, 0, 0, .1)";
+					}
+
+					this.items.push(spell);
 				}
 			}
 		} else {
