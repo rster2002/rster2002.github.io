@@ -28,8 +28,11 @@ Vue.component("editorlist", {
 			<button class="full" @click="addItem()" v-if="editing == false">Add</button>
 			<button class="full" @click="saveEdit()" v-if="editing == true">Save</button>
 		</div>
+		<div class="entry">
+			<input placeholder="Search" v-model="query">
+		</div>
 		<div class="entry" v-if="items.length > 0">
-			<div class="listItem" v-for="item in withTag" v-bind:style="{border: isPinned(item)}">
+			<div class="listItem" v-for="item in withTag" v-bind:style="{border: color(item)}">
 				<div v-if="item.editing == true">
 					<div class="shared">
 						<h1>Being edited...</h1>
@@ -52,11 +55,12 @@ Vue.component("editorlist", {
 							<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
 							<button @click="editItem(item)"><span class="material-icons">edit</span></button>
 							<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-if="item.pinned === false" class="material-icons">label</span></button>
+							<button @click="changeColor(item)"><span class="material-icons">color_lens</span></button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="listItem" v-for="item in withoutTag" v-bind:style="{border: isPinned(item)}">
+			<div class="listItem" v-for="item in withoutTag" v-bind:style="{border: color(item)}">
 				<div v-if="item.editing == true">
 					<div class="shared">
 						<h1>Being edited...</h1>
@@ -79,6 +83,7 @@ Vue.component("editorlist", {
 							<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
 							<button @click="editItem(item)"><span class="material-icons">edit</span></button>
 							<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-if="item.pinned === false" class="material-icons">label</span></button>
+							<button @click="changeColor(item)"><span class="material-icons">color_lens</span></button>
 						</div>
 					</div>
 				</div>
@@ -91,6 +96,8 @@ Vue.component("editorlist", {
 			items: [],
 			editing: false,
 			editingItem: {},
+			query: "",
+			colors: ["rgba(0, 0, 0, .1)", "#ff3030", "#30ff30", "#1cd0f6", "#008080", "#FFA500"],
 			working: {
 				name: "",
 				count: 1,
@@ -119,13 +126,37 @@ Vue.component("editorlist", {
 	},
 	computed: {
 		withTag() {
+			var query = this.query;
+			query = query.toLowerCase();
 			return this.items.filter(function(item) {
-				return item.pinned;
+				if (query !== "") {
+					if (item.pinned === true) {
+						console.log(query);
+						let n = item.name.toLowerCase();
+						if (n.includes(query)) {
+							return true;
+						}
+					}
+				} else {
+					return item.pinned;
+				}
 			});
 		},
 		withoutTag() {
+			var query = this.query;
+			query = query.toLowerCase();
 			return this.items.filter(function(item) {
-				return !item.pinned;
+				if (query !== "") {
+					if (item.pinned === false) {
+						console.log(query);
+						let n = item.name.toLowerCase();
+						if (n.includes(query)) {
+							return true;
+						}
+					}
+				} else {
+					return !item.pinned;
+				}
 			});
 		},
 		countPlaceholder() {
@@ -139,11 +170,15 @@ Vue.component("editorlist", {
 		}
 	},
 	methods: {
-		isPinned(item) {
-			if (item.pinned === false) {
-				return "";
-			} else {
+		color(item) {
+			console.log(item);
+
+			if (item.pinned === true) {
 				return "#0080ff solid 2px";
+			} else {
+				if (item.color !== undefined) {
+					return item.color + " solid 2px";
+				}
 			}
 		},
 		pin(item) {
@@ -189,6 +224,7 @@ Vue.component("editorlist", {
 			i.tags = Object.assign([], this.working.tags);
 			i.__id = genId();
 			i.pinned = false;
+			i.color = "rgba(0, 0, 0, .1)";
 			a.ev("Item created (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 			this.items.push(i);
 			this.resetWorking();
@@ -253,7 +289,7 @@ Vue.component("editorlist", {
 				if (this.working.count === 0) {
 					this.working.tags.unshift("Cantrip");
 				} else {
-					this.working.tags.unshift("Level: " + this.working.level);
+					this.working.tags.unshift("Level: " + this.working.count);
 				}
 			}
 
@@ -262,6 +298,7 @@ Vue.component("editorlist", {
 			i.__id = this.editingItem.__id;
 			i.editing = false;
 			i.shown = false;
+			i.color = this.editingItem.color;
 
 			i.version = 2;
 
@@ -271,10 +308,24 @@ Vue.component("editorlist", {
 			this.editing = false;
 			this.resetWorking();
 			a.ev("Item edited (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+		},
+		changeColor(item) {
+			var currentColorIndex = this.colors.indexOf(item.color);
+			var itemIndex = this.items.indexOf(item);
+			console.log(currentColorIndex);
+			currentColorIndex++;
+			if (currentColorIndex >= this.colors.length) {
+				currentColorIndex = 0;
+			}
+
+			console.log(currentColorIndex, this.colors[currentColorIndex]);
+
+			this.items[itemIndex].color = this.colors[currentColorIndex];
 		}
 	},
 	created: async function() {
 		var internalName = this.internalname;
+		var lastLevel = -1;
 		if (internalName === "spells") {
 			var query = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("name", "asc"));
 			console.log(query);
@@ -318,12 +369,29 @@ Vue.component("editorlist", {
 
 						a.ev("Spell updated", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 
+						if (spellObj.count === undefined) {
+							spellObj.count = spellObj.level;
+						}
+
+						if (spellObj.color === undefined) {
+							spellObj.color = "rgba(0, 0, 0, .1)"
+						}
+
 						this.items.push(spellObj);
 					} else {
 
 						if (spell.pinned === undefined) {
 							spell.pinned = false;
 						}
+
+						if (spell.count === undefined) {
+							spell.count = spell.level;
+						}
+
+						if (spell.color === undefined) {
+							spell.color = "rgba(0, 0, 0, .1)";
+						}
+
 						this.items.push(spell);
 					}
 				}
@@ -336,6 +404,10 @@ Vue.component("editorlist", {
 					var item = query[i];
 					if (item.pinned === undefined) {
 						item.pinned = false;
+					}
+
+					if (item.color === undefined) {
+						item.color = "rgba(0, 0, 0, .1)";
 					}
 
 					this.items.push(item);

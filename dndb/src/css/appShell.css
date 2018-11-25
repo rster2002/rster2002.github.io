@@ -321,7 +321,6 @@ div.wave.card {
 .innerPage {
 	width: 100%;
 	height: 100%;
-	margin-top: -12px;
 }
 
 .innerPage.scroll {
@@ -468,6 +467,7 @@ html div.wave.card > div.actions button {
 	padding: 4px 6px;
 	font-weight: 500;
 	transition: cubic-bezier(0.4, 0.0, 0.2, 1) border-color 250ms;
+	cursor: pointer;
 }
 
 .innerPage .lane .entry select:hover {
@@ -492,6 +492,7 @@ html div.wave.card > div.actions button {
 
 .innerPage .lane .entry button.border {
 	border-color: rgba(0, 0, 0, .1);
+	font-size: 24px;
 }
 
 /* .innerPage .lane .entry button:nth-of-type(1) {
