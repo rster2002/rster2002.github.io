@@ -40,7 +40,8 @@ Vue.component("editorlist", {
 				</div>
 				<div v-if="item.editing != true">
 					<div class="shared" @click="toggleShown(item)">
-						<h1>{{ item.name }}</h1>
+						<h1 v-if="item.name !== ''">{{ item.name }}</h1>
+						<h1 v-if="item.name === ''">Unnamed item</h1>
 					</div>
 					<div class="expanded" v-if="item.shown == true">
 						<input v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />
@@ -68,7 +69,8 @@ Vue.component("editorlist", {
 				</div>
 				<div v-if="item.editing != true">
 					<div class="shared" @click="toggleShown(item)">
-						<h1>{{ item.name }}</h1>
+						<h1 v-if="item.name !== ''">{{ item.name }}</h1>
+						<h1 v-if="item.name === ''">Unnamed item</h1>
 					</div>
 					<div class="expanded" v-if="item.shown == true">
 						<input v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />
