@@ -26,17 +26,23 @@ var vueInstance = new Vue({
 		},
 		changeUsername() {
 			if (this.editing.username !== "") {
-				if (confirm("Are you sure you want to change your display name?")) {
-					userRef.update({
-						username: this.editing.username
-					}).then(e => {
-						firestore.collection("userId").doc(this.userId).update({
-							username: this.editing.username
+				global.alert({
+					text: "Are you sure you want to change your username?",
+					btn1: "change",
+					btn2: "cancel",
+					btn1fn: function() {
+						userRef.update({
+							username: vueInstance.editing.username
 						}).then(e => {
-							skb("Username changed")
-						});
-					})
-				}
+							firestore.collection("userId").doc(vueInstance.userId).update({
+								username: vueInstance.editing.username
+							}).then(e => {
+								a.ev("Profile", "username changed", "user action", "");
+								skb("Username changed")
+							});
+						})
+					}
+				})
 			} else {
 				skb("You have to provide a name")
 			}

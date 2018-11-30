@@ -106,23 +106,46 @@ Vue.component("dmlist", {
 			var current = this.entries[index];
 			var open = current.open;
 			var id = current.__id;
+			global.i = {
+				t: this,
+				index: this.entries.indexOf(entry),
+				current: this.entries[index],
+				open: current.open,
+				id: current.__id,
+				entry: entry
+			}
 			if (open === false) {
-				if (confirm("You are about to reveal this information to the players so they can see it. Private notes will not be revealed. Are you sure?")) {
-					this.entries[index].open = true;
-					var push = Object.assign({}, entry);
-					push.dmDescription = "";
-					push.computedDmDescription = "";
-					push.show = false;
-					dmRef.doc(this.section).collection("players").doc(id).set(push).then(() => {
-						skb("Entry revealed to players");
-					}).catch(e => thr(e));
+				global.alert({
+					text: "Are you sure you want to reveal this entry to your players?",
+					btn1: "reveal",
+					btn2: "cancel",
+					btn1fn: function() {
 
-					dmRef.doc(this.section).collection("dm").doc(id).update({open: true}).then(() => {}).catch(e => thr(e));
-				}
+						var t = global.i.t;
+						var index = global.i.index;
+						var current = global.i.current;
+						var open = global.i.open;
+						var id = global.i.id;
+						var entry = global.i.entry;
+
+						t.entries[index].open = true;
+						var push = Object.assign({}, entry);
+						push.dmDescription = "";
+						push.computedDmDescription = "";
+						push.show = false;
+						dmRef.doc(t.section).collection("players").doc(id).set(push).then(() => {
+							skb("Entry revealed to players");
+							a.ev("DM Dashboard", "DM Dashboard", "Entry revealed to players", "user action", "");
+						}).catch(e => thr(e));
+
+						dmRef.doc(t.section).collection("dm").doc(id).update({open: true}).then(() => {}).catch(e => thr(e));
+					}
+				});
 			} else {
 				this.entries[index].open = false;
 				dmRef.doc(this.section).collection("players").doc(id).delete().then(() => {
 					skb("Entry hidden from players");
+					a.ev("DM Dashboard", "Entry hidden from players", "user action", "");
 				}).catch(e => thr(e));
 
 				dmRef.doc(this.section).collection("dm").doc(id).update({open: false}).then(() => {}).catch(e => thr(e));
@@ -131,20 +154,39 @@ Vue.component("dmlist", {
 		deleteEntry(entry) {
 			var index = this.entries.indexOf(entry);
 			var id = entry.__id;
-			if (confirm("Are you sure you want to delete this entry?")) {
-				dmRef.doc(this.section).collection("dm").doc(id).delete().then(() => {
-					skb("Entry deleted");
-				}).catch(e => thr(e));
-
-				if (entry.open === true) {
-					dmRef.doc(this.section).collection("players").doc(id).delete().catch(e => thr(e));
-				}
-
-				var indexAll = vueInstance.allEntries.indexOf(entry);
-				vueInstance.allEntries.splice(indexAll, 1);
-
-				this.entries.splice(index, 1);
+			global.i = {
+				id: entry.__id,
+				index: this.entries.indexOf(entry),
+				entry: entry,
+				t: this
 			}
+
+			global.alert({
+				text: "Are you sure you want to delete this entry?",
+				btn1: "delete",
+				btn2: "cancel",
+				btn1fn: function() {
+
+					var t = global.i.t;
+					var id = global.i.id
+					var index = global.i.index;
+					var entry = global.i.entry;
+
+
+					dmRef.doc(t.section).collection("dm").doc(id).delete().then(() => {
+						skb("Entry deleted");
+					}).catch(e => thr(e));
+
+					if (entry.open === true) {
+						dmRef.doc(t.section).collection("players").doc(id).delete().catch(e => thr(e));
+					}
+
+					var indexAll = vueInstance.allEntries.indexOf(entry);
+					vueInstance.allEntries.splice(indexAll, 1);
+
+					t.entries.splice(index, 1);
+				}
+			})
 		},
 		startEdit(entry) {
 			var index = this.entries.indexOf(entry);

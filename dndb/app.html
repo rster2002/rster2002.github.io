@@ -24,6 +24,7 @@
 		<script src="./src/js/dndinfo.js"></script>
 		<script src="./src/js/firebase.js"></script>
 		<script src="./src/js/userInfo.js"></script>
+		<script src="./src/js/init.js" defer></script>
 
 		<!-- Link styles -->
 		<link href="./src/fonts/material-icons.css" rel="stylesheet">
@@ -32,97 +33,109 @@
 		<link href="./src/css/appShell.m.css" media="screen and (max-device-width: 800px)" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<div class="snackbar">
-			<p>Character saved</p>
-		</div>
-		<div class="overlay terminal z4" id="vueTerminal">
-			<h3 v-for="(value, key) in display"><span class="key">{{ key }}: </span>{{ value }}</h3>
-		</div>
-		<div class="sidebar shadow-5">
-			<div class="userWrapper">
-				<div class="profilePictureGutter">
-					<img class="userIcon userimg" alt="Profile picture" />
+		<div id="globalVue">
+			<div class="snackbar">
+				<p>Character saved</p>
+			</div>
+			<!-- <div class="overlay terminal z4" id="vueTerminal">
+				<h3 v-for="(value, key) in display"><span class="key">{{ key }}: </span>{{ value }}</h3>
+			</div> -->
+			<div class="sidebar shadow-5">
+				<div class="userWrapper">
+					<div class="profilePictureGutter">
+						<img class="userIcon userimg" alt="Profile picture" />
+					</div>
+					<div class="profileUsername">
+						<h1 class="username noMargin"></h1>
+						<p class="userEmail noMargin"></p>
+					</div>
 				</div>
-				<div class="profileUsername">
-					<h1 class="username noMargin"></h1>
-					<p class="userEmail noMargin"></p>
+				<div class="menu">
+					<div class="divider"></div>
+					<div class="menubutton page-dashboard" onclick="openPage('dashboard')">
+						<p class="centerVertical"><i class="material-icons">dashboard</i>Dashboard</p>
+					</div>
+					<div class="menubutton page-characterList" onclick="openPage('characterList')">
+						<p class="centerVertical"><i class="material-icons">edit</i>Character Editor</p>
+					</div>
+					<div class="menubutton page-campaignMenu" onclick="openPage('campaignMenu')">
+						<p class="centerVertical"><i class="material-icons">bookmark</i>Campaigns</p>
+					</div>
+					<div class="menubutton page-dm" onclick="openPage('dm')">
+						<p class="centerVertical"><i class="material-icons">map</i>DM Tools</p>
+					</div>
+					<div class="divider"></div>
+					<div class="menubutton" onclick="openPage('profile')">
+						<p class="centerVertical"><i class="material-icons">face</i>Profile</p>
+					</div>
+					<div class="menubutton" onclick="window.open('https://github.com/rster2002/rster2002.github.io/issues')">
+						<p class="centerVertical"><i class="material-icons">feedback</i>Send Feedback</p>
+					</div>
+					<div class="menubutton page-news" onclick="openPage('news')">
+						<p class="centerVertical"><i class="material-icons">assignment</i>News</p>
+					</div>
+					<div class="menubutton" onclick="logout()">
+						<p class="centerVertical"><i class="material-icons">arrow_back</i>Logout</p>
+					</div>
 				</div>
 			</div>
-			<div class="menu">
-				<div class="divider"></div>
-				<div class="menubutton page-dashboard" onclick="openPage('dashboard')">
-					<p class="centerVertical"><i class="material-icons">dashboard</i>Dashboard</p>
-				</div>
-				<div class="menubutton page-characterList" onclick="openPage('characterList')">
-					<p class="centerVertical"><i class="material-icons">edit</i>Character Editor</p>
-				</div>
-				<div class="menubutton page-campaignMenu" onclick="openPage('campaignMenu')">
-					<p class="centerVertical"><i class="material-icons">bookmark</i>Campaigns</p>
-				</div>
-				<div class="menubutton page-dm" onclick="openPage('dm')">
-					<p class="centerVertical"><i class="material-icons">map</i>DM Tools</p>
-				</div>
-				<div class="divider"></div>
-				<div class="menubutton" onclick="openPage('profile')">
-					<p class="centerVertical"><i class="material-icons">face</i>Profile</p>
-				</div>
-				<div class="menubutton" onclick="window.open('https://github.com/rster2002/rster2002.github.io/issues')">
-					<p class="centerVertical"><i class="material-icons">feedback</i>Send Feedback</p>
-				</div>
-				<div class="menubutton page-news" onclick="openPage('news')">
-					<p class="centerVertical"><i class="material-icons">assignment</i>News</p>
-				</div>
-				<div class="menubutton" onclick="logout()">
-					<p class="centerVertical"><i class="material-icons">arrow_back</i>Logout</p>
+			<div class="sidebarBackground">
+				<div class="sidebarExit" onclick="sidebar.close()"></div>
+			</div>
+			<div class="loader">
+				<div class="animation"></div>
+			</div>
+			<div class="wave bar top shadow">
+				<button onclick="sidebar.open();">menu</button>
+				<h1 id="pageName">Dashboard</h1>
+				<img class="userimg right" alt="Profile picture" />
+			</div>
+			<div class='wave pusher top'></div>
+			<div class="wave page">
+				<div class="innerResources"></div>
+				<div class="innerPage"></div>
+			</div>
+			<div class="error">
+				<div class="center inner">
+					<h1>Whoops... <span style="color: red;">Critical error</span></h1>
+					<p>Something went wrong! If you had this issue a couple of times now, please open an issue on <span style="color:rgb(0,128,255);cursor: pointer;" onclick="window.open('https://github.com/rster2002/rster2002.github.io/issues')">github</span> so I can fix this, or you can try one of these things:</p>
+					<p>- Check your internet connection</p>
+					<p>- Try your action in another browser</p>
+					<button class="wave prime" onclick="$('.error').hide();">Close</button>
+					<p style="font-size: 1em; color: #585858;" id="errorText">ERROR</p>
 				</div>
 			</div>
-		</div>
-		<div class="sidebarBackground">
-			<div class="sidebarExit" onclick="sidebar.close()"></div>
-		</div>
-		<div class="loader">
-			<div class="animation"></div>
-		</div>
-		<div class="wave bar top shadow">
-			<button onclick="sidebar.open();">menu</button>
-			<h1 id="pageName">Dashboard</h1>
-			<img class="userimg right" alt="Profile picture" />
-		</div>
-		<div class='wave pusher top'></div>
-		<div class="wave page">
-			<div class="innerResources"></div>
-			<div class="innerPage"></div>
-		</div>
-		<div class="error">
-			<div class="center inner">
-				<h1>Whoops... <span style="color: red;">Critical error</span></h1>
-				<p>Something went wrong! If you had this issue a couple of times now, please open an issue on <span style="color:rgb(0,128,255);cursor: pointer;" onclick="window.open('https://github.com/rster2002/rster2002.github.io/issues')">github</span> so I can fix this, or you can try one of these things:</p>
-				<p>- Check your internet connection</p>
-				<p>- Try your action in another browser</p>
-				<button class="wave prime" onclick="$('.error').hide();">Close</button>
-				<p style="font-size: 1em; color: #585858;" id="errorText">ERROR</p>
-			</div>
-		</div>
-		<!-- <div class="scim"></div>
-		<div class="sheet">
-			<div class="inner">
-				<div class="innerPage">
-					<div class="lane fullWidth">
-						<div class="entry">
-							<h1>Atmospheric</h1>
-							<div class="slideshow">
-								<div class="slide" style="background-image: url(https://cdn.images.express.co.uk/img/dynamic/151/590x/NASA-Rain-817055.jpg)">
-									<h1 style="color: white;">Rain</h1>
-								</div>
-								<div class="slide" style="background-image: url(https://metofficenews.files.wordpress.com/2012/10/thunder-and-lightning.jpg)">
-									<h1 style="color: white;">Thunder</h1>
+			<!-- <div class="scim"></div>
+			<div class="sheet">
+				<div class="inner">
+					<div class="innerPage">
+						<div class="lane fullWidth">
+							<div class="entry">
+								<h1>Atmospheric</h1>
+								<div class="slideshow">
+									<div class="slide" style="background-image: url(https://cdn.images.express.co.uk/img/dynamic/151/590x/NASA-Rain-817055.jpg)">
+										<h1 style="color: white;">Rain</h1>
+									</div>
+									<div class="slide" style="background-image: url(https://metofficenews.files.wordpress.com/2012/10/thunder-and-lightning.jpg)">
+										<h1 style="color: white;">Thunder</h1>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div> -->
+			<div @click="cls()" class="dialog" v-if="type !== ''">
+				<transition name="dialogani">
+					<div v-on:click.stop class="box" v-if="type === 'simple'">
+						<p>{{ text }}</p>
+						<div class="btn">
+							<button @click="clkbtn1fn()">{{ btn1 }}</button>
+							<button @click="clkbtn2fn()" v-if="btn2 !== ''">{{ btn2 }}</button>
+						</div>
+					</div>
+				</transition>
 			</div>
-		</div> -->
-		<script src="./src/js/init.js"></script>
+		</div>
 	</body>
 </html>

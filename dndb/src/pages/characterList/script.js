@@ -66,7 +66,7 @@ function loadCharacter(index) {
 		lastEdited: Date.now()
 	}).then(function() {
 		sessionStorage.setItem("::openCharacter", characterName);
-		
+
 		openPage("characterEditor");
 	});
 }
@@ -84,9 +84,9 @@ function add() {
 	}).catch(function(e){error(e)});
 
 	userRef.collection("characters").doc(characterId + "/data/characterObj").set(emptyCharacterObj).then(function() {
-		
+
 		sessionStorage.setItem("::openCharacter", characterId);
-		a.ev("Character created", "user action", `characterId: ${characterId}`);
+		a.ev("Character List", "Character created", "user action", `characterId: ${characterId}`);
 		openPage("characterEditor");
 	}).catch(function(e){error(e)});
 }
@@ -105,7 +105,7 @@ async function loadList() {
 	if (characterArray.length === 0) {
 		vueInstance.loaded = true;
 	}
-	
+
 }
 
 function characterCardFade(here, delay) {

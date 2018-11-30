@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.19"
+	version: "vB1.20"
 }
 
 var url = document.URL;
@@ -195,10 +195,10 @@ function getSelected(selector) {
 }
 
 a = {
-	ev(action, label, value) {
+	ev(category, action, label, value) {
 		if (!DEV) {
 			gtag('event', action, {
-				'event_category': `dnd-${global.version}`,
+				'event_category': category,
 				'event_label': label,
 				'value': value
 			});

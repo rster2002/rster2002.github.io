@@ -167,7 +167,7 @@ async function host(campaignName) {
 				}).then(function() {
 					sessionStorage.setItem("::party", campaignId);
 					sessionStorage.setItem("::cache", campaignId);
-					a.ev("host campaign", "user action", `By: ${uid}, Campaign Id: ${campaignId}`);
+					a.ev("Campaign Menu", "host campaign", "user action", `By: ${uid}, Campaign Id: ${campaignId}`);
 					openPage("campaign");
 				});
 			});
@@ -211,7 +211,7 @@ async function join(campaignName) {
 				var userQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("users").where("id", "==", sUid));
 				if (userQuery[0] !== undefined) {
 					sessionStorage.setItem("::firstTimeJoin", false);
-					a.ev("join campaign", "user action", `Uid: ${uid}, CampaignId: ${campaignId}`);
+					a.ev("Campaign Menu", "join campaign", "user action", `Uid: ${uid}, CampaignId: ${campaignId}`);
 					userRef.collection("campaigns").doc(campaignId).update({lastOpened: Date.now()}).catch(e => thr(e));
 					openPage("campaign");
 				} else {
@@ -272,33 +272,38 @@ function afterSelect(index) {
 	var campaignId = sessionStorage.getItem("::campaignId");
 	var campaignName = sessionStorage.getItem("::campaignName");
 
-	if (confirm("Are you sure you want to use this character")) {
-		userRef.collection("campaigns").doc(campaignId).set({
-			name: campaignName,
-			id: campaignId,
-			added: Date.now(),
-			lastOpened: Date.now()
-		}).then(function() {
-			userRef.collection("characters").doc(character).collection("usedInCampaigns").doc(campaignId).set({
-				campaignId: campaignId,
-				campaignName: campaignName
-			});
-		}).then(function() {
-			firestore.collection("campaigns").doc(campaignId).collection("users").doc(userInformation.uid).set({
-				id: sUid,
-				banned: false,
-				character: character,
-				type: "player"
+	global.alert({
+		text: "Are you sure you want to use this character?",
+		btn1: "use",
+		btn2: "cancel",
+		btn1fn: function() {
+			userRef.collection("campaigns").doc(campaignId).set({
+				name: campaignName,
+				id: campaignId,
+				added: Date.now(),
+				lastOpened: Date.now()
 			}).then(function() {
-				sessionStorage.setItem("::party", campaignId);
-				sessionStorage.setItem("::firstTimeJoin", true);
-				a.ev("join campaign (first)", "user action", `Uid: ${uid}, campaignId: ${campaignId}`);
-				openPage("campaign");
-			}).catch(err => {
-				error(err);
+				userRef.collection("characters").doc(character).collection("usedInCampaigns").doc(campaignId).set({
+					campaignId: campaignId,
+					campaignName: campaignName
+				});
+			}).then(function() {
+				firestore.collection("campaigns").doc(campaignId).collection("users").doc(userInformation.uid).set({
+					id: sUid,
+					banned: false,
+					character: character,
+					type: "player"
+				}).then(function() {
+					sessionStorage.setItem("::party", campaignId);
+					sessionStorage.setItem("::firstTimeJoin", true);
+					a.ev("Campaign Menu", "join campaign (first)", "user action", `Uid: ${uid}, campaignId: ${campaignId}`);
+					openPage("campaign");
+				}).catch(err => {
+					error(err);
+				});
 			});
-		});
-	}
+		}
+	})
 }
 
 function joinDialog() {

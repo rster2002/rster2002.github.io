@@ -229,21 +229,33 @@ Vue.component("editorlist", {
 			i.color = "rgba(0, 0, 0, .1)";
 			i.version = 3;
 			i.count = this.working.count;
-			a.ev("Item created (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+			a.ev("Character Editor", "Item created (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 			this.items.push(i);
 			this.resetWorking();
 		},
 		deleteItem(item) {
-			if (confirm("Are you sure you want to delete this " + this.itemname + "? This can't be undone!")) {
-				var i = this;
+			global.i = {
+				a: this,
+				b: item
+			};
+			global.alert({
+				text: "Are you sure you want to delete this " + this.itemname + "? This can't be undone!",
+				btn1: "delete",
+				btn2: "cancel",
+				btn1fn: function() {
+					var i = global.i.a;
+					var item = global.i.b;
 
-				characterRef.collection(this.internalname).doc(item.__id).delete().then(function() {
-					i.items.splice(i.items.indexOf(item), 1);
-					a.ev("Item deleted (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-				}).catch(err => {
-					error(err);
-				});
-			}
+					characterRef.collection(i.internalname).doc(item.__id).delete().then(function() {
+						i.items.splice(i.items.indexOf(item), 1);
+						a.ev("Character Editor", "Item deleted (" + i.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+
+						global.i = {};
+					}).catch(err => {
+						error(err);
+					});
+				}
+			})
 		},
 		resetWorking() {
 			this.working = {
@@ -311,7 +323,7 @@ Vue.component("editorlist", {
 			this.items.splice(index, 0, i);
 			this.editing = false;
 			this.resetWorking();
-			a.ev("Item edited (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+			a.ev("Character Editor", "Item edited (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 		},
 		changeColor(item) {
 			var currentColorIndex = this.colors.indexOf(item.color);
@@ -437,7 +449,7 @@ var vuePermissions = new Vue({
 
 function ctrlS() {
 	if (sessionStorage.getItem("::openPage") === "characterEditor") {
-		a.ev("ctrl+s", "user interaction", `Uid: ${uid}, characterId: ${characterId}`);
+		a.ev("Character Editor", "ctrl+s", "user interaction", `Uid: ${uid}, characterId: ${characterId}`);
 		saveCharacter(true);
 	}
 }
@@ -505,7 +517,7 @@ function saveCharacter(show) {
 				}
 			}).then(function() {
 				if (show) {
-					a.ev("Character saved", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+					a.ev("Character Editor", "Character saved", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 					showSnackbar("Character saved");
 				}
 			}).catch(function(e) {
@@ -529,7 +541,7 @@ function loadCharacter(i) {
 				if (doc && doc.exists) {
 					var data = doc.data();
 					l(data);
-					a.ev("Character loaded", "passive", `Uid: ${uid}, characterId: ${characterId}`);
+					a.ev("Character Editor", "Character loaded", "passive", `Uid: ${uid}, characterId: ${characterId}`);
 					allowSave = true;
 					// window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
 
@@ -573,30 +585,35 @@ async function deleteCharacter() {
 	if (usedInCampaigns[0] === undefined) {
 
 
-		if (confirm("Are you sure you want to delete this character? This character will be lost forever.")) {
-			characterRef.collection("data").doc("characterObj").delete().catch(e => {thr(e)});
-			var inventoryQuery = createQuery(characterRef.collection("inventory"));
-			for (var i = 0; i < inventoryQuery.length; ++i) {
-				var id = inventoryQuery[i]["__id"];
-				characterRef.collection("inventory").doc(id).delete().catch(e => {thr(e)});
-			}
+		global.alert({
+			text: "Are you sure you want to delete this character? This can't be undone.",
+			btn1: "delete",
+			btn2: "cancel",
+			btn1fn: function() {
+				characterRef.collection("data").doc("characterObj").delete().catch(e => {thr(e)});
+				var inventoryQuery = createQuery(characterRef.collection("inventory"));
+				for (var i = 0; i < inventoryQuery.length; ++i) {
+					var id = inventoryQuery[i]["__id"];
+					characterRef.collection("inventory").doc(id).delete().catch(e => {thr(e)});
+				}
 
-			var abilitiesQuery = createQuery(characterRef.collection("abilities"));
-			for (var i = 0; i < abilitiesQuery.length; ++i) {
-				var id = abilitiesQuery[i]["__id"];
-				characterRef.collection("abilities").doc(id).delete().catch(e => {thr(e)});
-			}
+				var abilitiesQuery = createQuery(characterRef.collection("abilities"));
+				for (var i = 0; i < abilitiesQuery.length; ++i) {
+					var id = abilitiesQuery[i]["__id"];
+					characterRef.collection("abilities").doc(id).delete().catch(e => {thr(e)});
+				}
 
-			var spellsQuery = createQuery(characterRef.collection("spells"));
-			for (var i = 0; i < spellsQuery.length; ++i) {
-				var id = spellsQuery[i]["__id"];
-				characterRef.collection("spells").doc(id).delete().catch(e => {thr(e)});
-			}
+				var spellsQuery = createQuery(characterRef.collection("spells"));
+				for (var i = 0; i < spellsQuery.length; ++i) {
+					var id = spellsQuery[i]["__id"];
+					characterRef.collection("spells").doc(id).delete().catch(e => {thr(e)});
+				}
 
-			characterRef.delete().catch(e => {thr(e)});
-			a.ev("Character deleted", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-			openPage("characterList");
-		}
+				characterRef.delete().catch(e => {thr(e)});
+				a.ev("Character Editor", "Character deleted", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+				openPage("characterList");
+			}
+		})
 	} else {
 		alert("This character is in use in a campaign");
 
@@ -604,34 +621,39 @@ async function deleteCharacter() {
 }
 
 function dupe() {
-	if (confirm("Are you sure you want to dupe this character?")) {
-		var dupeName = prompt("You can name this dupe, but is not mandatory.");
-		var newCharacterId = "character_" + genId();
-		if (dupeName === null || dupeName === "") {
-			dupeName = shortId();
+	global.alert({
+		text: "Are you sure you want to duplicate this character?",
+		btn1: "duplicate",
+		btn2: "cancel",
+		btn1fn: function() {
+			var dupeName = prompt("You can name this dupe, but is not mandatory.");
+			var newCharacterId = "character_" + genId();
+			if (dupeName === null || dupeName === "") {
+				dupeName = shortId();
+			}
+			s();
+			var newCharacterInfo = characterInfo;
+			newCharacterInfo.dupe = dupeName;
+			newCharacterInfo.id = newCharacterId;
+			newCharacterInfo.hasImg = false;
+			console.log(newCharacterInfo);
+			var newCharacterRef = userRef.collection("characters").doc(newCharacterId);
+			newCharacterRef.set(newCharacterInfo).catch(e => {thr(e)});
+			newCharacterRef.collection("data").doc("characterObj").set(characterObj).catch(e => {thr(e)});
+			vueLists.toDB = {
+				send: 0,
+				toId: newCharacterId
+			}
+
+			// if (file !== null) {
+			// 	userBucket.child(newCharacterId).put(file);
+			// }
+
+			a.ev("Character Editor", "Character duplicated", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+
+			showSnackbar("Character duplicated");
 		}
-		s();
-		var newCharacterInfo = characterInfo;
-		newCharacterInfo.dupe = dupeName;
-		newCharacterInfo.id = newCharacterId;
-		newCharacterInfo.hasImg = false;
-		console.log(newCharacterInfo);
-		var newCharacterRef = userRef.collection("characters").doc(newCharacterId);
-		newCharacterRef.set(newCharacterInfo).catch(e => {thr(e)});
-		newCharacterRef.collection("data").doc("characterObj").set(characterObj).catch(e => {thr(e)});
-		vueLists.toDB = {
-			send: 0,
-			toId: newCharacterId
-		}
-
-		// if (file !== null) {
-		// 	userBucket.child(newCharacterId).put(file);
-		// }
-
-		a.ev("Character duplicated", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-
-		showSnackbar("Character duplicated");
-	}
+	})
 }
 
 addSpellIndex = 5000;
@@ -752,7 +774,7 @@ async function loadSpells() {
 				spellObj.__id = genId();
 				spellObj.version = "b";
 
-				a.ev("Spell updated", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+				a.ev("Character Editor", "Spell updated", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 
 				vueSpells.items.push(spellObj);
 			} else {
@@ -808,151 +830,162 @@ var loaded = false;
 
 function computeMods() {
 
-	if (confirm("Are you sure?")) {
-
-		var abilities = {
-			"strength": {
-				base: "#form83_1",
-				mod: "#form56_1",
-				saving: ["#form15_1", "#form42_1"],
-				skills: [
-					["#form2_1", "#form49_1"]
-				]
-			},
-			"dexterity": {
-				base: "#form84_1",
-				mod: "#form59_1",
-				saving: ["#form18_1", "#form54_1"],
-				skills: [
-					["#form19_1", "#form38_1"],
-					["#form4_1", "#form46_1"],
-					["#form23_1", "#form32_1"]
-				]
-			},
-			"constitution": {
-				base: "#form82_1",
-				mod: "#form58_1",
-				saving: ["#form22_1", "#form41_1"],
-				skills: []
-			},
-			"intelligence": {
-				base: "#form86_1",
-				mod: "#form57_1",
-				saving: ["#form6_1", "#form52_1"],
-				skills: [
-					["#form21_1", "#form40_1"],
-					["#form9_1", "#form48_1"],
-					["#form14_1", "#form31_1"],
-					["#form11_1", "#form37_1"],
-					["#form20_1", "#form33_1"]
-				]
-			},
-			"wisdom": {
-				base: "#form81_1",
-				mod: "#form60_1",
-				saving: ["#form10_1", "#form39_1"],
-				skills: [
-					["#form8_1", "#form50_1"],
-					["#form13_1", "#form35_1"],
-					["#form5_1", "#form53_1"],
-					["#form7_1", "#form43_1"],
-					["#form12_1", "#form47_1"]
-				]
-			},
-			"charisma": {
-				base: "#form85_1",
-				mod: "#form55_1",
-				saving: ["#form3_1", "#form51_1"],
-				skills: [
-					["#form17_1", "#form36_1"],
-					["#form24_1", "#form44_1"],
-					["#form16_1", "#form34_1"],
-					["#form1_1", "#form45_1"]
-				]
-			}
-		}
-
-		function calcMod(score) {
-			return Math.floor((score - 10) / 2);
-		}
-
-		function toTxt(mod) {
-			if (mod > 0) {
-				return "+" + mod;
-			} else {
-				return mod;
-			}
-		}
-
-		function populateMod(ab) {
-			var value = Number($(ab.base).val());
-			if (value !== NaN) {
-				var mod = calcMod(value);
-				$(ab.mod).val(toTxt(mod));
-				if ($("input" + ab.saving[0]).is(":checked")) {
-					$(ab.saving[1]).val(toTxt(mod + prof));
-				} else {
-					$(ab.saving[1]).val(toTxt(mod));
+	global.alert({
+		text: "Are you sure you want to calculate your mods?",
+		btn1: "calculate",
+		btn2: "cancel",
+		btn1fn: function() {
+			var abilities = {
+				"strength": {
+					base: "#form83_1",
+					mod: "#form56_1",
+					saving: ["#form15_1", "#form42_1"],
+					skills: [
+						["#form2_1", "#form49_1"]
+					]
+				},
+				"dexterity": {
+					base: "#form84_1",
+					mod: "#form59_1",
+					saving: ["#form18_1", "#form54_1"],
+					skills: [
+						["#form19_1", "#form38_1"],
+						["#form4_1", "#form46_1"],
+						["#form23_1", "#form32_1"]
+					]
+				},
+				"constitution": {
+					base: "#form82_1",
+					mod: "#form58_1",
+					saving: ["#form22_1", "#form41_1"],
+					skills: []
+				},
+				"intelligence": {
+					base: "#form86_1",
+					mod: "#form57_1",
+					saving: ["#form6_1", "#form52_1"],
+					skills: [
+						["#form21_1", "#form40_1"],
+						["#form9_1", "#form48_1"],
+						["#form14_1", "#form31_1"],
+						["#form11_1", "#form37_1"],
+						["#form20_1", "#form33_1"]
+					]
+				},
+				"wisdom": {
+					base: "#form81_1",
+					mod: "#form60_1",
+					saving: ["#form10_1", "#form39_1"],
+					skills: [
+						["#form8_1", "#form50_1"],
+						["#form13_1", "#form35_1"],
+						["#form5_1", "#form53_1"],
+						["#form7_1", "#form43_1"],
+						["#form12_1", "#form47_1"]
+					]
+				},
+				"charisma": {
+					base: "#form85_1",
+					mod: "#form55_1",
+					saving: ["#form3_1", "#form51_1"],
+					skills: [
+						["#form17_1", "#form36_1"],
+						["#form24_1", "#form44_1"],
+						["#form16_1", "#form34_1"],
+						["#form1_1", "#form45_1"]
+					]
 				}
+			}
 
-				for (var i = 0; i < ab.skills.length; ++i) {
-					var	skill = ab.skills[i];
+			function calcMod(score) {
+				return Math.floor((score - 10) / 2);
+			}
 
-					if ($("input" + skill[0]).is(":checked")) {
-						$(skill[1]).val(toTxt(mod + prof));
+			function toTxt(mod) {
+				if (mod > 0) {
+					return "+" + mod;
+				} else {
+					return mod;
+				}
+			}
+
+			function populateMod(ab) {
+				var value = Number($(ab.base).val());
+				if (value !== NaN) {
+					var mod = calcMod(value);
+					$(ab.mod).val(toTxt(mod));
+					if ($("input" + ab.saving[0]).is(":checked")) {
+						$(ab.saving[1]).val(toTxt(mod + prof));
 					} else {
-						$(skill[1]).val(toTxt(mod));
+						$(ab.saving[1]).val(toTxt(mod));
+					}
+
+					for (var i = 0; i < ab.skills.length; ++i) {
+						var	skill = ab.skills[i];
+
+						if ($("input" + skill[0]).is(":checked")) {
+							$(skill[1]).val(toTxt(mod + prof));
+						} else {
+							$(skill[1]).val(toTxt(mod));
+						}
 					}
 				}
 			}
-		}
 
-		function modToNumber(i) {
-			if (i.includes("-")) {
-				let p = i.replace("-", "");
-				return Number(p) * -1;
-			} else {
-				let p = i.replace("+", "");
-				return Number(p);
-			}
-		}
-
-		var prof = modToNumber($("#form61_1").val());
-
-
-		console.log(prof);
-
-		if (prof !== NaN) {
-
-			var entries = Object.entries(abilities);
-			for (var i = 0; i < entries.length; ++i) {
-				var entry = entries[i][1];
-				populateMod(entry);
+			function modToNumber(i) {
+				if (i.includes("-")) {
+					let p = i.replace("-", "");
+					return Number(p) * -1;
+				} else {
+					let p = i.replace("+", "");
+					return Number(p);
+				}
 			}
 
-			$("#form63_1").val(10 + modToNumber($("#form43_1").val()));
+			var prof = modToNumber($("#form61_1").val());
 
-			$("#form88_1").val($("#form59_1").val());
+
+			console.log(prof);
+
+			if (prof !== NaN) {
+
+				var entries = Object.entries(abilities);
+				for (var i = 0; i < entries.length; ++i) {
+					var entry = entries[i][1];
+					populateMod(entry);
+				}
+
+				$("#form63_1").val(10 + modToNumber($("#form43_1").val()));
+
+				$("#form88_1").val($("#form59_1").val());
+			}
+
 		}
-
-	}
+	})
 
 }
 
 function longRest() {
-	if (confirm("Are you sure?")) {
-		$("#form97_1").val($("#form80_1").val());
 
-		if ($("#form97_3").val() !== "") {$("#form207_3").val("0")} // lvl 1
-		if ($("#form94_3").val() !== "") {$("#form205_3").val("0")} // lvl 2
-		if ($("#form99_3").val() !== "") {$("#form209_3").val("0")} // lvl 3
-		if ($("#form93_3").val() !== "") {$("#form197_3").val("0")} // lvl 4
-		if ($("#form95_3").val() !== "") {$("#form206_3").val("0")} // lvl 5
-		if ($("#form96_3").val() !== "") {$("#form212_3").val("0")} // lvl 6
-		if ($("#form101_3").val() !== "") {$("#form211_3").val("0")} // lvl 7
-		if ($("#form100_3").val() !== "") {$("#form210_3").val("0")} // lvl 8
-		if ($("#form98_3").val() !== "") {$("#form208_3").val("0")} // lvl 9
-	}
+	global.alert({
+		text: "Are you sure you want to take a long rest?",
+		btn1: "rest",
+		btn2: "cancel",
+		btn1fn: function() {
+			$("#form97_1").val($("#form80_1").val());
+
+			if ($("#form97_3").val() !== "") {$("#form207_3").val("0")} // lvl 1
+			if ($("#form94_3").val() !== "") {$("#form205_3").val("0")} // lvl 2
+			if ($("#form99_3").val() !== "") {$("#form209_3").val("0")} // lvl 3
+			if ($("#form93_3").val() !== "") {$("#form197_3").val("0")} // lvl 4
+			if ($("#form95_3").val() !== "") {$("#form206_3").val("0")} // lvl 5
+			if ($("#form96_3").val() !== "") {$("#form212_3").val("0")} // lvl 6
+			if ($("#form101_3").val() !== "") {$("#form211_3").val("0")} // lvl 7
+			if ($("#form100_3").val() !== "") {$("#form210_3").val("0")} // lvl 8
+			if ($("#form98_3").val() !== "") {$("#form208_3").val("0")} // lvl 9
+		}
+	})
+
 }
 
 

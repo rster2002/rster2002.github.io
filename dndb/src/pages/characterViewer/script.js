@@ -5,6 +5,8 @@ var file = null;
 var sUid = global["viewCharacterInfo"]["userId"];
 characterRef = firestore.collection("users").doc(sUid).collection("characters").doc(global["viewCharacterInfo"]["characterId"]);
 
+a.ev("Character viewer", "Open character viewer", "user action", "");
+
 sessionStorage.setItem("::saved", "false");
 
 function back() {
@@ -234,7 +236,7 @@ allowSave = false;
 
 function localError(error) {
 	error(error);
-	
+
 	openPage("characterList");
 }
 
@@ -253,7 +255,7 @@ function loadCharacter(i) {
 					lDisabled(data);
 					allowSave = true;
 					// window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
-					
+
 				} else {
 					error("Couldn't find this character in the database");
 					openPage("characterList");
@@ -279,7 +281,7 @@ function loadCharacter(i) {
 				error(e)
 			});
 
-			
+
 		}
 	} catch(e) {
 		error(e);
@@ -396,11 +398,11 @@ async function loadSpells() {
 }
 
 async function loadLists() {
-	
+
 	await loadSpells();
 	await loadInventory();
 	await loadAbilities();
-	
+
 }
 
 function calcMod(selector, modSelector) {

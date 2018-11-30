@@ -1,5 +1,7 @@
 var infoRef = firestore.collection("campaigns").doc(global.campaignId).collection("dm");
 
+a.ev("Campaign companion", "Open companion", "user action", "");
+
 Vue.component("sectionlist", {
 	template: `<div class="entry" v-if="entries.length > 0">
 		<h2>{{ displayname }}</h2>
@@ -63,6 +65,7 @@ Vue.component("sectionlist", {
 		toggleOpen(entry) {
 			var index = this.entries.indexOf(entry);
 			this.entries[index].show = !this.entries[index].show;
+			a.ev("Campaign companion", "Open entry", "user interaction", "");
 		}
 	},
 	computed: {

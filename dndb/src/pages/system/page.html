@@ -13,7 +13,9 @@
 			<p>{{ status.info }}</p>
 			<input v-model="newStatus.status" placeholder="Status" />
 			<textarea v-model="newStatus.info" placeholder="Info"></textarea>
-			<button @click="updateStatus()">Update status</button>
+			<div class="btn">
+				<button @click="updateStatus()">Update status</button>
+			</div>
 		</div>
 		<div class="entry">
 			<h2>Controlls</h2>
@@ -31,7 +33,9 @@
 					<p><b>User code:</b> {{ user.userId }}</p>
 					<p><b>Last login:</b> {{ user.lastLogin }}</p>
 					<p><b>First login:</b> {{ user.firstLogin }}</p>
-					<button @click="startEmulation(user.uid)">Emulate user</button>
+					<div class="btn">
+						<button @click="startEmulation(user.uid)">Emulate user</button>
+					</div>
 				</div>
 			</div>
 		</div>

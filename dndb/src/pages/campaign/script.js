@@ -67,7 +67,7 @@ var vueInstance = new Vue({
 			var loadedCharacter = player.character;
 
 			function next() {
-				a.ev("player kicked", "user interaction", `Campaign: ${campaignId}, User kicked: ${loadedUid}`);
+				a.ev("Campaign", "player kicked", "user interaction", `Campaign: ${campaignId}, User kicked: ${loadedUid}`);
 				firestore.collection("campaigns").doc(campaignId + "/users/" + loadedUid).delete().then(function() {
 					firestore.collection("users").doc(loadedUid).collection("campaigns").doc(campaignId).delete().then(function() {
 						firestore.collection("users").doc(loadedUid + "/characters/" + loadedCharacter + "/usedInCampaigns/" + campaignId).delete().then(function() {
@@ -106,13 +106,23 @@ var vueInstance = new Vue({
 			if (ban === true) {
 				next();
 			} else if (ban === "self") {
-				if (confirm("Are you sure you want to leave this campaign?")) {
-					next();
-				}
+				global.alert({
+					text: "Are you sure you want to leave this campaing?",
+					btn1: "leave",
+					btn2: "cancel",
+					btn1fn: function() {
+						next();
+					}
+				});
 			} else {
-				if (confirm("Are you sure you want to kick this person?")) {
-					next();
-				}
+				global.alert({
+					text: "Are you sure you want to kick this player?",
+					btn1: "kick",
+					btn2: "cancel",
+					btn1fn: function() {
+						next();
+					}
+				});
 			}
 		},
 		viewCharacter(user) {
@@ -147,13 +157,26 @@ var vueInstance = new Vue({
 			campaignRef.collection("houserules").doc(this.houserules[index].__id).set(this.houserules[index]).then(e => skb("Rule saved")).catch(e => thr(e));
 		},
 		deleteRule(rule) {
-			if (confirm("Are you sure you want to delete this houserule?\nThis action can't be undone.")) {
-				var index = this.houserules.indexOf(rule);
-				var id = this.houserules[index].__id;
-				console.log([index, id]);
-				campaignRef.collection("houserules").doc(id).delete().then(e => skb("Rule deleted")).catch(e => thr(e));
-				this.houserules.splice(index, 1);
+			global.i = {
+				t: this,
+				rule: rule
 			}
+			global.alert({
+				text: "Are you sure you want to delete this houserule?",
+				btn1: "delete",
+				btn2: "cancel",
+				btn1fn: function() {
+
+					var t = global.i.t;
+					var rule = global.i.rule;
+
+					var index = t.houserules.indexOf(rule);
+					var id = t.houserules[index].__id;
+					console.log([index, id]);
+					campaignRef.collection("houserules").doc(id).delete().then(e => skb("Rule deleted")).catch(e => thr(e));
+					t.houserules.splice(index, 1);
+				}
+			})
 		},
 		openDashboard() {
 			global.campaignId = campaignId;

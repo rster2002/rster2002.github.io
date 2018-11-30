@@ -21,7 +21,8 @@
 			<div class='wave card m12 t6 d3' v-for="character in characters" v-bind:key="character.name">
 				<div class='title'>
 					<h1>{{ character.name }}</h1>
-					<p>{{ character.info }}</p>
+					<p v-if="character.info === '' || character.info === ' ' || character.info === '  '">No info</p>
+					<p v-if="character.info !== ''">{{ character.info }}</p>
 				</div>
 				<div class='actions'>
 					<button v-on:click='oc(character.index)'>Edit</button>
