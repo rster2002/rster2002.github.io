@@ -361,3 +361,9 @@ global["viewCharacter"] = function(userId, characterId) {
 global["pickuser"] = function(array, callback) {
 
 }
+
+global["openCharacter"] = function(options) {
+	global.openedCharacter = options;
+	global.lastOpenedPage = sessionStorage.getItem("::openPage");
+	openPage("characterEditor");
+}

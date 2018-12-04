@@ -32,6 +32,10 @@ vueInstance = new Vue({
 		toggleOpen(u) {
 			this.users[this.users.indexOf(u)].shown = !this.users[this.users.indexOf(u)].shown;
 		},
+		inspectUser(u) {
+			global.inspectUserUid = u.uid;
+			openPage("inspectUser");
+		},
 		updateStatus() {
 			if (this.newStatus.status === "") {
 				this.newStatus.status = "online";

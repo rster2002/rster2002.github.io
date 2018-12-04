@@ -34,6 +34,7 @@
 					<p><b>Last login:</b> {{ user.lastLogin }}</p>
 					<p><b>First login:</b> {{ user.firstLogin }}</p>
 					<div class="btn">
+						<button @click="inspectUser(user)">Inspect</button>
 						<button @click="startEmulation(user.uid)">Emulate user</button>
 					</div>
 				</div>

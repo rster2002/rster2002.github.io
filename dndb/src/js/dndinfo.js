@@ -1376,3 +1376,318 @@ armorList = {
 	Splint: 17,
 	Plate: 18
 }
+
+gearPacks = {
+	"burglar's pack": [
+		{
+			name: "Backpack",
+			count: 1,
+			description: "To hold items"
+		},
+		{
+			name: "Bag of 1000 ball bearings",
+			count: 1,
+			description: "As an action, you can spill these tiny metal balls from their pouch to cover a level, square area that is 10 feet on a side. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or fall prone. A creature moving through the area at half speed doesn't need to make the save."
+		},
+		{
+			name: "String",
+			count: 10,
+			description: "Every item, counts as 1 feet of string"
+		},
+		{
+			name: "Bell",
+			count: 1,
+			description: "It makes a sound"
+		},
+		{
+			name: "Candle",
+			count: 5,
+			description: "For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for an additional 5 feet."
+		},
+		{
+			name: "Crowbar",
+			count: 1,
+			description: "Can be used to open doors the hard way..."
+		},
+		{
+			name: "Hammer",
+			count: 1,
+			description: "Used to make things"
+		},
+		{
+			name: "Pitons",
+			count: 10,
+			description: "Used for climbing"
+		},
+		{
+			name: "Hooded lantern",
+			count: 1,
+			description: "A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil. As an action, you can lower the hood, reducing the light to dim light in a 5-foot radius."
+		},
+		{
+			name: "Flask of oil",
+			count: 2,
+			description: "Can be used to set things on fire"
+		},
+		{
+			name: "Rations",
+			count: 5,
+			description: "One ration is enough to sustain you for 1 day"
+		},
+		{
+			name: "Tinderbox",
+			count: 1,
+			description: "Can be used to set things on fire"
+		},
+		{
+			name: "Waterskin",
+			count: 1,
+			description: "Used to hold up to 1 galon of water"
+		},
+		{
+			name: "Hempen rope",
+			count: 50,
+			description: "The length is equal to the amount above"
+		}
+	],
+	"diplomat's pack": [
+		{
+			name: "Chest",
+			count: 1,
+			description: "Used to store"
+		},
+		{
+			name: "Case for map and scrolls",
+			count: 2,
+			description: "Used to store maps or scrolls"
+		},
+		{
+			name: "Fine clothes",
+			count: 1,
+			description: "Used to dess"
+		},
+		{
+			name: "Bottle of Ink",
+			count: 1,
+			description: "Used to write with"
+		},
+		{
+			name: "Ink pen",
+			count: 1,
+			description: "Used to write with"
+		},
+		{
+			name: "Lamp",
+			count: 1,
+			description: "Used to see in the dark"
+		},
+		{
+			name: "Flask of oil",
+			count: 2,
+			description: "Used to set things on fire"
+		},
+		{
+			name: "Sheet of paper",
+			count: 5,
+			description: "Used to write on"
+		},
+		{
+			name: "Vial of perfune",
+			count: 1,
+			description: "Used to make you smell like something else than sewer"
+		},
+		{
+			name: "Sealing wax",
+			count: 1,
+			description: "Used to seal envelopes"
+		},
+		{
+			name: "Soap",
+			count: 1,
+			description: "Used to clean yourself"
+		}
+	],
+	"dungeoneer's pack": [
+		{
+			name: "Backpack",
+			count: 1,
+			description: "Used to carry things"
+		},
+		{
+			name: "Crowbar",
+			count: 1,
+			description: "Used to break open door or chests"
+		},
+		{
+			name: "Hammer",
+			count: 1,
+			description: "Used to build stuff"
+		},
+		{
+			name: "Piton",
+			count: 10,
+			description: "Used for climbing"
+		},
+		{
+			name: "Torch",
+			count: 10,
+			description: "Emits bright light within 20ft and dim light for an additional 20ft. One torch lasts for 1 hour."
+		},
+		{
+			name: "Tinderbox",
+			count: 1,
+			description: "Used to set things on 🔥"
+		},
+		{
+			name: "Ration",
+			count: 1,
+			description: "One ration is enough food for 1 day"
+		},
+		{
+			name: "Waterskin",
+			count: 1,
+			description: "Can hold up to one galon of water"
+		},
+		{
+			name: "Hempen rope",
+			count: 50,
+			description: "The above number indicates the length of the rope"
+		}
+	],
+	"entertainer's pack": [
+		{
+			name: "Backpack",
+			count: 1,
+			description: "Used to carry things"
+		},
+		{
+			name: "Bedroll",
+			count: 1,
+			description: "Used to sleep in"
+		},
+		{
+			name: "Costume",
+			count: 2,
+			description: "Used to dress up"
+		},
+		{
+			name: "Candle",
+			count: 5,
+			description: "Used to see in the dark"
+		},
+		{
+			name: "Ration",
+			count: 5,
+			description: "One ration is enough food for 1 day"
+		},
+		{
+			name: "Waterskin",
+			count: 1,
+			description: "Can hold up to one galon of water"
+		},
+		{
+			name: "Disguise Kit",
+			count: 1,
+			description: "Used to *disguise* yourself, because, you know, it's a **disguise** kit"
+		}
+	],
+	"explorer's pack": [
+		{
+			name: "Backpack",
+			count: 1,
+			description: "Used to carry things"
+		},
+		{
+			name: "Bedroll",
+			count: 1,
+			description: "Used to sleep in"
+		},
+		{
+			name: "Mess kit",
+			count: 1,
+			description: "Used to prepare food\n\nContains:\n* A cup\n* Simple cutlery\n\n The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl"
+		},
+		{
+			name: "Tinderbox",
+			count: 1,
+			description: "Used to set things on 🔥"
+		},
+		{
+			name: "Torch",
+			count: 10,
+			description: "Emits bright light within 20ft and dim light for an additional 20ft. One torch lasts for 1 hour."
+		},
+		{
+			name: "Ration",
+			count: 10,
+			description: "One ration is enough food for 1 day"
+		},
+		{
+			name: "Waterskin",
+			count: 1,
+			description: "Can hold up to one galon of water"
+		},
+		{
+			name: "Hempen rope",
+			count: 50,
+			description: "The above number indicates the length of the rope"
+		}
+	],
+	"monster hunter's pack": [
+		{
+			name: "Chest",
+			count: 1,
+			description: "Used to store"
+		},
+		{
+			name: "Crowbar",
+			count: 1,
+			description: "Can be used to open doors the hard way..."
+		},
+		{
+			name: "Hammer",
+			count: 1,
+			description: "Used to make things"
+		},
+		{
+			name: "Wooden stake",
+			count: 3,
+			description: ""
+		},
+		{
+			name: "Holy symbol",
+			count: 1,
+			description: ""
+		},
+		{
+			name: "Flash of holy water",
+			count: 1,
+			description: ""
+		},
+		{
+			name: "Set of manacles",
+			count: 1,
+			description: ""
+		},
+		{
+			name: "Silver mirror",
+			count: 1,
+			description: "\"I'm so pretty\""
+		},
+		{
+			name: "Flask of oil",
+			count: 2,
+			description: "Can be used to set things on fire"
+		},
+		{
+			name: "Tinderbox",
+			count: 1,
+			description: "Can be used to set things on fire"
+		},
+		{
+			name: "Torch",
+			count: 3,
+			description: "Emits bright light within 20ft and dim light for an additional 20ft. One torch lasts for 1 hour."
+		}
+	]
+}

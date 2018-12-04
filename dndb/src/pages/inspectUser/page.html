@@ -1,0 +1,45 @@
+<div class="innerPage">
+	<script>
+		tempImport([
+			"--default"
+		]);
+	</script>
+	<div class="lane" id="vueProfile">
+		<div class="entry" style="margin-top: 24px;">
+			<img class="topUserImage" v-bind:src="profileImage" />
+			<h1 class="ch noOverflow">{{ username }}</h1>
+			<h2 class="ch noOverflow">{{ userId }}</h2>
+			<h2 class="ch noOverflow">{{ uid }}</h2>
+		</div>
+		<div class="entry">
+			<h2>User id</h2>
+			<div class="btn">
+				<button @click="copyId()">Copy user ID</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h2>Display name</h2>
+			<input v-model="editing.username" placeholder="Display name">
+			<p>This only changes your public display name.</p>
+			<div class="btn">
+				<button @click="changeUsername()">Change</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h2>Characters</h2>
+			<div class="listItem" v-for="character in characters">
+				<div class="shared" @click="toggleVisible(character)">
+					<h1>{{ character.name }}</h1>
+					<h2>{{ character.id }}</h2>
+				</div>
+				<div class="content" v-if="character.show === true">
+					<p><b>Last edited:</b> {{ character.showEdited }}</p>
+					<p><b>Created at:</b> {{ character.showCreated }}</p>
+					<div class="btn">
+						<button @click="viewCharacter(character)">View</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

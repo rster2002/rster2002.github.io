@@ -94,10 +94,10 @@ html, body {
 	/* Get playing faster */
 
 	margin: 0;
-	position: absolute;
+	position: relative;
 	width: 303px;
 	height: 195px;
-	top: 94px;
+	top: 41px;
 
 	font-family: Roboto;
 	font-style: normal;
@@ -112,4 +112,53 @@ html, body {
 	width: 100%;
 	height: 25px;
 	background-color: #f1f1f1;
+}
+
+.lane {
+	width: 70%;
+	margin: 0px 15%;
+}
+
+.lane h1 {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 900;
+	line-height: normal;
+	font-size: 36px;
+
+	color: #000000;
+}
+
+.lane p {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	font-size: 24px;
+
+	color: #000000;
+}
+
+.lane .entry {
+	width: 100%;
+	margin: 24px 0px;
+	padding: 8px;
+	display: inline-block;
+	background-color: #f1f1f1;
+	border-radius: 4px;
+}
+
+.lane .entry h1 {
+	width: 100%;
+	margin: 12px 0px;
+	font-size: 42px;
+	text-align: center;
+}
+
+.lane .entry p {
+	width: 90%;
+	max-width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 24px;
 }

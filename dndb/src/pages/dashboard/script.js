@@ -11,10 +11,12 @@ vueInstance = new Vue({
 			userRef.collection("characters").doc(characterId).update({
 				lastEdited: Date.now()
 			}).then(function() {
-				sessionStorage.setItem("::openCharacter", characterId);
 
 				a.ev("Dashboard", "Open character (dashboard)", "user interaction", `characterId: ${characterId}`);
-				openPage("characterEditor");
+				global.openCharacter({
+					uid: userInformation.uid,
+					characterId: characterId
+				});
 			});
 		},
 		openCampaign(campaign) {

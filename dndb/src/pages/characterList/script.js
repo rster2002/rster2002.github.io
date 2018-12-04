@@ -60,14 +60,19 @@ async function addTolist(i, characterInfo, delay) {
 }
 
 function loadCharacter(index) {
-	;
 	var characterName = obj[index];
 	userRef.collection("characters").doc(characterName).update({
 		lastEdited: Date.now()
 	}).then(function() {
-		sessionStorage.setItem("::openCharacter", characterName);
 
-		openPage("characterEditor");
+		global.openCharacter({
+			uid: sUid,
+			characterId: characterName
+		});
+
+		// sessionStorage.setItem("::openCharacter", characterName);
+		//
+		// openPage("characterEditor");
 	});
 }
 
@@ -84,10 +89,11 @@ function add() {
 	}).catch(function(e){error(e)});
 
 	userRef.collection("characters").doc(characterId + "/data/characterObj").set(emptyCharacterObj).then(function() {
-
-		sessionStorage.setItem("::openCharacter", characterId);
 		a.ev("Character List", "Character created", "user action", `characterId: ${characterId}`);
-		openPage("characterEditor");
+		global.openCharacter({
+			uid: sUid,
+			characterId: characterId
+		})
 	}).catch(function(e){error(e)});
 }
 

@@ -1,8 +1,9 @@
-sUid = sessionStorage.getItem("::uid");
+sUid = global.openedCharacter.uid;
 characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-characterId = sessionStorage.getItem("::openCharacter");
+characterId = global.openedCharacter.characterId;
 characterRef = userRef.collection("characters").doc(characterId);
 var characterInfo;
+var characterObj;
 var file = null;
 
 sessionStorage.setItem("::saved", "false");
@@ -229,9 +230,53 @@ Vue.component("editorlist", {
 			i.color = "rgba(0, 0, 0, .1)";
 			i.version = 3;
 			i.count = this.working.count;
-			a.ev("Character Editor", "Item created (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-			this.items.push(i);
-			this.resetWorking();
+
+			var t = this;
+
+			var name = i.name;
+			console.log(name);
+			name = name.toLowerCase();
+			global.i = {
+				name: name,
+				t: this
+			};
+
+			function finalize(item) {
+				a.ev("Character Editor", "Item created (" + t.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+				console.log(item);
+				t.items.push(item);
+				t.resetWorking();
+			}
+
+			global.i.item = i;
+
+			if (gearPacks[name] !== undefined && this.internalname === "inventory") {
+				global.alert({
+					text: "You can quickly add all the individial items of this pack to your inventory or do you want to add the pack as one item?",
+					btn1: "add content",
+					btn2: "add pack",
+					btn1fn: function() {
+						var name = global.i.name;
+						var t = global.i.t;
+						var arr = gearPacks[name];
+						for (var i = 0; i < arr.length; ++i) {
+							var item = arr[i];
+							let entries = Object.entries(item);
+							for (var l = 0; l < entries.length; ++l) {
+								t.working[entries[l][0]] = entries[l][1];
+							}
+
+							t.addItem();
+						}
+					},
+					btn2fn: function() {
+						finalize(global.i.item);
+					}
+				})
+			} else {
+				console.log(i);
+				finalize(i);
+			}
 		},
 		deleteItem(item) {
 			global.i = {
@@ -412,6 +457,23 @@ var vueLists = new Vue({
 	}
 });
 
+var vueCampaignList = new Vue({
+	el: "#campaignList",
+	data: {
+		usedInCampaigns: []
+	}
+});
+
+async function reloadCampaigns() {
+	vueCampaignList.usedInCampaigns = [];
+	var query = await createQuery(characterRef.collection("usedInCampaigns"));
+	if (query.length > 0) {
+		vueCampaignList.usedInCampaigns = query;
+	}
+}
+
+reloadCampaigns();
+
 
 var vuePermissions = new Vue({
 	el: "#permissions",
@@ -534,12 +596,12 @@ function saveCharacter(show) {
 function loadCharacter(i) {
 	try {
 		if (i) {
-			;
 			sessionStorage.setItem("::saved", i);
 			console.log(i);
 			firestore.collection("users").doc(sUid + "/characters/" + sessionStorage.getItem("::saved") + "/data/characterObj").get().then(function(doc) {
 				if (doc && doc.exists) {
 					var data = doc.data();
+					characterObj = data;
 					l(data);
 					a.ev("Character Editor", "Character loaded", "passive", `Uid: ${uid}, characterId: ${characterId}`);
 					allowSave = true;
@@ -579,8 +641,6 @@ function loadCharacter(i) {
 
 async function deleteCharacter() {
 	console.log("Delete");
-
-	;
 	var usedInCampaigns = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::saved")).collection("usedInCampaigns"));
 	if (usedInCampaigns[0] === undefined) {
 
@@ -589,21 +649,21 @@ async function deleteCharacter() {
 			text: "Are you sure you want to delete this character? This can't be undone.",
 			btn1: "delete",
 			btn2: "cancel",
-			btn1fn: function() {
+			btn1fn: async function() {
 				characterRef.collection("data").doc("characterObj").delete().catch(e => {thr(e)});
-				var inventoryQuery = createQuery(characterRef.collection("inventory"));
+				var inventoryQuery = await createQuery(characterRef.collection("inventory"));
 				for (var i = 0; i < inventoryQuery.length; ++i) {
 					var id = inventoryQuery[i]["__id"];
 					characterRef.collection("inventory").doc(id).delete().catch(e => {thr(e)});
 				}
 
-				var abilitiesQuery = createQuery(characterRef.collection("abilities"));
+				var abilitiesQuery = await createQuery(characterRef.collection("abilities"));
 				for (var i = 0; i < abilitiesQuery.length; ++i) {
 					var id = abilitiesQuery[i]["__id"];
 					characterRef.collection("abilities").doc(id).delete().catch(e => {thr(e)});
 				}
 
-				var spellsQuery = createQuery(characterRef.collection("spells"));
+				var spellsQuery = await createQuery(characterRef.collection("spells"));
 				for (var i = 0; i < spellsQuery.length; ++i) {
 					var id = spellsQuery[i]["__id"];
 					characterRef.collection("spells").doc(id).delete().catch(e => {thr(e)});
@@ -958,8 +1018,9 @@ function computeMods() {
 				$("#form63_1").val(10 + modToNumber($("#form43_1").val()));
 
 				$("#form88_1").val($("#form59_1").val());
-			}
 
+				skb("Mods calculated");
+			}
 		}
 	})
 
@@ -983,6 +1044,8 @@ function longRest() {
 			if ($("#form101_3").val() !== "") {$("#form211_3").val("0")} // lvl 7
 			if ($("#form100_3").val() !== "") {$("#form210_3").val("0")} // lvl 8
 			if ($("#form98_3").val() !== "") {$("#form208_3").val("0")} // lvl 9
+
+			skb("Taken a long rest");
 		}
 	})
 
@@ -992,9 +1055,11 @@ function longRest() {
 
 function onload() {
 	if (!loaded) {
+
 		console.log("C");
 		loadLists();
-		loadCharacter(sessionStorage.getItem("::openCharacter"));
+
+		loadCharacter(characterId);
 		refreshLayout();
 		// loadPermissions();
 		$("#characterSheetSpinner").hide();
