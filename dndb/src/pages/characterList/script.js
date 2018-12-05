@@ -67,7 +67,8 @@ function loadCharacter(index) {
 
 		global.openCharacter({
 			uid: sUid,
-			characterId: characterName
+			characterId: characterName,
+			view: false
 		});
 
 		// sessionStorage.setItem("::openCharacter", characterName);
@@ -92,8 +93,9 @@ function add() {
 		a.ev("Character List", "Character created", "user action", `characterId: ${characterId}`);
 		global.openCharacter({
 			uid: sUid,
-			characterId: characterId
-		})
+			characterId: characterId,
+			view: false
+		});
 	}).catch(function(e){error(e)});
 }
 

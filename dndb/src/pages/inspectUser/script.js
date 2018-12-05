@@ -32,7 +32,15 @@ var vueInstance = new Vue({
 		viewCharacter(character) {
 			global.openCharacter({
 				uid: global.inspectUserUid,
-				characterId: character.id
+				characterId: character.id,
+				view: true
+			});
+		},
+		editCharacter(character) {
+			global.openCharacter({
+				uid: global.inspectUserUid,
+				characterId: character.id,
+				view: false
 			});
 		},
 		changeUsername() {

@@ -11,7 +11,7 @@ sessionStorage.setItem("::saved", "false");
 Vue.component("editorlist", {
 	template: `
 	<div>
-		<div class="entry">
+		<div class="entry" v-if="limit === false">
 			<h1 style="font-size: 42px">{{ displayname }}</h1>
 			<input v-bind:placeholder="itemname + ' name'" v-model="working.name" />
 			<input v-if="showcount === 'true'" v-bind:placeholder="countPlaceholder" v-model="working.count" type="number" />
@@ -45,7 +45,7 @@ Vue.component("editorlist", {
 						<h1 v-if="item.name === ''">Unnamed item</h1>
 					</div>
 					<div class="expanded" v-if="item.shown == true">
-						<input v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />
+						<input :disabled="limit === true" v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />
 						<div class="markdown" v-html="toMarkdown(item.description)"></div>
 						<!-- {{{ toMarkdown(item.description) }}} -->
 						<div class="tags">
@@ -53,7 +53,7 @@ Vue.component("editorlist", {
 								<p>{{ tag }}</p>
 							</div>
 						</div>
-						<div class="btn icn">
+						<div class="btn icn" v-if="limit === false">
 							<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
 							<button @click="editItem(item)"><span class="material-icons">edit</span></button>
 							<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-if="item.pinned === false" class="material-icons">label</span></button>
@@ -74,7 +74,7 @@ Vue.component("editorlist", {
 						<h1 v-if="item.name === ''">Unnamed item</h1>
 					</div>
 					<div class="expanded" v-if="item.shown == true">
-						<input v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />
+						<input :disabled="limit === true" v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />
 						<div class="markdown" v-html="toMarkdown(item.description)"></div>
 						<!-- {{{ toMarkdown(item.description) }}} -->
 						<div class="tags">
@@ -82,7 +82,7 @@ Vue.component("editorlist", {
 								<p>{{ tag }}</p>
 							</div>
 						</div>
-						<div class="btn icn">
+						<div class="btn icn" v-if="limit === false">
 							<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
 							<button @click="editItem(item)"><span class="material-icons">edit</span></button>
 							<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-if="item.pinned === false" class="material-icons">label</span></button>
@@ -92,8 +92,11 @@ Vue.component("editorlist", {
 				</div>
 			</div>
 		</div>
+		<div class="entry" v-if="limit === true && items.length === 0">
+			<h1 class="hc">Nothing here</h1>
+		</div>
 	</div>`,
-	props: ["internalname", "displayname", "itemname", "showcount", "todb"],
+	props: ["internalname", "displayname", "itemname", "showcount", "todb", "limit"],
 	data() {
 		return {
 			items: [],
@@ -388,7 +391,7 @@ Vue.component("editorlist", {
 		var internalName = this.internalname;
 		var lastLevel = -1;
 		if (internalName === "spells") {
-			var query = await createQuery(userRef.collection("characters").doc(sessionStorage.getItem("::openCharacter")).collection("spells").orderBy("name", "asc"));
+			var query = await createQuery(characterRef.collection("spells").orderBy("name", "asc"));
 			console.log(query);
 			if (query.length > 0) {
 				for (var i = 0; i < query.length; ++i) {
@@ -453,22 +456,24 @@ var vueLists = new Vue({
 			tag: "",
 			tags: [],
 			shown: false
-		}
+		},
+		limit: false
 	}
 });
 
-var vueCampaignList = new Vue({
-	el: "#campaignList",
+var vueUtilities = new Vue({
+	el: "#utilities",
 	data: {
-		usedInCampaigns: []
+		usedInCampaigns: [],
+		limit: false
 	}
 });
 
 async function reloadCampaigns() {
-	vueCampaignList.usedInCampaigns = [];
+	vueUtilities.usedInCampaigns = [];
 	var query = await createQuery(characterRef.collection("usedInCampaigns"));
 	if (query.length > 0) {
-		vueCampaignList.usedInCampaigns = query;
+		vueUtilities.usedInCampaigns = query;
 	}
 }
 
@@ -539,7 +544,7 @@ function localError(error) {
 console.log("hmm");
 
 // save function for the character
-function saveCharacter(show) {
+saveCharacter = function(show) {
 
 	if (show === undefined) {
 		show = true;
@@ -602,8 +607,13 @@ function loadCharacter(i) {
 				if (doc && doc.exists) {
 					var data = doc.data();
 					characterObj = data;
-					l(data);
-					a.ev("Character Editor", "Character loaded", "passive", `Uid: ${uid}, characterId: ${characterId}`);
+					if (global.openedCharacter.view === true) {
+						lDisabled(data);
+						a.ev("Character Editor", "Character loaded (view)", "passive", `Uid: ${uid}, characterId: ${characterId}`);
+					} else {
+						l(data);
+						a.ev("Character Editor", "Character loaded (edit)", "passive", `Uid: ${uid}, characterId: ${characterId}`);
+					}
 					allowSave = true;
 					// window.history.pushState("", "", "appb.html?user=" + sUid + "&character=" + sessionStorage.getItem("::saved"));
 
@@ -1062,7 +1072,19 @@ function onload() {
 		loadCharacter(characterId);
 		refreshLayout();
 		// loadPermissions();
-		$("#characterSheetSpinner").hide();
+
+		if (global.openedCharacter.view === true) {
+			$("#svBtn").hide();
+			$("#bkBtn").css("width", "100%");
+			vueLists.limit = true;
+
+			saveCharacter = function() {};
+			vueUtilities.limit = true;
+		}
+
+		$("#pdf1").on("load", function() {
+			$("#characterSheetSpinner").hide();
+		});
 		loaded = true;
 	}
 }

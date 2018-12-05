@@ -126,7 +126,11 @@ var vueInstance = new Vue({
 			}
 		},
 		viewCharacter(user) {
-			global.viewCharacter(user.id, user.character);
+			global.openCharacter({
+				uid: user.id,
+				characterId: user.character,
+				view: true
+			});
 		},
 		addHouserule() {
 			let houserule = Object.assign({}, this.editingRule);

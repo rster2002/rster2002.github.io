@@ -15,7 +15,8 @@ vueInstance = new Vue({
 				a.ev("Dashboard", "Open character (dashboard)", "user interaction", `characterId: ${characterId}`);
 				global.openCharacter({
 					uid: userInformation.uid,
-					characterId: characterId
+					characterId: characterId,
+					view: false
 				});
 			});
 		},

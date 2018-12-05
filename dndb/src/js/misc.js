@@ -35,6 +35,49 @@ if (!DEV) {
 	console.log = function() {}
 }
 
+function roll(expression) {
+	var rtrn = expression;
+	var broken = expression.split("d");
+	var list = [];
+
+	for (var i = 0; i < broken.length; ++i) {
+		if (broken[i + 1] !== undefined) {
+			var count = broken[i];
+			count = count.split(" ");
+			count = Number(count[count.length - 1]);
+
+			var type = broken[i + 1];
+			type = type.split(" ");
+			type = Number(type[0]);
+
+			if (type !== NaN && count !== NaN) {
+
+				let output = 0;
+
+				for (var r = 0; r < count; ++r) {
+					let roll =  Math.floor((Math.random() * type) + 1);
+					output += roll;
+					list.push({
+						dice: "1d" + type,
+						count: 1,
+						type: type,
+						result: roll
+					});
+				}
+
+				rtrn = rtrn.replace(count + "d" + type, output);
+
+			}
+
+		}
+	}
+
+	return {
+		total: eval(rtrn),
+		list: list
+	};
+}
+
 const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 const pageTitles = {
 	characterList: "Character List",

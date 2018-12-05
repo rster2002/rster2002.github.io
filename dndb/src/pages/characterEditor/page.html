@@ -12,10 +12,10 @@
 		<div class="inner"></div>
 	</div>
 	<div class="controlls z1">
-		<div class="button" onclick="saveCharacter()">
+		<div id="svBtn" class="button" onclick="saveCharacter()">
 			<p>save</p>
 		</div>
-		<div class="button" onclick="openPage(global.lastOpenedPage)">
+		<div id="bkBtn" class="button" onclick="openPage(global.lastOpenedPage)">
 			<p>back</p>
 		</div>
 	</div>
@@ -49,13 +49,19 @@
 	</div>
 	<div class="lane" id="editorLists">
 		<div class="section" id="inventory">
-			<editorlist internalname="inventory" displayname="Inventory" itemname="Item" showcount="true" :todb="toDB"></editorlist>
+			<editorlist
+				internalname="inventory"
+				displayname="Inventory"
+				itemname="Item" showcount="true"
+				:todb="toDB"
+				:limit="limit"
+					></editorlist>
 		</div>
 		<div class="section" id="abilities" style="display: none;">
-			<editorlist internalname="abilities" displayname="Abilities" itemname="Ability" showcount="false" :todb="toDB"></editorlist>
+			<editorlist internalname="abilities" displayname="Abilities" itemname="Ability" showcount="false" :todb="toDB":limit="limit"></editorlist>
 		</div>
 		<div class="section" id="spells" style="display: none;">
-			<editorlist internalname="spells" displayname="Spells" itemname="Spell" showcount="true" :todb="toDB"></editorlist>
+			<editorlist internalname="spells" displayname="Spells" itemname="Spell" showcount="true" :todb="toDB" :limit="limit"></editorlist>
 		</div>
 	</div>
 
@@ -71,7 +77,7 @@
 			</div>
 		</div>
 	</div> -->
-	<div class="lane">
+	<div class="lane" id="utilities" v-if="limit === false">
 		<div class="entry">
 			<h2>Utilities</h2>
 			<p>You can click the button below to automaticly fill in a lot of text boxes while you only have your base stats. Keep in mind that this will overwrite any existing values. Clicking longrest will take a long rest.</p>
@@ -80,7 +86,7 @@
 				<button onclick="computeMods()">Calculate mods</button>
 			</div>
 		</div>
-		<div class="entry" v-if="usedInCampaigns.length > 0" id="campaignList">
+		<div class="entry" v-if="usedInCampaigns.length > 0">
 			<h2>Used in campaigns</h2>
 			<div class="listItem" v-for="campaign in usedInCampaigns">
 				<h1>{{ campaign.campaignName }}</h1>
