@@ -1303,6 +1303,49 @@ html div.wave.card > div.actions button {
 	background-color: var(--hover);
 }
 
+.dialog .box .users {
+	width: 100%;
+	/* display: inline-block; */
+	max-height: 300px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.dialog .box .user {
+	width: 100%;
+    padding: 10px 16px;
+    display: inline-block;
+	cursor: pointer;
+}
+
+.dialog .box .user img {
+	height: 52px;
+	width: 52px;
+	border-radius: 50%;
+	float: left;
+}
+
+.dialog .box .user .picked {
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	float: left;
+	background-color: var(--focus);
+}
+
+.dialog .box .user .picked i {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+}
+
+.dialog .box .user p {
+	float: left;
+    padding: 15px 16px;
+}
+
 .dialog .box.dialogani-enter-active {
 	transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
 }
@@ -1315,4 +1358,70 @@ html div.wave.card > div.actions button {
 .dialog .box.dialogani-enter-to {
 	opacity: 1;
 	transform: translate(-50%, -50%);
+}
+
+.banner {
+	width: calc(100% - 24px);
+	border-bottom: 2px rgba(0, 0, 0, .1) solid;
+	display: inline-block;
+	padding: 0px 12px;
+	background-color: white;
+}
+
+.banner .text {
+	width: calc(70% - 16px);
+	padding: 4px 8px;
+	display: inline-block;
+	float: left;
+}
+
+.banner .text p {
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	color: black;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.banner .actions {
+	width: 30%;
+	height: 100%;
+	float: left;
+}
+
+.banner .actions button {
+	transition: all 250ms cubic-bezier(0.4, 0.0, 0.2, 1);
+	margin: 14px 4px;
+	font-size: 18px;
+	background-color: var(--unfocus);
+	outline: 0;
+	border: solid 2px;
+	border-color: var(--unfocus);
+	border-radius: 4px;
+	color: #0080ff;
+	padding: 4px 8px;
+	font-weight: 500;
+	cursor: pointer;
+	text-transform: lowercase;
+	float: right;
+}
+
+.banner .actions button:hover {
+	border-color: transparent;
+	background-color: var(--hover);
+	/* color: white;
+	background-color: #0080ff;
+	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1); */
+}
+
+@media only screen and (max-width: 800px) {
+	.banner .text {
+		width: calc(100% - 16px);
+		float: none;
+	}
+
+	.banner .actions {
+		width: 100%;
+		float: none;
+	}
 }

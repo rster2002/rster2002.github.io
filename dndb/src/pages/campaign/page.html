@@ -9,6 +9,15 @@
 	<div class="spinner whiteBackground" v-if="spinning">
 		<div class="inner"></div>
 	</div>
+	<div class="banner" v-if="permissionGranted === false">
+		<div class="text">
+			<p>Give your DM permission to write to your character sheet. This will allow the DM to add items to your inventory.</p>
+		</div>
+		<div class="actions">
+			<button @click="grantPermission()">give permission</button>
+			<button @click="dismiss()">dismiss</button>
+		</div>
+	</div>
 	<div class="lane">
 		<div class="entry" style="margin-top: 24px;">
 			<img class="topUserImage" v-bind:src="currentUser.profileImage" />
@@ -64,7 +73,7 @@
 			</div>
 			<h1 v-if="players.length == 0" class="textCenter">No player has joined yet</h1>
 		</div>
-		<div class="entry" v-if="!isDM">
+		<div class="entry">
 			<h2>Campaign companion</h2>
 			<p>Here you can find information provided by your DM about the current campaign with things like NPC's you've encountered and locations you've visited.</p>
 			<div class="btn">
@@ -83,15 +92,15 @@
 			<div>
 				<div class="listItem" v-for="rule in houserules">
 					<div v-if="rule.editing != true">
-						<div>
+						<div class="shared" @click="toggleRule(rule)">
 							<h1 class="noOverflow">{{ rule.title }}</h1>
-							<div>
-								<p v-for="line in rule.description">{{ line }}</p>
-							</div>
 						</div>
-						<div class="btn" v-if="isDM">
-							<button @click="editRule(rule);">Edit</button>
-							<button @click="deleteRule(rule)" class="danger">Delete</button>
+						<div v-if="rule.opened">
+							<p v-for="line in rule.description">{{ line }}</p>
+						</div>
+						<div class="btn icn" v-if="isDM && rule.opened === true">
+							<button @click="deleteRule(rule)" class="danger"><span class="material-icons">delete</span></button>
+							<button @click="editRule(rule);"><span class="material-icons">edit</span></button>
 						</div>
 					</div>
 					<div v-if="rule.editing == true">
@@ -118,9 +127,15 @@
 				</div>
 			</div>
 		</div>
-		<div class="entry" v-if="!isDM">
+		<div class="entry">
 			<h2>Options</h2>
-			<div class="btn">
+			<div v-if="isDM">
+				<input v-model="campaignName" placeholder="Campaign name" />
+				<div class="btn">
+					<button @click="changeCampaignName()">change</button>
+				</div>
+			</div>
+			<div class="btn" v-if="!isDM">
 				<button v-if="!isDM" class="danger" @click="kick(self, 'self', 'campaignMenu')">Leave campaign</button>
 			</div>
 		</div>

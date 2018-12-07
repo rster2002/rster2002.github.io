@@ -19,7 +19,7 @@ Vue.component("dmlist", {
 				<div v-if="entry.editing != true">
 					<div class="shared" @click="openEntry(entry)">
 						<h1 class="noOverflow">{{ entry.name }}</h1>
-						<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
+						<h2 style="font-style: italic;" v-if="entry.subtitle != ''"><span v-if="section === 'items'">Ammount: </span>{{ entry.subtitle }}</h2>
 					</div>
 					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
 					</div>
@@ -115,32 +115,112 @@ Vue.component("dmlist", {
 				entry: entry
 			}
 			if (open === false) {
-				global.alert({
-					text: "Are you sure you want to reveal this entry to your players?",
-					btn1: "reveal",
-					btn2: "cancel",
-					btn1fn: function() {
+				if (this.section === "items") {
 
-						var t = global.i.t;
-						var index = global.i.index;
-						var current = global.i.current;
-						var open = global.i.open;
-						var id = global.i.id;
-						var entry = global.i.entry;
+					var usersPermitted = global.campaign.users.filter(a => {
+						return a.permitted;
+					});
 
-						t.entries[index].open = true;
-						var push = Object.assign({}, entry);
-						push.dmDescription = "";
-						push.computedDmDescription = "";
-						push.show = false;
-						dmRef.doc(t.section).collection("players").doc(id).set(push).then(() => {
-							skb("Entry revealed to players");
-							a.ev("DM Dashboard", "DM Dashboard", "Entry revealed to players", "user action", "");
-						}).catch(e => thr(e));
+					if (usersPermitted.length > 0) {
 
-						dmRef.doc(t.section).collection("dm").doc(id).update({open: true}).then(() => {}).catch(e => thr(e));
+						let r = [];
+
+						usersPermitted.forEach(a => {
+							a.image = a.profile.usericon;
+							a.name = a.profile.username;
+							r.push(a);
+						});
+
+						global.t = this;
+
+						global.alert({
+							type: "userList",
+							users: r,
+							text: "Reveal to",
+							btn1: "add",
+							btn2: "cancel",
+							btn1fn: function(arr) {
+
+								var item = Object.assign({}, entry);
+								item.tags = [];
+								item.color = "rgba(0, 0, 0, .1)";
+								item.tag = "";
+								item.count = item.subtitle;
+								let k = item.description;
+								console.log(item, k);
+								k = k.split("\n");
+								item.description = k;
+								item.dmDescription = "";
+								item.computedDmDescription = "";
+								item.pinned = false;
+								item.shown = false;
+								item.__id = genId();
+
+								global.a = arr;
+
+								global.alert({
+									text: "Are you sure you want to add this item to the inventory of the selected users? You can't remove it once it's added.",
+									btn1: "add",
+									btn2: "cancel",
+									btn1fn: function() {
+
+										var arr = global.a;
+
+										console.log(arr);
+
+										arr.forEach(a => {
+											console.log(a, item);
+											tRef = firestore.collection("users").doc(a.id).collection("characters").doc(a.character);
+
+											tRef.collection("inventory").doc(item.__id).set(item).then(e => {
+												tRef.collection("channels").doc("inventory").set({
+													status: "dm-added"
+												}).then(e => {
+													skb("Item added to inventory");
+
+													console.log(`%c Item added %c`, "padding: 1px; border-radius: 3px; color: white; background-color: #30ff30;", "background-color: transparent;");
+												});
+											});
+										});
+									}
+								})
+							}
+						});
+					} else {
+						global.alert({
+							text: "None of your players have given you permission to write to their character.",
+							btn1: "ok"
+						});
 					}
-				});
+
+				} else {
+					global.alert({
+						text: "Are you sure you want to reveal this entry to your players?",
+						btn1: "reveal",
+						btn2: "cancel",
+						btn1fn: function() {
+
+							var t = global.i.t;
+							var index = global.i.index;
+							var current = global.i.current;
+							var open = global.i.open;
+							var id = global.i.id;
+							var entry = global.i.entry;
+
+							t.entries[index].open = true;
+							var push = Object.assign({}, entry);
+							push.dmDescription = "";
+							push.computedDmDescription = "";
+							push.show = false;
+							dmRef.doc(t.section).collection("players").doc(id).set(push).then(() => {
+								skb("Entry revealed to players");
+								a.ev("DM Dashboard", "DM Dashboard", "Entry revealed to players", "user action", "");
+							}).catch(e => thr(e));
+
+							dmRef.doc(t.section).collection("dm").doc(id).update({open: true}).then(() => {}).catch(e => thr(e));
+						}
+					});
+				}
 			} else {
 				this.entries[index].open = false;
 				dmRef.doc(this.section).collection("players").doc(id).delete().then(() => {
@@ -186,7 +266,7 @@ Vue.component("dmlist", {
 
 					t.entries.splice(index, 1);
 				}
-			})
+			});
 		},
 		startEdit(entry) {
 			var index = this.entries.indexOf(entry);

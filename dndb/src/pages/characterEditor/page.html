@@ -58,25 +58,27 @@
 					></editorlist>
 		</div>
 		<div class="section" id="abilities" style="display: none;">
-			<editorlist internalname="abilities" displayname="Abilities" itemname="Ability" showcount="false" :todb="toDB":limit="limit"></editorlist>
+			<editorlist
+				internalname="abilities"
+				displayname="Abilities"
+				itemname="Ability"
+				showcount="false"
+				:todb="toDB"
+				:limit="limit"
+					></editorlist>
 		</div>
 		<div class="section" id="spells" style="display: none;">
-			<editorlist internalname="spells" displayname="Spells" itemname="Spell" showcount="true" :todb="toDB" :limit="limit"></editorlist>
+			<editorlist
+				internalname="spells"
+				displayname="Spells"
+				itemname="Spell"
+				showcount="true"
+				:todb="toDB"
+				:limit="limit"
+					></editorlist>
 		</div>
 	</div>
 
-	<!-- <div class="lane">
-		<div class="entry" id="permissions">
-			<h2>Permissions</h2>
-			<input v-model="userId" placeholder="User id" />
-			<button @click="addPermission()">Add user</button>
-			<div class="listItem" v-for="permission in permissions">
-				<h1>{{ permission.username }}</h1>
-				<h2>{{ permission.userId }}</h2>
-				<button class="danger" @click="revoke(permission)">Revoke</button>
-			</div>
-		</div>
-	</div> -->
 	<div class="lane" id="utilities" v-if="limit === false">
 		<div class="entry">
 			<h2>Utilities</h2>
@@ -84,6 +86,20 @@
 			<div class="btn">
 				<button onclick="longRest()">Take long rest</button>
 				<button onclick="computeMods()">Calculate mods</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h2>Permissions</h2>
+			<input v-model="userId" placeholder="User id" />
+			<div class="btn">
+				<button @click="addPermission()">Add user</button>
+			</div>
+			<div class="listItem" v-for="permission in permissions">
+				<h1>{{ permission.username }}</h1>
+				<h2>{{ permission.userId }}</h2>
+				<div class="btn">
+					<button class="danger" @click="revoke(permission)">Revoke</button>
+				</div>
 			</div>
 		</div>
 		<div class="entry" v-if="usedInCampaigns.length > 0">

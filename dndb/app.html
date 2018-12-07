@@ -17,6 +17,7 @@
 		<script src="../assets/js/library/material-wave/wave.js"></script>
 		<script src="https://unpkg.com/marked@0.3.6"></script>
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102147810-1"></script>
+		<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js" charset="utf-8"></script>
 
 
 		<!-- App Scripts -->
@@ -129,6 +130,22 @@
 				<transition name="dialogani">
 					<div v-on:click.stop class="box" v-if="type === 'simple'">
 						<p>{{ text }}</p>
+						<div class="btn">
+							<button @click="clkbtn1fn()">{{ btn1 }}</button>
+							<button @click="clkbtn2fn()" v-if="btn2 !== ''">{{ btn2 }}</button>
+						</div>
+					</div>
+					<div v-on:click.stop class="box" v-if="type === 'userList'">
+						<p>{{ text }}</p>
+						<div class="users">
+							<div class="user" v-for="user in users" @click="pickUser(user)">
+								<img v-bind:src="user.image" v-if="user.picked === false" />
+								<div class="picked" v-if="user.picked === true">
+									<i class="material-icons">done</i>
+								</div>
+								<p>{{ user.name }}</p>
+							</div>
+						</div>
 						<div class="btn">
 							<button @click="clkbtn1fn()">{{ btn1 }}</button>
 							<button @click="clkbtn2fn()" v-if="btn2 !== ''">{{ btn2 }}</button>

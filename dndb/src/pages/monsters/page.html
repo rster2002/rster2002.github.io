@@ -24,19 +24,27 @@
 						<input v-model="player.count" placeholder="Number" type="number" />
 						<input v-model="player.level" placeholder="level" type="number" />
 					</div>
-					<button @click="removePlayer(player)">Remove</button>
+					<div class="btn">
+						<button @click="removePlayer(player)">Remove</button>
+					</div>
 				</div>
 			</div>
-			<button @click="addPlayer()">Add player</button>
+			<div class="btn">
+				<button @click="addPlayer()">Add player</button>
+			</div>
 			<div v-if="selectedMonsters.length > 0">
 				<h3>Monsters</h3>
 				<div class="listItem" v-for="monster in selectedMonsters">
 					<h1 @click="setQuery(monster)" style="cursor: pointer;">{{ monster.name }}</h1>
 					<input v-model="monster.count" placeholder="Number of monsters" type="number" />
-					<button @click="removeMonster(monster)">Remove</button>
+					<div class="btn">
+						<button @click="removeMonster(monster)">Remove</button>
+					</div>
 				</div>
 			</div>
-			<button @click="calculate()" v-if="players.length > 0">Calculate challenge</button>
+			<div class="btn">
+				<button @click="calculate()" v-if="players.length > 0">Calculate challenge</button>
+			</div>
 		</div>
 		<div class="entry">
 			<h2>Search</h2>
@@ -79,7 +87,9 @@
 						<p>Has a total of 3 legendary actions per turn</p>
 						<p v-for="action in monster.legendary_actions"><b style="font-style: italic bold;">{{ action.name }}.</b> {{ action.desc }}</p>
 					</div>
-					<button @click="addMonster(monster)">Add monster</button>
+					<div class="btn">
+						<button @click="addMonster(monster)">Add monster</button>
+					</div>
 				</div>
 			</div>
 		</div>

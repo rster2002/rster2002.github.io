@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.20"
+	version: "vB1.23"
 }
 
 var url = document.URL;
@@ -23,6 +23,8 @@ if (DEV) {
 	$("#vueLib").append("<script src='https://cdn.jsdelivr.net/npm/vue'></script>");
 }
 
+console.log(`%c D&D Tools %c Version ${global.version} %c`, "background:#35495e; padding: 1px; border-radius: 3px 0 0 3px; color: white", "background:#ff3030; padding: 1px; border-radius: 0 3px 3px 0; color: white;", "background: transparent;")
+
 if (!DEV) {
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
@@ -33,6 +35,7 @@ if (!DEV) {
 	});
 
 	console.log = function() {}
+	console.warn = function() {}
 }
 
 function roll(expression) {

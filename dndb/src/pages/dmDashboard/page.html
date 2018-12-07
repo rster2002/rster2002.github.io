@@ -47,6 +47,13 @@
 			</div>
 		</div>
 		<div class="entry">
+			<h1>Items</h1>
+			<p>From items for quest to magic items. Here you can keep track of them and add them to your players inventory.</p>
+			<div class="btn">
+				<button @click="openSection('items', 'Items')">Open</button>
+			</div>
+		</div>
+		<div class="entry">
 			<h1>Contracts</h1>
 			<p>Contracts are missions or quests that your players have started.</p>
 			<div class="btn">
@@ -106,6 +113,16 @@
 			<template slot="input">
 				<input placeholder="Name" v-model="working.name" />
 				<input placeholder="Type of settlement" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be revealed to players)" v-model="working.dmDescription"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-items">
+		<dmlist section="items">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Ammount" v-model="working.subtitle" type="number" />
 				<textarea placeholder="Description" v-model="working.description"></textarea>
 				<textarea class="red" placeholder="Private notes (won't be revealed to players)" v-model="working.dmDescription"></textarea>
 			</template>

@@ -3,6 +3,7 @@ var campaignName = sessionStorage.getItem("::campaignName");
 var campaignRef = firestore.collection("campaigns").doc(campaignId);
 var sUid = sessionStorage.getItem("::uid");
 var isDM = false;
+global.campaign = {};
 
 var vueInstance = new Vue({
 	el: "#vueInstance",
@@ -13,6 +14,8 @@ var vueInstance = new Vue({
 		welcomeText: "",
 		isDM: false,
 		timerOutput: "",
+		permissionGranted: true,
+		campaignName: "",
 		dm: {
 			uid: "",
 			profileImage: "",
@@ -21,7 +24,8 @@ var vueInstance = new Vue({
 		currentUser: {
 			uid: "",
 			profileImage: "",
-			username: ""
+			username: "",
+			characterId: ""
 		},
 		datePicker: {
 			days: [],
@@ -126,11 +130,19 @@ var vueInstance = new Vue({
 			}
 		},
 		viewCharacter(user) {
-			global.openCharacter({
-				uid: user.id,
-				characterId: user.character,
-				view: true
-			});
+			if (user.id === uid) {
+				global.openCharacter({
+					uid: user.id,
+					characterId: user.character,
+					view: false
+				});
+			} else {
+				global.openCharacter({
+					uid: user.id,
+					characterId: user.character,
+					view: true
+				});
+			}
 		},
 		addHouserule() {
 			let houserule = Object.assign({}, this.editingRule);
@@ -182,6 +194,9 @@ var vueInstance = new Vue({
 				}
 			})
 		},
+		toggleRule(item) {
+			item.opened = !item.opened;
+		},
 		openDashboard() {
 			global.campaignId = campaignId;
 			global.campaignName = campaignName;
@@ -191,6 +206,39 @@ var vueInstance = new Vue({
 			global.campaignId = campaignId;
 			global.campaignName = campaignName;
 			openPage("campaignCompanion");
+		},
+		dismiss() {
+			this.permissionGranted = true;
+		},
+		grantPermission() {
+			global.t = this;
+			getProfile(this.dm.uid, function(e) {
+				userRef.collection("characters").doc(global.t.currentUser.characterId).collection("permissions").doc(e.uid).set(e).then(e => {
+					global.t.permissionGranted = true;
+					skb("Permission granted");
+				});
+			})
+		},
+		changeCampaignName() {
+			if (this.campaignName === "") {
+				alert("This name is invalid");
+			} else {
+
+				global.t = this;
+
+				global.alert({
+					text: "Are you sure you want to change the name of the campaign",
+					btn1: "change",
+					btn2: "cancel",
+					btn1fn: function() {
+						campaignRef.update({
+							name: global.t.campaignName
+						}).then(e => {
+							skb("Campaign name changed");
+						});
+					}
+				});
+			}
 		}
 	}
 });
@@ -293,17 +341,38 @@ async function getDm() {
 async function getPlayerList() {
 
 	vueInstance.players = [];
-	function addToPlayerArray(user) {
+	global.campaign.users = [];
+	async function addToPlayerArray(user) {
 		if (user.type === "player") {
-			getProfile(user.id, rtrn => {
+			getProfile(user.id, async function(rtrn){
 				user["profile"] = rtrn;
+
+				var permitted = await createQuery(firestore.collection("users").doc(user.id).collection("characters").doc(user.character).collection("permissions").where("uid", "==", vueInstance.dm.uid));
+
+				console.log(permitted);
+
+				if (permitted.length === 0) {
+					user.permitted = false;
+				} else if (permitted.length > 0) {
+					user.permitted = true;
+				}
+
 				getCharacter(user.id, user.character, characterObj => {
 					console.log(user);
 					user["characterObj"] = characterObj;
 					user["characterObj"]["characterName"] = characterObj["96_1"];
 					user["open"] = false;
+					global.campaign.users.push(user);
 					vueInstance.players.push(user);
 				});
+
+				if (user.id === uid) {
+					if (!user.permitted) {
+						vueInstance.permissionGranted = false;
+					}
+
+					vueInstance.currentUser.characterId = user.character;
+				}
 			});
 		}
 	}
@@ -323,12 +392,15 @@ async function getPlayerList() {
 async function getHouserules() {
 	var query = await createQuery(campaignRef.collection("houserules").orderBy("title", "desc"));
 	if (query.length > 0) {
-		vueInstance.houserules = query;
+		query.forEach(a => {
+			a.opened = false;
+			vueInstance.houserules.push(a);
+		});
 	}
 }
 
-getPlayerList();
 getDm();
+getPlayerList();
 getHouserules();
 
 vueInstance.currentUser = userInformation;

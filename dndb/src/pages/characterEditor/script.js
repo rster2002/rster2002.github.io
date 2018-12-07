@@ -111,7 +111,8 @@ Vue.component("editorlist", {
 				tag: "",
 				tags: [],
 				shown: false
-			}
+			},
+			forceUpdate: false
 		}
 	},
 	watch: {
@@ -127,6 +128,15 @@ Vue.component("editorlist", {
 				}
 
 				this.todb.send += 1;
+			}
+		},
+		forceUpdate() {
+			if (this.forceUpdate === true) {
+				console.log(`%c Forced update %c`, "padding: 1px; border-radius: 3px; color: white; background-color: #30ff30;", "background-color: transparent;");
+
+				this.updateList();
+
+				this.forceUpdate = false;
 			}
 		}
 	},
@@ -385,17 +395,33 @@ Vue.component("editorlist", {
 			console.log(currentColorIndex, this.colors[currentColorIndex]);
 
 			this.items[itemIndex].color = this.colors[currentColorIndex];
-		}
-	},
-	created: async function() {
-		var internalName = this.internalname;
-		var lastLevel = -1;
-		if (internalName === "spells") {
-			var query = await createQuery(characterRef.collection("spells").orderBy("name", "asc"));
-			console.log(query);
-			if (query.length > 0) {
-				for (var i = 0; i < query.length; ++i) {
-					var spell = query[i];
+		},
+		updateList: async function() {
+			var currentItems = [];
+
+			this.items.forEach(a => {
+				let p = Object.assign({}, a);
+				p.editing = false;
+				currentItems.push(p);
+			});
+
+			var internalName = this.internalname;
+			var lastLevel = -1;
+
+			var query = await createQuery(characterRef.collection(this.internalname).orderBy("name", "asc"));
+
+			let q = [];
+			query.forEach(a => {
+				a.editing = false;
+				q.push(a);
+			});
+
+			let diff = _.differenceBy(q, currentItems, "__id");
+
+			console.log(currentItems, q, diff);
+
+			if (this.internalname) {
+				diff.forEach(spell => {
 					if (spell.version === "b" || spell.version === undefined) {
 						spell.version = 3;
 					}
@@ -414,14 +440,9 @@ Vue.component("editorlist", {
 					}
 
 					this.items.push(spell);
-				}
-			}
-		} else {
-			var query = await createQuery(characterRef.collection(internalName).orderBy("name", "asc"));
-			console.log(query);
-			if (query[0] !== undefined) {
-				for (var i = 0; i < query.length; i++) {
-					var item = query[i];
+				});
+			} else {
+				diff.forEach(item => {
 					if (item.pinned === undefined) {
 						item.pinned = false;
 					}
@@ -431,11 +452,42 @@ Vue.component("editorlist", {
 					}
 
 					this.items.push(item);
-				}
-			} else {
-				this.items = [];
+				});
 			}
+
+			// if (internalName === "spells") {
+			// 	var query = await createQuery(characterRef.collection("spells").orderBy("name", "asc"));
+			// 	console.log(query);
+			// 	if (query.length > 0) {
+			// 		for (var i = 0; i < query.length; ++i) {
+			// 			var spell = query[i];
+			//
+			// 		}
+			// 	}
+			// } else {
+			// 	var query = await createQuery(characterRef.collection(internalName).orderBy("name", "asc"));
+			// 	console.log(query);
+			// 	if (query[0] !== undefined) {
+			// 		for (var i = 0; i < query.length; i++) {
+			// 			var item = query[i];
+			// 			if (item.pinned === undefined) {
+			// 				item.pinned = false;
+			// 			}
+			//
+			// 			if (item.color === undefined) {
+			// 				item.color = "rgba(0, 0, 0, .1)";
+			// 			}
+			//
+			// 			this.items.push(item);
+			// 		}
+			// 	} else {
+			// 		this.items = [];
+			// 	}
+			// }
 		}
+	},
+	created() {
+		this.updateList();
 	}
 });
 
@@ -465,9 +517,48 @@ var vueUtilities = new Vue({
 	el: "#utilities",
 	data: {
 		usedInCampaigns: [],
-		limit: false
+		limit: false,
+		userId: "",
+		permissions: []
+	},
+	methods: {
+		addPermission() {
+			var userId = this.userId;
+			console.log(userId);
+			getUidFromId(userId, returnedUid => {
+				getProfile(returnedUid, returnedProfile => {
+					characterRef.collection("permissions").doc(returnedProfile.uid).set(returnedProfile).then(() => {
+						this.permissions.push(returnedProfile);
+						skb("Permission added");
+					}).catch(e => thr(e));
+				});
+			});
+		},
+		revoke(permission) {
+			global.i = permission;
+			global.t = this;
+			global.alert({
+				text: "Are you sure you want to revoke permissions?",
+				btn1: "revoke",
+				btn2: "cancel",
+				btn1fn: function() {
+					var revokeUid = global.i.uid;
+					characterRef.collection("permissions").doc(revokeUid).delete().then(() => {
+						global.t.permissions.splice(global.t.permissions.indexOf(permission), 1);
+						skb("Permission revoked");
+					}).catch(e => thr(e));
+				}
+			});
+		}
+	},
+	created: async function() {
+		var query = await createQuery(characterRef.collection("permissions"));
+		if (query.length > 0) {
+			this.permissions = query;
+		}
 	}
 });
+
 
 async function reloadCampaigns() {
 	vueUtilities.usedInCampaigns = [];
@@ -479,33 +570,27 @@ async function reloadCampaigns() {
 
 reloadCampaigns();
 
+function setChannel(channel, status) {
+	characterRef.collection("channels").doc(channel).set({
+		status: status
+	});
+}
 
-var vuePermissions = new Vue({
-	el: "#permissions",
-	data: {
-		userId: "",
-		permissions: []
-	},
-	methods: {
-		addPermission() {
-			var userId = this.userId;
-			getUidFromId(userId, returnedUid => {
-				getProfile(returnedUid, returnedProfile => {
-					characterRef.collection("permissions").doc(returnedProfile.uid).set(returnedProfile).then(() => {
-						this.permissions.push(returnedProfile);
-						skb("Permission added");
-					}).catch(e => thr(e));
-				});
-			});
-		},
-		revoke(permission) {
-			if (confirm("Are you sure?")) {
-				var revokeUid = permission.uid;
-				characterRef.collection("permissions").doc(revokeUid).delete().then(() => {
-					this.permissions.splice(this.permissions.indexOf(permission), 1);
-					skb("Permission revoked");
-				}).catch(e => thr(e));
+characterRef.collection("channels").doc("inventory").onSnapshot(e => {
+	if (e && e.exists) {
+		let i = e.data();
+
+		console.log(`%c Status update %c ${i.status} `, "padding: 1px; border-radius: 3px; color: white; background-color: #3030ff;", "background-color: transparent;");
+
+		if (i.status !== "idle") {
+
+			if (i.status === "dm-added") {
+				vueLists.$children[0].forceUpdate = true;
+
+				skb("DM added an item to your inventory");
 			}
+
+			setChannel("inventory", "idle");
 		}
 	}
 });
@@ -1085,6 +1170,7 @@ function onload() {
 		$("#pdf1").on("load", function() {
 			$("#characterSheetSpinner").hide();
 		});
+
 		loaded = true;
 	}
 }
