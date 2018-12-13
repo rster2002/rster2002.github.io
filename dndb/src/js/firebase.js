@@ -13,6 +13,9 @@ const firestoreSettings = {
 	timestampsInSnapshots: true
 }
 firestoreFunction.settings(firestoreSettings);
+
+firestoreFunction.enablePersistence();
+
 const firestore = firestoreFunction.collection(dbNew).doc("dnd");
 
 var wait = firebase.storage();

@@ -207,6 +207,11 @@ var vueInstance = new Vue({
 			global.campaignName = campaignName;
 			openPage("campaignCompanion");
 		},
+		openStory() {
+			global.campaignId = campaignId;
+			global.campaignName = campaignName;
+			openPage("dmStory");
+		},
 		dismiss() {
 			this.permissionGranted = true;
 		},

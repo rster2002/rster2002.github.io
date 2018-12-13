@@ -1,116 +1,39 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@font-face {
+    font-family: Roboto;
+    src: url(./fonts/Roboto-Regular.ttf);
+}
 
-html, body {
-	width: 100vw;
-	height: 100vh;
+body, html {
+	width: 100%;
+	height: 100%;
 	padding: 0;
 	margin: 0;
-	overflow-x: hidden;
-}
-
-/* Some global classes */
-.full {
-	width: 100%;
-}
-
-.partial {
-	width: 100%;
-	max-width: 935px;
 }
 
 .header {
-	height: 345px;
-	background-color: #ff3030;
-}
-
-.header .content {
 	width: 100%;
-	height: calc(100% - 25px);
+	height: 100%;
+	background-image: url(./background.png);
+	background-position: center;
+	background-size: cover;
+	background-attachment: fixed;
 }
 
-.header .content .topBar {
-	height: calc(56px + 1px);
-	width: 90%;
-	margin-left: 5%;
-	margin-right: 5%;
-	border-bottom: #f1f1f1 solid 1px;
-}
-
-.header .content .topBar h1 {
-	/* D&D Tools */
+.header h1 {
 	margin: 0;
-	position: relative;
-	width: 194px;
-	height: 32px;
-	left: 0px;
-	top: 12px;
-
-	font-family: 'Roboto';
-	font-style: normal;
-	font-weight: 900;
-	line-height: normal;
-	font-size: 26px;
-
-	color: #FFFFFF;
-}
-
-.header .content .topBar .button {
-	/* Login btn */
-
-	position: relative;
-    width: 91px;
-    height: 32px;
-    top: -18px;
-    float: right;
-	border-radius: 2px;
-	cursor: pointer;
-}
-
-.header .content .topBar .button h1 {
-	/* Login */
-
-	margin: 0;
-    position: relative;
-    width: 100%;
-    height: 21px;
-    top: 7px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 900;
-    line-height: normal;
-    font-size: 16px;
-    color: #FFFFFF;
-    text-align: center;
-}
-
-.header .content .title {
-	width: 90%;
-	margin-left: 5%;
-	margin-right: 5%;
-	height: calc(100% - 57px);
-}
-
-.header .content .title h1 {
-	/* Get playing faster */
-
-	margin: 0;
-	width: 303px;
-
+	font-family: 'Roboto', sans-serif;
 	position: relative;
 	top: 50%;
-	transform: translateY(-50%);
-
-	font-family: Roboto;
-	font-style: normal;
-	font-weight: 900;
-	line-height: normal;
-	font-size: 48px;
-
-	color: #FFFFFF;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	font-size: 96px;
+    font-weight: 600;
+    mix-blend-mode: exclusion;
+	color: white;
 }
 
-.header .chin {
+.section {
 	width: 100%;
-	height: 25px;
-	background-color: #f1f1f1;
+	height: 100%;
 }

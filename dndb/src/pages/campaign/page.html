@@ -80,13 +80,20 @@
 				<button @click="openInformation()">Open</button>
 			</div>
 		</div>
-		<div class="entry" v-if="isDM" v-if="isDM">
+		<div class="entry" v-if="isDM">
 			<h2>DM Dashboard</h2>
 			<p>Staying consistent across sessions is crusial to keeping the world you paint believable. This tool helps you with that. Not only can you keep track of important information like NPC's and locations and a whole lot more, but you also can help your players remember all the information they get in sessions.</p>
 			<div class="btn">
 				<button @click="openDashboard()">Open</button>
 			</div>
 		</div>
+		<!-- <div class="entry" v-if="isDM">
+			<h2>Story</h2>
+			<p>Orginize your story hooks into chapters making it easier to run and plan a story.</p>
+			<div class="btn">
+				<button @click="openStory()">Open</button>
+			</div>
+		</div> -->
 		<div class="entry" v-if="houserules.length > 0 || isDM">
 			<h2>House rules</h2>
 			<div>

@@ -1,0 +1,40 @@
+<div class="innerResources">
+	<script>
+		tempImport([
+			"--default"
+		]);
+	</script>
+</div>
+<div class="innerPage" id="storyInstance">
+	<div class="lane">
+		<div class="entry">
+			<div class="btn">
+				<button onclick="openPage('campaign')">Back</button>
+			</div>
+		</div>
+		<div class="entry">
+			<h1>Story</h1>
+			<div class="listItem" v-if="chapters.length === 0">
+				<h1 class="hc">No chapters yet</h1>
+			</div>
+			<div class="listItem clk" v-for="chapter in chapters" @click="openChapter(chapter)">
+				<h1 v-if="chapter.name != ''">{{ chapter.name }}</h1>
+				<h1 v-else>No name</h1>
+			</div>
+		</div>
+	</div>
+
+	<button class="wave fab" onclick="vueInstance.addChapter()">
+		<i class="material-icons">add</i>
+	</button>
+
+	<div class="section" id="chapter">
+		<div class="lane">
+			<div class="entry">
+				<h1>Chapter</h1>
+				<input v-model="currentChapter.name" placeholder="name" />
+			</div>
+		</div>
+	</div>
+
+</div>

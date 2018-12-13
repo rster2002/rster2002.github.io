@@ -30,9 +30,7 @@ Vue.component("editorlist", {
 			<button class="full" @click="saveEdit()" v-if="editing == true">Save</button>
 		</div>
 		<div class="entry" v-if="items.length > 0">
-			<div class="listItem">
-				<input placeholder="Search" v-model="query">
-			</div>
+			<input placeholder="Search" v-model="query">
 			<div class="listItem" v-for="item in withTag" v-bind:style="{border: color(item)}">
 				<div v-if="item.editing == true">
 					<div class="shared">
@@ -41,8 +39,8 @@ Vue.component("editorlist", {
 				</div>
 				<div v-if="item.editing != true">
 					<div class="shared" @click="toggleShown(item)">
-						<h1 v-if="item.name !== ''">{{ item.name }}</h1>
-						<h1 v-if="item.name === ''">Unnamed item</h1>
+						<h1 v-if="item.name !== ''" class="noOverflow">{{ item.name }}</h1>
+						<h1 v-if="item.name === ''" class="noOverflow">Unnamed item</h1>
 					</div>
 					<div class="expanded" v-if="item.shown == true">
 						<input :disabled="limit === true" v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />
@@ -70,8 +68,8 @@ Vue.component("editorlist", {
 				</div>
 				<div v-if="item.editing != true">
 					<div class="shared" @click="toggleShown(item)">
-						<h1 v-if="item.name !== ''">{{ item.name }}</h1>
-						<h1 v-if="item.name === ''">Unnamed item</h1>
+						<h1 v-if="item.name !== ''" class="noOverflow">{{ item.name }}</h1>
+						<h1 v-if="item.name === ''" class="noOverflow">Unnamed item</h1>
 					</div>
 					<div class="expanded" v-if="item.shown == true">
 						<input :disabled="limit === true" v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />

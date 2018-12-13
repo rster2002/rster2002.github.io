@@ -66,6 +66,8 @@ html .wave.bar.top {
 
 html .wave.top.bar > .section.text h1 {
 	color: black;
+	padding-right: 20px;
+	text-align: center;
 }
 
 html .wave.top.bar > .section button i {
@@ -78,7 +80,7 @@ html .wave.top.bar > .section button i {
 }
 
 .page {
-	background-color: rgba(0, 0, 0, .03);
+	background-color: #f1f1f1;
 }
 
 /* Defines some global classes */
@@ -103,6 +105,10 @@ html .wave.top.bar > .section button i {
 }
 
 .textCenter {
+	text-align: center;
+}
+
+.hc {
 	text-align: center;
 }
 
@@ -1130,10 +1136,11 @@ html div.wave.card > div.actions button {
 }
 
 .spinner {
+	position: absolute;
 	width: 100%;
 	height: 100%;
-	background-color: transparent;
-	z-index: 5;
+	background-color: #f1f1f1;
+	z-index: 3;
 }
 
 .spinner.background {

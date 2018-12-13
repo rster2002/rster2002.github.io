@@ -12,9 +12,7 @@ Vue.component("dmlist", {
 		</div>
 		<div class="entry">
 			<h2>Entries</h2>
-			<div class="listItem">
-				<input v-model="query" placeholder="Search" />
-			</div>
+			<input v-model="query" placeholder="Search" />
 			<div class="listItem" v-for="entry in filteredEntries" v-bind:class="{open: entry.open}">
 				<div v-if="entry.editing != true">
 					<div class="shared" @click="openEntry(entry)">

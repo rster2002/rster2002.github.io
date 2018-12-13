@@ -1,0 +1,13 @@
+.innerPage .section {
+	position: fixed;
+	height: calc(100% - 64px);
+	width: 100%;
+	display: none;
+	background-color: white;
+	top: 64px;
+	overflow-y: auto;
+}
+
+.clk {
+	cursor: pointer;
+}
