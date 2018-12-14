@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.24"
+	version: "vB1.25"
 }
 
 var url = document.URL;
@@ -87,12 +87,13 @@ const pageTitles = {
 	characterEditor: "Character Editor",
 	campaign: "Campaign",
 	campaignMenu: "Campaigns",
-	dm: "Dungeon Master Tools",
+	content: "Content",
 	profile: "Profile",
 	dashboard: "Dashboard",
 	system: "System page",
 	campaignCompanion: "Campaign companion",
-	dmDashboard: "DM Dashboard"
+	dmDashboard: "DM Dashboard",
+	monsters: "Monsters"
 }
 
 $(document).ready(function() {

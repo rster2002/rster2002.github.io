@@ -81,6 +81,11 @@
 						<div class="divider"></div>
 						<p v-for="action in monster.actions"><b style="font-style: italic bold;">{{ action.name }}.</b> {{ action.desc }}</p>
 					</div>
+					<div v-if="monster.reactions.length > 0">
+						<h3>Reactions</h3>
+						<div class="divider"></div>
+						<p v-for="reaction in monster.reactions"><b style="font-style: italic bold;">{{ reaction.name }}.</b> {{ reaction.desc }}</p>
+					</div>
 					<div v-if="monster.legendary_actions.length > 0">
 						<h3>Legendary Actions</h3>
 						<div class="divider"></div>
