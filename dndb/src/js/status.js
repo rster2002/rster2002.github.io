@@ -18,6 +18,8 @@ firestore.onSnapshot(e => {
 	let d = e.data();
 	if (d.status === "online") {
 		vueInstance.styling.color = "#30f30f";
+	} else if (d.status === "warn") {
+		vueInstance.styling.color = "#fc6600";
 	} else {
 		vueInstance.styling.color = "#ff3030"
 	}

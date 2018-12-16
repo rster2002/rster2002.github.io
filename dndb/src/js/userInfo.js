@@ -100,8 +100,25 @@ async function configUserDb(authObj) {
 									d.info = "Application is not available at the moment.";
 								}
 
-								alert("Status: " + d.status + "\n\n" + d.info + "\n\nTo make sure no data is lost, you'll be logged out.");
-								logout();
+								let x = "\n\nTo make sure no data is lost, you'll be logged out.";
+
+								if (d.status === "warn") {
+									x = "";
+								}
+
+								global.i = d;
+
+								global.alert({
+									text: "Status: " + d.status + ", \n\n" + d.info + x,
+									btn1fn: function() {
+										let d = global.i;
+										if (d.status !== "warn") {
+											logout();
+										}
+									}
+								});
+
+
 							}
 						}
 					});

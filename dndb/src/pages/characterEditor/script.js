@@ -356,6 +356,10 @@ Vue.component("editorlist", {
 					a.description = a.description.join("\n");
 				}
 
+				if (a.count === undefined) {
+					a.count = 1;
+				}
+
 				q.push(a);
 			});
 
