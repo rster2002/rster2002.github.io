@@ -62,11 +62,11 @@
 					<div class="menubutton page-campaignMenu" onclick="openPage('campaignMenu')">
 						<p class="centerVertical"><i class="material-icons">bookmark</i>Campaigns</p>
 					</div>
-					<div class="menubutton page-dm" onclick="openPage('content')">
+					<div class="menubutton page-content" onclick="openPage('content')">
 						<p class="centerVertical"><i class="material-icons">folder</i>Content</p>
 					</div>
 					<div class="divider"></div>
-					<div class="menubutton" onclick="openPage('profile')">
+					<div class="menubutton page-profile" onclick="openPage('profile')">
 						<p class="centerVertical"><i class="material-icons">face</i>Profile</p>
 					</div>
 					<div class="menubutton" onclick="window.open('https://github.com/rster2002/rster2002.github.io/issues')">
@@ -87,9 +87,17 @@
 				<div class="animation"></div>
 			</div>
 			<div class="wave bar top shadow">
-				<button onclick="sidebar.open();">menu</button>
-				<h1 id="pageName">Dashboard</h1>
-				<img class="userimg right" alt="Profile picture" />
+				<div class="section">
+					<button onclick="sidebar.open();">
+						<i class="material-icons">menu</i>
+					</button>
+				</div>
+				<div class="section text" style="width: calc(100% - 128px);">
+					<h1 id="pageName">Dashboard</h1>
+				</div>
+				<div class="section" style="float: right;">
+					<img class="userimg right" alt="Profile picture" />
+				</div>
 			</div>
 			<div class='wave pusher top'></div>
 			<div class="wave page">

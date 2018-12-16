@@ -269,6 +269,7 @@ $.getJSON("./src/json/monsters.json", function(data) {
 		d["special_abilities"] = d["special_abilities"] !== undefined ? d["special_abilities"] : [];
 		d["actions"] = d["actions"] !== undefined ? d["actions"] : [];
 		d["legendary_actions"] = d["legendary_actions"] !== undefined ? d["legendary_actions"] : [];
+		d["reactions"] = d["reactions"] !== undefined ? d["reactions"] : [];
 
 		returning.push(d);
 	}

@@ -7,7 +7,6 @@ $(document).ready(() => {
 		"select",
 		"dialog",
 		"menu",
-		"bar",
 		"card",
 		"grid",
 		"elevation",

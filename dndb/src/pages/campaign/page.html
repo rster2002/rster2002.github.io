@@ -6,7 +6,7 @@
 	</script>
 </div>
 <div class="innerPage scroll" id="vueInstance">
-	<div class="spinner whiteBackground" v-if="spinning">
+	<div class="spinner" v-if="spinning">
 		<div class="inner"></div>
 	</div>
 	<div class="banner" v-if="permissionGranted === false">
@@ -87,13 +87,13 @@
 				<button @click="openDashboard()">Open</button>
 			</div>
 		</div>
-		<!-- <div class="entry" v-if="isDM">
+		<div class="entry" v-if="isDM">
 			<h2>Story</h2>
 			<p>Orginize your story hooks into chapters making it easier to run and plan a story.</p>
 			<div class="btn">
 				<button @click="openStory()">Open</button>
 			</div>
-		</div> -->
+		</div>
 		<div class="entry" v-if="houserules.length > 0 || isDM">
 			<h2>House rules</h2>
 			<div>

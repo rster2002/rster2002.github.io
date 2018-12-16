@@ -191,6 +191,7 @@ join checklist:
 */
 
 async function join(campaignName) {
+	vueInstance.loaded = false;
 	if (campaignName) {
 		// creates a query to check if a campaign with that campaign name exists
 		var query = await createQuery(firestore.collection("campaigns").where("name", "==", campaignName));
@@ -252,6 +253,7 @@ function addToList(i, characterId) {
 }
 
 async function selectCharacter() {
+	vueInstance.loaded = true;
 	$(".selectCharacter").show();
 
 	var characterQuery = await createQuery(userRef.collection("characters"));
@@ -277,6 +279,8 @@ function afterSelect(index) {
 		btn1: "use",
 		btn2: "cancel",
 		btn1fn: function() {
+			vueInstance.loaded = false;
+
 			userRef.collection("campaigns").doc(campaignId).set({
 				name: campaignName,
 				id: campaignId,

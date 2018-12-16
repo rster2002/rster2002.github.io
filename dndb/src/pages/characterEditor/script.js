@@ -8,36 +8,32 @@ var file = null;
 
 sessionStorage.setItem("::saved", "false");
 
+// <div v-if="adding === true">
+// 	<input v-bind:placeholder="itemname + ' name'" v-model="working.name" />
+// 	<input v-if="showcount === 'true'" v-bind:placeholder="countPlaceholder" v-model="working.count" type="number" />
+// 	<textarea v-model="working.description" placeholder="Description"></textarea>
+// 	<div class="row">
+// 	<input @keyup.enter="addTag()" v-model="working.tag" placeholder="Tag" />
+// 	<button @click="addTag()" style="padding: 0px; height: 41px;"><i class="material-icons">add</i></button>
+// 	</div>
+// 	<div class="tags" style="margin-bottom: 16px;">
+// 	<div class="tag" v-for="tag in working.tags" @click="deleteTag(tag)">
+// 	<p>{{ tag }}</p>
+// 	<i class="material-icons">clear</i>
+// 	</div>
+// 	</div>
+// 	<button class="full" @click="addItem()" v-if="editing == false">Add</button>
+// 	<button class="full" @click="saveEdit()" v-if="editing == true">Save</button>
+// </div>
+
 Vue.component("editorlist", {
 	template: `
 	<div>
-		<div class="entry" v-if="limit === false">
-			<h1 style="font-size: 42px">{{ displayname }}</h1>
-			<input v-bind:placeholder="itemname + ' name'" v-model="working.name" />
-			<input v-if="showcount === 'true'" v-bind:placeholder="countPlaceholder" v-model="working.count" type="number" />
-			<textarea v-model="working.description" placeholder="Description"></textarea>
-			<div class="row">
-				<input @keyup.enter="addTag()" v-model="working.tag" placeholder="Tag" />
-				<button @click="addTag()" style="padding: 0px; height: 41px;"><i class="material-icons">add</i></button>
-			</div>
-			<div class="tags">
-				<div class="tag" v-for="tag in working.tags" @click="deleteTag(tag)">
-					<p>{{ tag }}</p>
-					<i class="material-icons">clear</i>
-				</div>
-			</div>
-			<button class="full" @click="addItem()" v-if="editing == false">Add</button>
-			<button class="full" @click="saveEdit()" v-if="editing == true">Save</button>
-		</div>
-		<div class="entry" v-if="items.length > 0">
-			<input placeholder="Search" v-model="query">
-			<div class="listItem" v-for="item in withTag" v-bind:style="{border: color(item)}">
-				<div v-if="item.editing == true">
-					<div class="shared">
-						<h1>Being edited...</h1>
-					</div>
-				</div>
-				<div v-if="item.editing != true">
+		<div class="entry" style="margin-bottom: 46px;">
+			<input v-if="items.length > 0" placeholder="Search" v-model="query">
+			<h3 v-if="items.length === 0" class="hc">Nothing here</h3>
+			<div class="listItem" v-for="item in sorted" v-bind:style="{border: color(item)}">
+				<div v-if="item.editing !== true">
 					<div class="shared" @click="toggleShown(item)">
 						<h1 v-if="item.name !== ''" class="noOverflow">{{ item.name }}</h1>
 						<h1 v-if="item.name === ''" class="noOverflow">Unnamed item</h1>
@@ -59,39 +55,27 @@ Vue.component("editorlist", {
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="listItem" v-for="item in withoutTag" v-bind:style="{border: color(item)}">
-				<div v-if="item.editing == true">
-					<div class="shared">
-						<h1>Being edited...</h1>
+				<div v-if="item.editing === true">
+					<input :placeholder="itemname + ' name'" v-model="item.name" />
+					<textarea v-model="item.description" placeholder="Description"></textarea>
+					<div class="row">
+						<input @keyup.enter="addTag(item)" v-model="item.tag" placeholder="Tag" />
+						<button @click="addTag(item)" style="padding: 0px; height: 41px;"><i class="material-icons">add</i></button>
 					</div>
-				</div>
-				<div v-if="item.editing != true">
-					<div class="shared" @click="toggleShown(item)">
-						<h1 v-if="item.name !== ''" class="noOverflow">{{ item.name }}</h1>
-						<h1 v-if="item.name === ''" class="noOverflow">Unnamed item</h1>
+					<div class="tags" style="margin-bottom: 16px;">
+						<div class="tag" v-for="tag in item.tags" @click="deleteTag(tag)">
+							<p>{{ tag }}</p>
+							<i class="material-icons">clear</i>
+						</div>
 					</div>
-					<div class="expanded" v-if="item.shown == true">
-						<input :disabled="limit === true" v-if="showcount === 'true'" v-model="item.count" v-bind:placeholder="countPlaceholder" type="number" />
-						<div class="markdown" v-html="toMarkdown(item.description)"></div>
-						<!-- {{{ toMarkdown(item.description) }}} -->
-						<div class="tags">
-							<div class="tag" v-for="tag in item.tags">
-								<p>{{ tag }}</p>
-							</div>
-						</div>
-						<div class="btn icn" v-if="limit === false">
-							<button @click="deleteItem(item)"><span class="material-icons">delete</span></button>
-							<button @click="editItem(item)"><span class="material-icons">edit</span></button>
-							<button @click="pin(item)"><span v-if="item.pinned === true" class="material-icons">label_off</span><span v-if="item.pinned === false" class="material-icons">label</span></button>
-							<button @click="changeColor(item)"><span class="material-icons">color_lens</span></button>
-						</div>
+					<div class="btn icn">
+						<button @click="saveEdit(item)"><span class="material-icons">save</span></button>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="entry" v-if="limit === true && items.length === 0">
-			<h1 class="hc">Nothing here</h1>
+			<button v-if="limit === false" class="wave fab" @click="addEntry()">
+				<i class="material-icons">add</i>
+			</button>
 		</div>
 	</div>`,
 	props: ["internalname", "displayname", "itemname", "showcount", "todb", "limit"],
@@ -110,7 +94,8 @@ Vue.component("editorlist", {
 				tags: [],
 				shown: false
 			},
-			forceUpdate: false
+			forceUpdate: false,
+			adding: false
 		}
 	},
 	watch: {
@@ -139,39 +124,39 @@ Vue.component("editorlist", {
 		}
 	},
 	computed: {
-		withTag() {
+		sorted() {
 			var query = this.query;
 			query = query.toLowerCase();
-			return this.items.filter(function(item) {
-				if (query !== "") {
-					if (item.pinned === true) {
-						console.log(query);
-						let n = item.name.toLowerCase();
-						if (n.includes(query)) {
-							return true;
-						}
+			let list = this.items;
+			if (query !== "") {
+				list = list.filter(item => {
+					if (item.name.includes(query)) {
+						return true;
 					}
-				} else {
-					return item.pinned;
+				});
+			}
+
+			list = list.sort((a, b) => {
+				if (a.pinned === true) {
+					return -1;
 				}
 			});
-		},
-		withoutTag() {
-			var query = this.query;
-			query = query.toLowerCase();
-			return this.items.filter(function(item) {
-				if (query !== "") {
-					if (item.pinned === false) {
-						console.log(query);
-						let n = item.name.toLowerCase();
-						if (n.includes(query)) {
-							return true;
-						}
-					}
-				} else {
-					return !item.pinned;
-				}
-			});
+
+			return list;
+
+			// let queried = this.items.filter(function(item) {
+			// 	if (query !== "") {
+			// 		if (item.pinned === true) {
+			// 			console.log(query);
+			// 			let n = item.name.toLowerCase();
+			// 			if (n.includes(query)) {
+			// 				return true;
+			// 			}
+			// 		}
+			// 	} else {
+			// 		return item.pinned;
+			// 	}
+			// });
 		},
 		countPlaceholder() {
 			if (this.internalname === "spells") {
@@ -204,11 +189,7 @@ Vue.component("editorlist", {
 			}
 		},
 		toMarkdown(description) {
-			let p = [];
-			for (var i = 0; i < description.length; ++i) {
-				p.push(description[i]);
-			}
-			let o = marked(p.join("\n"), { sanitize: true });
+			let o = marked(description, { sanitize: true });
 			console.log(o);
 			return o;
 		},
@@ -216,95 +197,48 @@ Vue.component("editorlist", {
 			console.log("het")
 			this.items[this.items.indexOf(item)].shown = !this.items[this.items.indexOf(item)].shown;
 		},
-		addTag() {
-			this.working.tags.push(this.working.tag);
-			this.working.tag = "";
+		addTag(item) {
+			item.tags.push(item.tag);
+			item.tag = "";
 		},
 		deleteTag(tag) {
 			this.working.tags.splice(this.working.tags.indexOf(tag), 1);
 		},
-		addItem() {
-			var i = Object.assign({}, this.working);
-			var d = i.description.split("\n");
-			var rtrn = [];
-			for (var p = 0; p < d.length; ++p) {
-				var temp = d[p];
-				if (temp === "") {
-					temp = " ";
-				}
-				rtrn.push(temp);
-			}
-			i.description = rtrn;
-			i.tags = Object.assign([], this.working.tags);
-			i.__id = genId();
-			i.pinned = false;
-			i.color = "rgba(0, 0, 0, .1)";
-			i.version = 3;
-			i.count = this.working.count;
+		addEntry() {
 
-			var t = this;
+			this.items.push({
+				name: "",
+				description: "",
+				tag: "",
+				tags: [],
+				editing: true,
+				color: "rgba(0, 0, 0, .1)",
+				pinned: false,
+				shown: true,
+				version: 3,
+				count: 1,
+				__id: genId()
+			});
 
-			var name = i.name;
-			console.log(name);
-			name = name.toLowerCase();
-			global.i = {
-				name: name,
-				t: this
-			};
+			a.ev("Character Editor", "Item add", "user action");
 
-			function finalize(item) {
-				a.ev("Character Editor", "Item created (" + t.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
-				console.log(item);
-				t.items.push(item);
-				t.resetWorking();
-			}
-
-			global.i.item = i;
-
-			if (gearPacks[name] !== undefined && this.internalname === "inventory") {
-				global.alert({
-					text: "You can quickly add all the individial items of this pack to your inventory or do you want to add the pack as one item?",
-					btn1: "add content",
-					btn2: "add pack",
-					btn1fn: function() {
-						var name = global.i.name;
-						var t = global.i.t;
-						var arr = gearPacks[name];
-						for (var i = 0; i < arr.length; ++i) {
-							var item = arr[i];
-							let entries = Object.entries(item);
-							for (var l = 0; l < entries.length; ++l) {
-								t.working[entries[l][0]] = entries[l][1];
-							}
-
-							t.addItem();
-						}
-					},
-					btn2fn: function() {
-						finalize(global.i.item);
-					}
-				})
-			} else {
-				console.log(i);
-				finalize(i);
-			}
 		},
 		deleteItem(item) {
-			global.i = {
-				a: this,
-				b: item
-			};
+			global.i = item;
+
+			global.t = this;
+
 			global.alert({
-				text: "Are you sure you want to delete this " + this.itemname + "? This can't be undone!",
+				text: "Are you sure you want to delete this " + global.i.name + "? This can't be undone!",
 				btn1: "delete",
 				btn2: "cancel",
 				btn1fn: function() {
-					var i = global.i.a;
-					var item = global.i.b;
+					var t = global.t;
+					var item = global.i;
 
-					characterRef.collection(i.internalname).doc(item.__id).delete().then(function() {
-						i.items.splice(i.items.indexOf(item), 1);
-						a.ev("Character Editor", "Item deleted (" + i.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
+					characterRef.collection(t.internalname).doc(item.__id).delete().then(function() {
+						t.items.splice(t.items.indexOf(item), 1);
+						a.ev("Character Editor", "Item deleted (" + t.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 
 						global.i = {};
 					}).catch(err => {
@@ -324,62 +258,67 @@ Vue.component("editorlist", {
 			}
 		},
 		editItem(item) {
-			let index = this.items.indexOf(this.editingItem);
-			if (index !== -1) {
-				var d = this.editingItem.description.split("\n");
-				var rtrn = [];
-				for (var p = 0; p < d.length; ++p) {
-					var temp = d[p];
-					if (temp === "") {
-						temp = " ";
-					}
-					rtrn.push(temp);
-				}
-				this.items[index].description = rtrn;
-				this.items[index].editing = false;
-			}
-			this.editing = true;
-			this.editingItem = item;
-			this.items[this.items.indexOf(item)].editing = true;
-			item.description = item.description.join("\n");
-			this.working = item;
+
+			a.ev("Character Editor", "Item edit (start)", "user action");
+
+			item.editing = true;
 
 		},
-		saveEdit() {
-			var i = Object.assign({}, this.working);
-			var d = i.description.split("\n");
-			var rtrn = [];
-			for (var p = 0; p < d.length; ++p) {
-				var temp = d[p];
-				if (temp === "") {
-					temp = " ";
-				}
-				rtrn.push(temp);
+		saveEdit(item) {
+
+			global.i = {};
+			global.i.item = item;
+			global.t = this;
+
+			let packSearchName = item.name;
+			packSearchName = packSearchName.toLowerCase();
+
+			global.i.packName = packSearchName;
+
+			if (gearPacks[packSearchName] !== undefined && this.internalname === "inventory") {
+				global.alert({
+					text: "You can quickly add all the individial items of this pack to your inventory or do you want to add the pack as one item?",
+					btn1: "add content",
+					btn2: "add pack",
+					btn1fn: function() {
+
+						a.ev("Character Editor", "Item edit (pack)", "user action");
+
+						var name = global.i.packName;
+						var t = global.i.t;
+						var arr = gearPacks[name];
+						for (var i = 0; i < arr.length; ++i) {
+							var itemFromPack = arr[i];
+
+							global.t.items.push({
+								name: itemFromPack.name,
+								description: itemFromPack.name,
+								tag: global.i.item.tag,
+								tags: global.i.item.tags,
+								editing: false,
+								color: "rgba(0, 0, 0, .1)",
+								pinned: false,
+								shown: false,
+								version: 3,
+								count: itemFromPack.count,
+								__id: genId()
+							});
+						}
+
+						global.t.items.splice(global.t.items.indexOf(global.i.item), 1);
+
+					},
+					btn2fn: function() {
+						finalize(global.i.item);
+					}
+				})
+			} else {
+
+				a.ev("Character Editor", "Item edit (save)", "user action");
+
+				item.editing = false;
 			}
 
-			if (this.internalname === "spells") {
-				if (this.working.count === 0) {
-					this.working.tags.unshift("Cantrip");
-				} else {
-					this.working.tags.unshift("Level: " + this.working.count);
-				}
-			}
-
-			i.description = rtrn;
-			i.tags = Object.assign([], this.working.tags);
-			i.__id = this.editingItem.__id;
-			i.editing = false;
-			i.shown = false;
-			i.color = this.editingItem.color;
-
-			i.version = 2;
-
-			let index = this.items.indexOf(this.editingItem);
-			this.items.splice(index, 1);
-			this.items.splice(index, 0, i);
-			this.editing = false;
-			this.resetWorking();
-			a.ev("Character Editor", "Item edited (" + this.internalname + ")", "user action", `Uid: ${uid}, characterId: ${characterId}`);
 		},
 		changeColor(item) {
 			var currentColorIndex = this.colors.indexOf(item.color);
@@ -411,6 +350,12 @@ Vue.component("editorlist", {
 			let q = [];
 			query.forEach(a => {
 				a.editing = false;
+
+				if (Array.isArray(a.description)) {
+					console.log("FIX ARRAY")
+					a.description = a.description.join("\n");
+				}
+
 				q.push(a);
 			});
 
@@ -642,7 +587,7 @@ saveCharacter = function(show) {
 			firestore.collection("users").doc(sUid + "/characters/" + characterId + "/data/characterObj").update(characterObj).then(function() {
 
 			}).then(function() {
-				if (file !== null) {
+				if (file !== null && file.includes("https://") === false) {
 					var task = userBucket.child(characterId).put(file);
 					userRef.collection("characters").doc(characterId).update({
 						hasImg: true

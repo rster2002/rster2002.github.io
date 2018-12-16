@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.25"
+	version: "vB1.26"
 }
 
 var url = document.URL;
@@ -42,6 +42,8 @@ function roll(expression) {
 	var rtrn = expression;
 	var broken = expression.split("d");
 	var list = [];
+	var min = Infinity;
+	var max = -Infinity;
 
 	for (var i = 0; i < broken.length; ++i) {
 		if (broken[i + 1] !== undefined) {
@@ -60,6 +62,15 @@ function roll(expression) {
 				for (var r = 0; r < count; ++r) {
 					let roll =  Math.floor((Math.random() * type) + 1);
 					output += roll;
+
+					if (roll < min) {
+						min = roll;
+					}
+
+					if (roll > max) {
+						max = roll;
+					}
+
 					list.push({
 						dice: "1d" + type,
 						count: 1,
@@ -75,9 +86,17 @@ function roll(expression) {
 		}
 	}
 
+	let total = eval(rtrn);
+
 	return {
-		total: eval(rtrn),
-		list: list
+		total: total,
+		list: list,
+		roll: {
+			average: total / list.length,
+			sum: total,
+			max: max,
+			min: min
+		}
 	};
 }
 
@@ -93,7 +112,9 @@ const pageTitles = {
 	system: "System page",
 	campaignCompanion: "Campaign companion",
 	dmDashboard: "DM Dashboard",
-	monsters: "Monsters"
+	monsters: "Monsters",
+	spells: "Spells",
+	dmStory: "Story"
 }
 
 $(document).ready(function() {
@@ -391,6 +412,13 @@ function getCharacter(id, characterId, f) {
 			error(err);
 		})
 	}
+}
+
+function vuePut(a, b) {
+	let entries = Object.entries(b);
+	entries.forEach(c => {
+		a[c[0]] = c[1];
+	});
 }
 
 global["viewCharacter"] = function(userId, characterId) {

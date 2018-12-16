@@ -1,11 +1,15 @@
 <div class="innerResources">
 	<script>
 		tempImport([
-			"--default"
+			"--default",
+			"--mobile"
 		]);
 	</script>
 </div>
 <div class="innerPage" id="storyInstance">
+	<div class="spinner" v-if="loading == true">
+		<div class="inner"></div>
+	</div>
 	<div class="lane">
 		<div class="entry">
 			<div class="btn">
@@ -13,28 +17,83 @@
 			</div>
 		</div>
 		<div class="entry">
-			<h1>Story</h1>
-			<div class="listItem" v-if="chapters.length === 0">
-				<h1 class="hc">No chapters yet</h1>
-			</div>
+			<h2>Chapters</h2>
+			<h3 v-if="chapters.length === 0" class="hc">No chapters yet</h3>
 			<div class="listItem clk" v-for="chapter in chapters" @click="openChapter(chapter)">
-				<h1 v-if="chapter.name != ''">{{ chapter.name }}</h1>
-				<h1 v-else>No name</h1>
+				<h1>
+					<span style="font-size: 30px; color: #30ff30;" v-if="chapter.closed === true" class="material-icons">check</span>
+					<span>
+						<span v-if="chapter.name != ''">{{ chapter.name }}</span>
+						<span v-else>No name</span>
+					</span>
+				</h1>
 			</div>
+			<button v-if="openedSection === ''" class="wave fab" @click="addChapter()">
+				<i class="material-icons">add</i>
+			</button>
 		</div>
 	</div>
-
-	<button class="wave fab" onclick="vueInstance.addChapter()">
-		<i class="material-icons">add</i>
-	</button>
 
 	<div class="section" id="chapter">
 		<div class="lane">
 			<div class="entry">
-				<h1>Chapter</h1>
-				<input v-model="currentChapter.name" placeholder="name" />
+				<h2>Chapter</h2>
+				<div v-if="currentChapter.editing === false">
+					<h1 class="noOverflow"><span style="font-size: 30px; color: #30ff30; margin-right: 10px;" v-if="currentChapter.closed === true" class="material-icons">check</span>{{ currentChapter.name }}</h1>
+					<p>{{ currentChapter.description }}</p>
+					<div class="btn icn">
+						<button @click="deleteChapter()"><span class="material-icons">delete</span></button>
+						<button @click="toggleClosed(currentChapter)">
+							<span v-if="currentChapter.closed === false" class="material-icons">check_box_outline_blank</span>
+							<span v-else class="material-icons">check_box</span>
+						</button>
+						<button @click="editChapter()"><span class="material-icons">edit</span></button>
+					</div>
+				</div>
+				<div v-else>
+					<input v-model="currentChapter.name" placeholder="Name" />
+					<textarea v-model="currentChapter.description" placeholder="A short description of the chapter"></textarea>
+					<div class="btn icn">
+						<button @click="editChapter()"><span class="material-icons">save</span></button>
+					</div>
+				</div>
+			</div>
+			<div class="entry">
+				<h2>Hooks</h2>
+				<p>Hooks are bits of story or quests the player can do to proceed to the next chapter.</p>
+				<div class="listItem" v-for="hook in currentChapter.hooks">
+					<div class="shared" @click="openHook(hook)">
+						<h1 v-if="hook.editing === false">
+							<span style="font-size: 30px; color: #30ff30;" v-if="hook.done === true" class="material-icons">check</span>
+							{{ hook.name }}
+						</h1>
+					</div>
+					<div class="content" v-if="hook.opened === true">
+						<div v-if="hook.editing === false">
+							<div class="markdown" v-html="toMarked(hook.description)">
+							</div>
+							<div class="btn icn">
+								<button @click="deleteHook(hook)"><span class="material-icons">delete</span></button>
+								<button @click="check(hook)">
+									<span v-if="hook.done === false" class="material-icons">check_box_outline_blank</span>
+									<span v-else class="material-icons">check_box</span>
+								</button>
+								<button @click="editHook(hook)"><span class="material-icons">edit</span></button>
+							</div>
+						</div>
+						<div v-else>
+							<input v-model="hook.name" />
+							<textarea v-model="hook.description"></textarea>
+							<div class="btn icn">
+								<button @click="editHook(hook)"><span class="material-icons">save</span></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button v-if="openedSection !== ''" class="wave fab" @click="addHook()">
+					<i class="material-icons">add</i>
+				</button>
 			</div>
 		</div>
 	</div>
-
 </div>

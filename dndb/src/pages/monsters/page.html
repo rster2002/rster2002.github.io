@@ -47,13 +47,10 @@
 			</div>
 		</div>
 		<div class="entry">
-			<h2>Search</h2>
-			<input placeholder="Search" v-model="query" >
-		</div>
-		<div class="entry">
 			<h2>Monsters</h2>
+			<input placeholder="Search" v-model="query" >
 			<div class="listItem monster" v-for="monster in monstersList">
-				<h1 @click="show(monster)">{{ monster.name }}</h1>
+				<h1 @click="show(monster)" class="noOverflow">{{ monster.name }}</h1>
 				<div v-if="monster.show == true">
 					<h2 style="font-style: italic;color: rgba(0, 0, 0, .3);">{{ monster.size }} {{ monster.type }}<span v-if="monster.subtype != ''"> ({{ monster.subtype }})</span>, {{ monster.alignment }}</h2>
 					<div class="divider"></div>
