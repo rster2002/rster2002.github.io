@@ -3,6 +3,8 @@ if (DEV) {
 }
 sUid = sessionStorage.getItem("::uid");
 
+global.campaign = {}
+
 obj = {};
 
 var vueInstance = new Vue({
@@ -147,8 +149,8 @@ async function host(campaignName) {
 	if (exists[0] === undefined) {
 		var campaignId = "party-" + genId();
 
-		sessionStorage.setItem("::campaignId", campaignId);
-		sessionStorage.setItem("::campaignName", campaignName);
+		global.campaign.id = campaignId;
+		global.campaign.name = campaignName;
 
 		firestore.collection("campaigns").doc(campaignId).set({
 			name: campaignName,
@@ -165,8 +167,9 @@ async function host(campaignName) {
 					name: campaignName,
 					id: campaignId
 				}).then(function() {
-					sessionStorage.setItem("::party", campaignId);
-					sessionStorage.setItem("::cache", campaignId);
+					global.campaign.id = campaignId;
+					global.campaign.name = campaignName;
+					// sessionStorage.setItem("::cache", campaignId);
 					a.ev("Campaign Menu", "host campaign", "user action", `By: ${uid}, Campaign Id: ${campaignId}`);
 					openPage("campaign");
 				});
@@ -201,8 +204,8 @@ async function join(campaignName) {
 			// gets the shared campaign obj
 			var campaignId = campaign.id;
 			var campaignName = campaign.name;
-			sessionStorage.setItem("::campaignId", campaignId);
-			sessionStorage.setItem("::campaignName", campaignName);
+			global.campaign.id = campaignId;
+			global.campaign.name = campaignName;
 
 			// creates a query to check if the user is banned
 			var bannedQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("banList").where("uid", "==", sUid));

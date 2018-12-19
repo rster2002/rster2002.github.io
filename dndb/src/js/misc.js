@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.26a"
+	version: "vB1.27"
 }
 
 var url = document.URL;
@@ -204,7 +204,69 @@ function logout() {
 onExit = null;
 loaded = null;
 
-function openPage(page) {
+
+global.pageHistory = [];
+global.currentPage = "--end";
+
+window.addEventListener("popstate", function(e) {
+
+	let list = global.pageHistory;
+	let last = list.pop();
+
+	console.log(last);
+
+	if (last === undefined) {
+		history.back();
+	}
+
+	if (last.page !== "--end") {
+		Object.assign(global, last.global);
+
+		openPage(last.page, false);
+	} else {
+		history.back();
+	}
+});
+
+function openPage(page, h = true) {
+
+	if (h) {
+		global.pageHistory.push({
+			page: global.currentPage,
+			global: Object.assign({}, global)
+		});
+	}
+
+	let u;
+
+	console.log(window.url, global.pageHistory);
+
+	if (window.url.includes("?")) {
+
+		console.log("?");
+		u = window.url + "&p=" + randomString(characters, 4);
+	} else {
+		u = window.url + "?p=" + randomString(characters, 4);
+	}
+
+	// if (window.url.includes("page=")) {
+	// 	u = window.url;
+	// 	if (global.pageHistory.length === 1) {
+			// if (window.url.includes("?")) {
+			// 	u = window.url + "&page=" + page;
+			// } else {
+			// 	u = window.url + "?page=" + page;
+			// }
+	// 	} else {
+			// u.replace(global.pageHistory[global.pageHistory.length - 1], page);
+	// 	}
+	// } else {
+
+	// }
+
+	global.currentPage = page;
+
+	window.history.pushState(null, null, u);
 
 	characterSheetLoaded = false;
 	$(".page .innerPage").remove();

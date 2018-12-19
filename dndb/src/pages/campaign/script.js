@@ -1,9 +1,8 @@
-var campaignId = sessionStorage.getItem("::campaignId");
-var campaignName = sessionStorage.getItem("::campaignName");
+var campaignId = global.campaign.id;
+var campaignName = global.campaign.name;
 var campaignRef = firestore.collection("campaigns").doc(campaignId);
 var sUid = sessionStorage.getItem("::uid");
 var isDM = false;
-global.campaign = {};
 
 var vueInstance = new Vue({
 	el: "#vueInstance",
