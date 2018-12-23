@@ -8,24 +8,6 @@ var file = null;
 
 sessionStorage.setItem("::saved", "false");
 
-// <div v-if="adding === true">
-// 	<input v-bind:placeholder="itemname + ' name'" v-model="working.name" />
-// 	<input v-if="showcount === 'true'" v-bind:placeholder="countPlaceholder" v-model="working.count" type="number" />
-// 	<textarea v-model="working.description" placeholder="Description"></textarea>
-// 	<div class="row">
-// 	<input @keyup.enter="addTag()" v-model="working.tag" placeholder="Tag" />
-// 	<button @click="addTag()" style="padding: 0px; height: 41px;"><i class="material-icons">add</i></button>
-// 	</div>
-// 	<div class="tags" style="margin-bottom: 16px;">
-// 	<div class="tag" v-for="tag in working.tags" @click="deleteTag(tag)">
-// 	<p>{{ tag }}</p>
-// 	<i class="material-icons">clear</i>
-// 	</div>
-// 	</div>
-// 	<button class="full" @click="addItem()" v-if="editing == false">Add</button>
-// 	<button class="full" @click="saveEdit()" v-if="editing == true">Save</button>
-// </div>
-
 Vue.component("editorlist", {
 	template: `
 	<div>
@@ -172,7 +154,7 @@ Vue.component("editorlist", {
 		color(item) {
 			console.log(item);
 
-			if (item.pinned === true) {
+			if (item.pinned === true && item.color === "rgba(0, 0, 0, .1)") {
 				return "#0080ff solid 2px";
 			} else {
 				if (item.color !== undefined) {

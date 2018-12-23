@@ -16,7 +16,7 @@
 				<button onclick="openPage('campaign')">Back</button>
 			</div>
 		</div>
-		<div class="entry">
+		<div class="entry" style="margin-bottom: 46px;">
 			<h2>Chapters</h2>
 			<h3 v-if="chapters.length === 0" class="hc">No chapters yet</h3>
 			<div class="listItem clk" v-for="chapter in chapters" @click="openChapter(chapter)">
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="entry">
+			<div class="entry" style="margin-bottom: 46px;">
 				<h2>Hooks</h2>
 				<p>Hooks are bits of story or quests the player can do to proceed to the next chapter.</p>
 				<div class="listItem" v-for="hook in currentChapter.hooks">

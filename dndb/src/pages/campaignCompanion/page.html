@@ -21,7 +21,7 @@
 						<h1 class="noOverflow">{{ entry.name }}</h1>
 						<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
 					</div>
-					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
+					<div v-if="entry.show == true" v-html="toMarkdown(entry.description)" class="markdown">
 					</div>
 				</div>
 			</div>

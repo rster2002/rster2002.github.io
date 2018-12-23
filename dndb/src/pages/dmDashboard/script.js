@@ -3,14 +3,7 @@ var dmRef = firestore.collection("campaigns").doc(global.campaignId).collection(
 Vue.component("dmlist", {
 	template: `
 	<div class="lane">
-		<div class="entry">
-			<h2>Add entry</h2>
-			<slot name="input"></slot>
-			<div class="btn">
-				<button @click="addToList()">Add</button>
-			</div>
-		</div>
-		<div class="entry">
+		<div class="entry" style="margin-bottom: 46px;">
 			<h2>Entries</h2>
 			<input v-model="query" placeholder="Search" />
 			<div class="listItem" v-for="entry in filteredEntries" v-bind:class="{open: entry.open}">
@@ -19,17 +12,17 @@ Vue.component("dmlist", {
 						<h1 class="noOverflow">{{ entry.name }}</h1>
 						<h2 style="font-style: italic;" v-if="entry.subtitle != ''"><span v-if="section === 'items'">Ammount: </span>{{ entry.subtitle }}</h2>
 					</div>
-					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
+					<div v-if="entry.show == true" v-html="toMarkdown(entry.description)" class="markdown">
 					</div>
 					<div style="margin-top: 24px; width: calc(100% - 4px); border: 2px solid #ff3030; border-radius: 10px; padding: 8px 0px;" v-if="entry.show == true && entry.dmDescription != ''">
 						<h3 style="margin-top: 12px;">Private notes</h3>
-						<div v-html="entry.computedDmDescription" class="markdown">
+						<div v-html="toMarkdown(entry.dmDescription)" class="markdown">
 						</div>
 					</div>
-					<div v-if="entry.show == true" class="btn">
-						<button @click="toggleOpen(entry)"><span v-if="entry.open == true">Hide from players</span><span v-if="entry.open == false">Reveal to players</span></button>
-						<button @click="startEdit(entry)">Edit</button>
-						<button @click="deleteEntry(entry);" class="danger">Delete</button>
+					<div v-if="entry.show == true" class="btn icn">
+						<button @click="deleteEntry(entry);"><span class="material-icons">delete</span></button>
+						<button @click="startEdit(entry)"><span class="material-icons">edit</span></button>
+						<button @click="toggleOpen(entry)"><span v-if="entry.open == true" class="material-icons">visibility_off</span><span v-if="entry.open == false" class="material-icons">visibility</span></button>
 					</div>
 				</div>
 				<div v-if="entry.editing == true">
@@ -38,6 +31,9 @@ Vue.component("dmlist", {
 					<button class="full" @click="saveEdit(entry)">Save</button>
 				</div>
 			</div>
+			<button class="wave fab" @click="addEntry()">
+				<i class="material-icons">add</i>
+			</button>
 		</div>
 	</div>`,
 	props: ["working", "section"],
@@ -64,36 +60,18 @@ Vue.component("dmlist", {
 		}
 	},
 	methods: {
-		addToList() {
-			var entry = Object.assign({}, vueInstance.working);
-			console.log(entry);
-			var id = genId();
-			entry.__id = id;
-			entry.editing = false;
-			entry.show = false;
-			entry.open = false;
-
-			entry.computedDescription = marked(entry.description, { sanitize: true });
-			entry.computedDmDescription = marked(entry.dmDescription, { sanitize: true })
-
-			dmRef.doc(this.section).collection("dm").doc(id).set(entry).then(() => {
-				skb("Entry created");
-			}).catch(e => thr(e));
-
-			this.entries.push(entry);
-			vueInstance.allEntries.push(entry);
-
-			var resetWorking = {
+		toMarkdown(i) {
+			return marked(i, {sanitize: true});
+		},
+		addEntry() {
+			this.entries.push({
 				name: "",
-				subtitle: "",
 				description: "",
-				dmDescription: ""
-			}
-
-			var entries = Object.entries(resetWorking);
-			for (var i = 0; i < entries.length; ++i) {
-				vueInstance.working[entries[i][0]] = entries[i][1];
-			}
+				editing: true,
+				open: false,
+				show: true,
+				__id: genId()
+			});
 		},
 		openEntry(entry) {
 			var index = this.entries.indexOf(entry);
@@ -276,20 +254,20 @@ Vue.component("dmlist", {
 		},
 		saveEdit(entry) {
 			var index = this.entries.indexOf(entry);
-			var push = Object.assign({}, vueInstance.working);
-			var id = push.__id;
+			var push = Object.assign(entry, vueInstance.working);
+			var id = entry.__id;
 			push.editing = false;
 			push.show = false;
 
-			push.computedDescription = marked(push.description, { sanitize: true });
-			push.computedDmDescription = marked(push.dmDescription, { sanitize: true })
+			// push.computedDescription = marked(push.description, { sanitize: true });
+			// push.computedDmDescription = marked(push.dmDescription, { sanitize: true })
 
-			dmRef.doc(this.section).collection("dm").doc(id).update(push).then(() => {
+			dmRef.doc(this.section).collection("dm").doc(id).set(push).then(() => {
 				skb("Entry updated");
 			}).catch(e => thr(e));
 
 			if (push.open === true) {
-				dmRef.doc(this.section).collection("players").doc(id).update(push).catch(e => thr(e));
+				dmRef.doc(this.section).collection("players").doc(id).set(push).catch(e => thr(e));
 			}
 
 

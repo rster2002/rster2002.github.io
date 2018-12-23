@@ -3,11 +3,11 @@
 	height: calc(100% - 64px);
 	width: 100%;
 	display: none;
-	background-color: white;
+	background-color: #f1f1f1;
 	top: 64px;
 	overflow-y: auto;
 }
 
 .innerPage .lane .entry .listItem.open {
-	border-color: #a9f9a9;
+	border-color: #0080ff;
 }

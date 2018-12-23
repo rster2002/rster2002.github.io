@@ -13,7 +13,7 @@ Vue.component("sectionlist", {
 						<h1 class="noOverflow">{{ entry.name }}</h1>
 						<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
 					</div>
-					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
+					<div v-if="entry.show == true" v-html="toMarkdown(entry.description)" class="markdown">
 					</div>
 				</div>
 				<div class="listItem" v-if="entries.length > 5" style="cursor: pointer;" @click="toggleViewAll()">
@@ -26,7 +26,7 @@ Vue.component("sectionlist", {
 						<h1 class="noOverflow">{{ entry.name }}</h1>
 						<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
 					</div>
-					<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
+					<div v-if="entry.show == true" v-html="toMarkdown(entry.description)" class="markdown">
 					</div>
 				</div>
 				<div class="listItem" v-if="entries.length > 5" style="cursor: pointer;" @click="toggleViewAll()">
@@ -40,7 +40,7 @@ Vue.component("sectionlist", {
 					<h1 class="noOverflow">{{ entry.name }}</h1>
 					<h2 style="font-style: italic;" v-if="entry.subtitle != ''">{{ entry.subtitle }}</h2>
 				</div>
-				<div v-if="entry.show == true" v-html="entry.computedDescription" class="markdown">
+				<div v-if="entry.show == true" v-html="toMarkdown(entry.description)" class="markdown">
 				</div>
 			</div>
 		</div>
@@ -54,6 +54,9 @@ Vue.component("sectionlist", {
 		}
 	},
 	methods: {
+		toMarkdown(i) {
+			return marked(i, {sanitize: true});
+		},
 		toggleViewAll() {
 			this.showAll = !this.showAll;
 		},
@@ -117,6 +120,9 @@ var vueInstance = new Vue({
 	methods: {
 		back() {
 			openPage("campaign");
+		},
+		toMarkdown(i) {
+			return marked(i, {sanitize: true});
 		},
 		toggleOpen(entry) {
 			var index = this.allEntries.indexOf(entry);

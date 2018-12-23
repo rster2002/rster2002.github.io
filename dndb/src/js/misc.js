@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.27"
+	version: "vB1.28"
 }
 
 var url = document.URL;
@@ -38,12 +38,24 @@ if (!DEV) {
 	console.warn = function() {}
 }
 
+String.prototype.replaceAll = function(a, b) {
+	let i = this.split(a);
+	i = i.join(b);
+
+	return i;
+}
+
+Array.prototype.last = function() {
+	return this[this.length - 1];
+}
+
 function roll(expression) {
 	var rtrn = expression;
 	var broken = expression.split("d");
 	var list = [];
 	var min = Infinity;
 	var max = -Infinity;
+	var diceTotal = 0;
 
 	for (var i = 0; i < broken.length; ++i) {
 		if (broken[i + 1] !== undefined) {
@@ -80,22 +92,28 @@ function roll(expression) {
 				}
 
 				rtrn = rtrn.replace(count + "d" + type, output);
+				diceTotal = output;
 
 			}
 
 		}
 	}
 
-	let total = eval(rtrn);
+	rtrn = rtrn.replaceAll("min", min);
+	rtrn = rtrn.replaceAll("max", max);
+
+	let total = math.eval(rtrn);
 
 	return {
 		total: total,
 		list: list,
+		expression: expression,
 		roll: {
 			average: total / list.length,
 			sum: total,
 			max: max,
-			min: min
+			min: min,
+			diceTotal: diceTotal
 		}
 	};
 }
@@ -208,8 +226,7 @@ loaded = null;
 global.pageHistory = [];
 global.currentPage = "--end";
 
-window.addEventListener("popstate", function(e) {
-
+global.back = function() {
 	let list = global.pageHistory;
 	let last = list.pop();
 
@@ -226,6 +243,10 @@ window.addEventListener("popstate", function(e) {
 	} else {
 		history.back();
 	}
+}
+
+window.addEventListener("popstate", function(e) {
+	global.back();
 });
 
 function openPage(page, h = true) {
@@ -240,29 +261,6 @@ function openPage(page, h = true) {
 	let u;
 
 	console.log(window.url, global.pageHistory);
-
-	if (window.url.includes("?")) {
-
-		console.log("?");
-		u = window.url + "&p=" + randomString(characters, 4);
-	} else {
-		u = window.url + "?p=" + randomString(characters, 4);
-	}
-
-	// if (window.url.includes("page=")) {
-	// 	u = window.url;
-	// 	if (global.pageHistory.length === 1) {
-			// if (window.url.includes("?")) {
-			// 	u = window.url + "&page=" + page;
-			// } else {
-			// 	u = window.url + "?page=" + page;
-			// }
-	// 	} else {
-			// u.replace(global.pageHistory[global.pageHistory.length - 1], page);
-	// 	}
-	// } else {
-
-	// }
 
 	global.currentPage = page;
 
