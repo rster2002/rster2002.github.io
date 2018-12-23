@@ -245,12 +245,17 @@ Vue.component("dmlist", {
 			});
 		},
 		startEdit(entry) {
-			var index = this.entries.indexOf(entry);
-			var entries = Object.entries(entry);
-			for (var i = 0; i < entries.length; ++i) {
-				vueInstance.working[entries[i][0]] = entries[i][1];
+			if (vueInstance.editing === true) {
+				alert("Only one entry can be edited at once");
+			} else {
+				var index = this.entries.indexOf(entry);
+				var entries = Object.entries(entry);
+				for (var i = 0; i < entries.length; ++i) {
+					vueInstance.working[entries[i][0]] = entries[i][1];
+				}
+				this.entries[index].editing = true;
+				vueInstance.editing = true;
 			}
-			this.entries[index].editing = true;
 		},
 		saveEdit(entry) {
 			var index = this.entries.indexOf(entry);
@@ -289,6 +294,8 @@ Vue.component("dmlist", {
 			for (var i = 0; i < entries.length; ++i) {
 				vueInstance.working[entries[i][0]] = entries[i][1];
 			}
+
+			vueInstance.editing = false;
 		}
 	},
 	created: async function() {
@@ -299,7 +306,7 @@ Vue.component("dmlist", {
 			vueInstance.allEntries = vueInstance.allEntries.concat(query);
 		}
 	}
-})
+});
 
 var vueInstance = new Vue({
 	el: "#vueInstance",
@@ -309,6 +316,7 @@ var vueInstance = new Vue({
 		openedSection: "",
 		query: "",
 		allEntries: [],
+		editing: false,
 		working: {
 			name: "",
 			subtitle: "",
