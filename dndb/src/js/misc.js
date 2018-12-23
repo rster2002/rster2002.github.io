@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.28"
+	version: "vB1.29"
 }
 
 var url = document.URL;

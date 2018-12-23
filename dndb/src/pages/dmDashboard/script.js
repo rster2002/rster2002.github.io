@@ -6,6 +6,7 @@ Vue.component("dmlist", {
 		<div class="entry" style="margin-bottom: 46px;">
 			<h2>Entries</h2>
 			<input v-model="query" placeholder="Search" />
+			<h3 v-if="entries.length === 0" class="hc">Nothing here yet...</h3>
 			<div class="listItem" v-for="entry in filteredEntries" v-bind:class="{open: entry.open}">
 				<div v-if="entry.editing != true">
 					<div class="shared" @click="openEntry(entry)">
@@ -22,7 +23,7 @@ Vue.component("dmlist", {
 					<div v-if="entry.show == true" class="btn icn">
 						<button @click="deleteEntry(entry);"><span class="material-icons">delete</span></button>
 						<button @click="startEdit(entry)"><span class="material-icons">edit</span></button>
-						<button @click="toggleOpen(entry)"><span v-if="entry.open == true" class="material-icons">visibility_off</span><span v-if="entry.open == false" class="material-icons">visibility</span></button>
+						<button v-if="section !== 'companion'" @click="toggleOpen(entry)"><span v-if="entry.open == true" class="material-icons">visibility_off</span><span v-if="entry.open == false" class="material-icons">visibility</span></button>
 					</div>
 				</div>
 				<div v-if="entry.editing == true">

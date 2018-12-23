@@ -97,34 +97,21 @@
 				<button @click="openSection('history', 'History')">Open</button>
 			</div>
 		</div>
+		<div class="entry">
+			<h1>Companion</h1>
+			<p>Here you can write down rules you keep forgetting.</p>
+			<div class="btn">
+				<button @click="openSection('companion', 'Companion')">Open</button>
+			</div>
+		</div>
 	</div>
 
 	<!-- Sections -->
-	<div class="section" id="section-npc">
-		<dmlist section="npc">
+	<div class="section" id="section-companion">
+		<dmlist section="companion">
 			<template slot="input">
 				<input placeholder="Name" v-model="working.name" />
-				<input placeholder="Job" v-model="working.subtitle" />
-				<textarea placeholder="Description" v-model="working.description"></textarea>
-				<textarea class="red" placeholder="Private notes (won't be revealed to players)" v-model="working.dmDescription"></textarea>
-			</template>
-		</dmlist>
-	</div>
-	<div class="section" id="section-settlements">
-		<dmlist section="settlements">
-			<template slot="input">
-				<input placeholder="Name" v-model="working.name" />
-				<input placeholder="Type of settlement" v-model="working.subtitle" />
-				<textarea placeholder="Description" v-model="working.description"></textarea>
-				<textarea class="red" placeholder="Private notes (won't be revealed to players)" v-model="working.dmDescription"></textarea>
-			</template>
-		</dmlist>
-	</div>
-	<div class="section" id="section-items">
-		<dmlist section="items">
-			<template slot="input">
-				<input placeholder="Name" v-model="working.name" />
-				<input placeholder="Ammount" v-model="working.subtitle" type="number" />
+				<input placeholder="Type" v-model="working.subtitle" />
 				<textarea placeholder="Description" v-model="working.description"></textarea>
 				<textarea class="red" placeholder="Private notes (won't be revealed to players)" v-model="working.dmDescription"></textarea>
 			</template>
@@ -160,11 +147,21 @@
 			</template>
 		</dmlist>
 	</div>
-	<div class="section" id="section-religions">
-		<dmlist section="religions">
+	<div class="section" id="section-history">
+		<dmlist section="history">
 			<template slot="input">
 				<input placeholder="Name" v-model="working.name" />
 				<input placeholder="Subtitle" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be revealed to players)" v-model="working.dmDescription"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-items">
+		<dmlist section="items">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Ammount" v-model="working.subtitle" type="number" />
 				<textarea placeholder="Description" v-model="working.description"></textarea>
 				<textarea class="red" placeholder="Private notes (won't be revealed to players)" v-model="working.dmDescription"></textarea>
 			</template>
@@ -180,11 +177,31 @@
 			</template>
 		</dmlist>
 	</div>
-	<div class="section" id="section-history">
-		<dmlist section="history">
+	<div class="section" id="section-npc">
+		<dmlist section="npc">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Job" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be revealed to players)" v-model="working.dmDescription"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-religions">
+		<dmlist section="religions">
 			<template slot="input">
 				<input placeholder="Name" v-model="working.name" />
 				<input placeholder="Subtitle" v-model="working.subtitle" />
+				<textarea placeholder="Description" v-model="working.description"></textarea>
+				<textarea class="red" placeholder="Private notes (won't be revealed to players)" v-model="working.dmDescription"></textarea>
+			</template>
+		</dmlist>
+	</div>
+	<div class="section" id="section-settlements">
+		<dmlist section="settlements">
+			<template slot="input">
+				<input placeholder="Name" v-model="working.name" />
+				<input placeholder="Type of settlement" v-model="working.subtitle" />
 				<textarea placeholder="Description" v-model="working.description"></textarea>
 				<textarea class="red" placeholder="Private notes (won't be revealed to players)" v-model="working.dmDescription"></textarea>
 			</template>
