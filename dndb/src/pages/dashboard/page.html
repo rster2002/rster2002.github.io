@@ -20,7 +20,8 @@
 			<div class="entry" v-if="recent.length > 0">
 				<h2>Get back into editing</h2>
 				<div class="listItem" v-for="activity in recent" @click="openCharacter(activity)">
-					<h1>{{ activity.characterName }}</h1>
+					<h1 v-if="activity.characterName.length > 0">{{ activity.characterName }}</h1>
+					<h1 v-else>Unnamed character</h1>
 					<h2 v-if="activity.description != '  '">{{ activity.description }}</h2>
 				</div>
 			</div>
