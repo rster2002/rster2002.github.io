@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.29"
+	version: "vB1.30"
 }
 
 var url = document.URL;
@@ -116,6 +116,23 @@ function roll(expression) {
 			diceTotal: diceTotal
 		}
 	};
+}
+
+function returnStats() {
+	let stats = [];
+	for (var i = 1; i <= 6; ++i) {
+		stats.push(roll("4d6 - min"));
+	}
+
+	stats = stats.map(a => a.total);
+
+	return stats.sort((a, b) => {
+		if (a > b) {
+			return -1;
+		} else {
+			return 1;
+		}
+	})
 }
 
 const idCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

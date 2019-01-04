@@ -3,29 +3,26 @@
 <html>
 	<head>
 		<title>Projects for tasks</title>
-		<!-- API and Libraries -->
-		<script src="../assets/js/library/jquery.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+
+		<!-- Libraries -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" charset="utf-8"></script>
+
 		<!-- App scripts -->
-		<script src="../assets/components/task/js/firebase.js"></script>
-		<script src="../assets/components/task/js/misc.js"></script>
-		<script src="../assets/components/task/js/userinfo.js"></script>
+		<script src="../assets/js/collide.js" charset="utf-8"></script>
+
 		<!-- Styles -->
-		<link href="logo.png" rel="icon">
-		<link href="../assets/components/task/css/appShell.css" rel="stylesheet" type="text/css">
+		<link rel="icon" href="logo.png" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="./src/css/appshell.css" />
+
 	</head>
 	<body>
-		<div class="bar">
-			<div class="userinfo">
-				<img class="userIcon">
-				<h1 class="username"></h1>
+		<div id="app">
+			<div class="top-bar">
+
 			</div>
-			<button class="s1" onclick="openPage('dashboard')">Dashboard</button>
+
 		</div>
-		<div class="loader active main"><div class="animation"></div></div>
-		<div class="page">
-			<div class="innerPage"></div>
-		</div>
+		<script src="./src/js/app.js" charset="utf-8"></script>
 	</body>
 </html>

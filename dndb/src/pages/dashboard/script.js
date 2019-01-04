@@ -165,8 +165,9 @@ async function join(campaignName) {
 			// gets the shared campaign obj
 			var campaignId = campaign.id;
 			var campaignName = campaign.name;
-			sessionStorage.setItem("::campaignId", campaignId);
-			sessionStorage.setItem("::campaignName", campaignName);
+			global.campaign = {};
+			global.campaign.id = campaignId;
+			global.campaign.name = campaignName;
 
 			// creates a query to check if the user is banned
 			var bannedQuery = await createQuery(firestore.collection("campaigns").doc(campaignId).collection("banList").where("uid", "==", userInformation.uid));
