@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.30"
+	version: "vB1.31"
 }
 
 var url = document.URL;
@@ -284,6 +284,7 @@ function openPage(page, h = true) {
 	window.history.pushState(null, null, u);
 
 	characterSheetLoaded = false;
+	a.ex(false);
 	$(".page .innerPage").remove();
 	$(".page .innerTemp").remove();
 	$(".page .innerResources").remove();
@@ -347,6 +348,21 @@ a = {
 				'event_label': label,
 				'value': value
 			});
+		}
+	},
+	ex(st) {
+		if (st) {
+			window.onbeforeunload = function (e) {
+				e = e || window.event;
+				var y = e.pageY || e.clientY;
+				if (y < 0){
+					return "If you close the page now you might lose data!"
+				} else {
+					return "If you refresh the page now you might lose data!";
+				}
+			}
+		} else {
+			window.onbeforeunload = function() {}
 		}
 	}
 }

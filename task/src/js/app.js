@@ -8,9 +8,3 @@ var vueGlobal = new Vue({
 		]
 	}
 });
-
-var collide = new Collide("#app");
-
-collide.use([
-	"top-bar"
-]);

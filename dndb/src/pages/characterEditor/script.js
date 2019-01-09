@@ -442,6 +442,8 @@ var vueLists = new Vue({
 	}
 });
 
+a.ex(true);
+
 var vueUtilities = new Vue({
 	el: "#utilities",
 	data: {
