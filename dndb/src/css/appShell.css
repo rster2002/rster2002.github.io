@@ -1015,6 +1015,13 @@ html div.wave.card > div.actions button {
     background-color: rgba(0, 0, 0, .05);
     padding: 4px 8px;
     border-radius: 5px;
+	font-family: "Roboto", sans-serif;
+    background-color: rgba(0, 0, 0, .05);
+    padding: 4px 8px;
+    border-radius: 5px;
+    display: inline-block;
+    width: calc(100% - 24px);
+    white-space: pre-wrap;
 }
 
 .innerPage .lane .entry .markdown pre {

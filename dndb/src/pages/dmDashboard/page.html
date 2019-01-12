@@ -104,6 +104,15 @@
 				<button @click="openSection('settlements', 'Settlements')">Open</button>
 			</div>
 		</div>
+		<div class="entry">
+			<h2>Export/import</h2>
+			<p>When importing content, entries without an id will be created as a new entry.</p>
+			<textarea v-model="im" placeholder="Import"></textarea>
+			<div class="btn">
+				<button @click="exportContent()">Export</button>
+				<button @click="importContent()">Import</button>
+			</div>
+		</div>
 	</div>
 
 	<!-- Sections -->

@@ -11,6 +11,7 @@ Vue.component("dmlist", {
 				<div v-if="entry.editing != true">
 					<div class="shared" @click="openEntry(entry)">
 						<h1 class="noOverflow">{{ entry.name }}</h1>
+						<h1 v-if="entry.name === ''">No entry name provided</h1>
 						<h2 style="font-style: italic;" v-if="entry.subtitle != ''"><span v-if="section === 'items'">Ammount: </span>{{ entry.subtitle }}</h2>
 					</div>
 					<div v-if="entry.show == true" v-html="toMarkdown(entry.description)" class="markdown">
@@ -265,6 +266,8 @@ Vue.component("dmlist", {
 			push.editing = false;
 			push.show = false;
 
+			console.log(id);
+
 			// push.computedDescription = marked(push.description, { sanitize: true });
 			// push.computedDmDescription = marked(push.dmDescription, { sanitize: true })
 
@@ -318,6 +321,7 @@ var vueInstance = new Vue({
 		query: "",
 		allEntries: [],
 		editing: false,
+		im: "",
 		working: {
 			name: "",
 			subtitle: "",
@@ -370,6 +374,70 @@ var vueInstance = new Vue({
 		openEntry(entry) {
 			var index = this.allEntries.indexOf(entry);
 			this.allEntries[index].show = !this.allEntries[index].show;
+		},
+		exportContent() {
+			function download(filename, text) {
+				var element = document.createElement('a');
+				element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+				element.setAttribute('download', filename);
+
+				element.style.display = 'none';
+				document.body.appendChild(element);
+
+				element.click();
+
+				document.body.removeChild(element);
+			}
+
+			var content = {};
+
+			this.$children.forEach(a => {
+				let i = a.entries;
+				content[a.section] = i;
+			});
+
+			download("export.json", JSON.stringify(content));
+		},
+		importContent() {
+			let content = JSON.parse(this.im);
+
+			console.log(content);
+
+			this.$children.forEach(child => {
+				var ids = child.entries.map(a => a.__id);
+				console.log(ids);
+
+				var importedContent = content[child.section];
+
+				importedContent.forEach(item => {
+
+					addEntry = (item) => {
+						item = Object.assign(item, {
+							open: false,
+							editing: false,
+							show: false
+						});
+
+						child.entries.push(item);
+
+						vuePut(this.working, item);
+						child.saveEdit(item);
+					}
+
+					if (typeof item.__id !== "string") {
+						item.__id = genId();
+
+						addEntry(item);
+					} else {
+						console.log(item.__id, ids.indexOf(item.__id));
+						if (ids.indexOf(item.__id) === -1) {
+							addEntry(item);
+						}
+					}
+
+				});
+
+			});
 		}
 	}
 });

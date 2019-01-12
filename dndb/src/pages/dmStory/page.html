@@ -32,6 +32,14 @@
 				<i class="material-icons">add</i>
 			</button>
 		</div>
+		<div class="entry">
+			<h2>import/export</h2>
+			<textarea v-model="im" placeholder="Import"></textarea>
+			<div class="btn">
+				<button @click="exportContent()">Export</button>
+				<button @click="importContent()">Import</button>
+			</div>
+		</div>
 	</div>
 
 	<div class="section" id="chapter">

@@ -13,7 +13,8 @@ var vueInstance = new Vue({
 		},
 		chapters: [],
 		openedSection: "",
-		loading: false
+		loading: false,
+		im: ""
 	},
 	methods: {
 		addChapter() {
@@ -24,7 +25,7 @@ var vueInstance = new Vue({
 				closed: false,
 				hooks: [],
 				__id: genId(),
-				editing: false
+				editing: true
 			});
 
 			skb("Added new chapter");
@@ -197,6 +198,56 @@ var vueInstance = new Vue({
 		},
 		toMarked(a) {
 			return marked(a, {sanitize: true});
+		},
+		exportContent() {
+			var content = Object.assign([], this.chapters);
+
+			function download(filename, text) {
+				var element = document.createElement('a');
+				element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+				element.setAttribute('download', filename);
+
+				element.style.display = 'none';
+				document.body.appendChild(element);
+
+				element.click();
+
+				document.body.removeChild(element);
+			}
+
+			download("chapters.json", JSON.stringify(content));
+		},
+		importContent() {
+			this.loading = true;
+			var content = JSON.parse(vueInstance.im);
+
+			var chapterIds = this.chapters.map(a => a.__id);
+
+			content.forEach(chapter => {
+
+				chapter = Object.assign(chapter, {
+					editing: false,
+					opened: false
+				});
+
+				addChapter = (chapter) => {
+					this.chapters.push(chapter);
+
+					this.openChapter(chapter);
+					this.closeChapter();
+				};
+
+				if (typeof chapter.__id !== "string") {
+					chapter.__id = genId();
+
+					addChapter(chapter);
+				}
+
+				if (chapterIds.indexOf(chapter.__id) === -1) {
+					addChapter(chapter);
+				}
+			})
+
 		}
 	}
 });
