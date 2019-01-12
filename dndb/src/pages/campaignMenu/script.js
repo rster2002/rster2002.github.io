@@ -274,8 +274,8 @@ function afterSelect(index) {
 	$("selectCharacter").hide();
 
 	var character = charactersObj[index];
-	var campaignId = sessionStorage.getItem("::campaignId");
-	var campaignName = sessionStorage.getItem("::campaignName");
+	var campaignId = global.campaign.id;
+	var campaignName = global.campaign.name;
 
 	global.alert({
 		text: "Are you sure you want to use this character?",
@@ -283,6 +283,9 @@ function afterSelect(index) {
 		btn2: "cancel",
 		btn1fn: function() {
 			vueInstance.loaded = false;
+
+			var campaignId = global.campaign.id;
+			var campaignName = global.campaign.name;
 
 			userRef.collection("campaigns").doc(campaignId).set({
 				name: campaignName,
