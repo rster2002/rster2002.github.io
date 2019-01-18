@@ -243,6 +243,11 @@ var vueInstance = new Vue({
 					}
 				});
 			}
+		},
+		deleteCampaign() {
+			if (this.players.length > 0) {
+				alert("You have to kick every player out of the party to be able to delete the campaign");
+			}
 		}
 	}
 });

@@ -1,7 +1,7 @@
 sUid = global.openedCharacter.uid;
 characters = "abcdefghijklmnopqrstuvwxyz0123456789";
 characterId = global.openedCharacter.characterId;
-characterRef = userRef.collection("characters").doc(characterId);
+characterRef = firestore.collection("users").doc(global.openedCharacter.uid).collection("characters").doc(characterId);
 var characterInfo;
 var characterObj;
 var file = null;
@@ -328,6 +328,7 @@ Vue.component("editorlist", {
 			var lastLevel = -1;
 
 			var query = await createQuery(characterRef.collection(this.internalname).orderBy("name", "asc"));
+			console.log(query, this.internalname);
 
 			let q = [];
 			query.forEach(a => {
@@ -441,8 +442,6 @@ var vueLists = new Vue({
 		limit: false
 	}
 });
-
-a.ex(true);
 
 var vueUtilities = new Vue({
 	el: "#utilities",
@@ -1096,6 +1095,9 @@ function onload() {
 
 			saveCharacter = function() {};
 			vueUtilities.limit = true;
+			a.ex(false);
+		} else {
+			a.ex(true);
 		}
 
 		$("#pdf1").on("load", function() {

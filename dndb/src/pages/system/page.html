@@ -33,6 +33,7 @@
 					<p><b>User code:</b> {{ user.userId }}</p>
 					<p><b>Last login:</b> {{ user.lastLogin }}</p>
 					<p><b>First login:</b> {{ user.firstLogin }}</p>
+					<p><b>Agreed to tou: </b><span v-if="user.tou === true">true</span><span v-else>false</span></p>
 					<div class="btn">
 						<button @click="inspectUser(user)">Inspect</button>
 						<button @click="startEmulation(user.uid)">Emulate user</button>

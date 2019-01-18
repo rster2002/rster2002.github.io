@@ -7,6 +7,8 @@ async function getUser(f) {
 		if (user != null) {
 			f(user);
 			return user;
+		} else {
+			logout();
 		}
 	});
 }
@@ -22,6 +24,13 @@ async function configUserDb(authObj) {
 			// gets the data
 			globalUser = doc.data();
 			vueTerminal.display = globalUser;
+
+			if (globalUser.tou === undefined || globalUser.tou === false) {
+				alert("Please note that by using this website, you agree to the 'terms of use' which can be found on 'https://rster2002.github.io/dndb/tou.html'");
+				userRef.update({
+					tou: true
+				}).catch(e => {thr(e)});
+			}
 
 			// updates the document
 			userRef.update({
@@ -160,26 +169,30 @@ function initUser() {
 
 		a.ev("App", "user login", "passive", p.uid);
 
-		// checks if the user is emulating and if so sets the uid to the emulated uid
-		if (sessionStorage.getItem("::emuUid") !== null) {
-			uid = sessionStorage.getItem("::emuUid")
-		} else {
-			uid = p.uid;
-		}
-
 		// sets some vars
 		realUid = p.uid;
-		sessionStorage.setItem("::uid", uid);
 		userInformation = {
 			username: p.displayName,
 			profileImage: p.photoURL,
 			uid: p.uid
 		}
+
+		// checks if the user is emulating and if so sets the uid to the emulated uid
+		if (sessionStorage.getItem("::emuUid") !== null) {
+			let emuUid = sessionStorage.getItem("::emuUid");
+			uid = emuUid;
+			userInformation.uid = emuUid;
+		} else {
+			uid = p.uid;
+		}
+
+		sessionStorage.setItem("::uid", uid);
 		userRef = firestore.collection("users").doc(uid);
 		userBucket = cloudStorage.child(uid);
 		$(".userimg").attr("src", p.photoURL);
 		$(".username").text(p.displayName);
 		$(".userEmail").text(p.email);
+
 		configUserDb(p);
 		openPage("dashboard");
 	});

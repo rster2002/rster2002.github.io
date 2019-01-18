@@ -4,6 +4,35 @@ pages = {
 	3: 214
 }
 
+focused;
+
+function inspectInputs() {
+	fo(function(id) {
+		alert(id);
+	});
+}
+
+function fo(fn) {
+	characterObj = {};
+	focused = fn;
+	for (var page = 0; page <= 3; ++page) {
+		if (page > 0) {
+			for (var i = 0; i <= pages[page]; ++i) {
+				if (i > 0) {
+					let selector = "form" + i + "_" + page;
+					let element = document.getElementById(selector);
+
+					let tag = element.tagName
+
+					if (tag === "INPUT" || "TEXTAREA") {
+						element.setAttribute("onfocus", "focused('" + selector + "')")
+					}
+				}
+			}
+		}
+	}
+}
+
 function s() {
 	characterObj = {};
 	for (var page = 0; page <= 3; ++page) {

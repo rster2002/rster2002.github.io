@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.33"
+	version: "vB1.34"
 }
 
 cons = false;
@@ -134,6 +134,59 @@ function roll(expression) {
 	};
 }
 
+function y(c) {
+
+	var rows = c.split("\n");
+	var rtrn = [];
+
+	rows.forEach(a => {
+		rtrn.push(a.split(" ")[1]);
+	});
+
+	return x(rtrn.join("\n"));
+
+}
+
+function x(c) {
+
+	var rtrn = [];
+	var names = c.split("\n");
+
+	names.forEach(a => rtrn.push("\"" + a + "\""));
+
+	return rtrn.join(",\n");
+
+}
+
+function randomName(length) {
+	var vowels = "aeiou".split("");
+	var consonants = "bcdfghjklmnpqrstvwxyz".split("");
+	var rtrn = [];
+
+	for (var i = 1; i <= length; ++i) {
+
+		if (i % 2 === 1) {
+
+			let index = math.round(math.random() * consonants.length);
+			let character = consonants[index];
+
+			rtrn.push(character);
+
+		} else {
+
+			let index = math.round(math.random() * vowels.length);
+			let character = vowels[index];
+
+			rtrn.push(character);
+
+		}
+
+	}
+
+	return rtrn.join("");
+
+}
+
 function returnStats() {
 	let stats = [];
 	for (var i = 1; i <= 6; ++i) {
@@ -260,21 +313,39 @@ global.pageHistory = [];
 global.currentPage = "--end";
 
 global.back = function() {
-	let list = global.pageHistory;
-	let last = list.pop();
 
-	console.log(last);
+	function x() {
+		let list = global.pageHistory;
+		let last = list.pop();
 
-	if (last === undefined) {
-		history.back();
+		console.log(last);
+
+		if (last === undefined) {
+			history.back();
+		}
+
+		if (last.page !== "--end") {
+			Object.assign(global, last.global);
+
+			openPage(last.page, false);
+		} else {
+			history.back();
+		}
 	}
 
-	if (last.page !== "--end") {
-		Object.assign(global, last.global);
+	global.x = x;
 
-		openPage(last.page, false);
+	if (a.exen === true) {
+		global.alert({
+			text: "Are you sure you want to go back?",
+			btn1: "back",
+			btn2: "cancel",
+			btn1fn: function() {
+				global.x();
+			}
+		});
 	} else {
-		history.back();
+		x();
 	}
 }
 
@@ -367,6 +438,9 @@ a = {
 		}
 	},
 	ex(st) {
+
+		this.exen = st;
+
 		if (st) {
 			window.onbeforeunload = function (e) {
 				e = e || window.event;
@@ -380,7 +454,8 @@ a = {
 		} else {
 			window.onbeforeunload = function() {}
 		}
-	}
+	},
+	exen: false
 }
 
 function error(error) {
