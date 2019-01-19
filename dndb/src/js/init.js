@@ -113,20 +113,6 @@ global.alert = function(obj) {
 
 }
 
-global.alert({
-	type: "userList",
-	text: "Pick",
-	users: [{
-		image: "https://lh3.googleusercontent.com/-t2bTBSpPUVY/AAAAAAAAAAI/AAAAAAAABgs/6vL_lmKdF3g/photo.jpg",
-		name: "rster2002"
-	}],
-	btn1: "add",
-	btn2: "cancel",
-	btn1fn: function(picked) {
-		console.log(picked);
-	}
-})
-
 alert = function(text) {
 	global.alert({
 		text: text,
