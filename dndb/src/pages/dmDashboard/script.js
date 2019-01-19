@@ -104,9 +104,10 @@ Vue.component("dmlist", {
 						let r = [];
 
 						usersPermitted.forEach(a => {
-							a.image = a.profile.usericon;
-							a.name = a.profile.username;
-							r.push(a);
+							let obj = Object.assign({}, a);
+							obj.image = obj.profile.usericon;
+							obj.name = obj.profile.username;
+							r.push(obj);
 						});
 
 						global.t = this;
@@ -161,7 +162,7 @@ Vue.component("dmlist", {
 											});
 										});
 									}
-								})
+								});
 							}
 						});
 					} else {
