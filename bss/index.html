@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta name="Description" content="A compiler for minecraft functions to help map makers and alike to create awesome content faster." />
+		<title>Bluestone Script</title>
+
+		<link rel="stylesheet" href="./src/css/index.css">
+
+		<script src="./src/js/index.js" charset="utf-8"></script>
+
+	</head>
+	<body>
+		<div id="app">
+			<div class="header">
+				<h1>Bluestone script</h1>
+			</div>
+			<div class="content">
+				<div class="lane">
+					<h1>Get it done</h1>
+					<p>Using BSS you can stop having to worry about tabs and creating seperate files for different statements.</p>
+					<div class="code">
+						<p class="title">Bluestone Script</p>
+						<p><span class="bssexpression">{{ <span class="bsscommand">if</span> <span class="score">i</span> <span class="handeler">></span> <span class="number">10</span> => }}</span> <span class="block">&lt;&lt;</span><br/>
+							&emsp;say hey<br/>
+							&emsp;say hi<br/>
+							&emsp;say hello<br/>
+						<span class="block">&gt;&gt;</span></p>
+					</div>
+					<div class="code">
+						<p class="title">Output</p>
+						<p><span class="bssexpression"><span class="bsscommand">execute <span class="handeler">as</span> <span class="selector">@s[scores={i=11..}]</span> <span class="handeler">run</span> <span class="bsscommand">function</span> example:bss_generated/1110</span></span></p>
+					</div>
+					<h1>Write less</h1>
+					<p>BSS makes sure you can focus on what you are making by making you write less code.</p>
+					<div class="code">
+						<p class="title">Bluestone Script</p>
+						<p><span class="bssexpression">{{ <span class="bsscommand">var</span> <span class="score">score</span> <span class="handeler">=</span> <span class="number">10</span> }}</span><br/>
+						<span class="bssexpression">{{ <span class="bsscommand">expression</span> <span class="score">score</span> <span class="handeler">*</span> <span class="number">2</span> }}</span></p>
+					</div>
+					<div class="code">
+						<p class="title">Output</p>
+						<p>
+							<span class="handeler"># Adds the required scoreboards</span>
+							<br/>
+							<span class="bssexpression"><span class="bsscommand">scoreboard</span> <span class="handeler">objectives add</span> <span class="score">score</span> <span class="handeler">dummy</span></span><br/>
+							<span class="bssexpression"><span class="bsscommand">scoreboard</span> <span class="handeler">objectives add</span> <span class="score">n2</span> <span class="handeler">dummy</span></span><br/>
+
+							<br/>
+							<span class="handeler"># Sets the values</span>
+							<br/>
+							<span class="bssexpression"><span class="bsscommand">scoreboard</span> <span class="handeler">players set</span> <span class="score">n2</span> <span class="number">2</span></span><br/>
+							<span class="bssexpression"><span class="bsscommand">scoreboard</span> <span class="handeler">players set</span> <span class="score">score</span> <span class="number">10</span></span><br/>
+
+							<br/>
+							<span class="handeler"># And then does the operation</span>
+							<br/>
+							<span class="bssexpression"><span class="bsscommand">scoreboard</span> <span class="handeler">players operation</span> <span class="selector">@s</span> <span class="score">score</span> <span class="handeler">*=</span> <span class="selector">@s</span> <span class="score">n2</span></span><br/>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

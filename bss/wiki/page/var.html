@@ -1,0 +1,52 @@
+<h1>Basic usage</h1>
+<p>Using 'var' is like using a more advanced version of 'scoreboard'. It automatically defines scoreboards for you and can even add them to a seperate file.</p>
+<p>If you look at the example below. It creates the scoreboard and also assignes the value to 10.</p>
+<div class="code">
+	<p class="title">Bluestone Script</p>
+	<p>
+		<span class="bssexpression">{{ <span class="bsscommand">var</span> <span class="score">test</span> <span class="handeler">=</span> <span class="number">10</span> }}</span><br/>
+	</p>
+</div>
+<div class="code">
+	<p class="title">Output</p>
+	<p>
+		<span class="bsscommand">scoreboard</span> <span class="">objectives</span> <span class="">add</span> <span class="score">test</span> <span class="">dummy</span><br/>
+		<span class="bsscommand">scoreboard</span> <span class="">players</span> <span class="">set</span> <span class="selector">@s</span> <span class="score">test</span> <span class="number">10</span><br/>
+	</p>
+</div>
+
+<p>But we can do more. We can actually do some basic operations.</p>
+
+<div class="code">
+	<p class="title">Bluestone Script</p>
+	<p>
+		<span class="bssexpression">{{ <span class="bsscommand">var</span> <span class="score">test</span> <span class="handeler">=</span> <span class="number">10</span> }}</span><br/>
+		<span class="bssexpression">{{ <span class="bsscommand">var</span> <span class="score">test</span> <span class="handeler">+=</span> <span class="number">20</span> }}</span><br/>
+	</p>
+</div>
+<div class="code">
+	<p class="title">Output</p>
+	<p>
+		<span class="bsscommand">scoreboard</span> <span class="">objectives</span> <span class="">add</span> <span class="score">test</span> <span class="">dummy</span><br/>
+		<span class="bsscommand">scoreboard</span> <span class="">players</span> <span class="">set</span> <span class="selector">@s</span> <span class="score">test</span> <span class="number">10</span><br/>
+		<span class="bsscommand">scoreboard</span> <span class="">players</span> <span class="">add</span> <span class="selector">@s</span> <span class="score">test</span> <span class="number">20</span><br/>
+		<span class="handeler"># Expected output sould be 30</span>
+	</p>
+</div>
+
+<h1>Defining types</h1>
+<p>You might have noticed that it always defines the scoreboard using the dummy type. You can change the type by first defining the scoreboard and then assigning a value to it.</p>
+<div class="code">
+	<p class="title">Bluestone Script</p>
+	<p>
+		<span class="bssexpression">{{ <span class="bsscommand">var</span> <span class="score">deaths</span> <span class="handeler">as</span> <span class="number">deathCount</span> }}</span><br/>
+		<span class="bssexpression">{{ <span class="bsscommand">var</span> <span class="score">deaths</span> <span class="handeler">=</span> <span class="number">10</span> }}</span><br/>
+	</p>
+</div>
+<div class="code">
+	<p class="title">Output</p>
+	<p>
+		<span class="bsscommand">scoreboard</span> <span class="">objectives</span> <span class="">add</span> <span class="score">deaths</span> <span class="number">deathCount</span><br/>
+		<span class="bsscommand">scoreboard</span> <span class="">players</span> <span class="">set</span> <span class="selector">@s</span> <span class="score">deaths</span> <span class="number">10</span><br/>
+	</p>
+</div>
