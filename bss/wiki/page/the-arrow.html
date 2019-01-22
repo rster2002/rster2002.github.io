@@ -1,0 +1,16 @@
+<h1>Using the arrow</h1>
+<p>You may have seen '=>' in for example the 'if' command. This if for closing the compiled 'execute' command. If we have the following example:</p>
+<div class="code">
+	<p class="title">Bluestone Script</p>
+	<p>
+		<span class="bssexpression">{{ <span class="bsscommand">if</span> <span class="score">i</span> <span class="handeler">></span> <span class="number">10</span> <span class="handeler">=></span> }}</span> <span class="bsscommand">say</span> <span class="number">hi</span><br/>
+	</p>
+</div>
+<p>We can see that at the end of the command there is an arrow. This indicates to the compiler it should look at the rest of the line like a new command.</p>
+<p>If we wanted to extend the compiled 'execute' command, we would <b>not</b> add a arrow at the end. Like here:</p>
+<div class="code">
+	<p class="title">Bluestone Script</p>
+	<p>
+		<span class="bssexpression">{{ <span class="bsscommand">if</span> <span class="score">i</span> <span class="handeler">></span> <span class="number">10</span> }}</span> <span class="">at</span> <span class="selector">@s</span> <span class="">if</span> block <span class="number">~ ~-1 ~</span> minecraft:stone run <span class="bsscommand">say</span> <span class="number">stone</span><br/>
+	</p>
+</div>
