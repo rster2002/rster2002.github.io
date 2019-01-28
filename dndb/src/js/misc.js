@@ -229,7 +229,7 @@ $(document).ready(function() {
 				uid: ''
 			}
 		}
-	})
+	});
 });
 
 async function createQuery(query) {

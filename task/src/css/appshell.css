@@ -1,13 +1,4 @@
-@font-face {
-    font-family: Roboto;
-    src: url(../fonts/Roboto-Regular.ttf);
-}
-
-/* @font-face {
-    font-family: Roboto;
-    src: url(../fonts/Roboto-Black.ttf);
-	font-size: 900;
-} */
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,900');
 
 /* Defines some vars */
 :root {
@@ -22,7 +13,7 @@
 }
 
 /* Sets the body and html elements to be the size of the window */
-html, body, #app {
+html, body {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
@@ -37,7 +28,6 @@ html, body, #app {
 /* Sets their font */
 h1, p, input, textarea {
 	font-family: var(--font);
-	font-weight: 500;
 }
 
 /* Default styling */
@@ -62,13 +52,13 @@ html div.wave.menu a {
 
 /* Overwrites some wave components */
 html .wave.bar.top {
-	background-color: #3030ff;
+	background-color: white;
 }
 
 html .wave.top.bar > .section.text h1 {
-	color: white;
+	color: black;
 	padding-right: 20px;
-	text-align: left;
+	text-align: center;
 }
 
 html .wave.top.bar > .section button i {
@@ -199,19 +189,9 @@ div.wave.card {
 	float: left;
 }
 
-.pageArea {
-	width: calc(100% - 64px);
-	height: 100%;
-	float: left;
-}
-
 /* Styling for sidebar */
 .sidebar {
-	background-color: white;
-	width: 64px;
-	height: 100%;
-	float: left;
-	/* position: fixed;
+	position: fixed;
 	z-index: 30;
 	width: 80vw;
 	max-width: 360px;
@@ -219,12 +199,7 @@ div.wave.card {
 	background-color: white;
 	transition: 200ms transform cubic-bezier(0.4, 0.0, 0.6, 1);
 	transform: translateX(-200%);
-	overflow-y: auto; */
-}
-
-.sidebar > div {
-	width: 64px;
-	height: 64px;
+	overflow-y: auto;
 }
 
 .sidebar.open {
@@ -1031,6 +1006,13 @@ html div.wave.card > div.actions button {
     background-color: rgba(0, 0, 0, .05);
     padding: 4px 8px;
     border-radius: 5px;
+	font-family: "Roboto", sans-serif;
+    background-color: rgba(0, 0, 0, .05);
+    padding: 4px 8px;
+    border-radius: 5px;
+    display: inline-block;
+    width: calc(100% - 24px);
+    white-space: pre-wrap;
 }
 
 .innerPage .lane .entry .markdown pre {

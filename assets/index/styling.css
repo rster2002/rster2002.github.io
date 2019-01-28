@@ -102,3 +102,30 @@ body, html {
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.section {
+	width: 100%;
+	background-position: center;
+	background-size: cover;
+	height: 300px;
+	padding: 0;
+}
+
+.section .overlay {
+	width: 100%;
+	height: 100%;
+}
+
+.section .left {
+	width: 50%;
+	height: 100%;
+	float: left;
+	background-color: rgb(48, 48, 255, .9);
+}
+
+.section .right {
+	width: 50%;
+	height: 100%;
+	float: left;
+	background-color: rgba(0, 0, 0, .9);
+}
