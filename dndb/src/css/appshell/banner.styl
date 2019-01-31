@@ -1,0 +1,77 @@
+// main: index.styl
+
+.banner {
+	width: calc(100% - 24px);
+	border-bottom: 2px rgba(0, 0, 0, .1) solid;
+	display: inline-block;
+	padding: 0px 12px;
+	background-color: white;
+
+    .text {
+    	width: calc(70% - 16px);
+    	padding: 4px 8px;
+    	display: inline-block;
+    	float: left;
+
+        p {
+        	font-family: 'Roboto', sans-serif;
+        	position: relative;
+        	color: black;
+        	font-size: 16px;
+        	font-weight: 400;
+        }
+
+        .actions {
+        	width: 30%;
+        	height: 100%;
+        	float: left;
+
+            button {
+            	transition: all 250ms cubic-bezier(0.4, 0.0, 0.2, 1);
+            	margin: 14px 4px;
+            	font-size: 18px;
+            	background-color: no-hover;
+            	outline: 0;
+            	border: solid 2px;
+            	border-color: no-hover;
+            	border-radius: 4px;
+            	color: accent-color;
+            	padding: 4px 8px;
+            	font-weight: 500;
+            	cursor: pointer;
+            	text-transform: lowercase;
+            	float: right;
+
+                &:hover {
+                	border-color: transparent;
+                	background-color: hover;
+                	/* color: white;
+                	background-color: accent-color;
+                	transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1); */
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+@media only screen and (max-width: 800px) {
+
+	.banner {
+
+        .text {
+    		width: calc(100% - 16px);
+    		float: none;
+    	}
+
+        .actions {
+    		width: 100%;
+    		float: none;
+    	}
+
+    }
+
+}

@@ -1,5 +1,3 @@
-var input = "score (a, b, c) (d, e, f)  => => =>";
-
 Array.prototype.isolate = function(first, second) {
 
     let temp = [];

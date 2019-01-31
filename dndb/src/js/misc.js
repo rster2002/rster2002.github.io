@@ -1,5 +1,5 @@
 global = {
-	version: "vB1.35"
+	version: "vB1.36"
 }
 
 cons = false;
