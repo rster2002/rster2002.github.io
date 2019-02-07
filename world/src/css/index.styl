@@ -1,0 +1,41 @@
+// out: appshell.css
+
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+#app {
+    @extend html;
+
+    overflow: auto;
+}
+
+.playfield {
+    display: inline-block;
+
+    .layer {
+        position: fixed;
+        display: inline-block;
+
+        .row {
+            display: inline-block;
+            height: 64px;
+            margin-top: -4px;
+
+            .square {
+                width: 64px;
+                height: 64px;
+                float: left;
+                background-size: cover;
+
+                &:hover {
+                    background-image: url("../sprites/gui/cursor.gif");
+                }
+            }
+        }
+    }
+}

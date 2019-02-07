@@ -13,7 +13,7 @@
 		<script id="vueLib" src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 		<!-- App scripts -->
-		<script src="./src/js/combat.js" charset="utf-8"></script>
+		<script async src="./src/js/combat.js" charset="utf-8"></script>
 
 		<!-- Styles -->
 		<link rel="stylesheet" href="./src/css/appshell.css" />
@@ -21,19 +21,34 @@
 	</head>
 	<body>
 		<div id="app">
-			<div class="window">
-				<div class="section">
-					<div class="c">
-
+			<div class="playfield">
+				<div class="layer" style="z-index: 0;">
+					<div v-for="row in layers[0].rows" class="row" v-bind:style="{ width: row.width + 'px' }">
+						<div
+							class="square"
+							v-for="square in row.squares"
+							v-bind:style="{ backgroundImage: 'url(' + square.img + ')' }">
+						</div>
 					</div>
 				</div>
-				<div class="section"></div>
-				<div class="section"></div>
-				<div class="section"></div>
-				<div class="section"></div>
-				<div class="section"></div>
-				<div class="section"></div>
-				<div class="section"></div>
+				<div class="layer" style="z-index: 1;">
+					<div v-for="row in layers[1].rows" class="row" v-bind:style="{ width: row.width + 'px' }">
+						<div class="square" v-for="square in row.squares" v-bind:style="{ backgroundImage: 'url(' + square.img + ')' }">
+						</div>
+					</div>
+				</div>
+				<div class="layer" style="z-index: 2;">
+					<div v-for="row in layers[2].rows" class="row" v-bind:style="{ width: row.width + 'px' }">
+						<div class="square" v-for="square in row.squares">
+						</div>
+					</div>
+				</div>
+				<div class="layer" style="z-index: 3;">
+					<div v-for="row in layers[3].rows" class="row" v-bind:style="{ width: row.width + 'px' }">
+						<div class="square" v-for="square in row.squares" @click="select(square)">
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
