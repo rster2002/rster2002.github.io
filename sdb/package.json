@@ -1,0 +1,9 @@
+{
+	"name": "sessiondb",
+	"version": "1.0.1",
+	"description": "A small wrapper for sessionStorage",
+	"main": "sdb.js",
+	"author": "rster2002",
+	"license": "MIT",
+	"private": false
+}
