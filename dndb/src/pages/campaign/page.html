@@ -141,9 +141,11 @@
 				<div class="btn">
 					<button @click="changeCampaignName()">change</button>
 				</div>
+				<div class="btn">
+					<button v-id="isDM" class="danger" @click="deleteCampaign()">Delete campaign</button>
+				</div>
 			</div>
 			<div class="btn" v-if="!isDM">
-				<button v-id="isDM" class="danger" @click="deleteCampaign()">Delete campaign</button>
 				<button v-if="!isDM" class="danger" @click="kick(self, 'self', 'campaignMenu')">Leave campaign</button>
 			</div>
 		</div>
