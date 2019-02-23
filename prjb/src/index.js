@@ -6,13 +6,15 @@ import app from "./app.vue";
 // Pages
 import loginPage from "./pages/login.vue";
 import dashboardPage from "./pages/dashboard.vue";
+import devPage from "./pages/dev.vue";
 
 // Setup router
 Vue.use(vueRouter);
 
 const routes = [
 	{path: "/", component: loginPage},
-	{path: "/dashboard", component: dashboardPage}
+	{path: "/dashboard", component: dashboardPage},
+	{path: "/dev", component: devPage}
 ]
 
 const router = new vueRouter({

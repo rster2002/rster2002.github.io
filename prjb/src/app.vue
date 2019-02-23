@@ -19,7 +19,7 @@
 import bigInt from "big-integer";
 import vColm from "./components/vColm.vue";
 
-import {genId} from "./js/global.js";
+import {genId, makeApiCall} from "./js/global.js";
 
 import {fb, fs, cfb} from "./js/firebase.js";
 
@@ -114,15 +114,18 @@ export default {
 			if (user !== null) {
 				console.log(user);
 				console.log(t.$store);
-				var sessionid = genId()
+				var sessiontoken = genId()
 				t.$store.state.username = user.displayName;
 				t.$store.state.uid = user.uid;
-				t.$store.state.sessionid = sessionid;
+				t.$store.state.sessiontoken = sessiontoken;
 
 				console.log(t.$router);
-				t.$router.push({path: "/dashboard"});
 
-				t.$store.state.coins = "1000000";
+				console.log(t.$router.currentRoute);
+
+				if (t.$router.currentRoute.matched[0].path === "") {
+					t.$router.push({path: "/dashboard"});
+				}
 
 				fs.collection("users").doc(user.uid).set({
 					username: user.displayName,
@@ -131,7 +134,12 @@ export default {
 				});
 
 				fs.collection("users").doc(user.uid).collection("private").doc("session").set({
-					sessionid
+					sessiontoken
+				}).then(() => {
+					makeApiCall("/users/" + user.uid).then(a => {
+						console.log(a);
+						t.$store.state.coins = a.balance;
+					});
 				});
 			} else {
 				console.log("NULL");
