@@ -2,12 +2,14 @@
 	<div class="page">
 		<div class="mainHeader" v-bind:style="{ backgroundImage: 'url(' + randomImg + ')' }">
 			<div class="textWrapper">
-				<h1>{{ displayCoins }}</h1>
-				<h2>Coins</h2>
+				<h1 v-if="coins !== '-1'">{{ displayCoins }}</h1>
+				<h1 v-else>Login</h1>
+				<h2>{{ underHeader }}</h2>
 			</div>
 		</div>
 		<div class="content">
 			<router-view></router-view>
+			<h2>{{ sessionid }}</h2>
 		</div>
 	</div>
 </template>
@@ -17,6 +19,10 @@
 import bigInt from "big-integer";
 import vColm from "./components/vColm.vue";
 
+import {genId} from "./js/global.js";
+
+import {fb, fs, cfb} from "./js/firebase.js";
+
 const a = bigInt;
 
 export default {
@@ -25,11 +31,17 @@ export default {
 	},
 	data() {
 		return {
-			coins: "100000",
-			underHeader: "Coins"
+			underHeader: ""
 		}
 	},
 	computed: {
+		coins() {
+			console.log(this.$store.state.coins);
+			return this.$store.state.coins;
+		},
+		sessionid() {
+			return this.$store.state.sessionid;
+		},
 		randomImg() {
 			var images = [
 				"https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
@@ -55,7 +67,7 @@ export default {
 			return images[index];
 		},
 		displayCoins() {
-			if (this.coins.length > 0) {
+			if (this.coins.length > 0 && this.coins !== "-1") {
 				var coins = bigInt(this.coins);
 				console.log(coins);
 				function c(a, b) {
@@ -71,7 +83,7 @@ export default {
 				var symbols = ["", "K", "M", "B", "T", "Q", "QT", "S", "ST", "O", "N", "D", "U", "DU", "TR", "QU", "QD", "SD", "SP", "OC", "ND", "VT"];
 				var names = ["Coins", "Thousant", "Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion"];
 				for (var i = 3; i <= 63; i += 3) {
-					boundries.push("10e" + i);
+					boundries.push("10e" + (i - 1));
 				}
 
 				console.log(boundries);
@@ -94,8 +106,37 @@ export default {
 			} else {
 				return "Nothing";
 			}
-
 		}
+	},
+	created() {
+		var t = this;
+		cfb.auth().onAuthStateChanged(function(user) {
+			if (user !== null) {
+				console.log(user);
+				console.log(t.$store);
+				var sessionid = genId()
+				t.$store.state.username = user.displayName;
+				t.$store.state.uid = user.uid;
+				t.$store.state.sessionid = sessionid;
+
+				console.log(t.$router);
+				t.$router.push({path: "/dashboard"});
+
+				t.$store.state.coins = "1000000";
+
+				fs.collection("users").doc(user.uid).set({
+					username: user.displayName,
+					uid: user.uid,
+					lastOnline: Date.now()
+				});
+
+				fs.collection("users").doc(user.uid).collection("private").doc("session").set({
+					sessionid
+				});
+			} else {
+				console.log("NULL");
+			}
+		});
 	}
 }
 </script>
@@ -164,7 +205,7 @@ export default {
 			margin: 0;
 			margin-top: 4px;
 			margin-bottom: 16px;
-			color: #ffffff;
+			color: #8a8a8a;
 			font-size: 14px;
 			font-family: font;
 			text-align: center;
@@ -173,8 +214,7 @@ export default {
 
 		.itemsWrapper {
 			width: 100%;
-			height: 200px;
-			display: flex;
+			display: inline-flex;
 			flex-flow: row wrap;
 			align-items: stretch;
 			justify-content: space-around;

@@ -17,8 +17,12 @@ export default {
 @import "../global.stylus";
 
 .wrapper {
-	height: 100%;
+	height: 200px;
 	flex-basis: 50%;
+
+	&.full {
+		flex-basis: 100%;
+	}
 
 	.inner {
 		width: 80%;
