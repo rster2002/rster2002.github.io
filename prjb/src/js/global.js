@@ -11,6 +11,8 @@ if (document.URL.includes("http://localhost:")) {
 	base = "http://192.168.1.54:3000";
 }
 
+base = "http://192.168.1.54:3000";
+
 function genId() {
 	function randomString(characters, l) {
 		var retn = "";
