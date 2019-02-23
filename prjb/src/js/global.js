@@ -11,8 +11,6 @@ if (document.URL.includes("http://localhost:")) {
 	base = "http://192.168.1.54:3000";
 }
 
-base = "https://us-central1-dewebsite-bae27.cloudfunctions.net/api1";
-
 function genId() {
 	function randomString(characters, l) {
 		var retn = "";

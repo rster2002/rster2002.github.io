@@ -9,6 +9,7 @@
 		</div>
 		<div class="content">
 			<router-view></router-view>
+			<h2>v1.0.6</h2>
 			<h2>{{ sessionid }}</h2>
 		</div>
 	</div>
