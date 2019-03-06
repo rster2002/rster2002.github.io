@@ -3,15 +3,7 @@ import vueRouter from "vue-router";
 import store from "./store.js";
 
 import app from "./app.vue";
-// Pages
-import loginPage from "./pages/login.vue";
-
-// Setup router
-Vue.use(vueRouter);
-
-const routes = [
-	{path: "/", component: loginPage}
-]
+import routes from "./routes.js";
 
 const router = new vueRouter({
 	routes

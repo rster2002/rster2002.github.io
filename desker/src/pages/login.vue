@@ -1,10 +1,11 @@
 <template lang="html">
 	<div>
+		<h1 class="title">Desker</h1>
 		<div class="box dp1">
 			<h1>Login</h1>
 			<div class="btn" @click="login()">
 				<div class="icon">
-					<img src="../img/github-logo.png" />
+					<img src="./img/github-logo.png" />
 				</div>
 				<div class="text">
 					<p>Login with github</p>
@@ -15,11 +16,13 @@
 </template>
 
 <script>
-import {cfb, fb, fs} from "../js/firebase.js";
+import {cfb, fb, fs} from "./js/firebase.js";
+import {mac} from "./js/global.js";
 
 export default {
 	methods: {
 		login() {
+			var t = this;
 			var provider = new cfb.auth.GithubAuthProvider();
 			provider.addScope("repo");
 			fb.auth().signInWithPopup(provider).then(r => {
@@ -36,6 +39,11 @@ export default {
 						});
 
 						sessionStorage.setItem("auth", r.credential.accessToken);
+						sessionStorage.setItem("user", JSON.stringify(user));
+
+						t.$router.push({path: "repos"});
+
+						mac("/user").then(r => sessionStorage.setItem("gitUser", JSON.stringify(r)))
 					}
 
 					if (a && a.exists) {
@@ -59,10 +67,17 @@ export default {
 
 <style lang="stylus" scoped>
 
+h1.title {
+	margin: 0;
+	padding: 32px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+}
+
 .box {
 	padding: 16px;
 	width: 20%;
-	position: relative;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -72,7 +87,9 @@ export default {
 
 	h1 {
 		font-family: 'Montserrat', sans-serif;
-		margin: 16px 0px;
+		font-weight: 400;
+		margin: 0;
+		margin-bottom: 16px;
 	}
 
 	btnHeight = 36px;
