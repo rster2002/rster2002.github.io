@@ -36,13 +36,14 @@ export default {
 	width: 64px;
 	height: 100%;
 	background-color: #131313;
-	transition: width cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
+	transition: width cubic-bezier(0.4, 0.0, 0.2, 1) 250ms;
 	float: left;
+	position: relative;
 
 	p {
 		z-index: -1;
 		opacity: 0;
-		transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 200ms;
+		transition: all cubic-bezier(0.4, 0.0, 0.2, 1) 250ms;
 	}
 
 	&:hover {
@@ -74,6 +75,36 @@ export default {
 
 			&:hover {
 				background-color: #232323;
+			}
+		}
+
+		&.btm {
+			position: absolute;
+			bottom: 0;
+
+			.icon img {
+				filter: opacity(.2);
+			}
+
+			.text {
+				p {
+					color: #616161;
+				}
+			}
+		}
+
+		&.btm1 {
+			position: absolute;
+			bottom: 64px;
+
+			.icon img {
+				filter: opacity(.2);
+			}
+
+			.text {
+				p {
+					color: #616161;
+				}
 			}
 		}
 
@@ -147,6 +178,7 @@ export default {
 			font-family: 'Montserrat', sans-serif;
 			font-size: 16px;
 			color: #ffffff;
+			white-space: normal;
 		}
 
 		button {
@@ -200,6 +232,7 @@ export default {
 					padding: 0px 4px;
 					border-radius: 2px;
 					margin-right: 8px;
+					font-size: 12px;
 
 					&.blue {
 						background-color: #3070ff;
@@ -225,9 +258,14 @@ export default {
 						background-color: #019226;
 					}
 
+					&.grey {
+						background-color: #696969;
+					}
+
 					img {
-						height: 16px;
-					    transform: translateY(2px);
+						height: 14px;
+						position: relative;
+						top: 2px;
 					}
 				}
 			}

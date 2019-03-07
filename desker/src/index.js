@@ -5,13 +5,32 @@ import store from "./store.js";
 import app from "./app.vue";
 import routes from "./routes.js";
 
+import {fb} from "./pages/js/firebase.js";
+
 const router = new vueRouter({
 	routes
 });
 
 // Finalize
-new Vue({
+let i = new Vue({
 	router,
 	store,
-	render: h => h(app)
+	render: h => h(app),
+	watch: {
+		"$route": function() {
+			var i = JSON.parse(sessionStorage.getItem("user"));
+			if (i.auth !== undefined) {
+				this.$router.push({path: "/"});
+			}
+		}
+	}
 }).$mount("#app");
+
+fb.auth().onAuthStateChanged(function(user) {
+	if (user === null) {
+		sessionStorage.setItem("user", JSON.stringify({auth: false}));
+		i.$router.push({path: "/"});
+	} else {
+		sessionStorage.setItem("user", JSON.stringify(user));
+	}
+});

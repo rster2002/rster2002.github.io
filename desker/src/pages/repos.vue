@@ -7,14 +7,15 @@
 			<div class="card" v-if="selected.name !== ''">
 				<h1>{{ selected.name }}</h1>
 				<p v-if="selected.description !== ''">{{ selected.description }}</p>
-				<button>open</button>
+				<button @click="open()">open</button>
 			</div>
 			<div class="card" v-if="selected.events.length !== 0">
 				<div class="listItem" v-for="event in selected.events">
 					<p v-html="event.title"></p>
-					<!-- <p><span class="tag blue"><img src="./icons/done.png" /></span></p> -->
+					<!-- <p><span class="tag blue">hey</span> some other</p> -->
 				</div>
 			</div>
+			<sidebar-item @click="signOut()" class="btm" icon="exit">Log out</sidebar-item>
 		</sidebar>
 		<page class="ex">
 			<div class="card">
@@ -31,7 +32,8 @@ import sidebar from "./components/sidebar.vue";
 import sidebarItem from "./components/sidebarItem.vue";
 import page from "./components/page.vue";
 
-import {mac} from "./js/global.js";
+import {mac, signOut} from "./js/global.js";
+import eventMapper from "./js/eventMapper.js";
 
 export default {
 	components: {
@@ -54,32 +56,37 @@ export default {
 		select(repo) {
 			this.selected.name = repo.name;
 			this.selected.description = repo.description !== null ? repo.description : "";
-			var e = repo.events.slice(0, 5);
+			var e = repo.events.filter(a => {
+				if (a.type === "CreateEvent") {
+					var refType = a.payload["ref_type"];
+					if (refType === "tag") {
+						return false;
+					} else if (refType === "repository") {
+						return false;
+					} else if (refType === "branch" && a.payload.ref === "master") {
+						return false;
+					}
 
-			var r = e.map(a => {
-				a.title = ``;
-
-				if (a.event === "head_ref_deleted") {
-					a.title += `<span class="tag red"><img src="./src/pages/icons/bin.png" /></span>`;
-				} else if (a.event === "closed") {
-					a.title += `<span class="tag blue"><img src="./src/pages/icons/done.png" /></span>`;
-				} else if (a.event === "merged") {
-					a.title += `<span class="tag orange"><img src="./src/pages/icons/merge.png" /></span>`;
-				} else if (a.event === "referenced") {
-					a.title += `<span class="tag purple"><img src="./src/pages/icons/at.png" /></span>`;
-				} else if (a.event === "labeled") {
-					a.title += `<span class="tag pink"><img src="./src/pages/icons/label.png" /></span>`;
-				} else if (a.event === "assigned") {
-					a.title += `<span class="tag green"><img src="./src/pages/icons/account.png" /></span>`;
+				} else if (a.type === "PullRequestEvent") {
+					return false;
 				}
 
-				a.title += a.issue.title;
-
-				return a;
+				return true;
 			});
+			e = e.slice(0, 5);
+
+			console.log(e);
+			var r = e.map(eventMapper);
 
 			this.selected.events = r;
-		}
+		},
+		open() {
+			mac("/user").then(r => {
+				// this.$router.push({path: "repo", params: {user: r.login, repo: this.selected.name}});
+				this.$router.push({path: `repo/${r.login}/${this.selected.name}/dashboard`});
+			});
+		},
+		signOut
 	},
 	created() {
 		mac("/users/rster2002/repos").then(r => {
@@ -87,7 +94,7 @@ export default {
 			this.repos = r
 
 			this.repos.forEach((a, i) => {
-				mac(`/repos/$user/${a.name}/issues/events`)
+				mac(`/repos/$user/${a.name}/events`)
 					.then(r => this.repos[i].events = r);
 			});
 		});

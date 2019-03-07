@@ -1,4 +1,5 @@
 import Store from "../../store.js";
+import {fb} from "./firebase.js";
 
 var env;
 var base;
@@ -21,8 +22,8 @@ function genId() {
 	return randomString("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 32);
 }
 
-function mac(path) {
-	console.log(`Making call to ${path}`);
+function mac(path, params) {
+	console.log(`Making call to '${path}'`);
 	return new Promise(res => {
 		var u;
 		if (sessionStorage.getItem("gitUser") !== null) {
@@ -34,21 +35,45 @@ function mac(path) {
 			}
 		}
 
+		var tail = "";
+
+		if (params !== undefined) {
+			var entries = Object.entries(params);
+
+			entries.forEach(a => {
+				tail += `&${a[0]}=${a[1]}`;
+			});
+		}
+
+		tail += `&access_token=${sessionStorage.getItem("auth")}`;
+
+		path += `?${tail}`;
+
 		if (sessionStorage.getItem(path) !== null) {
+			console.log("Returning data from session");
 			res(JSON.parse(sessionStorage.getItem(path)));
 		} else {
-			fetch(`https://api.github.com${path}?&access_token=${sessionStorage.getItem("auth")}`)
+			fetch(`https://api.github.com${path}`)
 				.then(r => r.json())
 				.then(j => {
 					sessionStorage.setItem(path, JSON.stringify(j));
+					console.log("Returning data from API");
 					res(j)
 				});
 		}
 	});
 }
 
+function signOut() {
+	console.log("SIGNING OUT");
+	fb.auth().signOut().then(a => {
+		this.$router.push({path: "/"});
+	});
+}
+
 export {
 	env,
 	genId,
-	mac
+	mac,
+	signOut
 }
