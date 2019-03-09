@@ -5,7 +5,9 @@ import store from "./store.js";
 import app from "./app.vue";
 import routes from "./routes.js";
 
-import {fb} from "./pages/js/firebase.js";
+import {mac} from "./pages/js/global.js";
+
+import {fb, fs} from "./pages/js/firebase.js";
 
 const router = new vueRouter({
 	routes
@@ -31,6 +33,11 @@ fb.auth().onAuthStateChanged(function(user) {
 		sessionStorage.setItem("user", JSON.stringify({auth: false}));
 		i.$router.push({path: "/"});
 	} else {
+		fs.collection(`users/${user.uid}/private`).doc("token").get().then(a => {
+			sessionStorage.setItem("auth", a.data().token);
+
+			mac("/user").then(r => sessionStorage.setItem("gitUser", JSON.stringify(r)));
+		});
 		sessionStorage.setItem("user", JSON.stringify(user));
 	}
 });

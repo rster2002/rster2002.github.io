@@ -61,6 +61,12 @@ export default {
 
 			});
 		}
+	},
+	created() {
+		var i = JSON.parse(sessionStorage.getItem("user"));
+		if (i.auth === undefined) {
+			this.$router.push({path: "/repos"});
+		}
 	}
 }
 </script>

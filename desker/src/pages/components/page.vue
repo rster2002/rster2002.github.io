@@ -58,6 +58,7 @@ export default {
 			margin-bottom: 8px;
 			overflow-x: hidden;
 			overflow-y: auto;
+			max-height: calc(100% - 48px);
 
 			&.m2 {
 				max-height: 50%;
@@ -87,6 +88,25 @@ export default {
 				font-size: 16px;
 				color: #000000;
 				white-space: normal;
+
+				.chip {
+					background-color: #afafaf;
+					padding: 2px 8px;
+					border-radius: 100px;
+					margin: 0px 4px;
+
+					img {
+						height: 16px;
+					    border-radius: 50%;
+					    transform: translate(-4px, 2.5px);
+					}
+				}
+
+				.label {
+					padding: 2px 8px;
+					border-radius: 4px;
+					margin: 0px 4px;
+				}
 
 				.tag {
 					height: 100%;
@@ -168,6 +188,49 @@ export default {
 					overflow: hidden;
 					white-space: nowrap;
 					text-overflow: ellipsis;
+				}
+			}
+
+			.iconList {
+				width: 100%;
+				margin: 8px 0px;
+				white-space: normal;
+
+				.section {
+					width: calc(100% - 16px);
+					display: inline-block;
+					float: none;
+					min-height: 32px;
+
+					.icon {
+						height: 100%;
+						width: 32px;
+						float: left;
+
+						.icnWrapper {
+							height: 32px;
+							width: 32px;
+
+							img {
+								height: 70%;
+								position: relative;
+								top: 50%;
+								left: 50%;
+								transform: translate(-50%, -50%);
+								filter: invert(1);
+							}
+						}
+					}
+
+					.text {
+						display: inline-block;
+						width: calc(100% - 32px);
+						float: left;
+
+						p {
+							margin: 6px 0px;
+						}
+					}
 				}
 			}
 		}

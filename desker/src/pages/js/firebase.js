@@ -20,9 +20,16 @@ const at = fb.auth;
 // Client => User obj => date
 // Function => UID => User object
 
+async function qu(a) {
+	console.log(a);
+	var snapshot = await fs.collection(a).get();
+	return snapshot.docs.map(doc => (Object.assign({__id: doc.id}, doc.data())));
+}
+
 export {
 	fb,
 	fs,
 	at,
-	cfb
+	cfb,
+	qu
 };

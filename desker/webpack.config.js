@@ -1,11 +1,26 @@
 const path = require('path');
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const WebpackOnBuildPlugin = require('on-build-webpack');
+
+const Desker = require("desker");
+const desker = new Desker({
+	repo: "rster2002->rster2002.github.io",
+	token: "k5SeykIu8pYBKIaNzI9wPCzMxgHg7Aya"
+});
+
+desker.startSession();
 
 module.exports = {
-	mode: "development",
-	entry: "./src/index.js",
+	entry: [
+		"babel-polyfill",
+		"./src/index.js"
+	],
 	plugins: [
-		new VueLoaderPlugin()
+		new VueLoaderPlugin(),
+		new WebpackOnBuildPlugin(function(stats) {
+			console.log("RERERERERER")
+			desker.stopSession();
+		}),
 	],
 	module: {
 		rules: [

@@ -3,8 +3,9 @@
 		<sidebar>
 			<sidebar-item @click="openSection('dashboard')" icon="dashboard">Dashboard</sidebar-item>
 			<sidebar-item @click="openSection('events')" icon="events">Events</sidebar-item>
-			<sidebar-item @click="openSection('builds')" icon="build">Builds</sidebar-item>
+			<!-- <sidebar-item @click="openSection('builds')" icon="build">Builds</sidebar-item> -->
 			<sidebar-item @click="openSection('tasks')" icon="done">Tasks</sidebar-item>
+			<sidebar-item @click="openSection('workers')" icon="group">Workers</sidebar-item>
 			<sidebar-item @click="goto()" class="btm" icon="home">Home</sidebar-item>
 		</sidebar>
 		<page>
@@ -19,7 +20,20 @@ import sidebarItem from "./components/sidebarItem.vue";
 import page from "./components/page.vue";
 
 import {mac, signOut} from "./js/global.js";
-import {fb} from "./js/firebase.js";
+import {fb, fs} from "./js/firebase.js";
+
+function initPage(t) {
+	var params = t.$route.params;
+	var user = JSON.parse(sessionStorage.getItem("user"));
+	mac(`/repos/${params.user}/${params.repo}`).then(r => {
+		sessionStorage.setItem("cRepo", JSON.stringify(r));
+		fs.collection("repos").doc(`${params.user}->${params.repo}`).set({
+			name: params.repo,
+			fullName: r.full_name,
+			owner: user.uid
+		});
+	});
+}
 
 export default {
 	components: {
@@ -41,6 +55,9 @@ export default {
 		goto() {
 			this.$router.push({path: "/repos"});
 		}
+	},
+	created() {
+		initPage(this);
 	}
 }
 </script>
