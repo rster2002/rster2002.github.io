@@ -1,6 +1,6 @@
 {
 	"name": "sessiondb",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A small wrapper for sessionStorage",
 	"main": "sdb.js",
 	"author": "rster2002",
