@@ -34,6 +34,7 @@ class sdb {
         this.onChange = {};
         this.computable = {};
 		this.snapshot = {};
+		this.messager = sessionStorage;
 
         window.addEventListener("unload", function() {
             window["_sdb"].dbs.forEach(r => {
@@ -51,6 +52,11 @@ class sdb {
             console.log(val);
         }
     }
+
+	useMessager(a) {
+		this.messager = a;
+		return this;
+	}
 
     keepAlive() {
         window["_sdb"].db[this.name].keepAlive = true;
@@ -83,7 +89,7 @@ class sdb {
 
         this.onChange[data.__id] = data.onChange;
 
-        sessionStorage.setItem(this.name + "_" + ci.__id, JSON.stringify(data));
+        this.messager.setItem(this.name + "_" + ci.__id, JSON.stringify(data));
         this.$updateIndex(ci.__id);
         this.documentCount++;
 
@@ -117,7 +123,7 @@ class sdb {
         var index = this.$getIndex();
 
         index.forEach(a => {
-            var data = JSON.parse(sessionStorage.getItem(this.name + "_" + a));
+            var data = JSON.parse(this.messager.getItem(this.name + "_" + a));
 
             buildIndex.push(data);
         });
@@ -179,7 +185,7 @@ class sdb {
                 }
             }
 
-            sessionStorage.setItem(this.name + "_" + a.__id, JSON.stringify(newValue));
+            this.messager.setItem(this.name + "_" + a.__id, JSON.stringify(newValue));
         });
 
         this.$updateComputed();
@@ -191,7 +197,7 @@ class sdb {
         var index = this.$getIndex();
 
         index.forEach(a => {
-            var data = JSON.parse(sessionStorage.getItem(this.name + "_" + a));
+            var data = JSON.parse(this.messager.getItem(this.name + "_" + a));
             buildIndex.push(data);
         });
 
@@ -199,7 +205,7 @@ class sdb {
         var newIndex = [];
         if (key === "*" || key === undefined) {
             delList = buildIndex;
-            sessionStorage.removeItem(this.name + "-index");
+            this.messager.removeItem(this.name + "-index");
         } else {
             if (value !== undefined) {
                 delList = buildIndex.filter(a => {
@@ -226,16 +232,16 @@ class sdb {
             if (a["__id"] === undefined) {
                 throw new Error("Error deleting item: id field was not defined");
             } else {
-                sessionStorage.removeItem(this.name + "_" + a["__id"]);
+                this.messager.removeItem(this.name + "_" + a["__id"]);
             }
         });
 
         this.documentCount -= delList.length;
 
         if (newIndex.length > 0) {
-            sessionStorage.setItem(this.name + "-index", JSON.stringify(newIndex));
+            this.messager.setItem(this.name + "-index", JSON.stringify(newIndex));
         } else {
-            sessionStorage.removeItem(this.name + "-index");
+            this.messager.removeItem(this.name + "-index");
         }
 
         this.$updateComputed();
@@ -284,19 +290,27 @@ class sdb {
 
         index.push(id);
 
-        sessionStorage.setItem(this.name + "-index", JSON.stringify(index));
+		var r = {};
+		index.forEach(a => {r[a] = a});
+
+        this.messager.setItem(this.name + "-index", JSON.stringify(r));
     }
 
     $getIndex() {
-        var index = sessionStorage.getItem(this.name + "-index");
+        var index = this.messager.getItem(this.name + "-index");
 
         if (index === null) {
             index = "[]";
         }
 
-        index = JSON.parse(index);
+		index = JSON.parse(index);
 
-        return index;
+		var entries = Object.entries(index);
+		entries = entries.map(a => a[1]);
+
+		console.log(entries);
+
+        return entries;
     }
 
     $genId() {

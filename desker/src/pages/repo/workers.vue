@@ -14,7 +14,7 @@
 							<span v-else class="label" style="background-color: #ff3030;">no</span>
 						</p>
 					</icon-text>
-					<icon-text icon="server" v-if="selected.payload !== ''">
+					<icon-text icon="description" v-if="selected.payload !== ''">
 						<span v-html="selected.payload"></span>
 					</icon-text>
 					<icon-text icon="events" v-if="selected.events.length !== 0">

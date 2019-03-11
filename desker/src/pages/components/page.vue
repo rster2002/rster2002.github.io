@@ -1,5 +1,13 @@
 <template lang="html">
 	<div class="page">
+		<div class="gutter">
+			<div class="icon">
+				<img :src="i" />
+			</div>
+			<div class="text">
+				<h1>{{ title }}</h1>
+			</div>
+		</div>
 		<div class="content">
 			<slot></slot>
 		</div>
@@ -8,6 +16,12 @@
 
 <script>
 export default {
+	props: ["icon", "title"],
+	computed: {
+		i() {
+			return `./src/pages/icons/${this.icon}.png`;
+		}
+	}
 }
 </script>
 
@@ -24,12 +38,46 @@ export default {
 	.gutter {
 		width: 100%;
 		height: 64px;
+
+		.icon {
+			width: 64px;
+			height: 64px;
+			float: left;
+
+			img {
+				height: 50%;
+				width: 50%;
+
+				position: relative;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+
+				filter: invert(1);
+			}
+		}
+
+		.text {
+			width: calc(100% - 64px);
+			height: 64px;
+			float: left;
+
+			h1 {
+				margin: 0;
+				font-family: 'Montserrat', sans-serif;
+				position: relative;
+				top: 50%;
+				transform: translateY(-50%);
+				font-size: 24px;
+				text-transform: capitalize;
+			}
+		}
 	}
 
 	.content {
 		width: 100%;
 		height: calc(100% - 64px);
-		padding-top: 64px;
+		// padding-top: 64px;
 		padding-bottom: 64px;
 		overflow-y: auto;
 
@@ -43,6 +91,7 @@ export default {
 
 				&1 {
 					flex-basis: 50%;
+					max-width: 50%;
 				}
 			}
 		}

@@ -10,6 +10,7 @@ import repoDashboard from "./pages/repo/dashboard.vue";
 import repoEvents from "./pages/repo/events.vue";
 import repoTasks from "./pages/repo/tasks.vue";
 import repoWorkers from "./pages/repo/workers.vue";
+import repoTimeline from "./pages/repo/timeline.vue";
 
 // Setup router
 Vue.use(vueRouter);
@@ -24,7 +25,8 @@ const routes = [
 			{path: "dashboard", component: repoDashboard},
 			{path: "events", component: repoEvents},
 			{path: "tasks", component: repoTasks},
-			{path: "workers", component: repoWorkers}
+			{path: "workers", component: repoWorkers},
+			{path: "timeline", component: repoTimeline},
 		]
 	},
 ]

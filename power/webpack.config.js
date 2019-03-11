@@ -1,14 +1,6 @@
 const path = require('path');
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
-const WebpackOnBuildPlugin = require('on-build-webpack');
-
-const Desker = require("desker");
-const desker = new Desker({
-	repo: "rster2002->rster2002.github.io",
-	token: "k5SeykIu8pYBKIaNzI9wPCzMxgHg7Aya"
-});
-
-desker.startSession();
+// const WebpackOnBuildPlugin = require('on-build-webpack');
 
 module.exports = {
 	entry: [
@@ -16,11 +8,7 @@ module.exports = {
 		"./src/index.js"
 	],
 	plugins: [
-		new VueLoaderPlugin(),
-		new WebpackOnBuildPlugin(function(stats) {
-			console.log("RERERERERER")
-			desker.stopSession();
-		}),
+		new VueLoaderPlugin()
 	],
 	module: {
 		rules: [

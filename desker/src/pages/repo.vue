@@ -6,9 +6,10 @@
 			<!-- <sidebar-item @click="openSection('builds')" icon="build">Builds</sidebar-item> -->
 			<sidebar-item @click="openSection('tasks')" icon="done">Tasks</sidebar-item>
 			<sidebar-item @click="openSection('workers')" icon="group">Workers</sidebar-item>
+			<sidebar-item @click="openSection('timeline')" icon="timeline">Timeline</sidebar-item>
 			<sidebar-item @click="goto()" class="btm" icon="home">Home</sidebar-item>
 		</sidebar>
-		<page>
+		<page :icon="openPage.icon" :title="openPage.pageName">
 			<router-view></router-view>
 		</page>
 	</div>
@@ -41,6 +42,14 @@ export default {
 		page,
 		"sidebar-item": sidebarItem
 	},
+	data() {
+		return {
+			openPage: {
+				icon: "dashboard",
+				pageName: "dashboard"
+			}
+		}
+	},
 	watch: {
 		"$route": function() {
 			initPage(this);
@@ -50,6 +59,20 @@ export default {
 		signOut,
 		openSection(s) {
 			var params = this.$route.params;
+			var icons = {
+				"tasks": "done",
+				"workers": "group"
+			}
+
+			console.log(icons[s], s);
+			if (icons[s] === undefined) {
+				this.openPage.icon = s;
+			} else {
+				this.openPage.icon = icons[s];
+			}
+
+			this.openPage.pageName = s;
+
 			this.$router.push({path: `/repo/${params.user}/${params.repo}/${s}`});
 		},
 		goto() {
