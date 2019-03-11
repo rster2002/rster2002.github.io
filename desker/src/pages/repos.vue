@@ -17,7 +17,7 @@
 			</div>
 			<sidebar-item @click="signOut()" class="btm" icon="exit">Log out</sidebar-item>
 		</sidebar>
-		<page class="ex">
+		<page class="ex" icon="home" title="Repositories">
 			<div class="card">
 				<div class="listItem" v-for="repo in repos" @click="select(repo)">
 					<p>{{ repo.name }}</p>
