@@ -43,10 +43,10 @@
 </template>
 
 <script>
-import iconText from "../components/iconText.vue";
+import iconText from "@component/iconText.vue";
 
-import {genId} from "../js/global.js";
-import {fs, qu} from "../js/firebase.js";
+import { genId } from "@js/global.js";
+import { fs, qu } from "@js/firebase.js";
 
 async function initPage(t) {
 	var repo = JSON.parse(sessionStorage.getItem("cRepo"));

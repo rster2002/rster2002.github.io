@@ -1,33 +1,33 @@
 <template lang="html">
-	<div class="sidebar">
-		<div class="item">
-			<div class="icon">
-				<img :src="user.icon" />
-			</div>
-			<div class="text">
-				<p>{{ user.name }}</p>
-			</div>
-		</div>
-		<slot></slot>
-	</div>
+    <div class="sidebar">
+        <div class="item">
+            <div class="icon">
+                <img :src="user.icon" />
+            </div>
+            <div class="text">
+                <p>{{ user.name }}</p>
+            </div>
+        </div>
+        <slot></slot>
+    </div>
 </template>
 
 <script>
 export default {
-	data() {
-		return {
-			user: {
-				icon: "",
-				name: ""
-			}
-		}
-	},
-	created() {
-		var user = JSON.parse(sessionStorage.getItem("user"));
-		this.user.icon = user.photoURL;
-		this.user.name = user.displayName;
-	}
-}
+    data() {
+        return {
+            user: {
+                icon: "",
+                name: ""
+            }
+        };
+    },
+    created() {
+        var user = JSON.parse(sessionStorage.getItem("user"));
+        this.user.icon = user.photoURL;
+        this.user.name = user.displayName;
+    }
+};
 </script>
 
 <style lang="stylus">
@@ -272,5 +272,4 @@ export default {
 		}
 	}
 }
-
 </style>

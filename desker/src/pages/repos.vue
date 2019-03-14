@@ -28,12 +28,12 @@
 </template>
 
 <script>
-import sidebar from "./components/sidebar.vue";
-import sidebarItem from "./components/sidebarItem.vue";
-import page from "./components/page.vue";
+import sidebar from "@component/sidebar.vue";
+import sidebarItem from "@component/sidebarItem.vue";
+import page from "@component/page.vue";
 
-import {mac, signOut} from "./js/global.js";
-import eventMapper from "./js/eventMapper.js";
+import {mac, signOut} from "@js/global.js";
+import eventMapper from "@js/eventMapper.js";
 
 export default {
 	components: {
@@ -81,8 +81,10 @@ export default {
 			this.selected.events = r;
 		},
 		open() {
+			console.log("OPEN");
 			mac("/user").then(r => {
 				// this.$router.push({path: "repo", params: {user: r.login, repo: this.selected.name}});
+				console.log(r);
 				this.$router.push({path: `repo/${r.login}/${this.selected.name}/dashboard`});
 			});
 		},
