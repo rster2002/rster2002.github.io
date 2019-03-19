@@ -10,6 +10,9 @@
 							<span class="markdown" v-html="commit.body"></span>
 						</div>
 					</icon-text>
+					<icon-text v-if="selected.description !== ''" icon="description">
+						<span class="markdown" v-html="selected.description"></span>
+					</icon-text>
                 </div>
             </div>
         </div>
@@ -93,6 +96,8 @@ export default {
 			this.selected.show = true;
             this.selected.name = event.title;
 			this.selected.type = event.type;
+			this.selected.description = "";
+			this.selected.commits = [];
 
 			if (event.type === "PushEvent") {
 				var commits = event.payload.commits;
@@ -115,6 +120,14 @@ export default {
 					return commit;
 				});
 				this.selected.commits = commits;
+			} else if (event.type === "IssuesEvent") {
+				var message = event.payload.issue.body;
+
+				var body = marked(message, { sanitize: true });
+
+				body = replaceAll(body, "\n\n", "<br/>");
+
+				this.selected.description = body;
 			}
         }
     },
