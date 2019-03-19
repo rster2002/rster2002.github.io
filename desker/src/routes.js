@@ -16,19 +16,19 @@ import repoTimeline from "./pages/repo/timeline.vue";
 Vue.use(vueRouter);
 
 const routes = [
-	{path: "/", component: loginPage},
-	{path: "/repos", component: reposPage},
-	{
-		path: "/repo/:user/:repo",
-		component: repoPage,
-		children: [
-			{path: "dashboard", component: repoDashboard},
-			{path: "events", component: repoEvents},
-			{path: "tasks", component: repoTasks},
-			{path: "workers", component: repoWorkers},
-			{path: "timeline", component: repoTimeline},
-		]
-	},
-]
+    { path: "/", component: loginPage },
+    { path: "/repos", component: reposPage },
+    {
+        path: "/repo/:user/:repo",
+        component: repoPage,
+        children: [
+            { path: "dashboard", component: repoDashboard },
+            { path: "events", component: repoEvents },
+            { path: "tasks", component: repoTasks },
+            { path: "workers", component: repoWorkers },
+            { path: "timeline", component: repoTimeline }
+        ]
+    }
+];
 
 export default routes;

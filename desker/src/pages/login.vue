@@ -1,74 +1,90 @@
 <template lang="html">
-	<div>
-		<h1 class="title">Desker</h1>
-		<div class="box dp1">
-			<h1>Login</h1>
-			<div class="btn" @click="login()">
-				<div class="icon">
-					<img src="./img/github-logo.png" />
-				</div>
-				<div class="text">
-					<p>Login with github</p>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div>
+        <h1 class="title">Desker</h1>
+        <div class="box dp1">
+            <h1>Login</h1>
+            <div class="btn" @click="login()">
+                <div class="icon">
+                    <img src="@img/github-logo.png" />
+                </div>
+                <div class="text">
+                    <p>Login with github</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import {cfb, fb, fs} from "./js/firebase.js";
-import {mac} from "./js/global.js";
+import { cfb, fb, fs } from "@js/firebase.js";
+import { mac } from "@js/global.js";
 
 export default {
-	methods: {
-		login() {
-			var t = this;
-			var provider = new cfb.auth.GithubAuthProvider();
-			provider.addScope("repo");
-			fb.auth().signInWithPopup(provider).then(r => {
-				console.log(r);
-				var user = r.user;
-				fs.collection("users").doc(user.uid).get().then(a => {
-					function update() {
-						fs.collection("users").doc(user.uid).update({
-							lastLogin: Date.now()
-						});
+    methods: {
+        login() {
+            var t = this;
+            var provider = new cfb.auth.GithubAuthProvider();
+            provider.addScope("repo");
+            fb.auth()
+                .signInWithPopup(provider)
+                .then(r => {
+                    console.log(r);
+                    var user = r.user;
+                    fs.collection("users")
+                        .doc(user.uid)
+                        .get()
+                        .then(a => {
+                            function update() {
+                                fs.collection("users")
+                                    .doc(user.uid)
+                                    .update({
+                                        lastLogin: Date.now()
+                                    });
 
-						fs.collection(`users/${user.uid}/private/`).doc("token").set({
-							token: r.credential.accessToken
-						});
+                                fs.collection(`users/${user.uid}/private/`)
+                                    .doc("token")
+                                    .set({
+                                        token: r.credential.accessToken
+                                    });
 
-						sessionStorage.setItem("auth", r.credential.accessToken);
-						sessionStorage.setItem("user", JSON.stringify(user));
+                                sessionStorage.setItem(
+                                    "auth",
+                                    r.credential.accessToken
+                                );
+                                sessionStorage.setItem(
+                                    "user",
+                                    JSON.stringify(user)
+                                );
 
-						t.$router.push({path: "repos"});
+                                t.$router.push({ path: "repos" });
 
-						mac("/user").then(r => sessionStorage.setItem("gitUser", JSON.stringify(r)))
-					}
+                                mac("/user").then(r =>
+                                    sessionStorage.setItem(
+                                        "gitUser",
+                                        JSON.stringify(r)
+                                    )
+                                );
+                            }
 
-					if (a && a.exists) {
-						update();
-					} else {
-						fs.collection("users").doc(user.uid).set({
-							username: user.displayName,
-							uid: user.uid,
-							joined: Date.now()
-						}).then(a => {
-							update();
-						});
-					}
-				})
-
-			});
-		}
-	},
-	created() {
-		var i = JSON.parse(sessionStorage.getItem("user"));
-		if (i.auth === undefined) {
-			this.$router.push({path: "/repos"});
-		}
-	}
-}
+                            if (a && a.exists) {
+                                update();
+                            } else {
+                                fs.collection("users")
+                                    .doc(user.uid)
+                                    .set({
+                                        username: user.displayName,
+                                        uid: user.uid,
+                                        joined: Date.now()
+                                    })
+                                    .then(a => {
+                                        update();
+                                    });
+                            }
+                        });
+                });
+        }
+    }
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -139,5 +155,4 @@ h1.title {
 		}
 	}
 }
-
 </style>

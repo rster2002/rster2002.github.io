@@ -1,20 +1,20 @@
 <template lang="html">
-	<div>
-		<transition name="scim">
-			<div @click="$emit('click')" class="scim" v-if="show"></div>
-		</transition>
-		<transition name="popup">
-			<div class="popup" v-if="show">
-				<slot></slot>
-			</div>
-		</transition>
-	</div>
+    <div>
+        <transition name="scim">
+            <div @click="$emit('click')" class="scim" v-if="show"></div>
+        </transition>
+        <transition name="popup">
+            <div class="popup" v-if="show">
+                <slot></slot>
+            </div>
+        </transition>
+    </div>
 </template>
 
 <script>
 export default {
-	props: ["show"]
-}
+    props: ["show"]
+};
 </script>
 
 <style lang="stylus">

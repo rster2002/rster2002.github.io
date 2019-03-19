@@ -1,28 +1,28 @@
 <template lang="html">
-	<div class="page">
-		<div class="gutter">
-			<div class="icon">
-				<img :src="i" />
-			</div>
-			<div class="text">
-				<h1>{{ title }}</h1>
-			</div>
-		</div>
-		<div class="content">
-			<slot></slot>
-		</div>
-	</div>
+    <div class="page">
+        <div class="gutter">
+            <div class="icon">
+                <img :src="i" />
+            </div>
+            <div class="text">
+                <h1>{{ title }}</h1>
+            </div>
+        </div>
+        <div class="content">
+            <slot></slot>
+        </div>
+    </div>
 </template>
 
 <script>
 export default {
-	props: ["icon", "title"],
-	computed: {
-		i() {
-			return `./src/pages/icons/${this.icon}.png`;
-		}
-	}
-}
+    props: ["icon", "title"],
+    computed: {
+        i() {
+            return `./src/icons/${this.icon}.png`;
+        }
+    }
+};
 </script>
 
 <style lang="stylus">
@@ -113,20 +113,72 @@ export default {
 				max-height: 50%;
 			}
 
-			h1 {
+			h1, h2, h3 {
 				margin: 0;
 				padding: 0px 4px;
 				font-family: 'Montserrat', sans-serif;
 				color: #000000;
 				width: calc(100% - 8px);
+				font-size: 32px;
 
 				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 
+				.tag {
+					height: 100%;
+					padding: 0px 12px;
+					border-radius: 4px;
+					margin-right: 8px;
+					font-size: 32px;
+					color: white;
+
+					&.blue {
+						background-color: #3070ff;
+					}
+
+					&.red {
+						background-color: #ff3030;
+					}
+
+					&.orange {
+						background-color: #cc7a00;
+					}
+
+					&.purple {
+						background-color: #6b00cc;
+					}
+
+					&.pink {
+						background-color: #cc0460;
+					}
+
+					&.green {
+						background-color: #019226;
+					}
+
+					&.grey {
+						background-color: #696969;
+					}
+
+					img {
+						height: 30px;
+						position: relative;
+						top: 2px;
+					}
+				}
+
 				&.big {
 					font-size: 52px;
 				}
+			}
+
+			h2 {
+				font-size: 28px;
+			}
+
+			h3 {
+				font-size: 24px;
 			}
 
 			p {
@@ -237,6 +289,12 @@ export default {
 					overflow: hidden;
 					white-space: nowrap;
 					text-overflow: ellipsis;
+				}
+			}
+
+			.markdown {
+				p {
+					white-space: pre-wrap;
 				}
 			}
 
