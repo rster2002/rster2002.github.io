@@ -181,6 +181,11 @@ export default {
 				font-size: 24px;
 			}
 
+			ul {
+				font-family: 'Montserrat', sans-serif;
+				font-size: 16px;
+			}
+
 			p {
 				margin: 4px 0px;
 				padding: 0px 4px;
