@@ -186,6 +186,22 @@ export default {
 				font-size: 16px;
 			}
 
+			button {
+				padding: 2px 8px;
+				background-color: transparent;
+				outline: 0;
+				border: 1px solid #1d1d1d;
+				cursor: pointer;
+				font-family: 'Montserrat', sans-serif;
+				font-size: 16px;
+				border-radius: 4px;
+				margin: 0px 4px;
+
+				&:hover {
+					background-color: #e5e5e5;
+				}
+			}
+
 			p {
 				margin: 4px 0px;
 				padding: 0px 4px;

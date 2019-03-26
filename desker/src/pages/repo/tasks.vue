@@ -22,6 +22,9 @@
                     <icon-text icon="description">
                         <span v-html="toMarkdown(selected.body)"></span>
                     </icon-text>
+					<icon-text icon="">
+                        <button>Close</button>
+                    </icon-text>
                 </div>
             </div>
         </div>
