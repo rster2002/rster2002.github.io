@@ -2,7 +2,7 @@
     <div class="section">
         <div class="icon">
             <div class="icnWrapper">
-                <img :src="u" />
+                <img v-if="icon !== ''" :src="u" />
             </div>
         </div>
         <div class="text">

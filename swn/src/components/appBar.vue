@@ -1,0 +1,26 @@
+<template lang="html">
+	<div class="bar">
+		<slot></slot>
+	</div>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style lang="stylus" scoped>
+@import "../default.stylus";
+
+.bar {
+	width: 100%;
+	height: 54px;
+	background-color: primaryColor;
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+}
+
+</style>
