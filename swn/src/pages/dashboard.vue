@@ -23,7 +23,7 @@
 			</primaryTitle>
 			<p>Your gateway to the universe. Keep track of them here.</p>
 			<actions>
-				<button>
+				<button @click="changeTo('ships')">
 					view
 				</button>
 			</actions>

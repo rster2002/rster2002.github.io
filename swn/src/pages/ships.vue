@@ -1,12 +1,12 @@
 <template lang="html">
 	<div>
-		<empty v-if="characters.length == 0">
-			<img src="@svg/notfound.svg" />
-			<p>No one here</p>
+		<empty v-if="ships.length == 0">
+			<img src="@svg/empty.svg" />
+			<p>So empty</p>
 		</empty>
-		<card v-for="character in characters" :key="character.name">
+		<card v-for="ship in ships" :key="ship.name">
 			<primaryTitle>
-				<h1>{{ character.name }}</h1>
+				<h1>{{ ship.name }}</h1>
 			</primaryTitle>
 		</card>
 		<fab>add</fab>
@@ -26,7 +26,7 @@ export default {
 	},
 	data() {
 		return {
-			characters: []
+			ships: []
 		}
 	}
 }

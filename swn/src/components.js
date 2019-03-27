@@ -1,4 +1,5 @@
 import empty from "./components/empty.vue";
+import fab from "./components/fab.vue";
 
 import appbar from "./components/appBar.vue";
 import barbtn from "./components/barButton.vue";
@@ -24,5 +25,6 @@ export {
 	mainView,
 	appdrawer,
 	draweruser,
-	empty
+	empty,
+	fab
 }
