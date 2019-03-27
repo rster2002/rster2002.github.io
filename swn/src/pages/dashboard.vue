@@ -9,7 +9,7 @@
 			</primaryTitle>
 			<p>Keep track of your characters using this digital character sheet.</p>
 			<actions>
-				<button>
+				<button @click="changeTo('characters')">
 					view
 				</button>
 			</actions>
@@ -39,6 +39,11 @@ export default {
 		card,
 		primaryTitle,
 		actions
+	},
+	methods: {
+		changeTo(p) {
+			this.$router.push({path: `/${p}`});
+		}
 	}
 }
 </script>

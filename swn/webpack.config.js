@@ -75,6 +75,7 @@ module.exports = {
 			"@components$": path.resolve(__dirname, "./src/components.js"),
             "@js": path.resolve(__dirname, "./src/js"),
 			"@img": path.resolve(__dirname, "./src/img"),
+			"@svg": path.resolve(__dirname, "./src/svg"),
 			"@icon": path.resolve(__dirname, "./src/icons"),
 			"style$": path.resolve(__dirname, "./src/default.stylus")
 		}

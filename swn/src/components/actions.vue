@@ -22,7 +22,7 @@ export default {
 		border-radius: standardRadius;
 		padding: 4px 8px;
 
-		color: secondartColor;
+		color: secondaryColor;
 		font-family: defaultFont;
 		font-size: 18px;
 		outline: 0;

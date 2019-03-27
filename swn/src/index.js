@@ -3,6 +3,8 @@ import vueRouter from "vue-router";
 
 // import MyPlugin from "./testplugin.js"
 
+import { fb, fs } from "@js/firebase.js";
+
 import app from "./app.vue";
 import routes from "./routes.js";
 

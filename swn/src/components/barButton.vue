@@ -1,5 +1,5 @@
 <template lang="html">
-	<div class="btn">
+	<div class="btn" @click="$emit('click')">
 		<p class="material-icons"><slot></slot></p>
 	</div>
 </template>
@@ -12,8 +12,10 @@ export default {
 <style lang="stylus" scoped>
 
 .btn {
-	height: 54px;
-	width: 54px;
+	height: 64px;
+	width: 64px;
+	float: left;
+	cursor: pointer;
 
 	p {
 		margin: 0;

@@ -1,6 +1,6 @@
 // Element colors
 primaryColor = #1a237e;
-secondartColor = #8e24aa;
+secondaryColor = #8e24aa;
 
 // Main elements
 forGroundColor = #ffffff;

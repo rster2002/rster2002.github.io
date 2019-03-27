@@ -12,7 +12,9 @@ export default {
 <style lang="stylus" scoped>
 
 .view {
-	padding-top: 54px;
+	padding-top: 64px;
+	height: 100%;
+	width: 100%;
 }
 
 </style>

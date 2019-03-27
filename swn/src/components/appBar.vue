@@ -14,7 +14,7 @@ export default {
 
 .bar {
 	width: 100%;
-	height: 54px;
+	height: 64px;
 	background-color: primaryColor;
 	position: fixed;
 	top: 0;
