@@ -39,9 +39,14 @@ function replaceAll(c, a, b) {
 	return temp;
 }
 
+function user() {
+	return JSON.parse(sessionStorage.getItem("u"));
+}
+
 export {
 	env,
 	genId,
 	signOut,
-	replaceAll
+	replaceAll,
+	user
 };

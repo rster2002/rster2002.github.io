@@ -34,8 +34,7 @@ async function qu(a) {
 		This makes sure that when switching from page to page, it doesn't make
 		extra calls for data that (most of the time) hasn't been changed.
 	*/
-    console.log(a);
-    var snapshot = await fs.collection(a).get();
+    var snapshot = await a.get();
     return snapshot.docs.map(doc =>
         Object.assign({ __id: doc.id }, doc.data())
     );

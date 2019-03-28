@@ -1,5 +1,5 @@
 <template lang="html">
-	<div class="fab">
+	<div class="fab" @click="$emit('click')">
 		<p class="material-icons"><slot></slot></p>
 	</div>
 </template>

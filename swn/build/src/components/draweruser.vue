@@ -21,7 +21,7 @@ export default {
 
 .user {
 	width: 100%;
-	background-color: secondaryColor;
+	background-color: drawerUserBackgroundColor;
 	display: inline-block;
 
 	.iconRow {
@@ -47,7 +47,7 @@ export default {
 			font-size: 22px;
 			font-family: defaultFont;
 			font-weight: 400;
-			color: #ffffff;
+			color: drawerUserMainTextColor;
 		}
 
 		h2 {
@@ -55,7 +55,7 @@ export default {
 			font-size: 16px;
 			font-family: defaultFont;
 			font-weight: 400;
-			color: #d8d8d8;
+			color: drawerUserSecondaryTextColor;
 		}
 	}
 }

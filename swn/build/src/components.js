@@ -1,3 +1,5 @@
+import divider from "./components/divider.vue";
+
 import empty from "./components/empty.vue";
 import fab from "./components/fab.vue";
 
@@ -26,5 +28,6 @@ export {
 	appdrawer,
 	draweruser,
 	empty,
-	fab
+	fab,
+	divider
 }

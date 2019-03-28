@@ -33,6 +33,10 @@ export default {
 		font-family: defaultFont;
 		font-weight: 500;
 		color: #ffffff;
+
+		padding: 0px 4px;
+
+		text-transform: capitalize;
 	}
 }
 

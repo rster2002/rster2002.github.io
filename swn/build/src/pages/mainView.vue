@@ -5,10 +5,11 @@
 				:icon="user.icon"
 				:username="user.username"
 				:secondary="user.email"></draweruser>
+			<divider></divider>
 		</appdrawer>
 		<appbar>
-			<barbtn @click="toggleDrawer()">menu</barbtn>
-			<bartitle minus="1">Dashboard</bartitle>
+			<barbtn @menu="toggleDrawer()" @back="goBack()" menu="true" @click="toggleDrawer()">menu</barbtn>
+			<bartitle minus="1">{{ barTitle }}</bartitle>
 		</appbar>
 		<mainView>
 			<transition name="page">
@@ -19,9 +20,13 @@
 </template>
 
 <script>
-import { appbar, barbtn, bartitle, mainView, appdrawer, draweruser } from "@components";
+import { appbar, barbtn, bartitle, mainView, appdrawer, draweruser, divider } from "@components";
 
 import { fb } from "@js/firebase.js";
+
+function routeUpdate(t) {
+	t.barTitle = t.$route.meta.title;
+}
 
 export default {
 	components: {
@@ -30,16 +35,23 @@ export default {
 		bartitle,
 		mainView,
 		appdrawer,
-		draweruser
+		draweruser,
+		divider
 	},
 	data() {
 		return {
 			showDrawer: false,
+			barTitle: "dashboard",
 			user: {
 				username: "",
 				icon: "",
 				email: ""
 			}
+		}
+	},
+	watch: {
+		"$route": function() {
+			routeUpdate(this);
 		}
 	},
 	methods: {
@@ -48,22 +60,33 @@ export default {
 		},
 		closeDrawer() {
 			this.showDrawer = false;
+		},
+		goBack() {
+			window.history.back();
 		}
 	},
 	created() {
+
 		var t = this;
 		fb.auth().onAuthStateChanged(function(user) {
+			console.log(user);
 		    if (user === null) {
-		        sessionStorage.setItem("user", JSON.stringify({ auth: false }));
-		        i.$router.push({ path: "/" });
+				console.log("NO USER");
+		        t.$router.push({ path: "/" });
 		    } else {
-				console.log(user);
 				var u = t.user;
 				u.username = user.displayName;
 				u.icon = user.photoURL;
 				u.email = user.email;
+
+				sessionStorage.setItem("u", JSON.stringify({
+					uid: user.uid,
+					username: user.displayName
+				}));
 		    }
 		});
+
+		routeUpdate(this);
 	}
 }
 </script>

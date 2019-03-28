@@ -36,7 +36,7 @@ export default {
                                         lastLogin: Date.now()
                                     });
 
-								t.$router.push({path: "/game"});
+								t.$router.push({path: "/"});
                             }
 
                             if (a && a.exists) {

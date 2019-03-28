@@ -17,6 +17,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import "../default.stylus";
 
 .drawerScim {
 	position: fixed;
@@ -31,7 +32,7 @@ export default {
 		height: 100%;
 		width: 80%;
 		max-width: 400px;
-		background-color: #ffffff;
+		background-color: navDrawerBackgroundColor;
 	}
 }
 

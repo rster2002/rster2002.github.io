@@ -3,10 +3,10 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 // const WebpackOnBuildPlugin = require('on-build-webpack');
 
 module.exports = {
-	entry: [
-		"babel-polyfill",
-		"./src/index.js"
-	],
+	entry: {
+		polyfill: "babel-polyfill",
+		app: "./src/index.js"
+	},
 	plugins: [
 		new VueLoaderPlugin()
 	],
@@ -59,11 +59,11 @@ module.exports = {
 		]
 	},
 	output: {
-		filename: "bundle.js",
-		path: path.resolve(__dirname, "./")
+		filename: "[name].bundle.js",
+		path: path.resolve(__dirname, "../")
 	},
 	devServer: {
-		contentBase: path.join(__dirname, "./"),
+		contentBase: path.join(__dirname, "../"),
 		compress: true,
 		port: 8886
 	},

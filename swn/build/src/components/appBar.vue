@@ -4,18 +4,13 @@
 	</div>
 </template>
 
-<script>
-export default {
-}
-</script>
-
 <style lang="stylus" scoped>
 @import "../default.stylus";
 
 .bar {
 	width: 100%;
 	height: 64px;
-	background-color: primaryColor;
+	background-color: appBarColor;
 	position: fixed;
 	top: 0;
 	left: 0;

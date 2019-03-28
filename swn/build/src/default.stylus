@@ -1,0 +1,32 @@
+// Element colors
+primaryColor = #1a237e;
+secondaryColor = #8e24aa;
+
+// Main text colors
+defaultFontColorDark = #ffffff;
+defaultFontColor = #505050;
+secondaryFontColor = defaultFontColor;
+
+// Divider
+dividerColor = #ececec;
+
+// App Bar
+appBarColor = primaryColor;
+
+// Navigation drawer
+navDrawerBackgroundColor = #ffffff;
+
+// Drawer user
+drawerUserBackgroundColor = #ffffff;
+drawerUserMainTextColor = #000000;
+drawerUserSecondaryTextColor = #676767;
+
+// Main elements
+forGroundColor = #ffffff;
+borderColor = #484848;
+
+// Fonts
+defaultFont = 'Roboto', sans-serif;
+
+// Text color
+standardRadius = 2px;
