@@ -18,9 +18,12 @@ const routes = [
 		children: [
 			{ path: "/", meta: {title: "dashboard"}, component: () => import("./pages/dashboard.vue").then(m => m.default) },
 			{ path: "/characters", meta: {title: "characters"}, component: () => import("./pages/characters.vue").then(m => m.default) },
-			{ path: "/ships", meta: {title: "ships"}, component: () => import("./pages/ships.vue").then(m => m.default) }
+			{ path: "/ships", meta: {title: "ships"}, component: () => import("./pages/ships.vue").then(m => m.default) },
+
+			{ path: "/character/:ownerUid/:characterId", meta: {title: "character"}, component: () => import("./pages/character.vue").then(m => m.default) }
 		]
-	}
+	},
+	{ path: "*", component: () => import("./pages/notfound.vue").then(m => m.default) }
 ]
 
 export default routes;

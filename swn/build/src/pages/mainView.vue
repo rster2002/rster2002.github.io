@@ -6,9 +6,16 @@
 				:username="user.username"
 				:secondary="user.email"></draweruser>
 			<divider></divider>
+			<drawerbtn
+				@click="signOut()"
+				icon="exit_to_app">Logout</drawerbtn>
 		</appdrawer>
 		<appbar>
-			<barbtn @menu="toggleDrawer()" @back="goBack()" menu="true" @click="toggleDrawer()">menu</barbtn>
+			<barbtn
+				@menu="toggleDrawer()"
+				@back="goBack()"
+				menu="true"
+				@click="toggleDrawer()">menu</barbtn>
 			<bartitle minus="1">{{ barTitle }}</bartitle>
 		</appbar>
 		<mainView>
@@ -20,11 +27,30 @@
 </template>
 
 <script>
-import { appbar, barbtn, bartitle, mainView, appdrawer, draweruser, divider } from "@components";
+import { appbar, barbtn, bartitle, mainView, appdrawer, draweruser, divider, drawerbtn } from "@components";
 
 import { fb } from "@js/firebase.js";
+import { signOut } from "@js/global.js";
 
 function routeUpdate(t) {
+	fb.auth().onAuthStateChanged(function(user) {
+		console.log(user);
+		if (user === null) {
+			console.log("NO USER");
+			t.$router.push({ path: "/login" });
+		} else {
+			var u = t.user;
+			u.username = user.displayName;
+			u.icon = user.photoURL;
+			u.email = user.email;
+
+			sessionStorage.setItem("u", JSON.stringify({
+				uid: user.uid,
+				username: user.displayName
+			}));
+		}
+	});
+
 	t.barTitle = t.$route.meta.title;
 }
 
@@ -36,7 +62,8 @@ export default {
 		mainView,
 		appdrawer,
 		draweruser,
-		divider
+		divider,
+		drawerbtn
 	},
 	data() {
 		return {
@@ -63,29 +90,12 @@ export default {
 		},
 		goBack() {
 			window.history.back();
+		},
+		signOut() {
+			signOut(this)
 		}
 	},
 	created() {
-
-		var t = this;
-		fb.auth().onAuthStateChanged(function(user) {
-			console.log(user);
-		    if (user === null) {
-				console.log("NO USER");
-		        t.$router.push({ path: "/" });
-		    } else {
-				var u = t.user;
-				u.username = user.displayName;
-				u.icon = user.photoURL;
-				u.email = user.email;
-
-				sessionStorage.setItem("u", JSON.stringify({
-					uid: user.uid,
-					username: user.displayName
-				}));
-		    }
-		});
-
 		routeUpdate(this);
 	}
 }

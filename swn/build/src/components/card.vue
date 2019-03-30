@@ -18,6 +18,7 @@ export default {
 	margin: 16px;
 	margin-left: auto;
 	margin-right: auto;
+	padding: 1px 0px;
 
 	max-width: 400px;
 	border-radius: standardRadius;

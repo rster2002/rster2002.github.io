@@ -4,12 +4,19 @@
 			<img src="@svg/notfound.svg" />
 			<p>No one here</p>
 		</empty>
-		<card v-for="character in characters" :key="character.id">
-			<primaryTitle>
-				<h1 v-if="character.name !== ''">{{ character.name }}</h1>
-				<h1 v-else>Not named</h1>
-			</primaryTitle>
-		</card>
+		<transition-group name="itemAnimation">
+			<card v-for="character in characters" :key="character.id">
+				<primaryTitle>
+					<h1 v-if="character.name !== ''">{{ character.name }}</h1>
+					<h1 v-else>Not named</h1>
+				</primaryTitle>
+				<actions>
+					<button @click="openCharacter(character.id)">
+						view
+					</button>
+				</actions>
+			</card>
+		</transition-group>
 		<fab @click="createCharacter()">add</fab>
 	</div>
 </template>
@@ -36,6 +43,7 @@ export default {
 	},
 	methods: {
 		createCharacter() {
+			var t = this;
 			var id = "character-" + genId();
 			var doc = {
 				id,
@@ -45,7 +53,12 @@ export default {
 				owner: user().uid
 			}
 
-			fs.collection(`users/${user().uid}/characters`).doc(id).set(doc).then(a => console.log("Success"));
+			fs.collection(`users/${user().uid}/characters`).doc(id).set(doc).then(a => {
+				t.$router.push({ path: `/character/${user().uid}/${id}`});
+			});
+		},
+		openCharacter(id) {
+			this.$router.push({path: `/character/${user().uid}/${id}`});
 		}
 	},
 	created() {
@@ -56,7 +69,9 @@ export default {
 			} else {
 				t.noContent = false;
 				a.forEach((entry, i) => {
-					t.characters.push(entry);
+					setTimeout(a => {
+						t.characters.push(entry);
+					}, 50 * i)
 				});
 			}
 		})
@@ -64,5 +79,20 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
+
+.itemAnimation-enter-active {
+	transition: 250ms cubic-bezier(0.4, 0.0, 0.2, 1) all;
+}
+
+.itemAnimation-enter {
+	opacity: 0;
+	transform: translateY(32px);
+}
+
+.itemAnimation-enter-to {
+	opacity: 1;
+	transform: translateY(0px);
+}
+
 </style>

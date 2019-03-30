@@ -2,6 +2,7 @@ import divider from "./components/divider.vue";
 
 import empty from "./components/empty.vue";
 import fab from "./components/fab.vue";
+import textbox from "./components/textbox.vue";
 
 import appbar from "./components/appBar.vue";
 import barbtn from "./components/barButton.vue";
@@ -10,6 +11,7 @@ import bartitle from "./components/barTitle.vue";
 
 import appdrawer from "./components/appdrawer.vue";
 import draweruser from "./components/draweruser.vue";
+import drawerbtn from "./components/drawerbutton.vue";
 
 import mainView from "./components/view.vue";
 
@@ -29,5 +31,7 @@ export {
 	draweruser,
 	empty,
 	fab,
-	divider
+	divider,
+	drawerbtn,
+	textbox
 }

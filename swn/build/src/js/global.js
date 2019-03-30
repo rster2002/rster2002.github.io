@@ -24,12 +24,12 @@ function genId() {
     );
 }
 
-function signOut() {
+function signOut(t) {
     console.log("SIGNING OUT");
     fb.auth()
         .signOut()
         .then(a => {
-            this.$router.push({ path: "/" });
+            t.$router.push({ path: "/login" });
         });
 }
 

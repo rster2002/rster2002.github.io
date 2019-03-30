@@ -1,6 +1,6 @@
 // Element colors
-primaryColor = #1a237e;
-secondaryColor = #8e24aa;
+primaryColor = #f4511e;
+secondaryColor = #3949ab;
 
 // Main text colors
 defaultFontColorDark = #ffffff;
@@ -30,3 +30,6 @@ defaultFont = 'Roboto', sans-serif;
 
 // Text color
 standardRadius = 2px;
+
+// Textbox
+textboxBorder = #afafaf;
