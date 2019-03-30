@@ -1,8 +1,10 @@
 const path = require('path');
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const UglifyJsPlugin = require("uglifyJs-webpack-plugin");
 // const WebpackOnBuildPlugin = require('on-build-webpack');
 
 module.exports = {
+	mode: "development",
 	entry: {
 		polyfill: "babel-polyfill",
 		app: "./src/index.js"
@@ -61,6 +63,9 @@ module.exports = {
 	output: {
 		filename: "[name].bundle.js",
 		path: path.resolve(__dirname, "../")
+	},
+	optimization: {
+		minimizer: [new UglifyJsPlugin()]
 	},
 	devServer: {
 		contentBase: path.join(__dirname, "../"),

@@ -3,6 +3,7 @@ import divider from "./components/divider.vue";
 import empty from "./components/empty.vue";
 import fab from "./components/fab.vue";
 import textbox from "./components/textbox.vue";
+import checkbox from "./components/checkbox.vue";
 
 import appbar from "./components/appBar.vue";
 import barbtn from "./components/barButton.vue";
@@ -33,5 +34,6 @@ export {
 	fab,
 	divider,
 	drawerbtn,
-	textbox
+	textbox,
+	checkbox
 }
