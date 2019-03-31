@@ -14,5 +14,13 @@
 			"1": "Gain Stab as a bonus skill. You can draw orsheath a Stowed melee or thrown weapon as anInstant action. You may add your Stab skill level toa melee or thrown weapon’s damage roll or Shockdamage, assuming it has any to begin with.",
 			"2": "Your primitive melee and thrown weaponscount as TL4 weapons for the purpose of overcoming advanced armors. Even on a miss with amelee weapon, you do an unmodified 1d4 damageto the target, plus any Shock damage. This bonusdamage doesn’t apply to thrown weapons or attacks that use the Punch skill."
 		}
+	},
+	"assassin": {
+		"title": "Assassin",
+		"description": "You are practiced at sudden murder, and have certainadvantages in carrying out an Execution Attack as described in the rules on page 52 (FCB).",
+		"level": {
+			"1": "Gain Sneak as a bonus skill. You can conceal anobject no larger than a knife or pistol from anything less invasive than a strip search, includingnormal TL4 weapon detection devices. You candraw or produce this object as an On Turn action,and your point-blank ranged attacks made fromsurprise with it cannot miss the target.",
+			"2": "You can take a Move action on the same roundas you make an Execution Attack, closing rapidlywith a target before you attack. You may split thisMove action when making an Execution Attack,taking part of it before you murder your targetand part of it afterwards. This movement happenstoo quickly to alert a victim or to be hindered bybodyguards, barring an actual physical wall ofmeat between you and your prey."
+		}
 	}
 }

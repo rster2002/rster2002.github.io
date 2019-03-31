@@ -1,11 +1,12 @@
 <template lang="html">
-	<div class="header">
+	<div @click="$emit('click')" class="header" :style="{ cursor: cursor }">
 		<slot></slot>
 	</div>
 </template>
 
 <script>
 export default {
+	props: ["cursor"]
 }
 </script>
 
@@ -13,7 +14,7 @@ export default {
 @import "../default.stylus";
 
 .header {
-	width: 100%;
+	width: calc(100% - 16px);
 	padding: 16px;
 
 	h1 {

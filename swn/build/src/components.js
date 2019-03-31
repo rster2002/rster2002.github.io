@@ -1,5 +1,7 @@
 import divider from "./components/divider.vue";
 
+import popup from "./components/popup.vue";
+
 import empty from "./components/empty.vue";
 import fab from "./components/fab.vue";
 import textbox from "./components/textbox.vue";
@@ -35,5 +37,6 @@ export {
 	divider,
 	drawerbtn,
 	textbox,
-	checkbox
+	checkbox,
+	popup
 }

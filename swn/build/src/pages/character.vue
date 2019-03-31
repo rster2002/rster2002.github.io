@@ -723,6 +723,41 @@
 		</card>
 		<card>
 			<primaryTitle v-if="c.settings.showTitles">
+				<h1>Foci</h1>
+			</primaryTitle>
+			<actions>
+				<button @click="p.focus = true">
+					add focus
+				</button>
+			</actions>
+			<div class="listItem">
+
+			</div>
+			<popup @close="p.focus = false" :show="p.focus">
+				<card>
+					<primaryTitle>
+						<h1>Focus</h1>
+						<h2>Add a focus to your list</h2>
+					</primaryTitle>
+				</card>
+				<card v-for="focus in fociList" :key="focus.internalName">
+					<primaryTitle @click="toggleVal(focus, 'open')" cursor="pointer">
+						<h1><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span> {{ focus.title }}</h1>
+					</primaryTitle>
+					<transition name="contentDropdown">
+						<div v-if="focus.open">
+							<div v-html="toMarkdown(focus.description)">
+
+							</div>
+							<p><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
+							<p><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
+						</div>
+					</transition>
+				</card>
+			</popup>
+		</card>
+		<card>
+			<primaryTitle v-if="c.settings.showTitles">
 				<h1>Controlls</h1>
 			</primaryTitle>
 			<div class="setting" v-if="m.allowEdit">
@@ -758,8 +793,14 @@
 </template>
 
 <script>
-import { card, primaryTitle, actions, textbox, checkbox } from "@components";
+import marked from "marked";
+
+import { card, primaryTitle, actions, textbox, checkbox, popup } from "@components";
 import { user, genId } from "@js/global.js";
+
+import foci from "@json/foci.json";
+
+console.log(foci);
 
 import { fs } from "@js/firebase.js";
 // http://localhost:8886/#/character/bbRweWpKoed3dLYecbiKuzZQ0562/character-keBs9zQrdaAXcB4qZq6a68QzFomfzONG
@@ -801,10 +842,17 @@ export default {
 		primaryTitle,
 		actions,
 		textbox,
-		checkbox
+		checkbox,
+		popup
 	},
 	data() {
 		return {
+			content: {
+				foci: []
+			},
+			p: {
+				focus: false
+			},
 			info: {
 				ownerUid: "",
 				characterId: ""
@@ -850,11 +898,23 @@ export default {
 					talk: { trained: false, lvl: 0 },
 					trade: { trained: false, lvl: 0 },
 					work: { trained: false, lvl: 0 }
-				}
+				},
+				foci: []
 			}
 		}
 	},
+	computed: {
+		fociList() {
+			return this.content.foci.filter(a => !a.selected);
+		}
+	},
 	methods: {
+		toMarkdown(a) {
+			return marked(a, { sanitize: true });
+		},
+		toggleVal(a, b) {
+			a[b] = !a[b];
+		},
 		save() {
 			var t = this;
 			if (t.m.allowEdit) {
@@ -976,6 +1036,13 @@ export default {
 		}
 	},
 	created() {
+
+		var entries = Object.entries(foci);
+
+		var f = entries.map(a => {return {...a[1], internalName: a[0], open: false}});
+		console.log(f);
+		this.content.foci = f;
+
 		updateInstance(this);
 	}
 }
@@ -1202,6 +1269,29 @@ settingheight = 32px;
 			padding: 0px 8px;
 		}
 	}
+}
+
+.dropdownInd {
+	transform: translateY(4px) rotate(0deg);
+	transition: 200ms cubic-bezier(0.4, 0.0, 0.2, 1) transform;
+
+	&.d {
+		transform: translateY(4px) rotate(180deg);
+	}
+}
+
+.contentDropdown-enter-active {
+	transition: 200ms cubic-bezier(0.4, 0.0, 0.2, 1) all;
+}
+
+.contentDropdown-enter {
+	opacity: 0;
+	transform: translateY(-16px);
+}
+
+.contentDropdown-enter-to {
+	opacity: 1;
+	transform: translateY(0);
 }
 
 </style>

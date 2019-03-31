@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@babel/runtime": "^7.4.2",
 		"firebase": "^5.8.4",
+		"marked": "^0.6.1",
 		"sessiondb": "^1.0.3",
 		"vue": "^2.6.6",
 		"vue-router": "^3.0.2"
