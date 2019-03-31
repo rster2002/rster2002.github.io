@@ -1,0 +1,43 @@
+{
+	"biopsionics": {
+		"description": "Biopsionic powers repair, augment, debilitate, or damage living creatures. Unless otherwise specified thebiopsionicist must be able to touch a target, thoughclothing and armor do not interfere with the use ofthese abilities. Touching a willing or unsuspecting target is automatic, whereas touching a resisting targetrequires a normal Punch hit roll with a bonus equal tothe practitioner’s Biopsionics skill. Such touch effectsdo not inflict the normal damage of a Punch attack.Unsurprisingly, biopsionic powers are among themost accepted psychic abilities. Even a modestly-experienced biopsion can perform miracles of healing for acommunity lucky enough to have their services.",
+		"additional": [
+			{
+				"title": "System Strain",
+				"description": "Many curative biopsionic powers add to the target’sSystem Strain. System Strain is a measure of the amountof system stress, intrusive modification, and general biological distress an organism might be suffering. Psionic healing, cybernetic implants, and powerful drugs alladd to a target’s System Strain.If using a power or drug on a target would maketheir System Strain exceed their Constitution score, theeffect fails to function; their body simply cannot adaptto the changes and cannot benefit from them.System Strain decreases automatically by one pointafter each night of rest, provided the organism is wellfed and not compromised by sickness or privation."
+			}
+		],
+		"core": {
+			"description": "The adept’s touch stabilizes critically-wounded organisms. More sophisticated practitioners can heal tissueinjuries, though curing diseases, detoxifying poisons,and fixing congenital deformities require additionaltechniques. Each use of Psychic Succor adds one pointof System Strain to the target, or two points if theywere mortally wounded at the time.Activating Psychic Succor requires the biopsion toCommit Effort for the day. Once used, they can continue to use it for the rest of that scene without Committing Effort again.",
+			"level": {
+				"0": "The psychic’s touch can automatically stabilizea mortally-wounded target as a Main Action. Thispower must be used on a target within six roundsof their collapse, and does not function on targets that have been decapitated or killed by Heavyweapons. It’s the GM’s decision as to whether atarget is intact enough for this power to work.",
+				"1": "As level-0, and heal 1d6+1 hit points of damage.If used on a mortally-wounded target, they revivewith the rolled hit points and can act normally onthe next round.",
+				"2": "As level-1, but healing 2d6+2 hit points instead.",
+				"3": "As level-2, but healing 2d6+6 hit points instead",
+				"4": "As level-3, but healing 3d6+8 hit points instead"
+			}
+		},
+		"techniques": [
+			{
+				"title": "Mastered Succor",
+				"minLevel": 1,
+				"description": "The biopsion has developed a sophisticated mastery oftheir core ability, and they no longer need to CommitEffort to activate it, and may use it whenever they wish.The use of additional techniques that augment PsychicSuccor might still require Effort to be Committed."
+			},
+			{
+				"title": "Organic Purification Protocols",
+				"minLevel": 1,
+				"description": "The biopsion’s Psychic Succor now cures any poisons ordiseases the subject may be suffering, albeit it requiresCommitting Effort for the day as an additional surcharge. Biowarfare organisms, exceptionally virulentdiseases, or TL5 toxins may resist this curing, requiringa Wis/Biopsionics skill check at a difficulty of at least10. Failure means that the adept cannot cure the target’sdisease. This technique cannot cure congenital illnesses."
+			},
+			{
+				"title": "Remote Repair",
+				"minLevel": 1,
+				"description": "Psychic Succor and other biopsionic techniques that normally require touch contact can now be applied at adistance up to 100 meters, provided the biopsion cansee the target with their unaided vision. Hostile powersthat normally require a hit roll will hit automatically.Each time this technique is used, Effort must be Committed for the scene."
+			},
+			{
+				"title": "Invicible Stand",
+				"minLevel": 2,
+				"description": "The biopsion has mastered techniques of emergencytissue reinforcement and system stabilization. As anInstant action, they can Commit Effort for the scene tokeep themself or a target they can touch active even atzero hit points. This technique must be used once everyround on the target or they collapse at the end of theround. If the target suffers hit point damage, the biopsion must Instantly Commit Effort for the scene or thetarget goes down immediately with a mortal wound. AHeavy weapon hit on a subject of this power or similarphysical dismemberment will always kill a target, regardless of this technique."
+			}
+		]
+	}
+}

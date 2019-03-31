@@ -45,6 +45,7 @@ export default {
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;
+		margin-top: -1px;
 	}
 }
 

@@ -82,6 +82,7 @@ module.exports = {
 			"@img": path.resolve(__dirname, "./src/img"),
 			"@svg": path.resolve(__dirname, "./src/svg"),
 			"@icon": path.resolve(__dirname, "./src/icons"),
+			"@json": path.resolve(__dirname, "./src/json"),
 			"style$": path.resolve(__dirname, "./src/default.stylus")
 		}
 	}

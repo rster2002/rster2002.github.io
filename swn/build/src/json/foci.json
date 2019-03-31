@@ -1,0 +1,18 @@
+{
+	"alert": {
+		"title": "Alert",
+		"description": "You are keenly aware of your surroundings and virtually impossible to take unaware. You have an instinctivealacrity of response that helps you act before less warypersons can think to move.",
+		"level": {
+			"1": "Gain Notice as a bonus skill. You cannot besurprised, nor can others use the Execution Attackoption on you. When you roll initiative, roll twiceand take the best result",
+			"2": "You always act first in a combat round unlesssomeone else involved is also this *Alert*."
+		}
+	},
+	"armsman": {
+		"title": "Armsman",
+		"description": "You have an unusual competence with thrown weapons and melee attacks. This focus’ benefits do not applyto unarmed attacks or projectile weapons. For thrownweapons, you can’t use the benefits of the *Armsman* focus at the same time as *Gunslinger*",
+		"level": {
+			"1": "Gain Stab as a bonus skill. You can draw orsheath a Stowed melee or thrown weapon as anInstant action. You may add your Stab skill level toa melee or thrown weapon’s damage roll or Shockdamage, assuming it has any to begin with.",
+			"2": "Your primitive melee and thrown weaponscount as TL4 weapons for the purpose of overcoming advanced armors. Even on a miss with amelee weapon, you do an unmodified 1d4 damageto the target, plus any Shock damage. This bonusdamage doesn’t apply to thrown weapons or attacks that use the Punch skill."
+		}
+	}
+}
