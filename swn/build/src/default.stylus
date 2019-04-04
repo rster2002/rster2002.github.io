@@ -1,6 +1,6 @@
 // Element colors
-primaryColor = #f4511e;
-secondaryColor = #3949ab;
+primaryColor = #3a3133;
+secondaryColor = #197bb3;
 
 // Main text colors
 defaultFontColorDark = #ffffff;
