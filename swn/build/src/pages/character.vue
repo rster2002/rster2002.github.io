@@ -971,7 +971,7 @@ export default {
 			if (s <= 3) {
 				return -2;
 			} else if (s >= 4 && s <= 7) {
-				return -2;
+				return -1;
 			} else if (s >= 8 && s <= 13) {
 				return 0;
 			} else if (s >= 14 && s <= 17) {
