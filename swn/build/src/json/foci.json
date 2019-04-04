@@ -22,5 +22,21 @@
 			"1": "Gain Sneak as a bonus skill. You can conceal anobject no larger than a knife or pistol from anything less invasive than a strip search, includingnormal TL4 weapon detection devices. You candraw or produce this object as an On Turn action,and your point-blank ranged attacks made fromsurprise with it cannot miss the target.",
 			"2": "You can take a Move action on the same roundas you make an Execution Attack, closing rapidlywith a target before you attack. You may split thisMove action when making an Execution Attack,taking part of it before you murder your targetand part of it afterwards. This movement happenstoo quickly to alert a victim or to be hindered bybodyguards, barring an actual physical wall ofmeat between you and your prey."
 		}
+	},
+	"authority": {
+		"title": "Authority",
+		"description": "You have an uncanny kind of charisma about you, one that makes others instinctively follow your instructions and further your causes. At level 1, this is a knack of charm and personal magnetism, while level 2 might suggest latent telepathic influence or transhuman memetic hacking augmentations. Where this focus refers to followers, it means NPCs who have voluntarily chosen to be in your service. PCs never count as followers.",
+		"level": {
+			"1": "Gain Lead as a bonus skill. Once per day, you can make a request from an NPC who is not openly hostile to you, rolling a Cha/Lead skill check at a difficulty of the NPC’s Morale score. If you succeed, they will comply with the request, provided it is not harmful or extremely uncharacteristic.",
+			"2": "Those who follow you are fired with confidence. Any NPC being directly led by you gains a Morale and hit roll bonus equal to your Lead skill and a +1 bonus on all skill checks. Your followers will not act against your interests unless under extreme pressure."
+		}
+	},
+	"close_combatant": {
+		"title": "Close Combatant",
+		"description": "You’ve had all too much practice at close-in fighting and desperate struggles with pistol or blade. You’re extremely skilled at avoiding injury in melee combat, and at level 2 you can dodge through a melee scrum without fear of being knifed in passing.",
+		"level": {
+			"1": "Gain any combat skill as a bonus skill. You can use pistol-sized ranged weapons in melee without suffering penalties for the proximity of melee attackers. You ignore Shock damage from melee assailants, even if you’re unarmored at the time.",
+			"2": "The Shock damage from your melee attacks treats all targets as if they were AC 10. The Fighting Withdrawal combat action is treated as an On Turn action for you and can be performed freely."
+		}
 	}
 }

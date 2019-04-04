@@ -15,9 +15,28 @@
 				<textbox @change="h" :val="c.level" vname="level" label="Level" type="number"></textbox>
 			</div>
 		</card>
+		<card>
+			<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+				<h1><span v-if="c.settings.showTitles">Hit points</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 11</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+			</primaryTitle>
+			<div v-if="!m.edit" class="hp">
+				<div class="ctrl" @click="hpc('+')">
+					<h1 class="material-icons">add</h1>
+				</div>
+				<div class="disp">
+					<h1><span>{{ c.hp }}</span>/{{ c.hpMax }}</h1>
+				</div>
+				<div class="ctrl" @click="hpc('-')">
+					<h1 class="material-icons">remove</h1>
+				</div>
+			</div>
+			<div v-if="m.edit">
+				<textbox @change="h" :val="c.hpMax" vname="hpMax" label="Maximum hitpoints" type="number"></textbox>
+			</div>
+		</card>
 		<card v-if="!m.edit">
-			<primaryTitle v-if="c.settings.showTitles">
-				<h1>Saving throws</h1>
+			<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+				<h1><span v-if="c.settings.showTitles">Saving throws</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 17</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 			</primaryTitle>
 			<div class="row">
 				<div class="stat">
@@ -48,8 +67,8 @@
 		</card>
 		<card>
 			<div v-if="!m.edit">
-				<primaryTitle v-if="c.settings.showTitles">
-					<h1>Attributes</h1>
+				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+					<h1><span v-if="c.settings.showTitles">Attributes</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
 				<div class="row">
 					<div class="stat">
@@ -118,8 +137,8 @@
 		</card>
 		<card>
 			<div v-if="!m.edit" class="colmsWrapper">
-				<primaryTitle v-if="c.settings.showTitles">
-					<h1>Skills</h1>
+				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+					<h1><span v-if="c.settings.showTitles">Skills</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 4, 5, 9</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
 				<div class="col">
 					<div class="s">
@@ -722,17 +741,26 @@
 			</div>
 		</card>
 		<card>
-			<primaryTitle v-if="c.settings.showTitles">
-				<h1>Foci</h1>
+			<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+				<h1><span v-if="c.settings.showTitles">Focus</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 7, 8</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 			</primaryTitle>
+			<div class="listItem" v-for="focus in c.foci">
+				<h1 @click="toggleVal(focus, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span>{{ focus.title }}</h1>
+				<transition name="contentDropdown">
+					<div v-if="focus.open">
+						<div v-html="toMarkdown(focus.description)">
+
+						</div>
+						<p><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
+						<p><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
+					</div>
+				</transition>
+			</div>
 			<actions>
 				<button @click="p.focus = true">
 					add focus
 				</button>
 			</actions>
-			<div class="listItem">
-
-			</div>
 			<popup @close="p.focus = false" :show="p.focus">
 				<card>
 					<primaryTitle>
@@ -751,6 +779,51 @@
 							</div>
 							<p><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
 							<p><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
+							<actions>
+								<button @click="addFocus(focus)">Add focus</button>
+							</actions>
+						</div>
+					</transition>
+				</card>
+			</popup>
+		</card>
+		<card>
+			<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+				<h1><span v-if="c.settings.showTitles">Weapons</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+			</primaryTitle>
+			<div class="listItem" v-for="weapon in c.weapons">
+				<h1 @click="toggleVal(weapon, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: weapon.open }">arrow_drop_up</span>{{ weapon.title }}</h1>
+				<transition name="contentDropdown">
+					<div v-if="focus.open">
+					</div>
+				</transition>
+			</div>
+			<actions>
+				<button @click="p.weapon = true">
+					add weapon
+				</button>
+			</actions>
+			<popup @close="p.focus = false" :show="p.focus">
+				<card>
+					<primaryTitle>
+						<h1>Focus</h1>
+						<h2>Add a focus to your list</h2>
+					</primaryTitle>
+				</card>
+				<card v-for="focus in fociList" :key="focus.internalName">
+					<primaryTitle @click="toggleVal(focus, 'open')" cursor="pointer">
+						<h1><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span> {{ focus.title }}</h1>
+					</primaryTitle>
+					<transition name="contentDropdown">
+						<div v-if="focus.open">
+							<div v-html="toMarkdown(focus.description)">
+
+							</div>
+							<p><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
+							<p><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
+							<actions>
+								<button @click="addFocus(focus)">Add focus</button>
+							</actions>
 						</div>
 					</transition>
 				</card>
@@ -774,6 +847,14 @@
 				</div>
 				<div class="txt">
 					<p>Show titles</p>
+				</div>
+			</div>
+			<div class="setting" v-if="m.allowEdit">
+				<div class="checkboxWrapper">
+					<checkbox :val="c.settings.showSteps" vname="settings.showSteps" @change="h"></checkbox>
+				</div>
+				<div class="txt">
+					<p>Show character creation steps</p>
 				</div>
 			</div>
 			<actions>
@@ -815,15 +896,20 @@ function updateInstance(t) {
 	}
 
 	function fill(a, b) {
-		var entries = Object.entries(b);
+		console.log(a, b);
+		if (Array.isArray(b)) {
+			b.forEach(c => a.push(c));
+		} else {
+			var entries = Object.entries(b);
 
-		entries.forEach(ent => {
-			if (typeof ent[1] === "object") {
-				fill(a[ent[0]], ent[1]);
-			} else {
-				a[ent[0]] = ent[1];
-			}
-		});
+			entries.forEach(ent => {
+				if (typeof ent[1] === "object") {
+					fill(a[ent[0]], ent[1]);
+				} else {
+					a[ent[0]] = ent[1];
+				}
+			});
+		}
 	}
 
 	fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").get().then(a => {
@@ -866,9 +952,12 @@ export default {
 				background: "",
 				class: "",
 				level: 1,
+				hp: 0,
+				hpMax: 0,
 				settings: {
 					usePhysics: false,
-					showTitles: true
+					showTitles: true,
+					showSteps: false
 				},
 				attributes: {
 					str: 0,
@@ -1028,6 +1117,22 @@ export default {
 			} else {
 				return "-1";
 			}
+		},
+		addFocus(f) {
+			this.c.foci.push(Object.assign(f, {
+				open: false
+			}));
+		},
+		hpc(a) {
+			if (a === "+") {
+				if (this.c.hp < this.c.hpMax) {
+					this.c.hp++;
+				}
+			} else if (a === "-") {
+				if (this.c.hp > 0) {
+					this.c.hp--;
+				}
+			}
 		}
 	},
 	watch: {
@@ -1093,6 +1198,49 @@ export default {
 				top: 50%;
 				transform: translateY(-50%);
 			}
+		}
+	}
+}
+
+.hp {
+	width: 100%;
+	height: 78px;
+
+	.ctrl, .disp {
+		height: 100%;
+		float: left;
+	}
+
+	.disp {
+		width: 60%;
+
+		h1 {
+			margin: 0;
+			font-size: 32px;
+			text-align: center;
+			font-family: defaultFont;
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+
+	.ctrl {
+		width: 20%;
+
+		&:hover {
+			cursor: pointer;
+			background-color: rgba(#e5e5e5, .5);
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 32px;
+			text-align: center;
+			position: relative;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
 		}
 	}
 }
@@ -1268,6 +1416,21 @@ settingheight = 32px;
 			width: calc(100% - 16px);
 			padding: 0px 8px;
 		}
+	}
+}
+
+.listItem {
+	padding: 8px 16px;
+	width: calc(100% - 32px);
+	border-top: 1px solid dividerColor;
+	border-bottom: 1px solid dividerColor;
+
+	h1 {
+		color: black;
+		font-family: defaultFont;
+		font-size: 16px;
+		font-weight: 900;
+		margin: 6px 0px;
 	}
 }
 
