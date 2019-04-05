@@ -19,16 +19,20 @@ export default {
 	button {
 		background-color: transparent;
 		border: 0;
-		border-radius: standardRadius;
-		padding: 4px 8px;
-
-		color: secondaryColor;
-		font-family: defaultFont;
-		font-size: 18px;
+		border-radius: 2px;
+		padding: 6px 8px;
+		color: #197bb3;
+		font-family: 'Roboto', sans-serif;
+		font-size: 16px;
 		outline: 0;
 		cursor: pointer;
 		font-weight: 500;
 		letter-spacing: 1.25px;
+		margin-left: 8px;
+
+		.material-icons {
+			font-size: 24px;
+		}
 
 		&:hover {
 			background-color: #e5e5e5;

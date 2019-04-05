@@ -2,7 +2,16 @@
 	<div>
 		<card>
 			<div class="img" style="
-				background-image: url(https://66.media.tumblr.com/6b762c2e987d5449bdda7346c6fa00db/tumblr_ntpgvmbiXO1qmr4eao1_500.jpg);
+				background-image: url(https://i.pinimg.com/564x/34/72/78/347278cc7ed550049e3e118c824891b2.jpg);
+				background-position: 0% 1%"></div>
+			<primaryTitle>
+				<h1>Under contruction</h1>
+			</primaryTitle>
+			<p>Please keep in mind that this website is work in progress and things are subject to change. You may lose your character or any other information.</p>
+		</card>
+		<card>
+			<div class="img" style="
+				background-image: url(https://i.pinimg.com/564x/79/0c/e5/790ce538b5f94b73a53d43226ddb6b23.jpg);
 				background-position: 0% 83%"></div>
 			<primaryTitle>
 				<h1>Characters</h1>
@@ -16,7 +25,7 @@
 		</card>
 		<card>
 			<div class="img" style="
-				background-image: url(https://i.pinimg.com/564x/8a/be/cf/8abecfb90c5ff4edeb69f29e89ec7d8f.jpg);
+				background-image: url(https://i.pinimg.com/564x/ae/20/d1/ae20d1d22f87012689b1b58813dae2df.jpg);
 				background-position: 0% 57%"></div>
 			<primaryTitle>
 				<h1>Ships</h1>

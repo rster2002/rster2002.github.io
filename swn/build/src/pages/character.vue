@@ -1,875 +1,893 @@
 <template lang="html">
 	<div>
-		<card>
-			<div v-if="!m.edit">
-				<primaryTitle>
-					<h1 v-if="c.name !== ''">{{ c.name }}</h1>
-					<h1 v-else>Not named</h1>
-					<h2 v-if="c.background !== '' || c.class !== ''">{{ c.background }} {{ c.class.toLowerCase() }}</h2>
-				</primaryTitle>
-			</div>
-			<div v-if="m.edit">
-				<textbox @change="h" :val="c.name" vname="name" label="Name"></textbox>
-				<textbox @change="h" :val="c.background" vname="background" label="Background"></textbox>
-				<textbox @change="h" :val="c.class" vname="class" label="Class"></textbox>
-				<textbox @change="h" :val="c.level" vname="level" label="Level" type="number"></textbox>
-			</div>
-		</card>
-		<card>
-			<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-				<h1><span v-if="c.settings.showTitles">Hit points</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 11</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
-			</primaryTitle>
-			<div v-if="!m.edit" class="hp">
-				<div class="ctrl" @click="hpc('+')">
-					<h1 class="material-icons">add</h1>
+		<div class="cardGrid">
+			<card d style="grid-column: 1 / 3; grid-row: 1 / 2">
+				<div v-if="!m.edit">
+					<primaryTitle>
+						<h1 v-if="c.name !== ''">{{ c.name }}</h1>
+						<h1 v-else>Not named</h1>
+						<h2 v-if="c.background !== '' || c.class !== ''">{{ c.background }} {{ c.class.toLowerCase() }}</h2>
+					</primaryTitle>
 				</div>
-				<div class="disp">
-					<h1><span>{{ c.hp }}</span>/{{ c.hpMax }}</h1>
+				<div v-if="m.edit">
+					<textbox @change="h" :val="c.name" vname="name" label="Name"></textbox>
+					<textbox @change="h" :val="c.background" vname="background" label="Background"></textbox>
+					<textbox @change="h" :val="c.class" vname="class" label="Class"></textbox>
+					<textbox @change="h" :val="c.level" vname="level" label="Level" type="number"></textbox>
 				</div>
-				<div class="ctrl" @click="hpc('-')">
-					<h1 class="material-icons">remove</h1>
-				</div>
-			</div>
-			<div v-if="m.edit">
-				<textbox @change="h" :val="c.hpMax" vname="hpMax" label="Maximum hitpoints" type="number"></textbox>
-			</div>
-		</card>
-		<card v-if="!m.edit">
-			<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-				<h1><span v-if="c.settings.showTitles">Saving throws</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 17</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
-			</primaryTitle>
-			<div class="row">
-				<div class="stat">
-					<div class="mod">
-						<h1>{{ savingThrow("physical") }}</h1>
-					</div>
-					<div class="label">
-						<p>Physical</p>
-					</div>
-				</div>
-				<div class="stat">
-					<div class="mod">
-						<h1>{{ savingThrow("evasion") }}</h1>
-					</div>
-					<div class="label">
-						<p>Evasion</p>
-					</div>
-				</div>
-				<div class="stat">
-					<div class="mod">
-						<h1>{{ savingThrow("mental") }}</h1>
-					</div>
-					<div class="label">
-						<p>Mental</p>
-					</div>
-				</div>
-			</div>
-		</card>
-		<card>
-			<div v-if="!m.edit">
+			</card>
+			<card d style="grid-column: 3 / 5; grid-row: 1 / 2">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">Attributes</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h1><span v-if="c.settings.showTitles">Hit points</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 11</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+				</primaryTitle>
+				<div v-if="!m.edit" class="hp">
+					<div class="ctrl" @click="hpc('+')">
+						<h1 class="material-icons">add</h1>
+					</div>
+					<div class="disp">
+						<h1><span>{{ c.hp }}</span>/{{ c.hpMax }}</h1>
+					</div>
+					<div class="ctrl" @click="hpc('-')">
+						<h1 class="material-icons">remove</h1>
+					</div>
+				</div>
+				<div v-if="m.edit">
+					<textbox @change="h" :val="c.hpMax" vname="hpMax" label="Maximum hitpoints" type="number"></textbox>
+				</div>
+			</card>
+			<card d style="grid-column: 5 / 7; grid-row: 1 / 2">
+				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+					<h1><span v-if="c.settings.showTitles">Saving throws</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 17</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
 				<div class="row">
 					<div class="stat">
 						<div class="mod">
-							<h1>{{ mod(c.attributes.str) }}</h1>
+							<h1>{{ savingThrow("physical") }}</h1>
 						</div>
 						<div class="label">
-							<p>Strength</p>
+							<p>Physical</p>
 						</div>
 					</div>
 					<div class="stat">
 						<div class="mod">
-							<h1>{{ mod(c.attributes.dex) }}</h1>
+							<h1>{{ savingThrow("evasion") }}</h1>
 						</div>
 						<div class="label">
-							<p>Dexteriry</p>
+							<p>Evasion</p>
 						</div>
 					</div>
 					<div class="stat">
 						<div class="mod">
-							<h1>{{ mod(c.attributes.con) }}</h1>
+							<h1>{{ savingThrow("mental") }}</h1>
 						</div>
 						<div class="label">
-							<p>Constitution</p>
+							<p>Mental</p>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="stat">
-						<div class="mod">
-							<h1>{{ mod(c.attributes.int) }}</h1>
+			</card>
+			<card d style="grid-column: 1 / 4; grid-row: 2 / 3">
+				<div v-if="!m.edit">
+					<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+						<h1><span v-if="c.settings.showTitles">Attributes</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					</primaryTitle>
+					<div class="row">
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ mod(c.attributes.str) }}</h1>
+							</div>
+							<div class="label">
+								<p>Strength</p>
+							</div>
 						</div>
-						<div class="label">
-							<p>Intelligence</p>
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ mod(c.attributes.dex) }}</h1>
+							</div>
+							<div class="label">
+								<p>Dexteriry</p>
+							</div>
+						</div>
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ mod(c.attributes.con) }}</h1>
+							</div>
+							<div class="label">
+								<p>Constitution</p>
+							</div>
 						</div>
 					</div>
-					<div class="stat">
-						<div class="mod">
-							<h1>{{ mod(c.attributes.wis) }}</h1>
+					<div class="row">
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ mod(c.attributes.int) }}</h1>
+							</div>
+							<div class="label">
+								<p>Intelligence</p>
+							</div>
 						</div>
-						<div class="label">
-							<p>Wisdom</p>
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ mod(c.attributes.wis) }}</h1>
+							</div>
+							<div class="label">
+								<p>Wisdom</p>
+							</div>
 						</div>
-					</div>
-					<div class="stat">
-						<div class="mod">
-							<h1>{{ mod(c.attributes.cha) }}</h1>
-						</div>
-						<div class="label">
-							<p>Charisma</p>
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ mod(c.attributes.cha) }}</h1>
+							</div>
+							<div class="label">
+								<p>Charisma</p>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div v-if="m.edit">
-				<primaryTitle>
-					<h1>Attributes</h1>
-				</primaryTitle>
-				<textbox @change="h" label="Strength" :val="c.attributes.str" vname="attributes.str" type="number"></textbox>
-				<textbox @change="h" label="Dexteriry" :val="c.attributes.dex" vname="attributes.dex" type="number"></textbox>
-				<textbox @change="h" label="Constitution" :val="c.attributes.con" vname="attributes.con" type="number"></textbox>
-				<textbox @change="h" label="Intelligence" :val="c.attributes.int" vname="attributes.int" type="number"></textbox>
-				<textbox @change="h" label="Wisdom" :val="c.attributes.wis" vname="attributes.wis" type="number"></textbox>
-				<textbox @change="h" label="Charisma" :val="c.attributes.cha" vname="attributes.cha" type="number"></textbox>
-			</div>
-		</card>
-		<card>
-			<div v-if="!m.edit" class="colmsWrapper">
+				<div v-if="m.edit">
+					<primaryTitle>
+						<h1>Attributes</h1>
+					</primaryTitle>
+					<textbox @change="h" label="Strength" :val="c.attributes.str" vname="attributes.str" type="number"></textbox>
+					<textbox @change="h" label="Dexteriry" :val="c.attributes.dex" vname="attributes.dex" type="number"></textbox>
+					<textbox @change="h" label="Constitution" :val="c.attributes.con" vname="attributes.con" type="number"></textbox>
+					<textbox @change="h" label="Intelligence" :val="c.attributes.int" vname="attributes.int" type="number"></textbox>
+					<textbox @change="h" label="Wisdom" :val="c.attributes.wis" vname="attributes.wis" type="number"></textbox>
+					<textbox @change="h" label="Charisma" :val="c.attributes.cha" vname="attributes.cha" type="number"></textbox>
+				</div>
+			</card>
+			<card d style="grid-column: 4 / 7; grid-row: 2 / 3">
+				<div v-if="!m.edit" class="colmsWrapper">
+					<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+						<h1><span v-if="c.settings.showTitles">Skills</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 4, 5, 9</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					</primaryTitle>
+					<div class="col">
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("administer") }}</p>
+							</div>
+							<div class="txt">
+								<p>Administer</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("connect") }}</p>
+							</div>
+							<div class="txt">
+								<p>Connect</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("exert") }}</p>
+							</div>
+							<div class="txt">
+								<p>Exert</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("fix") }}</p>
+							</div>
+							<div class="txt">
+								<p>Fix</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("heal") }}</p>
+							</div>
+							<div class="txt">
+								<p>Heal</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("know") }}</p>
+							</div>
+							<div class="txt">
+								<p>Know</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("lead") }}</p>
+							</div>
+							<div class="txt">
+								<p>Lead</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("notice") }}</p>
+							</div>
+							<div class="txt">
+								<p>Notice</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("perform") }}</p>
+							</div>
+							<div class="txt">
+								<p>Perform</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("pilot") }}</p>
+							</div>
+							<div class="txt">
+								<p>Pilot</p>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("program") }}</p>
+							</div>
+							<div class="txt">
+								<p>Program</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("punch") }}</p>
+							</div>
+							<div class="txt">
+								<p>Punch</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("shoot") }}</p>
+							</div>
+							<div class="txt">
+								<p>Shoot</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("sneak") }}</p>
+							</div>
+							<div class="txt">
+								<p>Sneak</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("stab") }}</p>
+							</div>
+							<div class="txt">
+								<p>Stab</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("survive") }}</p>
+							</div>
+							<div class="txt">
+								<p>Survive</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("talk") }}</p>
+							</div>
+							<div class="txt">
+								<p>Talk</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("trade") }}</p>
+							</div>
+							<div class="txt">
+								<p>Trade</p>
+							</div>
+						</div>
+						<div class="s">
+							<div class="mod">
+								<p>{{ skillMod("work") }}</p>
+							</div>
+							<div class="txt">
+								<p>Work</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div v-if="m.edit">
+					<primaryTitle>
+						<h1>Skills</h1>
+					</primaryTitle>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.administer.trained" vname="skills.administer.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.administer.trained">
+							<div @click="sklAdd('administer')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.administer.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('administer')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>administer</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.connect.trained" vname="skills.connect.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.connect.trained">
+							<div @click="sklAdd('connect')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.connect.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('connect')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>connect</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.exert.trained" vname="skills.exert.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.exert.trained">
+							<div @click="sklAdd('exert')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.exert.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('exert')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>exert</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.fix.trained" vname="skills.fix.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.fix.trained">
+							<div @click="sklAdd('fix')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.fix.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('fix')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>fix</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.heal.trained" vname="skills.heal.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.heal.trained">
+							<div @click="sklAdd('heal')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.heal.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('heal')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>heal</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.know.trained" vname="skills.know.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.know.trained">
+							<div @click="sklAdd('know')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.know.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('know')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>know</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.lead.trained" vname="skills.lead.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.lead.trained">
+							<div @click="sklAdd('lead')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.lead.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('lead')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>lead</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.notice.trained" vname="skills.notice.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.notice.trained">
+							<div @click="sklAdd('notice')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.notice.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('notice')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>notice</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.perform.trained" vname="skills.perform.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.perform.trained">
+							<div @click="sklAdd('perform')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.perform.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('perform')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>perform</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.pilot.trained" vname="skills.pilot.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.pilot.trained">
+							<div @click="sklAdd('pilot')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.pilot.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('pilot')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>pilot</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.program.trained" vname="skills.program.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.program.trained">
+							<div @click="sklAdd('program')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.program.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('program')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>program</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.punch.trained" vname="skills.punch.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.punch.trained">
+							<div @click="sklAdd('punch')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.punch.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('punch')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>punch</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.shoot.trained" vname="skills.shoot.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.shoot.trained">
+							<div @click="sklAdd('shoot')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.shoot.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('shoot')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>shoot</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.sneak.trained" vname="skills.sneak.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.sneak.trained">
+							<div @click="sklAdd('sneak')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.sneak.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('sneak')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>sneak</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.stab.trained" vname="skills.stab.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.stab.trained">
+							<div @click="sklAdd('stab')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.stab.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('stab')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>stab</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.survive.trained" vname="skills.survive.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.survive.trained">
+							<div @click="sklAdd('survive')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.survive.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('survive')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>survive</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.talk.trained" vname="skills.talk.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.talk.trained">
+							<div @click="sklAdd('talk')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.talk.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('talk')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>talk</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.trade.trained" vname="skills.trade.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.trade.trained">
+							<div @click="sklAdd('trade')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.trade.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('trade')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>trade</p>
+						</div>
+					</div>
+					<div class="skill">
+						<div class="checkboxWrapper">
+							<checkbox :val="c.skills.work.trained" vname="skills.work.trained" @change="h"></checkbox>
+						</div>
+						<div class="lvl" v-if="c.skills.work.trained">
+							<div @click="sklAdd('work')" class="ctrl">
+								<p>
+									<span class="material-icons">add</span>
+								</p>
+							</div>
+							<div class="disp">
+								<h1>{{ c.skills.work.lvl }}</h1>
+							</div>
+							<div @click="sklRmv('work')" class="ctrl">
+								<p>
+									<span class="material-icons">remove</span>
+								</p>
+							</div>
+						</div>
+						<div class="txt">
+							<p>work</p>
+						</div>
+					</div>
+				</div>
+			</card>
+			<card d style="grid-column: 1 / 3; grid-row: 3 / 4">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">Skills</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 4, 5, 9</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h1><span v-if="c.settings.showTitles">Focus</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 7, 8</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
-				<div class="col">
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("administer") }}</p>
-						</div>
-						<div class="txt">
-							<p>Administer</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("connect") }}</p>
-						</div>
-						<div class="txt">
-							<p>Connect</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("exert") }}</p>
-						</div>
-						<div class="txt">
-							<p>Exert</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("fix") }}</p>
-						</div>
-						<div class="txt">
-							<p>Fix</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("heal") }}</p>
-						</div>
-						<div class="txt">
-							<p>Heal</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("know") }}</p>
-						</div>
-						<div class="txt">
-							<p>Know</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("lead") }}</p>
-						</div>
-						<div class="txt">
-							<p>Lead</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("notice") }}</p>
-						</div>
-						<div class="txt">
-							<p>Notice</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("perform") }}</p>
-						</div>
-						<div class="txt">
-							<p>Perform</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("pilot") }}</p>
-						</div>
-						<div class="txt">
-							<p>Pilot</p>
-						</div>
+				<div>
+					<div class="listItem" v-for="focus in c.foci">
+						<h1 @click="toggleVal(focus, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span>{{ focus.title }}</h1>
+						<transition name="contentDropdown">
+							<div v-if="focus.open">
+								<div v-if="c.settings.showDetails || focus.internalName === 'unique_gift'" v-html="toMarkdown(focus.description)">
+
+								</div>
+								<p v-if="focus.level[1] !== ''"><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
+								<transition name="contentDropdown">
+									<p v-if="focus.level[2] !== '' && focus.currentLvl === 2"><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
+								</transition>
+								<actions>
+									<button v-if="focus.level[2] !== '' && m.allowEdit" @click="changeFocus(focus)"><span v-if="focus.currentLvl === 1" class="material-icons">star_border</span><span v-if="focus.currentLvl == 2" class="material-icons">star</span></button>
+									<button v-if="m.allowEdit" @click="removeFocus(focus)"><span class="material-icons">delete</span></button>
+								</actions>
+							</div>
+						</transition>
 					</div>
 				</div>
-				<div class="col">
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("program") }}</p>
+				<actions v-if="m.edit">
+					<button @click="p.focus = true">
+						add focus
+					</button>
+				</actions>
+				<popup @close="p.focus = false" :show="p.focus">
+					<card>
+						<primaryTitle>
+							<h1>Focus</h1>
+							<h2>Add a focus to your list</h2>
+						</primaryTitle>
+					</card>
+					<card v-for="focus in fociList" :key="focus.internalName">
+						<primaryTitle @click="toggleVal(focus, 'open')" cursor="pointer">
+							<h1><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span> {{ focus.title }}</h1>
+						</primaryTitle>
+						<transition name="contentDropdown">
+							<div v-if="focus.open">
+								<div v-html="toMarkdown(focus.description)">
+
+								</div>
+								<p v-if="focus.level[1] !== ''"><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
+								<p v-if="focus.level[2] !== ''"><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
+								<actions>
+									<button @click="addFocus(focus)">Add focus</button>
+								</actions>
+							</div>
+						</transition>
+					</card>
+				</popup>
+			</card>
+			<card d style="grid-column: 3 / 5; grid-row: 3 / 4">
+				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+					<h1><span v-if="c.settings.showTitles">Weapons</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+				</primaryTitle>
+				<div class="listItem" v-for="weapon in c.weapons">
+					<h1 @click="toggleVal(weapon, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: weapon.open }">arrow_drop_up</span>{{ weapon.title }}</h1>
+					<transition name="contentDropdown">
+						<div v-if="focus.open">
 						</div>
-						<div class="txt">
-							<p>Program</p>
-						</div>
+					</transition>
+				</div>
+				<actions>
+					<button @click="p.weapon = true">
+						add weapon
+					</button>
+				</actions>
+				<!-- <popup @close="p.focus = false" :show="p.focus">
+					<card>
+						<primaryTitle>
+							<h1>Focus</h1>
+							<h2>Add a focus to your list</h2>
+						</primaryTitle>
+					</card>
+					<card v-for="focus in fociList" :key="focus.internalName">
+						<primaryTitle @click="toggleVal(focus, 'open')" cursor="pointer">
+							<h1><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span> {{ focus.title }}</h1>
+						</primaryTitle>
+						<transition name="contentDropdown">
+							<div v-if="focus.open">
+								<div v-html="toMarkdown(focus.description)">
+
+								</div>
+								<p><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
+								<p><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
+								<actions>
+									<button @click="addFocus(focus)">Add focus</button>
+								</actions>
+							</div>
+						</transition>
+					</card>
+				</popup> -->
+			</card>
+			<card d style="grid-column: 5 / 7; grid-row: 3 / 4">
+				<primaryTitle v-if="c.settings.showTitles">
+					<h1>Controls</h1>
+				</primaryTitle>
+				<div class="setting" v-if="m.allowEdit">
+					<div class="checkboxWrapper">
+						<checkbox :val="c.settings.usePhysics" vname="settings.usePhysics" @change="h"></checkbox>
 					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("punch") }}</p>
-						</div>
-						<div class="txt">
-							<p>Punch</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("shoot") }}</p>
-						</div>
-						<div class="txt">
-							<p>Shoot</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("sneak") }}</p>
-						</div>
-						<div class="txt">
-							<p>Sneak</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("stab") }}</p>
-						</div>
-						<div class="txt">
-							<p>Stab</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("survive") }}</p>
-						</div>
-						<div class="txt">
-							<p>Survive</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("talk") }}</p>
-						</div>
-						<div class="txt">
-							<p>Talk</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("trade") }}</p>
-						</div>
-						<div class="txt">
-							<p>Trade</p>
-						</div>
-					</div>
-					<div class="s">
-						<div class="mod">
-							<p>{{ skillMod("work") }}</p>
-						</div>
-						<div class="txt">
-							<p>Work</p>
-						</div>
+					<div class="txt">
+						<p>Use psychic</p>
 					</div>
 				</div>
-			</div>
-			<div v-if="m.edit">
+				<div class="setting" v-if="m.allowEdit">
+					<div class="checkboxWrapper">
+						<checkbox :val="c.settings.showTitles" vname="settings.showTitles" @change="h"></checkbox>
+					</div>
+					<div class="txt">
+						<p>Show titles</p>
+					</div>
+				</div>
+				<div class="setting" v-if="m.allowEdit">
+					<div class="checkboxWrapper">
+						<checkbox :val="c.settings.showSteps" vname="settings.showSteps" @change="h"></checkbox>
+					</div>
+					<div class="txt">
+						<p>Show character creation steps</p>
+					</div>
+				</div>
+				<div class="setting" v-if="m.allowEdit">
+					<div class="checkboxWrapper">
+						<checkbox :val="c.settings.showDetails" vname="settings.showDetails" @change="h"></checkbox>
+					</div>
+					<div class="txt">
+						<p>Show details</p>
+					</div>
+				</div>
+				<actions>
+					<button v-if="m.allowEdit" @click="toggleEdit()"><span class="material-icons">edit</span></button>
+					<button v-if="!m.edit && m.allowEdit" @click="save()"><span class="material-icons">save</span></button>
+					<button v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
+					<button v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
+				</actions>
+			</card>
+			<card d>
 				<primaryTitle>
-					<h1>Skills</h1>
+					<h1>{{ info.ownerUid }}</h1>
+					<h2>{{ info.characterId }}</h2>
 				</primaryTitle>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.administer.trained" vname="skills.administer.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.administer.trained">
-						<div @click="sklAdd('administer')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.administer.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('administer')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>administer</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.connect.trained" vname="skills.connect.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.connect.trained">
-						<div @click="sklAdd('connect')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.connect.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('connect')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>connect</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.exert.trained" vname="skills.exert.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.exert.trained">
-						<div @click="sklAdd('exert')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.exert.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('exert')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>exert</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.fix.trained" vname="skills.fix.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.fix.trained">
-						<div @click="sklAdd('fix')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.fix.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('fix')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>fix</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.heal.trained" vname="skills.heal.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.heal.trained">
-						<div @click="sklAdd('heal')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.heal.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('heal')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>heal</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.know.trained" vname="skills.know.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.know.trained">
-						<div @click="sklAdd('know')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.know.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('know')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>know</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.lead.trained" vname="skills.lead.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.lead.trained">
-						<div @click="sklAdd('lead')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.lead.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('lead')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>lead</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.notice.trained" vname="skills.notice.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.notice.trained">
-						<div @click="sklAdd('notice')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.notice.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('notice')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>notice</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.perform.trained" vname="skills.perform.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.perform.trained">
-						<div @click="sklAdd('perform')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.perform.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('perform')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>perform</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.pilot.trained" vname="skills.pilot.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.pilot.trained">
-						<div @click="sklAdd('pilot')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.pilot.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('pilot')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>pilot</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.program.trained" vname="skills.program.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.program.trained">
-						<div @click="sklAdd('program')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.program.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('program')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>program</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.punch.trained" vname="skills.punch.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.punch.trained">
-						<div @click="sklAdd('punch')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.punch.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('punch')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>punch</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.shoot.trained" vname="skills.shoot.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.shoot.trained">
-						<div @click="sklAdd('shoot')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.shoot.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('shoot')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>shoot</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.sneak.trained" vname="skills.sneak.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.sneak.trained">
-						<div @click="sklAdd('sneak')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.sneak.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('sneak')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>sneak</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.stab.trained" vname="skills.stab.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.stab.trained">
-						<div @click="sklAdd('stab')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.stab.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('stab')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>stab</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.survive.trained" vname="skills.survive.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.survive.trained">
-						<div @click="sklAdd('survive')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.survive.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('survive')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>survive</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.talk.trained" vname="skills.talk.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.talk.trained">
-						<div @click="sklAdd('talk')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.talk.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('talk')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>talk</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.trade.trained" vname="skills.trade.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.trade.trained">
-						<div @click="sklAdd('trade')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.trade.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('trade')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>trade</p>
-					</div>
-				</div>
-				<div class="skill">
-					<div class="checkboxWrapper">
-						<checkbox :val="c.skills.work.trained" vname="skills.work.trained" @change="h"></checkbox>
-					</div>
-					<div class="lvl" v-if="c.skills.work.trained">
-						<div @click="sklAdd('work')" class="ctrl">
-							<p>
-								<span class="material-icons">add</span>
-							</p>
-						</div>
-						<div class="disp">
-							<h1>{{ c.skills.work.lvl }}</h1>
-						</div>
-						<div @click="sklRmv('work')" class="ctrl">
-							<p>
-								<span class="material-icons">remove</span>
-							</p>
-						</div>
-					</div>
-					<div class="txt">
-						<p>work</p>
-					</div>
-				</div>
-			</div>
-		</card>
-		<card>
-			<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-				<h1><span v-if="c.settings.showTitles">Focus</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 7, 8</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
-			</primaryTitle>
-			<div class="listItem" v-for="focus in c.foci">
-				<h1 @click="toggleVal(focus, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span>{{ focus.title }}</h1>
-				<transition name="contentDropdown">
-					<div v-if="focus.open">
-						<div v-html="toMarkdown(focus.description)">
-
-						</div>
-						<p><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
-						<p><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
-					</div>
-				</transition>
-			</div>
-			<actions>
-				<button @click="p.focus = true">
-					add focus
-				</button>
-			</actions>
-			<popup @close="p.focus = false" :show="p.focus">
-				<card>
-					<primaryTitle>
-						<h1>Focus</h1>
-						<h2>Add a focus to your list</h2>
-					</primaryTitle>
-				</card>
-				<card v-for="focus in fociList" :key="focus.internalName">
-					<primaryTitle @click="toggleVal(focus, 'open')" cursor="pointer">
-						<h1><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span> {{ focus.title }}</h1>
-					</primaryTitle>
-					<transition name="contentDropdown">
-						<div v-if="focus.open">
-							<div v-html="toMarkdown(focus.description)">
-
-							</div>
-							<p><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
-							<p><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
-							<actions>
-								<button @click="addFocus(focus)">Add focus</button>
-							</actions>
-						</div>
-					</transition>
-				</card>
-			</popup>
-		</card>
-		<card>
-			<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-				<h1><span v-if="c.settings.showTitles">Weapons</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
-			</primaryTitle>
-			<div class="listItem" v-for="weapon in c.weapons">
-				<h1 @click="toggleVal(weapon, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: weapon.open }">arrow_drop_up</span>{{ weapon.title }}</h1>
-				<transition name="contentDropdown">
-					<div v-if="focus.open">
-					</div>
-				</transition>
-			</div>
-			<actions>
-				<button @click="p.weapon = true">
-					add weapon
-				</button>
-			</actions>
-			<popup @close="p.focus = false" :show="p.focus">
-				<card>
-					<primaryTitle>
-						<h1>Focus</h1>
-						<h2>Add a focus to your list</h2>
-					</primaryTitle>
-				</card>
-				<card v-for="focus in fociList" :key="focus.internalName">
-					<primaryTitle @click="toggleVal(focus, 'open')" cursor="pointer">
-						<h1><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span> {{ focus.title }}</h1>
-					</primaryTitle>
-					<transition name="contentDropdown">
-						<div v-if="focus.open">
-							<div v-html="toMarkdown(focus.description)">
-
-							</div>
-							<p><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
-							<p><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
-							<actions>
-								<button @click="addFocus(focus)">Add focus</button>
-							</actions>
-						</div>
-					</transition>
-				</card>
-			</popup>
-		</card>
-		<card>
-			<primaryTitle v-if="c.settings.showTitles">
-				<h1>Controlls</h1>
-			</primaryTitle>
-			<div class="setting" v-if="m.allowEdit">
-				<div class="checkboxWrapper">
-					<checkbox :val="c.settings.usePhysics" vname="settings.usePhysics" @change="h"></checkbox>
-				</div>
-				<div class="txt">
-					<p>Use physics</p>
-				</div>
-			</div>
-			<div class="setting" v-if="m.allowEdit">
-				<div class="checkboxWrapper">
-					<checkbox :val="c.settings.showTitles" vname="settings.showTitles" @change="h"></checkbox>
-				</div>
-				<div class="txt">
-					<p>Show titles</p>
-				</div>
-			</div>
-			<div class="setting" v-if="m.allowEdit">
-				<div class="checkboxWrapper">
-					<checkbox :val="c.settings.showSteps" vname="settings.showSteps" @change="h"></checkbox>
-				</div>
-				<div class="txt">
-					<p>Show character creation steps</p>
-				</div>
-			</div>
-			<actions>
-				<button v-if="m.allowEdit" @click="toggleEdit()"><span class="material-icons">edit</span></button>
-				<button v-if="!m.edit && m.allowEdit" @click="save()"><span class="material-icons">save</span></button>
-				<button v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
-				<button v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
-			</actions>
-		</card>
-		<card>
-			<primaryTitle>
-				<h1>{{ info.ownerUid }}</h1>
-				<h2>{{ info.characterId }}</h2>
-			</primaryTitle>
-		</card>
+			</card>
+		</div>
 	</div>
 </template>
 
@@ -881,13 +899,10 @@ import { user, genId } from "@js/global.js";
 
 import foci from "@json/foci.json";
 
-console.log(foci);
-
 import { fs } from "@js/firebase.js";
 // http://localhost:8886/#/character/bbRweWpKoed3dLYecbiKuzZQ0562/character-keBs9zQrdaAXcB4qZq6a68QzFomfzONG
 function updateInstance(t) {
 	var params = t.$route.params;
-	console.log(params);
 	t.info.ownerUid = params.ownerUid;
 	t.info.characterId = params.characterId;
 
@@ -896,7 +911,6 @@ function updateInstance(t) {
 	}
 
 	function fill(a, b) {
-		console.log(a, b);
 		if (Array.isArray(b)) {
 			b.forEach(c => a.push(c));
 		} else {
@@ -913,10 +927,8 @@ function updateInstance(t) {
 	}
 
 	fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").get().then(a => {
-		console.log(a);
 		if (a && a.exists) {
 			var d = a.data();
-			console.log(d);
 			fill(t.c, d);
 		}
 	});
@@ -957,7 +969,8 @@ export default {
 				settings: {
 					usePhysics: false,
 					showTitles: true,
-					showSteps: false
+					showSteps: false,
+					showDetails: false
 				},
 				attributes: {
 					str: 0,
@@ -1052,8 +1065,6 @@ export default {
 				ref = ref[a];
 			});
 
-			console.log(ref, value.value);
-
 			ref[f] = value.value;
 		},
 		calMod(s) {
@@ -1120,8 +1131,21 @@ export default {
 		},
 		addFocus(f) {
 			this.c.foci.push(Object.assign(f, {
-				open: false
+				open: false,
+				currentLvl: 1
 			}));
+		},
+		removeFocus(f) {
+			var index = this.c.foci.indexOf(f);
+			this.c.foci.splice(index, 1);
+		},
+		changeFocus(f) {
+			console.log(f);
+			if (f.currentLvl === 1) {
+				f.currentLvl = 2;
+			} else {
+				f.currentLvl = 1;
+			}
 		},
 		hpc(a) {
 			if (a === "+") {
@@ -1145,7 +1169,6 @@ export default {
 		var entries = Object.entries(foci);
 
 		var f = entries.map(a => {return {...a[1], internalName: a[0], open: false}});
-		console.log(f);
 		this.content.foci = f;
 
 		updateInstance(this);
@@ -1422,8 +1445,11 @@ settingheight = 32px;
 .listItem {
 	padding: 8px 16px;
 	width: calc(100% - 32px);
-	border-top: 1px solid dividerColor;
 	border-bottom: 1px solid dividerColor;
+
+	&:first-child {
+		border-top: 1px solid dividerColor;
+	}
 
 	h1 {
 		color: black;
@@ -1431,6 +1457,23 @@ settingheight = 32px;
 		font-size: 16px;
 		font-weight: 900;
 		margin: 6px 0px;
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	.cardGrid {
+		width: calc(100% - 32px);
+		padding: 16px;
+		display: inline-grid;
+		grid-template-columns: repeat(6, 1fr);
+		grid-template-rows: auto;
+		grid-gap: 16px 16px;
+
+		.card {
+			max-width: 100000px;
+			width: auto;
+			grid-column: 1 / 4;
+		}
 	}
 }
 

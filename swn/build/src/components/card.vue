@@ -1,11 +1,17 @@
 <template lang="html">
-	<div class="card">
+	<div class="card" :class="{ d: a }">
 		<slot></slot>
 	</div>
 </template>
 
 <script>
 export default {
+	props: ["d"],
+	computed: {
+		a() {
+			return this.d === "";
+		}
+	}
 }
 </script>
 
@@ -46,6 +52,12 @@ export default {
 		background-size: cover;
 		background-position: center;
 		margin-top: -1px;
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	.card.d {
+		margin: 0;
 	}
 }
 
