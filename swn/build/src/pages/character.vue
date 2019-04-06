@@ -1,7 +1,8 @@
 <template lang="html">
 	<div>
 		<div class="cardGrid">
-			<card d style="grid-column: 1 / 3; grid-row: 1 / 2">
+			<!-- General info -->
+			<card d style="grid-column: 1 / 5; grid-row: 1 / 2">
 				<div v-if="!m.edit">
 					<primaryTitle>
 						<h1 v-if="c.name !== ''">{{ c.name }}</h1>
@@ -16,7 +17,8 @@
 					<textbox @change="h" :val="c.level" vname="level" label="Level" type="number"></textbox>
 				</div>
 			</card>
-			<card d style="grid-column: 3 / 5; grid-row: 1 / 2">
+			<!-- Hit Points -->
+			<card d style="grid-column: 1 / 4; grid-row: 2 / 3">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Hit points</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 11</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
@@ -35,7 +37,8 @@
 					<textbox @change="h" :val="c.hpMax" vname="hpMax" label="Maximum hitpoints" type="number"></textbox>
 				</div>
 			</card>
-			<card d style="grid-column: 5 / 7; grid-row: 1 / 2">
+			<!-- Saving throws -->
+			<card d style="grid-column: 4 / 7; grid-row: 2 / 3">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Saving throws</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 17</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
@@ -66,12 +69,13 @@
 					</div>
 				</div>
 			</card>
-			<card d style="grid-column: 1 / 4; grid-row: 2 / 3">
+			<!-- Attributes -->
+			<card d style="grid-column: 5 / 13; grid-row: 1 / 2">
 				<div v-if="!m.edit">
 					<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 						<h1><span v-if="c.settings.showTitles">Attributes</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 					</primaryTitle>
-					<div class="row">
+					<div class="row d">
 						<div class="stat">
 							<div class="mod">
 								<h1>{{ mod(c.attributes.str) }}</h1>
@@ -85,7 +89,7 @@
 								<h1>{{ mod(c.attributes.dex) }}</h1>
 							</div>
 							<div class="label">
-								<p>Dexteriry</p>
+								<p>Dexterity</p>
 							</div>
 						</div>
 						<div class="stat">
@@ -97,7 +101,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row d">
 						<div class="stat">
 							<div class="mod">
 								<h1>{{ mod(c.attributes.int) }}</h1>
@@ -129,14 +133,15 @@
 						<h1>Attributes</h1>
 					</primaryTitle>
 					<textbox @change="h" label="Strength" :val="c.attributes.str" vname="attributes.str" type="number"></textbox>
-					<textbox @change="h" label="Dexteriry" :val="c.attributes.dex" vname="attributes.dex" type="number"></textbox>
+					<textbox @change="h" label="Dexterity" :val="c.attributes.dex" vname="attributes.dex" type="number"></textbox>
 					<textbox @change="h" label="Constitution" :val="c.attributes.con" vname="attributes.con" type="number"></textbox>
 					<textbox @change="h" label="Intelligence" :val="c.attributes.int" vname="attributes.int" type="number"></textbox>
 					<textbox @change="h" label="Wisdom" :val="c.attributes.wis" vname="attributes.wis" type="number"></textbox>
 					<textbox @change="h" label="Charisma" :val="c.attributes.cha" vname="attributes.cha" type="number"></textbox>
 				</div>
 			</card>
-			<card d style="grid-column: 4 / 7; grid-row: 2 / 3">
+			<!-- Skills -->
+			<card d style="grid-column: 7 / 13; grid-row: 2 / 4">
 				<div v-if="!m.edit" class="colmsWrapper">
 					<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 						<h1><span v-if="c.settings.showTitles">Skills</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 4, 5, 9</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
@@ -741,7 +746,8 @@
 					</div>
 				</div>
 			</card>
-			<card d style="grid-column: 1 / 3; grid-row: 3 / 4">
+			<!-- Focus -->
+			<card d style="grid-column: 1 / 4; grid-row: 3 / 4">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Focus</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 7, 8</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
@@ -796,7 +802,8 @@
 					</card>
 				</popup>
 			</card>
-			<card d style="grid-column: 3 / 5; grid-row: 3 / 4">
+			<!-- Weapons -->
+			<card d style="grid-column: 4 / 7; grid-row: 3 / 4">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Weapons</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
@@ -838,7 +845,8 @@
 					</card>
 				</popup> -->
 			</card>
-			<card d style="grid-column: 5 / 7; grid-row: 3 / 4">
+			<!-- Controls -->
+			<card d style="grid-column: 1 / 7; grid-row: 4 / 5">
 				<primaryTitle v-if="c.settings.showTitles">
 					<h1>Controls</h1>
 				</primaryTitle>
@@ -881,7 +889,7 @@
 					<button v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
 				</actions>
 			</card>
-			<card d>
+			<card d style="grid-column: 7 / 13; grid-row: 4 / 5">
 				<primaryTitle>
 					<h1>{{ info.ownerUid }}</h1>
 					<h2>{{ info.characterId }}</h2>
@@ -908,6 +916,8 @@ function updateInstance(t) {
 
 	if (user().uid === t.info.ownerUid) {
 		t.m.allowEdit = true;
+	} else {
+		t.m.allowEdit = false;
 	}
 
 	function fill(a, b) {
@@ -1036,7 +1046,7 @@ export default {
 							name: t.c.name,
 							owner: user().uid
 						}).then(a => {
-							t.$router.push({ path: `character/${user().uid}/${id}` });
+							t.$router.push({ path: `/character/${user().uid}/${id}` });
 							alert("Copied")
 						});
 					});
@@ -1460,12 +1470,12 @@ settingheight = 32px;
 	}
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 1000px) {
 	.cardGrid {
 		width: calc(100% - 32px);
 		padding: 16px;
 		display: inline-grid;
-		grid-template-columns: repeat(6, 1fr);
+		grid-template-columns: repeat(12, 1fr);
 		grid-template-rows: auto;
 		grid-gap: 16px 16px;
 
@@ -1474,6 +1484,11 @@ settingheight = 32px;
 			width: auto;
 			grid-column: 1 / 4;
 		}
+	}
+
+	.row.d {
+		width: 50%;
+		float: left;
 	}
 }
 

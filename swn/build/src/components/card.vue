@@ -55,10 +55,12 @@ export default {
 	}
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 1000px) {
 	.card.d {
 		margin: 0;
 	}
 }
 
+
+// http://localhost:8886/#/character/bbRweWpKoed3dLYecbiKuzZQ0562/character-keBs9zQrdaAXcB4qZq6a68QzFomfzONG
 </style>

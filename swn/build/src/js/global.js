@@ -40,7 +40,12 @@ function replaceAll(c, a, b) {
 }
 
 function user() {
-	return JSON.parse(sessionStorage.getItem("u"));
+	let i = JSON.parse(sessionStorage.getItem("u"));
+	if (i === null) {
+		return "";
+	} else {
+		return i;
+	}
 }
 
 export {
