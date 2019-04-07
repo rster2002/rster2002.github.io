@@ -804,14 +804,14 @@
 					</div>
 				</div>
 				<actions v-if="m.edit">
-					<button @click="p.focus = true">
+					<button @click="popup.focus = true">
 						add focus
 					</button>
 				</actions>
-				<popup @close="p.focus = false" :show="p.focus">
-					<div class="p">
+				<popup @close="popup.focus = false" :show="popup.focus">
+					<div class="p" @click.self="popup.focus = false">
 						<card style="position: relative;">
-							<p class="x" @click="p.focus = false"><span class="material-icons">close</span></p>
+							<p class="x" @click="popup.focus = false"><span class="material-icons">close</span></p>
 							<primaryTitle>
 								<h1>Focus</h1>
 								<h2>Add a focus to your list</h2>
@@ -848,11 +848,11 @@
 					</transition>
 				</div>
 				<actions>
-					<button @click="p.weapon = true">
+					<button @click="popup.weapon = true">
 						add weapon
 					</button>
 				</actions>
-				<!-- <popup @close="p.focus = false" :show="p.focus">
+				<!-- <popup @close="popup.focus = false" :show="popup.focus">
 					<card>
 						<primaryTitle>
 							<h1>Focus</h1>
@@ -882,14 +882,146 @@
 			<card d style="grid-column: 1 / 7; grid-row: 5 / 6">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Equipment</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h2>Ready: {{ totalReadiedItems }}/{{ readyEnc }}</h2>
 				</primaryTitle>
+				<div>
+					<div class="listItem" v-for="item in readiedItems">
+						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
+						<transition name="contentDropdown">
+							<div v-if="item.open">
+								<div class="row">
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.cost }}c</h1>
+										</div>
+										<div class="label">
+											<p>Cost</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.enc }}</h1>
+										</div>
+										<div class="label">
+											<p>Encumbrance</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.tl }}</h1>
+										</div>
+										<div class="label">
+											<p>Tech level</p>
+										</div>
+									</div>
+								</div>
+								<div class="row" v-if="item.equipmentType == 'armor'">
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.ac }}<span v-if="item.bonus !== 0">/+{{ item.bonus }}</span></h1>
+										</div>
+										<div class="label">
+											<p>Armor class</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.type }}</h1>
+										</div>
+										<div class="label">
+											<p>Type</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.tl }}</h1>
+										</div>
+										<div class="label">
+											<p>Tech level</p>
+										</div>
+									</div>
+								</div>
+								<actions>
+									<button @click="stowItem(item)">Stow item</button>
+								</actions>
+							</div>
+						</transition>
+					</div>
+				</div>
+				<primaryTitle>
+					<h2>Stowed: {{ totalStowedItems }}/{{ c.attributes.str }}</h2>
+				</primaryTitle>
+				<div>
+					<div class="listItem" v-for="item in stowedItems">
+						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
+						<transition name="contentDropdown">
+							<div v-if="item.open">
+								<div class="row">
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.cost }}c</h1>
+										</div>
+										<div class="label">
+											<p>Cost</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.enc }}</h1>
+										</div>
+										<div class="label">
+											<p>Encumbrance</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.tl }}</h1>
+										</div>
+										<div class="label">
+											<p>Tech level</p>
+										</div>
+									</div>
+								</div>
+								<div class="row" v-if="item.equipmentType == 'armor'">
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.ac }}<span v-if="item.bonus !== 0">/+{{ item.bonus }}</span></h1>
+										</div>
+										<div class="label">
+											<p>Armor class</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.type }}</h1>
+										</div>
+										<div class="label">
+											<p>Type</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.tl }}</h1>
+										</div>
+										<div class="label">
+											<p>Tech level</p>
+										</div>
+									</div>
+								</div>
+								<actions>
+									<button @click="readyItem(item)">Ready item</button>
+								</actions>
+							</div>
+						</transition>
+					</div>
+				</div>
 				<actions>
-					<button @click="p.equipment = true">Add equipment</button>
+					<button @click="popup.equipment = true">Add equipment</button>
 				</actions>
-				<popup @close="p.equipment = false" :show="p.equipment">
-					<div class="p">
+				<popup @close="popup.equipment = false" :show="popup.equipment">
+					<div class="p" @click.self="popup.equipment = false">
 						<card style="position: relative;">
-							<p class="x" @click="p.equipment = false"><span class="material-icons">close</span></p>
+							<p class="x" @click="popup.equipment = false"><span class="material-icons">close</span></p>
 							<primaryTitle>
 								<h1>Equipment</h1>
 								<h2>Add a focus to your list</h2>
@@ -898,60 +1030,8 @@
 								<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
 								<transition name="contentDropdown">
 									<div v-if="item.open">
-										<div class="row">
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.cost }}c</h1>
-												</div>
-												<div class="label">
-													<p>Cost</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.enc }}</h1>
-												</div>
-												<div class="label">
-													<p>Encumbrance</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.tl }}</h1>
-												</div>
-												<div class="label">
-													<p>Tech level</p>
-												</div>
-											</div>
-										</div>
-										<div class="row" v-if="item.equipmentType == 'armor'">
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.ac }}<span v-if="item.bonus !== 0">/+{{ item.bonus }}</span></h1>
-												</div>
-												<div class="label">
-													<p>Armor class</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.type }}</h1>
-												</div>
-												<div class="label">
-													<p>Type</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.tl }}</h1>
-												</div>
-												<div class="label">
-													<p>Tech level</p>
-												</div>
-											</div>
-										</div>
 										<actions>
-											<button @click="addFocus(item)">Add item</button>
+											<button @click="addItem(item, 'stowed')">Add stowed</button>
 										</actions>
 									</div>
 								</transition>
@@ -998,10 +1078,10 @@
 					</div>
 				</div>
 				<actions>
-					<button v-if="m.allowEdit" @click="toggleEdit()"><span class="material-icons">edit</span></button>
-					<button v-if="!m.edit && m.allowEdit" @click="save()"><span class="material-icons">save</span></button>
-					<button v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
-					<button v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
+					<button class="icon" v-if="m.allowEdit" @click="toggleEdit()"><span class="material-icons">edit</span></button>
+					<button class="icon" v-if="!m.edit && m.allowEdit" @click="save()"><span class="material-icons">save</span></button>
+					<button class="icon" v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
+					<button class="icon" v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
 				</actions>
 			</card>
 			<!-- <card d style="grid-column: 7 / 13; grid-row: 5 / 6">
@@ -1047,7 +1127,9 @@ function updateInstance(t) {
 				if (typeof ent[1] === "object") {
 					fill(a[ent[0]], ent[1]);
 				} else {
-					a[ent[0]] = ent[1];
+					if (a !== undefined) {
+						a[ent[0]] = ent[1];
+					}
 				}
 			});
 		}
@@ -1056,6 +1138,7 @@ function updateInstance(t) {
 	fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").get().then(a => {
 		if (a && a.exists) {
 			var d = a.data();
+			console.log(d);
 			fill(t.c, d);
 		}
 	});
@@ -1076,7 +1159,7 @@ export default {
 				foci: [],
 				equipment: []
 			},
-			p: {
+			popup: {
 				focus: false,
 				equipment: false
 			},
@@ -1131,7 +1214,8 @@ export default {
 					trade: { trained: false, lvl: 0 },
 					work: { trained: false, lvl: 0 }
 				},
-				foci: []
+				foci: [],
+				equipment: []
 			}
 		}
 	},
@@ -1140,7 +1224,63 @@ export default {
 			return this.content.foci.filter(a => !a.selected);
 		},
 		ac() {
-			return 10 + this.calMod(this.c.attributes.dex);
+			console.log("UPDATE AC", this.equipedArmor);
+			let i = 10 + this.calMod(this.c.attributes.dex);
+			if (this.equipedArmor) {
+				var a = this.equipedArmor;
+				if (Array.isArray(a)) {
+					let c = 0;
+
+					a.forEach(armor => {
+						if (armor.bonus === 0) {
+							c += armor.ac;
+						} else {
+							c += armor.bonus;
+						}
+					});
+
+					return c;
+				} else {
+					if (i >= a.ac) {
+						return i + a.bonus;
+					} else {
+						return a.ac;
+					}
+				}
+			} else {
+				return i;
+			}
+		},
+		readyEnc() {
+			return Math.floor(this.c.attributes.str / 2);
+		},
+		readiedItems() {
+			return this.c.equipment.filter(a => a.$caried === "ready");
+		},
+		stowedItems() {
+			return this.c.equipment.filter(a => a.$caried === "stowed");
+		},
+		totalStowedItems() {
+			var s = 0;
+			this.stowedItems.forEach(a => s += a.enc);
+			return s;
+		},
+		totalReadiedItems() {
+			var s = 0;
+			this.readiedItems.forEach(a => s += a.enc);
+			return s;
+		},
+		equipedArmor() {
+			var i = this.readiedItems.filter(a => a.equipmentType === "armor");
+			if (i.length > 0) {
+				if (i.length === 2) {
+					return i;
+				} else {
+					return i[0];
+				}
+			} else {
+				return false;
+			}
 		}
 	},
 	methods: {
@@ -1289,6 +1429,46 @@ export default {
 				if (this.c.hp > 0) {
 					this.c.hp--;
 				}
+			}
+		},
+		addItem(a, b) {
+			let allow = false;
+			if (b === "stowed") {
+				if (this.totalStowedItems + a.enc <= this.c.attributes.str) {
+					allow = true;
+				}
+			} else if (b === "ready") {
+				if (this.totalStowedItems + a.enc <= this.readyEnc) {
+					allow = true;
+				}
+			}
+
+			if (allow) {
+				this.c.equipment.push({...a, $caried: b, open: false});
+			}
+		},
+		readyItem(a) {
+			a.open = false;
+			if (this.totalReadiedItems + a.enc <= this.readyEnc) {
+				if (a.equipmentType === "armor" && this.equipedArmor) {
+					if (Array.isArray(this.equipedArmor) === false) {
+						if (a.bonus > 0 || this.equipedArmor.bonus > 0) {
+							a.$caried = "ready";
+						} else {
+							alert("You can only equip one set of armor");
+						}
+					} else {
+						alert("You can only equip one set of armor");
+					}
+				} else {
+					a.$caried = "ready";
+				}
+			}
+		},
+		stowItem(a) {
+			if (this.totalStowedItems + a.enc <= this.c.attributes.str) {
+				a.open = false;
+				a.$caried = "stowed";
 			}
 		}
 	},
@@ -1642,6 +1822,7 @@ settingheight = 32px;
 	position: absolute;
 	right: 0px;
 	cursor: pointer;
+	z-index: 21;
 }
 
 .dropdownInd {

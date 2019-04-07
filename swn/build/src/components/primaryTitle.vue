@@ -16,6 +16,7 @@ export default {
 .header {
 	width: calc(100% - 16px);
 	padding: 16px;
+	position: relative;
 
 	h1 {
 		margin: 0;
@@ -23,6 +24,7 @@ export default {
 		font-family: defaultFont;
 		font-size: 20px;
 		font-weight: 500;
+		width: 50%;
 	}
 
 	h2 {
@@ -34,6 +36,18 @@ export default {
 		font-weight: 400;
 
 		color: secondaryFontColor;
+	}
+
+	.w {
+		position: absolute;
+		top: 16px;
+		right: 32px;
+
+		h1 {
+			float: right;
+			width: auto;
+			margin-left: 16px;
+		}
 	}
 }
 
