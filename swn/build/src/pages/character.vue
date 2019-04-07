@@ -1,8 +1,8 @@
 <template lang="html">
 	<div>
 		<div class="cardGrid">
-			<!-- General info -->
-			<card d style="grid-column: 1 / 5; grid-row: 1 / 2">
+			<!-- Name, class, background -->
+			<card d style="grid-column: 1 / 4; grid-row: 1 / 2">
 				<div v-if="!m.edit">
 					<primaryTitle>
 						<h1 v-if="c.name !== ''">{{ c.name }}</h1>
@@ -15,6 +15,38 @@
 					<textbox @change="h" :val="c.background" vname="background" label="Background"></textbox>
 					<textbox @change="h" :val="c.class" vname="class" label="Class"></textbox>
 					<textbox @change="h" :val="c.level" vname="level" label="Level" type="number"></textbox>
+				</div>
+			</card>
+			<!-- General info -->
+			<card d style="grid-column: 4 / 7; grid-row: 1 / 2">
+				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+					<h1><span v-if="c.settings.showTitles">General</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 16</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+				</primaryTitle>
+				<div class="row">
+					<div class="stat">
+						<div class="mod">
+							<h1>{{ ac }}</h1>
+						</div>
+						<div class="label">
+							<p>Armor Class</p>
+						</div>
+					</div>
+					<div class="stat">
+						<div class="mod">
+							<h1>{{ c.speed }}</h1>
+						</div>
+						<div class="label">
+							<p>Speed</p>
+						</div>
+					</div>
+					<!-- <div class="stat">
+						<div class="mod">
+							<h1>{{ savingThrow("mental") }}</h1>
+						</div>
+						<div class="label">
+							<p>Mental</p>
+						</div>
+					</div> -->
 				</div>
 			</card>
 			<!-- Hit Points -->
@@ -70,7 +102,7 @@
 				</div>
 			</card>
 			<!-- Attributes -->
-			<card d style="grid-column: 5 / 13; grid-row: 1 / 2">
+			<card d style="grid-column: 7 / 13; grid-row: 1 / 2">
 				<div v-if="!m.edit">
 					<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 						<h1><span v-if="c.settings.showTitles">Attributes</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
@@ -141,7 +173,7 @@
 				</div>
 			</card>
 			<!-- Skills -->
-			<card d style="grid-column: 7 / 13; grid-row: 2 / 4">
+			<card d style="grid-column: 7 / 13; grid-row: 2 / 5">
 				<div v-if="!m.edit" class="colmsWrapper">
 					<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 						<h1><span v-if="c.settings.showTitles">Skills</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 4, 5, 9</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
@@ -747,7 +779,7 @@
 				</div>
 			</card>
 			<!-- Focus -->
-			<card d style="grid-column: 1 / 4; grid-row: 3 / 4">
+			<card d style="grid-column: 4 / 7; grid-row: 3 / 5">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Focus</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 7, 8</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
@@ -777,33 +809,34 @@
 					</button>
 				</actions>
 				<popup @close="p.focus = false" :show="p.focus">
-					<card>
-						<primaryTitle>
-							<h1>Focus</h1>
-							<h2>Add a focus to your list</h2>
-						</primaryTitle>
-					</card>
-					<card v-for="focus in fociList" :key="focus.internalName">
-						<primaryTitle @click="toggleVal(focus, 'open')" cursor="pointer">
-							<h1><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span> {{ focus.title }}</h1>
-						</primaryTitle>
-						<transition name="contentDropdown">
-							<div v-if="focus.open">
-								<div v-html="toMarkdown(focus.description)">
+					<div class="p">
+						<card style="position: relative;">
+							<p class="x" @click="p.focus = false"><span class="material-icons">close</span></p>
+							<primaryTitle>
+								<h1>Focus</h1>
+								<h2>Add a focus to your list</h2>
+							</primaryTitle>
+							<div class="listItem" v-for="focus in fociList" :key="focus.internalName">
+								<h1 @click="toggleVal(focus, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span> {{ focus.title }}</h1>
+								<transition name="contentDropdown">
+									<div v-if="focus.open">
+										<div v-html="toMarkdown(focus.description)">
 
-								</div>
-								<p v-if="focus.level[1] !== ''"><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
-								<p v-if="focus.level[2] !== ''"><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
-								<actions>
-									<button @click="addFocus(focus)">Add focus</button>
-								</actions>
+										</div>
+										<p v-if="focus.level[1] !== ''"><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
+										<p v-if="focus.level[2] !== ''"><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
+										<actions>
+											<button @click="addFocus(focus)">Add focus</button>
+										</actions>
+									</div>
+								</transition>
 							</div>
-						</transition>
-					</card>
+						</card>
+					</div>
 				</popup>
 			</card>
 			<!-- Weapons -->
-			<card d style="grid-column: 4 / 7; grid-row: 3 / 4">
+			<card d style="grid-column: 1 / 4; grid-row: 3 / 5">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Weapons</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
@@ -845,8 +878,90 @@
 					</card>
 				</popup> -->
 			</card>
+			<!-- Equipment -->
+			<card d style="grid-column: 1 / 7; grid-row: 5 / 6">
+				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+					<h1><span v-if="c.settings.showTitles">Equipment</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+				</primaryTitle>
+				<actions>
+					<button @click="p.equipment = true">Add equipment</button>
+				</actions>
+				<popup @close="p.equipment = false" :show="p.equipment">
+					<div class="p">
+						<card style="position: relative;">
+							<p class="x" @click="p.equipment = false"><span class="material-icons">close</span></p>
+							<primaryTitle>
+								<h1>Equipment</h1>
+								<h2>Add a focus to your list</h2>
+							</primaryTitle>
+							<div class="listItem" v-for="item in content.equipment" :key="item.internalName">
+								<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
+								<transition name="contentDropdown">
+									<div v-if="item.open">
+										<div class="row">
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.cost }}c</h1>
+												</div>
+												<div class="label">
+													<p>Cost</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.enc }}</h1>
+												</div>
+												<div class="label">
+													<p>Encumbrance</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.tl }}</h1>
+												</div>
+												<div class="label">
+													<p>Tech level</p>
+												</div>
+											</div>
+										</div>
+										<div class="row" v-if="item.equipmentType == 'armor'">
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.ac }}<span v-if="item.bonus !== 0">/+{{ item.bonus }}</span></h1>
+												</div>
+												<div class="label">
+													<p>Armor class</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.type }}</h1>
+												</div>
+												<div class="label">
+													<p>Type</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.tl }}</h1>
+												</div>
+												<div class="label">
+													<p>Tech level</p>
+												</div>
+											</div>
+										</div>
+										<actions>
+											<button @click="addFocus(item)">Add item</button>
+										</actions>
+									</div>
+								</transition>
+							</div>
+						</card>
+					</div>
+				</popup>
+			</card>
 			<!-- Controls -->
-			<card d style="grid-column: 1 / 7; grid-row: 4 / 5">
+			<card d style="grid-column: 7 / 13; grid-row: 5 / 6">
 				<primaryTitle v-if="c.settings.showTitles">
 					<h1>Controls</h1>
 				</primaryTitle>
@@ -889,12 +1004,12 @@
 					<button v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
 				</actions>
 			</card>
-			<card d style="grid-column: 7 / 13; grid-row: 4 / 5">
+			<!-- <card d style="grid-column: 7 / 13; grid-row: 5 / 6">
 				<primaryTitle>
 					<h1>{{ info.ownerUid }}</h1>
 					<h2>{{ info.characterId }}</h2>
 				</primaryTitle>
-			</card>
+			</card> -->
 		</div>
 	</div>
 </template>
@@ -906,6 +1021,8 @@ import { card, primaryTitle, actions, textbox, checkbox, popup } from "@componen
 import { user, genId } from "@js/global.js";
 
 import foci from "@json/foci.json";
+
+import equipment from "@json/equipment.js";
 
 import { fs } from "@js/firebase.js";
 // http://localhost:8886/#/character/bbRweWpKoed3dLYecbiKuzZQ0562/character-keBs9zQrdaAXcB4qZq6a68QzFomfzONG
@@ -956,10 +1073,12 @@ export default {
 	data() {
 		return {
 			content: {
-				foci: []
+				foci: [],
+				equipment: []
 			},
 			p: {
-				focus: false
+				focus: false,
+				equipment: false
 			},
 			info: {
 				ownerUid: "",
@@ -976,6 +1095,7 @@ export default {
 				level: 1,
 				hp: 0,
 				hpMax: 0,
+				speed: 10,
 				settings: {
 					usePhysics: false,
 					showTitles: true,
@@ -1018,6 +1138,9 @@ export default {
 	computed: {
 		fociList() {
 			return this.content.foci.filter(a => !a.selected);
+		},
+		ac() {
+			return 10 + this.calMod(this.c.attributes.dex);
 		}
 	},
 	methods: {
@@ -1180,6 +1303,14 @@ export default {
 
 		var f = entries.map(a => {return {...a[1], internalName: a[0], open: false}});
 		this.content.foci = f;
+
+		// var t = this;
+
+		equipment.armor.then(a => {
+			entries = Object.entries(a);
+			var f = entries.map(b => {return {...b[1], open: false}});
+			f.forEach(b => this.content.equipment.push(b));
+		})
 
 		updateInstance(this);
 	}
@@ -1490,6 +1621,27 @@ settingheight = 32px;
 		width: 50%;
 		float: left;
 	}
+}
+
+.p {
+	width: 100%;
+	height: 100%;
+
+	.card {
+		margin: 16px;
+		margin-left: auto;
+		margin-right: auto;
+
+		max-width: 400px;
+	}
+}
+
+.x {
+	display: inline-block;
+	width: 24px;
+	position: absolute;
+	right: 0px;
+	cursor: pointer;
 }
 
 .dropdownInd {
