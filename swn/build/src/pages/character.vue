@@ -22,34 +22,40 @@
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">General</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 16</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
-				<div class="row">
-					<div class="stat">
-						<div class="mod">
-							<h1>{{ ac }}</h1>
+				<div v-if="m.edit === false || c.settings.useManual === false">
+					<div class="row">
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ ac }}</h1>
+							</div>
+							<div class="label">
+								<p>Armor Class</p>
+							</div>
 						</div>
-						<div class="label">
-							<p>Armor Class</p>
+						<div class="stat">
+							<div class="mod">
+								<h1>
+									<span v-if="speed >= 10">{{ speed }}</span>
+									<span v-if="speed < 10" style="color: #ff3030">{{ speed }}</span>
+								</h1>
+							</div>
+							<div class="label">
+								<p>Speed</p>
+							</div>
+						</div>
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ level }}</h1>
+							</div>
+							<div class="label">
+								<p>Level</p>
+							</div>
 						</div>
 					</div>
-					<div class="stat">
-						<div class="mod">
-							<h1>
-								<span v-if="speed === 10">{{ speed }}</span>
-								<span v-if="speed < 10" style="color: #ff3030">{{ speed }}</span>
-							</h1>
-						</div>
-						<div class="label">
-							<p>Speed</p>
-						</div>
-					</div>
-					<div class="stat">
-						<div class="mod">
-							<h1>{{ level }}</h1>
-						</div>
-						<div class="label">
-							<p>Level</p>
-						</div>
-					</div>
+				</div>
+				<div  v-if="m.edit === true && c.settings.useManual === true">
+					<textbox @change="h" :val="c.manual.ac" vname="manual.ac" label="Armor Class" type="number"></textbox>
+					<textbox @change="h" :val="c.manual.speed" vname="manual.speed" label="Speed" type="number"></textbox>
 				</div>
 			</card>
 			<!-- Hit Points -->
@@ -77,31 +83,38 @@
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Saving throws</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 17</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
-				<div class="row">
-					<div class="stat">
-						<div class="mod">
-							<h1>{{ savingThrow("physical") }}</h1>
+				<div v-if="m.edit === false || c.settings.useManual === false">
+					<div class="row">
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ savingThrow("physical") }}</h1>
+							</div>
+							<div class="label">
+								<p>Physical</p>
+							</div>
 						</div>
-						<div class="label">
-							<p>Physical</p>
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ savingThrow("evasion") }}</h1>
+							</div>
+							<div class="label">
+								<p>Evasion</p>
+							</div>
+						</div>
+						<div class="stat">
+							<div class="mod">
+								<h1>{{ savingThrow("mental") }}</h1>
+							</div>
+							<div class="label">
+								<p>Mental</p>
+							</div>
 						</div>
 					</div>
-					<div class="stat">
-						<div class="mod">
-							<h1>{{ savingThrow("evasion") }}</h1>
-						</div>
-						<div class="label">
-							<p>Evasion</p>
-						</div>
-					</div>
-					<div class="stat">
-						<div class="mod">
-							<h1>{{ savingThrow("mental") }}</h1>
-						</div>
-						<div class="label">
-							<p>Mental</p>
-						</div>
-					</div>
+				</div>
+				<div v-if="m.edit === true && c.settings.useManual === true">
+					<textbox @change="h" :val="c.manual.savingThrows.physical" vname="manual.savingThrows.physical" label="Physical" type="number"></textbox>
+					<textbox @change="h" :val="c.manual.savingThrows.evasion" vname="manual.savingThrows.evasion" label="Evasion" type="number"></textbox>
+					<textbox @change="h" :val="c.manual.savingThrows.mental" vname="manual.savingThrows.mental" label="Mental" type="number"></textbox>
 				</div>
 			</card>
 			<!-- Attributes -->
@@ -889,7 +902,7 @@
 				</primaryTitle>
 				<div>
 					<div class="listItem" v-for="item in readiedItems">
-						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
+						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }})</span></h1>
 						<transition name="contentDropdown">
 							<div v-if="item.open">
 								<div class="row">
@@ -941,6 +954,60 @@
 										</div>
 										<div class="label">
 											<p>Tech level</p>
+										</div>
+									</div>
+								</div>
+								<div class="row" v-if="item.equipmentType == 'rangedWeapon'">
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.dmg }}</h1>
+										</div>
+										<div class="label">
+											<p>Damage</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.range.normal }}/{{ item.range.max }}</h1>
+										</div>
+										<div class="label">
+											<p>Range</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1 v-if="item.magazine !== -1">{{ item.magazine }}</h1>
+											<h1 v-if="item.magazine === -1">N/A</h1>
+										</div>
+										<div class="label">
+											<p>Magazine</p>
+										</div>
+									</div>
+								</div>
+								<div class="row" v-if="item.equipmentType == 'rangedWeapon'">
+									<div class="stat">
+										<div class="mod">
+											<h1 v-if="item.burstFire">Yes</h1>
+											<h1 v-else>No</h1>
+										</div>
+										<div class="label">
+											<p>Burst Fire</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.reloadTime }} round<span v-if="item.reloadTime > 1">s</span></h1>
+										</div>
+										<div class="label">
+											<p>Reload time</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ attackBonus(item) }}</h1>
+										</div>
+										<div class="label">
+											<p>Attack Bonus</p>
 										</div>
 									</div>
 								</div>
@@ -957,7 +1024,7 @@
 				</primaryTitle>
 				<div>
 					<div class="listItem" v-for="item in stowedItems">
-						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
+						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }})</span></h1>
 						<transition name="contentDropdown">
 							<div v-if="item.open">
 								<div class="row">
@@ -1009,6 +1076,60 @@
 										</div>
 										<div class="label">
 											<p>Tech level</p>
+										</div>
+									</div>
+								</div>
+								<div class="row" v-if="item.equipmentType == 'rangedWeapon'">
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.dmg }}</h1>
+										</div>
+										<div class="label">
+											<p>Damage</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.range.normal }}/{{ item.range.max }}</h1>
+										</div>
+										<div class="label">
+											<p>Range</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1 v-if="item.magazine !== -1">{{ item.magazine }}</h1>
+											<h1 v-if="item.magazine === -1">N/A</h1>
+										</div>
+										<div class="label">
+											<p>Magazine</p>
+										</div>
+									</div>
+								</div>
+								<div class="row" v-if="item.equipmentType == 'rangedWeapon'">
+									<div class="stat">
+										<div class="mod">
+											<h1 v-if="item.burstFire">Yes</h1>
+											<h1 v-else>No</h1>
+										</div>
+										<div class="label">
+											<p>Burst Fire</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ item.reloadTime }} round<span v-if="item.reloadTime > 1">s</span></h1>
+										</div>
+										<div class="label">
+											<p>Reload time</p>
+										</div>
+									</div>
+									<div class="stat">
+										<div class="mod">
+											<h1>{{ attackBonus(item) }}</h1>
+										</div>
+										<div class="label">
+											<p>Attack Bonus</p>
 										</div>
 									</div>
 								</div>
@@ -1094,6 +1215,102 @@
 								</transition>
 							</div>
 						</card>
+						<card style="position: relative;">
+							<primaryTitle>
+								<h1>Ranged weapons</h1>
+								<h2>Used to put holes in things</h2>
+							</primaryTitle>
+							<div class="listItem" v-for="item in content.weapons.ranged" :key="item.internalName">
+								<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
+								<transition name="contentDropdown">
+									<div v-if="item.open">
+										<div class="row">
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.cost }}c</h1>
+												</div>
+												<div class="label">
+													<p>Cost</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.enc }}</h1>
+												</div>
+												<div class="label">
+													<p>Encumbrance</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.tl }}</h1>
+												</div>
+												<div class="label">
+													<p>Tech level</p>
+												</div>
+											</div>
+										</div>
+										<div class="row" v-if="item.equipmentType == 'rangedWeapon'">
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.dmg }}</h1>
+												</div>
+												<div class="label">
+													<p>Damage</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.range.normal }}/{{ item.range.max }}</h1>
+												</div>
+												<div class="label">
+													<p>Range</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1 v-if="item.magazine !== -1">{{ item.magazine }}</h1>
+													<h1 v-if="item.magazine === -1">N/A</h1>
+												</div>
+												<div class="label">
+													<p>Magazine</p>
+												</div>
+											</div>
+										</div>
+										<div class="row" v-if="item.equipmentType == 'rangedWeapon'">
+											<div class="stat">
+												<div class="mod">
+													<h1 v-if="item.burstFire">Yes</h1>
+													<h1 v-else>No</h1>
+												</div>
+												<div class="label">
+													<p>Burst Fire</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.reloadTime }} round<span v-if="item.reloadTime > 1">s</span></h1>
+												</div>
+												<div class="label">
+													<p>Reload time</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ attackBonus(item) }}</h1>
+												</div>
+												<div class="label">
+													<p>Attack Bonus</p>
+												</div>
+											</div>
+										</div>
+										<actions>
+											<button @click="addItem(item, 'stowed')">Add stowed</button>
+										</actions>
+									</div>
+								</transition>
+							</div>
+						</card>
 					</div>
 				</popup>
 			</card>
@@ -1134,6 +1351,14 @@
 						<p>Show details</p>
 					</div>
 				</div>
+				<div class="setting" v-if="m.allowEdit">
+					<div class="checkboxWrapper">
+						<checkbox :val="c.settings.useManual" vname="settings.useManual" @change="h"></checkbox>
+					</div>
+					<div class="txt">
+						<p>Use manual mode</p>
+					</div>
+				</div>
 				<actions>
 					<button class="icon" v-if="m.allowEdit" @click="toggleEdit()"><span class="material-icons">edit</span></button>
 					<button class="icon" v-if="!m.edit && m.allowEdit" @click="save()"><span class="material-icons">save</span></button>
@@ -1160,6 +1385,7 @@ import { user, genId } from "@js/global.js";
 import foci from "@json/foci.json";
 
 import equipment from "@json/equipment.js";
+import rangedWeapons from "@json/weapons/ranged.json";
 
 import { fs } from "@js/firebase.js";
 // http://localhost:8886/#/character/bbRweWpKoed3dLYecbiKuzZQ0562/character-keBs9zQrdaAXcB4qZq6a68QzFomfzONG
@@ -1201,6 +1427,14 @@ function updateInstance(t) {
 	});
 }
 
+function toMod(a) {
+	if (a >= 0) {
+		return "+" + a;
+	} else {
+		return a;
+	}
+}
+
 export default {
 	components: {
 		card,
@@ -1214,7 +1448,10 @@ export default {
 		return {
 			content: {
 				foci: [],
-				equipment: []
+				equipment: [],
+				weapons: {
+					ranged: []
+				}
 			},
 			popup: {
 				focus: false,
@@ -1239,7 +1476,17 @@ export default {
 					usePhysics: false,
 					showTitles: true,
 					showSteps: false,
-					showDetails: false
+					showDetails: false,
+					useManual: false
+				},
+				manual: {
+					ac: 10,
+					speed: 10,
+					savingThrows: {
+						physical: 15,
+						evasion: 15,
+						mental: 15
+					}
 				},
 				attributes: {
 					str: 0,
@@ -1303,41 +1550,48 @@ export default {
 			}
 		},
 		speed() {
-			if (this.totalStowedItems > this.c.attributes.str || this.totalReadiedItems > Math.floor(this.c.attributes.str / 2)) {
-				return 7;
+			if (!this.c.settings.useManual) {
+				if (this.totalStowedItems > this.c.attributes.str || this.totalReadiedItems > Math.floor(this.c.attributes.str / 2)) {
+					return 7;
+				} else {
+					return 10;
+				}
 			} else {
-				return 10;
+				return this.c.manual.speed;
 			}
 		},
 		fociList() {
 			return this.content.foci.filter(a => !a.selected);
 		},
 		ac() {
-			console.log("UPDATE AC", this.equipedArmor);
-			let i = 10 + this.calMod(this.c.attributes.dex);
-			if (this.equipedArmor) {
-				var a = this.equipedArmor;
-				if (Array.isArray(a)) {
-					let c = 0;
+			if (!this.c.settings.useManual) {
+				let i = 10 + this.calMod(this.c.attributes.dex);
+				if (this.equipedArmor) {
+					var a = this.equipedArmor;
+					if (Array.isArray(a)) {
+						let c = 0;
 
-					a.forEach(armor => {
-						if (armor.bonus === 0) {
-							c += armor.ac;
-						} else {
-							c += armor.bonus;
-						}
-					});
+						a.forEach(armor => {
+							if (armor.bonus === 0) {
+								c += armor.ac;
+							} else {
+								c += armor.bonus;
+							}
+						});
 
-					return c + this.calMod(this.c.attributes.dex);
-				} else {
-					if (i >= a.ac) {
-						return i + a.bonus;
+						return c + this.calMod(this.c.attributes.dex);
 					} else {
-						return a.ac + this.calMod(this.c.attributes.dex);
+						if (i >= a.ac) {
+							return i + a.bonus;
+						} else {
+							return a.ac + this.calMod(this.c.attributes.dex);
+						}
 					}
+				} else {
+					return i;
 				}
 			} else {
-				return i;
+				return this.c.manual.ac;
 			}
 		},
 		readyEnc() {
@@ -1451,25 +1705,30 @@ export default {
 			}
 		},
 		savingThrow(a) {
-			var s1, s2, u;
-			if (a === "physical") {
-				s1 = this.c.attributes.str;
-				s2 = this.c.attributes.con;
-			} else if (a === "evasion") {
-				s1 = this.c.attributes.dex;
-				s2 = this.c.attributes.int;
-			} else if (a === "mental") {
-				s1 = this.c.attributes.cha;
-				s2 = this.c.attributes.wis;
-			}
+			if (!this.c.settings.useManual) {
+				var s1, s2, u;
+				if (a === "physical") {
+					s1 = this.c.attributes.str;
+					s2 = this.c.attributes.con;
+				} else if (a === "evasion") {
+					s1 = this.c.attributes.dex;
+					s2 = this.c.attributes.int;
+				} else if (a === "mental") {
+					s1 = this.c.attributes.cha;
+					s2 = this.c.attributes.wis;
+				}
 
-			if (s1 >= s2) {
-				u = this.calMod(s1);
+				if (s1 >= s2) {
+					u = this.calMod(s1);
+				} else {
+					u = this.calMod(s2);
+				}
+
+				return 15 - (this.level - 1) - u;
 			} else {
-				u = this.calMod(s2);
+				var s = this.c.manual.savingThrows[a];
+				return s;
 			}
-
-			return 15 - (this.level - 1) - u;
 		},
 		sklAdd(s) {
 			var skill = this.c.skills[s];
@@ -1567,6 +1826,23 @@ export default {
 				a.open = false;
 				a.$caried = "stowed";
 			}
+		},
+		attackBonus(item) {
+			var skill, skillBonus, attr;
+			if (item.equipmentType === "rangedWeapon") {
+				skill = this.c.skills.shoot;
+				attr = this.c.attributes.dex;
+			}
+
+			if (skill.trained === false) {
+				skillBonus = -2;
+			} else {
+				skillBonus = skill.lvl;
+			}
+
+			console.log(Math.floor(this.level / 2), skillBonus, this.calMod(attr));
+
+			return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr));
 		}
 	},
 	watch: {
@@ -1587,7 +1863,12 @@ export default {
 			entries = Object.entries(a);
 			var f = entries.map(b => {return {...b[1], open: false}});
 			f.forEach(b => this.content.equipment.push(b));
-		})
+		});
+
+		var e = Object.entries(rangedWeapons);
+		e.forEach(a => {
+			this.content.weapons.ranged.push({...a[1], open: false});
+		});
 
 		updateInstance(this);
 	}

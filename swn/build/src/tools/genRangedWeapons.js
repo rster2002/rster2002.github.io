@@ -1,5 +1,4 @@
-var text = `
-Primitive Bow 1d6 50/75 15 1 Dex 2 1
+var tabel = `Primitive Bow 1d6 50/75 15 1 Dex 2 1
 Advanced Bow 1d6 100/150 50 1 Dex 2 3
 Conversion Bow 1d8 150/300 500 1 Dex 2 4
 Grenade 2d6 10/30 25 N/A Dex 1 3
@@ -34,7 +33,7 @@ function replaceAll(c, a, b) {
 	return temp;
 }
 
-var sections = text.split("*-");
+var sections = tabel.split("*-");
 console.log(sections);
 
 sections.forEach(s => {
@@ -46,36 +45,56 @@ sections.forEach(s => {
 
 	rows.forEach(a => {
 		console.log(a);
-		a = a.replace(" bonus", "");
 		a = a.split(" ");
-		let tl = a.pop();
-		let enc = a.pop();
-		let cost = replaceAll(a.pop(), ",", "");
-		let bonus = 0;
-		let ac = a.pop();
-		let name = a.join(" ");
-		if (ac.includes("/")) {
-			ac = ac.split("/");
-			bonus = Number(replaceAll(ac[1], "+", ""));
-			ac = Number(ac[0]);
-		} else {
-			ac = Number(ac);
+		console.log(a);
+		let tl = Number(a.pop());
+		let enc = Number(a.pop());
+		let attr = a.pop();
+
+		let magazine = a.pop();
+		let burstFire = false;
+		let reloadTime = 1;
+		if (magazine.includes("@")) {
+			reloadTime = 2;
+			magazine = magazine.replace("@", "");
+		} else if (magazine === "N/A") {
+			magazine = -1;
+		}
+		magazine = Number(magazine);
+
+		let cost = Number(a.pop());
+		let range = a.pop();
+		range = range.split("/");
+		range = {
+			normal: Number(range[0]),
+			max: Number(range[1])
 		}
 
-		let internalName = replaceAll(name.toLowerCase(), " ", "_");
+		let dmg = a.pop();
+		if (dmg.includes("*")) {
+			burstFire = true;
+			dmg = dmg.replace("*", "");
+		}
 
+		let name = a.join(" ");
+
+		let internalName = replaceAll(name.toLowerCase(), " ", "_");
 		obj[internalName] = {
-			tl: Number(tl),
-			enc: Number(enc),
-			cost: Number(cost),
 			internalName,
-			bonus,
-			ac,
 			name,
-			type,
-			equipmentType: "armor"
+			tl,
+			enc,
+			attr,
+			magazine,
+			burstFire,
+			reloadTime,
+			cost,
+			range,
+			dmg,
+			equipmentType: "rangedWeapon"
 		}
 	});
 });
 
+console.log(obj);
 console.log(JSON.stringify(obj));
