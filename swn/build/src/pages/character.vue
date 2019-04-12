@@ -14,7 +14,7 @@
 					<textbox @change="h" :val="c.name" vname="name" label="Name"></textbox>
 					<textbox @change="h" :val="c.background" vname="background" label="Background"></textbox>
 					<textbox @change="h" :val="c.class" vname="class" label="Class"></textbox>
-					<textbox @change="h" :val="c.level" vname="level" label="Level" type="number"></textbox>
+					<textbox @change="h" :val="c.xp" vname="xp" label="XP" type="number"></textbox>
 				</div>
 			</card>
 			<!-- General info -->
@@ -33,20 +33,23 @@
 					</div>
 					<div class="stat">
 						<div class="mod">
-							<h1>{{ c.speed }}</h1>
+							<h1>
+								<span v-if="speed === 10">{{ speed }}</span>
+								<span v-if="speed < 10" style="color: #ff3030">{{ speed }}</span>
+							</h1>
 						</div>
 						<div class="label">
 							<p>Speed</p>
 						</div>
 					</div>
-					<!-- <div class="stat">
+					<div class="stat">
 						<div class="mod">
-							<h1>{{ savingThrow("mental") }}</h1>
+							<h1>{{ level }}</h1>
 						</div>
 						<div class="label">
-							<p>Mental</p>
+							<p>Level</p>
 						</div>
-					</div> -->
+					</div>
 				</div>
 			</card>
 			<!-- Hit Points -->
@@ -803,7 +806,7 @@
 						</transition>
 					</div>
 				</div>
-				<actions v-if="m.edit">
+				<actions>
 					<button @click="popup.focus = true">
 						add focus
 					</button>
@@ -943,6 +946,7 @@
 								</div>
 								<actions>
 									<button @click="stowItem(item)">Stow item</button>
+									<button @click="deleteItem(item)">Delete item</button>
 								</actions>
 							</div>
 						</transition>
@@ -1010,6 +1014,7 @@
 								</div>
 								<actions>
 									<button @click="readyItem(item)">Ready item</button>
+									<button @click="deleteItem(item)">Delete item</button>
 								</actions>
 							</div>
 						</transition>
@@ -1023,13 +1028,65 @@
 						<card style="position: relative;">
 							<p class="x" @click="popup.equipment = false"><span class="material-icons">close</span></p>
 							<primaryTitle>
-								<h1>Equipment</h1>
-								<h2>Add a focus to your list</h2>
+								<h1>Armor</h1>
+								<h2>To protect you</h2>
 							</primaryTitle>
 							<div class="listItem" v-for="item in content.equipment" :key="item.internalName">
 								<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
 								<transition name="contentDropdown">
 									<div v-if="item.open">
+										<div class="row">
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.cost }}c</h1>
+												</div>
+												<div class="label">
+													<p>Cost</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.enc }}</h1>
+												</div>
+												<div class="label">
+													<p>Encumbrance</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.tl }}</h1>
+												</div>
+												<div class="label">
+													<p>Tech level</p>
+												</div>
+											</div>
+										</div>
+										<div class="row" v-if="item.equipmentType == 'armor'">
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.ac }}<span v-if="item.bonus !== 0">/+{{ item.bonus }}</span></h1>
+												</div>
+												<div class="label">
+													<p>Armor class</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.type }}</h1>
+												</div>
+												<div class="label">
+													<p>Type</p>
+												</div>
+											</div>
+											<div class="stat">
+												<div class="mod">
+													<h1>{{ item.tl }}</h1>
+												</div>
+												<div class="label">
+													<p>Tech level</p>
+												</div>
+											</div>
+										</div>
 										<actions>
 											<button @click="addItem(item, 'stowed')">Add stowed</button>
 										</actions>
@@ -1175,10 +1232,9 @@ export default {
 				name: "",
 				background: "",
 				class: "",
-				level: 1,
+				xp: 0,
 				hp: 0,
 				hpMax: 0,
-				speed: 10,
 				settings: {
 					usePhysics: false,
 					showTitles: true,
@@ -1220,6 +1276,39 @@ export default {
 		}
 	},
 	computed: {
+		level() {
+			var xp = this.c.xp;
+			if (xp < 3) {
+				return 1;
+			} else if (xp >= 3 && xp < 6) {
+				return 2;
+			} else if (xp >= 6 && xp < 12) {
+				return 3;
+			} else if (xp >= 12 && xp < 18) {
+				return 4;
+			} else if (xp >= 18 && xp < 27) {
+				return 5;
+			} else if (xp >= 27 && xp < 39) {
+				return 6;
+			} else if (xp >= 39 && xp < 54) {
+				return 7;
+			} else if (xp >= 54 && xp < 72) {
+				return 8;
+			} else if (xp >= 72 && xp < 93) {
+				return 9;
+			} else if (xp >= 93 && xp < 117) {
+				return 10;
+			} else if (xp >= 117) {
+				return 10 + Math.floor(((xp - 93) / 24));
+			}
+		},
+		speed() {
+			if (this.totalStowedItems > this.c.attributes.str || this.totalReadiedItems > Math.floor(this.c.attributes.str / 2)) {
+				return 7;
+			} else {
+				return 10;
+			}
+		},
 		fociList() {
 			return this.content.foci.filter(a => !a.selected);
 		},
@@ -1239,12 +1328,12 @@ export default {
 						}
 					});
 
-					return c;
+					return c + this.calMod(this.c.attributes.dex);
 				} else {
 					if (i >= a.ac) {
 						return i + a.bonus;
 					} else {
-						return a.ac;
+						return a.ac + this.calMod(this.c.attributes.dex);
 					}
 				}
 			} else {
@@ -1380,7 +1469,7 @@ export default {
 				u = this.calMod(s2);
 			}
 
-			return 15 - (this.c.level - 1) - u;
+			return 15 - (this.level - 1) - u;
 		},
 		sklAdd(s) {
 			var skill = this.c.skills[s];
@@ -1407,6 +1496,7 @@ export default {
 				open: false,
 				currentLvl: 1
 			}));
+			console.log();
 		},
 		removeFocus(f) {
 			var index = this.c.foci.indexOf(f);
@@ -1434,11 +1524,11 @@ export default {
 		addItem(a, b) {
 			let allow = false;
 			if (b === "stowed") {
-				if (this.totalStowedItems + a.enc <= this.c.attributes.str) {
+				if (this.totalStowedItems + a.enc <= this.c.attributes.str + 4) {
 					allow = true;
 				}
 			} else if (b === "ready") {
-				if (this.totalStowedItems + a.enc <= this.readyEnc) {
+				if (this.totalStowedItems + a.enc <= this.readyEnc + 2) {
 					allow = true;
 				}
 			}
@@ -1447,12 +1537,18 @@ export default {
 				this.c.equipment.push({...a, $caried: b, open: false});
 			}
 		},
+		deleteItem(a) {
+			if (confirm("Are you sure you want to delete this item from your inventory?")) {
+				var index = this.c.equipment.indexOf(a);
+				this.c.equipment.splice(index, 1);
+			}
+		},
 		readyItem(a) {
-			a.open = false;
 			if (this.totalReadiedItems + a.enc <= this.readyEnc) {
 				if (a.equipmentType === "armor" && this.equipedArmor) {
 					if (Array.isArray(this.equipedArmor) === false) {
 						if (a.bonus > 0 || this.equipedArmor.bonus > 0) {
+							a.open = false;
 							a.$caried = "ready";
 						} else {
 							alert("You can only equip one set of armor");
@@ -1461,6 +1557,7 @@ export default {
 						alert("You can only equip one set of armor");
 					}
 				} else {
+					a.open = false;
 					a.$caried = "ready";
 				}
 			}

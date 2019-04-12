@@ -130,3 +130,37 @@ db.get("name", "Thorin").then(r => console.log(r));
 }
 ```
 
+### Advanced
+
+If you want to use this wrapper for localStorage, you can use the `.messager()` function.
+
+```javascript
+import sdb from "sdb";
+
+const db = new sdb("party").useMessager(localStorage);
+```
+
+Or you can create your own messager:
+
+```javascript
+const messager = {
+    setItem(id, data) {
+        // ...
+    },
+    getItem(id) {
+        // When for example calling to a database.
+        return new Promise(res => {
+            // ..
+        });
+        
+        // When using some other method of storage that doesn't require a promise
+        return data;
+    },
+    removeItem(id) {
+        // ...
+    }
+}
+
+const db = new sdb("party").useMessager(messager);
+```
+

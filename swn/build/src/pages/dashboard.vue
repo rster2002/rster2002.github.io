@@ -5,7 +5,7 @@
 				background-image: url(https://i.pinimg.com/564x/34/72/78/347278cc7ed550049e3e118c824891b2.jpg);
 				background-position: 0% 1%"></div>
 			<primaryTitle>
-				<h1>Under contruction</h1>
+				<h1>Under construction</h1>
 			</primaryTitle>
 			<p>Please keep in mind that this website is work in progress and things are subject to change. You may lose your character or any other information.</p>
 		</card>

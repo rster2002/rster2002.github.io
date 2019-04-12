@@ -1,7 +1,7 @@
 const path = require('path');
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const UglifyJsPlugin = require("uglifyJs-webpack-plugin");
-// const WebpackOnBuildPlugin = require('on-build-webpack');
+const WebpackOnBuildPlugin = require('on-build-webpack');
 
 module.exports = {
 	mode: "development",

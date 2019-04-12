@@ -123,9 +123,13 @@ class sdb {
         var index = this.$getIndex();
 
         index.forEach(a => {
-            var data = JSON.parse(this.messager.getItem(this.name + "_" + a));
-
-            buildIndex.push(data);
+			var getData = this.messager.getItem(this.name + "_" + a);
+			if (getData.then !== undefined) {
+				
+			} else {
+				var data = JSON.parse(getData);
+				buildIndex.push(data);
+			}
         });
 
         var rtrn;
