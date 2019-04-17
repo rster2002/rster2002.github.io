@@ -15,6 +15,7 @@
 					<textbox @change="h" :val="c.background" vname="background" label="Background"></textbox>
 					<textbox @change="h" :val="c.class" vname="class" label="Class"></textbox>
 					<textbox @change="h" :val="c.xp" vname="xp" label="XP" type="number"></textbox>
+					<textbox @change="h" :val="c.attackBonus" vname="attackBonus" label="Attack Bonus" type="number"></textbox>
 				</div>
 			</card>
 			<!-- General info -->
@@ -902,7 +903,7 @@
 				</primaryTitle>
 				<div>
 					<div class="listItem" v-for="item in readiedItems">
-						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }})</span></h1>
+						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">(attack bonus: {{ attackBonus(item) }})</span></h1>
 						<transition name="contentDropdown">
 							<div v-if="item.open">
 								<div class="row">
@@ -996,7 +997,7 @@
 									</div>
 									<div class="stat">
 										<div class="mod">
-											<h1>{{ item.reloadTime }} round<span v-if="item.reloadTime > 1">s</span></h1>
+											<h1>{{ item.reloadTime }} main action<span v-if="item.reloadTime > 1">s</span></h1>
 										</div>
 										<div class="label">
 											<p>Reload time</p>
@@ -1118,7 +1119,7 @@
 									</div>
 									<div class="stat">
 										<div class="mod">
-											<h1>{{ item.reloadTime }} round<span v-if="item.reloadTime > 1">s</span></h1>
+											<h1>{{ item.reloadTime }} main action<span v-if="item.reloadTime > 1">s</span></h1>
 										</div>
 										<div class="label">
 											<p>Reload time</p>
@@ -1149,167 +1150,175 @@
 						<card style="position: relative;">
 							<p class="x" @click="popup.equipment = false"><span class="material-icons">close</span></p>
 							<primaryTitle>
-								<h1>Armor</h1>
+								<h1 @click="toggleVal(popup, 'armor')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: popup.armor }">arrow_drop_up</span> Armor</h1>
 								<h2>To protect you</h2>
 							</primaryTitle>
-							<div class="listItem" v-for="item in content.equipment" :key="item.internalName">
-								<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
-								<transition name="contentDropdown">
-									<div v-if="item.open">
-										<div class="row">
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.cost }}c</h1>
+							<transition name="contentDropdown">
+								<div v-if="popup.armor">
+									<div class="listItem" v-for="item in content.equipment" :key="item.internalName">
+										<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
+										<transition name="contentDropdown">
+											<div v-if="item.open">
+												<div class="row">
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.cost }}c</h1>
+														</div>
+														<div class="label">
+															<p>Cost</p>
+														</div>
+													</div>
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.enc }}</h1>
+														</div>
+														<div class="label">
+															<p>Encumbrance</p>
+														</div>
+													</div>
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.tl }}</h1>
+														</div>
+														<div class="label">
+															<p>Tech level</p>
+														</div>
+													</div>
 												</div>
-												<div class="label">
-													<p>Cost</p>
+												<div class="row" v-if="item.equipmentType == 'armor'">
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.ac }}<span v-if="item.bonus !== 0">/+{{ item.bonus }}</span></h1>
+														</div>
+														<div class="label">
+															<p>Armor class</p>
+														</div>
+													</div>
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.type }}</h1>
+														</div>
+														<div class="label">
+															<p>Type</p>
+														</div>
+													</div>
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.tl }}</h1>
+														</div>
+														<div class="label">
+															<p>Tech level</p>
+														</div>
+													</div>
 												</div>
+												<actions>
+													<button @click="addItem(item, 'stowed')">Add stowed</button>
+												</actions>
 											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.enc }}</h1>
-												</div>
-												<div class="label">
-													<p>Encumbrance</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.tl }}</h1>
-												</div>
-												<div class="label">
-													<p>Tech level</p>
-												</div>
-											</div>
-										</div>
-										<div class="row" v-if="item.equipmentType == 'armor'">
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.ac }}<span v-if="item.bonus !== 0">/+{{ item.bonus }}</span></h1>
-												</div>
-												<div class="label">
-													<p>Armor class</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.type }}</h1>
-												</div>
-												<div class="label">
-													<p>Type</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.tl }}</h1>
-												</div>
-												<div class="label">
-													<p>Tech level</p>
-												</div>
-											</div>
-										</div>
-										<actions>
-											<button @click="addItem(item, 'stowed')">Add stowed</button>
-										</actions>
+										</transition>
 									</div>
-								</transition>
-							</div>
+								</div>
+							</transition>
 						</card>
 						<card style="position: relative;">
 							<primaryTitle>
-								<h1>Ranged weapons</h1>
+								<h1 @click="toggleVal(popup, 'rangedWeapons')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: popup.rangedWeapons }">arrow_drop_up</span> Ranged weapons</h1>
 								<h2>Used to put holes in things</h2>
 							</primaryTitle>
-							<div class="listItem" v-for="item in content.weapons.ranged" :key="item.internalName">
-								<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
-								<transition name="contentDropdown">
-									<div v-if="item.open">
-										<div class="row">
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.cost }}c</h1>
+							<transition name="contentDropdown">
+								<div v-if="popup.rangedWeapons">
+									<div class="listItem" v-for="item in content.weapons.ranged" :key="item.internalName">
+										<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
+										<transition name="contentDropdown">
+											<div v-if="item.open">
+												<div class="row">
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.cost }}c</h1>
+														</div>
+														<div class="label">
+															<p>Cost</p>
+														</div>
+													</div>
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.enc }}</h1>
+														</div>
+														<div class="label">
+															<p>Encumbrance</p>
+														</div>
+													</div>
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.tl }}</h1>
+														</div>
+														<div class="label">
+															<p>Tech level</p>
+														</div>
+													</div>
 												</div>
-												<div class="label">
-													<p>Cost</p>
+												<div class="row" v-if="item.equipmentType == 'rangedWeapon'">
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.dmg }}</h1>
+														</div>
+														<div class="label">
+															<p>Damage</p>
+														</div>
+													</div>
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.range.normal }}/{{ item.range.max }}</h1>
+														</div>
+														<div class="label">
+															<p>Range</p>
+														</div>
+													</div>
+													<div class="stat">
+														<div class="mod">
+															<h1 v-if="item.magazine !== -1">{{ item.magazine }}</h1>
+															<h1 v-if="item.magazine === -1">N/A</h1>
+														</div>
+														<div class="label">
+															<p>Magazine</p>
+														</div>
+													</div>
 												</div>
+												<div class="row" v-if="item.equipmentType == 'rangedWeapon'">
+													<div class="stat">
+														<div class="mod">
+															<h1 v-if="item.burstFire">Yes</h1>
+															<h1 v-else>No</h1>
+														</div>
+														<div class="label">
+															<p>Burst Fire</p>
+														</div>
+													</div>
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ item.reloadTime }} main action<span v-if="item.reloadTime > 1">s</span></h1>
+														</div>
+														<div class="label">
+															<p>Reload time</p>
+														</div>
+													</div>
+													<div class="stat">
+														<div class="mod">
+															<h1>{{ attackBonus(item) }}</h1>
+														</div>
+														<div class="label">
+															<p>Attack Bonus</p>
+														</div>
+													</div>
+												</div>
+												<actions>
+													<button @click="addItem(item, 'stowed')">Add stowed</button>
+												</actions>
 											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.enc }}</h1>
-												</div>
-												<div class="label">
-													<p>Encumbrance</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.tl }}</h1>
-												</div>
-												<div class="label">
-													<p>Tech level</p>
-												</div>
-											</div>
-										</div>
-										<div class="row" v-if="item.equipmentType == 'rangedWeapon'">
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.dmg }}</h1>
-												</div>
-												<div class="label">
-													<p>Damage</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.range.normal }}/{{ item.range.max }}</h1>
-												</div>
-												<div class="label">
-													<p>Range</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1 v-if="item.magazine !== -1">{{ item.magazine }}</h1>
-													<h1 v-if="item.magazine === -1">N/A</h1>
-												</div>
-												<div class="label">
-													<p>Magazine</p>
-												</div>
-											</div>
-										</div>
-										<div class="row" v-if="item.equipmentType == 'rangedWeapon'">
-											<div class="stat">
-												<div class="mod">
-													<h1 v-if="item.burstFire">Yes</h1>
-													<h1 v-else>No</h1>
-												</div>
-												<div class="label">
-													<p>Burst Fire</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ item.reloadTime }} round<span v-if="item.reloadTime > 1">s</span></h1>
-												</div>
-												<div class="label">
-													<p>Reload time</p>
-												</div>
-											</div>
-											<div class="stat">
-												<div class="mod">
-													<h1>{{ attackBonus(item) }}</h1>
-												</div>
-												<div class="label">
-													<p>Attack Bonus</p>
-												</div>
-											</div>
-										</div>
-										<actions>
-											<button @click="addItem(item, 'stowed')">Add stowed</button>
-										</actions>
+										</transition>
 									</div>
-								</transition>
-							</div>
+								</div>
+							</transition>
 						</card>
 					</div>
 				</popup>
@@ -1455,7 +1464,9 @@ export default {
 			},
 			popup: {
 				focus: false,
-				equipment: false
+				equipment: false,
+				armor: false,
+				rangedWeapons: false
 			},
 			info: {
 				ownerUid: "",
@@ -1472,6 +1483,7 @@ export default {
 				xp: 0,
 				hp: 0,
 				hpMax: 0,
+				attackBonus: 0,
 				settings: {
 					usePhysics: false,
 					showTitles: true,
@@ -1842,7 +1854,7 @@ export default {
 
 			console.log(Math.floor(this.level / 2), skillBonus, this.calMod(attr));
 
-			return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr));
+			return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr)) + this.c.attackBonus;
 		}
 	},
 	watch: {

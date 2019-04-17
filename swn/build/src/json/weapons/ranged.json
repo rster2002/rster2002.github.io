@@ -197,8 +197,8 @@
         "reloadTime": 1,
         "cost": 400,
         "range": {
-            "normal": null,
-            "max": null
+            "normal": 1000,
+            "max": 2000
         },
         "dmg": "2d8",
         "equipmentType": "rangedWeapon"
@@ -365,7 +365,7 @@
         "magazine": 6,
         "burstFire": false,
         "reloadTime": 1,
-        "cost": null,
+        "cost": 1000,
         "range": {
             "normal": 100,
             "max": 300
@@ -382,7 +382,7 @@
         "magazine": 6,
         "burstFire": false,
         "reloadTime": 1,
-        "cost": null,
+        "cost": 1250,
         "range": {
             "normal": 100,
             "max": 300
