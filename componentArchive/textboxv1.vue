@@ -1,6 +1,6 @@
 <template lang="html">
 	<div class="textbox" :class="{ f: focus }" @click="f()">
-		<p :class="{ c: focus }"><span>{{ label }}</span></p>
+		<p :class="{ c: focus }">{{ label }}</p>
 		<input :type="t" @focus="f()" @blur="b()" v-model="v" ref="n" />
 	</div>
 </template>
@@ -77,17 +77,14 @@ size = 20px;
 	position: relative;
 	height: size + 12px;
 	width: 90%;
-	border: 2px solid textboxBorder;
-	border-radius: 4px;
+	border-bottom: 2px solid textboxBorder;
 
 	margin: 32px;
 	margin-left: auto;
 	margin-right: auto;
 
-	padding: 2px 0px;
-
 	&.f {
-		border: 2px solid secondaryColor;
+		border-bottom: 2px solid secondaryColor;
 	}
 
 	p {
@@ -98,7 +95,6 @@ size = 20px;
 		position: absolute;
 		z-index: 1;
 		top: 50%;
-		left: 8px;
 		transform: translateY(-50%);
 
 		font-family: defaultFont;
@@ -108,16 +104,10 @@ size = 20px;
 		cursor: text;
 
 		&.c {
-			top: -4%;
+			top: -17%;
 			font-size: 12px;
 			color: secondaryColor;
 			cursor: default;
-		}
-
-		span {
-			display: inline-block;
-			background-color: white;
-			padding: 0px 4px;
 		}
 	}
 
@@ -125,8 +115,8 @@ size = 20px;
 		position: absolute;
 		border: 0;
 		outline: 0;
-		padding: 0px 8px;
-		width: calc(99% - 16px);
+		padding: 6px 0px;
+		width: calc(99%);
 
 		padding: 0px 0px;
 
