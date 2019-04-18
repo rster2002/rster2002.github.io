@@ -78,7 +78,7 @@ size = 20px;
 	height: size + 12px;
 	width: 90%;
 	border: 2px solid textboxBorder;
-	border-radius: 4px;
+	border-radius: interactiveRadius;
 
 	margin: 32px;
 	margin-left: auto;

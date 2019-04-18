@@ -2,6 +2,10 @@
 primaryColor = #3a3133;
 secondaryColor = #197bb3;
 
+// Standard settings
+standardRadius = 4px;
+interactiveRadius = standardRadius;
+
 // Main text colors
 defaultFontColorDark = #ffffff;
 defaultFontColor = #505050;
@@ -27,9 +31,6 @@ borderColor = #484848;
 
 // Fonts
 defaultFont = 'Roboto', sans-serif;
-
-// Text color
-standardRadius = 2px;
 
 // Textbox
 textboxBorder = #afafaf;

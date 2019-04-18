@@ -18,9 +18,9 @@ export default {
 
 	button {
 		background-color: secondaryColor;
-		box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+		box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 		border: 0;
-		border-radius: 2px;
+		border-radius: interactiveRadius;
 		padding: 6px 8px;
 		color: #ffffff;
 		font-family: 'Roboto', sans-serif;
@@ -31,6 +31,7 @@ export default {
 		letter-spacing: 1.25px;
 		margin-left: 8px;
 		text-transform: uppercase;
+		position: relative;
 
 		.d {
 			background-color: transparent;

@@ -21,6 +21,7 @@ import mainView from "./components/view.vue";
 import card from "./components/card.vue";
 import actions from "./components/actions.vue";
 import primaryTitle from "./components/primaryTitle.vue";
+import snackbar from "./components/snackbar.vue";
 
 export {
 	card,
@@ -38,5 +39,6 @@ export {
 	drawerbtn,
 	textbox,
 	checkbox,
-	popup
+	popup,
+	snackbar
 }

@@ -8,7 +8,7 @@ import { fb, fs } from "@js/firebase.js";
 import app from "./app.vue";
 import routes from "./routes.js";
 
-// Vue.use(MyPlugin);
+Vue.use(require("vue-shortkey"));
 
 const router = new vueRouter({
 	routes

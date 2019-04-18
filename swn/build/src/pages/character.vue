@@ -1,5 +1,8 @@
 <template lang="html">
 	<div>
+		<snackbar :show="p.save">
+			saved
+		</snackbar>
 		<div class="cardGrid">
 			<!-- Name, class, background -->
 			<card d style="grid-column: 1 / 4; grid-row: 1 / 2">
@@ -796,7 +799,7 @@
 				</div>
 			</card>
 			<!-- Focus -->
-			<card d style="grid-column: 4 / 7; grid-row: 3 / 5">
+			<card d style="grid-column: 1 / 7; grid-row: 3 / 5">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Focus</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 7, 8</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
@@ -813,8 +816,8 @@
 									<p v-if="focus.level[2] !== '' && focus.currentLvl === 2"><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
 								</transition>
 								<actions>
-									<button v-if="focus.level[2] !== '' && m.allowEdit" @click="changeFocus(focus)"><span v-if="focus.currentLvl === 1" class="material-icons">star_border</span><span v-if="focus.currentLvl == 2" class="material-icons">star</span></button>
-									<button v-if="m.allowEdit" @click="removeFocus(focus)"><span class="material-icons">delete</span></button>
+									<button class="icon" v-if="focus.level[2] !== '' && m.allowEdit" @click="changeFocus(focus)"><span v-if="focus.currentLvl === 1" class="material-icons">star_border</span><span v-if="focus.currentLvl == 2" class="material-icons">star</span></button>
+									<button class="icon" v-if="m.allowEdit" @click="removeFocus(focus)"><span class="material-icons">delete</span></button>
 								</actions>
 							</div>
 						</transition>
@@ -853,48 +856,9 @@
 				</popup>
 			</card>
 			<!-- Weapons -->
-			<card d style="grid-column: 1 / 4; grid-row: 3 / 5">
-				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">Weapons</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
-				</primaryTitle>
-				<div class="listItem" v-for="weapon in c.weapons">
-					<h1 @click="toggleVal(weapon, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: weapon.open }">arrow_drop_up</span>{{ weapon.title }}</h1>
-					<transition name="contentDropdown">
-						<div v-if="focus.open">
-						</div>
-					</transition>
-				</div>
-				<actions>
-					<button @click="popup.weapon = true">
-						add weapon
-					</button>
-				</actions>
-				<!-- <popup @close="popup.focus = false" :show="popup.focus">
-					<card>
-						<primaryTitle>
-							<h1>Focus</h1>
-							<h2>Add a focus to your list</h2>
-						</primaryTitle>
-					</card>
-					<card v-for="focus in fociList" :key="focus.internalName">
-						<primaryTitle @click="toggleVal(focus, 'open')" cursor="pointer">
-							<h1><span class="dropdownInd material-icons" :class="{ d: focus.open }">arrow_drop_up</span> {{ focus.title }}</h1>
-						</primaryTitle>
-						<transition name="contentDropdown">
-							<div v-if="focus.open">
-								<div v-html="toMarkdown(focus.description)">
+			<!-- <card d style="grid-column: 1 / 4; grid-row: 3 / 5; background-image: url(https://i.pinimg.com/564x/cb/82/7d/cb827d4adff7e2c2134ab04eedcd68c6.jpg);">
 
-								</div>
-								<p><b>Level-1</b> <span v-html="toMarkdown(focus.level['1'])"></span></p>
-								<p><b>Level-2</b> <span v-html="toMarkdown(focus.level['2'])"></span></p>
-								<actions>
-									<button @click="addFocus(focus)">Add focus</button>
-								</actions>
-							</div>
-						</transition>
-					</card>
-				</popup> -->
-			</card>
+			</card> -->
 			<!-- Equipment -->
 			<card d style="grid-column: 1 / 7; grid-row: 5 / 6">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
@@ -1369,8 +1333,14 @@
 					</div>
 				</div>
 				<actions>
-					<button class="icon" v-if="m.allowEdit" @click="toggleEdit()"><span class="material-icons">edit</span></button>
-					<button class="icon" v-if="!m.edit && m.allowEdit" @click="save()"><span class="material-icons">save</span></button>
+					<button v-shortkey="['f2']" class="icon" v-if="m.allowEdit" @shortkey="toggleEdit()" @click="toggleEdit()">
+						<span class="material-icons">edit</span>
+						<span class="tooltip">f2</span>
+					</button>
+					<button v-shortkey="['ctrl', 's']" class="icon" v-if="!m.edit && m.allowEdit" @shortkey="save()" @click="save()">
+						<span class="material-icons">save</span>
+						<span class="tooltip">ctrl + s</span>
+					</button>
 					<button class="icon" v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
 					<button class="icon" v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
 				</actions>
@@ -1388,7 +1358,7 @@
 <script>
 import marked from "marked";
 
-import { card, primaryTitle, actions, textbox, checkbox, popup } from "@components";
+import { card, primaryTitle, actions, textbox, checkbox, popup, snackbar } from "@components";
 import { user, genId } from "@js/global.js";
 
 import foci from "@json/foci.json";
@@ -1451,7 +1421,8 @@ export default {
 		actions,
 		textbox,
 		checkbox,
-		popup
+		popup,
+		snackbar
 	},
 	data() {
 		return {
@@ -1461,6 +1432,9 @@ export default {
 				weapons: {
 					ranged: []
 				}
+			},
+			p: {
+				save: false
 			},
 			popup: {
 				focus: false,
@@ -1651,7 +1625,13 @@ export default {
 				fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").set(t.c).then(a => {
 					fs.collection(`users/${t.info.ownerUid}/characters`).doc(t.info.characterId).update({
 						name: t.c.name
-					}).then(a => alert("Saved"));
+					}).then(a => {
+						console.log(t.p.save);
+						t.p.save = true;
+						setTimeout(() => {
+							t.p.save = false;
+						}, 3000)
+					});
 				});
 			} else {
 				if (confirm("Are you sure you want to copy this character to your own account?")) {
@@ -2236,6 +2216,39 @@ settingheight = 32px;
 .contentDropdown-enter-to {
 	opacity: 1;
 	transform: translateY(0);
+}
+
+.tooltip {
+	visibility: hidden;
+    background-color: #6d6d6d;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    /* margin-left: -60px; */
+    font-size: 12px;
+    transform: translateX(-50%) scale(0);
+    padding: 0px 8px;
+    height: 24px;
+    line-height: 24px;
+	opacity: 0;
+	transition: 100ms cubic-bezier(0.0, 0.0, 0.2, 1) all;
+}
+
+button:hover .tooltip {
+	visibility: visible;
+	opacity: 1;
+	transform: translateX(-50%) scale(1);
+}
+
+@media only screen and (max-width: 600px) {
+	.tooltip {
+		display: none;
+	}
 }
 
 </style>

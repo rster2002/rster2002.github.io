@@ -72,7 +72,7 @@ size = 20px;
 
 	cursor: pointer;
 
-	border-radius: standardRadius + 4px;
+	border-radius: standardRadius;
 	border: 2px solid secondaryColor;
 
 	transition: 100ms cubic-bezier(0.4, 0.0, 0.2, 1) all;
