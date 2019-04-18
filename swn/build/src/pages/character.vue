@@ -1,5 +1,28 @@
 <template lang="html">
 	<div>
+		<popup @close="popup.search = false" :show="popup.search">
+			<searchbar @onchange="search" placeholder="Search in companion"></searchbar>
+			<card v-if="bestResult.length === 1">
+				<primaryTitle>
+					<h1>{{ bestResult[0].title }}</h1>
+				</primaryTitle>
+				<h2 class="shortAnswer" v-if="bestResult[0].preferShort">{{ bestResult[0].short }}</h2>
+				<p style="margin-top: 0;" v-else>{{ bestResult[0].long }}</p>
+			</card>
+			<card v-for="result in searchResults" :key="result.title">
+				<primaryTitle>
+					<h1>{{ result.title }}</h1>
+				</primaryTitle>
+				<h2 class="shortAnswer" v-if="result.preferShort">{{ result.short }}</h2>
+				<p style="margin-top: 0;" v-else>{{ result.long }}</p>
+			</card>
+			<card v-for="result in relatedResults" :key="result.title">
+				<primaryTitle>
+					<h1>{{ result.title }}</h1>
+				</primaryTitle>
+				<p style="margin-top: 0;">{{ result.long }}</p>
+			</card>
+		</popup>
 		<snackbar :show="p.save">
 			saved
 		</snackbar>
@@ -1341,6 +1364,10 @@
 						<span class="material-icons">save</span>
 						<span class="tooltip">ctrl + s</span>
 					</button>
+					<button v-shortkey="['ctrl', 'h']" class="icon" v-if="!m.edit && m.allowEdit" @shortkey="toggleSearch()" @click="toggleSearch()">
+						<span class="material-icons">search</span>
+						<span class="tooltip">ctrl + h</span>
+					</button>
 					<button class="icon" v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
 					<button class="icon" v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
 				</actions>
@@ -1358,13 +1385,14 @@
 <script>
 import marked from "marked";
 
-import { card, primaryTitle, actions, textbox, checkbox, popup, snackbar } from "@components";
+import { card, primaryTitle, actions, textbox, checkbox, popup, snackbar, searchbar } from "@components";
 import { user, genId } from "@js/global.js";
 
 import foci from "@json/foci.json";
 
 import equipment from "@json/equipment.js";
 import rangedWeapons from "@json/weapons/ranged.json";
+import companion from "@json/companion.json";
 
 import { fs } from "@js/firebase.js";
 // http://localhost:8886/#/character/bbRweWpKoed3dLYecbiKuzZQ0562/character-keBs9zQrdaAXcB4qZq6a68QzFomfzONG
@@ -1422,7 +1450,8 @@ export default {
 		textbox,
 		checkbox,
 		popup,
-		snackbar
+		snackbar,
+		searchbar
 	},
 	data() {
 		return {
@@ -1433,6 +1462,8 @@ export default {
 					ranged: []
 				}
 			},
+			companion: [],
+			query: "",
 			p: {
 				save: false
 			},
@@ -1440,7 +1471,8 @@ export default {
 				focus: false,
 				equipment: false,
 				armor: false,
-				rangedWeapons: false
+				rangedWeapons: false,
+				search: false
 			},
 			info: {
 				ownerUid: "",
@@ -1610,6 +1642,47 @@ export default {
 			} else {
 				return false;
 			}
+		},
+		bestResult() {
+			var query = this.query;
+
+			if (query === "") {
+				return []
+			}
+
+			return this.companion.filter(a => {
+				return a.title.toLowerCase() === query;
+			});
+		},
+		searchResults() {
+			var query = this.query;
+			if (query === "") {
+				return []
+			}
+
+			return this.companion.filter(a => {
+				return a.title.toLowerCase() !== query && a.title.toLowerCase().includes(query);
+			});
+		},
+		relatedResults() {
+			var query = this.query;
+			if (query === "") {
+				return []
+			}
+
+			return this.companion.filter(a => {
+				let r = false;
+
+				if (a.title.toLowerCase() !== query && a.title.toLowerCase().includes(query) === false) {
+					a.related.forEach(b => {
+						if (b.toLowerCase().includes(query)) {
+							r = true;
+						}
+					});
+				}
+
+				return r;
+			});
 		}
 	},
 	methods: {
@@ -1662,7 +1735,10 @@ export default {
 			}
 		},
 		toggleEdit() {
-			this.m.edit = !this.m.edit
+			this.m.edit = !this.m.edit;
+		},
+		toggleSearch() {
+			this.popup.search = !this.popup.search;
 		},
 		h(value) {
 			var refBuild = value.key.split(".");
@@ -1835,6 +1911,10 @@ export default {
 			console.log(Math.floor(this.level / 2), skillBonus, this.calMod(attr));
 
 			return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr)) + this.c.attackBonus;
+		},
+		search(a) {
+			var query = a.toLowerCase();
+			this.query = query;
 		}
 	},
 	watch: {
@@ -1860,6 +1940,11 @@ export default {
 		var e = Object.entries(rangedWeapons);
 		e.forEach(a => {
 			this.content.weapons.ranged.push({...a[1], open: false});
+		});
+
+		var e = Object.entries(companion);
+		e.forEach(a => {
+			this.companion.push(a[1]);
 		});
 
 		updateInstance(this);
@@ -2223,7 +2308,7 @@ settingheight = 32px;
     background-color: #6d6d6d;
     color: #fff;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 4px;
     padding: 5px 0;
     position: absolute;
     z-index: 1;
@@ -2243,6 +2328,16 @@ button:hover .tooltip {
 	visibility: visible;
 	opacity: 1;
 	transform: translateX(-50%) scale(1);
+}
+
+.shortAnswer {
+	font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 30px;
+    margin: 8px 0px;
+	margin-top: 0;
+    color: #505050;
+    padding: 0px 16px;
 }
 
 @media only screen and (max-width: 600px) {

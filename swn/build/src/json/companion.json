@@ -1,0 +1,44 @@
+{
+    "initiative": {
+        "title": "Initiative",
+        "short": "1d8 + dex modifier",
+        "long": "Roll 1d8 and add your dexterity modifier.",
+        "preferShort": true,
+        "related": ["combat"]
+    },
+    "round": {
+        "title": "Round",
+        "short": "6 seconds",
+        "long": "A round of combat is around 6 seconds",
+        "preferShort": false,
+        "related": ["combat"]
+    },
+    "shock_damage": {
+        "title": "Shock Damage",
+        "short": "You always to the amount shows when the AC of the target is lower or equal",
+        "long": "Some melee weapons apply Shock, and are guaranteed to do some degree of harm to a target. A weapon’s Shock quality lists the number of points of damage it inflicts on any target with an Armor Class equal or less than the one given. Thus, a primitive knife with a Shock score of “1 point/AC 15” would always do at least 1 point of damage whenever its wielder attacks a target with AC 15 or less, whether they hit or miss. Shock damage always adds the wielder’s attribute modifier and any other bonuses that might apply from weapon mods, foci, or other advanced tech. Some advanced armor will always protect completely against primitive weapons, however, and some advanced weapons can ignore primitive gear, treating it as AC 10",
+        "preferShort": false,
+        "related": ["combat", "damage", "melee weapon"]
+    },
+    "main_action": {
+        "title": "Main Action",
+        "short": "This action is used for making attacks etc.",
+        "long": "Every actor can make one Main Action each round. Main Actions are those deeds that are going to absorb most of the six-second round, such as attacking an enemy, bracing a door, applying first aid to a downed ally, digging a Stowed item out of a pack, manipulating a complex device, or some other activity that takes up their focus. In place of their Main Action, an actor can take a second Move action.",
+        "preferShort": false,
+        "related": ["combat", "actions", "main action"]
+    },
+    "move_action": {
+        "title": "Move Action",
+        "short": "Move the speed of your character.",
+        "long": "Every actor can make one Move action each round, running up to 10 meters. This movement assumes that an actor is dodging enemies, paying attention to the surroundings, navigating awkward terrain, and generally dealing with the hazards of a battlefield. Climbing a surface, swimming, or passing extremely rough terrain halves this movement rate. Actors can’t split their Move action, such as taking part of it before using their Main Action and the rest afterwards. An actor who wants to disengage from an opponent in melee must use their Main Action to perform a Fighting Withdrawal, or else they suffer a free automatic melee attack from any foe engaged with them. There is no need to spend a Main Action disengaging from enemies who are wielding only ranged weapons. While it’s possible to use a rifle to buttstroke someone or pistol-whip a near combatant, such weapons aren’t as effectively threatening as true melee weapons.",
+        "preferShort": false,
+        "related": ["combat", "actions", "move action"]
+    },
+    "on_turn_action": {
+        "title": "On Turn Action",
+        "short": "Used for simple tasks",
+        "long": "An On Turn action is some fast, simple act that could reasonably be performed while an actor is doing something else. Dropping an object, falling prone, saying something, drawing a Readied item, or activating a simple device might all be On Turn actions. A PC can perform as many On Turn actions as they want in a round, subject to the GM’s discretion.",
+        "preferShort": false,
+        "related": ["combat", "actions", "on turn action"]
+    }
+}

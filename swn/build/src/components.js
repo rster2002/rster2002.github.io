@@ -22,6 +22,7 @@ import card from "./components/card.vue";
 import actions from "./components/actions.vue";
 import primaryTitle from "./components/primaryTitle.vue";
 import snackbar from "./components/snackbar.vue";
+import searchbar from "./components/searchbar.vue";
 
 export {
 	card,
@@ -40,5 +41,6 @@ export {
 	textbox,
 	checkbox,
 	popup,
-	snackbar
+	snackbar,
+	searchbar
 }
