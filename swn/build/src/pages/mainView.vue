@@ -64,7 +64,7 @@ function routeUpdate(t, to, from) {
 	if (gtag !== undefined && env === "pro") {
 		gtag("config", "UA-102147810-4", {
 			"page_title": t.$route.meta.title,
-			"page_path": t.$route
+			"page_path": t.$route.fullPath
 		});
 	}
 }
