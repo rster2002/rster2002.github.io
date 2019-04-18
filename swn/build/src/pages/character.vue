@@ -24,7 +24,7 @@
 			</card>
 		</popup>
 		<snackbar :show="p.save">
-			saved
+			Saved character
 		</snackbar>
 		<div class="cardGrid">
 			<!-- Name, class, background -->
@@ -883,14 +883,14 @@
 
 			</card> -->
 			<!-- Equipment -->
-			<card d style="grid-column: 1 / 7; grid-row: 5 / 6">
+			<card d style="grid-column: 1 / 7;" :class="{ e: c.settings.usePsionics, b: !c.settings.usePsionics }">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Equipment</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 					<h2>Ready: {{ totalReadiedItems }}/{{ readyEnc }}</h2>
 				</primaryTitle>
 				<div>
 					<div class="listItem" v-for="item in readiedItems">
-						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">(attack bonus: {{ attackBonus(item) }})</span></h1>
+						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }})</span></h1>
 						<transition name="contentDropdown">
 							<div v-if="item.open">
 								<div class="row">
@@ -1310,17 +1310,22 @@
 					</div>
 				</popup>
 			</card>
+			<card d v-if="c.settings.usePsionics" style="grid-column: 1 / 13; grid-row: 5 / 6;">
+				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+					<h1><span v-if="c.settings.showTitles">Psionics</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+				</primaryTitle>
+			</card>
 			<!-- Controls -->
-			<card d style="grid-column: 7 / 13; grid-row: 5 / 6">
+			<card d style="grid-column: 7 / 13;" :class="{ e: c.settings.usePsionics, b: !c.settings.usePsionics }">
 				<primaryTitle v-if="c.settings.showTitles">
 					<h1>Controls</h1>
 				</primaryTitle>
 				<div class="setting" v-if="m.allowEdit">
 					<div class="checkboxWrapper">
-						<checkbox :val="c.settings.usePhysics" vname="settings.usePhysics" @change="h"></checkbox>
+						<checkbox :val="c.settings.usePsionics" vname="settings.usePsionics" @change="h"></checkbox>
 					</div>
 					<div class="txt">
-						<p>Use psychic</p>
+						<p>Use psionics</p>
 					</div>
 				</div>
 				<div class="setting" v-if="m.allowEdit">
@@ -1491,7 +1496,7 @@ export default {
 				hpMax: 0,
 				attackBonus: 0,
 				settings: {
-					usePhysics: false,
+					usePsionics: false,
 					showTitles: true,
 					showSteps: false,
 					showDetails: false,
@@ -2338,6 +2343,15 @@ button:hover .tooltip {
 	margin-top: 0;
     color: #505050;
     padding: 0px 16px;
+}
+
+.card {
+	.b {
+		grid-row: 5 / 6;
+	}
+	.e {
+		grid-row: 6 / 7;
+	}
 }
 
 @media only screen and (max-width: 600px) {

@@ -32,7 +32,15 @@ import { appbar, barbtn, bartitle, mainView, appdrawer, draweruser, divider, dra
 import { fb } from "@js/firebase.js";
 import { signOut } from "@js/global.js";
 
-function routeUpdate(t) {
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+
+gtag("config", "UA-102147810-4");
+
+import { env } from "@js/global.js";
+
+function routeUpdate(t, to, from) {
 	fb.auth().onAuthStateChanged(function(user) {
 		console.log(user);
 		if (user === null) {
@@ -52,6 +60,13 @@ function routeUpdate(t) {
 	});
 
 	t.barTitle = t.$route.meta.title;
+
+	if (gtag !== undefined && env === "pro") {
+		gtag("config", "UA-102147810-4", {
+			"page_title": t.$route.meta.title,
+			"page_path": t.$route
+		});
+	}
 }
 
 export default {
@@ -77,8 +92,8 @@ export default {
 		}
 	},
 	watch: {
-		"$route": function() {
-			routeUpdate(this);
+		"$route": function(to, from) {
+			routeUpdate(this, to, from);
 		}
 	},
 	methods: {
