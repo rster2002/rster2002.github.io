@@ -24,7 +24,7 @@
 			</card>
 		</popup>
 		<snackbar :show="p.save">
-			Saved character
+			Character saved
 		</snackbar>
 		<div class="cardGrid">
 			<!-- Name, class, background -->
@@ -878,10 +878,6 @@
 					</div>
 				</popup>
 			</card>
-			<!-- Weapons -->
-			<!-- <card d style="grid-column: 1 / 4; grid-row: 3 / 5; background-image: url(https://i.pinimg.com/564x/cb/82/7d/cb827d4adff7e2c2134ab04eedcd68c6.jpg);">
-
-			</card> -->
 			<!-- Equipment -->
 			<card d style="grid-column: 1 / 7;" :class="{ e: c.settings.usePsionics, b: !c.settings.usePsionics }">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
@@ -1310,10 +1306,135 @@
 					</div>
 				</popup>
 			</card>
+			<!-- Psionics -->
 			<card d v-if="c.settings.usePsionics" style="grid-column: 1 / 13; grid-row: 5 / 6;">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Psionics</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
+				<div class="psionics">
+					<div class="listItem" v-for="psionic in c.psionics">
+						<h1 @click="toggleVal(psionic, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: psionic.open }">arrow_drop_up</span> {{ psionic.title }}</h1>
+						<transition name="contentDropdown">
+							<div v-if="psionic.open">
+								<div class="halfed a">
+									<p v-if="c.settings.showDetails">{{ psionic.description }}</p>
+									<div>
+										<transition name="contentDropdown"><p v-if="psionic.level >= 0"><b>Level-0</b> {{ psionic.core.level.l0 }}</p></transition>
+										<transition name="contentDropdown"><p v-if="psionic.level >= 1"><b>Level-1</b> {{ psionic.core.level.l1 }}</p></transition>
+										<transition name="contentDropdown"><p v-if="psionic.level >= 2"><b>Level-2</b> {{ psionic.core.level.l2 }}</p></transition>
+										<transition name="contentDropdown"><p v-if="psionic.level >= 3"><b>Level-3</b> {{ psionic.core.level.l3 }}</p></transition>
+										<transition name="contentDropdown"><p v-if="psionic.level >= 4"><b>Level-4</b> {{ psionic.core.level.l4 }}</p></transition>
+									</div>
+									<div class="skill">
+										<div class="lvl">
+											<div class="ctrl" @click="psionicUp(psionic)">
+												<p>
+													<span class="material-icons">add</span>
+												</p>
+											</div>
+											<div class="disp">
+												<h1>{{ psionic.level }}</h1>
+											</div>
+											<div class="ctrl" @click="psionicDown(psionic)">
+												<p>
+													<span class="material-icons">remove</span>
+												</p>
+											</div>
+										</div>
+										<div class="txt">
+											<p>level</p>
+										</div>
+									</div>
+								</div>
+								<div class="halfed">
+									<div>
+										<div style="display: block;" class="listItem" v-for="technique in psionic.selectedTechniques">
+											<h1 @click="toggleVal(technique, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: technique.open }">arrow_drop_up</span>{{ technique.title }}</h1>
+											<transition name="contentDropdown">
+												<div v-if="technique.open">
+													<p>{{ technique.description }}</p>
+													<actions>
+														<button @click="removeTechnique(psionic, technique)" class="icon">
+															<span class="material-icons">delete</span>
+														</button>
+													</actions>
+												</div>
+											</transition>
+										</div>
+									</div>
+									<actions>
+										<button @click="psionic.showPopup = true">Add technique</button>
+										<button @click="removePsionic(psionic)">Remove skill</button>
+									</actions>
+									<popup @close="psionic.showPopup = false" :show="psionic.showPopup">
+										<card>
+											<primaryTitle>
+												<h1>Techniques</h1>
+												<h2>Specialize</h2>
+											</primaryTitle>
+											<div>
+												<div style="display: block;" class="listItem" v-for="technique in psionic.techniques" v-if="technique.choicen === false">
+													<h1 @click="toggleVal(technique, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: technique.open }">arrow_drop_up</span> {{ technique.title }}</h1>
+													<transition name="contentDropdown">
+														<div v-if="technique.open">
+															<p>
+																<span v-if="psionic.level >= technique.minLevel" style="color: #000000;"><b>Minimum level:</b> {{ technique.minLevel }}</span>
+																<span v-else style="color: #ff3030;"><b style="color: #ff3030;">Minimum level:</b> {{ technique.minLevel }}</span>
+															</p>
+															<p>{{ technique.description }}</p>
+															<actions v-if="psionic.level >= technique.minLevel">
+																<button @click="chooseTechnique(psionic, technique)">Add technique</button>
+															</actions>
+														</div>
+													</transition>
+												</div>
+											</div>
+										</card>
+									</popup>
+								</div>
+							</div>
+						</transition>
+					</div>
+				</div>
+				<actions>
+					<button @click="popup.psionics = true">Add skill</button>
+				</actions>
+				<popup @close="popup.psionics = false" :show="popup.psionics">
+					<card>
+						<primaryTitle>
+							<h1>Psionics</h1>
+							<h2>Mysterious...</h2>
+						</primaryTitle>
+					</card>
+					<card v-for="psionic in content.psionics" :key="psionic.internalTitle">
+						<primaryTitle @click="toggleVal(psionic, 'open')">
+							<h1 style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: psionic.open }">arrow_drop_up</span> {{ psionic.title }}</h1>
+						</primaryTitle>
+						<transition name="contentDropdown">
+							<div v-if="psionic.open">
+								<p>{{ psionic.description }}</p>
+								<div v-for="additional in psionic.additional">
+									<h3>{{ additional.title }}</h3>
+									<p>{{ additional.description }}</p>
+								</div>
+								<div>
+									<h3>{{ psionic.core.title }}</h3>
+									<p>{{ psionic.core.description }}</p>
+								</div>
+								<div>
+									<p><b>Level-0</b> {{ psionic.core.level.l0 }}</p>
+									<p><b>Level-1</b> {{ psionic.core.level.l1 }}</p>
+									<p><b>Level-2</b> {{ psionic.core.level.l2 }}</p>
+									<p><b>Level-3</b> {{ psionic.core.level.l3 }}</p>
+									<p><b>Level-4</b> {{ psionic.core.level.l4 }}</p>
+								</div>
+								<actions>
+									<button @click="addPsionic(psionic)">Add skill</button>
+								</actions>
+							</div>
+						</transition>
+					</card>
+				</popup>
 			</card>
 			<!-- Controls -->
 			<card d style="grid-column: 7 / 13;" :class="{ e: c.settings.usePsionics, b: !c.settings.usePsionics }">
@@ -1399,6 +1520,8 @@ import equipment from "@json/equipment.js";
 import rangedWeapons from "@json/weapons/ranged.json";
 import companion from "@json/companion.json";
 
+import psionics from "@json/psionics.js";
+
 import { fs } from "@js/firebase.js";
 // http://localhost:8886/#/character/bbRweWpKoed3dLYecbiKuzZQ0562/character-keBs9zQrdaAXcB4qZq6a68QzFomfzONG
 function updateInstance(t) {
@@ -1463,6 +1586,7 @@ export default {
 			content: {
 				foci: [],
 				equipment: [],
+				psionics: [],
 				weapons: {
 					ranged: []
 				}
@@ -1477,7 +1601,8 @@ export default {
 				equipment: false,
 				armor: false,
 				rangedWeapons: false,
-				search: false
+				search: false,
+				psionics: false
 			},
 			info: {
 				ownerUid: "",
@@ -1541,7 +1666,8 @@ export default {
 					work: { trained: false, lvl: 0 }
 				},
 				foci: [],
-				equipment: []
+				equipment: [],
+				psionics: []
 			}
 		}
 	},
@@ -1915,11 +2041,52 @@ export default {
 
 			console.log(Math.floor(this.level / 2), skillBonus, this.calMod(attr));
 
-			return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr)) + this.c.attackBonus;
+			return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr)) + Number(this.c.attackBonus);
 		},
 		search(a) {
 			var query = a.toLowerCase();
 			this.query = query;
+		},
+		addPsionic(p) {
+			var obj = {...p, open: false, level: 0, selectedTechniques: [], showPopup: false};
+			var techniques = obj.techniques;
+
+			obj.techniques = [];
+
+			techniques.forEach(a => {
+				obj.techniques.push({...a, open: false, choicen: false});
+			});
+
+			this.c.psionics.push(obj);
+		},
+		psionicUp(p) {
+			if (p.level < 4) {
+				p.level++;
+			}
+		},
+		psionicDown(p) {
+			if (p.level > 0) {
+				p.level--;
+			}
+		},
+		chooseTechnique(p, t) {
+			var index = p.techniques.indexOf(t);
+			p.selectedTechniques.push({...t, open: false, index});
+
+			t.choicen = true;
+		},
+		removeTechnique(p, t) {
+			p.techniques[t.index].choicen = false;
+			p.techniques[t.index].open = false;
+
+			var index = p.selectedTechniques.indexOf(p);
+			p.selectedTechniques.splice(index, 1);
+		},
+		removePsionic(p) {
+			if (confirm("Are you sure you want to delete this skill?")) {
+				var index = this.c.psionics.indexOf(p);
+				this.c.psionics.splice(index, 1);
+			}
 		}
 	},
 	watch: {
@@ -1950,6 +2117,11 @@ export default {
 		var e = Object.entries(companion);
 		e.forEach(a => {
 			this.companion.push(a[1]);
+		});
+
+		var e = Object.entries(psionics);
+		e.forEach(a => {
+			this.content.psionics.push({...a[1], open: false});
 		});
 
 		updateInstance(this);
@@ -2227,6 +2399,7 @@ settingheight = 32px;
 	padding: 8px 16px;
 	width: calc(100% - 32px);
 	border-bottom: 1px solid dividerColor;
+	// display: inline-block;
 
 	&:first-child {
 		border-top: 1px solid dividerColor;
@@ -2238,28 +2411,6 @@ settingheight = 32px;
 		font-size: 16px;
 		font-weight: 900;
 		margin: 6px 0px;
-	}
-}
-
-@media only screen and (min-width: 1000px) {
-	.cardGrid {
-		width: calc(100% - 32px);
-		padding: 16px;
-		display: inline-grid;
-		grid-template-columns: repeat(12, 1fr);
-		grid-template-rows: auto;
-		grid-gap: 16px 16px;
-
-		.card {
-			max-width: 100000px;
-			width: auto;
-			grid-column: 1 / 4;
-		}
-	}
-
-	.row.d {
-		width: 50%;
-		float: left;
 	}
 }
 
@@ -2354,9 +2505,87 @@ button:hover .tooltip {
 	}
 }
 
+.halfed {
+	width: 50%;
+	float: left;
+
+	&.a {
+		width: calc(50% - 1px);
+		border-right: 1px solid transparent;
+	}
+}
+
+h3 {
+	padding: 0px 16px;
+	font-family: defaultFont;
+	font-size: 36px;
+	color: #000000de;
+	font-size: 20px;
+}
+
+b {
+	color: #000000de;
+}
+
+.psionics {
+	.listItem {
+		// padding-top: 0;
+		// padding-bottom: 0;
+		display: inline-block;
+	}
+
+	.skill {
+		.disp {
+			h1 {
+				margin: 0;
+				font-size: 20px;
+			}
+		}
+	}
+}
+
+.popup .card {
+	max-width: 700px;
+}
+
 @media only screen and (max-width: 600px) {
 	.tooltip {
 		display: none;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	.cardGrid {
+		width: calc(100% - 32px);
+		padding: 16px;
+		display: inline-grid;
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: auto;
+		grid-gap: 16px 16px;
+
+		& > .card {
+			max-width: 100000px;
+			width: auto;
+			grid-column: 1 / 4;
+		}
+	}
+
+	.row.d {
+		width: 50%;
+		float: left;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.halfed {
+		width: 100%;
+		float: none;
+
+		&.a {
+			width: 100%;
+			border-right: 0px;
+			border-bottom: 1px solid dividerColor;
+		}
 	}
 }
 

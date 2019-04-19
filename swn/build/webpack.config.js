@@ -2,6 +2,11 @@ const path = require('path');
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const UglifyJsPlugin = require("uglifyJs-webpack-plugin");
 const WebpackOnBuildPlugin = require('on-build-webpack');
+const Tracker = require("./tracker.js");
+
+const tracker = new Tracker({name: "SWN", timeout: 300000});
+
+tracker.startSession();
 
 module.exports = {
 	mode: "development",
@@ -10,7 +15,10 @@ module.exports = {
 		app: "./src/index.js"
 	},
 	plugins: [
-		new VueLoaderPlugin()
+		new VueLoaderPlugin(),
+		new WebpackOnBuildPlugin(stats => {
+			tracker.trackSession();
+		})
 	],
 	module: {
 		rules: [
