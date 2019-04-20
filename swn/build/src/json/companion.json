@@ -1,4 +1,11 @@
 {
+    "executing_a_hack": {
+        "title": "Executing a Hack",
+        "short": "",
+        "long": "Assuming a hacker is able to make a connection, they can make an Int/Program skill check to hack the system. If they’ve spent at least an hour planning this specific hack, the skill check requires only a Main Action to execute their prepared code. If they’re performing the hack off-the-cuff, it takes ten minutes. If they’re rushed and don’t have time to either prepare the hack or spend ten minutes dueling with security systems, they can speed it up into a single Main Action at an additional difficulty penalty. The difficulty of the roll depends on the kind of information or influence they want to get out of the system, adjusted by the quality of the security system and any rush on the hacker’s part. On a success, they get what they want. If what they want is data, the information is downloaded instantly. If what they want is control over an automated system such as a factory control computer or a security system, they maintain control for 1d4 rounds plus their Program skill before the system detects the intrusion and locks them out. The hacker can attempt to regain control, but further hacking attempts become more difficult. If they fail, they must immediately make a second skill check at the same difficulty. On a success, they avoid an immediate alarm and a trace of their hacking location. On a failure, the system has been alerted to their intrusion attempt and has informed its human overseers of the hacker’s location. Depending on the nature of the system being hacked, the response may range from an annoyed data janitor shutting down the compromised terminal after he’s done eating lunch to a fast-response special weapons team busting through the windows ninety seconds later. Hacking the same system in a short period of time is progressively more difficult, as the system’s alerts and security measures are increasingly active. Whether or not prior attempts were successful, an additional +1 difficulty penalty is added for every hack attempted in the system after the first within 24 hours.",
+        "preferShort": false,
+        "related": ["hacking"]
+    },
     "initiative": {
         "title": "Initiative",
         "short": "1d8 + dex modifier",

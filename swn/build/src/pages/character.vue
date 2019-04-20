@@ -46,13 +46,14 @@
 					<primaryTitle>
 						<h1 v-if="c.name !== ''">{{ c.name }}</h1>
 						<h1 v-else>Not named</h1>
-						<h2 v-if="c.background !== '' || c.class !== ''">{{ c.background }} {{ c.class.toLowerCase() }}</h2>
+						<h2 v-if="c.background !== '' || c.class !== ''">{{ c.background }} {{ c.class.toLowerCase() }}<span v-if="c.class.toLowerCase() === 'adventurer' && c.partial !== ''">, partial {{ c.partial.toLowerCase() }}</span></h2>
 					</primaryTitle>
 				</div>
 				<div v-if="m.edit">
 					<textbox @change="h" :val="c.name" vname="name" label="Name"></textbox>
 					<textbox @change="h" :val="c.background" vname="background" label="Background"></textbox>
 					<textbox @change="h" :val="c.class" vname="class" label="Class"></textbox>
+					<textbox v-if="c.class.toLowerCase() === 'adventurer'" @change="h" :val="c.partial" vname="partial" label="Partial Class"></textbox>
 					<textbox @change="h" :val="c.xp" vname="xp" label="XP" type="number"></textbox>
 					<textbox @change="h" :val="c.attackBonus" vname="attackBonus" label="Attack Bonus" type="number"></textbox>
 				</div>
@@ -1421,6 +1422,7 @@
 									</actions>
 									<popup @close="psionic.showPopup = false" :show="psionic.showPopup">
 										<card>
+											<p style="right: 16px;" class="x" @click="psionic.showPopup = false"><span class="material-icons">close</span></p>
 											<primaryTitle>
 												<h1>Techniques</h1>
 												<h2>Specialize</h2>
@@ -1547,7 +1549,7 @@
 						<span class="material-icons">edit</span>
 						<span class="tooltip">f2</span>
 					</button>
-					<button v-shortkey="['ctrl', 's']" class="icon" v-if="!m.edit && m.allowEdit" @shortkey="save()" @click="save()">
+					<button v-shortkey="['ctrl', 's']" class="icon" v-if="m.allowEdit" @shortkey="save()" @click="save()">
 						<span class="material-icons">save</span>
 						<span class="tooltip">ctrl + s</span>
 					</button>
@@ -1679,10 +1681,15 @@ export default {
 				name: "",
 				background: "",
 				class: "",
+				partial: "",
 				xp: 0,
 				hp: 0,
 				hpMax: 0,
 				attackBonus: 0,
+				effort: {
+					current: 0,
+					max: 0
+				},
 				settings: {
 					usePsionics: false,
 					showTitles: true,
@@ -2672,7 +2679,7 @@ button:hover .tooltip {
 
 .shortAnswer {
 	font-family: 'Roboto', sans-serif;
-    font-weight: 100;
+    font-weight: 300;
     font-size: 30px;
     margin: 8px 0px;
 	margin-top: 0;
