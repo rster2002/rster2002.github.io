@@ -5,7 +5,7 @@ var telekinesis = import("./psionics/telekinesis.json").then(a => a.default);
 var telepathy = import("./psionics/telepathy.json").then(a => a.default);
 var teleportation = import("./psionics/teleportation.json").then(a => a.default);
 
-export default {
+var obj = {
     biopsionics,
     metapsionics,
     precognition,
@@ -13,3 +13,7 @@ export default {
     telepathy,
     teleportation
 }
+
+console.log(obj);
+
+export default obj;

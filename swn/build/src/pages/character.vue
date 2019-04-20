@@ -23,6 +23,19 @@
 				<p style="margin-top: 0;">{{ result.long }}</p>
 			</card>
 		</popup>
+		<popup @close="popup.breakdown = false" :show="popup.breakdown">
+			<card style="max-width: 300px;">
+				<primaryTitle>
+					<h1>Breakdown</h1>
+					<h2>How this stat is calculated</h2>
+				</primaryTitle>
+				<div>
+					<div class="listItem" v-for="step in m.breakdown">
+						<h1>{{ toMod(step.value) }} {{ step.label }}</h1>
+					</div>
+				</div>
+			</card>
+		</popup>
 		<snackbar :show="p.save">
 			Character saved
 		</snackbar>
@@ -51,7 +64,7 @@
 				</primaryTitle>
 				<div v-if="m.edit === false || c.settings.useManual === false">
 					<div class="row">
-						<div class="stat">
+						<div class="stat" v-if="!c.settings.showBreakdown">
 							<div class="mod">
 								<h1>{{ ac }}</h1>
 							</div>
@@ -59,7 +72,15 @@
 								<p>Armor Class</p>
 							</div>
 						</div>
-						<div class="stat">
+						<div class="stat" style="cursor: pointer;" v-if="c.settings.showBreakdown" @click="showBreakdown('ac')">
+							<div class="mod">
+								<h1 style="color: #3030ff;">{{ ac }}</h1>
+							</div>
+							<div class="label">
+								<p style="color: #3030ff;">Armor Class</p>
+							</div>
+						</div>
+						<div class="stat" v-if="!c.settings.showBreakdown">
 							<div class="mod">
 								<h1>
 									<span v-if="speed >= 10">{{ speed }}</span>
@@ -68,6 +89,14 @@
 							</div>
 							<div class="label">
 								<p>Speed</p>
+							</div>
+						</div>
+						<div class="stat" style="cursor: pointer;" v-if="c.settings.showBreakdown" @click="showBreakdown('speed')">
+							<div class="mod">
+								<h1 style="color: #3030ff;">{{ speed }}</h1>
+							</div>
+							<div class="label">
+								<p style="color: #3030ff;">Speed</p>
 							</div>
 						</div>
 						<div class="stat">
@@ -986,12 +1015,20 @@
 											<p>Reload time</p>
 										</div>
 									</div>
-									<div class="stat">
+									<div class="stat" v-if="!c.settings.showBreakdown">
 										<div class="mod">
 											<h1>{{ attackBonus(item) }}</h1>
 										</div>
 										<div class="label">
 											<p>Attack Bonus</p>
+										</div>
+									</div>
+									<div class="stat" v-if="c.settings.showBreakdown" style="cursor: pointer;" @click="showBreakdown(item)">
+										<div class="mod">
+											<h1 style="color: #3030ff;">{{ attackBonus(item) }}</h1>
+										</div>
+										<div class="label">
+											<p style="color: #3030ff;">Attack Bonus</p>
 										</div>
 									</div>
 								</div>
@@ -1108,12 +1145,20 @@
 											<p>Reload time</p>
 										</div>
 									</div>
-									<div class="stat">
+									<div class="stat" v-if="!c.settings.showBreakdown">
 										<div class="mod">
 											<h1>{{ attackBonus(item) }}</h1>
 										</div>
 										<div class="label">
 											<p>Attack Bonus</p>
+										</div>
+									</div>
+									<div class="stat" v-if="c.settings.showBreakdown" style="cursor: pointer;" @click="showBreakdown(item)">
+										<div class="mod">
+											<h1 style="color: #3030ff;">{{ attackBonus(item) }}</h1>
+										</div>
+										<div class="label">
+											<p style="color: #3030ff;">Attack Bonus</p>
 										</div>
 									</div>
 								</div>
@@ -1285,12 +1330,20 @@
 															<p>Reload time</p>
 														</div>
 													</div>
-													<div class="stat">
+													<div class="stat" v-if="!c.settings.showBreakdown">
 														<div class="mod">
 															<h1>{{ attackBonus(item) }}</h1>
 														</div>
 														<div class="label">
 															<p>Attack Bonus</p>
+														</div>
+													</div>
+													<div class="stat" v-if="c.settings.showBreakdown" style="cursor: pointer;" @click="showBreakdown(item)">
+														<div class="mod">
+															<h1 style="color: #3030ff;">{{ attackBonus(item) }}</h1>
+														</div>
+														<div class="label">
+															<p style="color: #3030ff;">Attack Bonus</p>
 														</div>
 													</div>
 												</div>
@@ -1481,6 +1534,14 @@
 						<p>Use manual mode</p>
 					</div>
 				</div>
+				<div class="setting" v-if="m.allowEdit">
+					<div class="checkboxWrapper">
+						<checkbox :val="c.settings.showBreakdown" vname="settings.showBreakdown" @change="h"></checkbox>
+					</div>
+					<div class="txt">
+						<p>Show calculation breakdown</p>
+					</div>
+				</div>
 				<actions>
 					<button v-shortkey="['f2']" class="icon" v-if="m.allowEdit" @shortkey="toggleEdit()" @click="toggleEdit()">
 						<span class="material-icons">edit</span>
@@ -1602,7 +1663,8 @@ export default {
 				armor: false,
 				rangedWeapons: false,
 				search: false,
-				psionics: false
+				psionics: false,
+				breakdown: false
 			},
 			info: {
 				ownerUid: "",
@@ -1610,7 +1672,8 @@ export default {
 			},
 			m: {
 				allowEdit: false,
-				edit: false
+				edit: false,
+				breakdown: []
 			},
 			c: {
 				name: "",
@@ -1625,7 +1688,8 @@ export default {
 					showTitles: true,
 					showSteps: false,
 					showDetails: false,
-					useManual: false
+					useManual: false,
+					showBreakdown: false
 				},
 				manual: {
 					ac: 10,
@@ -2041,11 +2105,14 @@ export default {
 
 			console.log(Math.floor(this.level / 2), skillBonus, this.calMod(attr));
 
-			return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr)) + Number(this.c.attackBonus);
+			return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr) + Number(this.c.attackBonus));
 		},
 		search(a) {
 			var query = a.toLowerCase();
 			this.query = query;
+		},
+		toMod(a) {
+			return toMod(a);
 		},
 		addPsionic(p) {
 			var obj = {...p, open: false, level: 0, selectedTechniques: [], showPopup: false};
@@ -2087,6 +2154,121 @@ export default {
 				var index = this.c.psionics.indexOf(p);
 				this.c.psionics.splice(index, 1);
 			}
+		},
+		showBreakdown(a) {
+			if (a === "ac") {
+				if (this.equipedArmor) {
+					var a = this.equipedArmor;
+
+					var r = [];
+
+					if (Array.isArray(a)) {
+						a.forEach(armor => {
+							if (armor.bonus === 0) {
+								r.push({
+									value: armor.ac,
+									label: "Base armor (" + armor.name + ")"
+								});
+							} else {
+								r.push({
+									value: armor.bonus,
+									label: "Bonus (" + armor.name + ")"
+								});
+							}
+						});
+					} else {
+						let i = 10 + this.calMod(this.c.attributes.dex);
+						if (i >= a.ac) {
+							r.push({
+								value: 10,
+								label: "Base"
+							});
+
+							r.push({
+								value: a.bonus,
+								label: "Bonus (" + a.name + ")"
+							});
+						} else {
+							r.push({
+								value: a.ac,
+								label: "Base armor (" + a.name + ")"
+							});
+						}
+					}
+
+					r.push({
+						value: this.calMod(this.c.attributes.dex),
+						label: "Dex modifier"
+					});
+
+					this.m.breakdown = r;
+				} else {
+					this.m.breakdown = [
+						{
+							value: 10,
+							label: "Base"
+						},
+						{
+							value: this.calMod(this.c.attributes.dex),
+							label: "Dex modifier"
+						}
+					]
+				}
+			} else if (a === "speed") {
+				// speed() {
+				// 	if (!this.c.settings.useManual) {
+				// 	} else {
+				// 		return this.c.manual.speed;
+				// 	}
+				// },
+
+				var r = [
+					{
+						value: 10,
+						label: "Base"
+					}
+				]
+
+				if (this.totalStowedItems > this.c.attributes.str || this.totalReadiedItems > Math.floor(this.c.attributes.str / 2)) {
+					r.push({
+						value: -3,
+						label: "Heavily packed"
+					});
+				}
+
+				this.m.breakdown = r;
+			} else if (a.equipmentType === "rangedWeapon") {
+				let skillBonus;
+
+				let skill = this.c.skills.shoot;
+
+				if (skill.trained === false) {
+					skillBonus = -2;
+				} else {
+					skillBonus = skill.lvl;
+				}
+
+				this.m.breakdown = [
+					{
+						value: Math.floor(this.level / 2),
+						label: "Level / 2 rounded down"
+					},
+					{
+						value: skillBonus,
+						label: "Skill (shoot)"
+					},
+					{
+						value: this.calMod(this.c.attributes.dex),
+						label: "Dex modifier"
+					},
+					{
+						value: this.c.attackBonus,
+						label: "Extra attack bonus"
+					}
+				]
+			}
+
+			this.popup.breakdown = true;
 		}
 	},
 	watch: {
@@ -2121,7 +2303,9 @@ export default {
 
 		var e = Object.entries(psionics);
 		e.forEach(a => {
-			this.content.psionics.push({...a[1], open: false});
+			a[1].then(b => {
+				this.content.psionics.push({...b, open: false});
+			});
 		});
 
 		updateInstance(this);
