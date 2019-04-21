@@ -8,12 +8,58 @@
                     <p>Login with google</p>
                 </div>
             </div>
+            <div style="margin-top: 8px;" class="btn" @click="an()">
+                <div class="text">
+                    <p>Login anonymously</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+
 import { cfb, fb, fs } from "@js/firebase.js";
+
+function finalize(t, r) {
+    console.log(r);
+    var user = r.user;
+    fs.collection("users")
+        .doc(user.uid)
+        .get()
+        .then(a => {
+            function update() {
+                fs.collection("users")
+                    .doc(user.uid)
+                    .update({
+                        lastLogin: Date.now()
+                    });
+
+                t.$router.push({path: "/"});
+            }
+
+            if (a && a.exists) {
+                update();
+            } else {
+                fs.collection("users")
+                    .doc(user.uid)
+                    .set({
+                        username: user.displayName,
+                        uid: user.uid,
+                        joined: Date.now()
+                    })
+                    .then(a => {
+                        fs.collection(`users/${user.uid}/private`)
+                            .doc("type")
+                            .set({
+                                type: "default"
+                            }).then(a => {
+                                update();
+                            });
+                    });
+            }
+        });
+}
 
 export default {
     methods: {
@@ -23,44 +69,14 @@ export default {
             fb.auth()
                 .signInWithPopup(provider)
                 .then(r => {
-                    console.log(r);
-                    var user = r.user;
-                    fs.collection("users")
-                        .doc(user.uid)
-                        .get()
-                        .then(a => {
-                            function update() {
-                                fs.collection("users")
-                                    .doc(user.uid)
-                                    .update({
-                                        lastLogin: Date.now()
-                                    });
-
-								t.$router.push({path: "/"});
-                            }
-
-                            if (a && a.exists) {
-                                update();
-                            } else {
-                                fs.collection("users")
-                                    .doc(user.uid)
-                                    .set({
-                                        username: user.displayName,
-                                        uid: user.uid,
-                                        joined: Date.now()
-                                    })
-                                    .then(a => {
-                                        fs.collection(`users/${user.uid}/private`)
-											.doc("type")
-											.set({
-												type: "default"
-											}).then(a => {
-												update();
-											});
-                                    });
-                            }
-                        });
+                    finalize(t, r);
                 });
+        },
+        an() {
+            var t = this;
+            fb.auth().signInAnonymously().then(r => {
+                finalize(t, r);
+            });
         }
     }
 };

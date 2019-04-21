@@ -1,7 +1,8 @@
 <template lang="html">
 	<div class="textbox" :class="{ f: focus }" @click="f()">
 		<p :class="{ c: focus }"><span>{{ label }}</span></p>
-		<input :type="t" @focus="f()" @blur="b()" v-model="v" ref="n" />
+		<input v-if="t !== 'textarea'" :type="t" @focus="f()" @blur="b()" v-model="v" ref="n" />
+		<textarea v-if="t === 'textarea'" @focus="f()" @blur="b()" v-model="v"></textarea>
 	</div>
 </template>
 
@@ -137,6 +138,26 @@ size = 20px;
 		font-size: size;
 
 		font-family: defaultFont;
+	}
+
+	textarea {
+		position: absolute;
+		border: 0;
+		outline: 0;
+		padding: 0px 8px;
+		width: calc(99% - 16px);
+
+		padding: 0px 0px;
+
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		font-size: size;
+
+		font-family: defaultFont;
+
+		height: 400px;
 	}
 }
 

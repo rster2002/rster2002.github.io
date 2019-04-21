@@ -2,10 +2,13 @@
 	<div>
 		<appdrawer v-on:closedrawer="closeDrawer()" :show="showDrawer">
 			<draweruser
-				:icon="user.icon"
-				:username="user.username"
+				:icon="user.icon || 'https://i.stack.imgur.com/ZQT8Z.png'"
+				:username="user.username || 'anonymous'"
 				:secondary="user.email"></draweruser>
 			<divider></divider>
+			<drawerbtn
+				@click="leaveFeedback()"
+				icon="feedback">Send Feedback</drawerbtn>
 			<drawerbtn
 				@click="signOut()"
 				icon="exit_to_app">Logout</drawerbtn>
@@ -108,6 +111,12 @@ export default {
 		},
 		signOut() {
 			signOut(this)
+		},
+		leaveFeedback() {
+			window.open('https://github.com/rster2002/rster2002.github.io/issues', '_blank')
+		},
+		icon(user) {
+			return user.icon || "https://i.stack.imgur.com/ZQT8Z.png";
 		}
 	},
 	created() {

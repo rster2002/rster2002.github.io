@@ -57,6 +57,24 @@
 					<textbox @change="h" :val="c.xp" vname="xp" label="XP" type="number"></textbox>
 					<textbox @change="h" :val="c.attackBonus" vname="attackBonus" label="Attack Bonus" type="number"></textbox>
 				</div>
+				<div class="mobile">
+					<actions>
+						<button v-shortkey="['f2']" class="icon" v-if="m.allowEdit" @shortkey="toggleEdit()" @click="toggleEdit()">
+							<span class="material-icons">edit</span>
+							<span class="tooltip">f2</span>
+						</button>
+						<button v-shortkey="['ctrl', 's']" class="icon" v-if="m.allowEdit" @shortkey="save()" @click="save()">
+							<span class="material-icons">save</span>
+							<span class="tooltip">ctrl + s</span>
+						</button>
+						<button v-shortkey="['ctrl', 'h']" class="icon" v-if="!m.edit && m.allowEdit" @shortkey="toggleSearch()" @click="toggleSearch()">
+							<span class="material-icons">search</span>
+							<span class="tooltip">ctrl + h</span>
+						</button>
+						<button class="icon" v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
+						<button class="icon" v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
+					</actions>
+				</div>
 			</card>
 			<!-- General info -->
 			<card d style="grid-column: 4 / 7; grid-row: 1 / 2">
@@ -1357,6 +1375,14 @@
 								</div>
 							</transition>
 						</card>
+						<!-- <card>
+							<primaryTitle>
+								<h1>Custom equipment</h1>
+								<h2>Add your own content</h2>
+							</primaryTitle>
+							<textbox @change="h" :val="c.customEquipment.name" vname="customEquipment.name" label="Item Name"></textbox>
+							<textbox @change="h" type="textarea" :val="c.customEquipment.description" vname="customEquipment.description" label="Description"></textbox>
+						</card> -->
 					</div>
 				</popup>
 			</card>
@@ -1565,20 +1591,22 @@
 					</div>
 				</div>
 				<actions>
-					<button v-shortkey="['f2']" class="icon" v-if="m.allowEdit" @shortkey="toggleEdit()" @click="toggleEdit()">
-						<span class="material-icons">edit</span>
-						<span class="tooltip">f2</span>
-					</button>
-					<button v-shortkey="['ctrl', 's']" class="icon" v-if="m.allowEdit" @shortkey="save()" @click="save()">
-						<span class="material-icons">save</span>
-						<span class="tooltip">ctrl + s</span>
-					</button>
-					<button v-shortkey="['ctrl', 'h']" class="icon" v-if="!m.edit && m.allowEdit" @shortkey="toggleSearch()" @click="toggleSearch()">
-						<span class="material-icons">search</span>
-						<span class="tooltip">ctrl + h</span>
-					</button>
-					<button class="icon" v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
-					<button class="icon" v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
+					<div class="desktop">
+						<button v-shortkey="['f2']" class="icon" v-if="m.allowEdit" @shortkey="toggleEdit()" @click="toggleEdit()">
+							<span class="material-icons">edit</span>
+							<span class="tooltip">f2</span>
+						</button>
+						<button v-shortkey="['ctrl', 's']" class="icon" v-if="m.allowEdit" @shortkey="save()" @click="save()">
+							<span class="material-icons">save</span>
+							<span class="tooltip">ctrl + s</span>
+						</button>
+						<button v-shortkey="['ctrl', 'h']" class="icon" v-if="!m.edit && m.allowEdit" @shortkey="toggleSearch()" @click="toggleSearch()">
+							<span class="material-icons">search</span>
+							<span class="tooltip">ctrl + h</span>
+						</button>
+						<button class="icon" v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
+						<button class="icon" v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
+					</div>
 				</actions>
 			</card>
 			<!-- <card d style="grid-column: 7 / 13; grid-row: 5 / 6">
@@ -1706,6 +1734,10 @@ export default {
 				hp: 0,
 				hpMax: 0,
 				attackBonus: 0,
+				customEquipment: {
+					name: "",
+					description: ""
+				},
 				effort: {
 					current: 0,
 					max: 0
@@ -2770,9 +2802,27 @@ b {
 	max-width: 700px;
 }
 
+.mobile {
+	display: none;
+}
+
+.desktop {
+	display: none;
+}
+
 @media only screen and (max-width: 600px) {
 	.tooltip {
 		display: none;
+	}
+
+	.mobile {
+		display: block;
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	.desktop {
+		display: block;
 	}
 }
 
