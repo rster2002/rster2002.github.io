@@ -1360,8 +1360,28 @@
 					</div>
 				</popup>
 			</card>
+			<!-- Effort -->
+			<card d v-if="c.settings.usePsionics" style="grid-column: 1 / 4; grid-row: 5 / 6;">
+				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+					<h1><span v-if="c.settings.showTitles">Effort</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+				</primaryTitle>
+				<div v-if="!m.edit" class="hp">
+					<div class="ctrl" @click="efc('+')">
+						<h1 class="material-icons">add</h1>
+					</div>
+					<div class="disp">
+						<h1>{{ c.effort.current }}/{{ c.effort.max }}</h1>
+					</div>
+					<div class="ctrl" @click="efc('-')">
+						<h1 class="material-icons">remove</h1>
+					</div>
+				</div>
+				<div v-if="m.edit">
+					<textbox @change="h" :val="c.effort.max" vname="effort.max" label="Max effort" type="number"></textbox>
+				</div>
+			</card>
 			<!-- Psionics -->
-			<card d v-if="c.settings.usePsionics" style="grid-column: 1 / 13; grid-row: 5 / 6;">
+			<card d v-if="c.settings.usePsionics" style="grid-column: 4 / 13; grid-row: 5 / 6;">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Psionics</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
 				</primaryTitle>
@@ -2047,6 +2067,17 @@ export default {
 			} else if (a === "-") {
 				if (this.c.hp > 0) {
 					this.c.hp--;
+				}
+			}
+		},
+		efc(a) {
+			if (a === "+") {
+				if (this.c.effort.current < this.c.effort.max) {
+					this.c.effort.current++;
+				}
+			} else if (a === "-") {
+				if (this.c.effort.current > 0) {
+					this.c.effort.current--;
 				}
 			}
 		},
