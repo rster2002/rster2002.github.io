@@ -8,6 +8,11 @@
 				<h1>Under construction</h1>
 			</primaryTitle>
 			<p>Please keep in mind that this website is work in progress and things are subject to change. You may lose your character or any other information.</p>
+			<actions>
+				<button @click="changeTo('versions')">
+					View progress
+				</button>
+			</actions>
 		</card>
 		<card>
 			<div class="img" style="

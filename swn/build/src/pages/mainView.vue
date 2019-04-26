@@ -7,6 +7,9 @@
 				:secondary="user.email"></draweruser>
 			<divider></divider>
 			<drawerbtn
+				@click="$router.push({path: '/versions'})"
+				icon="history">Versions</drawerbtn>
+			<drawerbtn
 				@click="leaveFeedback()"
 				icon="feedback">Send Feedback</drawerbtn>
 			<drawerbtn

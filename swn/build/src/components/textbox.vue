@@ -1,8 +1,11 @@
 <template lang="html">
-	<div class="textbox" :class="{ f: focus }" @click="f()">
+	<div class="textbox" :class="{ f: focus, textarea: type === 'textarea' }" @click="f()">
 		<p :class="{ c: focus }"><span>{{ label }}</span></p>
-		<input v-if="t !== 'textarea'" :type="t" @focus="f()" @blur="b()" v-model="v" ref="n" />
-		<textarea v-if="t === 'textarea'" @focus="f()" @blur="b()" v-model="v"></textarea>
+		<input v-if="t !== 'textarea' && t !== 'select'" :type="t" @focus="f()" @blur="b()" v-model="v" ref="n" />
+		<textarea v-if="t === 'textarea'" @focus="f()" @blur="b()" v-model="v" ref="n"></textarea>
+		<select v-if="t === 'select'" v-model="v" @focus="f()" @blur="b()" ref="n">
+			<slot></slot>
+		</select>
 	</div>
 </template>
 
@@ -25,6 +28,8 @@ export default {
 		},
 		v() {
 			var v = this.v;
+
+			console.log(v);
 
 			if (this.type === "number") {
 				v = Number(v);
@@ -91,6 +96,22 @@ size = 20px;
 		border: 2px solid secondaryColor;
 	}
 
+	&.lessMargin {
+		margin: 20px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	&.textarea {
+		height: 212px;
+		resize: none;
+
+		p {
+			top: 6px;
+			transform: translateY(0);
+		}
+	}
+
 	p {
 		margin: 0;
 		padding: 0px 0px;
@@ -122,7 +143,7 @@ size = 20px;
 		}
 	}
 
-	input {
+	input, select {
 		position: absolute;
 		border: 0;
 		outline: 0;
@@ -149,15 +170,15 @@ size = 20px;
 
 		padding: 0px 0px;
 
-		top: 50%;
+		top: 6px;
 		left: 50%;
-		transform: translate(-50%, -50%);
+		transform: translateX(-50%);
 
 		font-size: size;
 
 		font-family: defaultFont;
 
-		height: 400px;
+		height: 200px;
 	}
 }
 

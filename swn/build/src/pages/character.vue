@@ -57,24 +57,23 @@
 					<textbox @change="h" :val="c.xp" vname="xp" label="XP" type="number"></textbox>
 					<textbox @change="h" :val="c.attackBonus" vname="attackBonus" label="Attack Bonus" type="number"></textbox>
 				</div>
-				<div class="mobile">
-					<actions>
-						<button v-shortkey="['f2']" class="icon" v-if="m.allowEdit" @shortkey="toggleEdit()" @click="toggleEdit()">
-							<span class="material-icons">edit</span>
-							<span class="tooltip">f2</span>
-						</button>
-						<button v-shortkey="['ctrl', 's']" class="icon" v-if="m.allowEdit" @shortkey="save()" @click="save()">
-							<span class="material-icons">save</span>
-							<span class="tooltip">ctrl + s</span>
-						</button>
-						<button v-shortkey="['ctrl', 'h']" class="icon" v-if="!m.edit && m.allowEdit" @shortkey="toggleSearch()" @click="toggleSearch()">
-							<span class="material-icons">search</span>
-							<span class="tooltip">ctrl + h</span>
-						</button>
-						<button class="icon" v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
-						<button class="icon" v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
-					</actions>
-				</div>
+				<actions>
+					<button v-shortkey="['f2']" class="icon" v-if="m.allowEdit" @shortkey="toggleEdit()" @click="toggleEdit()">
+						<span class="material-icons">edit</span>
+						<span class="tooltip">f2</span>
+					</button>
+					<button v-shortkey="['ctrl', 's']" class="icon" v-if="m.allowEdit" @shortkey="save()" @click="save()">
+						<span class="material-icons">save</span>
+						<span class="tooltip">ctrl + s</span>
+					</button>
+					<button v-shortkey="['ctrl', 'h']" class="icon" v-if="!m.edit && m.allowEdit" @shortkey="toggleSearch()" @click="toggleSearch()">
+						<span class="material-icons">search</span>
+						<span class="tooltip">ctrl + h</span>
+					</button>
+					<button class="icon" v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
+					<button class="icon" v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
+					<!-- <button class="icon" @click="test()"><span class="material-icons">info</span></button> -->
+				</actions>
 			</card>
 			<!-- General info -->
 			<card d style="grid-column: 4 / 7; grid-row: 1 / 2">
@@ -1380,8 +1379,13 @@
 								<h1>Custom equipment</h1>
 								<h2>Add your own content</h2>
 							</primaryTitle>
-							<textbox @change="h" :val="c.customEquipment.name" vname="customEquipment.name" label="Item Name"></textbox>
-							<textbox @change="h" type="textarea" :val="c.customEquipment.description" vname="customEquipment.description" label="Description"></textbox>
+							<textbox class="lessMargin" @change="h" type="select" :val="c.customEquipment.type" vname="customEquipment.type" label="Equipment Type">
+								<option selected	>Armor</option>
+								<option>Ranged Weapon</option>
+								<option>Custom</option>
+							</textbox>
+							<textbox class="lessMargin" @change="h" :val="c.customEquipment.name" vname="customEquipment.name" label="Item Name"></textbox>
+							<textbox class="lessMargin" @change="h" type="textarea" :val="c.customEquipment.description" vname="customEquipment.description" label="Description"></textbox>
 						</card> -->
 					</div>
 				</popup>
@@ -1415,7 +1419,7 @@
 					<div class="listItem" v-for="psionic in c.psionics">
 						<h1 @click="toggleVal(psionic, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: psionic.open }">arrow_drop_up</span> {{ psionic.title }}</h1>
 						<transition name="contentDropdown">
-							<div v-if="psionic.open">
+							<div v-if="psionic.open" style="display: inline-block;">
 								<div class="halfed a">
 									<p v-if="c.settings.showDetails">{{ psionic.description }}</p>
 									<div>
@@ -1590,24 +1594,6 @@
 						<p>Show calculation breakdown</p>
 					</div>
 				</div>
-				<actions>
-					<div class="desktop">
-						<button v-shortkey="['f2']" class="icon" v-if="m.allowEdit" @shortkey="toggleEdit()" @click="toggleEdit()">
-							<span class="material-icons">edit</span>
-							<span class="tooltip">f2</span>
-						</button>
-						<button v-shortkey="['ctrl', 's']" class="icon" v-if="m.allowEdit" @shortkey="save()" @click="save()">
-							<span class="material-icons">save</span>
-							<span class="tooltip">ctrl + s</span>
-						</button>
-						<button v-shortkey="['ctrl', 'h']" class="icon" v-if="!m.edit && m.allowEdit" @shortkey="toggleSearch()" @click="toggleSearch()">
-							<span class="material-icons">search</span>
-							<span class="tooltip">ctrl + h</span>
-						</button>
-						<button class="icon" v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
-						<button class="icon" v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
-					</div>
-				</actions>
 			</card>
 			<!-- <card d style="grid-column: 7 / 13; grid-row: 5 / 6">
 				<primaryTitle>
@@ -1667,10 +1653,82 @@ function updateInstance(t) {
 	fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").get().then(a => {
 		if (a && a.exists) {
 			var d = a.data();
-			console.log(d);
-			fill(t.c, d);
+			fill(t.c, rebuildCharacter(d));
 		}
 	});
+}
+
+function rebuildCharacter(a) {
+	// Rebuilds the character object with descriptions and large chunks of text
+	console.log("Rebuilding");
+
+	a.equipment = a.equipment.map(a => {
+		var list;
+		if (a.equipmentType === "armor") {
+			list = equipment.armor;
+		} else if (a.equipmentType === "rangedWeapon") {
+			list = rangedWeapons;
+		}
+
+		let i = list[a.internalName];
+		return {...Object.assign(i, a), open: false};
+	});
+
+	a.foci = a.foci.map(a => {
+		return {...Object.assign(foci[a.internalName], a), open: false};
+	});
+
+	a.psionics = a.psionics.map(a => {
+		var obj = psionics[a.internalTitle];
+		let i = Object.assign(obj, a);
+		console.log(i, obj);
+		i.selectedTechniques = i.selectedTechniques.map(a => {
+			console.log(a);
+			i.techniques[a.index].choicen = true;
+			return {...obj.techniques[a.index], open: false};
+		});
+
+		return {...i, open: false};
+	});
+
+	return a;
+}
+
+function compressCharacter(a) {
+	// Filters out any non-user content, like descriptions and stats
+
+	console.log("COMPRESSING", a);
+	var r = Object.assign({}, a);
+
+	r.equipment = a.equipment.map(a => {
+		return {
+			"$caried": a.$caried,
+			equipmentType: a.equipmentType,
+			internalName: a.internalName
+		}
+	});
+
+	r.foci = a.foci.map(a => {
+		return {
+			currentLvl: a.currentLvl,
+			internalName: a.internalName
+		}
+	});
+
+	r.psionics = a.psionics.map(a => {
+		return {
+			level: a.level,
+			internalTitle: a.internalTitle,
+			selectedTechniques: a.selectedTechniques.map(a => {
+				return {
+					internalName: a.internalName,
+					index: a.index
+				}
+			})
+		}
+	});
+
+	return r;
 }
 
 function toMod(a) {
@@ -1796,6 +1854,8 @@ export default {
 	},
 	computed: {
 		level() {
+			// Calculates the current level of the player based on the xp
+
 			var xp = this.c.xp;
 			if (xp < 3) {
 				return 1;
@@ -1822,6 +1882,8 @@ export default {
 			}
 		},
 		speed() {
+			// Checks wether 'useManual' is in use and if not calculates the speed of the player based on the equipment the player has
+
 			if (!this.c.settings.useManual) {
 				if (this.totalStowedItems > this.c.attributes.str || this.totalReadiedItems > Math.floor(this.c.attributes.str / 2)) {
 					return 7;
@@ -1837,12 +1899,17 @@ export default {
 		},
 		ac() {
 			if (!this.c.settings.useManual) {
+				// Calculates the Armor Class of the player
 				let i = 10 + this.calMod(this.c.attributes.dex);
+
+				// Checks if the player is wearing armor
 				if (this.equipedArmor) {
 					var a = this.equipedArmor;
-					if (Array.isArray(a)) {
-						let c = 0;
 
+					// Checks for an array. If it is an array, the player had armor and a shield of some kind
+					if (Array.isArray(a)) {
+						// Calculates the armorclass
+						let c = 0;
 						a.forEach(armor => {
 							if (armor.bonus === 0) {
 								c += armor.ac;
@@ -1853,6 +1920,7 @@ export default {
 
 						return c + this.calMod(this.c.attributes.dex);
 					} else {
+						// Checks wether the armor class of the player is already higher than the ac of the equipment (shield) and if it is, instead adds the bonus of that item
 						if (i >= a.ac) {
 							return i + a.bonus;
 						} else {
@@ -1867,25 +1935,31 @@ export default {
 			}
 		},
 		readyEnc() {
+			// The max amount the player can ready without an penalty
 			return Math.floor(this.c.attributes.str / 2);
 		},
 		readiedItems() {
+			// Filters the items into one list
 			return this.c.equipment.filter(a => a.$caried === "ready");
 		},
 		stowedItems() {
+			// Filters the items into one list
 			return this.c.equipment.filter(a => a.$caried === "stowed");
 		},
 		totalStowedItems() {
+			// The total enc of items the player has readied
 			var s = 0;
 			this.stowedItems.forEach(a => s += a.enc);
 			return s;
 		},
 		totalReadiedItems() {
+			// The total enc of items the player has stowed
 			var s = 0;
 			this.readiedItems.forEach(a => s += a.enc);
 			return s;
 		},
 		equipedArmor() {
+			// Returns the equiped armor the player is wearing
 			var i = this.readiedItems.filter(a => a.equipmentType === "armor");
 			if (i.length > 0) {
 				if (i.length === 2) {
@@ -1898,8 +1972,8 @@ export default {
 			}
 		},
 		bestResult() {
+			// The best result is where an search item's name exactly matches the query
 			var query = this.query;
-
 			if (query === "") {
 				return []
 			}
@@ -1909,6 +1983,7 @@ export default {
 			});
 		},
 		searchResults() {
+			// Returns items with the query in its title
 			var query = this.query;
 			if (query === "") {
 				return []
@@ -1919,6 +1994,7 @@ export default {
 			});
 		},
 		relatedResults() {
+			// Returns items where the query is in the 'related' array
 			var query = this.query;
 			if (query === "") {
 				return []
@@ -1946,14 +2022,18 @@ export default {
 		toggleVal(a, b) {
 			a[b] = !a[b];
 		},
+		test() {
+			console.log(rebuildCharacter(compressCharacter(this.c)));
+		},
 		save() {
 			var t = this;
+			// Checks if it's a save from its owner
 			if (t.m.allowEdit) {
-				fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").set(t.c).then(a => {
+				// If it is, then it saves it like normal
+				fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").set(compressCharacter(t.c)).then(a => {
 					fs.collection(`users/${t.info.ownerUid}/characters`).doc(t.info.characterId).update({
 						name: t.c.name
 					}).then(a => {
-						console.log(t.p.save);
 						t.p.save = true;
 						setTimeout(() => {
 							t.p.save = false;
@@ -1961,6 +2041,7 @@ export default {
 					});
 				});
 			} else {
+				// If it is not, it instead prompts the user if they want to copy the character to their own account
 				if (confirm("Are you sure you want to copy this character to your own account?")) {
 					var id = "character-" + genId();
 					fs.collection(`users/${user().uid}/characters/${id}/d`).doc("data").set(t.c).then(a => {
@@ -1995,6 +2076,7 @@ export default {
 			this.popup.search = !this.popup.search;
 		},
 		h(value) {
+			// Used for textboxes to allow them to update the right value
 			var refBuild = value.key.split(".");
 			var f = refBuild.pop();
 			var ref = this.c;
@@ -2006,6 +2088,7 @@ export default {
 			ref[f] = value.value;
 		},
 		calMod(s) {
+			// Returns the mod of an attribute score as a number
 			if (s <= 3) {
 				return -2;
 			} else if (s >= 4 && s <= 7) {
@@ -2019,6 +2102,7 @@ export default {
 			}
 		},
 		mod(s) {
+			// Returns the mod of an attribute score as a string
 			var modifier = this.calMod(s);
 			if (modifier > 0) {
 				return "+" + modifier;
@@ -2077,14 +2161,12 @@ export default {
 				open: false,
 				currentLvl: 1
 			}));
-			console.log();
 		},
 		removeFocus(f) {
 			var index = this.c.foci.indexOf(f);
 			this.c.foci.splice(index, 1);
 		},
 		changeFocus(f) {
-			console.log(f);
 			if (f.currentLvl === 1) {
 				f.currentLvl = 2;
 			} else {
@@ -2172,8 +2254,6 @@ export default {
 			} else {
 				skillBonus = skill.lvl;
 			}
-
-			console.log(Math.floor(this.level / 2), skillBonus, this.calMod(attr));
 
 			return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr) + Number(this.c.attackBonus));
 		},
@@ -2285,12 +2365,6 @@ export default {
 					]
 				}
 			} else if (a === "speed") {
-				// speed() {
-				// 	if (!this.c.settings.useManual) {
-				// 	} else {
-				// 		return this.c.manual.speed;
-				// 	}
-				// },
 
 				var r = [
 					{
@@ -2359,6 +2433,7 @@ export default {
 			entries = Object.entries(a);
 			var f = entries.map(b => {return {...b[1], open: false}});
 			f.forEach(b => this.content.equipment.push(b));
+			equipment.armor = a;
 		});
 
 		var e = Object.entries(rangedWeapons);
@@ -2375,6 +2450,7 @@ export default {
 		e.forEach(a => {
 			a[1].then(b => {
 				this.content.psionics.push({...b, open: false});
+				psionics[a[0]] = b;
 			});
 		});
 
@@ -2782,11 +2858,11 @@ b {
 }
 
 .psionics {
-	.listItem {
-		// padding-top: 0;
-		// padding-bottom: 0;
-		display: inline-block;
-	}
+	// .listItem {
+	// 	// padding-top: 0;
+	// 	// padding-bottom: 0;
+	// 	display: inline-block;
+	// }
 
 	.skill {
 		.disp {
@@ -2808,6 +2884,15 @@ b {
 
 .desktop {
 	display: none;
+}
+
+.r {
+	.h {
+		width: calc(50% - 64px);
+	    float: left;
+	    margin: 32px;
+	    float: left;
+	}
 }
 
 @media only screen and (max-width: 600px) {

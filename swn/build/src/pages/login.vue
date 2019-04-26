@@ -8,11 +8,11 @@
                     <p>Login with google</p>
                 </div>
             </div>
-            <div style="margin-top: 8px;" class="btn" @click="an()">
+            <!-- <div style="margin-top: 8px;" class="btn" @click="an()">
                 <div class="text">
                     <p>Login anonymously</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
