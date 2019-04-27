@@ -1506,6 +1506,7 @@
 				</actions>
 				<popup @close="popup.psionics = false" :show="popup.psionics">
 					<card>
+						<p style="right: 16px;" class="x" @click="popup.psionics = false"><span class="material-icons">close</span></p>
 						<primaryTitle>
 							<h1>Psionics</h1>
 							<h2>Mysterious...</h2>
@@ -1620,6 +1621,13 @@ import companion from "@json/companion.json";
 import psionics from "@json/psionics.js";
 
 import { fs } from "@js/firebase.js";
+
+const equipmentBuild = {
+	armor: {}
+};
+
+const psionicsBuild = {};
+
 // http://localhost:8886/#/character/bbRweWpKoed3dLYecbiKuzZQ0562/character-keBs9zQrdaAXcB4qZq6a68QzFomfzONG
 function updateInstance(t) {
 	var params = t.$route.params;
@@ -1662,34 +1670,42 @@ function rebuildCharacter(a) {
 	// Rebuilds the character object with descriptions and large chunks of text
 	console.log("Rebuilding");
 
-	a.equipment = a.equipment.map(a => {
-		var list;
-		if (a.equipmentType === "armor") {
-			list = equipment.armor;
-		} else if (a.equipmentType === "rangedWeapon") {
-			list = rangedWeapons;
-		}
+	console.log(a);
 
-		let i = list[a.internalName];
-		return {...Object.assign(i, a), open: false};
-	});
+	if (a.equipment !== undefined) {
+		a.equipment = a.equipment.map(a => {
+			var list;
+			if (a.equipmentType === "armor") {
+				list = equipmentBuild.armor;
+			} else if (a.equipmentType === "rangedWeapon") {
+				list = rangedWeapons;
+			}
 
-	a.foci = a.foci.map(a => {
-		return {...Object.assign(foci[a.internalName], a), open: false};
-	});
-
-	a.psionics = a.psionics.map(a => {
-		var obj = psionics[a.internalTitle];
-		let i = Object.assign(obj, a);
-		console.log(i, obj);
-		i.selectedTechniques = i.selectedTechniques.map(a => {
-			console.log(a);
-			i.techniques[a.index].choicen = true;
-			return {...obj.techniques[a.index], open: false};
+			let i = list[a.internalName];
+			return {...Object.assign(i, a), open: false};
 		});
+	}
 
-		return {...i, open: false};
-	});
+	if (a.foci !== undefined) {
+		a.foci = a.foci.map(a => {
+			return {...Object.assign(foci[a.internalName], a), open: false};
+		});
+	}
+
+	if (a.psionics !== undefined) {
+		a.psionics = a.psionics.map(a => {
+			var obj = psionicsBuild[a.internalTitle];
+			console.log(obj);
+			let i = Object.assign(obj, a);
+			i.selectedTechniques = i.selectedTechniques.map(a => {
+				console.log(a);
+				i.techniques[a.index].choicen = true;
+				return {...obj.techniques[a.index], open: false};
+			});
+
+			return {...i, open: false};
+		});
+	}
 
 	return a;
 }
@@ -1727,6 +1743,8 @@ function compressCharacter(a) {
 			})
 		}
 	});
+
+	console.log(r);
 
 	return r;
 }
@@ -2433,7 +2451,7 @@ export default {
 			entries = Object.entries(a);
 			var f = entries.map(b => {return {...b[1], open: false}});
 			f.forEach(b => this.content.equipment.push(b));
-			equipment.armor = a;
+			equipmentBuild.armor = a;
 		});
 
 		var e = Object.entries(rangedWeapons);
@@ -2450,7 +2468,7 @@ export default {
 		e.forEach(a => {
 			a[1].then(b => {
 				this.content.psionics.push({...b, open: false});
-				psionics[a[0]] = b;
+				psionicsBuild[a[0]] = b;
 			});
 		});
 
