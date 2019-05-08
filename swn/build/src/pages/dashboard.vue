@@ -33,11 +33,11 @@
 				background-image: url(https://i.pinimg.com/564x/ae/20/d1/ae20d1d22f87012689b1b58813dae2df.jpg);
 				background-position: 0% 57%"></div>
 			<primaryTitle>
-				<h1>Ships</h1>
+				<h1>Groups</h1>
 			</primaryTitle>
-			<p>Your gateway to the universe. Keep track of them here.</p>
+			<p>Team up with others and explore the universe</p>
 			<actions>
-				<button @click="changeTo('ships')">
+				<button @click="changeTo('groups')">
 					view
 				</button>
 			</actions>

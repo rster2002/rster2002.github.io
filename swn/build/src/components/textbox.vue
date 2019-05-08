@@ -29,7 +29,7 @@ export default {
 		v() {
 			var v = this.v;
 
-			console.log(v);
+			// console.log(v);
 
 			if (this.type === "number") {
 				v = Number(v);
@@ -140,6 +140,7 @@ size = 20px;
 			display: inline-block;
 			background-color: white;
 			padding: 0px 4px;
+            border-radius: 2px;
 		}
 	}
 
@@ -169,6 +170,8 @@ size = 20px;
 		width: calc(99% - 16px);
 
 		padding: 0px 0px;
+
+        resize: none;
 
 		top: 6px;
 		left: 50%;
