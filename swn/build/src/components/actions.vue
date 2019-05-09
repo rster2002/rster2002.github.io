@@ -58,6 +58,14 @@ export default {
 		&:hover {
 			background-color: rgba(secondaryColor, .8);
 		}
+
+        &:disabled {
+            color: rgba(#000000, .6) !important;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
 	}
 }
 

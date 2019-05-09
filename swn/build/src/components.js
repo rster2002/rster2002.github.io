@@ -1,4 +1,5 @@
 import divider from "./components/divider.vue";
+import x from "./components/x.vue";
 
 import popup from "./components/popup.vue";
 
@@ -19,9 +20,13 @@ import drawerbtn from "./components/drawerbutton.vue";
 import mainView from "./components/view.vue";
 
 import card from "./components/card.vue";
+import cardgrid from "./components/cardgrid.vue";
 import actions from "./components/actions.vue";
 import primaryTitle from "./components/primaryTitle.vue";
 import snackbar from "./components/snackbar.vue";
+
+import dialoglist from "./components/dialoglist.vue";
+
 import searchbar from "./components/searchbar.vue";
 
 export {
@@ -42,5 +47,8 @@ export {
 	checkbox,
 	popup,
 	snackbar,
-	searchbar
+    searchbar,
+    x,
+    cardgrid,
+    dialoglist
 }
