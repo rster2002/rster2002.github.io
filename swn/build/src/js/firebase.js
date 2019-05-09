@@ -14,8 +14,8 @@ const fb = firebase.initializeApp({
 	messagingSenderId: "753059590422"
 });
 
-const fs = firebase
-    .firestore()
+const fsc = firebase.firestore();
+const fs = fsc
     .collection("swn")
     .doc(env);
 
@@ -40,4 +40,4 @@ async function qu(a) {
     );
 }
 
-export { fb, fs, at, cfb, qu };
+export { fb, fs, at, cfb, qu, fsc };

@@ -1,23 +1,30 @@
 <template lang="html">
-	<div class="textbox" :class="{ f: focus, textarea: type === 'textarea' }" @click="f()">
-		<p :class="{ c: focus }"><span>{{ label }}</span></p>
-		<input v-if="t !== 'textarea' && t !== 'select'" :type="t" @focus="f()" @blur="b()" v-model="v" ref="n" />
-		<textarea v-if="t === 'textarea'" @focus="f()" @blur="b()" v-model="v" ref="n"></textarea>
-		<select v-if="t === 'select'" v-model="v" @focus="f()" @blur="b()" ref="n">
-			<slot></slot>
-		</select>
-	</div>
+    <div class="textboxWrapper" :class="{ err: v.length > ml }">
+        <div class="textbox" :class="{ f: focus, textarea: type === 'textarea', mb: ht !== '' }" @click="f()">
+            <p class="label" :class="{ c: focus }"><span>{{ label }}</span></p>
+            <input v-if="t !== 'textarea' && t !== 'select'" :type="t" @focus="f()" @blur="b()" v-model="v" ref="n" />
+            <textarea v-if="t === 'textarea'" @focus="f()" @blur="b()" v-model="v" ref="n"></textarea>
+            <select v-if="t === 'select'" v-model="v" @focus="f()" @blur="b()" ref="n">
+                <slot></slot>
+            </select>
+        </div>
+        <p class="helpertext" v-if="ht.length > 0">{{ ht }}</p>
+    </div>
 </template>
 
 <script>
+
 export default {
-	props: ["label", "val", "vname", "type"],
+	props: ["label", "val", "vname", "type", "maxlength", "helpertext"],
 	data() {
 		return {
 			v: "",
 			n: "",
 			focus: false,
-			t: "text"
+            t: "text",
+            ht: "",
+            ml: 10000000,
+            validateFn: function() {}
 		}
 	},
 	watch: {
@@ -29,11 +36,19 @@ export default {
 		v() {
 			var v = this.v;
 
-			// console.log(v);
+            // console.log(v);
 
 			if (this.type === "number") {
 				v = Number(v);
-			}
+            }
+
+            if (this.helpertext !== undefined) {
+                if (v.length > this.maxlength) {
+                    this.ht = "This input is too long";
+                } else {
+                    this.ht = this.helpertext;
+                }
+            }
 
 			this.$emit("change", {
 				label: this.label,
@@ -59,7 +74,9 @@ export default {
 			if (this.v !== "") {
 				this.focus = true;
 			}
-		}
+        }
+        
+        console.log(this.validate);
 
 		if (this.vname === undefined) {
 			this.n = this.label
@@ -69,7 +86,15 @@ export default {
 
 		if (this.type !== undefined) {
 			this.t = this.type;
-		}
+        }
+        
+        if (this.helpertext !== undefined) {
+            this.ht = this.helpertext;
+        }
+
+        if (this.maxlength !== undefined) {
+            this.ml = Number(this.maxlength);
+        }
 	}
 }
 </script>
@@ -79,110 +104,146 @@ export default {
 
 size = 20px;
 
-.textbox {
-	position: relative;
-	height: size + 12px;
-	width: 90%;
-	border: 2px solid textboxBorder;
-	border-radius: interactiveRadius;
+.textboxWrapper {
 
-	margin: 32px;
-	margin-left: auto;
-	margin-right: auto;
+    &.lessMargin .textbox {
+        margin: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-	padding: 2px 0px;
+    .helpertext {
+        padding: 0px 32px;
+        font-size: 12px;
+        margin-top: 4px;
+        color: rgba(defaultFontColor, .8);
+    }
 
-	&.f {
-		border: 2px solid secondaryColor;
-	}
+    &.err {
+        .textbox {
+            border-color: #b00020;
 
-	&.lessMargin {
-		margin: 20px;
-		margin-left: auto;
-		margin-right: auto;
-	}
+            &.f {
+                border-color: #b00020;
+            }
 
-	&.textarea {
-		height: 212px;
-		resize: none;
+            .label {
+                color: #b00020;
 
-		p {
-			top: 6px;
-			transform: translateY(0);
-		}
-	}
+                &.c {
+                    color: #b00020;
+                }
+            }
+        }
 
-	p {
-		margin: 0;
-		padding: 0px 0px;
-		display: inline-block;
+        .helpertext {
+            color: #b00020;
+        }
+    }
 
-		position: absolute;
-		z-index: 1;
-		top: 50%;
-		left: 8px;
-		transform: translateY(-50%);
+    .textbox {
+        position: relative;
+        height: size + 12px;
+        width: 90%;
+        border: 2px solid textboxBorder;
+        border-radius: interactiveRadius;
 
-		font-family: defaultFont;
-		font-size: size;
+        margin: 32px;
+        margin-left: auto;
+        margin-right: auto;
 
-		transition: 100ms cubic-bezier(0.4, 0.0, 0.2, 1) all;
-		cursor: text;
+        padding: 2px 0px;
 
-		&.c {
-			top: -4%;
-			font-size: 12px;
-			color: secondaryColor;
-			cursor: default;
-		}
+        &.f {
+            border: 2px solid secondaryColor;
+        }
 
-		span {
-			display: inline-block;
-			background-color: white;
-			padding: 0px 4px;
-            border-radius: 2px;
-		}
-	}
+        &.mb {
+            margin-bottom: 0px;
+        }
 
-	input, select {
-		position: absolute;
-		border: 0;
-		outline: 0;
-		padding: 0px 8px;
-		width: calc(99% - 16px);
+        &.textarea {
+            height: 212px;
+            resize: none;
 
-		padding: 0px 0px;
+            p.label {
+                top: 6px;
+                transform: translateY(0);
+            }
+        }
 
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+        p.label {
+            margin: 0;
+            padding: 0px 0px;
+            display: inline-block;
 
-		font-size: size;
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 8px;
+            transform: translateY(-50%);
 
-		font-family: defaultFont;
-	}
+            font-family: defaultFont;
+            font-size: size;
 
-	textarea {
-		position: absolute;
-		border: 0;
-		outline: 0;
-		padding: 0px 8px;
-		width: calc(99% - 16px);
+            transition: 100ms cubic-bezier(0.4, 0.0, 0.2, 1) all;
+            cursor: text;
 
-		padding: 0px 0px;
+            &.c {
+                top: -4%;
+                font-size: 12px;
+                color: secondaryColor;
+                cursor: default;
+            }
 
-        resize: none;
+            span {
+                display: inline-block;
+                background-color: white;
+                padding: 0px 4px;
+                border-radius: 2px;
+            }
+        }
 
-		top: 6px;
-		left: 50%;
-		transform: translateX(-50%);
+        input, select {
+            position: absolute;
+            border: 0;
+            outline: 0;
+            padding: 0px 8px;
+            width: calc(99% - 16px);
 
-		font-size: size;
+            padding: 0px 0px;
 
-		font-family: defaultFont;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
 
-		height: 200px;
-	}
+            font-size: size;
+
+            font-family: defaultFont;
+        }
+
+        textarea {
+            position: absolute;
+            border: 0;
+            outline: 0;
+            padding: 0px 8px;
+            width: calc(99% - 16px);
+
+            padding: 0px 0px;
+
+            resize: none;
+
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            font-size: size;
+
+            font-family: defaultFont;
+
+            height: 200px;
+        }
+    }
 }
 
 </style>
