@@ -20,6 +20,7 @@ export default {
 
 .card {
 	width: calc(100% - 32px);
+    position: relative;
 
 	margin: 16px;
 	margin-left: auto;
@@ -53,6 +54,21 @@ export default {
 		background-position: center;
 		margin-top: -1px;
 	}
+
+    .actions {
+        position: relative;
+        bottom: 0;
+
+        button:not(.primary) {
+            box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12);
+            background-color: transparent;
+            color: secondaryColor;
+
+            &:hover {
+                background-color: rgba(#e5e5e5, .2);
+            }
+        }
+    }
 }
 
 @media only screen and (min-width: 1000px) {

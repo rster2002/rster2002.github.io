@@ -60,7 +60,8 @@ function routeUpdate(t, to, from) {
 
 			sessionStorage.setItem("u", JSON.stringify({
 				uid: user.uid,
-				username: user.displayName
+                username: user.displayName,
+                usericon: user.photoURL
 			}));
 		}
 	});

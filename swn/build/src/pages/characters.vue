@@ -4,25 +4,27 @@
 			<img src="@svg/notfound.svg" />
 			<p>No one here</p>
 		</empty>
-		<transition-group name="itemAnimation">
-			<card v-for="character in characters" :key="character.id">
-				<primaryTitle>
-					<h1 v-if="character.name !== ''">{{ character.name }}</h1>
-					<h1 v-else>Not named</h1>
-				</primaryTitle>
-				<actions>
-					<button @click="openCharacter(character.id)">
-						view
-					</button>
-				</actions>
-			</card>
-		</transition-group>
+		<cardgrid class="animated">
+            <transition-group name="itemAnimation">
+                <card v-for="(character, index) in characters" :key="character.id" :style="{ gridRow: row(index), gridColumn: column(index) }">
+                    <primaryTitle>
+                        <h1 v-if="character.name !== ''">{{ character.name }}</h1>
+                        <h1 v-else>Not named</h1>
+                    </primaryTitle>
+                    <actions>
+                        <button @click="openCharacter(character.id)">
+                            view
+                        </button>
+                    </actions>
+                </card>
+            </transition-group>
+        </cardgrid>
 		<fab @click="createCharacter()">add</fab>
 	</div>
 </template>
 
 <script>
-import { card, primaryTitle, actions, empty, fab } from "@components";
+import { card, primaryTitle, actions, empty, fab, cardgrid } from "@components";
 import { genId, user } from "@js/global.js";
 
 import { fs, qu } from "@js/firebase.js";
@@ -33,7 +35,8 @@ export default {
 		primaryTitle,
 		actions,
 		empty,
-		fab
+        fab,
+        cardgrid
 	},
 	data() {
 		return {
@@ -59,7 +62,15 @@ export default {
 		},
 		openCharacter(id) {
 			this.$router.push({path: `/character/${user().uid}/${id}`});
-		}
+        },
+        row(i) {
+            var r = Math.floor(i / 4) + 1;
+            return `${r} / ${r + 1}`;
+        },
+        column(i) {
+            var r = (i % 4) * 3 + 1;
+            return `${r} / ${r + 3}`;
+        }
 	},
 	created() {
 		var t = this;
