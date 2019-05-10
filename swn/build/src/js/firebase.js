@@ -15,6 +15,12 @@ const fb = firebase.initializeApp({
 });
 
 const fsc = firebase.firestore();
+
+fsc.settings({
+    cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED
+});
+
+fsc.enablePersistence();
 const fs = fsc
     .collection("swn")
     .doc(env);

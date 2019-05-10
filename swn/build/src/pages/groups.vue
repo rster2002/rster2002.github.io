@@ -1,6 +1,16 @@
 <template lang="html">
 	<div>
-        <dialoglist :show="showCharacter" title="Character">
+        <dialoglist @close="showCharacter = false" :show="showCharacter" title="Select Character:">
+            <div class="optionList">
+                <listitem v-for="character in characters" :key="character.id">
+                    <div class="checkboxWrapper">
+                        <radiobox></radiobox>
+                    </div>
+                    <div class="textWrapper">
+                        <h1>{{ character.name }}</h1>
+                    </div>
+                </listitem>
+            </div>
             <actions>
                 <button>pick</button>
                 <button>cancel</button>
@@ -61,11 +71,9 @@
 </template>
 
 <script>
-import { card, primaryTitle, actions, empty, fab, popup, textbox, snackbar, x, cardgrid, dialoglist } from "@components";
+import { card, primaryTitle, actions, empty, fab, popup, textbox, snackbar, x, cardgrid, dialoglist, listitem, radiobox } from "@components";
 import { genId, user } from "@js/global.js";
 import { fs, fsc, qu } from "@js/firebase.js";
-
-// group-lFE11QpfuBJrn7y9ov2A1ypCNHmHPBsI
 
 export default {
 	components: {
@@ -79,11 +87,14 @@ export default {
         snackbar,
         x,
         cardgrid,
-        dialoglist
+        dialoglist,
+        listitem,
+        radiobox
 	},
 	data() {
 		return {
             groups: [],
+            characters: [],
             showCharacter: false,
             popup: {
                 create: false
@@ -164,7 +175,27 @@ export default {
             var query = await qu(fs.collection("groups").where("id", "==", id));
 
             if (query.length === 1) {
-                
+                var group = query[0];
+                var query = await qu(fs.collection(`groups/${group.id}/users`).where("user.uid", "==", user().uid));
+
+                if (query.length === 0) {
+                    var characters = await qu(fs.collection(`users/${user().uid}/characters`).orderBy("lastModified", "desc"));
+                    console.log(characters);
+
+                    this.popup.create = false;
+
+                    if (characters.length > 0) {
+                        this.characters = characters;
+                        this.showCharacter = true;
+                    }
+
+                    // group-lFE11QpfuBJrn7y9ov2A1ypCNHmHPBsI
+
+                    // var batch = fsc.batch();
+                    // batch.set(fs.collection(`users/${user().uid}/groups`).doc(group.id));
+                } else {
+                    alert("You already joined this group");
+                }
             } else {
                 alert("Can't find group")
             }

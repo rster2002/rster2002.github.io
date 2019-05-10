@@ -2,11 +2,13 @@ import divider from "./components/divider.vue";
 import x from "./components/x.vue";
 
 import popup from "./components/popup.vue";
+import listitem from "./components/listitem.vue";
 
 import empty from "./components/empty.vue";
 import fab from "./components/fab.vue";
 import textbox from "./components/textbox.vue";
 import checkbox from "./components/checkbox.vue";
+import radiobox from "./components/radiobox.vue";
 
 import appbar from "./components/appBar.vue";
 import barbtn from "./components/barButton.vue";
@@ -50,5 +52,7 @@ export {
     searchbar,
     x,
     cardgrid,
-    dialoglist
+    dialoglist,
+    listitem,
+    radiobox
 }
