@@ -5,14 +5,6 @@ const toCache = [
     "/",
     "index.html",
     "style.css",
-    "build/src/fonts/Roboto-Regular.ttf",
-    "build/src/fonts/Roboto-Medium.ttf",
-    "build/src/fonts/Roboto-Bold.ttf",
-    "build/src/fonts/Roboto-Black.ttf",
-    "build/src/fonts/material-icons.woff2",
-    "build/src/images/construction.jpg",
-    "build/src/images/characters.jpg",
-    "build/src/images/groups.jpg",
     "mdi.css",
     "manifest.json",
     "polyfill.bundle.js",
@@ -37,10 +29,26 @@ const toCache = [
     "16.bundle.js",
     "17.bundle.js",
     "18.bundle.js",
-    "19.bundle.js"
+    "19.bundle.js",
+    "build/src/fonts/Roboto-Regular.ttf",
+    "build/src/fonts/Roboto-Medium.ttf",
+    "build/src/fonts/Roboto-Bold.ttf",
+    "build/src/fonts/Roboto-Black.ttf",
+    "build/src/fonts/material-icons.woff2",
+    "build/src/images/construction.jpg",
+    "build/src/images/characters.jpg",
+    "build/src/images/groups.jpg",
+    "icons/icon-72x72.png",
+    "icons/icon-96x96.png",
+    "icons/icon-128x128.png",
+    "icons/icon-144x144.png",
+    "icons/icon-152x152.png",
+    "icons/icon-192x192.png",
+    "icons/icon-384x384.png",
+    "icons/icon-512x512.png"
 ]
 
-self.addEventListener("activate", event => {
+self.addEventListener("activa", event => {
     event.waitUntil(
         caches.open(cacheName)
             .then(cache => {
@@ -51,29 +59,42 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-    event.respondWith(fromNetwork(event.request, 400).catch(() => {
+    event.respondWith(fromNetwork(event.request, 20000000).catch(() => {
         return fromCache(event.request);
     }));
 });
 
 function fromNetwork(request, timeout) {
-    return new Promise((fulfill, rej) => {
+    return new Promise((respond, rej) => {
         var timeoutId = setTimeout(rej, timeout);
 
-        console.log("TRYING FROM NETWORK");
+        // console.log("TRYING FROM NETWORK");
+        console.log("r", request);
 
         fetch(request).then(res => {
+            console.log("res", res);
             clearTimeout(timeoutId);
-            fulfill(responce);
-        }, reject);
+            respond(res);
+        })
+        .catch(reject);
+
+        // fetch(request).then(res => {
+        //     console.log(res);
+        //     clearTimeout(timeoutId);
+        //     respond(responce);
+        // }, reject);
     });
 }
 
 function fromCache(request) {
     return caches.open(cacheName).then(cache => {
         return cache.match(request).then(matching => {
-            console.log("TRYING FROM CACHE");
-            return matching || Promise.reject("no-match");
+            // console.log("TRYING FROM CACHE");
+            if (!request.url.includes("/sockjs-node/")) {
+                return matching || Promise.reject("no-match");
+            } else {
+                return "";
+            }
         });
     });
 }

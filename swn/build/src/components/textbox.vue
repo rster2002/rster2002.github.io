@@ -2,9 +2,9 @@
     <div class="textboxWrapper" :class="{ err: v.length > ml }">
         <div class="textbox" :class="{ f: focus, textarea: type === 'textarea', mb: ht !== '' }" @click="f()">
             <p class="label" :class="{ c: focus }"><span>{{ label }}</span></p>
-            <input v-if="t !== 'textarea' && t !== 'select'" :type="t" @focus="f()" @blur="b()" v-model="v" ref="n" />
-            <textarea v-if="t === 'textarea'" @focus="f()" @blur="b()" v-model="v" ref="n"></textarea>
-            <select v-if="t === 'select'" v-model="v" @focus="f()" @blur="b()" ref="n">
+            <input v-if="t !== 'textarea' && t !== 'select'" :type="t" @focus="f()" @blur="b()" :value="value" @input="i()" ref="n" />
+            <textarea v-if="t === 'textarea'" @focus="f()" @blur="b()" :value="value" @input="i()" ref="n"></textarea>
+            <select v-if="t === 'select'" :value="value" @input="i()" @focus="f()" @blur="b()" ref="n">
                 <slot></slot>
             </select>
         </div>
@@ -15,7 +15,7 @@
 <script>
 
 export default {
-	props: ["label", "val", "vname", "type", "maxlength", "helpertext"],
+	props: ["label", "val", "vname", "type", "maxlength", "helpertext", "value"],
 	data() {
 		return {
 			v: "",
@@ -32,32 +32,16 @@ export default {
 			if (this.v !== this.val) {
 				this.v = this.val;
 			}
-		},
-		v() {
-			var v = this.v;
-
-            // console.log(v);
-
-			if (this.type === "number") {
-				v = Number(v);
-            }
-
-            if (this.helpertext !== undefined) {
-                if (v.length > this.maxlength) {
-                    this.ht = "This input is too long";
-                } else {
-                    this.ht = this.helpertext;
-                }
-            }
-
-			this.$emit("change", {
-				label: this.label,
-				key: this.n,
-				value: v
-			});
-		}
+        }
 	},
 	methods: {
+        i() {
+            this.v = this.$refs.n.value;
+            if (this.type === "number") {
+                this.v = Number(this.v);
+            }
+            this.$emit("input", this.v);
+        },
 		f() {
 			this.focus = true;
 			this.$refs.n.focus();
@@ -69,8 +53,10 @@ export default {
 		}
 	},
 	created() {
-		if (this.val !== undefined) {
-			this.v = this.val;
+
+        console.log(this.value);
+		if (this.value !== undefined) {
+			this.v = this.value;
 			if (this.v !== "") {
 				this.focus = true;
 			}

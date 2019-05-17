@@ -30,6 +30,8 @@ import snackbar from "./components/snackbar.vue";
 import dialoglist from "./components/dialoglist.vue";
 
 import searchbar from "./components/searchbar.vue";
+import dropdownindicator from "./components/dropdownindicator.vue";
+import dropdowncontent from "./components/dropdowncontent.vue";
 
 export {
 	card,
@@ -54,5 +56,7 @@ export {
     cardgrid,
     dialoglist,
     listitem,
-    radiobox
+    radiobox,
+    dropdownindicator,
+    dropdowncontent
 }

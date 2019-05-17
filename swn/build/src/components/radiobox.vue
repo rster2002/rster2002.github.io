@@ -12,10 +12,19 @@ export default {
             internalState: false
         }
     },
+    watch: {
+        checked() {
+            if (this.checked === "true" || this.checked === true) {
+                this.internalState = true;
+            } else {
+                this.internalState = false;
+            }
+        }
+    },
     methods: {
         ck() {
             this.internalState = !this.internalState;
-            $emit('change');
+            this.$emit('change', this.internalState);
         }
     },
     created() {

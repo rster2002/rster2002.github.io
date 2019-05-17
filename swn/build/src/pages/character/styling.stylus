@@ -412,8 +412,10 @@ b {
 	}
 }
 
-.popup .card {
-	max-width: 700px;
+.popup {
+    .card, .searchbar  {
+        max-width: 700px;
+    }
 }
 
 .mobile {

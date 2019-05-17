@@ -9,9 +9,17 @@
 			<drawerbtn
 				@click="$router.push({path: '/versions'})"
 				icon="history">Versions</drawerbtn>
+            <divider></divider>
+            <drawerbtn
+				@click="$router.push({path: '/tou'})"
+				icon="assignment">Terms and Conditions</drawerbtn>
+            <drawerbtn
+				@click="$router.push({path: '/privacy'})"
+				icon="fingerprint">Privacy Policy</drawerbtn>
 			<drawerbtn
 				@click="leaveFeedback()"
 				icon="feedback">Send Feedback</drawerbtn>
+            <divider></divider>
 			<drawerbtn
 				@click="signOut()"
 				icon="exit_to_app">Logout</drawerbtn>

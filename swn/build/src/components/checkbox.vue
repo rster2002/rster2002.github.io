@@ -6,7 +6,7 @@
 
 <script>
 export default {
-	props: ["vname", "val"],
+	props: ["value"],
 	data() {
 		return {
 			checked: false,
@@ -28,15 +28,12 @@ export default {
 				}, 100);
 			}
 
-			this.$emit("change", {
-				key: this.vname,
-				value: this.c
-			});
+			this.$emit("input", this.c);
 		},
-		val() {
-			if (this.val !== undefined) {
-				console.log(this.val, this.c);
-				if (this.val === true || this.val === "true") {
+		value() {
+			if (this.value !== undefined) {
+				// console.log(this.val, this.c);
+				if (this.value === true || this.value === "true") {
 					this.c = true;
 				} else {
 					this.c = false;
@@ -50,8 +47,8 @@ export default {
 		}
 	},
 	created() {
-		if (this.val !== undefined) {
-			if (this.val === "true" || this.val === true) {
+		if (this.value !== undefined) {
+			if (this.value === "true" || this.value === true) {
 				this.c = true;
 			} else {
 				this.c = false;

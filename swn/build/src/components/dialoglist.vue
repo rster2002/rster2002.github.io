@@ -103,8 +103,8 @@ export default {
             .actions {
                 display: inline-block;
                 height: 52px;
-                padding-bottom: 0px;
-                padding-top: 0px;
+                padding: 0;
+
 
                 button {
                     float: right;
@@ -125,6 +125,7 @@ export default {
 
             .listItem {
                 height: 48px;
+                padding: 0;
                 border: 0;
             }
         }

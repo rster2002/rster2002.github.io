@@ -21,8 +21,8 @@ let i = new Vue({
 	render: h => h(app)
 }).$mount("#app");
 
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js").then(() => console.log("registarted")).catch(() => console.error("failed"));
-    });
-}
+// if ("serviceWorker" in navigator) {
+//     window.addEventListener("load", () => {
+//         navigator.serviceWorker.register("/sw.js").then(() => console.log("registarted")).catch(() => console.error("failed"));
+//     });
+// }
