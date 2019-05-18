@@ -50,12 +50,12 @@
 					</primaryTitle>
 				</div>
 				<div v-if="m.edit">
-					<textbox @change="h" :val="c.name" vname="name" label="Name"></textbox>
-					<textbox @change="h" :val="c.background" vname="background" label="Background"></textbox>
-					<textbox @change="h" :val="c.class" vname="class" label="Class"></textbox>
-					<textbox v-if="c.class.toLowerCase() === 'adventurer'" @change="h" :val="c.partial" vname="partial" label="Partial Class"></textbox>
-					<textbox @change="h" :val="c.xp" vname="xp" label="XP" type="number"></textbox>
-					<textbox @change="h" :val="c.attackBonus" vname="attackBonus" label="Attack Bonus" type="number"></textbox>
+                    <textbox v-model="c.name" label="Name"></textbox>
+					<textbox v-model="c.background" label="Background"></textbox>
+					<textbox v-model="c.class" label="Class"></textbox>
+					<textbox v-if="c.class.toLowerCase() === 'adventurer'" v-model="c.partial" label="Partial Class"></textbox>
+					<textbox v-model="c.xp" label="XP" type="number"></textbox>
+					<textbox v-model="c.attackBonus" label="Attack Bonus" type="number"></textbox>
 				</div>
 				<actions>
 					<button v-shortkey="['f2']" class="icon" v-if="m.allowEdit" @shortkey="toggleEdit()" @click="toggleEdit()">
@@ -128,8 +128,8 @@
 					</div>
 				</div>
 				<div  v-if="m.edit === true && c.settings.useManual === true">
-					<textbox @change="h" :val="c.manual.ac" vname="manual.ac" label="Armor Class" type="number"></textbox>
-					<textbox @change="h" :val="c.manual.speed" vname="manual.speed" label="Speed" type="number"></textbox>
+					<textbox v-model="c.manual.ac" label="Armor Class" type="number"></textbox>
+					<textbox v-model="c.manual.speed" label="Speed" type="number"></textbox>
 				</div>
 			</card>
 			<!-- Hit Points -->
@@ -149,7 +149,7 @@
 					</div>
 				</div>
 				<div v-if="m.edit">
-					<textbox @change="h" :val="c.hpMax" vname="hpMax" label="Maximum hitpoints" type="number"></textbox>
+					<textbox v-model="c.hpMax" label="Maximum hitpoints" type="number"></textbox>
 				</div>
 			</card>
 			<!-- Saving throws -->
@@ -186,9 +186,9 @@
 					</div>
 				</div>
 				<div v-if="m.edit === true && c.settings.useManual === true">
-					<textbox @change="h" :val="c.manual.savingThrows.physical" vname="manual.savingThrows.physical" label="Physical" type="number"></textbox>
-					<textbox @change="h" :val="c.manual.savingThrows.evasion" vname="manual.savingThrows.evasion" label="Evasion" type="number"></textbox>
-					<textbox @change="h" :val="c.manual.savingThrows.mental" vname="manual.savingThrows.mental" label="Mental" type="number"></textbox>
+					<textbox v-model="c.manual.savingThrows.physical" label="Physical" type="number"></textbox>
+					<textbox v-model="c.manual.savingThrows.evasion" label="Evasion" type="number"></textbox>
+					<textbox v-model="c.manual.savingThrows.mental" label="Mental" type="number"></textbox>
 				</div>
 			</card>
 			<!-- Attributes -->
@@ -254,12 +254,12 @@
 					<primaryTitle>
 						<h1>Attributes</h1>
 					</primaryTitle>
-					<textbox @change="h" label="Strength" :val="c.attributes.str" vname="attributes.str" type="number"></textbox>
-					<textbox @change="h" label="Dexterity" :val="c.attributes.dex" vname="attributes.dex" type="number"></textbox>
-					<textbox @change="h" label="Constitution" :val="c.attributes.con" vname="attributes.con" type="number"></textbox>
-					<textbox @change="h" label="Intelligence" :val="c.attributes.int" vname="attributes.int" type="number"></textbox>
-					<textbox @change="h" label="Wisdom" :val="c.attributes.wis" vname="attributes.wis" type="number"></textbox>
-					<textbox @change="h" label="Charisma" :val="c.attributes.cha" vname="attributes.cha" type="number"></textbox>
+					<textbox label="Strength" v-model="c.attributes.str" type="number"></textbox>
+					<textbox label="Dexterity" v-model="c.attributes.dex" type="number"></textbox>
+					<textbox label="Constitution" v-model="c.attributes.con" type="number"></textbox>
+					<textbox label="Intelligence" v-model="c.attributes.int" type="number"></textbox>
+					<textbox label="Wisdom" v-model="c.attributes.wis" type="number"></textbox>
+					<textbox label="Charisma" v-model="c.attributes.cha" type="number"></textbox>
 				</div>
 			</card>
 			<!-- Skills -->
@@ -431,7 +431,7 @@
 					</primaryTitle>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.administer.trained" vname="skills.administer.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.administer.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.administer.trained">
 							<div @click="sklAdd('administer')" class="ctrl">
@@ -454,7 +454,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.connect.trained" vname="skills.connect.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.connect.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.connect.trained">
 							<div @click="sklAdd('connect')" class="ctrl">
@@ -477,7 +477,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.exert.trained" vname="skills.exert.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.exert.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.exert.trained">
 							<div @click="sklAdd('exert')" class="ctrl">
@@ -500,7 +500,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.fix.trained" vname="skills.fix.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.fix.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.fix.trained">
 							<div @click="sklAdd('fix')" class="ctrl">
@@ -523,7 +523,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.heal.trained" vname="skills.heal.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.heal.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.heal.trained">
 							<div @click="sklAdd('heal')" class="ctrl">
@@ -546,7 +546,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.know.trained" vname="skills.know.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.know.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.know.trained">
 							<div @click="sklAdd('know')" class="ctrl">
@@ -569,7 +569,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.lead.trained" vname="skills.lead.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.lead.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.lead.trained">
 							<div @click="sklAdd('lead')" class="ctrl">
@@ -592,7 +592,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.notice.trained" vname="skills.notice.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.notice.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.notice.trained">
 							<div @click="sklAdd('notice')" class="ctrl">
@@ -615,7 +615,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.perform.trained" vname="skills.perform.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.perform.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.perform.trained">
 							<div @click="sklAdd('perform')" class="ctrl">
@@ -638,7 +638,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.pilot.trained" vname="skills.pilot.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.pilot.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.pilot.trained">
 							<div @click="sklAdd('pilot')" class="ctrl">
@@ -661,7 +661,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.program.trained" vname="skills.program.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.program.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.program.trained">
 							<div @click="sklAdd('program')" class="ctrl">
@@ -684,7 +684,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.punch.trained" vname="skills.punch.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.punch.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.punch.trained">
 							<div @click="sklAdd('punch')" class="ctrl">
@@ -707,7 +707,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.shoot.trained" vname="skills.shoot.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.shoot.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.shoot.trained">
 							<div @click="sklAdd('shoot')" class="ctrl">
@@ -730,7 +730,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.sneak.trained" vname="skills.sneak.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.sneak.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.sneak.trained">
 							<div @click="sklAdd('sneak')" class="ctrl">
@@ -753,7 +753,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.stab.trained" vname="skills.stab.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.stab.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.stab.trained">
 							<div @click="sklAdd('stab')" class="ctrl">
@@ -776,7 +776,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.survive.trained" vname="skills.survive.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.survive.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.survive.trained">
 							<div @click="sklAdd('survive')" class="ctrl">
@@ -799,7 +799,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.talk.trained" vname="skills.talk.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.talk.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.talk.trained">
 							<div @click="sklAdd('talk')" class="ctrl">
@@ -822,7 +822,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.trade.trained" vname="skills.trade.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.trade.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.trade.trained">
 							<div @click="sklAdd('trade')" class="ctrl">
@@ -845,7 +845,7 @@
 					</div>
 					<div class="skill">
 						<div class="checkboxWrapper">
-							<checkbox :val="c.skills.work.trained" vname="skills.work.trained" @change="h"></checkbox>
+							<checkbox v-model="c.skills.work.trained"></checkbox>
 						</div>
 						<div class="lvl" v-if="c.skills.work.trained">
 							<div @click="sklAdd('work')" class="ctrl">
@@ -1379,13 +1379,13 @@
 								<h1>Custom equipment</h1>
 								<h2>Add your own content</h2>
 							</primaryTitle>
-							<textbox class="lessMargin" @change="h" type="select" :val="c.customEquipment.type" vname="customEquipment.type" label="Equipment Type">
+							<textbox class="lessMargin" @change="h" type="select" v-model="c.customEquipment.type" vname="customEquipment.type" label="Equipment Type">
 								<option selected	>Armor</option>
 								<option>Ranged Weapon</option>
 								<option>Custom</option>
 							</textbox>
-							<textbox class="lessMargin" @change="h" :val="c.customEquipment.name" vname="customEquipment.name" label="Item Name"></textbox>
-							<textbox class="lessMargin" @change="h" type="textarea" :val="c.customEquipment.description" vname="customEquipment.description" label="Description"></textbox>
+							<textbox class="lessMargin" v-model="c.customEquipment.name" vname="customEquipment.name" label="Item Name"></textbox>
+							<textbox class="lessMargin" @change="h" type="textarea" v-model="c.customEquipment.description" vname="customEquipment.description" label="Description"></textbox>
 						</card> -->
 					</div>
 				</popup>
@@ -1407,7 +1407,7 @@
 					</div>
 				</div>
 				<div v-if="m.edit">
-					<textbox @change="h" :val="c.effort.max" vname="effort.max" label="Max effort" type="number"></textbox>
+					<textbox v-model="c.effort.max" label="Max effort" type="number"></textbox>
 				</div>
 			</card>
 			<!-- Psionics -->
@@ -1549,7 +1549,7 @@
 				</primaryTitle>
 				<div class="setting" v-if="m.allowEdit">
 					<div class="checkboxWrapper">
-						<checkbox :val="c.settings.usePsionics" vname="settings.usePsionics" @change="h"></checkbox>
+						<checkbox v-model="c.settings.usePsionics"></checkbox>
 					</div>
 					<div class="txt">
 						<p>Use psionics</p>
@@ -1557,7 +1557,7 @@
 				</div>
 				<div class="setting" v-if="m.allowEdit">
 					<div class="checkboxWrapper">
-						<checkbox :val="c.settings.showTitles" vname="settings.showTitles" @change="h"></checkbox>
+						<checkbox v-model="c.settings.showTitles"></checkbox>
 					</div>
 					<div class="txt">
 						<p>Show titles</p>
@@ -1565,7 +1565,7 @@
 				</div>
 				<div class="setting" v-if="m.allowEdit">
 					<div class="checkboxWrapper">
-						<checkbox :val="c.settings.showSteps" vname="settings.showSteps" @change="h"></checkbox>
+						<checkbox v-model="c.settings.showSteps"></checkbox>
 					</div>
 					<div class="txt">
 						<p>Show character creation steps</p>
@@ -1573,7 +1573,7 @@
 				</div>
 				<div class="setting" v-if="m.allowEdit">
 					<div class="checkboxWrapper">
-						<checkbox :val="c.settings.showDetails" vname="settings.showDetails" @change="h"></checkbox>
+						<checkbox v-model="c.settings.showDetails"></checkbox>
 					</div>
 					<div class="txt">
 						<p>Show details</p>
@@ -1581,7 +1581,7 @@
 				</div>
 				<div class="setting" v-if="m.allowEdit">
 					<div class="checkboxWrapper">
-						<checkbox :val="c.settings.useManual" vname="settings.useManual" @change="h"></checkbox>
+						<checkbox v-model="c.settings.useManual"></checkbox>
 					</div>
 					<div class="txt">
 						<p>Use manual mode</p>
@@ -1589,7 +1589,7 @@
 				</div>
 				<div class="setting" v-if="m.allowEdit">
 					<div class="checkboxWrapper">
-						<checkbox :val="c.settings.showBreakdown" vname="settings.showBreakdown" @change="h"></checkbox>
+						<checkbox v-model="c.settings.showBreakdown"></checkbox>
 					</div>
 					<div class="txt">
 						<p>Show calculation breakdown</p>

@@ -20,6 +20,7 @@
 			max-width: 100000px;
 			// width: auto;
 			grid-column: 1 / 4;
+            margin: 0;
 		}
 	}
 
@@ -42,6 +43,7 @@
                 max-width: 100000px;
                 // width: auto;
                 grid-column: 1 / 4;
+                margin: 0;
             }
         }
     }

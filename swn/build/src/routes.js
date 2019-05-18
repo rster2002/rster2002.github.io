@@ -13,7 +13,9 @@ import vueRouter from "vue-router";
 Vue.use(vueRouter);
 
 const routes = [
-	{ path: "/login", component: () => import("./pages/login.vue").then(m => m.default) },
+    { path: "/login", component: () => import("./pages/login.vue").then(m => m.default) },
+    { path: "/tou", component: () => import("./pages/tou.vue").then(m => m.default) },
+    { path: "/privacy", component: () => import("./pages/privacy.vue").then(m => m.default) },
 	{ path: "/", component: () => import("./pages/mainView.vue").then(m => m.default),
 		children: [
 			{ path: "/", meta: {title: "dashboard"}, component: () => import("./pages/dashboard.vue").then(m => m.default) },

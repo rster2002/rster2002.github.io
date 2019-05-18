@@ -1,0 +1,97 @@
+// Default
+mdc-typography-font-family = 'Roboto', sans-serif;
+mdc-typography-font-weight = 500;
+mdc-typography-font-size = 16px;
+mdc-typography-letter-spacing = 1.15px;
+mdc-typography-text-transform = none;
+
+// Header 1
+mdc-typescale-header-1-font-family = mdc-typography-font-family;
+mdc-typescale-header-1-font-weight = 300;
+mdc-typescale-header-1-font-size = 6rem;
+mdc-typescale-header-1-letter-spacing = -1.5px;
+mdc-typescale-header-1-text-transform = none;
+
+// Header 2
+mdc-typescale-header-2-font-family = mdc-typography-font-family;
+mdc-typescale-header-2-font-weight = 300;
+mdc-typescale-header-2-font-size = 3.75rem;
+mdc-typescale-header-2-letter-spacing = -0.5px;
+mdc-typescale-header-2-text-transform = none;
+
+// Header 3
+mdc-typescale-header-3-font-family = mdc-typography-font-family;
+mdc-typescale-header-3-font-weight = 400;
+mdc-typescale-header-3-font-size = 3rem;
+mdc-typescale-header-3-letter-spacing = 0px;
+mdc-typescale-header-3-text-transform = none;
+
+// Header 4
+mdc-typescale-header-4-font-family = mdc-typography-font-family;
+mdc-typescale-header-4-font-weight = 400;
+mdc-typescale-header-4-font-size = 2.125rem;
+mdc-typescale-header-4-letter-spacing = 0.25px;
+mdc-typescale-header-4-text-transform = none;
+
+// Header 5
+mdc-typescale-header-5-font-family = mdc-typography-font-family;
+mdc-typescale-header-5-font-weight = 400;
+mdc-typescale-header-5-font-size = 1.5rem;
+mdc-typescale-header-5-letter-spacing = 0px;
+mdc-typescale-header-5-text-transform = none;
+
+// Header 6
+mdc-typescale-header-6-font-family = mdc-typography-font-family;
+mdc-typescale-header-6-font-weight = 500;
+mdc-typescale-header-6-font-size = 1.25rem;
+mdc-typescale-header-6-letter-spacing = 0.15px;
+mdc-typescale-header-6-text-transform = none;
+
+// Subtitle 1
+mdc-typescale-subtitle-1-font-family = mdc-typography-font-family;
+mdc-typescale-subtitle-1-font-weight = 400;
+mdc-typescale-subtitle-1-font-size = 1rem;
+mdc-typescale-subtitle-1-letter-spacing = 0.15px;
+mdc-typescale-subtitle-1-text-transform = none;
+
+// Subtitle 2
+mdc-typescale-subtitle-2-font-family = mdc-typography-font-family;
+mdc-typescale-subtitle-2-font-weight = 500;
+mdc-typescale-subtitle-2-font-size = 0.875;
+mdc-typescale-subtitle-2-letter-spacing = 0.1px;
+mdc-typescale-subtitle-2-text-transform = none;
+
+// Body 1
+mdc-typescale-body-1-font-family = mdc-typography-font-family;
+mdc-typescale-body-1-font-weight = 400;
+mdc-typescale-body-1-font-size = 1rem;
+mdc-typescale-body-1-letter-spacing = 0.5px;
+mdc-typescale-body-1-text-transform = none;
+
+// Body 2
+mdc-typescale-body-2-font-family = mdc-typography-font-family;
+mdc-typescale-body-2-font-weight = 400;
+mdc-typescale-body-2-font-size = 0.875rem;
+mdc-typescale-body-2-letter-spacing = 0.25px;
+mdc-typescale-body-2-text-transform = none;
+
+// Button
+mdc-typescale-button-font-family = mdc-typography-font-family;
+mdc-typescale-button-font-weight = 500;
+mdc-typescale-button-font-size = 0.875rem;
+mdc-typescale-button-letter-spacing = 1.25px;
+mdc-typescale-button-text-transform = uppercase;
+
+// Caption
+mdc-typescale-button-font-family = mdc-typography-font-family;
+mdc-typescale-button-font-weight = 400;
+mdc-typescale-button-font-size = 0.75rem;
+mdc-typescale-button-letter-spacing = 0.4px;
+mdc-typescale-button-text-transform = none;
+
+// Overline
+mdc-typescale-overline-font-family = mdc-typography-font-family;
+mdc-typescale-overline-font-weight = 400;
+mdc-typescale-overline-font-size = 0.625rem;
+mdc-typescale-overline-letter-spacing = 1.5px;
+mdc-typescale-overline-text-transform = uppercase;

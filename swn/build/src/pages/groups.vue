@@ -1,9 +1,19 @@
 <template lang="html">
 	<div>
-        <dialoglist :show="showCharacter" title="Character">
+        <dialoglist @close="showCharacter = false" :show="showCharacter" title="Select Character:">
+            <div class="optionList">
+                <listitem v-for="character in characters" :key="character.id" v-if="character.name !== ''">
+                    <div class="checkboxWrapper">
+                        <radiobox :checked="picked(character)" @change="choice(character)"></radiobox>
+                    </div>
+                    <div class="textWrapper">
+                        <h1>{{ character.name }}</h1>
+                    </div>
+                </listitem>
+            </div>
             <actions>
-                <button>pick</button>
-                <button>cancel</button>
+                <button @click="proceedJoin()">pick</button>
+                <button @click="showCharacter = false">cancel</button>
             </actions>
         </dialoglist>
 		<empty v-if="groups.length == 0">
@@ -61,11 +71,9 @@
 </template>
 
 <script>
-import { card, primaryTitle, actions, empty, fab, popup, textbox, snackbar, x, cardgrid, dialoglist } from "@components";
+import { card, primaryTitle, actions, empty, fab, popup, textbox, snackbar, x, cardgrid, dialoglist, listitem, radiobox } from "@components";
 import { genId, user } from "@js/global.js";
 import { fs, fsc, qu } from "@js/firebase.js";
-
-// group-lFE11QpfuBJrn7y9ov2A1ypCNHmHPBsI
 
 export default {
 	components: {
@@ -79,11 +87,14 @@ export default {
         snackbar,
         x,
         cardgrid,
-        dialoglist
+        dialoglist,
+        listitem,
+        radiobox
 	},
 	data() {
 		return {
             groups: [],
+            characters: [],
             showCharacter: false,
             popup: {
                 create: false
@@ -94,6 +105,9 @@ export default {
             newGroup: {
                 name: "",
                 description: ""
+            },
+            choicenCharacter: {
+                id: ""
             },
             joinId: ""
 		}
@@ -112,6 +126,41 @@ export default {
         column(i) {
             var r = (i % 4) * 3 + 1;
             return `${r} / ${r + 3}`;
+        },
+        choice(character) {
+            this.choicenCharacter = character.id;
+        },
+        picked(character) {
+            return character.id === this.choicenCharacter;
+        },
+        proceedJoin() {
+            if (this.choicenCharacter !== "") {
+
+                var group = JSON.parse(sessionStorage.getItem("::t"));
+                let obj = {
+                    id: group.id,
+                    name: group.name,
+                    description: group.description,
+                    joined: Date.now(),
+                    lastOpened: Date.now()
+                }
+
+                // Creates a batch to make sure the documents are added to the group and user
+                var batch = fsc.batch();
+                batch.set(fs.collection(`users/${user().uid}/groups`).doc(group.id), obj);
+                batch.set(fs.collection(`groups/${group.id}/users`).doc(user().uid), {
+                    user: user(),
+                    character: this.choicenCharacter,
+                    joined: Date.now()
+                });
+
+                batch.commit().then(() => {
+                    this.$router.push({path: `group/${group.id}`});
+                });
+
+            } else {
+                throw new Error("Fatal");
+            }
         },
         postGroup() {
             if (this.newGroup.name !== "") {
@@ -161,20 +210,51 @@ export default {
         },
         async joinGroup() {
             var id = this.joinId;
+            id = "group-lFE11QpfuBJrn7y9ov2A1ypCNHmHPBsI";
             var query = await qu(fs.collection("groups").where("id", "==", id));
 
+
             if (query.length === 1) {
-                
+                var group = query[0];
+
+                sessionStorage.setItem("::t", JSON.stringify(group));
+                var query = await qu(fs.collection(`groups/${group.id}/users`).where("user.uid", "==", user().uid));
+
+                if (query.length === 0) {
+                    var characters = await qu(fs.collection(`users/${user().uid}/characters`).orderBy("lastModified", "desc"));
+                    console.log(characters);
+
+                    this.popup.create = false;
+
+                    this.characters = [];
+
+                    if (characters.length > 0) {
+
+                        characters.forEach(character => {
+                            this.characters.push({...character, choicen: false});
+                        });
+
+                        this.showCharacter = true;
+                    }
+
+                    // group-lFE11QpfuBJrn7y9ov2A1ypCNHmHPBsI
+
+                    // var batch = fsc.batch();
+                    // batch.set(fs.collection(`users/${user().uid}/groups`).doc(group.id));
+                } else {
+                    alert("You already joined this group");
+                }
             } else {
                 alert("Can't find group")
             }
         },
         openGroup(group) {
-
+            this.$router.push({path: `group/${group.id}`});
         }
     },
     async created() {
         var query = await qu(fs.collection(`users/${user().uid}/groups`).orderBy("lastOpened", "desc"));
+        this.groups = query;
     }
 }
 </script>

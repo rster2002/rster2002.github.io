@@ -26,6 +26,7 @@ export default {
 
 #rtrn {
 	text-decoration: underline;
+    cursor: pointer;
 }
 
 </style>

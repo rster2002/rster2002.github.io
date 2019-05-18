@@ -1,12 +1,14 @@
 <template>
     <transition name="scim">
-        <div class="scim" v-if="internalShow" @click="internalShow = false">
+        <div class="scim" v-if="internalShow" @click.self="$emit('close')">
             <transition name="dialog" appear>
                 <div v-if="internalShow" class="dialog">
                     <div class="head">
                         <h1>{{ title }}</h1>
                     </div>
-                    <slot></slot>
+                    <div class="contentWrapper">
+                        <slot></slot>
+                    </div>
                 </div>
             </transition>
         </div>
@@ -62,6 +64,8 @@ export default {
         left: 50%;
         transform: translate(-50%, -50%);
 
+        max-height: 70%;
+
         width: 280px;
         background-color: #ffffff;
         box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
@@ -85,27 +89,45 @@ export default {
             }
         }
 
-        .actions {
-            display: inline-block;
-            height: 52px;
-            padding-bottom: 0px;
-            padding-top: 0px;
+        .contentWrapper {
+            overflow-y: auto;
+            overflow-x: hidden;
 
-            button {
-                float: right;
-                margin-top: 8px;
-                margin-bottom: 8px;
+            .optionList {
+                width: 100%;
 
-                &:not(.primary) {
-                    box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12);
-                    background-color: transparent;
-                    color: secondaryColor;
+                border-top: 2px solid dividerColor;
+                border-bottom: 2px solid dividerColor;
+            }
 
-                    &:hover {
-                        background-color: rgba(#e5e5e5, .2);
+            .actions {
+                display: inline-block;
+                height: 52px;
+                padding: 0;
+
+
+                button {
+                    float: right;
+                    margin-top: 8px;
+                    margin-bottom: 8px;
+
+                    &:not(.primary) {
+                        box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12);
+                        background-color: transparent;
+                        color: secondaryColor;
+
+                        &:hover {
+                            background-color: rgba(#e5e5e5, .2);
+                        }
                     }
-                }
-            }  
+                }  
+            }
+
+            .listItem {
+                height: 48px;
+                padding: 0;
+                border: 0;
+            }
         }
     }
 }
