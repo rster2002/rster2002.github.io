@@ -38,7 +38,7 @@
                 </primaryTitle>
                 <p>Team up with others and explore the universe</p>
                 <actions>
-                    <button @click="changeTo('groups')">
+                    <button @click="changeTo('groups')" disabled>
                         work in progress
                     </button>
                 </actions>
