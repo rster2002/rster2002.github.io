@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>BSS - Commands</title>
+        
+        <link rel="stylesheet" href="../src/css/docs.css" />
+        <link rel="icon" href="../src/img/favicon.png" />
+        
+        <link rel="stylesheet" href="../src/css/codestyle.css" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="titleContainer" onclick="location.href = '../index.html'">
+                <div class="iconContainer">
+                    <img src="../src/img/logo.png" />
+                </div>
+                <div class="textContainer">
+                    <h1>Bluestone Script</h1>
+                </div>
+            </div>
+            <div class="controllsContainer">
+                <div class="buttonContainer">
+                    <button class="selected" onclick="location.href = './'">docs</button>
+                    <button>showcase</button>
+                    <button class="primary" onclick="location.href = './getting-started.html'">get started</button>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="card">
+                <h1>Commands</h1>
+                <p>Here you will find a list off added or extended commands that you can use.</p>
+                <p>Everything between [] is required and everything between &lt; &gt; is optional.</p>
+                
+                <h2>as</h2>
+                <p><span>as [selectors] run ...</span></p>
+                <p>Will execute the command that comes after for every selector that is found.</p>
+                <pre><code>
+as @a[tag=fighter] || @a[tag=barbarian] run say Cracking bones
+                </code></pre>
+
+                <h2>call</h2>
+                <p><span>call [function]([parameters])</span></p>
+                <p>Executes a local function defined using the 'local' keyword.</p>
+                <pre><code>
+call greet(Steve)
+                </code></pre>
+
+                <h2>data</h2>
+                <p><span>... set from entity score [data type] [scale] [selector] [scoreboard]</span></p>
+                <p>Set's a NBT value to the value of a scoreboard</p>
+                <pre><code>
+data modify block ~ ~-3 ~ Items[0].Count set from entity score int 1 @p itemCount
+                </code></pre>
+
+                <h2>for</h2>
+                <p><span>for [entry] in [array] {[commands]}</span></p>
+                <p>Loops over the array and compiles the commands with that entry</p>
+                <pre><code>
+for opPlayer in [Steve, Alex, Notch] {
+    effect give $opPlayer protection 100000 100 true
+}
+                </code></pre>
+
+                <h2>holding</h2>
+                <p><span>holding [item] &lt;nbt&gt; run [command]</span></p>
+                <p>Checks wether the selector is holding the specified item.</p>
+                <pre><code>
+as @a run holding minecraft:clock run say tick tock
+                </code></pre>
+
+                <h2>if</h2>
+                <p><span>if [scoreboard | number] [operation] [scoreboard | number] run [command]</span></p>
+                <p>Checks wether the score or value of the current entity is greater than the other score or value</p>
+                <pre><code>
+as @a run if timer >= 20 run say timer finished
+as @a run if timer >= timerLimit run say timer finished
+                </code></pre>
+
+                <h2>local</h2>
+                <p><span>local [name] = [value | function]</span></p>
+                <p>Defines a local which can be called.</p>
+                <pre><code>
+local playername = Steve
+say $playername
+                </code></pre>
+                <p>Defines a function that can be called using the 'call' keyword.</p>
+                <pre><code>
+local greet = (playername) {
+    say hey, $playername
+    say hi, $playername
+    say hello, $playername
+}
+                </code></pre>
+
+                <h2>log</h2>
+                <p><span>log [scoreboard] &lt;selector&gt; &lt;prefix&gt;</span></p>
+                <p>Gets the current value of the scoreboard and shows it in chat</p>
+                <pre><code>
+log timer @s Left
+                </code></pre>
+
+                <h2>operation</h2>
+                <p><span>operation</span></p>
+            </div>
+        </div>
+    </body>
+</html>

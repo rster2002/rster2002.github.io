@@ -1,0 +1,45 @@
+@font-face {
+    font-family: Roboto;
+    font-weight: 400;
+    src: url(build/src/fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: 500;
+    src: url(build/src/fonts/Roboto-Medium.ttf);
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: 700;
+    src: url(build/src/fonts/Roboto-Bold.ttf);
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: 900;
+    src: url(build/src/fonts/Roboto-Black.ttf);
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+}
+
+body > div {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #e5e5e5;
+	overflow: hidden;
+	overflow-y: auto;
+	white-space: nowrap;
+}
