@@ -12,7 +12,10 @@
             <primaryTitle>
                 <h1>Heads</h1>
             </primaryTitle>
-            <div>
+            <div v-if="queried.length === 0">
+                <p>Start searching to find heads.</p>
+            </div>
+            <div v-if="queried.length > 0">
                 <listitem v-for="head in queried" :key="head.totalNr">
                     <h1 @click="head.open = !head.open" style="cursor: pointer;"><dropdownindicator :val="head.open"></dropdownindicator><span class="material-icons" v-if="head.aquired">check</span>{{ head.name }}</h1>
                     <dropdowncontent :show="head.open">
@@ -66,7 +69,7 @@ export default {
                     }
                 });
             } else {
-                return this.heads;
+                return [];
             }
         },
         headCount() {
