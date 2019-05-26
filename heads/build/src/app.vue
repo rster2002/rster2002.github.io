@@ -3,11 +3,18 @@
         <searchbar placeholder="Search by name and number" @onchange="catchSearch"></searchbar>
         <snackbar :show="snackbar">Saved</snackbar>
         <card>
-            <p>You have: <b>{{ headCount }}</b> heads, just <b>{{ 742 - headCount }}</b> to go.</p>
+            <p>You own <b>{{ headCount }}</b> heads in total, just <b>{{ 742 - headCount }}</b> to go.</p>
+            <p>The current search shows <b>{{ queried.length }}</b> heads. You own <b>{{ searchOwnCount }}</b> of them.</p>
             <p>Searched numbers: <b>{{ idList }}</b></p>
             <actions>
                 <button @click="save" class="primary">Save</button>
             </actions>
+            <div class="setting">
+                <div class="checkboxWrapper">
+                    <checkbox v-model="filter.owned"></checkbox>
+                </div>
+                <div class="txt"><p>Only show Owned</p></div>
+            </div>
             <div class="setting">
                 <div class="checkboxWrapper">
                     <checkbox v-model="filter.duplicates"></checkbox>
@@ -85,8 +92,12 @@ export default {
                         // Checks wether it is a list of numbers or just a name
                         if (!this.query.includes(",")) {
                             if (a.name.toLowerCase().includes(this.query.toLowerCase()) || a.category.name.toLowerCase().includes(this.query.toLowerCase())) {
-                                if (this.filter.duplicates) {
+                                if (this.filter.duplicates && this.filter.owned) {
+                                    return a.duplicate && a.aquired;
+                                } else if (this.filter.duplicates) {
                                     return a.duplicate;
+                                } else if (this.filter.owned) {
+                                    return a.aquired;
                                 } else {
                                     return true;
                                 }
@@ -108,8 +119,12 @@ export default {
                     }
                 });
             } else {
-                if (this.filter.duplicates) {
+                if (this.filter.duplicates && this.filter.owned) {
+                    return this.heads.filter(a => a.duplicate && a.owned)
+                } else if (this.filter.duplicates) {
                     return this.heads.filter(a => a.duplicate);
+                } else if (this.filter.owned) {
+                    return this.heads.filter(a => a.aquired);
                 } else {
                     return [];
                 }
@@ -132,6 +147,17 @@ export default {
             this.queried.forEach(a => i.push(a.totalNr));
 
             return i.join(", ");
+        },
+        searchOwnCount() {
+            let i = 0;
+
+            this.queried.forEach(a => {
+                if (a.aquired) {
+                    i++;
+                }
+            });
+
+            return i;
         }
     },
     methods: {
