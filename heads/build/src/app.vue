@@ -1,12 +1,19 @@
 <template lang="html">
 	<div>
-        <searchbar placeholder="Search on name and number" @onchange="catchSearch"></searchbar>
+        <searchbar placeholder="Search by name and number" @onchange="catchSearch"></searchbar>
         <snackbar :show="snackbar">Saved</snackbar>
         <card>
             <p>You have: <b>{{ headCount }}</b> heads, just <b>{{ 742 - headCount }}</b> to go.</p>
+            <p>Searched numbers: <b>{{ idList }}</b></p>
             <actions>
                 <button @click="save" class="primary">Save</button>
             </actions>
+            <div class="setting">
+                <div class="checkboxWrapper">
+                    <checkbox v-model="filter.duplicates"></checkbox>
+                </div>
+                <div class="txt"><p>Only show duplicates</p></div>
+            </div>
         </card>
         <card>
             <primaryTitle>
@@ -25,9 +32,17 @@
                             </div>
                             <div class="txt"><p>Aquired?</p></div>
                         </div>
+                        <dropdowncontent :show="head.aquired">
+                            <div class="setting">
+                                <div class="checkboxWrapper">
+                                    <checkbox v-model="head.duplicate"></checkbox>
+                                </div>
+                                <div class="txt"><p>More than one?</p></div>
+                            </div>
+                        </dropdowncontent>
                         <p>Category: <b>{{ head.category.name }}</b></p>
-                        <p>Head <b>{{ head.totalNr }}</b>/742</p>
-                        <p>Head <b>{{ head.category.nr }}</b>/{{ head.category.max }}</p>
+                        <p>Total nr: <b>{{ head.totalNr }}</b>/742</p>
+                        <p>Category nr: <b>{{ head.category.nr }}</b>/{{ head.category.max }}</p>
                     </dropdowncontent>
                 </listitem>
             </div>
@@ -54,6 +69,9 @@ export default {
     data() {
         return {
             heads: [],
+            filter: {
+                duplicates: false
+            },
             snackbar: false,
             query: ""
         }
@@ -62,14 +80,39 @@ export default {
         queried() {
             if (this.query !== "") {
                 return this.heads.filter(a => {
+                    // Checks wether it is an number of string
                     if (isNaN(this.query)) {
-                        return a.name.toLowerCase().includes(this.query.toLowerCase()) || a.category.name.toLowerCase().includes(this.query.toLowerCase());
+                        // Checks wether it is a list of numbers or just a name
+                        if (!this.query.includes(",")) {
+                            if (a.name.toLowerCase().includes(this.query.toLowerCase()) || a.category.name.toLowerCase().includes(this.query.toLowerCase())) {
+                                if (this.filter.duplicates) {
+                                    return a.duplicate;
+                                } else {
+                                    return true;
+                                }
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            var nrs = this.query.split(",");
+                            nrs = nrs.map(a => Number(a.trim()));
+
+                            if (nrs.indexOf(a.totalNr) !== -1) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
                     } else {
                         return a.totalNr == this.query;
                     }
                 });
             } else {
-                return [];
+                if (this.filter.duplicates) {
+                    return this.heads.filter(a => a.duplicate);
+                } else {
+                    return [];
+                }
             }
         },
         headCount() {
@@ -82,6 +125,13 @@ export default {
             });
 
             return i;
+        },
+        idList() {
+            let i = [];
+
+            this.queried.forEach(a => i.push(a.totalNr));
+
+            return i.join(", ");
         }
     },
     methods: {
@@ -93,14 +143,19 @@ export default {
         },
         save() {
             var saveNrs = [];
+            var duplicateNrs = [];
 
             this.heads.forEach(a => {
                 if (a.aquired) {
                     saveNrs.push(a.totalNr);
                 }
+                if (a.duplicate) {
+                    duplicateNrs.push(a.totalNr);
+                }
             });
 
             localStorage.setItem("savedHeads", JSON.stringify(saveNrs));
+            localStorage.setItem("duplicateHeads", JSON.stringify(duplicateNrs));
 
             this.snackbar = true;
 
@@ -111,12 +166,19 @@ export default {
     },
     created() {
         heads.forEach(head => {
-            let obj = {...head, open: false, aquired: false};
+            let obj = {...head, open: false, aquired: false, duplicate: false};
 
             if (localStorage.getItem("savedHeads") !== null) {
                 let savedHeads = JSON.parse(localStorage.getItem("savedHeads"));
                 if (savedHeads.indexOf(head.totalNr) !== -1) {
                     obj.aquired = true;
+                }
+            }
+
+            if (localStorage.getItem("duplicateHeads") !== null) {
+                let savedHeads = JSON.parse(localStorage.getItem("duplicateHeads"));
+                if (savedHeads.indexOf(head.totalNr) !== -1) {
+                    obj.duplicate = true;
                 }
             }
 
@@ -130,6 +192,7 @@ export default {
 
 
 settingheight = 56px;
+settingsize = 56px;
 .setting {
 	width: 100%;
 	height: settingheight;
