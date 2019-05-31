@@ -22,14 +22,11 @@
                 <div class="txt"><p>Only show duplicates</p></div>
             </div>
         </card>
-        <card>
+        <card v-if="queried.length > 0">
             <primaryTitle>
-                <h1>Heads</h1>
+                <h1>Searched heads</h1>
             </primaryTitle>
-            <div v-if="queried.length === 0">
-                <p>Start searching to find heads.</p>
-            </div>
-            <div v-if="queried.length > 0">
+            <div>
                 <listitem v-for="head in queried" :key="head.totalNr">
                     <h1 @click="head.open = !head.open" style="cursor: pointer;"><dropdownindicator :val="head.open"></dropdownindicator><span class="material-icons" v-if="head.aquired">check</span>{{ head.name }}</h1>
                     <dropdowncontent :show="head.open">
@@ -54,6 +51,19 @@
                 </listitem>
             </div>
         </card>
+        <card v-if="queried.length == 0">
+            <p>You can now <b>{{ mode }}</b> heads.</p>
+            <actions>
+                <button @click="mode = 'add'">Add heads</button>
+                <button @click="mode = 'remove'">Remove mode</button>
+            </actions>
+        </card>
+        <card class="chest" v-if="queried.length == 0" v-for="(chest) in chests">
+            <div class="item" @click="processItemClick(head)" v-for="(head, index) in chest" style="--aspect-ratio: 1/1;" :style="{ gridRow: row(index), gridColumn: column(index), backgroundColor: clr(head) }">
+                <p v-if="head.aquired && head.duplicate === false">aqd</p>
+                <p v-if="head.duplicate">dupe</p>
+            </div>
+        </card>
     </div>
 </template>
 
@@ -76,6 +86,7 @@ export default {
     data() {
         return {
             heads: [],
+            mode: "add",
             filter: {
                 duplicates: false
             },
@@ -158,6 +169,17 @@ export default {
             });
 
             return i;
+        },
+        chests() {
+            var chests = [];
+
+            var headList = Object.assign([], this.heads);
+
+            while (headList.length > 0) {
+                chests.push(headList.splice(0, 54));
+            }
+
+           return chests;
         }
     },
     methods: {
@@ -166,6 +188,30 @@ export default {
         },
         checkHead(head) {
 
+        },
+        clr(head) {
+            if (head.duplicate) {
+                return "#01a6b2";
+            } else if (head.aquired) {
+                return "#2db201"
+            } else {
+                return "#ffffff";
+            }
+        },
+        processItemClick(head) {
+            if (this.mode === "add") {
+                if (head.aquired) {
+                    head.duplicate = true;
+                } else {
+                    head.aquired = true;
+                }
+            } else if (this.mode === "remove") {
+                if (head.duplicate) {
+                    head.duplicate = false;
+                } else {
+                    head.aquired = false;
+                }
+            }
         },
         save() {
             var saveNrs = [];
@@ -188,6 +234,14 @@ export default {
             setTimeout(() => {
                 this.snackbar = false;
             }, 3000);
+        },
+        row(i) {
+            var r = Math.floor(i / 9) + 1;
+            return `${r} / ${r + 1}`;
+        },
+        column(i) {
+            var r = (i % 9) + 1;
+            return `${r} / ${r + 1}`;
         }
     },
     created() {
@@ -261,6 +315,44 @@ settingsize = 56px;
 			padding: 0px 8px;
 		}
 	}
+}
+
+.chest {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+	grid-template-rows: auto;
+
+    .item {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        border: 2px solid #cecece;
+        cursor: pointer;
+
+        p {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            margin-top: -20px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-200%);
+            text-align: center;
+            color: #ffffff;
+
+            // span {
+            //     font-size: 16px;
+            // }
+        }
+    }
+
+    .item[style^='--aspect-ratio']::before {
+        content: "";
+        display: inline-block;
+        width: 1px;
+        height: 0;
+        padding-bottom: calc(100% / (var(--aspect-ratio)));
+    }
 }
 
 </style>
