@@ -14,7 +14,6 @@ Vue.use(require("vue-shortkey"));
 // 	routes
 // });
 
-
 // Finalized
 let i = new Vue({
 	render: h => h(app)

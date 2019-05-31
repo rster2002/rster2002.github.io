@@ -2,12 +2,16 @@
 	<div>
         <searchbar placeholder="Search by name and number" @onchange="catchSearch"></searchbar>
         <snackbar :show="snackbar">Saved</snackbar>
+        <snackbar :show="snackbarMode">{{ mode }} mode</snackbar>
         <card>
             <p>You own <b>{{ headCount }}</b> heads in total, just <b>{{ 742 - headCount }}</b> to go.</p>
             <p>The current search shows <b>{{ queried.length }}</b> heads. You own <b>{{ searchOwnCount }}</b> of them.</p>
             <p>Searched numbers: <b>{{ idList }}</b></p>
             <actions>
-                <button @click="save" class="primary">Save</button>
+                <button v-shortkey="['ctrl', 's']" @shortkey="save" @click="save" class="primary">
+                    <span class="tooltip">ctrl + s</span>
+                    Save
+                </button>
             </actions>
             <div class="setting">
                 <div class="checkboxWrapper">
@@ -54,8 +58,14 @@
         <card v-if="queried.length == 0">
             <p>You can now <b>{{ mode }}</b> heads.</p>
             <actions>
-                <button @click="mode = 'add'">Add heads</button>
-                <button @click="mode = 'remove'">Remove mode</button>
+                <button v-shortkey="['ctrl', 'e']" @shortkey="changeMode('add')" @click="changeMode('add')">
+                    <span class="tooltip">ctrl + e</span>
+                    Add heads
+                </button>
+                <button v-shortkey="['ctrl', 'r']" @shortkey="changeMode('remove')" @click="changeMode('remove')">
+                    <span class="tooltip">ctrl + r</span>
+                    Remove mode
+                </button>
             </actions>
         </card>
         <card class="chest" v-if="queried.length == 0" v-for="(chest) in chests">
@@ -92,6 +102,7 @@ export default {
                 duplicates: false
             },
             snackbar: false,
+            snackbarMode: false,
             query: ""
         }
     },
@@ -189,6 +200,13 @@ export default {
         },
         checkHead(head) {
 
+        },
+        changeMode(mode) {
+            this.mode = mode;
+
+            this.snackbarMode = true;
+
+            setTimeout(() => {this.snackbarMode = false}, 1500);
         },
         clr(head) {
             if (head.duplicate) {
@@ -354,6 +372,33 @@ settingsize = 56px;
         height: 0;
         padding-bottom: calc(100% / (var(--aspect-ratio)));
     }
+}
+
+.tooltip {
+	visibility: hidden;
+    background-color: #6d6d6d;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    /* margin-left: -60px; */
+    font-size: 12px;
+    transform: translateX(-50%) scale(0);
+    padding: 0px 8px;
+    height: 24px;
+    line-height: 24px;
+	opacity: 0;
+	transition: 100ms cubic-bezier(0.0, 0.0, 0.2, 1) all;
+}
+
+button:hover .tooltip {
+	visibility: visible;
+	opacity: 1;
+	transform: translateX(-50%) scale(1);
 }
 
 </style>
