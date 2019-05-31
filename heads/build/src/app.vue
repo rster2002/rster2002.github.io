@@ -60,6 +60,7 @@
         </card>
         <card class="chest" v-if="queried.length == 0" v-for="(chest) in chests">
             <div class="item" @click="processItemClick(head)" v-for="(head, index) in chest" style="--aspect-ratio: 1/1;" :style="{ gridRow: row(index), gridColumn: column(index), backgroundColor: clr(head) }">
+                <p v-if="head.aquired === false && head.duplicate === false" style="color: #505050;">{{ head.totalNr }}</p>
                 <p v-if="head.aquired && head.duplicate === false">aqd</p>
                 <p v-if="head.duplicate">dupe</p>
             </div>
