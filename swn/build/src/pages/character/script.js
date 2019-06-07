@@ -94,7 +94,7 @@ function rebuildCharacter(a) {
                 return { ...obj.techniques[a.index], open: false };
             });
 
-            return { ...i, open: false };
+            return { ...i, open: false, showPopup: false };
         });
     }
 
@@ -507,7 +507,7 @@ export default {
             } else if (s >= 14 && s <= 17) {
                 return 1;
             } else if (s >= 18) {
-                return 1;
+                return 2;
             }
         },
         mod(s) {
