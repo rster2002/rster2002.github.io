@@ -26,7 +26,7 @@
             <div class="controllsContainer">
                 <div class="buttonContainer">
                     <button class="selected" onclick="location.href = './'">docs</button>
-                    <button>showcase</button>
+                    <!-- <button>showcase</button> -->
                     <button class="primary" onclick="location.href = './getting-started.html'">get started</button>
                 </div>
             </div>
@@ -106,7 +106,40 @@ log timer @s Left
                 </code></pre>
 
                 <h2>operation</h2>
-                <p><span>operation</span></p>
+                <p><span>operation [operations]</span></p>
+                <p>Lets you do operations on scores. Operations are executed in order from left to right.</p>
+                <pre><code>
+var i = 10
+var j = 2
+operation i + 10 * j
+# Expected output: 40
+                </code></pre>
+                <h2>random</h2>
+                <p><span>random [range] in [scoreboard]</span></p>
+                <p>Generates a random score which is in the given range.</p>
+                <pre><code>
+var rnd
+random 1-100 in rnd
+# Generates a score between 1 and 100
+                </code></pre>
+                <h2>store</h2>
+                <p><span>store [path] in [scoreboard]</span></p>
+                <p>Stores a value in the specified scoreboard</p>
+                <pre><code>
+var sleepTime
+store self.SleepTimer in sleepTime
+# Stores the current players SleepTimer nbt value into the sleepTime scoreboard
+                </code></pre>
+                <h2>var</h2>
+                <p><span>var [scoreboard] [= | += | -=] [value]</span></p>
+                <p>Alternative to using '/scoreboard'.</p>
+                <pre><code>
+var i
+# Creates the scoreboard 'i'
+
+var j = 10
+# Creates the scoreboard 'j' and sets the current entities score to 10
+                </code></pre>
             </div>
         </div>
     </body>
