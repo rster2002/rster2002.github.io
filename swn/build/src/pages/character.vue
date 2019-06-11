@@ -932,6 +932,7 @@
 					<h2>Ready: {{ totalReadiedItems }}/{{ readyEnc }}</h2>
 				</primaryTitle>
 				<div>
+                    <!-- Readied items -->
 					<div class="listItem" v-for="item in readiedItems">
 						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }})</span></h1>
 						<transition name="contentDropdown">
@@ -1007,7 +1008,7 @@
 									</div>
 									<div class="stat">
 										<div class="mod">
-											<h1 v-if="item.magazine !== -1">{{ item.magazine }}</h1>
+											<h1 v-if="item.magazine !== -1">{{ item.magazinesLeft}}/{{ item.magazine }}</h1>
 											<h1 v-if="item.magazine === -1">N/A</h1>
 										</div>
 										<div class="label">
@@ -1051,7 +1052,10 @@
 									</div>
 								</div>
 								<actions>
-									<button class="primary" @click="stowItem(item)">Stow item</button>
+                                    <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft === 0" class="primary" @click="reloadWeapon(item)">reload weapon</button>
+                                    <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft > 0" class="primary" @click="useRangedWeapon(item)">Use weapon</button>
+                                    <button v-if="item.equipmentType === 'rangedWeapon'" @click="stowItem(item)">Stow item</button>
+									<button v-if="item.equipmentType !== 'rangedWeapon'" class="primary" @click="stowItem(item)">Stow item</button>
 									<button @click="deleteItem(item)">Delete item</button>
 								</actions>
 							</div>
@@ -1062,6 +1066,7 @@
 					<h2>Stowed: {{ totalStowedItems }}/{{ c.attributes.str }}</h2>
 				</primaryTitle>
 				<div>
+                    <!-- Stowed items -->
 					<div class="listItem" v-for="item in stowedItems">
 						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }})</span></h1>
 						<transition name="contentDropdown">
@@ -1137,7 +1142,7 @@
 									</div>
 									<div class="stat">
 										<div class="mod">
-											<h1 v-if="item.magazine !== -1">{{ item.magazine }}</h1>
+											<h1 v-if="item.magazine !== -1">{{ item.magazinesLeft }}/{{ item.magazine }}</h1>
 											<h1 v-if="item.magazine === -1">N/A</h1>
 										</div>
 										<div class="label">
