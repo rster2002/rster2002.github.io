@@ -124,11 +124,17 @@ function initParser(input, output) {
 }
 
 function updateInfo() {
-    fetch("https://mcapi.us/server/status?ip=149.202.90.3&port=41070")
+    fetch("https://mcapi.us/server/status?ip=96.127.154.214&port=25585")
         .then(r => r.json())
         .then(json => {
             console.log(json);
-            document.getElementById("img").setAttribute("src", json.favicon);
+
+            if (json.favicon !== undefined) {
+                document.getElementById("img").setAttribute("src", json.favicon);
+            } else {
+                document.getElementById("img").setAttribute("src", "https://www.filterforge.com/filters/11635.jpg");
+            }
+            
             document.getElementById("motd").innerHTML = "";
             document.getElementById("motd").appendChild(initParser(json.motd));
 
