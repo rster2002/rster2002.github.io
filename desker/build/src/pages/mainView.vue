@@ -18,11 +18,8 @@ gtag("config", "UA-102147810-4");
 
 import { env } from "@js/global.js";
 
-console.log("HI")
-
 function routeUpdate(t, to, from) {
 	fb.auth().onAuthStateChanged(function(user) {
-		console.log(user);
 		if (user === null) {
 			console.log("NO USER");
 			t.$router.push({ path: "/login" });
@@ -82,7 +79,7 @@ export default {
 
     & > div.view {
         width: 100%;
-        height: calc(100% - 32px);
+        height: calc(100% - 114px);
     }
 }
 

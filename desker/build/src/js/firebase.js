@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
-import { env } from "@js/global.js";
+import { env, user } from "@js/global.js";
 
 const cfb = firebase;
 const fb = firebase.initializeApp({
@@ -46,4 +46,8 @@ async function qu(a) {
     );
 }
 
-export { fb, fs, at, cfb, qu, fsc };
+function u() {
+    return fs.collection("users").doc(user().uid);
+}
+
+export { fb, fs, at, cfb, qu, fsc, u };

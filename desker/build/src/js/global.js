@@ -20,7 +20,7 @@ function genId() {
     }
     return randomString(
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-        32
+        9
     );
 }
 

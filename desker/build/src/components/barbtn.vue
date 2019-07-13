@@ -1,5 +1,5 @@
 <template>
-    <div class="barbtn" @click="navTo">
+    <div class="barbtn" @click="$emit('click')">
         <p :class="{ current: current }"><slot></slot></p>
     </div>
 </template>
@@ -15,11 +15,6 @@ export default {
     watch: {
         "$route": function(to) {
             this.current = to.meta.title === this.title;
-        }
-    },
-    methods: {
-        navTo() {
-            this.$router.push({ path: `/${this.title}` });
         }
     },
     created() {
