@@ -25,6 +25,14 @@ function updateInstance(t) {
     t.info.ownerUid = params.ownerUid;
     t.info.characterId = params.characterId;
 
+    if (t.userUid !== undefined) {
+        t.info.ownerUid = t.userUid;
+    }
+
+    if (t.characterId !== undefined) {
+        t.info.characterId = t.characterId;
+    }
+
     if (user().uid === t.info.ownerUid) {
         t.m.allowEdit = true;
     } else {
@@ -49,12 +57,14 @@ function updateInstance(t) {
         }
     }
 
-    fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").get().then(a => {
-        if (a && a.exists) {
-            var d = a.data();
-            fill(t.c, rebuildCharacter(d));
-        }
-    });
+    if (t.info.ownerUid !== "" && t.info.characterId !== "") {
+        fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").get().then(a => {
+            if (a && a.exists) {
+                var d = a.data();
+                fill(t.c, rebuildCharacter(d));
+            }
+        });
+    }
 }
 
 function rebuildCharacter(a) {
@@ -149,6 +159,7 @@ function toMod(a) {
 }
 
 export default {
+    props: ["userUid", "characterId"],
     components: {
         card,
         primaryTitle,
@@ -839,6 +850,9 @@ export default {
     },
     watch: {
         "$route": function () {
+            updateInstance(this);
+        },
+        userUid() {
             updateInstance(this);
         }
     },
