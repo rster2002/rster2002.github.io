@@ -15,6 +15,7 @@ export default {
 .actions {
 	width: 100%;
 	padding: 8px;
+    display: inline-block;
 
 	button {
 		background-color: secondaryColor;
@@ -33,6 +34,8 @@ export default {
 		margin-left: 8px;
 		text-transform: uppercase;
 		position: relative;
+        float: left;
+        margin-top: 8px;
 
 		.d {
 			background-color: transparent;
