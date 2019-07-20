@@ -76,14 +76,19 @@ function rebuildCharacter(a) {
     if (a.equipment !== undefined) {
         a.equipment = a.equipment.map(a => {
             var list;
+            var add = {};
             if (a.equipmentType === "armor") {
                 list = equipmentBuild.armor;
             } else if (a.equipmentType === "rangedWeapon") {
                 list = rangedWeapons;
+                console.log(a);
+                if (a.magazinesLeft === undefined) {
+                    add = { magazinesLeft: 0 }
+                }
             }
 
             let i = list[a.internalName];
-            return { ...Object.assign(i, a), open: false };
+            return { ...Object.assign(i, a), ...add, open: false };
         });
     }
 
@@ -112,7 +117,7 @@ function rebuildCharacter(a) {
                 return a;
             });
 
-            return { ...i, open: false };
+            return { ...i, open: false, showPopup: false };
         });
     }
 
@@ -126,10 +131,17 @@ function compressCharacter(a) {
     var r = Object.assign({}, a);
 
     r.equipment = a.equipment.map(a => {
+        let add = {};
+
+        if (a.equipmentType === "rangedWeapon") {
+            add = {magazinesLeft: a.magazinesLeft}
+        }
+
         return {
             "$caried": a.$caried,
             equipmentType: a.equipmentType,
-            internalName: a.internalName
+            internalName: a.internalName,
+            ...add
         }
     });
 
@@ -528,7 +540,7 @@ export default {
             } else if (s >= 14 && s <= 17) {
                 return 1;
             } else if (s >= 18) {
-                return 1;
+                return 2;
             }
         },
         mod(s) {
@@ -661,7 +673,7 @@ export default {
             }
         },
         readyItem(a) {
-            if (this.totalReadiedItems + a.enc <= this.readyEnc) {
+            if ((this.totalReadiedItems - 2) + a.enc <= this.readyEnc) {
                 if (a.equipmentType === "armor" && this.equipedArmor) {
                     if (Array.isArray(this.equipedArmor) === false) {
                         if (a.bonus > 0 || this.equipedArmor.bonus > 0) {
@@ -680,7 +692,7 @@ export default {
             }
         },
         stowItem(a) {
-            if (this.totalStowedItems + a.enc <= this.c.attributes.str) {
+            if ((this.totalStowedItems - 2) + a.enc <= this.c.attributes.str) {
                 a.open = false;
                 a.$caried = "stowed";
             }
@@ -857,6 +869,14 @@ export default {
             }
 
             this.popup.breakdown = true;
+        },
+        reloadWeapon(item) {
+            item.magazinesLeft = item.magazine;
+        },
+        useRangedWeapon(item) {
+            if (item.magazinesLeft > 0) {
+                item.magazinesLeft--;
+            }
         }
     },
     watch: {

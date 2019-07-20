@@ -1,0 +1,104 @@
+<template>
+    <div class="content">
+            <div class="card">
+                <h1>Getting Started</h1>
+                <p>
+                    This is where you will learn everything you need to know to get started.
+                </p>
+                <h2>Why Bluestone Script?</h2>
+                <p>
+                    Why would you want to use BSS? By using BSS you make sure you write your datapacks in the most efficient way there is.
+                    It takes away having to manually create files when you check for something and need to run multiple commands. This helps
+                    making your datapack faster and more efficient. It helps you create your datapacks faster by adding extra commands that
+                    would normally take multiple commands to get the same result. 
+                </p>
+                <h2>Setup</h2>
+                <ol>
+                    <li>Download and install nodejs from their website <a target="_blank" href="https://nodejs.org/">here</a>.</li>
+                    <li>Open your command promt and type <span>npm install backpacker -g</span>. backpacker is needed to run BSS.</li>
+                    <li>Create a datapack in your world folder and navidate to the data folder where you'll be working.</li>
+                    <li>
+                        Create the following folders: <span>backpacker_pouches</span>, <span>src</span>, <span>functions</span>
+                        <ul>
+                            <li><span>backpacker_pouches</span>: This folder will hold the BSS compiler</li>
+                            <li><span>src</span>: This is where you will write your BSS code</li>
+                            <li><span>functions</span>: This is where your compiled files will go to so minecraft can run it.</li>
+                        </ul>
+                    </li>
+                    <li>Download the BSS compiler from <a target="_blank" href="https://github.com/rster2002/BSS">here</a>.</li>
+                    <li>Create a folder in the folder named <span>backpacker_pouches</span> and create a folder called: <span>bss</span> (notice it's lowercase)</li>
+                    <li>Extract the content's of the zip you downloaded earlier into this folder.</li>
+                    <li>Create a file called <span>backpacker.config.js</span>.</li>
+                </ol>
+                <p>
+                    To make sure you are setup right, open your command promt in the data folder (click on the bar that shows the path and
+                    type 'cmd') and type <span>backpacker version</span>. You should see a line that shows the current installed version
+                    of backpacker.
+                </p>
+                <h2>What did we just do?</h2>
+                <p>
+                    We did a lot here, so I'm going to quickly explain why we need the things that we downloaded and how it works. First things
+                    first, we downloaded nodejs. We did that because BSS is made in javascript. Next we installed a tool called 'backpacker'.
+                    This handels the reading and creation of files. It basically takes the files that we write, runs then through BSS and the exports
+                    them to an other folder. That why we created two additional folders besides the 'functions' folder. The 'src' folder holds our
+                    files that havent been compiled yet. This is where we will work in. The other folder 'backpacker_pouches' is used by backpacker
+                    as a location to get the compiled from. You only need to worry about it when updating.
+                </p>
+                <h2>Configuration</h2>
+                <p>
+                    We need to configure backpacker to tell it where our files are, where they need to go, and that it needs to use BSS for 'mcfunction' files.
+                    We do this by editing 'backpacker.config.js' and copying the folliwing code into it.
+                </p>
+                <pre><code class="js">
+module.exports = {
+    entries: [
+        "./src/**/*.mcfunction"
+    ],
+    loaders: [
+        {
+            loader: "bss",
+            filter: a => a.extension === "mcfunction",
+            config: {
+                namespace: "t"
+            }
+        }
+    ],
+    output: {
+        dir: "./functions"
+    }
+}
+                </code></pre>
+                <p>
+                    You don't need to understand any of this for now, but here is a quick rundown.
+                </p>
+                <ul>
+                    <li>
+                        <span>entries</span>: Here we specify what files to use. It is now setup to find every file with the 'mcfunction'
+                        extension in the 'src' folder and folder under it.
+                    </li>
+                    <li>
+                        <span>loaders</span>: This is a list of compilers used for converting the code that we write, to code that is
+                        readable by minecraft. We specify that we want to use BSS and tell backpacker to only use this loader if the extension
+                        of the file is 'mcfunction'. Lastly we tell BSS the namespace of our datapack by specifying it in the config section.
+                        This is required if we want to use block's (I'll explain what those are later).
+                    </li>
+                    <li>
+                        <span>output</span>: This just specifies the folder where the compiled files should go.
+                    </li>
+                </ul>
+                <h2>Let's write some code</h2>
+                <p>
+                    Now that we have configured backpacker, we are ready to write some code. Open up command prompt in your data folder.
+                    Type <span>backpacker watch</span>, this will tell backpacker to start watching the 'src' folder and compile your
+                    code when anything changes. Minimize it so it's not in the way, but keep it open. Let's then create a file called 
+                    'index.mcfunction' in our 'src' folder. This is where we will write our function. Let's just started with something simple.
+                    Write 'say hello world' in your file and check your command prompt. It should somewhere say something like: 
+                    '[ done ] { bss } output: './index.mcfunction''. Check your 'functions' folder and you should see a new file called 'index.mcfunction'.
+                    If you open it, you will see that it contains the exact line we wrote: 'say hello world'. Now this is not that exiting, so let's
+                    introduce a BSS command: 'as'. Replace "say hello world" with "as @a run say hello world" and check the compiled file again.
+                    You should see that it compiled into "execute as @a at @s run say hello world". We just saw BSS do a basic task: replacing the 'as'
+                    keyword with an execute command. This already saves us some work. It's not a lot, but it's something.
+                </p>
+            </div>
+        </div>
+</template>

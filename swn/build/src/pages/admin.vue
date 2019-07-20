@@ -9,8 +9,8 @@
                     <h1 @click="user.open = !user.open"><dropdownindicator :val="user.open"></dropdownindicator>{{ user.username }}</h1>
                     <dropdowncontent :show="user.open">
                         <p><b>uid: </b> {{ user.uid }}</p>
-                        <p><b>last login: </b> {{ user.lastLogin }}</p>
-                        <p><b>joined: </b> {{ user.joined }}</p>
+                        <p><b>last login: </b> {{ toDate(user.lastLogin) }}</p>
+                        <p><b>joined: </b> {{ toDate(user.joined) }}</p>
                     </dropdowncontent>
                 </listitem>
             </div>
@@ -34,6 +34,12 @@ export default {
     data() {
         return {
             users: []
+        }
+    },
+    methods: {
+        toDate(unix) {
+            let i = new Date(unix);
+            return i.toString();
         }
     },
     async created() {

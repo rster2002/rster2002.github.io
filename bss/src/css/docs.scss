@@ -235,7 +235,11 @@ body, html {
             width: 80%;
 
             .grid {
-                grid-template-columns: repeat(auto-fit, 50%);
+                display: block;
+
+                .item {
+                    margin: 16px 0px;
+                }
             }
         }
     }

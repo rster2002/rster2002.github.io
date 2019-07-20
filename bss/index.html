@@ -1,71 +1,28 @@
 <!DOCTYPE html>
+<html lang="en" dir="ltr">
 
-<html>
-    <head>
-        <title>Bluestone Script</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./src/css/index.css" />
-        <script src="./src/js/index.js"></script>
-        <link rel="icon" href="./src/img/favicon.png" />
-    </head>
-    <body>
-        <div class="app">
-            <div class="navbar">
-                <div class="titleContainer">
-                    <div class="iconContainer">
-                        <img src="./src/img/logo.png" />
-                    </div>
-                    <div class="textContainer">
-                        <h1>Bluestone Script</h1>
-                    </div>
-                </div>
-                <div class="controllsContainer">
-                    <div class="buttonContainer">
-                        <button onclick="location.href = './docs/'">docs</button>
-                        <button>showcase</button>
-                        <button class="primary" onclick="location.href = './docs/getting-started.html'">get started</button>
-                    </div>
-                </div>
-            </div>
-            <div class="contentWrapper">
-                <div class="header">
-                    <h1>Create datapacks <span>faster</span></h1>
-                </div>
-                <div class="infoCard" style="padding-top: 32px; padding-bottom: 32px">
-                    <h1>BSS makes it easier than ever to create quality datapacks with less code</h1>
-                    <div class="buttonContainer">
-                        <button class="primary" onclick="location.href = './docs/getting-started.html'">
-                            get started
-                        </button>
-                        <button onclick="location.href = './docs/index.html'">
-                            view docs
-                        </button>
-                    </div>
-                </div>
-                <div class="infoCard">
-                    <div class="col">
-                        <div class="imgWrapper">
-                            <img src="./src/svg/undraw_speed_test_wxl0.svg" />
-                        </div>
-                        <h1>Faster development</h1>
-                        <p>Using BSS allows you to get the same functionality that you already have, but with less code.</p>
-                    </div>
-                    <div class="col">
-                        <div class="imgWrapper">
-                            <img src="./src/svg/undraw_To_the_stars_qhyy.svg" />
-                        </div>
-                        <h1>High performance</h1>
-                        <p>BSS was made with performance in mind. So every line you write will be optimized to only execute when needed.</p>
-                    </div>
-                    <div class="col">
-                        <div class="imgWrapper">
-                            <img src="./src/svg/undraw_knowledge_g5gf.svg" />
-                        </div>
-                        <h1>Easy to addapt</h1>
-                        <p>Addapting BSS into your existing datapack is really easy. Things that you already wrote without BSS with work just fine with it.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#3a3133" />
+    <meta name="Description" content="The official website for the BSS compiler.">
+    <link rel="manifest" href="./manifest.json">
+
+    <title>Bluestone Script</title>
+    <!-- <link href="./mdi.css" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet"> -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-102147810-4"></script>
+    <script async src="./app.bundle.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./elevation.css" />
+    <link rel="icon" href="./src/img/favicon.png" />
+</head>
+
+<body>
+    <noscript>
+        JavaScript must be enabled to use this website.
+    </noscript>
+    <div id="app"></div>
+</body>
+
 </html>
