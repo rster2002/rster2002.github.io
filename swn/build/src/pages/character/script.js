@@ -1,17 +1,17 @@
 import marked from "marked";
 
 import { card, primaryTitle, actions, textbox, checkbox, popup, snackbar, searchbar } from "@components";
+import itemStats from "./components/itemStats.vue";
+
 import { user, genId } from "@js/global.js";
+import { fs } from "@js/firebase.js";
 
 import foci from "@json/foci.json";
-
 import equipment from "@json/equipment.js";
 import rangedWeapons from "@json/weapons/ranged.json";
 import companion from "@json/companion.json";
-
 import psionics from "@json/psionics.js";
 
-import { fs } from "@js/firebase.js";
 
 const equipmentBuild = {
     armor: {}
@@ -101,7 +101,15 @@ function rebuildCharacter(a) {
             i.selectedTechniques = i.selectedTechniques.map(a => {
                 console.log(a);
                 i.techniques[a.index].choicen = true;
-                return { ...obj.techniques[a.index], open: false };
+                return { ...obj.techniques[a.index], open: false, choicen: true, index: a.index };
+            });
+
+            i.techniques = i.techniques.map(a => {
+                if (a.choicen === undefined) {
+                    a.choicen = true;
+                }
+
+                return a;
             });
 
             return { ...i, open: false };
@@ -168,7 +176,8 @@ export default {
         checkbox,
         popup,
         snackbar,
-        searchbar
+        searchbar,
+        itemStats
     },
     data() {
         return {
@@ -211,6 +220,7 @@ export default {
                 xp: 0,
                 hp: 0,
                 hpMax: 0,
+                credits: 0,
                 attackBonus: 0,
                 customEquipment: {
                     name: "",
@@ -726,6 +736,7 @@ export default {
             t.choicen = true;
         },
         removeTechnique(p, t) {
+            console.log(p, t)
             p.techniques[t.index].choicen = false;
             p.techniques[t.index].open = false;
 

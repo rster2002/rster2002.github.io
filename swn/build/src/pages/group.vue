@@ -1,12 +1,16 @@
 <template>
     <div>
         <cardgrid>
-            <card d style="grid-column: 1 / 5; grid-row: 1 / 2">
+            <!-- <card d style="grid-column: 1 / 5; grid-row: 1 / 2">
                 <primaryTitle>
                     <h1>Group</h1>
                 </primaryTitle>
             </card>
             <card d style="grid-column: 5 / 13; grid-row: 1 / 2">
+                
+                
+            </card> -->
+            <card d style="grid-column: 11 / 13; grid-row: 1 / 2">
                 <primaryTitle>
                     <h1>Players</h1>
                 </primaryTitle>
@@ -21,20 +25,23 @@
 					</div>
 				</div>
             </card>
-            <card d style="grid-column: 5 / 13; grid-row: 2 / 3">
-                <div>
-                    <characterSheet :userUid="loadedCharacter.uid" :characterId="loadedCharacter.character">
-
-                    </characterSheet>
+            <div style="grid-column: 1 / 11; grid-row: 1 / 2">
+                <div class="characterSheetWrapper" v-if="loadedCharacter.character !== ''">
+                    <characterSheet :userUid="loadedCharacter.uid" :characterId="loadedCharacter.character"></characterSheet>
                 </div>
-            </card>
+                <empty class="emptyWrapper" v-if="loadedCharacter.character === ''">
+                    <h1>No character loaded</h1>
+                </empty>
+            </div>
         </cardgrid>
     </div>
 </template>
 
 <script>
-import { card, cardgrid, primaryTitle, dropdownindicator, dropdowncontent, actions } from "@components";
+import { card, cardgrid, primaryTitle, dropdownindicator, dropdowncontent, actions, empty } from "@components";
+
 import { fs, qu } from "@js/firebase.js";
+import { user } from "@js/global.js";
 
 import characterSheet from "./character.vue";
 
@@ -44,6 +51,12 @@ async function updatePage(t) {
     players = players.filter(a => {return a.character !== null});
     players = players.map(a => {return {...a, open: false}});
     t.players = players;
+
+    players.forEach(player => {
+        if (player.user.uid === user().uid && player.character !== null) {
+            t.openCharacter(player);
+        }
+    });
 
 }
 
@@ -55,7 +68,8 @@ export default {
         dropdownindicator,
         dropdowncontent,
         actions,
-        characterSheet
+        characterSheet,
+        empty
     },
     data() {
         return {
@@ -118,6 +132,28 @@ export default {
 
 .interactive {
     cursor: pointer;
+}
+
+.characterSheetWrapper .cardGrid {
+    padding: 0;
+}
+
+.emptyWrapper {
+    background-color: #fff;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12);
+    border-radius: standardRadius;
+
+    h1 {
+        font-family: defaultFont;
+        color: rgba(#000, 0.3);
+        margin: 0;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .characterSheetWrapper {
+        margin-right: -32px;
+    }
 }
 
 </style>
