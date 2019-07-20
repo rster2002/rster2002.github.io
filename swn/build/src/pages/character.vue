@@ -934,10 +934,10 @@
 				<div>
                     <!-- Readied items -->
 					<div class="listItem" v-for="item in readiedItems">
-						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }})</span></h1>
+						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }}, {{ item.magazinesLeft }}/{{ item.magazine }})</span></h1>
 						<transition name="contentDropdown">
 							<div v-if="item.open">
-                <itemStats :item="item" :c="c"></itemStats>
+                            <itemStats :item="item" :c="c"></itemStats>
 								<actions>
                                     <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft === 0" class="primary" @click="reloadWeapon(item)">reload weapon</button>
                                     <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft > 0" class="primary" @click="useRangedWeapon(item)">Use weapon</button>
@@ -955,7 +955,7 @@
 				<div>
                     <!-- Stowed items -->
 					<div class="listItem" v-for="item in stowedItems">
-						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }})</span></h1>
+						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }}, {{ item.magazinesLeft }}/{{ item.magazine }})</span></h1>
 						<transition name="contentDropdown">
 							<div v-if="item.open">
 								<itemStats :item="item" :c="c"></itemStats>
@@ -1006,6 +1006,28 @@
 										<transition name="contentDropdown">
 											<div v-if="item.open">
 												<itemStats :item="item" :c="c"></itemStats>
+												<actions>
+													<button class="primary" @click="addItem(item, 'stowed')">Add stowed</button>
+												</actions>
+											</div>
+										</transition>
+									</div>
+								</div>
+							</transition>
+						</card>
+                        <card style="position: relative;">
+							<primaryTitle>
+								<h1 @click="toggleVal(popup, 'misc')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: popup.misc }">arrow_drop_up</span> Ammo</h1>
+								<h2>Used to power those sweet guns</h2>
+							</primaryTitle>
+							<transition name="contentDropdown">
+								<div v-if="popup.misc">
+									<div class="listItem" v-for="item in content.ammo" :key="item.internalName">
+										<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
+										<transition name="contentDropdown">
+											<div v-if="item.open">
+												<itemStats :item="item" :c="c"></itemStats>
+                                                <textbox v-if="item.internalName.includes('bulletBox')" v-model="item.shots" @change="updateCost(item)" label="Shots" type="number"></textbox>
 												<actions>
 													<button class="primary" @click="addItem(item, 'stowed')">Add stowed</button>
 												</actions>
