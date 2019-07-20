@@ -10,8 +10,8 @@ import foci from "@json/foci.json";
 import equipment from "@json/equipment.js";
 import rangedWeapons from "@json/weapons/ranged.json";
 import companion from "@json/companion.json";
+import ammoItems from "@json/ammo.json";
 import psionics from "@json/psionics.js";
-
 
 const equipmentBuild = {
     armor: {}
@@ -85,6 +85,8 @@ function rebuildCharacter(a) {
                 if (a.magazinesLeft === undefined) {
                     add = { magazinesLeft: 0 }
                 }
+            } else if (a.equipmentType === "ammoItems") {
+                list = ammoItems;
             }
 
             let i = list[a.internalName];
@@ -135,6 +137,10 @@ function compressCharacter(a) {
 
         if (a.equipmentType === "rangedWeapon") {
             add = {magazinesLeft: a.magazinesLeft}
+        }
+
+        if (a.internalName.includes("bulletBox")) {
+            add = { shots: a.shots }
         }
 
         return {
@@ -199,7 +205,8 @@ export default {
                 psionics: [],
                 weapons: {
                     ranged: []
-                }
+                },
+                ammo: []
             },
             companion: [],
             query: "",
@@ -213,7 +220,8 @@ export default {
                 rangedWeapons: false,
                 search: false,
                 psionics: false,
-                breakdown: false
+                breakdown: false,
+                misc: false
             },
             info: {
                 ownerUid: "",
@@ -662,12 +670,18 @@ export default {
                 }
             }
 
+            var item = { ...a, $caried: b, open: false };
+
+            if (a.equipmentType === "rangedWeapon") {
+                item.magazinesLeft = item.magazine;
+            }
+
             if (allow) {
-                this.c.equipment.push({ ...a, $caried: b, open: false });
+                this.c.equipment.push(Object.assign({}, item));
             }
         },
-        deleteItem(a) {
-            if (confirm("Are you sure you want to delete this item from your inventory?")) {
+        deleteItem(a, b = false) {
+            if (b || confirm("Are you sure you want to delete this item from your inventory?")) {
                 var index = this.c.equipment.indexOf(a);
                 this.c.equipment.splice(index, 1);
             }
@@ -871,11 +885,53 @@ export default {
             this.popup.breakdown = true;
         },
         reloadWeapon(item) {
-            item.magazinesLeft = item.magazine;
+            var magazines = this.c.equipment.filter(a => a.internalName === "magazine" && a.$caried === "ready");
+            var bulletBoxes = this.c.equipment.filter(a => a.internalName.includes("bulletBox") && a.$caried === "ready" && a.forWeapon === undefined);
+            var specificBulletBoxes = this.c.equipment.filter(a => a.internalName.includes("bulletBox") && a.$caried === "ready" && a.forWeapon === item.internalName);
+
+            bulletBoxes = [...bulletBoxes, ...specificBulletBoxes];
+
+            if (magazines.length > 0) {
+                var magazine = magazines[0];
+                this.deleteItem(magazine, true);
+                item.magazinesLeft = item.magazine;
+            } else if (bulletBoxes.length > 0) {
+                var bulletsGot = 0;
+                var bulletsRequired = item.magazine;
+
+                var getBulletsFromBox = (i) => {
+                    var bulletBox = bulletBoxes[i];
+                    
+                    if (bulletsRequired <= bulletBox.shots) {
+                        bulletBox.shots -= bulletsRequired;
+                        item.magazinesLeft += bulletsRequired;
+                    } else if (bulletsRequired > bulletBox.shots) {
+                        item.magazinesLeft += bulletBox.shots;
+                        bulletsRequired -= bulletBox.shots;
+                        bulletBoxes.shift();
+                        this.deleteItem(bulletBox, true);
+                        if (bulletBoxes[0] !== undefined) {
+                            getBulletsFromBox(0);
+                        }
+                    }
+                }
+
+                getBulletsFromBox(0);
+            } else {
+                if (confirm("You don't bullets handy. Are you sure you want to violate the rules of the universe and reload your weapon.")) {
+                    item.magazinesLeft = item.magazine;
+                }
+            }
         },
         useRangedWeapon(item) {
             if (item.magazinesLeft > 0) {
                 item.magazinesLeft--;
+            }
+        },
+        updateCost(item) {
+            console.log(item);
+            if (item.equipmentType === "ammoItems") {
+                item.cost = item.basePrice * item.shots;
             }
         }
     },
@@ -919,6 +975,11 @@ export default {
                 this.content.psionics.push({ ...b, open: false });
                 psionicsBuild[a[0]] = b;
             });
+        });
+
+        var e = Object.entries(ammoItems);
+        e.forEach(a => {
+            this.content.ammo.push({...a[1], open: false});
         });
 
         updateInstance(this);

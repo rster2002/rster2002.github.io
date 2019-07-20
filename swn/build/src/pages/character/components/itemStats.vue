@@ -106,6 +106,19 @@
                 </div>
             </div>
         </div>
+        <div class="row" v-if="item.internalName.includes('bulletBox')">
+            <div class="stat">
+                <div class="mod">
+                    <h1>{{ item.shots }}</h1>
+                </div>
+                <div class="label">
+                    <p>Shots</p>
+                </div>
+            </div>
+        </div>
+        <div class="description" v-if="hasDescription">
+            <p>{{ item.description }}</p>
+        </div>
     </div>
 </template>
 
@@ -121,6 +134,11 @@ function toMod(a) {
 
 export default {
     props: ["item", "c"],
+    data() {
+        return {
+            hasDescription: false
+        }
+    },
     computed: {
         level() {
             // Calculates the current level of the player based on the xp
@@ -183,6 +201,12 @@ export default {
             } else if (s >= 18) {
                 return 1;
             }
+        }
+    },
+    created() {
+        console.log(this.item);
+        if (this.item.description !== undefined) {
+            this.hasDescription = true;
         }
     }
 }

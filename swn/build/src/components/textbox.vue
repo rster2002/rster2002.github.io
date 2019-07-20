@@ -30,8 +30,11 @@ export default {
 	watch: {
 		val() {
 			if (this.v !== this.val) {
-				this.v = this.val;
+                this.v = this.val;
 			}
+        },
+        value() {
+            this.$emit('change');
         }
 	},
 	methods: {
