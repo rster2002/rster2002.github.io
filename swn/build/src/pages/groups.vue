@@ -56,8 +56,8 @@
                     <h2>Let the adventure begin!</h2>
                 </primaryTitle>
                 <div>
-                    <textbox class="lessMargin" @change="processChange" vname="name" label="Name" maxlength=32 helpertext="* required"></textbox>
-                    <textbox class="lessMargin" @change="processChange" vname="description" label="Description" maxlength=200 type="textarea"></textbox>
+                    <textbox class="lessMargin" v-model="newGroup.name" label="Name" maxlength=32 helpertext="* required"></textbox>
+                    <textbox class="lessMargin" v-model="newGroup.description" label="Description" maxlength=200 type="textarea"></textbox>
                 </div>
                 <actions>
                     <button @click="postGroup()" class="primary">Create</button>
@@ -210,7 +210,7 @@ export default {
         },
         async joinGroup() {
             var id = this.joinId;
-            id = "group-lFE11QpfuBJrn7y9ov2A1ypCNHmHPBsI";
+            id = "group-FRSJ3a41Wot3eQxetG0AuzTbGHF4Ea8Q";
             var query = await qu(fs.collection("groups").where("id", "==", id));
 
 

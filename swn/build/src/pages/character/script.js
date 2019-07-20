@@ -1,17 +1,17 @@
 import marked from "marked";
 
 import { card, primaryTitle, actions, textbox, checkbox, popup, snackbar, searchbar } from "@components";
+import itemStats from "./components/itemStats.vue";
+
 import { user, genId } from "@js/global.js";
+import { fs } from "@js/firebase.js";
 
 import foci from "@json/foci.json";
-
 import equipment from "@json/equipment.js";
 import rangedWeapons from "@json/weapons/ranged.json";
 import companion from "@json/companion.json";
-
 import psionics from "@json/psionics.js";
 
-import { fs } from "@js/firebase.js";
 
 const equipmentBuild = {
     armor: {}
@@ -24,6 +24,14 @@ function updateInstance(t) {
     var params = t.$route.params;
     t.info.ownerUid = params.ownerUid;
     t.info.characterId = params.characterId;
+
+    if (t.userUid !== undefined) {
+        t.info.ownerUid = t.userUid;
+    }
+
+    if (t.characterId !== undefined) {
+        t.info.characterId = t.characterId;
+    }
 
     if (user().uid === t.info.ownerUid) {
         t.m.allowEdit = true;
@@ -49,12 +57,14 @@ function updateInstance(t) {
         }
     }
 
-    fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").get().then(a => {
-        if (a && a.exists) {
-            var d = a.data();
-            fill(t.c, rebuildCharacter(d));
-        }
-    });
+    if (t.info.ownerUid !== "" && t.info.characterId !== "") {
+        fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").get().then(a => {
+            if (a && a.exists) {
+                var d = a.data();
+                fill(t.c, rebuildCharacter(d));
+            }
+        });
+    }
 }
 
 function rebuildCharacter(a) {
@@ -96,7 +106,15 @@ function rebuildCharacter(a) {
             i.selectedTechniques = i.selectedTechniques.map(a => {
                 console.log(a);
                 i.techniques[a.index].choicen = true;
-                return { ...obj.techniques[a.index], open: false };
+                return { ...obj.techniques[a.index], open: false, choicen: true, index: a.index };
+            });
+
+            i.techniques = i.techniques.map(a => {
+                if (a.choicen === undefined) {
+                    a.choicen = true;
+                }
+
+                return a;
             });
 
             return { ...i, open: false, showPopup: false };
@@ -161,6 +179,7 @@ function toMod(a) {
 }
 
 export default {
+    props: ["userUid", "characterId"],
     components: {
         card,
         primaryTitle,
@@ -169,7 +188,8 @@ export default {
         checkbox,
         popup,
         snackbar,
-        searchbar
+        searchbar,
+        itemStats
     },
     data() {
         return {
@@ -212,6 +232,7 @@ export default {
                 xp: 0,
                 hp: 0,
                 hpMax: 0,
+                credits: 0,
                 attackBonus: 0,
                 customEquipment: {
                     name: "",
@@ -727,6 +748,7 @@ export default {
             t.choicen = true;
         },
         removeTechnique(p, t) {
+            console.log(p, t)
             p.techniques[t.index].choicen = false;
             p.techniques[t.index].open = false;
 
@@ -859,6 +881,9 @@ export default {
     },
     watch: {
         "$route": function () {
+            updateInstance(this);
+        },
+        userUid() {
             updateInstance(this);
         }
     },

@@ -29,7 +29,7 @@
                     </button>
                 </actions>
             </card>
-            <card style="grid-column: 3 / 8; grid-row: 2 / 3;">
+            <card style="grid-column: 6 / 11; grid-row: 2 / 3;">
                 <div class="img" style="
                     background-image: url(./build/src/images/groups.jpg);
                     background-position: 0% 57%"></div>
@@ -37,6 +37,20 @@
                     <h1>Groups</h1>
                 </primaryTitle>
                 <p>Team up with others and explore the universe</p>
+                <actions>
+                    <button @click="changeTo('groups')" disabled>
+                        work in progress
+                    </button>
+                </actions>
+            </card>
+            <card style="grid-column: 3 / 6; grid-row: 2 / 3;">
+                <div class="img" style="
+                    background-image: url(https://i.pinimg.com/564x/dd/d7/a6/ddd7a625ceb31b0462486d59fb861bd5.jpg);
+                    background-position: 0% 58%"></div>
+                <primaryTitle>
+                    <h1>Homebrew</h1>
+                </primaryTitle>
+                <p>Find homebrew equipment and stories</p>
                 <actions>
                     <button @click="changeTo('groups')" disabled>
                         work in progress
