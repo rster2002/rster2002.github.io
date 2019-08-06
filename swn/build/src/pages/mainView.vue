@@ -52,6 +52,7 @@ gtag("js", new Date());
 
 gtag("config", "UA-102147810-4");
 
+import { fs } from "@js/firebase.js"
 import { env } from "@js/global.js";
 
 function routeUpdate(t, to, from) {
@@ -65,6 +66,12 @@ function routeUpdate(t, to, from) {
 			u.username = user.displayName;
 			u.icon = user.photoURL;
 			u.email = user.email;
+
+            fs.collection("users")
+                .doc(user.uid)
+                .update({
+                    lastLogin: Date.now()
+                });
 
 			sessionStorage.setItem("u", JSON.stringify({
 				uid: user.uid,

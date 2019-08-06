@@ -961,6 +961,7 @@
 								<itemStats :item="item" :c="c"></itemStats>
 								<actions>
 									<button class="primary" @click="readyItem(item)">Ready item</button>
+                                    <button @click="storeItem()">store item</button>
 									<button @click="deleteItem(item)">Delete item</button>
 								</actions>
 							</div>
@@ -1053,6 +1054,33 @@
 					</div>
 				</popup>
 			</card>
+            <!-- Containers -->
+            <card d style="grid-column: 1 / 5; grid-row: 7 / 8;">
+                <primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+					<h1><span v-if="c.settings.showTitles">Containers</span></h1>
+				</primaryTitle>
+                <div>
+                    <div class="listItem" v-for="container in c.containers">
+                        <h1 style="cursor: pointer;" @click="container.open = !container.open"><dropdownindicator :val="container.open"></dropdownindicator> {{ container.name }}</h1>
+                        <dropdowncontent :show="container.open">
+                            <div class="listItem" v-for="item in container.items">
+                                <h1><dropdownindicator :val="item.open"></dropdownindicator> {{ item.name }}</h1>
+                                <dropdowncontent :show="item.open">
+
+                                </dropdowncontent>
+                            </div>
+                            <textbox v-model="container.name" label="Container name"></textbox>
+                            <textbox v-model="container.size" label="Size" type="number"></textbox>
+                            <actions>
+                                <button>delete container</button>
+                            </actions>
+                        </dropdowncontent>
+                    </div>
+                </div>
+                <actions>
+                    <button @click="addContainer()">Add container</button>
+                </actions>
+            </card>
             <!-- Credits -->
             <card d style="grid-column: 5 / 7;" :class="{ e: c.settings.usePsionics, b: !c.settings.usePsionics }">
                 <primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">

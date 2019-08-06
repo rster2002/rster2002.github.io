@@ -136,7 +136,7 @@ function compressCharacter(a) {
         let add = {};
 
         if (a.equipmentType === "rangedWeapon") {
-            add = {magazinesLeft: a.magazinesLeft}
+            add = { magazinesLeft: a.magazinesLeft }
         }
 
         if (a.internalName.includes("bulletBox")) {
@@ -901,7 +901,7 @@ export default {
 
                 var getBulletsFromBox = (i) => {
                     var bulletBox = bulletBoxes[i];
-                    
+
                     if (bulletsRequired <= bulletBox.shots) {
                         bulletBox.shots -= bulletsRequired;
                         item.magazinesLeft += bulletsRequired;
@@ -979,7 +979,7 @@ export default {
 
         var e = Object.entries(ammoItems);
         e.forEach(a => {
-            this.content.ammo.push({...a[1], open: false});
+            this.content.ammo.push({ ...a[1], open: false });
         });
 
         updateInstance(this);

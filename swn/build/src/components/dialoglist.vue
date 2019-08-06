@@ -17,7 +17,7 @@
 
 <script>
 export default {
-    props: ["show", "title"],
+    props: ["show", "title", "value"],
     data() {
         return {
             internalShow: false
