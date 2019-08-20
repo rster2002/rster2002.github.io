@@ -8,6 +8,7 @@ import empty from "./components/empty.vue";
 import fab from "./components/fab.vue";
 import textbox from "./components/textbox.vue";
 import checkbox from "./components/checkbox.vue";
+import checkboxinput from "./components/checkboxinput.vue";
 import radiobox from "./components/radiobox.vue";
 
 import appbar from "./components/appBar.vue";
@@ -58,5 +59,6 @@ export {
     listitem,
     radiobox,
     dropdownindicator,
-    dropdowncontent
+    dropdowncontent,
+    checkboxinput
 }

@@ -1,0 +1,149 @@
+{
+    "Small_primitive_weapon": {
+        "equipmentType": "meleeWeapon",
+        "tl": 0,
+        "enc": 1,
+        "cost": 0,
+        "attr": "Str/Dex",
+        "shock": {
+            "ac": "15",
+            "dmg": "1"
+        },
+        "dmg": {
+            "die": "1d4",
+            "mod": 0
+        },
+        "name": "Small primitive weapon",
+        "internalName": "Small_primitive_weapon"
+    },
+    "Medium_primitive_weapon": {
+        "equipmentType": "meleeWeapon",
+        "tl": 0,
+        "enc": 1,
+        "cost": 20,
+        "attr": "Str/Dex",
+        "shock": {
+            "ac": "13",
+            "dmg": "2"
+        },
+        "dmg": {
+            "die": "1d6",
+            "mod": 1
+        },
+        "name": "Medium primitive weapon",
+        "internalName": "Medium_primitive_weapon"
+    },
+    "Large_primitive_weapon": {
+        "equipmentType": "meleeWeapon",
+        "tl": 0,
+        "enc": 2,
+        "cost": 30,
+        "attr": "Str",
+        "shock": {
+            "ac": "15",
+            "dmg": "2"
+        },
+        "dmg": {
+            "die": "1d8",
+            "mod": 1
+        },
+        "name": "Large primitive weapon",
+        "internalName": "Large_primitive_weapon"
+    },
+    "Small_advanced_weapon": {
+        "equipmentType": "meleeWeapon",
+        "tl": 4,
+        "enc": 1,
+        "cost": 40,
+        "attr": "Str/Dex",
+        "shock": {
+            "ac": "15",
+            "dmg": "1"
+        },
+        "dmg": {
+            "die": "1d6",
+            "mod": 0
+        },
+        "name": "Small advanced weapon",
+        "internalName": "Small_advanced_weapon"
+    },
+    "Medium_advanced_weapon": {
+        "equipmentType": "meleeWeapon",
+        "tl": 4,
+        "enc": 1,
+        "cost": 60,
+        "attr": "Str/Dex",
+        "shock": {
+            "ac": "13",
+            "dmg": "2"
+        },
+        "dmg": {
+            "die": "1d8",
+            "mod": 1
+        },
+        "name": "Medium advanced weapon",
+        "internalName": "Medium_advanced_weapon"
+    },
+    "Large_advanced_weapon": {
+        "equipmentType": "meleeWeapon",
+        "tl": 4,
+        "enc": 2,
+        "cost": 80,
+        "attr": "Str",
+        "shock": {
+            "ac": "15",
+            "dmg": "2"
+        },
+        "dmg": {
+            "die": "1d10",
+            "mod": 1
+        },
+        "name": "Large advanced weapon",
+        "internalName": "Large_advanced_weapon"
+    },
+    "Stun_baton": {
+        "equipmentType": "meleeWeapon",
+        "tl": 4,
+        "enc": 1,
+        "cost": 50,
+        "attr": "Str/Dex",
+        "shock": {
+            "ac": "15",
+            "dmg": "1"
+        },
+        "dmg": {
+            "die": "1d8",
+            "mod": 0
+        },
+        "name": "Stun baton",
+        "internalName": "Stun_baton"
+    },
+    "Suit_ripper": {
+        "equipmentType": "meleeWeapon",
+        "tl": 4,
+        "enc": 1,
+        "cost": 75,
+        "attr": "Str/Dex",
+        "shock": null,
+        "dmg": {
+            "die": "1d6",
+            "mod": 0
+        },
+        "name": "Suit ripper",
+        "internalName": "Suit_ripper"
+    },
+    "Unarmed_attack": {
+        "equipmentType": "meleeWeapon",
+        "tl": null,
+        "enc": null,
+        "cost": null,
+        "attr": "Str/Dex",
+        "shock": null,
+        "dmg": {
+            "die": "1d2",
+            "mod": 0
+        },
+        "name": "Unarmed attack",
+        "internalName": "Unarmed_attack"
+    }
+}
