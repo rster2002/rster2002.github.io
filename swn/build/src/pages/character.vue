@@ -942,7 +942,7 @@
                                     <actions>
                                         <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft === 0" class="primary" @click="reloadWeapon(item)">reload weapon</button>
                                         <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft > 0" class="primary" @click="useRangedWeapon(item)">Use weapon</button>
-                                        <button v-if="item.equipmentType === 'rangedWeapon'" @click="stowItem(item)">Stow item</button>
+                                        <button @click="stowItem(item)">Stow item</button>
                                         <!-- <button v-if="item.equipmentType !== 'rangedWeapon'" class="primary" @click="stowItem(item)">Stow item</button> -->
                                         <button @click="item.edit = true">Edit Item</button>
                                         <button @click="deleteItem(item)">Delete item</button>
