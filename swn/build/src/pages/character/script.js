@@ -2,6 +2,7 @@ import marked from "marked";
 
 import { card, primaryTitle, actions, textbox, checkbox, popup, snackbar, searchbar } from "@components";
 import itemStats from "./components/itemStats.vue";
+import itemEditor from "./components/itemEditor.vue";
 
 import { user, genId } from "@js/global.js";
 import { fs } from "@js/firebase.js";
@@ -9,6 +10,7 @@ import { fs } from "@js/firebase.js";
 import foci from "@json/foci.json";
 import equipment from "@json/equipment.js";
 import rangedWeapons from "@json/weapons/ranged.json";
+import meleeWeapons from "@json/weapons/melee.json";
 import companion from "@json/companion.json";
 import ammoItems from "@json/ammo.json";
 import psionics from "@json/psionics.js";
@@ -81,16 +83,21 @@ function rebuildCharacter(a) {
                 list = equipmentBuild.armor;
             } else if (a.equipmentType === "rangedWeapon") {
                 list = rangedWeapons;
-                console.log(a);
                 if (a.magazinesLeft === undefined) {
-                    add = { magazinesLeft: 0 }
+                    add = { magazinesLeft: 0 };
+                }
+            } else if (a.equipmentType === "meleeWeapon") {
+                list = meleeWeapons;
+                if (a.skill === undefined) {
+                    add = { skill: "stab" };
                 }
             } else if (a.equipmentType === "ammoItems") {
                 list = ammoItems;
             }
 
-            let i = list[a.internalName];
-            return { ...Object.assign(i, a), ...add, open: false };
+            let i = a.customItem === undefined ? list[a.internalName] : {};
+            
+            return { ...Object.assign(i, a), ...add, open: false, edit: false };
         });
     }
 
@@ -135,19 +142,27 @@ function compressCharacter(a) {
     r.equipment = a.equipment.map(a => {
         let add = {};
 
-        if (a.equipmentType === "rangedWeapon") {
-            add = { magazinesLeft: a.magazinesLeft }
-        }
-
-        if (a.internalName.includes("bulletBox")) {
-            add = { shots: a.shots }
-        }
-
-        return {
-            "$caried": a.$caried,
-            equipmentType: a.equipmentType,
-            internalName: a.internalName,
-            ...add
+        if (a.customItem === undefined) {
+            if (a.equipmentType === "rangedWeapon") {
+                add = { magazinesLeft: a.magazinesLeft }
+            }
+    
+            if (a.equipmentType === "meleeWeapon") {
+                add = { skill: a.skill };
+            }
+    
+            if (a.internalName.includes("bulletBox")) {
+                add = { shots: a.shots }
+            }
+    
+            return {
+                "$caried": a.$caried,
+                equipmentType: a.equipmentType,
+                internalName: a.internalName,
+                ...add
+            }
+        } else if (a.customItem === true) {
+            return a;
         }
     });
 
@@ -195,7 +210,8 @@ export default {
         popup,
         snackbar,
         searchbar,
-        itemStats
+        itemStats,
+        itemEditor
     },
     data() {
         return {
@@ -204,7 +220,8 @@ export default {
                 equipment: [],
                 psionics: [],
                 weapons: {
-                    ranged: []
+                    ranged: [],
+                    melee: []
                 },
                 ammo: []
             },
@@ -218,6 +235,7 @@ export default {
                 equipment: false,
                 armor: false,
                 rangedWeapons: false,
+                meleeWeapons: false,
                 search: false,
                 psionics: false,
                 breakdown: false,
@@ -399,13 +417,13 @@ export default {
         totalStowedItems() {
             // The total enc of items the player has readied
             var s = 0;
-            this.stowedItems.forEach(a => s += a.enc);
+            this.stowedItems.forEach(a => a.enc !== null ? s += a.enc : s += 0);
             return s;
         },
         totalReadiedItems() {
             // The total enc of items the player has stowed
             var s = 0;
-            this.readiedItems.forEach(a => s += a.enc);
+            this.readiedItems.forEach(a => a.enc !== null ? s += a.enc : s += 0);
             return s;
         },
         equipedArmor() {
@@ -670,7 +688,7 @@ export default {
                 }
             }
 
-            var item = { ...a, $caried: b, open: false };
+            var item = { ...a, $caried: b, open: false, edit: false };
 
             if (a.equipmentType === "rangedWeapon") {
                 item.magazinesLeft = item.magazine;
@@ -933,6 +951,30 @@ export default {
             if (item.equipmentType === "ammoItems") {
                 item.cost = item.basePrice * item.shots;
             }
+        },
+        mutate(a, b) {
+
+            function fill(a, b) {
+                if (Array.isArray(b)) {
+                    b.forEach(c => a.push(c));
+                } else {
+                    var entries = Object.entries(b);
+
+                    entries.forEach(ent => {
+                        if (ent[1] === null) {
+                            a[ent[0]] = ent[1];
+                        } else if (typeof ent[1] === "object") {
+                            fill(a[ent[0]], ent[1]);
+                        } else {
+                            if (a !== undefined) {
+                                a[ent[0]] = ent[1];
+                            }
+                        }
+                    });
+                }
+            }
+
+            fill(a, b);
         }
     },
     watch: {
@@ -962,6 +1004,11 @@ export default {
         var e = Object.entries(rangedWeapons);
         e.forEach(a => {
             this.content.weapons.ranged.push({ ...a[1], open: false });
+        });
+
+        var e = Object.entries(meleeWeapons);
+        e.forEach(a => {
+            this.content.weapons.melee.push({ ...a[1], open: false, skill: "stab" });
         });
 
         var e = Object.entries(companion);

@@ -13,7 +13,10 @@
             "normal": 150,
             "max": 300
         },
-        "dmg": "1d8",
+        "dmg": {
+            "die": "1d8",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "grenade": {
@@ -30,7 +33,10 @@
             "normal": 10,
             "max": 30
         },
-        "dmg": "2d6",
+        "dmg": {
+            "die": "2d6",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "crude_pistol": {
@@ -47,7 +53,10 @@
             "normal": 5,
             "max": 15
         },
-        "dmg": "1d6",
+        "dmg": {
+            "die": "1d6",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "musket": {
@@ -64,7 +73,10 @@
             "normal": 25,
             "max": 50
         },
-        "dmg": "1d12",
+        "dmg": {
+            "die": "1d12",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "revolver": {
@@ -81,7 +93,10 @@
             "normal": 30,
             "max": 100
         },
-        "dmg": "1d8",
+        "dmg": {
+            "die": "1d8",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "rifle": {
@@ -98,7 +113,10 @@
             "normal": 200,
             "max": 400
         },
-        "dmg": "1d10+2",
+        "dmg": {
+            "die": "1d10",
+            "mod": 2
+        },
         "equipmentType": "rangedWeapon"
     },
     "shotgun": {
@@ -115,7 +133,10 @@
             "normal": 10,
             "max": 30
         },
-        "dmg": "3d4",
+        "dmg": {
+            "die": "3d4",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "semi-auto_pistol": {
@@ -132,7 +153,10 @@
             "normal": 30,
             "max": 100
         },
-        "dmg": "1d6+1",
+        "dmg": {
+            "die": "1d6",
+            "mod": 1
+        },
         "equipmentType": "rangedWeapon"
     },
     "submachine_gun": {
@@ -149,7 +173,10 @@
             "normal": 30,
             "max": 100
         },
-        "dmg": "1d8",
+        "dmg": {
+            "die": "1d8",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "combat_rifle": {
@@ -166,7 +193,10 @@
             "normal": 100,
             "max": 300
         },
-        "dmg": "1d12",
+        "dmg": {
+            "die": "1d12",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "combat_shotgun": {
@@ -183,7 +213,10 @@
             "normal": 10,
             "max": 30
         },
-        "dmg": "3d4",
+        "dmg": {
+            "die": "3d4",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "sniper_rifle": {
@@ -197,10 +230,13 @@
         "reloadTime": 1,
         "cost": 400,
         "range": {
-            "normal": 1000,
-            "max": 2000
+            "normal": null,
+            "max": null
         },
-        "dmg": "2d8",
+        "dmg": {
+            "die": "2d8",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "void_carbine": {
@@ -217,7 +253,10 @@
             "normal": 100,
             "max": 300
         },
-        "dmg": "2d6",
+        "dmg": {
+            "die": "2d6",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "mag_pistol": {
@@ -234,7 +273,10 @@
             "normal": 100,
             "max": 300
         },
-        "dmg": "2d6+2",
+        "dmg": {
+            "die": "2d6",
+            "mod": 2
+        },
         "equipmentType": "rangedWeapon"
     },
     "mag_rifle": {
@@ -251,7 +293,10 @@
             "normal": 300,
             "max": 600
         },
-        "dmg": "2d8+2",
+        "dmg": {
+            "die": "2d8",
+            "mod": 2
+        },
         "equipmentType": "rangedWeapon"
     },
     "spike_thrower": {
@@ -268,7 +313,10 @@
             "normal": 20,
             "max": 40
         },
-        "dmg": "3d8",
+        "dmg": {
+            "die": "3d8",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "laser_pistol": {
@@ -285,7 +333,10 @@
             "normal": 100,
             "max": 300
         },
-        "dmg": "1d6",
+        "dmg": {
+            "die": "1d6",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "laser_rifle": {
@@ -302,7 +353,10 @@
             "normal": 300,
             "max": 500
         },
-        "dmg": "1d10",
+        "dmg": {
+            "die": "1d10",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "thermal_pistol": {
@@ -319,7 +373,10 @@
             "normal": 25,
             "max": 50
         },
-        "dmg": "2d6",
+        "dmg": {
+            "die": "2d6",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "plasma_projector": {
@@ -336,7 +393,10 @@
             "normal": 50,
             "max": 100
         },
-        "dmg": "2d8",
+        "dmg": {
+            "die": "2d8",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "shear_rifle": {
@@ -353,7 +413,10 @@
             "normal": 100,
             "max": 300
         },
-        "dmg": "2d8",
+        "dmg": {
+            "die": "2d8",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "thunder_gun": {
@@ -370,7 +433,10 @@
             "normal": 100,
             "max": 300
         },
-        "dmg": "2d10",
+        "dmg": {
+            "die": "2d10",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     },
     "distortion_cannon": {
@@ -387,7 +453,10 @@
             "normal": 100,
             "max": 300
         },
-        "dmg": "2d12",
+        "dmg": {
+            "die": "2d12",
+            "mod": 0
+        },
         "equipmentType": "rangedWeapon"
     }
 }

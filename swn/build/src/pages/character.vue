@@ -937,14 +937,20 @@
 						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }}, {{ item.magazinesLeft }}/{{ item.magazine }})</span></h1>
 						<transition name="contentDropdown">
 							<div v-if="item.open">
-                            <itemStats :item="item" :c="c"></itemStats>
-								<actions>
-                                    <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft === 0" class="primary" @click="reloadWeapon(item)">reload weapon</button>
-                                    <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft > 0" class="primary" @click="useRangedWeapon(item)">Use weapon</button>
-                                    <button v-if="item.equipmentType === 'rangedWeapon'" @click="stowItem(item)">Stow item</button>
-									<button v-if="item.equipmentType !== 'rangedWeapon'" class="primary" @click="stowItem(item)">Stow item</button>
-									<button @click="deleteItem(item)">Delete item</button>
-								</actions>
+                                <div v-if="item.edit === false">
+                                    <itemStats :item="item" :c="c"></itemStats>
+                                    <actions>
+                                        <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft === 0" class="primary" @click="reloadWeapon(item)">reload weapon</button>
+                                        <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft > 0" class="primary" @click="useRangedWeapon(item)">Use weapon</button>
+                                        <button v-if="item.equipmentType === 'rangedWeapon'" @click="stowItem(item)">Stow item</button>
+                                        <!-- <button v-if="item.equipmentType !== 'rangedWeapon'" class="primary" @click="stowItem(item)">Stow item</button> -->
+                                        <button @click="item.edit = true">Edit Item</button>
+                                        <button @click="deleteItem(item)">Delete item</button>
+                                    </actions>
+                                </div>
+                                <div v-else>
+                                    <itemEditor :value="item" @save="mutate(item, $event)" @discard="item.edit = false"></itemEditor>
+                                </div>
 							</div>
 						</transition>
 					</div>
@@ -958,12 +964,18 @@
 						<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }} <span v-if="item.equipmentType === 'rangedWeapon'">({{ attackBonus(item) }}, {{ item.magazinesLeft }}/{{ item.magazine }})</span></h1>
 						<transition name="contentDropdown">
 							<div v-if="item.open">
-								<itemStats :item="item" :c="c"></itemStats>
-								<actions>
-									<button class="primary" @click="readyItem(item)">Ready item</button>
-                                    <button @click="storeItem()">store item</button>
-									<button @click="deleteItem(item)">Delete item</button>
-								</actions>
+                                <div v-if="item.edit === false">
+                                    <itemStats :item="item" :c="c"></itemStats>
+                                    <actions>
+                                        <button class="primary" @click="readyItem(item)">Ready item</button>
+                                        <!-- <button @click="storeItem()">store item</button> -->
+                                        <button @click="item.edit = true">Edit Item</button>
+                                        <button @click="deleteItem(item)">Delete item</button>
+                                    </actions>
+                                </div>
+                                <div v-else>
+                                    <itemEditor :value="item" @save="mutate(item, $event)" @discard="item.edit = false"></itemEditor>
+                                </div>
 							</div>
 						</transition>
 					</div>
@@ -986,6 +998,31 @@
 										<transition name="contentDropdown">
 											<div v-if="item.open">
 												<itemStats :item="item" :c="c"></itemStats>
+												<actions>
+													<button class="primary" @click="addItem(item, 'stowed')">Add stowed</button>
+												</actions>
+											</div>
+										</transition>
+									</div>
+								</div>
+							</transition>
+						</card>
+                        <card style="position: relative;">
+							<primaryTitle>
+								<h1 @click="toggleVal(popup, 'meleeWeapons')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: popup.meleeWeapons }">arrow_drop_up</span> Melee weapons</h1>
+								<h2>Oh hi... BAM</h2>
+							</primaryTitle>
+							<transition name="contentDropdown">
+								<div v-if="popup.meleeWeapons">
+									<div class="listItem" v-for="item in content.weapons.melee" :key="item.internalName">
+										<h1 @click="toggleVal(item, 'open')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: item.open }">arrow_drop_up</span> {{ item.name }}</h1>
+										<transition name="contentDropdown">
+											<div v-if="item.open">
+												<itemStats :item="item" :c="c"></itemStats>
+                                                <textbox v-model="item.skill" label="Skill" type="select">
+                                                    <option>stab</option>
+                                                    <option>punch</option>
+                                                </textbox>
 												<actions>
 													<button class="primary" @click="addItem(item, 'stowed')">Add stowed</button>
 												</actions>

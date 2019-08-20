@@ -74,7 +74,22 @@ sections.forEach(s => {
 		if (dmg.includes("*")) {
 			burstFire = true;
 			dmg = dmg.replace("*", "");
-		}
+        }
+        
+        if (dmg.includes("+")) {
+            dmg = dmg.split("+");
+
+            dmg = {
+                die: dmg[0],
+                mod: Number(dmg[1])
+            };
+
+        } else {
+            dmg = {
+                die: dmg,
+                mod: 0
+            };
+        }
 
 		let name = a.join(" ");
 
