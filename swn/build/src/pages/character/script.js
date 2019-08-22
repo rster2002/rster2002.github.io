@@ -1,8 +1,10 @@
 import marked from "marked";
 
-import { card, primaryTitle, actions, textbox, checkbox, popup, snackbar, searchbar } from "@components";
+import { card, primaryTitle, actions, textbox, checkbox, popup, snackbar, searchbar, confirmationdialog } from "@components";
 import itemStats from "./components/itemStats.vue";
 import itemEditor from "./components/itemEditor.vue";
+
+import toi from "./components/toi.vue";
 
 import { user, genId } from "@js/global.js";
 import { fs } from "@js/firebase.js";
@@ -75,10 +77,14 @@ function rebuildCharacter(a) {
 
     console.log(a);
 
+    // Checks whether of not the object form the database contains equipment or not
     if (a.equipment !== undefined) {
+        // Adds additional information about the item
         a.equipment = a.equipment.map(a => {
             var list;
             var add = {};
+
+            // Checks what list to use to look in when searching for the additional data and any additional information that it should add to the equipment object
             if (a.equipmentType === "armor") {
                 list = equipmentBuild.armor;
             } else if (a.equipmentType === "rangedWeapon") {
@@ -95,8 +101,10 @@ function rebuildCharacter(a) {
                 list = ammoItems;
             }
 
+            // Checks whether or not it should search a list for additional data. It should NOT search when its a custom item, because the internal name is random and does not match anywhere
             let i = a.customItem === undefined ? list[a.internalName] : {};
             
+            // Adds some additional values used by the UI (vue)
             return { ...Object.assign(i, a), ...add, open: false, edit: false };
         });
     }
@@ -109,21 +117,27 @@ function rebuildCharacter(a) {
 
     if (a.psionics !== undefined) {
         a.psionics = a.psionics.map(a => {
+            // Gets the base obj form the app
             var obj = psionicsBuild[a.internalTitle];
-            console.log(obj);
-            let i = Object.assign(obj, a);
-            i.selectedTechniques = i.selectedTechniques.map(a => {
-                console.log(a);
-                i.techniques[a.index].choicen = true;
-                return { ...obj.techniques[a.index], open: false, choicen: true, index: a.index };
-            });
 
+            // Replaces any base data, with data from the database
+            let i = Object.assign(obj, a);
+
+            // validates and repairs techniques where needed
             i.techniques = i.techniques.map(a => {
                 if (a.choicen === undefined) {
-                    a.choicen = true;
+                    a.choicen = false;
                 }
 
-                return a;
+                return {...a, open: false};
+            });
+
+            // Rebuilds techniques
+            i.selectedTechniques = i.selectedTechniques.map(technique => {
+                console.log(technique);
+                // If a technique is choicen, it should not show up in the 'add technique' list
+                i.techniques[technique.index].choicen = true;
+                return { ...obj.techniques[technique.index], open: false, choicen: true, index: technique.index };
             });
 
             return { ...i, open: false, showPopup: false };
@@ -211,7 +225,9 @@ export default {
         snackbar,
         searchbar,
         itemStats,
-        itemEditor
+        itemEditor,
+        confirmationdialog,
+        toi
     },
     data() {
         return {
@@ -274,7 +290,8 @@ export default {
                     showSteps: false,
                     showDetails: false,
                     useManual: false,
-                    showBreakdown: false
+                    showBreakdown: false,
+                    compactButtons: false
                 },
                 manual: {
                     ac: 10,
@@ -488,6 +505,7 @@ export default {
             return marked(a, { sanitize: true });
         },
         toggleVal(a, b) {
+            console.log(a, b);
             a[b] = !a[b];
         },
         test() {
@@ -677,7 +695,10 @@ export default {
             }
         },
         addItem(a, b) {
+            // Method for adding an item from the item list
             let allow = false;
+
+            // Checks how the item should be added and checks whether when it adds the item, exeeds the max allowance
             if (b === "stowed") {
                 if (this.totalStowedItems + a.enc <= this.c.attributes.str + 4) {
                     allow = true;
@@ -688,26 +709,33 @@ export default {
                 }
             }
 
+            // Adds some standard values used by vue (will not be stored)
             var item = { ...a, $caried: b, open: false, edit: false };
 
+            // If the item is of equipment type 'rangedWeapon', it sets its magazines left to the max size of one magazine
             if (a.equipmentType === "rangedWeapon") {
                 item.magazinesLeft = item.magazine;
             }
 
+            // Adds the item to the equipment of the character if all checks passed
             if (allow) {
                 this.c.equipment.push(Object.assign({}, item));
             }
         },
         deleteItem(a, b = false) {
+            // Checks with the user if they want to delete the item. The confirm can be overwritten by setting the second parameter to true
             if (b || confirm("Are you sure you want to delete this item from your inventory?")) {
                 var index = this.c.equipment.indexOf(a);
                 this.c.equipment.splice(index, 1);
             }
         },
         readyItem(a) {
+            // Checks whether or not the user can ready the item
             if ((this.totalReadiedItems - 2) + a.enc <= this.readyEnc) {
+                // Checks whether the user already has armor equiped (readied)
                 if (a.equipmentType === "armor" && this.equipedArmor) {
                     if (Array.isArray(this.equipedArmor) === false) {
+                        // Checks whether or now the armor piece that is about to be readied has a bonus score. If it has, it allows it to be added
                         if (a.bonus > 0 || this.equipedArmor.bonus > 0) {
                             a.open = false;
                             a.$caried = "ready";
@@ -718,57 +746,88 @@ export default {
                         alert("You can only equip one set of armor");
                     }
                 } else {
+                    // If the equipment is not armor, it closes the dropdown content and sets the caried state to 'ready'
                     a.open = false;
                     a.$caried = "ready";
                 }
             }
         },
         stowItem(a) {
+            // Checks whether or not the user can stow the item
             if ((this.totalStowedItems - 2) + a.enc <= this.c.attributes.str) {
+                // Closes the dropdown content and sets the caried state to 'stowed'
                 a.open = false;
                 a.$caried = "stowed";
             }
         },
         attackBonus(item) {
             var skill, skillBonus, attr;
+
+            // Checks what type of weapon is used and stores the relavant score
             if (item.equipmentType === "rangedWeapon") {
                 skill = this.c.skills.shoot;
-                attr = this.c.attributes.dex;
+            } else if (item.equipmentType === "meleeWeapon") {
+                skill = this.c.skills[item.skill];
             }
 
+            // Checks whether of not the character is trained in the relavant score, and if not: apply an -2 penalty
             if (skill.trained === false) {
                 skillBonus = -2;
             } else {
                 skillBonus = skill.lvl;
             }
 
+            // Checks what attribute to use
+            if (item.attr === "Str/Dex") {
+                // Gets the highest of Strength of Dexterity
+                attr = this.c.attributes.str;
+
+                if (this.c.attributes.dex > attr) {
+                    attr = this.c.attributes.dex;
+                }
+            } else if (item.attr === "Str") {
+                // Returns Strength
+                attr = this.c.attributes.str;
+            } else if (item.attr === "Dex") {
+                // Return Dexterity
+                attr = this.c.attributes.dex;
+            }
+
+            // The total modifier is half of the characters level (rounded down) + their skill bonus (or penalty) + their relavant attribute modifier + the characters base attack bonus
             return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr) + Number(this.c.attackBonus));
         },
         search(a) {
+            // Small method for setting the search query
             var query = a.toLowerCase();
             this.query = query;
         },
         toMod(a) {
+            // If a is positive, it adds a "+" sign
             return toMod(a);
         },
         addPsionic(p) {
+            // Adds the selected psionic skill to the users character with some variables used by vue
             var obj = { ...p, open: false, level: 0, selectedTechniques: [], showPopup: false };
             var techniques = obj.techniques;
 
+            // Created a array which contains all the available techniques
             obj.techniques = [];
 
             techniques.forEach(a => {
                 obj.techniques.push({ ...a, open: false, choicen: false });
             });
 
+            // Adds the whole object to the users character
             this.c.psionics.push(obj);
         },
         psionicUp(p) {
+            // Checks whether the level if the psionic skill is lower than 4 (max is 5) and increases the level
             if (p.level < 4) {
                 p.level++;
             }
         },
         psionicDown(p) {
+            // Checks whether the level if the psionic skill is higher than 0 (min is 0) and increases the level
             if (p.level > 0) {
                 p.level--;
             }
