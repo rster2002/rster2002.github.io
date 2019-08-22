@@ -940,12 +940,12 @@
                                 <div v-if="item.edit === false">
                                     <itemStats :item="item" :c="c"></itemStats>
                                     <actions>
-                                        <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft === 0" class="primary" @click="reloadWeapon(item)">reload weapon</button>
+                                        <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft === 0" class="primary" @click="reloadWeapon(item)">Reload weapon</button>
                                         <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft > 0" class="primary" @click="useRangedWeapon(item)">Use weapon</button>
-                                        <button @click="stowItem(item)">Stow item</button>
-                                        <!-- <button v-if="item.equipmentType !== 'rangedWeapon'" class="primary" @click="stowItem(item)">Stow item</button> -->
-                                        <button @click="item.edit = true">Edit Item</button>
-                                        <button @click="deleteItem(item)">Delete item</button>
+                                        <button v-if="item.equipmentType !== 'rangedWeapon'" class="primary" @click="stowItem(item)">Stow item</button>
+                                        <button v-if="item.equipmentType === 'rangedWeapon'" @click="stowItem(item)"><toi :s="c.settings.compactButtons" t="stow item" i="archive"></toi></button>
+                                        <button @click="item.edit = true"><toi :s="c.settings.compactButtons" t="edit item" i="edit"></toi></button>
+                                        <button @click="deleteItem(item)"><toi :s="c.settings.compactButtons" t="delete item" i="delete"></toi></button>
                                     </actions>
                                 </div>
                                 <div v-else>
@@ -969,8 +969,8 @@
                                     <actions>
                                         <button class="primary" @click="readyItem(item)">Ready item</button>
                                         <!-- <button @click="storeItem()">store item</button> -->
-                                        <button @click="item.edit = true">Edit Item</button>
-                                        <button @click="deleteItem(item)">Delete item</button>
+                                        <button @click="item.edit = true"><toi :s="c.settings.compactButtons" t="edit item" i="edit"></toi></button>
+                                        <button @click="deleteItem(item)"><toi :s="c.settings.compactButtons" t="delete item" i="delete"></toi></button>
                                     </actions>
                                 </div>
                                 <div v-else>
@@ -1010,7 +1010,7 @@
                         <card style="position: relative;">
 							<primaryTitle>
 								<h1 @click="toggleVal(popup, 'meleeWeapons')" style="cursor: pointer;"><span class="dropdownInd material-icons" :class="{ d: popup.meleeWeapons }">arrow_drop_up</span> Melee weapons</h1>
-								<h2>Oh hi... BAM</h2>
+								<h2>Used to hammer people into the ground</h2>
 							</primaryTitle>
 							<transition name="contentDropdown">
 								<div v-if="popup.meleeWeapons">
@@ -1092,7 +1092,7 @@
 				</popup>
 			</card>
             <!-- Containers -->
-            <card d style="grid-column: 1 / 5; grid-row: 7 / 8;">
+            <!-- <card d style="grid-column: 1 / 5; grid-row: 7 / 8;">
                 <primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Containers</span></h1>
 				</primaryTitle>
@@ -1117,7 +1117,7 @@
                 <actions>
                     <button @click="addContainer()">Add container</button>
                 </actions>
-            </card>
+            </card> -->
             <!-- Credits -->
             <card d style="grid-column: 5 / 7;" :class="{ e: c.settings.usePsionics, b: !c.settings.usePsionics }">
                 <primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
@@ -1279,10 +1279,10 @@
 					</card>
 				</popup>
 			</card>
-			<!-- Controls -->
+			<!-- Settings -->
 			<card d style="grid-column: 7 / 13;" :class="{ e: c.settings.usePsionics, b: !c.settings.usePsionics }">
 				<primaryTitle v-if="c.settings.showTitles">
-					<h1>Controls</h1>
+					<h1>Settings</h1>
 				</primaryTitle>
 				<div class="setting" v-if="m.allowEdit">
 					<div class="checkboxWrapper">
@@ -1330,6 +1330,14 @@
 					</div>
 					<div class="txt">
 						<p>Show calculation breakdown</p>
+					</div>
+				</div>
+                <div class="setting" v-if="m.allowEdit">
+					<div class="checkboxWrapper">
+						<checkbox v-model="c.settings.compactButtons"></checkbox>
+					</div>
+					<div class="txt">
+						<p>Use compact buttons</p>
 					</div>
 				</div>
 			</card>

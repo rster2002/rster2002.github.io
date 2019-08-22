@@ -34,6 +34,9 @@ import searchbar from "./components/searchbar.vue";
 import dropdownindicator from "./components/dropdownindicator.vue";
 import dropdowncontent from "./components/dropdowncontent.vue";
 
+import simpledialog from "./components/simpledialog.vue";
+import confirmationdialog from "./components/confirmationdialog.vue";
+
 export {
 	card,
 	primaryTitle,
@@ -60,5 +63,7 @@ export {
     radiobox,
     dropdownindicator,
     dropdowncontent,
-    checkboxinput
+    checkboxinput,
+    simpledialog,
+    confirmationdialog
 }

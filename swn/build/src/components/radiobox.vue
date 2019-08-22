@@ -6,32 +6,43 @@
 
 <script>
 export default {
-    props: ["checked"],
+    props: ["value", "alive"],
     data() {
         return {
-            internalState: false
+            internalState: false,
+            intAlive: true
         }
     },
     watch: {
-        checked() {
-            if (this.checked === "true" || this.checked === true) {
+        value() {
+            if (this.value === "true" || this.value === true) {
                 this.internalState = true;
             } else {
                 this.internalState = false;
+            }
+
+            if (this.alive !== undefined) {
+                this.intAlive = this.alive;
             }
         }
     },
     methods: {
         ck() {
-            this.internalState = !this.internalState;
-            this.$emit('change', this.internalState);
+            if (this.intAlive) {
+                this.internalState = !this.internalState;
+                this.$emit('input', this.internalState);
+            }
         }
     },
     created() {
-        if (this.checked === "true" || this.checked === true) {
+        if (this.value === "true" || this.value === true) {
             this.internalState = true;
         } else {
             this.internalState = false;
+        }
+
+        if (this.alive !== undefined) {
+            this.intAlive = this.alive;
         }
     }
 }

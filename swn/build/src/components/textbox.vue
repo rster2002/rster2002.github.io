@@ -209,6 +209,8 @@ size = 20px;
             font-size: size;
 
             font-family: defaultFont;
+
+            background-color: transparent;
         }
 
         textarea {

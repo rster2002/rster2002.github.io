@@ -14,7 +14,7 @@ export default {
 @import "../default.stylus";
 
 .header {
-	width: calc(100% - 16px);
+	width: calc(100% - 32px);
 	padding: 16px;
 	position: relative;
 
@@ -24,7 +24,7 @@ export default {
 		font-family: defaultFont;
 		font-size: 20px;
 		font-weight: 500;
-		width: 50%;
+		width: 100%;
 	}
 
 	h2 {

@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>
+	<div id="mainView">
 		<appdrawer v-on:closedrawer="closeDrawer()" :show="showDrawer">
 			<draweruser
 				:icon="user.icon || 'https://i.stack.imgur.com/ZQT8Z.png'"
