@@ -139,7 +139,9 @@ export default {
 		}
 	},
 	created() {
-		routeUpdate(this);
+        routeUpdate(this);
+        
+        // window.addEventListener("error", err => console.log("ERR", err));
 	}
 }
 </script>

@@ -295,7 +295,7 @@ settingheight = 32px;
 	}
 }
 
-.x {
+.card .innerCardContent p.x {
 	display: inline-block;
 	width: 24px;
 	position: absolute;
@@ -365,6 +365,11 @@ button:hover .tooltip {
 }
 
 .card {
+
+    .innerContent {
+        height: 100%;
+    }
+
 	.b {
 		grid-row: 5 / 6;
 	}

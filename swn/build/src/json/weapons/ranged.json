@@ -25,7 +25,7 @@
         "tl": 3,
         "enc": 1,
         "attr": "Dex",
-        "magazine": -1,
+        "magazine": null,
         "burstFire": false,
         "reloadTime": 1,
         "cost": 25,

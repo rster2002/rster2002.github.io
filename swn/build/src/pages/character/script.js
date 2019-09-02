@@ -1,10 +1,14 @@
 import marked from "marked";
 
-import { card, primaryTitle, actions, textbox, checkbox, popup, snackbar, searchbar, confirmationdialog } from "@components";
+import { card, primaryTitle, actions, textbox, checkbox, popup, snackbar, searchbar, confirmationdialog, dropdownindicator, dropdowncontent } from "@components";
 import itemStats from "./components/itemStats.vue";
 import itemEditor from "./components/itemEditor.vue";
 
 import toi from "./components/toi.vue";
+import steps from "./components/steps.vue";
+import emptyCharacter from "./empty.js";
+
+import { attackBonus } from "./shared.js";
 
 import { user, genId } from "@js/global.js";
 import { fs } from "@js/firebase.js";
@@ -153,10 +157,13 @@ function compressCharacter(a) {
     console.log("COMPRESSING", a);
     var r = Object.assign({}, a);
 
+    // Processes the characters equipment
     r.equipment = a.equipment.map(a => {
         let add = {};
 
+        // If the item is not a custom item, it should compress the item to it's bare minimum
         if (a.customItem === undefined) {
+            // Checks the equipment type of the item and sets some additional (type specific) data to be stored
             if (a.equipmentType === "rangedWeapon") {
                 add = { magazinesLeft: a.magazinesLeft }
             }
@@ -176,10 +183,12 @@ function compressCharacter(a) {
                 ...add
             }
         } else if (a.customItem === true) {
+            // If the item is a custom item, it should store the whole item
             return a;
         }
     });
 
+    // Processes the characters foci
     r.foci = a.foci.map(a => {
         return {
             currentLvl: a.currentLvl,
@@ -187,11 +196,13 @@ function compressCharacter(a) {
         }
     });
 
+    // Processes the characters psionic skills
     r.psionics = a.psionics.map(a => {
         return {
             level: a.level,
             internalTitle: a.internalTitle,
             selectedTechniques: a.selectedTechniques.map(a => {
+                // Processes the psionic skill's 
                 return {
                     internalName: a.internalName,
                     index: a.index
@@ -206,6 +217,7 @@ function compressCharacter(a) {
 }
 
 function toMod(a) {
+    // Used to convert a number to a modifier
     if (a >= 0) {
         return "+" + a;
     } else {
@@ -227,10 +239,14 @@ export default {
         itemStats,
         itemEditor,
         confirmationdialog,
-        toi
+        toi,
+        steps,
+        dropdownindicator,
+        dropdowncontent
     },
     data() {
         return {
+            listener: () => {},
             content: {
                 foci: [],
                 equipment: [],
@@ -266,75 +282,7 @@ export default {
                 edit: false,
                 breakdown: []
             },
-            c: {
-                name: "",
-                background: "",
-                class: "",
-                partial: "",
-                xp: 0,
-                hp: 0,
-                hpMax: 0,
-                credits: 0,
-                attackBonus: 0,
-                customEquipment: {
-                    name: "",
-                    description: ""
-                },
-                effort: {
-                    current: 0,
-                    max: 0
-                },
-                settings: {
-                    usePsionics: false,
-                    showTitles: true,
-                    showSteps: false,
-                    showDetails: false,
-                    useManual: false,
-                    showBreakdown: false,
-                    compactButtons: false
-                },
-                manual: {
-                    ac: 10,
-                    speed: 10,
-                    savingThrows: {
-                        physical: 15,
-                        evasion: 15,
-                        mental: 15
-                    }
-                },
-                attributes: {
-                    str: 0,
-                    dex: 0,
-                    con: 0,
-                    int: 0,
-                    wis: 0,
-                    cha: 0
-                },
-                skills: {
-                    administer: { trained: false, lvl: 0 },
-                    connect: { trained: false, lvl: 0 },
-                    exert: { trained: false, lvl: 0 },
-                    fix: { trained: false, lvl: 0 },
-                    heal: { trained: false, lvl: 0 },
-                    know: { trained: false, lvl: 0 },
-                    lead: { trained: false, lvl: 0 },
-                    notice: { trained: false, lvl: 0 },
-                    perform: { trained: false, lvl: 0 },
-                    pilot: { trained: false, lvl: 0 },
-                    program: { trained: false, lvl: 0 },
-                    punch: { trained: false, lvl: 0 },
-                    shoot: { trained: false, lvl: 0 },
-                    sneak: { trained: false, lvl: 0 },
-                    stab: { trained: false, lvl: 0 },
-                    survive: { trained: false, lvl: 0 },
-                    talk: { trained: false, lvl: 0 },
-                    trade: { trained: false, lvl: 0 },
-                    work: { trained: false, lvl: 0 }
-                },
-                foci: [],
-                equipment: [],
-                psionics: []
-            }
+            c: emptyCharacter
         }
     },
     computed: {
@@ -394,6 +342,7 @@ export default {
                     // Checks for an array. If it is an array, the player had armor and a shield of some kind
                     if (Array.isArray(a)) {
                         // Calculates the armorclass
+
                         let c = 0;
                         a.forEach(armor => {
                             if (armor.bonus === 0) {
@@ -501,6 +450,40 @@ export default {
         }
     },
     methods: {
+        initializeListener() {
+            this.listener = fs
+                .collection(`users/${this.info.ownerUid}/characters/${this.info.characterId}/d`)
+                .doc("data")
+                .onSnapshot(doc => {
+
+                    function update(a, b) {
+                        if (Array.isArray(b)) {
+                            a = b;
+                        } else {
+                            var entries = Object.entries(b);
+
+                            entries.forEach(ent => {
+                                if (ent[1] === null) {
+                                    a[ent[0]] = ent[1];
+                                } else if (typeof ent[1] === "object") {
+                                    update(a[ent[0]], ent[1]);
+                                } else {
+                                    if (a !== undefined) {
+                                        a[ent[0]] = ent[1];
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    // fill(this.c, emptyCharacter);
+                    update(this.c, rebuildCharacter(doc.data()));
+                    console.log("UPDATE", doc.data())
+                });
+        },
+        unsubscribeListener() {
+            this.listener();
+        },
         toMarkdown(a) {
             return marked(a, { sanitize: true });
         },
@@ -509,7 +492,8 @@ export default {
             a[b] = !a[b];
         },
         test() {
-            console.log(rebuildCharacter(compressCharacter(this.c)));
+            // Function for using vue to run some test code
+            a
         },
         save() {
             var t = this;
@@ -546,32 +530,23 @@ export default {
             }
         },
         del() {
-            var t = this;
+            // Checks with the user whether or not they are really sure they want to delete their character
             if (confirm("Are you sure you want do delete your character?")) {
-                fs.collection(`users/${t.info.ownerUid}/characters/${t.info.characterId}/d`).doc("data").delete().then(a => {
-                    fs.collection(`users/${t.info.ownerUid}/characters/`).doc(t.info.characterId).delete().then(a => {
-                        t.$router.push({ path: "/characters" });
+                // Removes the document where the character itself is stored and the document in the "characters" collection, which is used to display general information
+                fs.collection(`users/${this.info.ownerUid}/characters/${this.info.characterId}/d`).doc("data").delete().then(a => {
+                    fs.collection(`users/${this.info.ownerUid}/characters/`).doc(this.info.characterId).delete().then(a => {
+                        this.$router.push({ path: "/characters" });
                     });
                 });
             }
         },
         toggleEdit() {
+            // Shorthand function to toggle the character sheet between edit and play mode
             this.m.edit = !this.m.edit;
         },
         toggleSearch() {
+            // Shorthand function to toggle the search popup
             this.popup.search = !this.popup.search;
-        },
-        h(value) {
-            // Used for textboxes to allow them to update the right value
-            var refBuild = value.key.split(".");
-            var f = refBuild.pop();
-            var ref = this.c;
-
-            refBuild.forEach(a => {
-                ref = ref[a];
-            });
-
-            ref[f] = value.value;
         },
         calMod(s) {
             // Returns the mod of an attribute score as a number
@@ -651,8 +626,11 @@ export default {
             }
         },
         addFocus(f) {
-            // Adds the given focus to the list of used foci
-            this.c.foci.push(Object.assign(f, {
+            // Removes the reactivity from the object, so new entries won't be linked
+            let i = Object.assign({}, f);
+
+            // Adds the focus to the character with some default values
+            this.c.foci.push(Object.assign(i, {
                 open: false,
                 currentLvl: 1
             }));
@@ -760,42 +738,7 @@ export default {
                 a.$caried = "stowed";
             }
         },
-        attackBonus(item) {
-            var skill, skillBonus, attr;
-
-            // Checks what type of weapon is used and stores the relavant score
-            if (item.equipmentType === "rangedWeapon") {
-                skill = this.c.skills.shoot;
-            } else if (item.equipmentType === "meleeWeapon") {
-                skill = this.c.skills[item.skill];
-            }
-
-            // Checks whether of not the character is trained in the relavant score, and if not: apply an -2 penalty
-            if (skill.trained === false) {
-                skillBonus = -2;
-            } else {
-                skillBonus = skill.lvl;
-            }
-
-            // Checks what attribute to use
-            if (item.attr === "Str/Dex") {
-                // Gets the highest of Strength of Dexterity
-                attr = this.c.attributes.str;
-
-                if (this.c.attributes.dex > attr) {
-                    attr = this.c.attributes.dex;
-                }
-            } else if (item.attr === "Str") {
-                // Returns Strength
-                attr = this.c.attributes.str;
-            } else if (item.attr === "Dex") {
-                // Return Dexterity
-                attr = this.c.attributes.dex;
-            }
-
-            // The total modifier is half of the characters level (rounded down) + their skill bonus (or penalty) + their relavant attribute modifier + the characters base attack bonus
-            return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr) + Number(this.c.attackBonus));
-        },
+        attackBonus,
         search(a) {
             // Small method for setting the search query
             var query = a.toLowerCase();
@@ -1034,6 +977,15 @@ export default {
             }
 
             fill(a, b);
+        },
+        addContainer() {
+            this.c.containers.push({
+                name: "New container",
+                id: genId(),
+                size: 10,
+                content: [],
+                open: false
+            });
         }
     },
     watch: {

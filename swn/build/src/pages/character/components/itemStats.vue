@@ -154,6 +154,8 @@ function toMod(a) {
     }
 }
 
+import { attackBonus } from "../shared.js";
+
 export default {
     props: ["item", "c"],
     data() {
@@ -192,38 +194,7 @@ export default {
         }
     },
     methods: {
-        attackBonus(item) {
-            var skill, skillBonus, attr;
-            if (item.equipmentType === "rangedWeapon") {
-                // Gets the relavant skill and attribute
-                skill = this.c.skills.shoot;
-                attr = this.c.attributes.dex;
-            } else if (item.equipmentType === "meleeWeapon") {
-
-                if (item.attr === "Str/Dex") {
-                    attr = this.c.attributes.str;
-
-                    if (this.c.attributes.dex > attr) {
-                        attr = this.c.attributes.dex;
-                    }
-                } else if (item.attr === "Str") {
-                    attr = this.c.attributes.str;
-                } else if (item.attr === "Dex") {
-                    attr = this.c.attributes.dex;
-                }
-
-                skill = this.c.skills[item.skill];
-
-            }
-
-            if (skill.trained === false) {
-                skillBonus = -2;
-            } else {
-                skillBonus = skill.lvl;
-            }
-
-            return toMod(Math.floor(this.level / 2) + skillBonus + this.calMod(attr) + Number(this.c.attackBonus));
-        },
+        attackBonus,
         toMod(a) {
             return toMod(a);
         },

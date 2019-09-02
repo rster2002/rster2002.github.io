@@ -9,6 +9,7 @@
                 <textbox v-model="internalEdit.dmg.die" label="Damage Die"></textbox>
                 <textbox v-model="internalEdit.dmg.mod" label="Base Damage Modifier" type="number"></textbox>
                 <textbox v-model="internalEdit.attr" label="Attribute" type="select">
+                    <option>None</option>
                     <option>Dex</option>
                     <option>Str</option>
                     <option>Str/Dex</option>
@@ -23,6 +24,7 @@
                 <textbox v-model="internalEdit.dmg.die" label="Damage Die"></textbox>
                 <textbox v-model="internalEdit.dmg.mod" label="Base Damage Modifier" type="number"></textbox>
                 <textbox v-model="internalEdit.attr" label="Attribute" type="select">
+                    <option>None</option>
                     <option>Dex</option>
                     <option>Str</option>
                     <option>Str/Dex</option>
