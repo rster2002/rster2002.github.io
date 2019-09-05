@@ -20,6 +20,7 @@
 <script>
 
 import { cfb, fb, fs } from "@js/firebase.js";
+import vueChannel from "@js/vueChannel.js";
 
 function finalize(t, r) {
     console.log(r);
@@ -34,6 +35,9 @@ function finalize(t, r) {
                     .update({
                         lastLogin: Date.now()
                     });
+
+                vueChannel("user")
+                    .set(user);
 
                 t.$router.push({path: "/"});
             }
