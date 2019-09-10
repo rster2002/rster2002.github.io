@@ -47,7 +47,7 @@ export default {
 	methods: {
 		createCharacter() {
 			var t = this;
-			var id = "character-" + genId();
+			var id = "c" + genId(9);
 			var doc = {
 				id,
 				createdAt: Date.now(),

@@ -50,6 +50,9 @@
 					</primaryTitle>
 				</div>
 				<div v-if="m.edit">
+                    <primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+                        <h1><span v-if="c.settings.showTitles">Character info</span> <steps :c="c">steps 3, 6, 12</steps></h1>
+                    </primaryTitle>
                     <textbox v-model="c.name" label="Name"></textbox>
 					<textbox v-model="c.background" label="Background"></textbox>
 					<textbox v-model="c.class" label="Class"></textbox>
@@ -72,15 +75,15 @@
 					</button>
 					<button class="icon" v-if="m.allowEdit && !m.edit" @click="del()"><span class="material-icons">delete</span></button>
 					<button class="icon" v-if="!m.allowEdit" @click="save()"><span class="material-icons">file_copy</span></button>
-					<!-- <button class="icon" @click="test()"><span class="material-icons">info</span></button> -->
+					<button class="icon" @click="test()"><span class="material-icons">info</span></button>
 				</actions>
 			</card>
 			<!-- General info -->
 			<card d style="grid-column: 4 / 7; grid-row: 1 / 2">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">General</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 16</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h1><span v-if="c.settings.showTitles">General</span> <steps v-if="c.settings.useManual" :c="c">step 16</steps></h1>
 				</primaryTitle>
-				<div v-if="m.edit === false || c.settings.useManual === false">
+				<div v-if="m.edit === false || c.settings.useManual === false" class="innerContent">
 					<div class="row">
 						<div class="stat" v-if="!c.settings.showBreakdown">
 							<div class="mod">
@@ -135,7 +138,7 @@
 			<!-- Hit Points -->
 			<card d style="grid-column: 1 / 4; grid-row: 2 / 3">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">Hit points</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 11</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h1><span v-if="c.settings.showTitles">Hit points</span> <steps :c="c">step 11</steps></h1>
 				</primaryTitle>
 				<div v-if="!m.edit" class="hp">
 					<div class="ctrl" @click="hpc('+')">
@@ -155,9 +158,9 @@
 			<!-- Saving throws -->
 			<card d style="grid-column: 4 / 7; grid-row: 2 / 3">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">Saving throws</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 17</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h1><span v-if="c.settings.showTitles">Saving throws</span> <steps v-if="c.settings.useManual" :c="c">step 17</steps></h1>
 				</primaryTitle>
-				<div v-if="m.edit === false || c.settings.useManual === false">
+				<div v-if="m.edit === false || c.settings.useManual === false" class="innerContent">
 					<div class="row">
 						<div class="stat">
 							<div class="mod">
@@ -193,10 +196,10 @@
 			</card>
 			<!-- Attributes -->
 			<card d style="grid-column: 7 / 13; grid-row: 1 / 2">
+                <primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+                    <h1><span v-if="c.settings.showTitles">Attributes</span> <steps :c="c">steps 1, 2</steps></h1>
+                </primaryTitle>
 				<div v-if="!m.edit">
-					<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-						<h1><span v-if="c.settings.showTitles">Attributes</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
-					</primaryTitle>
 					<div class="row d">
 						<div class="stat">
 							<div class="mod">
@@ -251,9 +254,6 @@
 					</div>
 				</div>
 				<div v-if="m.edit">
-					<primaryTitle>
-						<h1>Attributes</h1>
-					</primaryTitle>
 					<textbox label="Strength" v-model="c.attributes.str" type="number"></textbox>
 					<textbox label="Dexterity" v-model="c.attributes.dex" type="number"></textbox>
 					<textbox label="Constitution" v-model="c.attributes.con" type="number"></textbox>
@@ -264,10 +264,10 @@
 			</card>
 			<!-- Skills -->
 			<card d style="grid-column: 7 / 13; grid-row: 2 / 5">
+                <primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
+                    <h1><span v-if="c.settings.showTitles">Skills</span> <steps :c="c">steps 4, 5, 9</steps></h1>
+                </primaryTitle>
 				<div v-if="!m.edit" class="colmsWrapper">
-					<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-						<h1><span v-if="c.settings.showTitles">Skills</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 4, 5, 9</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
-					</primaryTitle>
 					<div class="col">
 						<div class="s">
 							<div class="mod">
@@ -426,9 +426,6 @@
 					</div>
 				</div>
 				<div v-if="m.edit">
-					<primaryTitle>
-						<h1>Skills</h1>
-					</primaryTitle>
 					<div class="skill">
 						<div class="checkboxWrapper">
 							<checkbox v-model="c.skills.administer.trained"></checkbox>
@@ -871,7 +868,7 @@
 			<!-- Focus -->
 			<card d style="grid-column: 1 / 7; grid-row: 3 / 5">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">Focus</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 7, 8</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h1><span v-if="c.settings.showTitles">Foci</span> <steps :c="c">step 7, 8</steps></h1>
 				</primaryTitle>
 				<div>
 					<div class="listItem" v-for="focus in c.foci">
@@ -894,7 +891,7 @@
 					</div>
 				</div>
 				<actions>
-					<button @click="popup.focus = true">
+					<button @click="popup.focus = true" v-if="m.allowEdit">
 						add focus
 					</button>
 				</actions>
@@ -928,7 +925,7 @@
 			<!-- Equipment -->
 			<card d style="grid-column: 1 / 5;" :class="{ e: c.settings.usePsionics, b: !c.settings.usePsionics }">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">Equipment</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h1><span v-if="c.settings.showTitles">Equipment</span> <steps :c="c">step 13</steps></h1>
 					<h2>Ready: {{ totalReadiedItems }}/{{ readyEnc }}</h2>
 				</primaryTitle>
 				<div>
@@ -939,7 +936,7 @@
 							<div v-if="item.open">
                                 <div v-if="item.edit === false">
                                     <itemStats :item="item" :c="c"></itemStats>
-                                    <actions>
+                                    <actions v-if="m.allowEdit">
                                         <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft === 0" class="primary" @click="reloadWeapon(item)">Reload weapon</button>
                                         <button v-if="item.equipmentType === 'rangedWeapon' && item.magazinesLeft > 0" class="primary" @click="useRangedWeapon(item)">Use weapon</button>
                                         <button v-if="item.equipmentType !== 'rangedWeapon'" class="primary" @click="stowItem(item)">Stow item</button>
@@ -966,7 +963,7 @@
 							<div v-if="item.open">
                                 <div v-if="item.edit === false">
                                     <itemStats :item="item" :c="c"></itemStats>
-                                    <actions>
+                                    <actions v-if="m.allowEdit">
                                         <button class="primary" @click="readyItem(item)">Ready item</button>
                                         <!-- <button @click="storeItem()">store item</button> -->
                                         <button @click="item.edit = true"><toi :s="c.settings.compactButtons" t="edit item" i="edit"></toi></button>
@@ -981,7 +978,7 @@
 					</div>
 				</div>
 				<actions>
-					<button @click="popup.equipment = true">Add equipment</button>
+					<button @click="popup.equipment = true" v-if="m.allowEdit">Add equipment</button>
 				</actions>
 				<popup @close="popup.equipment = false" :show="popup.equipment">
 					<div class="p" @click.self="popup.equipment = false">
@@ -1092,7 +1089,7 @@
 				</popup>
 			</card>
             <!-- Containers -->
-            <!-- <card d style="grid-column: 1 / 5; grid-row: 7 / 8;">
+            <card d style="grid-column: 1 / 5; grid-row: 7 / 8;">
                 <primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
 					<h1><span v-if="c.settings.showTitles">Containers</span></h1>
 				</primaryTitle>
@@ -1106,8 +1103,8 @@
 
                                 </dropdowncontent>
                             </div>
-                            <textbox v-model="container.name" label="Container name"></textbox>
-                            <textbox v-model="container.size" label="Size" type="number"></textbox>
+                            <textbox class="lessMargin" v-model="container.name" label="Container name"></textbox>
+                            <textbox class="lessMargin" v-model="container.size" label="Size" type="number"></textbox>
                             <actions>
                                 <button>delete container</button>
                             </actions>
@@ -1117,11 +1114,11 @@
                 <actions>
                     <button @click="addContainer()">Add container</button>
                 </actions>
-            </card> -->
+            </card>
             <!-- Credits -->
             <card d style="grid-column: 5 / 7;" :class="{ e: c.settings.usePsionics, b: !c.settings.usePsionics }">
                 <primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">Credits</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h1><span v-if="c.settings.showTitles">Credits</span> <steps :c="c">step 13</steps></h1>
 				</primaryTitle>
                 <div>
                     <textbox v-model="c.credits" type="number" label="credits"></textbox>
@@ -1130,7 +1127,7 @@
 			<!-- Effort -->
 			<card d v-if="c.settings.usePsionics" style="grid-column: 1 / 4; grid-row: 5 / 6;">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">Effort</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h1><span v-if="c.settings.showTitles">Effort</span> <steps :c="c">step 10</steps></h1>
 				</primaryTitle>
 				<div v-if="!m.edit" class="hp">
 					<div class="ctrl" @click="efc('+')">
@@ -1150,7 +1147,7 @@
 			<!-- Psionics -->
 			<card d v-if="c.settings.usePsionics" style="grid-column: 4 / 13; grid-row: 5 / 6;">
 				<primaryTitle v-if="c.settings.showTitles || c.settings.showSteps">
-					<h1><span v-if="c.settings.showTitles">Psionics</span> <span v-if="c.settings.showSteps && c.settings.showTitles">(</span><span v-if="c.settings.showSteps">step 1, 2</span><span v-if="c.settings.showSteps && c.settings.showTitles">)</span></h1>
+					<h1><span v-if="c.settings.showTitles">Psionics</span> <steps :c="c">step 10</steps></h1>
 				</primaryTitle>
 				<div class="psionics">
 					<div class="listItem" v-for="psionic in c.psionics">

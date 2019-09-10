@@ -24,10 +24,13 @@
                         </dropdowncontent>
 					</div>
 				</div>
+                <actions v-if="loadedCharacter.character !== ''">
+                    <button @click="closeCharacter()">close character</button>
+                </actions>
             </card>
             <div style="grid-column: 1 / 11; grid-row: 1 / 2">
                 <div class="characterSheetWrapper" v-if="loadedCharacter.character !== ''">
-                    <characterSheet :userUid="loadedCharacter.uid" :characterId="loadedCharacter.character"></characterSheet>
+                    <characterSheet ref="characterSheet" :userUid="loadedCharacter.uid" :characterId="loadedCharacter.character"></characterSheet>
                 </div>
                 <empty class="emptyWrapper" v-if="loadedCharacter.character === ''">
                     <h1>No character loaded</h1>
@@ -85,6 +88,8 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 import { card, cardgrid, primaryTitle, dropdownindicator, dropdowncontent, actions, empty, textbox } from "@components";
 
 import { fs, qu } from "@js/firebase.js";
@@ -153,6 +158,14 @@ export default {
             // this.$router.push(`/character/${player.user.uid}/${player.character}`)
             this.loadedCharacter.uid = player.user.uid;
             this.loadedCharacter.character = player.character;
+
+            Vue.nextTick(() => {
+                this.$refs.characterSheet.initializeListener()
+            });
+        },
+        closeCharacter() {
+            this.loadedCharacter.character = '';
+            this.$refs.characterSheet.unsubscribeListener();
         },
         newShip() {
             let shipId = "ship-" + genId();
@@ -228,11 +241,15 @@ export default {
     cursor: pointer;
 }
 
-.characterSheetWrapper .cardGrid {
-    padding: 0;
+.characterSheetWrapper {
+    .cardGrid {
+        padding: 0;
+    }
 }
 
 .emptyWrapper {
+    width: calc(100% - 32px);
+
     background-color: #fff;
     box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12);
     border-radius: standardRadius;
@@ -244,9 +261,24 @@ export default {
     }
 }
 
+// When the screen width is MORE than 1000px
 @media only screen and (min-width: 1000px) {
     .characterSheetWrapper {
         margin-right: -32px;
+    }
+}
+
+// When the screen width is LESS than 1000px
+@media only screen and (max-width: 1000px) {
+    .emptyWrapper {
+        margin: 16px;
+    }
+
+    .characterSheetWrapper {
+        padding: 0.1px 0px;
+
+        background-color: #b1b1b1;
+        border-radius: standardRadius;
     }
 }
 

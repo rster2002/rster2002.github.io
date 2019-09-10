@@ -1,5 +1,5 @@
 {
-	"name": "swn-ools",
+	"name": "swn-tools",
 	"version": "1.0.0",
 	"description": "A fun side-project",
 	"main": "index.js",
@@ -7,11 +7,15 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "webpack -p",
-		"serve": "webpack-dev-server"
+        "serve": "webpack-dev-server",
+        "e2e:ui": "cypress open"
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.4.2",
+		"@sentry/browser": "^5.6.3",
+		"@sentry/integrations": "^5.6.1",
 		"firebase": "^5.8.4",
+		"json-beautify": "^1.1.0",
 		"lodash": "^4.17.13",
 		"marked": "^0.6.1",
 		"sessiondb": "^1.0.3",
@@ -32,8 +36,10 @@
 		"babel-polyfill": "^6.26.0",
 		"babel-preset-env": "^1.7.0",
 		"css-loader": "^2.1.0",
+        "cypress": "^3.4.1",
 		"desker": "^1.0.2",
-		"on-build-webpack": "^0.1.0",
+        "on-build-webpack": "^0.1.0",
+        "start-server-and-test": "^1.10.0",
 		"style-loader": "^0.23.1",
 		"stylus": "^0.54.5",
 		"stylus-loader": "^3.0.2",
@@ -45,6 +51,6 @@
 		"webpack": "^4.29.5",
 		"webpack-bundle-analyzer": "^3.3.2",
 		"webpack-cli": "^3.2.3",
-		"webpack-dev-server": "^3.2.0"
+        "webpack-dev-server": "^3.2.0"
 	}
 }

@@ -1,286 +1,144 @@
 {
-    "magazine": {
-        "internalName": "magazine",
-        "name": "Magazine",
-        "enc": 1,
-        "tl": 1,
-        "cost": "N/A",
-        "equipmentType": "ammoItems",
-        "description": "Used fully to reload any kind of ranged weapon that needs ammo."
-    },
-    "bulletBox": {
-        "internalName": "bulletBox",
-        "name": "Ammo Box (any weapon)",
-        "enc": 1,
+    "Ammo,_20_rounds": {
         "tl": 2,
+        "enc": 1,
         "cost": 10,
-        "basePrice": 0.5,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "description": "Used to reload any kind of ranged weapon that needs ammo."
+        "descriptions": "A few worlds are too primitive or too\nresource-poor to manufacture ammunition, but\nthe vast majority of worlds provide cartridges in\nalmost every conceivable caliber and make. Most\nlocal gunsmiths can load ammunition to any specification required by a buyer",
+        "internalName": "Ammo,_20_rounds",
+        "name": "Ammo, 20 rounds",
+        "equipmentType": "ammo",
+        "ammoType": "bullet"
     },
-    "bulletBox-conversion_bow": {
-        "internalName": "bulletBox-conversion_bow",
-        "name": "Ammo Box (Conversion Bow)",
+    "packet-Ammo,_20_rounds": {
+        "name": "Package (Ammo, 20 rounds)",
+        "internalName": "packet-Ammo,_20_rounds",
+        "equipmentType": "package",
+        "packageType": "ammo",
         "enc": 1,
+        "cost": 30,
         "tl": 2,
-        "cost": 1000,
-        "basePrice": 50,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "conversion_bow",
-        "description": "Used to reload a conversion bow"
+        "contents": [
+            {
+                "tl": 2,
+                "enc": 1,
+                "cost": 10,
+                "descriptions": "A few worlds are too primitive or too\nresource-poor to manufacture ammunition, but\nthe vast majority of worlds provide cartridges in\nalmost every conceivable caliber and make. Most\nlocal gunsmiths can load ammunition to any specification required by a buyer",
+                "internalName": "Ammo,_20_rounds",
+                "name": "Ammo, 20 rounds",
+                "equipmentType": "ammo",
+                "ammoType": "bullet"
+            },
+            {
+                "tl": 2,
+                "enc": 1,
+                "cost": 10,
+                "descriptions": "A few worlds are too primitive or too\nresource-poor to manufacture ammunition, but\nthe vast majority of worlds provide cartridges in\nalmost every conceivable caliber and make. Most\nlocal gunsmiths can load ammunition to any specification required by a buyer",
+                "internalName": "Ammo,_20_rounds",
+                "name": "Ammo, 20 rounds",
+                "equipmentType": "ammo",
+                "ammoType": "bullet"
+            },
+            {
+                "tl": 2,
+                "enc": 1,
+                "cost": 10,
+                "descriptions": "A few worlds are too primitive or too\nresource-poor to manufacture ammunition, but\nthe vast majority of worlds provide cartridges in\nalmost every conceivable caliber and make. Most\nlocal gunsmiths can load ammunition to any specification required by a buyer",
+                "internalName": "Ammo,_20_rounds",
+                "name": "Ammo, 20 rounds",
+                "equipmentType": "ammo",
+                "ammoType": "bullet"
+            }
+        ]
     },
-    "bulletBox-crude_pistol": {
-        "internalName": "bulletBox-crude_pistol",
-        "name": "Ammo Box (Crude Pistol)",
+    "Ammo,_missile": {
+        "tl": 3,
         "enc": 1,
-        "tl": 2,
-        "cost": 40,
-        "basePrice": 2,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "crude_pistol",
-        "description": "Used to reload a crude pistol"
+        "cost": 50,
+        "descriptions": "Some characters might have reason to pack along a man-portable rocket launcher,\nor have one mounted on their favorite gravcar.\nHeavy weapons and their ammunition are usually\noutlawed for civilians on most worlds, but this\nprice is for locales where missiles can be bought.",
+        "internalName": "Ammo,_missile",
+        "name": "Ammo, missile",
+        "equipmentType": "ammo",
+        "ammoType": "rocket"
     },
-    "bulletBox-musket": {
-        "internalName": "bulletBox-musket",
-        "name": "Ammo Box (Musket)",
+    "Power_cell,_type_A": {
+        "tl": 4,
         "enc": 1,
-        "tl": 2,
-        "cost": 60,
-        "basePrice": 3,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "musket",
-        "description": "Used to reload a musket"
+        "cost": 10,
+        "descriptions": "One of the few standardized artifacts inherited from before the Silence, power cells are\nsmall cylindrical objects designed to take and hold\nelectrical charges. Type A cells are usually used for\npersonal equipment, and the larger type B cells\nfor vehicles and heavy gear. The engineering for\nthe cells is substantially different, and they cannot\nbe exchanged or recharge each other without a\ntrained tech’s modifications or a converter unit.\nPower cells can be recharged off a ship’s power\nplant or other grid. Recharging requires 30 minutes for a type A cell or 24 hours for a type B cell.",
+        "internalName": "Power_cell,_type_A",
+        "name": "Power cell, type A",
+        "equipmentType": "ammo",
+        "ammoType": "powercellA"
     },
-    "bulletBox-revolver": {
-        "internalName": "bulletBox-revolver",
-        "name": "Ammo Box (Revolver)",
+    "packet-Power_cell,_type_A": {
+        "name": "Package (Power cell, type A)",
+        "internalName": "packet-Power_cell,_type_A",
+        "equipmentType": "package",
+        "packageType": "ammo",
         "enc": 1,
-        "tl": 2,
+        "cost": 30,
+        "tl": 4,
+        "contents": [
+            {
+                "tl": 4,
+                "enc": 1,
+                "cost": 10,
+                "descriptions": "One of the few standardized artifacts inherited from before the Silence, power cells are\nsmall cylindrical objects designed to take and hold\nelectrical charges. Type A cells are usually used for\npersonal equipment, and the larger type B cells\nfor vehicles and heavy gear. The engineering for\nthe cells is substantially different, and they cannot\nbe exchanged or recharge each other without a\ntrained tech’s modifications or a converter unit.\nPower cells can be recharged off a ship’s power\nplant or other grid. Recharging requires 30 minutes for a type A cell or 24 hours for a type B cell.",
+                "internalName": "Power_cell,_type_A",
+                "name": "Power cell, type A",
+                "equipmentType": "ammo",
+                "ammoType": "powercellA"
+            },
+            {
+                "tl": 4,
+                "enc": 1,
+                "cost": 10,
+                "descriptions": "One of the few standardized artifacts inherited from before the Silence, power cells are\nsmall cylindrical objects designed to take and hold\nelectrical charges. Type A cells are usually used for\npersonal equipment, and the larger type B cells\nfor vehicles and heavy gear. The engineering for\nthe cells is substantially different, and they cannot\nbe exchanged or recharge each other without a\ntrained tech’s modifications or a converter unit.\nPower cells can be recharged off a ship’s power\nplant or other grid. Recharging requires 30 minutes for a type A cell or 24 hours for a type B cell.",
+                "internalName": "Power_cell,_type_A",
+                "name": "Power cell, type A",
+                "equipmentType": "ammo",
+                "ammoType": "powercellA"
+            },
+            {
+                "tl": 4,
+                "enc": 1,
+                "cost": 10,
+                "descriptions": "One of the few standardized artifacts inherited from before the Silence, power cells are\nsmall cylindrical objects designed to take and hold\nelectrical charges. Type A cells are usually used for\npersonal equipment, and the larger type B cells\nfor vehicles and heavy gear. The engineering for\nthe cells is substantially different, and they cannot\nbe exchanged or recharge each other without a\ntrained tech’s modifications or a converter unit.\nPower cells can be recharged off a ship’s power\nplant or other grid. Recharging requires 30 minutes for a type A cell or 24 hours for a type B cell.",
+                "internalName": "Power_cell,_type_A",
+                "name": "Power cell, type A",
+                "equipmentType": "ammo",
+                "ammoType": "powercellA"
+            }
+        ]
+    },
+    "Power_cell,_type_B": {
+        "tl": 4,
+        "enc": 1,
         "cost": 100,
-        "basePrice": 5,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "revolver",
-        "description": "Used to reload a revolver"
+        "descriptions": "One of the few standardized artifacts inherited from before the Silence, power cells are\nsmall cylindrical objects designed to take and hold\nelectrical charges. Type A cells are usually used for\npersonal equipment, and the larger type B cells\nfor vehicles and heavy gear. The engineering for\nthe cells is substantially different, and they cannot\nbe exchanged or recharge each other without a\ntrained tech’s modifications or a converter unit.\nPower cells can be recharged off a ship’s power\nplant or other grid. Recharging requires 30 minutes for a type A cell or 24 hours for a type B cell.",
+        "internalName": "Power_cell,_type_B",
+        "name": "Power cell, type B",
+        "equipmentType": "ammo",
+        "ammoType": "powercellB"
     },
-    "bulletBox-rifle": {
-        "internalName": "bulletBox-rifle",
-        "name": "Ammo Box (Rifle)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 150,
-        "basePrice": 7.5,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "rifle",
-        "description": "Used to reload a rifle"
+    "Solar_recharger": {
+        "tl": 4,
+        "enc": 3,
+        "cost": 500,
+        "descriptions": "This recharger unfolds into a 2 meter\nby 2 meter square field of solar cells. Granted a\nprimary star of roughly Earth-like intensity, it can\nrecharge one type A power cell per day.",
+        "internalName": "Solar_recharger",
+        "name": "Solar recharger",
+        "equipmentType": "ammo",
+        "ammoType": "rechargeA"
     },
-    "bulletBox-shotgun": {
-        "internalName": "bulletBox-shotgun",
-        "name": "Ammo Box (Shotgun)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 100,
-        "basePrice": 5,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "shotgun",
-        "description": "Used to reload a shotgun"
-    },
-    "bulletBox-semi-auto_pistol": {
-        "internalName": "bulletBox-semi-auto_pistol",
-        "name": "Ammo Box (Semi-Auto Pistol)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 150,
-        "basePrice": 7.5,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "semi-auto_pistol",
-        "description": "Used to reload a semi-auto pistol"
-    },
-    "bulletBox-submachine_gun": {
-        "internalName": "bulletBox-submachine_gun",
-        "name": "Ammo Box (Submachine Gun)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 400,
-        "basePrice": 20,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "submachine_gun",
-        "description": "Used to reload a submachine gun"
-    },
-    "bulletBox-combat_rifle": {
-        "internalName": "bulletBox-combat_rifle",
-        "name": "Ammo Box (Combat Rifle)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 600,
-        "basePrice": 30,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "combat_rifle",
-        "description": "Used to reload a combat rifle"
-    },
-    "bulletBox-combat_shotgun": {
-        "internalName": "bulletBox-combat_shotgun",
-        "name": "Ammo Box (Combat Shotgun)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 600,
-        "basePrice": 30,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "combat_shotgun",
-        "description": "Used to reload a combat shotgun"
-    },
-    "bulletBox-sniper_rifle": {
-        "internalName": "bulletBox-sniper_rifle",
-        "name": "Ammo Box (Sniper Rifle)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 800,
-        "basePrice": 40,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "sniper_rifle",
-        "description": "Used to reload a sniper rifle"
-    },
-    "bulletBox-void_carbine": {
-        "internalName": "bulletBox-void_carbine",
-        "name": "Ammo Box (Void Carbine)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 800,
-        "basePrice": 40,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "void_carbine",
-        "description": "Used to reload a void carbine"
-    },
-    "bulletBox-mag_pistol": {
-        "internalName": "bulletBox-mag_pistol",
-        "name": "Ammo Box (Mag Pistol)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 800,
-        "basePrice": 40,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "mag_pistol",
-        "description": "Used to reload a mag pistol"
-    },
-    "bulletBox-mag_rifle": {
-        "internalName": "bulletBox-mag_rifle",
-        "name": "Ammo Box (Mag Rifle)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 1000,
-        "basePrice": 50,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "mag_rifle",
-        "description": "Used to reload a mag rifle"
-    },
-    "bulletBox-spike_thrower": {
-        "internalName": "bulletBox-spike_thrower",
-        "name": "Ammo Box (Spike Thrower)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 1200,
-        "basePrice": 60,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "spike_thrower",
-        "description": "Used to reload a spike thrower"
-    },
-    "bulletBox-laser_pistol": {
-        "internalName": "bulletBox-laser_pistol",
-        "name": "Ammo Box (Laser Pistol)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 400,
-        "basePrice": 20,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "laser_pistol",
-        "description": "Used to reload a laser pistol"
-    },
-    "bulletBox-laser_rifle": {
-        "internalName": "bulletBox-laser_rifle",
-        "name": "Ammo Box (Laser Rifle)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 600,
-        "basePrice": 30,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "laser_rifle",
-        "description": "Used to reload a laser rifle"
-    },
-    "bulletBox-thermal_pistol": {
-        "internalName": "bulletBox-thermal_pistol",
-        "name": "Ammo Box (Thermal Pistol)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 600,
-        "basePrice": 30,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "thermal_pistol",
-        "description": "Used to reload a thermal pistol"
-    },
-    "bulletBox-plasma_projector": {
-        "internalName": "bulletBox-plasma_projector",
-        "name": "Ammo Box (Plasma Projector)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 800,
-        "basePrice": 40,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "plasma_projector",
-        "description": "Used to reload a plasma projector"
-    },
-    "bulletBox-shear_rifle": {
-        "internalName": "bulletBox-shear_rifle",
-        "name": "Ammo Box (Shear Rifle)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 1200,
-        "basePrice": 60,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "shear_rifle",
-        "description": "Used to reload a shear rifle"
-    },
-    "bulletBox-thunder_gun": {
-        "internalName": "bulletBox-thunder_gun",
-        "name": "Ammo Box (Thunder Gun)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 2000,
-        "basePrice": 100,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "thunder_gun",
-        "description": "Used to reload a thunder gun"
-    },
-    "bulletBox-distortion_cannon": {
-        "internalName": "bulletBox-distortion_cannon",
-        "name": "Ammo Box (Distortion Cannon)",
-        "enc": 1,
-        "tl": 2,
-        "cost": 2500,
-        "basePrice": 125,
-        "equipmentType": "ammoItems",
-        "shots": 20,
-        "forWeapon": "distortion_cannon",
-        "description": "Used to reload a distortion cannon"
+    "Telekinetic_generator": {
+        "tl": 4,
+        "enc": 2,
+        "cost": 250,
+        "descriptions": "While this device assumes the\npresence of a trained telekinetic, it isn’t strictly\npsitech, as its operation is quite simple. A telekinetic user pushes a resistance bar within the generator, causing a flow of electricity to recharge an\nattached power cell. Any telekinetic with Telekinesis-1 skill or better can recharge a cell with fifteen minutes of concentration. In an emergency, a\ncharacter with at least Strength 10 can operate the\ngenerator manually, though they need to succeed\non a difficulty 8 Con/Exert skill check in order to\nkeep up the pace for an hour. Failure means that\nthe character must rest for at least an hour before\ntrying again. The generator can charge one type\nA power cell at a time.",
+        "internalName": "Telekinetic_generator",
+        "name": "Telekinetic generator",
+        "equipmentType": "ammo",
+        "ammoType": "rechargeA"
     }
 }

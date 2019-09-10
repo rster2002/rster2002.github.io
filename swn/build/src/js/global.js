@@ -9,7 +9,7 @@ if (document.URL.includes("http://localhost:")) {
     env = "pro";
 }
 
-function genId() {
+function genId(length = 32) {
     function randomString(characters, l) {
         var retn = "";
         for (var i = 0; i < l; i++) {
@@ -20,7 +20,7 @@ function genId() {
     }
     return randomString(
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-        32
+        length
     );
 }
 
