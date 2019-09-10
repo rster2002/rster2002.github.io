@@ -6,7 +6,9 @@
 </template>
 
 <script>
-import { fb } from "@js/firebase.js";
+import vueChannel from "vue-channel";
+
+import { fb, fs } from "@js/firebase.js";
 import { signOut } from "@js/global.js";
 import appbar from "@component/appbar.vue";
 
@@ -29,11 +31,29 @@ function routeUpdate(t, to, from) {
 			u.icon = user.photoURL;
 			u.email = user.email;
 
-			sessionStorage.setItem("u", JSON.stringify({
-				uid: user.uid,
-                username: user.displayName,
-                usericon: user.photoURL
-			}));
+            vueChannel("user")
+                .set({
+                    uid: user.uid,
+                    username: user.displayName,
+                    usericon: user.photoURL
+                });
+
+            if (user.credential !== undefined) {
+                vueChannel("accessToken")
+                    .set({ token: user.credential.accessToken });
+            } else {
+                fs.collection("users")
+                    .doc(user.uid)
+                    .collection("private")
+                    .doc("token")
+                    .get()
+                    .then(doc => {
+                        if (doc && doc.exists) {
+                            vueChannel("accessToken")
+                                .set({ token: doc.data().token })
+                        }
+                    });
+            }
 		}
 	});
 

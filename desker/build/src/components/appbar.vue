@@ -3,7 +3,7 @@
         <div class="logo">
             <img src="@img/logo.png" />
         </div>
-        <barbtn title="dashboard" @click="navTo('dashboard')">Dashboard</barbtn>
+        <barbtn title="dashboard" @click="navTo('')">Dashboard</barbtn>
         <barbtn title="projects" @click="navTo('projects')">Projects</barbtn>
         <barbtn title="settings" @click="navTo('settings')">Settings</barbtn>
         <div class="divider" v-if="showPrjNav()"></div>
