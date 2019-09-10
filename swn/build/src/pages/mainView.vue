@@ -54,6 +54,7 @@ gtag("config", "UA-102147810-4");
 
 import { fs } from "@js/firebase.js"
 import { env } from "@js/global.js";
+import vueChannel from "@js/vueChannel.js";
 
 function routeUpdate(t, to, from) {
 	fb.auth().onAuthStateChanged(function(user) {
@@ -73,11 +74,18 @@ function routeUpdate(t, to, from) {
                     lastLogin: Date.now()
                 });
 
+            vueChannel("user")
+                .set({
+                    uid: user.uid,
+                    username: user.displayName,
+                    usericon: user.photoURL
+                });
+
 			sessionStorage.setItem("u", JSON.stringify({
 				uid: user.uid,
                 username: user.displayName,
                 usericon: user.photoURL
-			}));
+            }));
 		}
 	});
 
@@ -141,7 +149,13 @@ export default {
 	created() {
         routeUpdate(this);
         
-        // window.addEventListener("error", err => console.log("ERR", err));
+        window["vueChannel"] = vueChannel;
+
+        let channel = vueChannel("user");
+
+        channel.receive(a => {
+            this.user = Object.assign({}, this.user, a);
+        });
 	}
 }
 </script>

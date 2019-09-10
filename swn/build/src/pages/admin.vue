@@ -2,7 +2,7 @@
     <div>
         <card>
             <primaryTitle>
-                <h1>Users</h1>
+                <h1>{{ title }}</h1>
             </primaryTitle>
             <div>
                 <listitem v-for="user in users" :key="user.uid">
@@ -22,6 +22,8 @@
 import { card, primaryTitle, listitem, dropdownindicator, dropdowncontent } from "@components";
 
 import { fs, qu } from "@js/firebase.js";
+import fdb from "@js/fastdb.js";
+window.fdb = fdb;
 
 export default {
     components: {
@@ -33,7 +35,8 @@ export default {
     },
     data() {
         return {
-            users: []
+            users: [],
+            title: "Users"
         }
     },
     methods: {
@@ -47,6 +50,12 @@ export default {
 
         users.forEach(user => {
             this.users.push({...user, open: false});
+        });
+
+        var db = fdb("global");
+
+        db.onStateSet(a => {
+            this.title = a.title
         });
     }
 }
