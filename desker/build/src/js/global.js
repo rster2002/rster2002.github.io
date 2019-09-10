@@ -48,6 +48,10 @@ function user() {
     }
 }
 
+function makeApiCall(endpoint, payload, requireNewest = false) {
+
+}
+
 export {
     env,
     genId,
