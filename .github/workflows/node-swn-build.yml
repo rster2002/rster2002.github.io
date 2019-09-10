@@ -1,0 +1,23 @@
+name: Node CI	
+
+on: 	
+  pull_request:	
+    branches:	
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        node: [ '10', '8' ]
+    name: Node ${{ matrix.node }} sample
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - run: cd swn/build
+      - run: yarn
+      - run: yarn build
