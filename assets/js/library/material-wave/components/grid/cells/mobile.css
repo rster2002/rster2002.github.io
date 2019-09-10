@@ -1,9 +1,0 @@
-div.wave.grid .m12 {
-	margin: 24px;
-	width: calc(100% - 48px);
-}
-
-div.wave.grid .m6 {
-	margin: 24px;
-	width: calc(50% - 48px);
-}
