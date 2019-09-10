@@ -7,7 +7,8 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "webpack -p",
-		"serve": "webpack-dev-server"
+        "serve": "webpack-dev-server",
+        "e2e:ui": "cypress open"
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.4.2",
