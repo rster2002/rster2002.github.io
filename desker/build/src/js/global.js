@@ -1,4 +1,6 @@
-import { fb } from "@js/firebase.js";
+import vueChannel from "vue-channel";
+
+import { fb, fs } from "@js/firebase.js";
 
 var env;
 var base;
@@ -49,13 +51,37 @@ function user() {
 }
 
 function makeApiCall(endpoint, payload, requireNewest = false) {
+    return new Promise((res, rej) => {
+        vueChannel("accessToken")
+            .disposable(accessTokenState => {
 
+                vueChannel("user")
+                    .disposable(userState => {
+                        if (accessTokenState.token !== undefined && userState.login !== undefined) {
+                            endpoint = replaceAll(endpoint, "$user", userState.login);
+    
+                            fetch(`https://api.github.com${endpoint}?access_token=${accessTokenState.token}`)
+                                .then(r => r.json())
+                                .then(j => {
+                                    res(j);
+                                });
+                        } else {
+                            return true;
+                        }
+                    });
+
+                return accessTokenState.token === undefined;
+            });
+    });
 }
+
+window["makeApiCall"] = makeApiCall;
 
 export {
     env,
     genId,
     signOut,
     replaceAll,
-    user
+    user,
+    makeApiCall
 };

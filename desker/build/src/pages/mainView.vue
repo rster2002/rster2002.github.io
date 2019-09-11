@@ -20,6 +20,16 @@ gtag("config", "UA-102147810-4");
 
 import { env } from "@js/global.js";
 
+vueChannel("accessToken")
+    .disposable(state => {
+        fetch("https://api.github.com/user?access_token=" + state.token)
+            .then(r => r.json())
+            .then(j => 
+                vueChannel("user")
+                    .update(j)
+            );
+    });
+
 function routeUpdate(t, to, from) {
 	fb.auth().onAuthStateChanged(function(user) {
 		if (user === null) {
@@ -29,7 +39,9 @@ function routeUpdate(t, to, from) {
 			var u = t.user;
 			u.username = user.displayName;
 			u.icon = user.photoURL;
-			u.email = user.email;
+            u.email = user.email;
+
+            console.log(user);
 
             vueChannel("user")
                 .set({

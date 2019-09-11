@@ -4,29 +4,8 @@
         <div class="grid">
             <card v-for="project in projects" :key="project.id" @click="openprj(project)">
                 <h1>{{ project.name }}</h1>
-                <p>Progress</p>
-                <div class="bar">
-                    <div class="progress" :style="{ width: progress(project) }"></div>
-                </div>
-                <div class="footer">
-                    <div class="text">
-                        <p>Last activity was {{ activity(project) }} ago by</p>
-                    </div>
-                    <div class="user">
-                        <img :src="project.lastActivityBy.usericon" />
-                    </div>
-                </div>
-            </card>
-            <card class="add" @click="popup.new = true">
-                <h1 class="material-icons">add</h1>
             </card>
         </div>
-        <popup v-model="popup.new">
-            <h1>New project</h1>
-            <textbox label="Name" v-model="newprj.name" helpertext="Give your project a name" maxlength="40"></textbox>
-            <textbox label="Description" v-model="newprj.description" type="textarea" helpertext="A description of what your project is about" maxlength="500"></textbox>
-            <btn @click="addPrj()">add</btn>
-        </popup>
     </div>
 </template>
 
@@ -37,7 +16,7 @@ import textbox from "@component/textbox.vue";
 import btn from "@component/btn.vue";
 
 import { fs, u, qu } from "@js/firebase.js";
-import { genId, user } from "@js/global.js";
+import { genId, user, makeApiCall } from "@js/global.js";
 
 export default {
     components: {
@@ -59,86 +38,14 @@ export default {
         }
     },
     methods: {
-        addPrj() {
-            var nameValid = this.newprj.name.length > 0 && this.newprj.name.length <= 40;
-            var descriptionValid = this.newprj.description.length <= 500;
-
-            if (nameValid && descriptionValid) {
-                var id = genId();
-
-                u().collection("projects").doc(id).set({
-                    id,
-                    name: this.newprj.name,
-                    description: this.newprj.description,
-                    owner: user()
-                });
-
-                fs.collection("projects").doc(id).set({
-                    created: Date.now(),
-                    createdBy: user(),
-                    progressDone: 0,
-                    progressTotal: 0,
-                    lastActivity: Date.now(),
-                    lastActivityBy: user(),
-                    id,
-                    name: this.newprj.name,
-                    description: this.newprj.description,
-                    owner: user(),
-                    members: [user().uid]
-                }).then(() => {
-                    fs.collection("projects")
-                        .doc(id)
-                        .collection("members")
-                        .doc(user().uid)
-                        .set({
-                            ...user(),
-                            workload: 0,
-                            assignedTasks: 0,
-                            maxWorkloadPerDay: 0,
-                            userType: "default"
-                        });
-                });
-            }
-        },
-        activity(prj) {
-            var now = Date.now();
-            var distance = now - prj.lastActivity;
-            var surfix = "ms";
-
-            if (distance >= 1000) {distance = Math.round(distance / 1000); surfix = "second"};
-            if (distance >= 60 && surfix == "second") {distance = Math.round(distance / 60); surfix = "minute"};
-            if (distance >= 60 && surfix == "minute") {distance = Math.round(distance / 60); surfix = "hour"};
-            if (distance >= 24 && surfix == "hour") {distance = Math.round(distance / 24); surfix = "day"};
-            if (distance >= 7 && surfix == "day") {distance = Math.round(distance / 7); surfix = "week"};
-            if (distance >= 4 && surfix == "week") {distance = Math.round(distance / 4); surfix = "month"};
-            if (distance >= 12 && surfix == "month") {distance = Math.round(distance / 12); surfix = "year"};
-
-            if (distance > 1) {surfix += "s"};
-
-            return distance + " " + surfix;
-        },
-        progress(prj) {
-            if (prj.progressTotal === 0) {
-                return "0%";
-            } else {
-                var percentage = Math.round(prj.progressDone / prj.progressTotal * 100);
-                return percentage + "%";
-            }
-        },
         openprj(prj) {
             this.$router.push({ path: `/project/${prj.id}/overview` });
         }
     },
     async created() {
-        var query = await qu(u().collection("projects"));
-        
-        query.forEach(a => {
-            fs.collection("projects").doc(a.id).get().then(a => {
-                if (a && a.exists) {
-                    this.projects.push(a.data());
-                }
-            });
-        });
+        var repos = await makeApiCall("/users/$user/repos");
+
+        console.log(repos);
     }
 }
 </script>

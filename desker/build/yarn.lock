@@ -6466,10 +6466,10 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.0.tgz#bd76d6a23323e2ca8ffa12028dc04559c75f9019"
   integrity sha512-iq+S7vZJE60yejDYM0ek6zg308+UZsdtPExWP9VZoCFCz1zkJoXFnAX7aZfd/ZwrkidzdUZL0C/ryW+JwAiIGw==
 
-vue-channel@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vue-channel/-/vue-channel-1.0.1.tgz#1ef211fdd220172d2f2cc974db1a84d505be855b"
-  integrity sha512-W2bZ3RsN8g79tN9cYxM/eb3kOllitVEMpKF/qvc5FZRtzi4mq/Nfl4Stc17ieevud/l6pMJNEBHPGOJfG9IB1Q==
+vue-channel@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/vue-channel/-/vue-channel-1.0.3.tgz#df4501a8885f52e61b07603326cf47b4cc4aca9e"
+  integrity sha512-r8FxKc9PZOQ1ctANNKLl60Keopw0ho/IPlZsAQyMuLQ8pRr2DQNNVfyRCWvAiOVDWsORUPTpV+pt+hO2HTzVXQ==
 
 vue-function-api@^2.0.6:
   version "2.0.6"
