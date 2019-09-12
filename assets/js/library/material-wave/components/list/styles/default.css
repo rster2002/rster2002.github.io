@@ -1,0 +1,101 @@
+ul.wave {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: .00937em;
+    margin: 0;
+    padding: 8px 0;
+    line-height: 1.5rem;
+    list-style-type: none;
+    border: 1px solid rgba(0,0,0,.1);
+    max-width: 600px;
+}
+
+ul.wave > li {
+    display: block;
+    position: relative;
+    padding: 0 16px;
+    overflow: hidden;
+	cursor: pointer;
+	width: calc(100% - 32px);
+}
+
+ul.wave > li:not(.double) {
+	height: 48px;
+}
+
+ul.wave > li:hover {
+	background-color: rgba(235, 235, 235, 0.5);
+}
+
+ul.wave > li h1 {
+    font-weight: 400;
+    letter-spacing: .00937em;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-transform: inherit;
+	height: 1.5rem;
+	position: relative;
+	color: rgba(0,0,0,.87);
+}
+
+ul.wave > li:not(.double) h1 {
+	top: calc(50% - 0.75rem);
+}
+
+ul.wave > li.double {
+	height: 72px;
+}
+
+ul.wave > li.double h1 {
+	top: .75rem;
+}
+
+ul.wave > li.double p {
+	position: relative;
+	top: .75rem;
+	font-size: .875rem;
+	line-height: 1.25rem;
+	font-weight: 400;
+	letter-spacing: .01786em;
+	color: rgba(0,0,0,.54);
+	margin: 0;
+	height: 1.5rem;
+}
+
+ul.wave > li.expandable {
+	height: 48px;
+}
+
+ul.wave > li.expandable.open {
+	display: inline-table;
+	max-height: 1000vh;
+	transition: 295ms all cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+ul.wave > li.expandable.double {
+	height: 72px;
+}
+
+ul.wave > li.expandable div.shared {
+	height: 48px;
+}
+
+ul.wave > li.expandable.double div.shared {
+	height: 72px;
+}
+
+ul.wave > li.expandable div.shared h1 {
+	top: .75rem;
+}
+
+ul.wave > li.expandable div.content p {
+	top: 0;
+	color: black;
+	margin: 4px 0;
+}

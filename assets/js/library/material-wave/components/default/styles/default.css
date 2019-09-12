@@ -1,0 +1,16 @@
+/* Global Background */
+.wave--background {
+	display: none;
+	transition: .1s all ease-in;
+	z-index: 24;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0,0,0,0);
+}
+
+.wave--background.show {
+	display:block;
+	transition: .1s all ease-in;
+	background-color:rgba(0,0,0,.5);
+}
