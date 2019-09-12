@@ -1,0 +1,174 @@
+// Globals
+$globalFontFamily: 'Roboto', sans-serif;
+$globalFontSize: 16px;
+$globalFontWeightThin: 100;
+$globalFontWeightLight: 300;
+$globalFontWeightRegular: 400;
+$globalFontWeightMedium: 500;
+$globalFontWeightBold: 700;
+$globalFontWeightBlack: 900;
+
+$globalBorderRadius: 5px;
+
+// Colors
+$primaryColor: #4527a0;
+$primaryColorLight: #7953d2;
+$primaryColorDark: #000070;
+$textOnPrimaryColor: #ffffff;
+$secondaryColor: #009688;
+$secondaryColorLight: #52c7b8;
+$secondaryColorDark: #00675b;
+$textOnSecondaryColor: #000000;
+
+$backgroundColor: #ffffff;
+$textOnBackgroundColor: #000000;
+$surfaceColor: #ffffff;
+$textOnSurfaceColor: #000000;
+$errorColor: #b00020;
+$textOnErrorColor: #ffffff;
+
+// -> Type scale
+
+// Header 1
+$typeScaleHeader1FontFamily: $globalFontFamily;
+$typeScaleHeader1FontWeight: $globalFontWeightLight;
+$typeScaleHeader1FontSize: 6rem;
+$typeScaleHeader1FontTransform: none;
+$typeScaleHeader1LetterSpacing: -0.09375rem;
+
+// Header 2
+$typeScaleHeader2FontFamily: $globalFontFamily;
+$typeScaleHeader2FontWeight: $globalFontWeightLight;
+$typeScaleHeader2FontSize: 3.75rem;
+$typeScaleHeader2FontTransform: none;
+$typeScaleHeader2LetterSpacing: -0.03125rem;
+
+// Header 3
+$typeScaleHeader3FontFamily: $globalFontFamily;
+$typeScaleHeader3FontWeight: $globalFontWeightRegular;
+$typeScaleHeader3FontSize: 3rem;
+$typeScaleHeader3FontTransform: none;
+$typeScaleHeader3LetterSpacing: 0rem;
+
+// Header 4
+$typeScaleHeader4FontFamily: $globalFontFamily;
+$typeScaleHeader4FontWeight: $globalFontWeightRegular;
+$typeScaleHeader4FontSize: 2.125rem;
+$typeScaleHeader4FontTransform: none;
+$typeScaleHeader4LetterSpacing: 0.015625rem;
+
+// Header 5
+$typeScaleHeader5FontFamily: $globalFontFamily;
+$typeScaleHeader5FontWeight: $globalFontWeightRegular;
+$typeScaleHeader5FontSize: 1.5rem;
+$typeScaleHeader5FontTransform: none;
+$typeScaleHeader5LetterSpacing: 0rem;
+
+// Header 6
+$typeScaleHeader6FontFamily: $globalFontFamily;
+$typeScaleHeader6FontWeight: $globalFontWeightMedium;
+$typeScaleHeader6FontSize: 1.25rem;
+$typeScaleHeader6FontTransform: none;
+$typeScaleHeader6LetterSpacing: 0.009375rem;
+
+// Subtitle 1
+$typeScaleSubtitle1FontFamily: $globalFontFamily;
+$typeScaleSubtitle1FontWeight: $globalFontWeightRegular;
+$typeScaleSubtitle1FontSize: 1rem;
+$typeScaleSubtitle1FontTransform: none;
+$typeScaleSubtitle1LetterSpacing: 0.009375rem;
+
+// Subtitle 2
+$typeScaleSubtitle2FontFamily: $globalFontFamily;
+$typeScaleSubtitle2FontWeight: $globalFontWeightMedium;
+$typeScaleSubtitle2FontSize: 0.875rem;
+$typeScaleSubtitle2FontTransform: none;
+$typeScaleSubtitle2LetterSpacing: 0.00625rem;
+
+// Body 1
+$typeScaleBody1FontFamily: $globalFontFamily;
+$typeScaleBody1FontWeight: $globalFontWeightRegular;
+$typeScaleBody1FontSize: 1rem;
+$typeScaleBody1FontTransform: none;
+$typeScaleBody1LetterSpacing: 0.03125rem;
+
+// Body 2
+$typeScaleBody2FontFamily: $globalFontFamily;
+$typeScaleBody2FontWeight: $globalFontWeightRegular;
+$typeScaleBody2FontSize: 0.875rem;
+$typeScaleBody2FontTransform: none;
+$typeScaleBody2LetterSpacing: 0.015625rem;
+
+// Button
+$typeScaleButtonFontFamily: $globalFontFamily;
+$typeScaleButtonFontWeight: $globalFontWeightMedium;
+$typeScaleButtonFontSize: 0.875rem;
+$typeScaleButtonFontTransform: uppercase;
+$typeScaleButtonLetterSpacing: 0.078125rem;
+
+// Caption
+$typeScaleCaptionFontFamily: $globalFontFamily;
+$typeScaleCaptionFontWeight: $globalFontWeightMedium;
+$typeScaleCaptionFontSize: 0.75rem;
+$typeScaleCaptionFontTransform: none;
+$typeScaleCaptionLetterSpacing: 0.025rem;
+
+// Overline
+$typeScaleOverlineFontFamily: $globalFontFamily;
+$typeScaleOverlineFontWeight: $globalFontWeightMedium;
+$typeScaleOverlineFontSize: 0.625rem;
+$typeScaleOverlineFontTransform: uppercase;
+$typeScaleOverlineLetterSpacing: 0.09375rem;
+
+// -> Components
+
+// appbar
+$appbarBackgroundColor: $primaryColorLight;
+
+    // Font
+    $appbarFontColor: $textOnPrimaryColor;
+    $appbarFontFamily: $typeScaleHeader6FontFamily;
+    $appbarFontWeight: $typeScaleHeader6FontWeight;
+    $appbarFontSize: $typeScaleHeader6FontSize;
+    $appbarFontTransform: $typeScaleHeader6FontTransform;
+    $appbarLetterSpacing: $typeScaleHeader6LetterSpacing;
+
+// Card
+$cardBackgroundColor: $surfaceColor;
+$cardBorderRadius: $globalBorderRadius;
+
+// App Drawer
+$appdrawerBackgroundColor: $surfaceColor;
+
+// Drawer Button
+$drawerbtnFontColor: $textOnSurfaceColor;
+$drawerbtnFontFamily: $globalFontFamily;
+$drawerbtnBorderRadius: $globalBorderRadius;
+
+// Drawer Title
+
+    // Primary Text (header 1)
+    $drawertitlePrimaryFontFamily: $typeScaleHeader6FontFamily;
+    $drawertitlePrimaryFontWeight: $typeScaleHeader6FontWeight;
+    $drawertitlePrimaryFontSize: $typeScaleHeader6FontSize;
+    $drawertitlePrimaryLetterSpacing: $typeScaleHeader6LetterSpacing;
+    $drawertitlePrimaryFontTransform: $typeScaleHeader6FontTransform;
+
+    // Secondary Text (header 2)
+    $drawertitleSecondaryFontFamily: $typeScaleSubtitle1FontFamily;
+    $drawertitleSecondaryFontWeight: $typeScaleSubtitle1FontWeight;
+    $drawertitleSecondaryFontSize: $typeScaleSubtitle1FontSize;
+    $drawertitleSecondaryLetterSpacing: $typeScaleSubtitle1LetterSpacing;
+    $drawertitleSecondaryFontTransform: $typeScaleSubtitle1FontTransform;
+
+// Backdrop
+$backdropBorderRadius: 15px;
+$backdropBackgroundColor: $primaryColor;
+$backdropSurfaceColor: $surfaceColor;
+
+    // Drawer subtitle
+    $backdropTitleFontFamily: $typeScaleSubtitle1FontFamily;
+    $backdropTitleFontWeight: $typeScaleSubtitle1FontWeight;
+    $backdropTitleFontSize: $typeScaleSubtitle1FontSize;
+    $backdropTitleLetterSpacing: $typeScaleSubtitle1LetterSpacing;
+    $backdropTitleFontTransform: $typeScaleSubtitle1FontTransform;
