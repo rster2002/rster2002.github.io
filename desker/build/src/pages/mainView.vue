@@ -111,7 +111,9 @@ export default {
 
     & > div.view {
         width: 100%;
-        height: calc(100% - 114px);
+        height: calc(100% - 2px);
+
+        padding: 1px 0px;
     }
 }
 
