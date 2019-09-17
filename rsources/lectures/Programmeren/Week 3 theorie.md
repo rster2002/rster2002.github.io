@@ -1,10 +1,10 @@
-# Programmeren week 3 - Selectie
+# Programming week 3 - Selection
 
 [TOC]
 
-## Selectie
+## Selection
 
-### Opdracht 2.3
+### Exercise 2.3
 
 ```pseudocode
 read seconds
@@ -19,7 +19,7 @@ Uses interger deviding, $3601 / 3600 = 1$ because it can't store decimals.
 
 The modulo operator (`%`) takes all whole numbers from a number and shows how much remains (calculates the remainder)
 
-### Opdracht 2.8
+### Exercise 2.8
 
 `Button.Icon` sets an icon to an button
 
@@ -87,7 +87,7 @@ else
 
 > ###### Sidenote
 >
-> Don't add else statments when you don't need them.
+> Don't add else statements when you don't need them.
 
 #### If-nested
 
@@ -208,16 +208,16 @@ display "Smallest number is " + smallest
 
 #### Self-test 2
 
-Personel get a 5% raise in salery, but has to be at least 75 euro's more than they already earn. You read the current salery and then display how much extra money they get per month.
+Personnel get a 5% raise in salary, but has to be at least 75 euro's more than they already earn. You read the current salary and then display how much extra money they get per month.
 
 ```pseudocode
-read salery
-raise = salery * 0.05
+read salary
+raise = salary * 0.05
 if raise < 75
 	raise = 75
 
-newSalery = salery + raise
-display raise, newSalery
+newSalary = salary + raise
+display raise, newSalary
 ```
 
 > ###### Sidenote
@@ -260,7 +260,7 @@ bool studentInternship = firstYearDone && (totalCredits >= 100)
 >
 > `&` go's though all condition statements even if one already failed.
 
-#### One of confitions
+#### One of conditions
 
 | A    | B    | OUT  |
 | ---- | ---- | ---- |
@@ -297,7 +297,7 @@ switch (grade) {
     case "A":
         Console.WriteLine("Prima")
         break;
-	default"
+    default:
         Console.WriteLile("Geen idee wat dit is");
         break;
 }
@@ -307,9 +307,9 @@ switch (grade) {
 >
 > Note the `break;` at the end of every `case`.
 
-### Oefeningen
+### Practice exercises
 
-#### Oefening 3
+#### Exercise 3
 
 ```pseudocode
 read goldNL, goldGE
