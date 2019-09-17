@@ -1,9 +1,9 @@
 <template>
     <div class="view">
         <h1>Your projects</h1>
-        <grid size="12xA" gap="16px">
+        <grid type="list">
             <card v-for="project in projects" :key="project.id" @click="openprj(project)">
-                <h1>{{ project.name }}</h1>
+                <h1><span class="mdi mdi-github-circle"></span> {{ project.name }}</h1>
             </card>
         </grid>
     </div>
@@ -61,10 +61,24 @@ export default {
     font-size: 40px;
 }
 
-.grid {
+.grid.list {
     width: calc(100% - 128px);
     
     padding: 0px 64px;
+
+    .card {
+        width: calc(25% - 64px);
+
+        margin: 16px;
+        float: left;
+        cursor: pointer;
+
+        h1 {
+            font-family: $default-font;
+            margin: 8px 0px;
+            padding: 0px 16px;
+        }
+    }
 }
 
 </style>

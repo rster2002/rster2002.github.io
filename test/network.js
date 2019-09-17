@@ -41,9 +41,21 @@ class NeuralNetwork {
 
         return lastResult;
     }
+
+    train(input, expectedOutput) {
+        
+    }
 }
 
-const shape = [24, 15, 10];
+function randomNr(min, max) {
+    
+}
+
+function randomTrainingData() {
+    var inputArray = 
+}
+
+const shape = [10, 5, 2];
 
 const network = new NeuralNetwork(shape, x => 1/(1+Math.exp(-x)));
 
@@ -52,16 +64,3 @@ var prediction = network.compute(
 );
 
 console.log(prediction, network);
-
-// console.log(vecAdd(
-//     [
-//         [1],
-//         [2],
-//         [3],
-//     ],
-//     [
-//         [4],
-//         [5],
-//         [6],
-//     ]
-// ))

@@ -1,29 +1,37 @@
 <template>
-    <div class="grid" :style="{ gridTemplateColumns: colms, gridTemplateRows: rows, gridGap: gap }">
-
+    <div class="grid" :class="[type]" :style="{ gridTemplateColumns: colms, gridTemplateRows: rows, gridGap: gap }">
+        <slot></slot>
     </div>
 </template>
 
 <script>
 export default {
-    props: ["size", "gap"],
+    props: ["type", "size", "gap"],
     computed: {
         colms() {
-            var colms = this.disect()[0];
+            if (this.type === "implicit") {
+                var colms = this.disect()[0];
 
-            if (colms === "A") {
-                return `auto`;
+                if (colms === "A") {
+                    return `auto`;
+                } else {
+                    return `repeat(${Number(colms)}, 1fr)`;
+                }
             } else {
-                return `repeat(${Number(colms)}, 1fr)`;
+                return 0;
             }
         },
         rows() {
-            var rows = this.disect()[1];
-
-            if (rows === "A") {
-                return `auto`;
+            if (this.type === "implicit") {
+                var rows = this.disect()[1];
+    
+                if (rows === "A") {
+                    return `auto`;
+                } else {
+                    return `repeat(${Number(rows)}, 1fr)`;
+                }
             } else {
-                return `repeat(${Number(rows)}, 1fr)`;
+                return 0;
             }
         }
     },
@@ -43,13 +51,24 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
-.grid {
+.grid.implicit {
     height: 100%;
     width: 100%;
 
     display: grid;
+}
+
+.grid.list {
+    height: 100%;
+    width: 100%;
+
+    display: block;
+
+    .card {
+        width: 25%;
+    }
 }
 
 </style>

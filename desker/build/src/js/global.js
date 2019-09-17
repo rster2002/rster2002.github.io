@@ -51,14 +51,17 @@ function user() {
 }
 
 function makeApiCall(endpoint, payload, requireNewest = false) {
+
     return new Promise((res, rej) => {
         vueChannel("accessToken")
             .disposable(accessTokenState => {
 
                 vueChannel("user")
                     .disposable(userState => {
+
                         if (accessTokenState.token !== undefined && userState.login !== undefined) {
                             endpoint = replaceAll(endpoint, "$user", userState.login);
+                            console.log(endpoint);
     
                             fetch(`https://api.github.com${endpoint}?access_token=${accessTokenState.token}`)
                                 .then(r => r.json())

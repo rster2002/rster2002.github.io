@@ -23,7 +23,9 @@ export default {
         login() {
             var t = this;
             var provider = new cfb.auth.GithubAuthProvider();
+
             provider.addScope("repo");
+            
             fb.auth()
                 .signInWithPopup(provider)
                 .then(r => {

@@ -31,43 +31,6 @@ vueChannel("accessToken")
     });
 
 function routeUpdate(t, to, from) {
-	fb.auth().onAuthStateChanged(function(user) {
-		if (user === null) {
-			console.log("NO USER");
-			t.$router.push({ path: "/login" });
-		} else {
-			var u = t.user;
-			u.username = user.displayName;
-			u.icon = user.photoURL;
-            u.email = user.email;
-
-            console.log(user);
-
-            vueChannel("user")
-                .set({
-                    uid: user.uid,
-                    username: user.displayName,
-                    usericon: user.photoURL
-                });
-
-            if (user.credential !== undefined) {
-                vueChannel("accessToken")
-                    .set({ token: user.credential.accessToken });
-            } else {
-                fs.collection("users")
-                    .doc(user.uid)
-                    .collection("private")
-                    .doc("token")
-                    .get()
-                    .then(doc => {
-                        if (doc && doc.exists) {
-                            vueChannel("accessToken")
-                                .set({ token: doc.data().token })
-                        }
-                    });
-            }
-		}
-	});
 
 	t.barTitle = t.$route.meta.title;
 
@@ -98,7 +61,43 @@ export default {
 		}
 	},
 	created() {
-		routeUpdate(this);
+        routeUpdate(this);
+        
+        fb.auth().onAuthStateChanged(user => {
+            if (user === null) {
+                console.log("NO USER");
+                this.$router.push({ path: "/login" });
+            } else {
+
+                this.user.username = user.displayName;
+                this.user.icon = user.photoURL;
+                this.user.email = user.email;
+
+                vueChannel("user")
+                    .set({
+                        uid: user.uid,
+                        username: user.displayName,
+                        usericon: user.photoURL
+                    });
+
+                if (user.credential !== undefined) {
+                    vueChannel("accessToken")
+                        .set({ token: user.credential.accessToken });
+                } else {
+                    fs.collection("users")
+                        .doc(user.uid)
+                        .collection("private")
+                        .doc("token")
+                        .get()
+                        .then(doc => {
+                            if (doc && doc.exists) {
+                                vueChannel("accessToken")
+                                    .set({ token: doc.data().token })
+                            }
+                        });
+                }
+            }
+        });
 	}
 }
 </script>
