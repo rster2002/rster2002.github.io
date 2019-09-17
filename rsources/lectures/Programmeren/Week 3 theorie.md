@@ -52,16 +52,18 @@ if grade < PASS_LIMIT
 
 > ###### Sidenote
 >
-> `Int.Parse` and `Int32.Parse` is the same
+> `Int.Parse` and `Int32.Parse` does the same.
 
-When there is only one line needs to be executed you can do:
-
-```C#
-if (true)
-    statement
-```
-
-And don't have to put brackets around it.
+> ###### Sidenote
+>
+> When there is only one line needs to be executed you can do in C#:
+>
+> ```C#
+> if (condition)
+>     statement
+> ```
+>
+> And don't have to put brackets around it.
 
 #### If-else
 
