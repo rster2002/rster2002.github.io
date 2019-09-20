@@ -4,7 +4,10 @@
 
 ## Lectures
 
+* [Lecture 1.1](./lecture 1.2.html)
+* [Lecture 1.2](./lecture 1.2.html)
 * [Lecture 3.1](./lecture 3.1.html)
+* [Lecture 3.2](./lecture 3.2.html)
 
 ## Regels
 

@@ -2,7 +2,7 @@
 
 ## Wortels vereenvoudigen
 
-Als je bijvoorbeeld $\sqrt{75}$ heb, moet je deze vereenvoudigen. Eerst vind je de priemfactorizatie van het getal in de wortel, in dit geval dus de priemfactorizatie van `75` ($\ref{sqrtstep1}$):  
+Als je bijvoorbeeld $\sqrt{75}$ heb, moet je deze vereenvoudigen. Eerst vind je de priemfactorizatie van het getal in de wortel, in dit geval dus de priemfactorizatie van `75`:  
 $$
 \label{sqrtstep1}
 \sqrt{75} = \sqrt{3 \times 5 \times 5}
