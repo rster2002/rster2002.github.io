@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[16],{546:function(e,n,t){"use strict";t.r(n);var i={},l=t(95),s=Object(l.a)(i,function(){var e=this,n=e.$createElement;e._self._c;return e._m(0)},[function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",{staticClass:"view"},[t("h1",[e._v("Timeline")])])}],!1,null,null,null);n.default=s.exports}}]);
