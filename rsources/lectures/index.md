@@ -8,6 +8,7 @@ Here you can find notes that I've taken during lectures.
   * [Hands-on 3](./netwerken/hands-on3.html)
 * [Programming](./Programmeren/Week 3 theorie.html)
   * [Week 3](./Programmeren/Week 3 theorie.html)
+  * [Lecture 4.1](./Programmeren/Lecture 4.1.html)
 * [Wiskunde (nl)](./math/index.html)
   * [Lecture 1.1](./math/lecture 1.1.html)
   * [Lecture 1.2](./math/lecture 1.2.html)
