@@ -32,7 +32,7 @@ export default {
 	display: inline-block;
 
 	&.ex {
-		width: 80%;
+		width: 70%;
 	}
 
 	.gutter {

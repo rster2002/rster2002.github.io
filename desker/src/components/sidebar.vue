@@ -56,7 +56,7 @@ export default {
 	}
 
 	&.ex {
-		width: 20%;
+		width: 30%;
 
 		p {
 			z-index: 1;

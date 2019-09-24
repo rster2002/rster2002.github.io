@@ -57,6 +57,9 @@ export default a => {
             a.title += `<span class="tag purple"><img src="./src/icons/split.png" /></span>`;
             a.title += `'${a.actor.login}' created a fork`;
             break;
+        case "GollumEvent":
+            a.title += `<span class="tag green"><img src="./src/icons/book.png" /></span>`;
+            break;
     }
 
     return a;

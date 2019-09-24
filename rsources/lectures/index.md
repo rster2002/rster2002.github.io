@@ -13,6 +13,8 @@ Here you can find notes that I've taken during lectures.
   * [Lecture 1.2](./math/lecture 1.2.html)
   * [Lecture 3.1](./math/lecture 3.1.html)
   * [Lecture 3.2](./math/lecture 3.2.html)
+* [Studenten panel](./studenten panel/index.html)
+  * [Meeting 1](./studenten panel/Meeting 1.html)
 
 You can always change the file extention from `.html` to `.md` to find the markdown source code.
 
