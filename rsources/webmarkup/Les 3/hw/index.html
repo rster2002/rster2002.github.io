@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <form action="" method="POST">
+            <h1>Contact by email</h1>
+            <h2>Please select the topic you would like to contact us about. So, we can serve you better and faster.</h2>
+            <fieldset>
+                <legend>Where is your question about?</legend>
+                <select name="questionType" id="questionType">
+                    <option value="none" selected disabled>Make a choice</option>
+                    <option value="order">I have a question about an order</option>
+                    <option value="infoComputer">I like to have more information about a computer</option>
+                    <option value="other">I have another question</option>
+                </select>
+            </fieldset>
+            <h2>Contact about</h2>
+            <fieldset>
+                <legend>Main subject</legend>
+                <select name="topic" id="topicType">
+                    <option value="none" selected disabled>Choose topic</option>
+                    <option value="orderingAndDelivery">Ordering and delivery</option>
+                    <option value="cancelAndReturn">Cancel and return</option>
+                    <option value="giftVoucher">Gift voucher</option>
+                    <option value="other">Other question</option>
+                </select>
+                <textarea name="note" id="note"></textarea>
+                <input name="fileUpload" type="file" />
+                <input name="fullName" type="text" />
+                <input name="phoneNumber" type="phone" />
+                <input name="emailAddress" type="email" />
+                <input type="submit" />
+            </fieldset>
+        </form>
+    </body>
+</html>
