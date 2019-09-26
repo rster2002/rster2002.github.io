@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500|Roboto+Mono:400,700&display=swap');
+
+h1, h2 {
+    font-family: "Roboto Mono";
+    font-weight: 700;
+}
+
+h1 {
+    color: #59a1ff;
+}
+
+h2 {
+    color: #7495c0;
+}
+
+a {
+    color: #00fff3;
+}
+
+p, table, form, li {
+    color: #ffffff;
+    font-family: "Montserrat";
+}
+
+body {
+    background-color: #272727;
+}
+
+th {
+    font-weight: bold;
+}
+
+td {
+    font-style: italic;
+}

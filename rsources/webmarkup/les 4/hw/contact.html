@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="keywords" content="computers, pc, studying" />
+        <meta name="description" content="The contact information for Student Inc." />
+        <meta name="author" content="Bjørn Reemer" />
+        
+        <link rel="stylesheet" href="./css/ihavestyle.css" type="text/css" />
+
+        <title>Contact us</title>
+    </head>
+    <body>
+        <header>
+            <img src="./svg/icon.svg" alt="company logo">
+            <nav>
+                <a href="./index.html">Home</a>
+                <a href="./product.html">Products</a>
+            </nav>
+        </header>
+        <main>
+            <h1>Contact us</h1>
+            <ul>
+                <li>Company name: Student Inc.</li>
+                <li>Chamber of Commerce number: 66148980</li>
+                <li>Bank account number: 48954867</li>
+                <li>Phone number: +31 072 86721661</li>
+                <li>Email: contact@studentinc.com</li>
+            </ul>
+            <form action="test.php" method="POST">
+                <h1>Contact by email</h1>
+                <h2>Please select the topic you would like to contact us about. So, we can serve you better and faster.</h2>
+                <fieldset>
+                    <legend>Where is your question about?</legend>
+                    <select name="questionType" id="questionType">
+                        <option value="none" selected disabled>Make a choice</option>
+                        <option value="order">I have a question about an order</option>
+                        <option value="infoComputer">I like to have more information about a computer</option>
+                        <option value="other">I have another question</option>
+                    </select>
+                </fieldset>
+                <h2>Contact about</h2>
+                <fieldset>
+                    <legend>Main subject</legend>
+                    <select name="topic" id="topicType">
+                        <option value="none" selected disabled>Choose topic</option>
+                        <option value="orderingAndDelivery">Ordering and delivery</option>
+                        <option value="cancelAndReturn">Cancel and return</option>
+                        <option value="giftVoucher">Gift voucher</option>
+                        <option value="other">Other question</option>
+                    </select>
+                    <textarea name="note" id="note" placeholder="Note *"></textarea>
+                    <input name="fileUpload" type="file" />
+                    <input name="fullName" type="text" placeholder="Full name" />
+                    <input name="phoneNumber" type="tel" placeholder="Phone number" />
+                    <input name="emailAddress" type="email" placeholder="Email address" />
+                    <input type="submit" />
+                </fieldset>
+            </form>
+        </main>
+        <footer>
+            <p>&copy; Student Inc.</p>
+        </footer>
+    </body>
+</html>
