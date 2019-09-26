@@ -67,6 +67,8 @@ h2 {
 }
 
 .linkContainer {
+    width: 132px;
+
     position: absolute;
     bottom: 32px;
     left: 50%;
@@ -100,5 +102,16 @@ h2 {
     .logo {
         height: 64px;
         width: 64px;
+    }
+}
+
+@media screen and (max-height: 350px) {
+    .linkContainer {
+        bottom: unset;
+        left: unset;
+        top: 16px;
+        right: 10px;
+
+        transform: none;
     }
 }
