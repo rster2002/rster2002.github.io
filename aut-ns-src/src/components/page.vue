@@ -22,7 +22,7 @@ main {
     overflow-y: auto;
 
     .inner {
-        width: 50%;
+        width: 100%;
 
         position: relative;
         left: 50%;
