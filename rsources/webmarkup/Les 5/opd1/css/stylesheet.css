@@ -1,0 +1,16 @@
+body {
+    height: 100%;
+    width: 100%;
+
+    background-image: url(../img/background-image.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+main {
+    max-width: 600px;
+    
+    margin: 50px auto;
+    
+    color: white;
+}
