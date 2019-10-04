@@ -57,6 +57,10 @@ export default a => {
             a.title += `<span class="tag purple"><img src="./src/icons/split.png" /></span>`;
             a.title += `'${a.actor.login}' created a fork`;
             break;
+        case "GollumEvent":
+            a.title += `<span class="tag purple"><img src="./src/icons/document-edited.png" /></span>`;
+            a.title += `${a.actor.login} modified the wiki page ${payload.pages[0].page_name}`;
+            break;
     }
 
     return a;

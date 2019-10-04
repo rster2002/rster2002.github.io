@@ -1,14 +1,14 @@
 <template lang="html">
     <div>
         <sidebar>
-            <sidebar-item @click="openSection('dashboard')" icon="view-dashboard"
+            <sidebar-item @click="openSection('dashboard')" icon="dashboard"
                 >Dashboard</sidebar-item
             >
-            <sidebar-item @click="openSection('events')" icon="radar"
+            <sidebar-item @click="openSection('events')" icon="events"
                 >Events</sidebar-item
             >
             <!-- <sidebar-item @click="openSection('builds')" icon="build">Builds</sidebar-item> -->
-            <sidebar-item @click="openSection('tasks')" icon="check"
+            <sidebar-item @click="openSection('tasks')" icon="tasks"
                 >Tasks</sidebar-item
             >
             <sidebar-item @click="openSection('workers')" icon="group"

@@ -114,14 +114,12 @@ export default {
 			float: left;
 
 			img {
-				height: 65%;
-				width: 65%;
+				height: 55%;
+				width: 55%;
 				position: relative;
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
-
-				border-radius: 50%;
 
 				&.i {
 					width: 40%;

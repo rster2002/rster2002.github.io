@@ -1,8 +1,6 @@
 <template>
     <div class="icon">
-        <h6>
-            <span class="mdi" :class="[ iconValue ]"></span>
-        </h6>
+        <img :src="iconValue" />
     </div>
 </template>
 
@@ -11,7 +9,7 @@ export default {
     props: ["icon"],
     computed: {
         iconValue() {
-            return "mdi-" + this.icon
+            return `./src/icons/${this.icon}.png`;
         }
     }
 }
@@ -19,13 +17,13 @@ export default {
 
 <style lang="stylus" scoped>
 
-.icon h6 {
-    font-size: 28px;
-    margin: 0;
+.icon img {
+    height: 60%;
+    width: 60%;
+
     position: relative;
     top: 50%;
-    transform: translateY(-50%);
-    text-align: center;
+    left: 50%;
 }
 
 </style>
