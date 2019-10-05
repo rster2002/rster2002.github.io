@@ -1,4 +1,4 @@
-# Programming week 3 - Selection
+# Lecture 3 - Selection
 
 [TOC]
 

@@ -43,6 +43,16 @@ IP is media independent. It doesn't care how it's transmitted.
 
 ### IPv6
 
+An example IPv6 can be `2001:0DB8:ACAD:00C8:0000:0000:0000:0000/64`. One section of an IPv6 address is called an `hextet`.
+
+Every hextet, you can remove the `0s` before an actual value, so `0DB8` becomes `DB8` and `00C8` becomes `C8`. If there is no value, in the case of `0000`, it just becomes "". So `2001:0DB8:ACAD:00C8:0000:0000` becomes `2001:DB8:ACAD:C8::` we don't use `::::`, when there are only `0s` left from left to right, you can rewrite it to `::`. More information about representing addresses can be found on [wikipedia](https://en.wikipedia.org/wiki/IPv6#Address_representation).
+
+The first 3 hextets is used for ISP. The 4th is used for subnetting. So the first 4 hextets are used for networking. The last 2 are used for hosts.
+
+| 2001 | DB8  | ACAD | C8     | 0    | 0    |
+| ---- | ---- | ---- | ------ | ---- | ---- |
+| IPS  | IPS  | IPS  | Subnet | Host | Host |
+
 ## Routing
 
 Routers use IP addresses to communicate. It most determain whether it's talking to itself, to a device within the same network or to a device outside of my network.
