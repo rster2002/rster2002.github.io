@@ -1,4 +1,6 @@
-# Chapter 7
+# Chapter 7 - binary conversion
+
+[TOC]
 
 ## Decimal to Binary
 

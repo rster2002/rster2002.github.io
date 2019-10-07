@@ -7,6 +7,8 @@ Here you can find notes that I've taken during lectures.
   * [Chapter 6](./netwerken/Chapter 6.html)
   * [Chapter 7](./netwerken/Chapter 7.html)
   * [Chapter 8](./netwerken/Chapter 8.html)
+  * [Chapter 9](./netwerken/Chapter 9.html)
+  * [Chapter 10](./netwerken/Chapter 10.html)
   * [Hands-on 3](./netwerken/hands-on3.html)
   * [Hands-on 4](./netwerken/hands-on4.html)
   * [Hands-on 5](./netwerken/hands-on5.html)

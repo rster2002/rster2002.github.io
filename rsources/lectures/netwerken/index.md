@@ -4,7 +4,10 @@
 * [Chapter 6](./Chapter 6.html)
 * [Chapter 7](./Chapter 7.html)
 * [Chapter 8](./Chapter 8.html)
+* [Chapter 9](./Chapter 9.html)
+* [Chapter 10](./Chapter 10.html)
 * [Hands-on 3](./hands-on3.html)
 * [Hands-on 4](./hands-on4.html)
-* [Hand-on 5](./hands-on5.html)
+* [Hands-on 5](./hands-on5.html)
 
+An overview of all toptics by chapter can be found [here](./overview.html).

@@ -1,5 +1,7 @@
 # Hands-on 5
 
+[TOC]
+
 ## IPv4
 
 Goal: create 5 subnets consisting of 2 routers and 4 switches.

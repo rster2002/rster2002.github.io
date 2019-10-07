@@ -1,4 +1,6 @@
-# Chapter 8
+# Chapter 8 - Subnetting
+
+[TOC]
 
 ## Subnetting
 

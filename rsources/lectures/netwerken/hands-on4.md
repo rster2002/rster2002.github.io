@@ -1,5 +1,7 @@
 # Hands-on 4
 
+[TOC]
+
 ## IP Types
 
 ## Network classes
