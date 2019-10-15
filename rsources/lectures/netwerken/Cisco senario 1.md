@@ -69,7 +69,7 @@ We can now assign addresses to the different parts of the network.
 
 #### Basic configuration
 
-First of all, we need to add some basic configuration like setting a `hostname`, `motd` and setting a password for the `enable` command.
+First of all, we need to add some basic configuration like setting a `hostname`, `motd` and setting a password for the `enable` command. We set the default gateway to `192.168.1.1`, the ip address of the `G0/0` interface.
 
 ```cisco
 Switch>en
@@ -78,6 +78,7 @@ Enter configuration commands, one per line.  End with CNTL/Z.
 Switch(config)#hostname S1
 S1(config)#enable secret cisco
 S1(config)#banner motd "Some message"
+S1(config)#ip default-gateway 192.168.1.1
 ```
 
 #### Console port configuration
