@@ -1,5 +1,7 @@
 # Lecture 3.1
 
+[TOC]
+
 ## Wortels vereenvoudigen
 
 Als je bijvoorbeeld $\sqrt{75}$ heb, moet je deze vereenvoudigen. Eerst vind je de priemfactorizatie van het getal in de wortel, in dit geval dus de priemfactorizatie van `75`:  

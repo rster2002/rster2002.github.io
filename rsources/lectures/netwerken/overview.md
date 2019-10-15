@@ -1,6 +1,6 @@
 # Overview Page
 
-Here you can find the chapters with the headers. You can use the buildin search function of your browser to find a topic you want to read on (`ctrl + f`)
+Here you can find the chapters with the headers. You can use the buildin search function of your browser to find a topic you want to read on (`ctrl + f`) or on mobile `search on page`.
 
 * [Chapter 1 - Explore the network](./Chapter 1.html)
   * [LANs and WANs](./Chapter 1#lans-and-wans)
@@ -64,7 +64,7 @@ Here you can find the chapters with the headers. You can use the buildin search 
   * [Application layer parts](./Chapter 10.html#application-layer-parts)
   * [DNS (Domain Name Service)](./Chapter 10.html#dns-domain-name-service)
     * [ICANN](./Chapter 10.html#icann)
-* [Hands-on 3](./hands-on3.html)
+* [Hands-on 3 - Router Config](./hands-on3.html)
   * [Difference SWITCH and ROUTER](./hands-on3.html#difference-switch-and-router)
     * [Switch](./hands-on3.html#switch)
     * [Router](./hands-on3.html#router)
@@ -85,6 +85,21 @@ Here you can find the chapters with the headers. You can use the buildin search 
   * [Converting BITS, Decimal and HEX](./hands-on4.html#converting-bits-decimal-hex)
     * [Decimal to HEX](./hands-on4.html#defimal-to-hex)
     * [BITS to HEX](./hands-on4.html#bits-to-hex)
-* [Hands-on 5](./hands-on5.html)
+* [Hands-on 5 - Subnetting](./hands-on5.html)
   * [IPv4](./hands-on5.html#ipv4)
   * [IPv6](./hands-on5.html#ipv6)
+* [Cisco Senario 1 - Full Config](./Cisco senario 1.html)
+  * [Hardware](./Cisco senario 1.html#hardware)
+    * [Creating 2 subnets](./Cisco senario 1.html#creating-2-subnets)
+    * [Switch](./Cisco senario 1.html#switch)
+      * [Basic configuration](./Cisco senario 1.html#basic-configuration)
+      * [Console port configuration](./Cisco senario 1.html#console-port-configuration)
+      * [VLAN Configuration](./Cisco senario 1.html#vlan-configuration)
+      * [Save config](./Cisco senario 1.html#save-config)
+    * [Router](./Cisco senario 1.html#router)
+      * [Basic config](./Cisco senario 1.html#basic-config)
+      * [Command interface configuration](./Cisco senario 1.html#command-interface-configuration)
+      * [Virtual Terminal Lines configuration](./Cisco senario 1.html#virtual-terminal-line-configuration)
+      * [Configure network interfaces](./Cisco senario 1.html#configure-network-interfaces)
+      * [Save config](./Cisco senario 1.html#save-config)
+

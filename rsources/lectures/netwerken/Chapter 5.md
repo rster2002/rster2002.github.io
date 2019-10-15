@@ -1,5 +1,7 @@
 # Chapter 5 - Ethernet
 
+[TOC]
+
 ## Switch
 
 A switch allows connected devices to talk to each other without collisions and full duplex.

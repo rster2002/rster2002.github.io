@@ -2,7 +2,9 @@
 
 Here you can find notes that I've taken during lectures.
 
-* [Networks](./netwerken/index.html)
+* [Networks](./netwerken/index.html) ([Overview](./netwerken/overview.html))
+  * [Chapter 1](./netwerken/Chapter 1.html)
+  * [Chapter 3](./netwerken/Chapter 3.html)
   * [Chapter 5](./netwerken/Chapter 5.html)
   * [Chapter 6](./netwerken/Chapter 6.html)
   * [Chapter 7](./netwerken/Chapter 7.html)
@@ -12,6 +14,7 @@ Here you can find notes that I've taken during lectures.
   * [Hands-on 3](./netwerken/hands-on3.html)
   * [Hands-on 4](./netwerken/hands-on4.html)
   * [Hands-on 5](./netwerken/hands-on5.html)
+  * [Cisco scenario 1](./netwerken/Cisco senario 1.html)
 * [Programming](./Programmeren/Week 3 theorie.html)
   * [Week 3](./Programmeren/Week 3 theorie.html)
   * [Lecture 4.1](./Programmeren/Lecture 4.1.html)

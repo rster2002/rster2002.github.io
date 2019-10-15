@@ -1,5 +1,7 @@
 # Lecture 3.2
 
+[TOC]
+
 ## Buiten haakjes zetten
 
 * Zoek termen

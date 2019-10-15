@@ -1,5 +1,7 @@
 # Lecture 5.1
 
+[TOC]
+
 ## Eerstegraadsvergelijkingen
 
 ### Voorbeeld opgave

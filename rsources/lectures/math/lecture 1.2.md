@@ -1,5 +1,7 @@
 # Lecture 1.2
 
+[TOC]
+
 ## Alle delers vinden
 
 ### Algoritme

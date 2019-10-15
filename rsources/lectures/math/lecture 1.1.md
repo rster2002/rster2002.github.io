@@ -1,5 +1,7 @@
 # Lecture 1.1
 
+[TOC]
+
 ## Priemfactorizatie
 
 ### Algoritme
