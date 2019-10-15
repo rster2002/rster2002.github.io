@@ -164,7 +164,7 @@ R1(config-line)#exit
 To enable other devices to use this router to send packets.
 
 ```cisco
-R1(config)#interface gig 0/0
+R1(config)#interface gig0/0
 R1(config-if)#description connection to S1
 R1(config-if)#ip address 192.168.1.1 255.255.255.192
 R1(config-if)#no shutdown
@@ -174,7 +174,7 @@ R1(config-if)#
 
 %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
 exit
-R1(config)#int gig 0/1
+R1(config)#int gig0/1
 R1(config-if)#description connection to S2
 R1(config-if)#ip address 192.168.1.65 255.255.255.192
 R1(config-if)#no shutdown
@@ -197,3 +197,8 @@ R1#copy running-config  startup-config
 Destination filename [startup-config]? 
 Building configuration..
 ```
+
+### PC
+
+A pc on the network also need's an IP address. You can give it any IP Address within the range of that subnet that isn't used already. Furthermore, you also need to provide a subnet mask and a default gateway. The subnet mask is just the subnet mask for that subnet, as we calculated when we created the [subnet](#creating-2-subnets) (so in this case `255.255.255.192`). The default gateway is the IP address of the interface for that subnet, so PC's connected to the network which go's to interface `gig 0/0` would be `192.168.1.1` and for `gig0/1` it would be `192.168.1.65`.
+

@@ -1,0 +1,30 @@
+.flexParent {
+    width: 800px;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#article1 {
+    flex-basis: 30%;
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    background-color: #b14b4b;
+}
+
+#article2 {
+    flex-basis: 50%;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    background-color: #24d47c;
+}
+
+#article3 {
+    flex-basis: 25%;
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    background-color: #4b55b1;
+}
