@@ -50,7 +50,7 @@ First of all, we need to find out how many subnets there are needed. In this cas
 | `|00000000`       | $2^0 = 1$       | $2^8 - 2 = 254$              |
 | `1|0000000`       | $2^1=2$         | $2^7 - 2 = 126$              |
 | `11|000000`       | $2^2 = 4$       | $2^6 - 2 = 62$               |
-| `11111|000`       | $2^5 = 32$      | $2^3 - 6$                    |
+| `11111|000`       | $2^5 = 32$      | $2^3 - 2 = 6$                |
 | $\dots$           | $\dots$         | $\dots$                      |
 
 We need to write out the last octet of the subnet IP addresses to get the usable addresses. The `|` shows which section us used for the network and which for the hosts: `network|host`
