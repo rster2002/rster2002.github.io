@@ -43,12 +43,22 @@ What we need to do:
 
 First off, we take `192.168.1.0` as our base IP address and `255.255.255.0` as our subnet mask.
 
-First of all, we need to find out how many subnets there are needed. In this case we need two: one between `R1` to `S1` and one between `R1` and `S2`. Because we need two, we need to reserve 2 bits, because $2^2 - 2$ is 2, because this is equal or grater than how many subnets we need. We need to write out the last octet of the subnet IP addresses to get the usable addresses. The `|` shows which section us used for the network and which for the hosts: `network|host`
+First of all, we need to find out how many subnets there are needed. In this case we need two: one between `R1` to `S1` and one between `R1` and `S2`. Because we need two, we need to reserve 1 bit, because $2^1$ is 2, because this is equal or grater than how many subnets we need. If instead, we need to find how out how many subnets are needed based on how many host there should be per subnet, we count the `0`s in the subnet mask that are available and find out how many are needed. If we take the following subnet mask: `255.255.255.0`, the last octet would be `00000000` in bits. As usual, the `|` is used to show how many bits are used for the subnet.
+
+| Last subnet octet | Subnets ($2^n$) | Hosts per subnet ($2^n - 2$) |
+| ----------------- | --------------- | ---------------------------- |
+| `|00000000`       | $2^0 = 1$       | $2^8 - 2 = 254$              |
+| `1|0000000`       | $2^1=2$         | $2^7 - 2 = 126$              |
+| `11|000000`       | $2^2 = 4$       | $2^6 - 2 = 62$               |
+| `11111|000`       | $2^5 = 32$      | $2^3 - 6$                    |
+| $\dots$           | $\dots$         | $\dots$                      |
+
+We need to write out the last octet of the subnet IP addresses to get the usable addresses. The `|` shows which section us used for the network and which for the hosts: `network|host`
 
 | Subnet address last octet | Full IP Address | First usable address | Last usable address | Broadcast address |
 | ------------------------- | --------------- | -------------------- | ------------------- | ----------------- |
-| 00\|000000                | 192.168.1.0     | 192.168.1.1          | 192.168.1.62        | 192.168.1.63      |
-| 01\|000000                | 192.168.1.64    | 192.168.1.65         | 192.168.1.126       | 192.168.1.127     |
+| `00|000000`               | 192.168.1.0     | 192.168.1.1          | 192.168.1.62        | 192.168.1.63      |
+| `01|000000`               | 192.168.1.64    | 192.168.1.65         | 192.168.1.126       | 192.168.1.127     |
 
 Our new subnet mask will be `255.255.255.192` because if we write out the last octet in bits, we get `11|000000`.
 
