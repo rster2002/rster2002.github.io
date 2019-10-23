@@ -15,6 +15,17 @@ But also has some disadvantages.
 
 * Increased level of complexity
 
+## Network layers (LAN, WLAN, MAN, WAN)
+
+![Network layers]( https://upload.wikimedia.org/wikipedia/commons/7/70/Data_Networks_classification_by_spatial_scope.png )
+
+| Layer | Full name                   | Description                                                  |
+| ----- | --------------------------- | ------------------------------------------------------------ |
+| LAN   | Local Area Network          | A small network consisting of a small number of end devices. Think of a home or school network. |
+| MAN   | Metropolitan Area Network   | A network about the size of a city consisting of multiple LAN networks connected to each other. |
+| WAN   | Wide Area Network           | A network that connects almost all public network to each other creating one giant network. |
+| WLAN  | Wireless Local Area Network | Connects multiple devices to each other using wireless technology, creating a LAN network. |
+
 ## Data Encapsulation
 
 A `Transport`, `Network` and `Frame` header are added to the data.
