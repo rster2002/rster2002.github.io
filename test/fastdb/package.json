@@ -1,0 +1,7 @@
+{
+    "name": "fastdb",
+    "version": "0.0.2",
+    "main": "index.js",
+    "license": "MIT",
+    "description": "A quick and easy way to work with session and localStorage"
+}
