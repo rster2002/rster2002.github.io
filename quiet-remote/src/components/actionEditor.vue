@@ -1,7 +1,7 @@
 <template>
     <div class="actionEditor">
         <div v-for="(action, index) in actions" :key="action.id" class="action">
-            <dropDown>
+            <dropDown :label="'Action' + (index + 1)">
                 <textBox type="select" label="Type" v-model="action.type">
                     <option value="light">Light</option>
                     <option value="group">Group</option>
