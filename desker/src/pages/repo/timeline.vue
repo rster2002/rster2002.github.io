@@ -2,19 +2,31 @@
     <div>
         <div class="card">
             <div class="userTimeline">
-                <div class="user">
-                    <img src="https://avatars2.githubusercontent.com/u/26026518?v=4" />
-                </div>
-                <div class="timeline">
-                    <div class="task" style="left: 18px; width: 100px;"></div>
-                </div>
+                <svg id="gantt"></svg>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+
+import Gantt from "frappe-gantt";
+
+export default {
+    created() {
+        var tasks = [
+            {
+                id: 'Task 1',
+                name: 'Redesign website',
+                start: '2016-12-28',
+                end: '2016-12-31',
+                progress: 20
+            }
+        ]
+
+        new Gantt("#gantt", tasks);
+    }
+};
 </script>
 
 <style lang="stylus" scoped>

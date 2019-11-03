@@ -3,7 +3,7 @@ function fdb(a) {
     // '_' for internal use, '$' for external use
     var configObject = {
         name: "fdb",
-        handeler: sessionStorage,
+        handler: sessionStorage,
         usePromises: false,
         dbRefId: $genId(),
         events: {
@@ -85,7 +85,7 @@ function fdb(a) {
                 var dbArray = [];
 
                 keys.forEach(key => {
-                    let doc = dO._.handeler.getItem(dO._.name + "_" + key);
+                    let doc = dO._.handler.getItem(dO._.name + "_" + key);
 
                     if (doc !== null) {
                         dbArray.push(JSON.parse(doc))
@@ -97,7 +97,7 @@ function fdb(a) {
                 var dbObj = {};
 
                 keys.forEach(key => {
-                    let doc = dO._.handeler.getItem(dO._.name + "_" + key);
+                    let doc = dO._.handler.getItem(dO._.name + "_" + key);
 
                     if (doc !== null) {
                         dbObj[key] = JSON.parse(doc);
@@ -109,16 +109,16 @@ function fdb(a) {
                 throw new Error("Type: expected an array or object, but was " + typeof type);
             }
         },
-        on(event, handeler) {
+        on(event, handler) {
             if (event in events === false) {
                 events[event] = {};
             }
 
-            let eventHandelerId = $genId();
-            events[event][eventHandelerId] = handeler;
+            let eventHandlerId = $genId();
+            events[event][eventHandlerId] = handler;
 
             return function() {
-                delete events[event][eventHandelerId];
+                delete events[event][eventHandlerId];
             };
         },
         removeEvent(eventType, id) {
@@ -135,20 +135,20 @@ function fdb(a) {
         },
         onState() {
             if (arguments.length === 1) {
-                this.$addStateHandeler("all", arguments[0]);
+                this.$addStateHandler("all", arguments[0]);
             } else {
-                this.$addStateHandeler(arguments[0], arguments[1]);
+                this.$addStateHandler(arguments[0], arguments[1]);
             }
         },
-        onStateUpdate(handeler) {
-            this.$addStateHandeler("update", handeler);
+        onStateUpdate(handler) {
+            this.$addStateHandler("update", handler);
         },
-        onStateSet(handeler) {
-            this.$addStateHandeler("set", handeler);
+        onStateSet(handler) {
+            this.$addStateHandler("set", handler);
         },
-        $addStateHandeler(type, handeler) {
-            window._fdb.listeners[type][configObject.dbRefId] = handeler;
-            return handeler(window._fdb.state);
+        $addStateHandler(type, handler) {
+            window._fdb.listeners[type][configObject.dbRefId] = handler;
+            return handler(window._fdb.state);
         }
     }
 
@@ -165,29 +165,29 @@ function fdb(a) {
     }
 
     function $updateIndex(obj, prop) {
-        var index = dO._.handeler.getItem(obj._.name + "__index");
+        var index = dO._.handler.getItem(obj._.name + "__index");
 
         if (index === null) {
             let indexObj = {};
 
             indexObj[prop] = true;
 
-            dO._.handeler.setItem(obj._.name + "__index", JSON.stringify(indexObj));
+            dO._.handler.setItem(obj._.name + "__index", JSON.stringify(indexObj));
         } else {
-            let indexObj = JSON.parse(dO._.handeler.getItem(obj._.name + "__index"));
+            let indexObj = JSON.parse(dO._.handler.getItem(obj._.name + "__index"));
 
             indexObj[prop] = true;
 
-            dO._.handeler.setItem(obj._.name + "__index", JSON.stringify(indexObj));
+            dO._.handler.setItem(obj._.name + "__index", JSON.stringify(indexObj));
         }
     }
 
     function $setIndex(index) {
-        dO._.handeler.setItem(dO._.name + "__index", JSON.stringify(index));
+        dO._.handler.setItem(dO._.name + "__index", JSON.stringify(index));
     }
 
     function $getIndex() {
-        var index = dO._.handeler.getItem(dO._.name + "__index");
+        var index = dO._.handler.getItem(dO._.name + "__index");
 
         return index === null ? {} : JSON.parse(index);
     }
@@ -203,15 +203,17 @@ function fdb(a) {
             set: (obj, prop, value) => {
                 if (value === null || value === undefined) {
                     $deleteFromIndex(prop);
-                    dO._.handeler.removeItem(dO._.name + "_" + prop);
+                    dO._.handler.removeItem(dO._.name + "_" + prop);
                 } else {
                     $updateIndex(obj, prop);
-                    dO._.handeler.setItem(dO._.name + "_" + prop, JSON.stringify(value));
+                    dO._.handler.setItem(dO._.name + "_" + prop, JSON.stringify(value));
                 }
+
+                return true;
             },
             get: async (obj, prop) => {
-                if (!prop in frozenObject) {
-                    return await JSON.parse(dO._.handeler.getItem(dO._.name + "_" + prop));
+                if (!(prop in frozenObject)) {
+                    return await JSON.parse(dO._.handler.getItem(dO._.name + "_" + prop));
                 } else {
                     return obj[prop];
                 }
@@ -222,15 +224,17 @@ function fdb(a) {
             set: (obj, prop, value) => {
                 if (value === null || value === undefined) {
                     $deleteFromIndex(prop);
-                    dO._.handeler.removeItem(dO._.name + "_" + prop);
+                    dO._.handler.removeItem(dO._.name + "_" + prop);
                 } else {
                     $updateIndex(obj, prop);
-                    dO._.handeler.setItem(dO._.name + "_" + prop, JSON.stringify(value));
+                    dO._.handler.setItem(dO._.name + "_" + prop, JSON.stringify(value));
                 }
+
+                return true;
             },
             get: (obj, prop) => {
-                if (!prop in frozenObject) {
-                    return JSON.parse(dO._.handeler.getItem(dO._.name + "_" + prop));
+                if (!(prop in frozenObject)) {
+                    return JSON.parse(dO._.handler.getItem(dO._.name + "_" + prop));
                 } else {
                     return obj[prop];
                 }
@@ -239,3 +243,5 @@ function fdb(a) {
     }
 
 }
+
+export default fdb;

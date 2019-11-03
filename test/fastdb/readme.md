@@ -69,28 +69,35 @@ There are a couple of methods you can call for extra functionality. All methods 
 
 ```javascript
 // Gets everything from the database as an object
-db.$.getAll();
+db.getAll();
 
 // Is the same as above
-db.$.getAll({});
+db.getAll({});
 
 // Returns the data in an array
-db.$.getAll([]);
+db.getAll([]);
 ```
 
 You can also query for data using the `query` method. Queries will always return the data as an array.
 
 ```javascript
 // Query by prop and value, will return both Darth Vader and Luke Skywalker
-db.$.query("surname", "Skywalker");
+db.query("surname", "Skywalker");
 
 // Query by multiple props, will return Luke Skywalker
-db.$.query({
+db.query({
     surname: "Skywalker",
     side: "Resistance"
 });
 
 // Query by using a function, will return Darth Vader
-db.$.query(doc => doc.side === "Dark Side");
+db.query(doc => doc.side === "Dark Side");
+```
+
+### Configuration
+
+```javascript
+// Use localStorage instead of sessionStorage
+const db = fdb("starwars");
 ```
 

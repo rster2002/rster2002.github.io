@@ -1,6 +1,6 @@
 const db = fdb({
     name: "test",
-    handeler: localStorage
+    handler: localStorage
 });
 
 db.skyWalker = {
