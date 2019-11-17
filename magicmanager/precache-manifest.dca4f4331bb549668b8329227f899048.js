@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c7e12c360bf5cfb0c1f7",
+    "revision": "c97e29f95c30dc2df490",
     "url": "/magicmanager/css/app.6ef70fd3.css"
   },
   {
@@ -28,12 +28,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/magicmanager/fonts/Ringbearer.15e72b71.ttf"
   },
   {
-    "revision": "582e88a8f34f1c3f51da2c9126e27ce2",
+    "revision": "47dbd08c63361113c713fb59a798116f",
     "url": "/magicmanager/index.html"
   },
   {
-    "revision": "c7e12c360bf5cfb0c1f7",
-    "url": "/magicmanager/js/app.ea8e98d0.js"
+    "revision": "c97e29f95c30dc2df490",
+    "url": "/magicmanager/js/app.ba0925d4.js"
   },
   {
     "revision": "d6c4f83d3759cd468301",
@@ -52,8 +52,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/magicmanager/js/chunk-716562d5.463b0834.js"
   },
   {
-    "revision": "38950805564fdd722b36",
-    "url": "/magicmanager/js/chunk-vendors.61e834c6.js"
+    "revision": "ceb99dd544b0357817ee",
+    "url": "/magicmanager/js/chunk-vendors.655f9c0b.js"
   },
   {
     "revision": "3ff33ba85962bec0144eb65e0ea59ee4",

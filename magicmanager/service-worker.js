@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/magicmanager/precache-manifest.7c4a5a9dc629b62e9a0350dcb3b5c271.js"
+  "/magicmanager/precache-manifest.dca4f4331bb549668b8329227f899048.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "magicmanager"});
