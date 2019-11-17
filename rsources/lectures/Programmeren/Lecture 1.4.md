@@ -1,4 +1,4 @@
-# Lecture 4.1 - Iteration
+# Lecture 1.4 - Iteration
 
 [TOC]
 

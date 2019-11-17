@@ -1,4 +1,4 @@
-# Lecture 5.1 - Arrays
+# Lecture 1.5 - Arrays
 
 [TOC]
 
