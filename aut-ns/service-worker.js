@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/aut-ns/precache-manifest.fa5e0890a7d76f45acf31331877ed58b.js"
+  "/aut-ns/precache-manifest.05f4e459501818bc2ba37a6824892b41.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "aut-ns"});
