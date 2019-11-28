@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c97e29f95c30dc2df490",
-    "url": "/magicmanager/css/app.6ef70fd3.css"
+    "revision": "6833eb088d10c302752e",
+    "url": "/magicmanager/css/app.de7fbe05.css"
   },
   {
-    "revision": "d6c4f83d3759cd468301",
-    "url": "/magicmanager/css/chunk-0bbda64b.2a7b2703.css"
+    "revision": "fb80ec5dbaf2842f961a",
+    "url": "/magicmanager/css/chunk-21816a4b.d944b076.css"
   },
   {
     "revision": "aacb10fd36cd372d1df5",
@@ -28,16 +28,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/magicmanager/fonts/Ringbearer.15e72b71.ttf"
   },
   {
-    "revision": "47dbd08c63361113c713fb59a798116f",
+    "revision": "5e6bca09530c7e784c92d27c4b73fa70",
     "url": "/magicmanager/index.html"
   },
   {
-    "revision": "c97e29f95c30dc2df490",
-    "url": "/magicmanager/js/app.ba0925d4.js"
+    "revision": "6833eb088d10c302752e",
+    "url": "/magicmanager/js/app.9ac17d60.js"
   },
   {
-    "revision": "d6c4f83d3759cd468301",
-    "url": "/magicmanager/js/chunk-0bbda64b.d30c95c8.js"
+    "revision": "fb80ec5dbaf2842f961a",
+    "url": "/magicmanager/js/chunk-21816a4b.eb2fb61e.js"
   },
   {
     "revision": "7678174ec0d4019dff40",

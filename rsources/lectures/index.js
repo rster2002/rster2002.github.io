@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 
-var globalStyling, defaultIndexTemplate, globalOverviewTemplate;
+var globalStyling, defaultIndexTemplate, globalIndexTemplate;
 
 let categories = require("./categories.json");
 categories = categories.categories;
