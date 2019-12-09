@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/aut-ov/js/app.a8127bd6.js"
   },
   {
-    "revision": "d46f29aa438409fdb72927d62a8fc39f",
+    "revision": "a97845ffa64a1d8a804661b12037bd51",
     "url": "/aut-ov/index.html"
   },
   {

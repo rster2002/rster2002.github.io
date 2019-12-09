@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/aut-ov/precache-manifest.4ffe2ddf9fb334d6ece70e6f3faa5eb7.js"
+  "/aut-ov/precache-manifest.67d42b0ae7a36192028afe2a33379336.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "aut-ns"});
+workbox.core.setCacheNameDetails({prefix: "aut-ov"});
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
