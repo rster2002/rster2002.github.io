@@ -1,5 +1,4 @@
 # SpaceTime
-
 $$
 \begin{bmatrix}
 1 \\
