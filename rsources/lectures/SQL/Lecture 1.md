@@ -8,11 +8,14 @@ Een objectief controleerbare expressie die je kan controleren met alle data in d
 
 ## Symbolen
 
-| Symbool | Implicatie      |
-| ------- | --------------- |
-| =>      | If ... then ... |
-| ¬       | NOT             |
-| ^       | AND             |
+| Symbool   | Implicatie      | Voorbeeld                                           |
+| --------- | --------------- | --------------------------------------------------- |
+| =>        | If ... then ... |                                                     |
+| ¬         | NOT             |                                                     |
+| ^         | AND             |                                                     |
+| $\subset$ | Subset van      | $\{0, 1\} \subset \{0, 1, 2, 3\}$                   |
+| $\in$     | Element an      |                                                     |
+| $X$       |                 | $\{1, 2\}X\{3, 4\} = \{(1,3), (1,4), (2,3), 2,4)\}$ |
 
 _[Zie Wikipedia](https://en.wikipedia.org/wiki/List_of_logic_symbols)_
 
