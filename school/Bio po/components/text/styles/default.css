@@ -1,6 +1,0 @@
-p .wave--icon.material-icons {
-    position: relative;
-    top: 50%;
-    transform: translate(0%,20%);
-	font-size: inherit !important;
-}
