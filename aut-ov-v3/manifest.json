@@ -5,8 +5,8 @@
     "background_color": "#ffffff",
     "display": "standalone",
     "orientation": "portrait",
-    "Scope": "/",
-    "start_url": "/",
+    "Scope": "/aut-ov-v3/",
+    "start_url": "/aut-ov-v3/index.html",
     "icons": [
         {
             "src": "img/app-icons/icon-72x72.png",
@@ -50,7 +50,7 @@
         },
         {
             "src": "img/maskable.png",
-            "sizes": "512x512",
+            "sizes": "426x426",
             "type": "image/png",
             "purpose": "any maskable"
         }
