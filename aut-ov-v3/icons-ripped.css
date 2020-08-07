@@ -1,0 +1,143 @@
+@font-face {
+    font-family: "Material Design Icons";
+    src: url("../fonts/materialdesignicons-webfont.eot?v=5.4.55");
+    src: url("../fonts/materialdesignicons-webfont.eot?#iefix&v=5.4.55") format("embedded-opentype"),url("../fonts/materialdesignicons-webfont.woff2?v=5.4.55") format("woff2"),url("../fonts/materialdesignicons-webfont.woff?v=5.4.55") format("woff"),url("../fonts/materialdesignicons-webfont.ttf?v=5.4.55") format("truetype");
+    font-weight: normal;
+    font-style: normal
+}
+
+.mdi:before,.mdi-set {
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+/* INSERT AFTER HERE */
+
+.mdi-crosshairs-question::before {
+    content: "\F1136"
+}
+
+.mdi-bus::before {
+    content: "\F00E7"
+}
+
+.mdi-train::before {
+    content: "\F052C"
+}
+
+.mdi-walk::before {
+    content: "\F0583"
+}
+
+.mdi-flag::before {
+    content: "\F023B"
+}
+
+.mdi-flag-checkered::before {
+    content: "\F023C"
+}
+
+.mdi-menu::before {
+    content: "\F035C"
+}
+
+.mdi-magnify::before {
+    content: "\F0349"
+}
+
+.mdi-arrow-expand-right::before {
+    content: "\F0798"
+}
+
+.mdi-arrow-collapse-right::before {
+    content: "\F0794"
+}
+
+.mdi-chevron-triple-right::before {
+    content: "\F0DBA"
+}
+
+.mdi-chevron-triple-left::before {
+    content: "\F0DBA"
+}
+
+.mdi-rss::before {
+    content: "\F046B"
+}
+
+.mdi-routes::before {
+    content: "\F046A"
+}
+
+.mdi-ruler::before {
+    content: "\F046D"
+}
+
+.mdi-barcode::before {
+    content: "\F0071"
+}
+
+.mdi-arrow-left-right::before {
+    content: "\F0E73"
+}
+
+.mdi-alarm::before {
+    content: "\F0020"
+}
+
+.mdi-check::before {
+    content: "\F012C"
+}
+
+.mdi-check-all::before {
+    content: "\F012D"
+}
+
+.mdi-wifi-strength-4::before {
+    content: "\F0928"
+}
+
+.mdi-human-male-female::before {
+    content: "\F02E8"
+}
+
+.mdi-volume-mute::before {
+    content: "\F075F"
+}
+
+.mdi-bicycle::before {
+    content: "\F109C"
+}
+
+.mdi-power-socket-eu::before {
+    content: "\F07E7"
+}
+
+.mdi-play-circle-outline::before {
+    content: "\F040D"
+}
+
+.mdi-plus-circle-outline::before {
+    content: "\F0419"
+}
+
+.mdi-minus-circle-outline::before {
+    content: "\F0377"
+}
+
+.mdi-chevron-down::before {
+    content: "\F0140"
+}
+
+.mdi-stop-circle-outline::before {
+    content: "\F0667"
+}
+
+.mdi-wifi-strength-alert-outline::before {
+    content: "\F092B"
+}

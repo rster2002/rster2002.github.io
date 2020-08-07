@@ -1,0 +1,1608 @@
+{
+    "searchable": [
+        {
+            "stationName": "Aalten",
+            "stationCode": "ATN"
+        },
+        {
+            "stationName": "Abcoude",
+            "stationCode": "AC"
+        },
+        {
+            "stationName": "Akkrum",
+            "stationCode": "AKM"
+        },
+        {
+            "stationName": "Alkmaar Noord",
+            "stationCode": "AMRN"
+        },
+        {
+            "stationName": "Alkmaar",
+            "stationCode": "AMR"
+        },
+        {
+            "stationName": "Almelo de Riet",
+            "stationCode": "AMRI"
+        },
+        {
+            "stationName": "Almelo",
+            "stationCode": "AML"
+        },
+        {
+            "stationName": "Almere Buiten",
+            "stationCode": "ALMB"
+        },
+        {
+            "stationName": "Almere Centrum",
+            "stationCode": "ALM"
+        },
+        {
+            "stationName": "Almere Muziekwijk",
+            "stationCode": "ALMM"
+        },
+        {
+            "stationName": "Almere Oostvaarders",
+            "stationCode": "ALMO"
+        },
+        {
+            "stationName": "Almere Parkwijk",
+            "stationCode": "ALMP"
+        },
+        {
+            "stationName": "Almere Poort",
+            "stationCode": "AMPO"
+        },
+        {
+            "stationName": "Alphen aan den Rijn",
+            "stationCode": "APN"
+        },
+        {
+            "stationName": "Amersfoort",
+            "stationCode": "AMF"
+        },
+        {
+            "stationName": "Amersfoort Schothorst",
+            "stationCode": "AMFS"
+        },
+        {
+            "stationName": "Amersfoort Vathorst",
+            "stationCode": "AVAT"
+        },
+        {
+            "stationName": "Amsterdam Amstel",
+            "stationCode": "ASA"
+        },
+        {
+            "stationName": "Amsterdam Arena",
+            "stationCode": "ASDAR"
+        },
+        {
+            "stationName": "Amsterdam Bijlmer ArenA",
+            "stationCode": "ASB"
+        },
+        {
+            "stationName": "Amsterdam Centraal",
+            "stationCode": "ASD"
+        },
+        {
+            "stationName": "Amsterdam Holendrecht",
+            "stationCode": "ASHD"
+        },
+        {
+            "stationName": "Amsterdam Lelylaan",
+            "stationCode": "ASDL"
+        },
+        {
+            "stationName": "Amsterdam Muiderpoort",
+            "stationCode": "ASDM"
+        },
+        {
+            "stationName": "Amsterdam RAI",
+            "stationCode": "RAI"
+        },
+        {
+            "stationName": "Amsterdam Science Park",
+            "stationCode": "ASSP"
+        },
+        {
+            "stationName": "Amsterdam Sloterdijk",
+            "stationCode": "ASS"
+        },
+        {
+            "stationName": "Amsterdam Zuid",
+            "stationCode": "ASDZ"
+        },
+        {
+            "stationName": "Anna Paulowna",
+            "stationCode": "ANA"
+        },
+        {
+            "stationName": "Apeldoorn De Maten",
+            "stationCode": "APDM"
+        },
+        {
+            "stationName": "Apeldoorn Osseveld",
+            "stationCode": "APDO"
+        },
+        {
+            "stationName": "Apeldoorn",
+            "stationCode": "APD"
+        },
+        {
+            "stationName": "Appingedam",
+            "stationCode": "APG"
+        },
+        {
+            "stationName": "Arkel",
+            "stationCode": "AKL"
+        },
+        {
+            "stationName": "Arnemuiden",
+            "stationCode": "ARN"
+        },
+        {
+            "stationName": "Arnhem Presikhaaf",
+            "stationCode": "AHPR"
+        },
+        {
+            "stationName": "Arnhem Centraal",
+            "stationCode": "AH"
+        },
+        {
+            "stationName": "Arnhem Velperpoort",
+            "stationCode": "AHP"
+        },
+        {
+            "stationName": "Arnhem Zuid",
+            "stationCode": "AHZ"
+        },
+        {
+            "stationName": "Assen",
+            "stationCode": "ASN"
+        },
+        {
+            "stationName": "Baarn",
+            "stationCode": "BRN"
+        },
+        {
+            "stationName": "Bad Nieuweschans",
+            "stationCode": "NSCH"
+        },
+        {
+            "stationName": "Baflo",
+            "stationCode": "BF"
+        },
+        {
+            "stationName": "Barendrecht",
+            "stationCode": "BRD"
+        },
+        {
+            "stationName": "Barneveld Centrum",
+            "stationCode": "BNC"
+        },
+        {
+            "stationName": "Barneveld Noord",
+            "stationCode": "BNN"
+        },
+        {
+            "stationName": "Barneveld Zuid",
+            "stationCode": "BNZ"
+        },
+        {
+            "stationName": "Bedum",
+            "stationCode": "BDM"
+        },
+        {
+            "stationName": "Beek-Elsloo",
+            "stationCode": "BK"
+        },
+        {
+            "stationName": "Beesd",
+            "stationCode": "BSD"
+        },
+        {
+            "stationName": "Beilen",
+            "stationCode": "BL"
+        },
+        {
+            "stationName": "Bergen op Zoom",
+            "stationCode": "BGN"
+        },
+        {
+            "stationName": "Best",
+            "stationCode": "BET"
+        },
+        {
+            "stationName": "Beverwijk",
+            "stationCode": "BV"
+        },
+        {
+            "stationName": "Bilthoven",
+            "stationCode": "BHV"
+        },
+        {
+            "stationName": "Blerick",
+            "stationCode": "BR"
+        },
+        {
+            "stationName": "Bloemendaal",
+            "stationCode": "BLL"
+        },
+        {
+            "stationName": "Bodegraven",
+            "stationCode": "BDG"
+        },
+        {
+            "stationName": "Borne",
+            "stationCode": "BN"
+        },
+        {
+            "stationName": "Boskoop",
+            "stationCode": "BSK"
+        },
+        {
+            "stationName": "Boskoop Snijdelwijk",
+            "stationCode": "BSKS"
+        },
+        {
+            "stationName": "Bovenkarspel Flora",
+            "stationCode": "BKF"
+        },
+        {
+            "stationName": "Bovenkarspel-Grootebroek",
+            "stationCode": "BKG"
+        },
+        {
+            "stationName": "Boven Hardinxveld",
+            "stationCode": "BHDV"
+        },
+        {
+            "stationName": "Boxmeer",
+            "stationCode": "BMR"
+        },
+        {
+            "stationName": "Boxtel",
+            "stationCode": "BTL"
+        },
+        {
+            "stationName": "Breda Prinsenbeek",
+            "stationCode": "BDPB"
+        },
+        {
+            "stationName": "Breda",
+            "stationCode": "BD"
+        },
+        {
+            "stationName": "Breukelen",
+            "stationCode": "BKL"
+        },
+        {
+            "stationName": "Brummen",
+            "stationCode": "BMN"
+        },
+        {
+            "stationName": "Buitenpost",
+            "stationCode": "BP"
+        },
+        {
+            "stationName": "Bunde",
+            "stationCode": "BDE"
+        },
+        {
+            "stationName": "Bunnik",
+            "stationCode": "BNK"
+        },
+        {
+            "stationName": "Bussum Zuid",
+            "stationCode": "BSMZ"
+        },
+        {
+            "stationName": "Capelle Schollevaar",
+            "stationCode": "CPS"
+        },
+        {
+            "stationName": "Castricum",
+            "stationCode": "CAS"
+        },
+        {
+            "stationName": "Chevremont",
+            "stationCode": "CVM"
+        },
+        {
+            "stationName": "Coevorden",
+            "stationCode": "CO"
+        },
+        {
+            "stationName": "Cuijk",
+            "stationCode": "CK"
+        },
+        {
+            "stationName": "Culemborg",
+            "stationCode": "CL"
+        },
+        {
+            "stationName": "Daarlerveen",
+            "stationCode": "DA"
+        },
+        {
+            "stationName": "Dalen",
+            "stationCode": "DLN"
+        },
+        {
+            "stationName": "Dalfsen",
+            "stationCode": "DL"
+        },
+        {
+            "stationName": "De Vink",
+            "stationCode": "DVNK"
+        },
+        {
+            "stationName": "De Westereen",
+            "stationCode": "DWE"
+        },
+        {
+            "stationName": "Deinum",
+            "stationCode": "DEI"
+        },
+        {
+            "stationName": "Delden",
+            "stationCode": "DDN"
+        },
+        {
+            "stationName": "Delft",
+            "stationCode": "DT"
+        },
+        {
+            "stationName": "Delft Zuid",
+            "stationCode": "DTZ"
+        },
+        {
+            "stationName": "Delfzijl",
+            "stationCode": "DZ"
+        },
+        {
+            "stationName": "Delfzijl West",
+            "stationCode": "DZW"
+        },
+        {
+            "stationName": "Den Dolder",
+            "stationCode": "DLD"
+        },
+        {
+            "stationName": "Den Haag Centraal",
+            "stationCode": "GVC"
+        },
+        {
+            "stationName": "Den Haag Hollands Spoor",
+            "stationCode": "GV"
+        },
+        {
+            "stationName": "Den Haag Laan van NOI",
+            "stationCode": "LAA"
+        },
+        {
+            "stationName": "Den Haag Mariahoeve",
+            "stationCode": "GVM"
+        },
+        {
+            "stationName": "Den Haag Moerwijk",
+            "stationCode": "GVMW"
+        },
+        {
+            "stationName": "Den Haag Ypenburg",
+            "stationCode": "YPB"
+        },
+        {
+            "stationName": "Den Helder",
+            "stationCode": "HDR"
+        },
+        {
+            "stationName": "Den Helder Zuid",
+            "stationCode": "HDRZ"
+        },
+        {
+            "stationName": "Deurne",
+            "stationCode": "DN"
+        },
+        {
+            "stationName": "Deventer Colmschate",
+            "stationCode": "DVC"
+        },
+        {
+            "stationName": "Deventer",
+            "stationCode": "DV"
+        },
+        {
+            "stationName": "Didam",
+            "stationCode": "DID"
+        },
+        {
+            "stationName": "Diemen",
+            "stationCode": "DMN"
+        },
+        {
+            "stationName": "Diemen Zuid",
+            "stationCode": "DMNZ"
+        },
+        {
+            "stationName": "Dieren",
+            "stationCode": "DR"
+        },
+        {
+            "stationName": "Doetinchem De Huet",
+            "stationCode": "DTCH"
+        },
+        {
+            "stationName": "Doetinchem",
+            "stationCode": "DTC"
+        },
+        {
+            "stationName": "Dordrecht",
+            "stationCode": "DDR"
+        },
+        {
+            "stationName": "Dordrecht Stadspolders",
+            "stationCode": "DDRS"
+        },
+        {
+            "stationName": "Dordrecht Zuid",
+            "stationCode": "DDZD"
+        },
+        {
+            "stationName": "Driebergen-Zeist",
+            "stationCode": "DB"
+        },
+        {
+            "stationName": "Driehuis",
+            "stationCode": "DH"
+        },
+        {
+            "stationName": "Dronryp",
+            "stationCode": "DRP"
+        },
+        {
+            "stationName": "Dronten",
+            "stationCode": "DRON"
+        },
+        {
+            "stationName": "Duiven",
+            "stationCode": "DVN"
+        },
+        {
+            "stationName": "Duivendrecht",
+            "stationCode": "{{NOTA TYPO|DVD}} "
+        },
+        {
+            "stationName": "Echt",
+            "stationCode": "EC"
+        },
+        {
+            "stationName": "Ede Centrum",
+            "stationCode": "EDC"
+        },
+        {
+            "stationName": "Ede-Wageningen",
+            "stationCode": "ED"
+        },
+        {
+            "stationName": "Eemshaven",
+            "stationCode": ""
+        },
+        {
+            "stationName": "Eijsden",
+            "stationCode": "EDN"
+        },
+        {
+            "stationName": "Eindhoven",
+            "stationCode": "EHV"
+        },
+        {
+            "stationName": "Eindhoven Stadion",
+            "stationCode": "EHS"
+        },
+        {
+            "stationName": "Eindhoven Strijp-S",
+            "stationCode": "EHB"
+        },
+        {
+            "stationName": "Elst",
+            "stationCode": "EST"
+        },
+        {
+            "stationName": "Emmen",
+            "stationCode": "EMN"
+        },
+        {
+            "stationName": "Emmen Zuid",
+            "stationCode": "EMNZ"
+        },
+        {
+            "stationName": "Enkhuizen",
+            "stationCode": "EKZ"
+        },
+        {
+            "stationName": "Enschede De Eschmarke",
+            "stationCode": "ESE"
+        },
+        {
+            "stationName": "Enschede Kennispark",
+            "stationCode": "ESK"
+        },
+        {
+            "stationName": "Enschede",
+            "stationCode": "ES"
+        },
+        {
+            "stationName": "Ermelo",
+            "stationCode": "EML"
+        },
+        {
+            "stationName": "Etten-Leur",
+            "stationCode": "ETN"
+        },
+        {
+            "stationName": "Eygelshoven Markt",
+            "stationCode": "EGHM"
+        },
+        {
+            "stationName": "Eygelshoven",
+            "stationCode": "EGH"
+        },
+        {
+            "stationName": "Feanwâlden",
+            "stationCode": "FWD"
+        },
+        {
+            "stationName": "Franeker",
+            "stationCode": "FN"
+        },
+        {
+            "stationName": "Gaanderen",
+            "stationCode": "GDR"
+        },
+        {
+            "stationName": "Geldermalsen",
+            "stationCode": "GDM"
+        },
+        {
+            "stationName": "Geldrop",
+            "stationCode": "GP"
+        },
+        {
+            "stationName": "Geleen Oost",
+            "stationCode": "GLN"
+        },
+        {
+            "stationName": "Geleen-Lutterade",
+            "stationCode": "LUT"
+        },
+        {
+            "stationName": "Gilze-Rijen",
+            "stationCode": "GZ"
+        },
+        {
+            "stationName": "Glanerbrug",
+            "stationCode": "GBR"
+        },
+        {
+            "stationName": "Goes",
+            "stationCode": "GS"
+        },
+        {
+            "stationName": "Goor",
+            "stationCode": "GO"
+        },
+        {
+            "stationName": "Gorinchem",
+            "stationCode": "GR"
+        },
+        {
+            "stationName": "Gouda Goverwelle",
+            "stationCode": "GDG"
+        },
+        {
+            "stationName": "Gouda",
+            "stationCode": "GD"
+        },
+        {
+            "stationName": "Gramsbergen",
+            "stationCode": "GBG"
+        },
+        {
+            "stationName": "Grijpskerk",
+            "stationCode": "GK"
+        },
+        {
+            "stationName": "Groningen Europapark",
+            "stationCode": "GERP"
+        },
+        {
+            "stationName": "Groningen Noord",
+            "stationCode": "GNN"
+        },
+        {
+            "stationName": "Groningen",
+            "stationCode": "GN"
+        },
+        {
+            "stationName": "Grou-Jirnsum",
+            "stationCode": "GW"
+        },
+        {
+            "stationName": "Haarlem",
+            "stationCode": "HLM"
+        },
+        {
+            "stationName": "Haarlem Spaarnwoude",
+            "stationCode": "HLMS"
+        },
+        {
+            "stationName": "Halfweg-Zwanenburg",
+            "stationCode": "HWZB"
+        },
+        {
+            "stationName": "Hardenberg",
+            "stationCode": "HDB"
+        },
+        {
+            "stationName": "Harderwijk",
+            "stationCode": "HD"
+        },
+        {
+            "stationName": "Hardinxveld Blauwe Zoom",
+            "stationCode": "BZM"
+        },
+        {
+            "stationName": "Hardinxveld-Giessendam",
+            "stationCode": "GND"
+        },
+        {
+            "stationName": "Haren (NL)",
+            "stationCode": "HRN"
+        },
+        {
+            "stationName": "Harlingen Haven",
+            "stationCode": "HLGH"
+        },
+        {
+            "stationName": "Harlingen",
+            "stationCode": "HLG"
+        },
+        {
+            "stationName": "Heemskerk",
+            "stationCode": "HK"
+        },
+        {
+            "stationName": "Heemstede-Aerdenhout",
+            "stationCode": "HAD"
+        },
+        {
+            "stationName": "Heerenveen IJsstadion",
+            "stationCode": "HRY"
+        },
+        {
+            "stationName": "Heerenveen",
+            "stationCode": "HR"
+        },
+        {
+            "stationName": "Heerhugowaard",
+            "stationCode": "HWD"
+        },
+        {
+            "stationName": "Heerlen de Kissel",
+            "stationCode": "HRLK"
+        },
+        {
+            "stationName": "Heerlen",
+            "stationCode": "HRL"
+        },
+        {
+            "stationName": "Heerlen Woonboulevard",
+            "stationCode": "HRLW"
+        },
+        {
+            "stationName": "Heeze",
+            "stationCode": "HZ"
+        },
+        {
+            "stationName": "Heiloo",
+            "stationCode": "HLO"
+        },
+        {
+            "stationName": "Heino",
+            "stationCode": "HNO"
+        },
+        {
+            "stationName": "Helmond Brandevoort",
+            "stationCode": "HMBV"
+        },
+        {
+            "stationName": "Helmond Brouwhuis",
+            "stationCode": "HMBH"
+        },
+        {
+            "stationName": "Helmond",
+            "stationCode": "HM"
+        },
+        {
+            "stationName": "Helmond 't Hout",
+            "stationCode": "HMH"
+        },
+        {
+            "stationName": "Hemmen-Dodewaard",
+            "stationCode": "HMN"
+        },
+        {
+            "stationName": "Hengelo Gezondheidspark",
+            "stationCode": "HGLG"
+        },
+        {
+            "stationName": "Hengelo Oost",
+            "stationCode": "HGLO"
+        },
+        {
+            "stationName": "Hengelo",
+            "stationCode": "HGL"
+        },
+        {
+            "stationName": "Hillegom",
+            "stationCode": "HIL"
+        },
+        {
+            "stationName": "Hilversum Media Park",
+            "stationCode": "HVSN"
+        },
+        {
+            "stationName": "Hilversum",
+            "stationCode": "HVS"
+        },
+        {
+            "stationName": "Hilversum Sportpark",
+            "stationCode": "HVSP"
+        },
+        {
+            "stationName": "Hindeloopen",
+            "stationCode": "HNP"
+        },
+        {
+            "stationName": "Hoensbroek",
+            "stationCode": "HB"
+        },
+        {
+            "stationName": "Hoevelaken",
+            "stationCode": "HVL"
+        },
+        {
+            "stationName": "Hollandsche Rading",
+            "stationCode": "HOR"
+        },
+        {
+            "stationName": "Holten",
+            "stationCode": "HON"
+        },
+        {
+            "stationName": "Hoofddorp",
+            "stationCode": "HFD"
+        },
+        {
+            "stationName": "Hoogeveen",
+            "stationCode": "HGV"
+        },
+        {
+            "stationName": "Hoogezand-Sappemeer",
+            "stationCode": "HGZ"
+        },
+        {
+            "stationName": "Hoogkarspel",
+            "stationCode": "HKS"
+        },
+        {
+            "stationName": "Hoorn Kersenboogerd",
+            "stationCode": "HNK"
+        },
+        {
+            "stationName": "Hoorn",
+            "stationCode": "HN"
+        },
+        {
+            "stationName": "Horst-Sevenum",
+            "stationCode": "HRT"
+        },
+        {
+            "stationName": "Houten Castellum",
+            "stationCode": "HTNC"
+        },
+        {
+            "stationName": "Houten",
+            "stationCode": "HTN"
+        },
+        {
+            "stationName": "Houthem-Sint Gerlach",
+            "stationCode": "SGL"
+        },
+        {
+            "stationName": "Hurdegaryp",
+            "stationCode": "HDG"
+        },
+        {
+            "stationName": "IJlst",
+            "stationCode": "IJT"
+        },
+        {
+            "stationName": "Kampen",
+            "stationCode": "KPN"
+        },
+        {
+            "stationName": "Kampen Zuid",
+            "stationCode": "KPNZ"
+        },
+        {
+            "stationName": "Kapelle-Biezelinge",
+            "stationCode": "BZL"
+        },
+        {
+            "stationName": "Kerkrade Centrum",
+            "stationCode": "KRD"
+        },
+        {
+            "stationName": "Kesteren",
+            "stationCode": "KTR"
+        },
+        {
+            "stationName": "Klarenbeek",
+            "stationCode": "KBK"
+        },
+        {
+            "stationName": "Klimmen-Ransdaal",
+            "stationCode": "KMR"
+        },
+        {
+            "stationName": "Koog Bloemwijk|Koog aan de Zaan",
+            "stationCode": "KBW"
+        },
+        {
+            "stationName": "Koog-Zaandijk|Zaandijk Zaanse Schans",
+            "stationCode": "KZD"
+        },
+        {
+            "stationName": "Koudum-Molkwerum",
+            "stationCode": "KMW"
+        },
+        {
+            "stationName": "Krabbendijke",
+            "stationCode": "KBD"
+        },
+        {
+            "stationName": "Krommenie-Assendelft",
+            "stationCode": "KMA"
+        },
+        {
+            "stationName": "Kropswolde",
+            "stationCode": "KW"
+        },
+        {
+            "stationName": "Kruiningen-Yerseke",
+            "stationCode": "KRG"
+        },
+        {
+            "stationName": "Lage Zwaluwe",
+            "stationCode": "ZLW"
+        },
+        {
+            "stationName": "Landgraaf",
+            "stationCode": "LG"
+        },
+        {
+            "stationName": "Lansingerland-Zoetermeer",
+            "stationCode": ""
+        },
+        {
+            "stationName": "Leerdam",
+            "stationCode": "LDM"
+        },
+        {
+            "stationName": "Leeuwarden Camminghaburen",
+            "stationCode": "LWC"
+        },
+        {
+            "stationName": "Leeuwarden",
+            "stationCode": "LW"
+        },
+        {
+            "stationName": "Leiden Centraal",
+            "stationCode": "LEDN"
+        },
+        {
+            "stationName": "Leiden Lammenschans",
+            "stationCode": "LDL"
+        },
+        {
+            "stationName": "Lelystad Centrum",
+            "stationCode": "LLS"
+        },
+        {
+            "stationName": "Lichtenvoorde-Groenlo",
+            "stationCode": "LTV"
+        },
+        {
+            "stationName": "Lochem",
+            "stationCode": "LC"
+        },
+        {
+            "stationName": "Loppersum",
+            "stationCode": "LP"
+        },
+        {
+            "stationName": "Lunteren",
+            "stationCode": "LTN"
+        },
+        {
+            "stationName": "Maarheeze",
+            "stationCode": "MZ"
+        },
+        {
+            "stationName": "Maarn",
+            "stationCode": "MRN"
+        },
+        {
+            "stationName": "Maarssen",
+            "stationCode": "MAS"
+        },
+        {
+            "stationName": "Maastricht Noord",
+            "stationCode": "MTN"
+        },
+        {
+            "stationName": "Maastricht",
+            "stationCode": "MT"
+        },
+        {
+            "stationName": "Maastricht Randwyck",
+            "stationCode": "MTR"
+        },
+        {
+            "stationName": "Mantgum",
+            "stationCode": "MG"
+        },
+        {
+            "stationName": "Mariënberg",
+            "stationCode": "MRB"
+        },
+        {
+            "stationName": "Martenshoek",
+            "stationCode": "MTH"
+        },
+        {
+            "stationName": "Meerssen",
+            "stationCode": "MES"
+        },
+        {
+            "stationName": "Meppel",
+            "stationCode": "MP"
+        },
+        {
+            "stationName": "Middelburg",
+            "stationCode": "MDB"
+        },
+        {
+            "stationName": "Mook-Molenhoek",
+            "stationCode": "MMLH"
+        },
+        {
+            "stationName": "Naarden-Bussum",
+            "stationCode": "NDB"
+        },
+        {
+            "stationName": "Nieuw Amsterdam",
+            "stationCode": "NA"
+        },
+        {
+            "stationName": "Nieuwerkerk aan den IJssel",
+            "stationCode": "NWK"
+        },
+        {
+            "stationName": "Nieuw-Vennep",
+            "stationCode": "NVP"
+        },
+        {
+            "stationName": "Nijkerk",
+            "stationCode": "NKK"
+        },
+        {
+            "stationName": "Nijmegen Dukenburg",
+            "stationCode": "NMD"
+        },
+        {
+            "stationName": "Nijmegen Goffert",
+            "stationCode": "NMGO"
+        },
+        {
+            "stationName": "Nijmegen Heyendaal",
+            "stationCode": "NMH"
+        },
+        {
+            "stationName": "Nijmegen Lent",
+            "stationCode": "NML"
+        },
+        {
+            "stationName": "Nijmegen",
+            "stationCode": "NM"
+        },
+        {
+            "stationName": "Nijverdal",
+            "stationCode": "NVD"
+        },
+        {
+            "stationName": "Nunspeet",
+            "stationCode": "NS"
+        },
+        {
+            "stationName": "Nuth",
+            "stationCode": "NH"
+        },
+        {
+            "stationName": "Obdam",
+            "stationCode": "OBD"
+        },
+        {
+            "stationName": "Oisterwijk",
+            "stationCode": "OT"
+        },
+        {
+            "stationName": "Oldenzaal",
+            "stationCode": "ODZ"
+        },
+        {
+            "stationName": "Olst",
+            "stationCode": "OST"
+        },
+        {
+            "stationName": "|-Ommen",
+            "stationCode": "OMN"
+        },
+        {
+            "stationName": "Oosterbeek",
+            "stationCode": "OTB"
+        },
+        {
+            "stationName": "Opheusden",
+            "stationCode": "OP"
+        },
+        {
+            "stationName": "Oss",
+            "stationCode": "O"
+        },
+        {
+            "stationName": "Oss West",
+            "stationCode": "OW"
+        },
+        {
+            "stationName": "Oudenbosch",
+            "stationCode": "ODB"
+        },
+        {
+            "stationName": "Overveen",
+            "stationCode": "OVN"
+        },
+        {
+            "stationName": "Purmerend Overwhere",
+            "stationCode": "PMO"
+        },
+        {
+            "stationName": "Purmerend",
+            "stationCode": "PMR"
+        },
+        {
+            "stationName": "Purmerend Weidevenne",
+            "stationCode": "PMW"
+        },
+        {
+            "stationName": "Putten",
+            "stationCode": "PT"
+        },
+        {
+            "stationName": "Raalte",
+            "stationCode": "RAT"
+        },
+        {
+            "stationName": "Ravenstein",
+            "stationCode": "RVS"
+        },
+        {
+            "stationName": "Reuver",
+            "stationCode": "RV"
+        },
+        {
+            "stationName": "Rheden",
+            "stationCode": "RH"
+        },
+        {
+            "stationName": "Rhenen",
+            "stationCode": "RHN"
+        },
+        {
+            "stationName": "Rijssen",
+            "stationCode": "RSN"
+        },
+        {
+            "stationName": "Rijswijk",
+            "stationCode": "RSW"
+        },
+        {
+            "stationName": "Rilland-Bath",
+            "stationCode": "RB"
+        },
+        {
+            "stationName": "Roermond",
+            "stationCode": "RM"
+        },
+        {
+            "stationName": "Roodeschool",
+            "stationCode": "RD"
+        },
+        {
+            "stationName": "Roosendaal",
+            "stationCode": "RSD"
+        },
+        {
+            "stationName": "Rosmalen",
+            "stationCode": "RS"
+        },
+        {
+            "stationName": "Rotterdam Alexander",
+            "stationCode": "RTA"
+        },
+        {
+            "stationName": "Rotterdam Blaak",
+            "stationCode": "RTB"
+        },
+        {
+            "stationName": "Rotterdam Centraal",
+            "stationCode": "RTD"
+        },
+        {
+            "stationName": "Rotterdam Lombardijen",
+            "stationCode": "RLB"
+        },
+        {
+            "stationName": "Rotterdam Noord",
+            "stationCode": "RTN"
+        },
+        {
+            "stationName": "Rotterdam Stadion",
+            "stationCode": "RTST"
+        },
+        {
+            "stationName": "Rotterdam Zuid",
+            "stationCode": "RTZ"
+        },
+        {
+            "stationName": "Ruurlo",
+            "stationCode": "RL"
+        },
+        {
+            "stationName": "Santpoort Noord",
+            "stationCode": "SPTN"
+        },
+        {
+            "stationName": "Santpoort Zuid",
+            "stationCode": "SPTZ"
+        },
+        {
+            "stationName": "Sappemeer Oost",
+            "stationCode": "SPM"
+        },
+        {
+            "stationName": "Sassenheim",
+            "stationCode": "SSH"
+        },
+        {
+            "stationName": "Sauwerd",
+            "stationCode": "SWD"
+        },
+        {
+            "stationName": "Schagen",
+            "stationCode": "SGN"
+        },
+        {
+            "stationName": "Scheemda",
+            "stationCode": "SDA"
+        },
+        {
+            "stationName": "Schiedam Centrum",
+            "stationCode": "SDM"
+        },
+        {
+            "stationName": "Schin op Geul",
+            "stationCode": "SOG"
+        },
+        {
+            "stationName": "Schinnen",
+            "stationCode": "SN"
+        },
+        {
+            "stationName": "Schiphol",
+            "stationCode": "SHL"
+        },
+        {
+            "stationName": "'s-Hertogenbosch Oost",
+            "stationCode": "HTO"
+        },
+        {
+            "stationName": "'s-Hertogenbosch",
+            "stationCode": "HT"
+        },
+        {
+            "stationName": "Sittard",
+            "stationCode": "STD"
+        },
+        {
+            "stationName": "Sliedrecht Baanhoek",
+            "stationCode": "SDTB"
+        },
+        {
+            "stationName": "Sliedrecht",
+            "stationCode": "SDT"
+        },
+        {
+            "stationName": "Sneek Noord",
+            "stationCode": "SKND"
+        },
+        {
+            "stationName": "Sneek",
+            "stationCode": "SK"
+        },
+        {
+            "stationName": "Soest (Netherlands)",
+            "stationCode": "ST"
+        },
+        {
+            "stationName": "Soest Zuid",
+            "stationCode": "STZ"
+        },
+        {
+            "stationName": "Soestdijk",
+            "stationCode": "SD"
+        },
+        {
+            "stationName": "Spaubeek",
+            "stationCode": "SBK"
+        },
+        {
+            "stationName": "Stavoren",
+            "stationCode": "STV"
+        },
+        {
+            "stationName": "Stedum",
+            "stationCode": "STM"
+        },
+        {
+            "stationName": "Steenwijk",
+            "stationCode": "SWK"
+        },
+        {
+            "stationName": "Susteren",
+            "stationCode": "SRN"
+        },
+        {
+            "stationName": "Swalmen",
+            "stationCode": "SM"
+        },
+        {
+            "stationName": "'t Harde",
+            "stationCode": "HDE"
+        },
+        {
+            "stationName": "Tegelen",
+            "stationCode": "TG"
+        },
+        {
+            "stationName": "Terborg",
+            "stationCode": "TBG"
+        },
+        {
+            "stationName": "Tiel Passewaaij",
+            "stationCode": "TPSW"
+        },
+        {
+            "stationName": "Tiel",
+            "stationCode": "TL"
+        },
+        {
+            "stationName": "Tilburg",
+            "stationCode": "TB"
+        },
+        {
+            "stationName": "Tilburg Reeshof",
+            "stationCode": "TBR"
+        },
+        {
+            "stationName": "Tilburg Universiteit",
+            "stationCode": "TBU"
+        },
+        {
+            "stationName": "Twello",
+            "stationCode": "TWL"
+        },
+        {
+            "stationName": "Uitgeest",
+            "stationCode": "UTG"
+        },
+        {
+            "stationName": "Uithuizen",
+            "stationCode": "UHZ"
+        },
+        {
+            "stationName": "Uithuizermeeden",
+            "stationCode": "UHM"
+        },
+        {
+            "stationName": "Usquert",
+            "stationCode": "UST"
+        },
+        {
+            "stationName": "Utrecht Centraal",
+            "stationCode": "UT"
+        },
+        {
+            "stationName": "Utrecht Leidsche Rijn",
+            "stationCode": "UTLR"
+        },
+        {
+            "stationName": "Utrecht Lunetten",
+            "stationCode": "UTL"
+        },
+        {
+            "stationName": "Utrecht Maliebaan",
+            "stationCode": "UTM"
+        },
+        {
+            "stationName": "Utrecht Overvecht",
+            "stationCode": "UTO"
+        },
+        {
+            "stationName": "Utrecht Terwijde",
+            "stationCode": "UTT"
+        },
+        {
+            "stationName": "Utrecht Vaartsche Rijn",
+            "stationCode": "UTVR"
+        },
+        {
+            "stationName": "Utrecht Zuilen",
+            "stationCode": "UTZL"
+        },
+        {
+            "stationName": "Valkenburg",
+            "stationCode": "VK"
+        },
+        {
+            "stationName": "Varsseveld",
+            "stationCode": "VSV"
+        },
+        {
+            "stationName": "Veendam",
+            "stationCode": "VDM"
+        },
+        {
+            "stationName": "Veenendaal Centrum",
+            "stationCode": "VNDC"
+        },
+        {
+            "stationName": "Veenendaal West",
+            "stationCode": "VNDW"
+        },
+        {
+            "stationName": "Veenendaal-De Klomp",
+            "stationCode": "KLP"
+        },
+        {
+            "stationName": "Velp",
+            "stationCode": "VP"
+        },
+        {
+            "stationName": "Venlo",
+            "stationCode": "VL"
+        },
+        {
+            "stationName": "Venray",
+            "stationCode": "VRY"
+        },
+        {
+            "stationName": "Vierlingsbeek",
+            "stationCode": "VLB"
+        },
+        {
+            "stationName": "Vleuten",
+            "stationCode": "VTN"
+        },
+        {
+            "stationName": "Vlissingen",
+            "stationCode": "VS"
+        },
+        {
+            "stationName": "Vlissingen Souburg",
+            "stationCode": "VSS"
+        },
+        {
+            "stationName": "Voerendaal",
+            "stationCode": "VDL"
+        },
+        {
+            "stationName": "Voorburg",
+            "stationCode": "VB"
+        },
+        {
+            "stationName": "Voorhout",
+            "stationCode": "VH"
+        },
+        {
+            "stationName": "Voorschoten",
+            "stationCode": "VST"
+        },
+        {
+            "stationName": "Voorst-Empe",
+            "stationCode": "VEM"
+        },
+        {
+            "stationName": "Vorden",
+            "stationCode": "VD"
+        },
+        {
+            "stationName": "Vriezenveen",
+            "stationCode": "VZ"
+        },
+        {
+            "stationName": "Vroomshoop",
+            "stationCode": "VHP"
+        },
+        {
+            "stationName": "Vught",
+            "stationCode": "VG"
+        },
+        {
+            "stationName": "Waddinxveen Noord",
+            "stationCode": "WADN"
+        },
+        {
+            "stationName": "Waddinxveen",
+            "stationCode": "WAD"
+        },
+        {
+            "stationName": "Waddinxveen Triangel",
+            "stationCode": ""
+        },
+        {
+            "stationName": "Warffum",
+            "stationCode": "WFM"
+        },
+        {
+            "stationName": "Weert",
+            "stationCode": "WT"
+        },
+        {
+            "stationName": "Weesp",
+            "stationCode": "WP"
+        },
+        {
+            "stationName": "Wehl",
+            "stationCode": "WL"
+        },
+        {
+            "stationName": "Westervoort",
+            "stationCode": "WTV"
+        },
+        {
+            "stationName": "Wezep",
+            "stationCode": "WZ"
+        },
+        {
+            "stationName": "Wierden",
+            "stationCode": "WDN"
+        },
+        {
+            "stationName": "Wijchen",
+            "stationCode": "WC"
+        },
+        {
+            "stationName": "Wijhe",
+            "stationCode": "WH"
+        },
+        {
+            "stationName": "Winschoten",
+            "stationCode": "WS"
+        },
+        {
+            "stationName": "Winsum",
+            "stationCode": "WSM"
+        },
+        {
+            "stationName": "Winterswijk",
+            "stationCode": "WW"
+        },
+        {
+            "stationName": "Winterswijk West",
+            "stationCode": "WWW"
+        },
+        {
+            "stationName": "Woerden",
+            "stationCode": "WD"
+        },
+        {
+            "stationName": "Wolfheze",
+            "stationCode": "WF"
+        },
+        {
+            "stationName": "Wolvega",
+            "stationCode": "WV"
+        },
+        {
+            "stationName": "Workum",
+            "stationCode": "WK"
+        },
+        {
+            "stationName": "Wormerveer",
+            "stationCode": "WM"
+        },
+        {
+            "stationName": "Zaandam Kogerveld",
+            "stationCode": "ZDK"
+        },
+        {
+            "stationName": "Zaandam",
+            "stationCode": "ZD"
+        },
+        {
+            "stationName": "Zaltbommel",
+            "stationCode": "ZBM"
+        },
+        {
+            "stationName": "Zandvoort aan Zee",
+            "stationCode": "ZVT"
+        },
+        {
+            "stationName": "Zetten-Andelst",
+            "stationCode": "ZA"
+        },
+        {
+            "stationName": "Zevenaar",
+            "stationCode": "ZV"
+        },
+        {
+            "stationName": "Zevenbergen",
+            "stationCode": "ZVB"
+        },
+        {
+            "stationName": "Zoetermeer Oost",
+            "stationCode": "ZTMO"
+        },
+        {
+            "stationName": "Zoetermeer",
+            "stationCode": "ZTM"
+        },
+        {
+            "stationName": "Zuidbroek",
+            "stationCode": "ZB"
+        },
+        {
+            "stationName": "Zuidhorn",
+            "stationCode": "ZH"
+        },
+        {
+            "stationName": "Zutphen",
+            "stationCode": "ZP"
+        },
+        {
+            "stationName": "Zwijndrecht",
+            "stationCode": "ZWD"
+        },
+        {
+            "stationName": "Zwolle",
+            "stationCode": "ZL"
+        },
+        {
+            "stationName": "Zwolle Stadshagen",
+            "stationCode": "ZLSH"
+        }
+    ]
+}

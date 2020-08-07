@@ -1,0 +1,2254 @@
+{
+    "geocoded_waypoints": [
+        {
+            "geocoder_status": "OK",
+            "place_id": "ChIJA1BX9HlWz0cRKiHlfZ2gZqk",
+            "types": [
+                "route"
+            ]
+        },
+        {
+            "geocoder_status": "OK",
+            "place_id": "ChIJb4ceaxvvxUcRGONvgZptipw",
+            "types": [
+                "establishment",
+                "point_of_interest",
+                "transit_station"
+            ]
+        }
+    ],
+    "routes": [
+        {
+            "bounds": {
+                "northeast": {
+                    "lat": 52.6434761,
+                    "lng": 4.801021299999999
+                },
+                "southwest": {
+                    "lat": 52.38236999999999,
+                    "lng": 4.614508
+                }
+            },
+            "copyrights": "Map data ©2020",
+            "legs": [
+                {
+                    "arrival_time": {
+                        "text": "9:44pm",
+                        "time_zone": "Europe/Amsterdam",
+                        "value": 1591645440
+                    },
+                    "departure_time": {
+                        "text": "7:58pm",
+                        "time_zone": "Europe/Amsterdam",
+                        "value": 1591639084
+                    },
+                    "distance": {
+                        "text": "44.6 km",
+                        "value": 44557
+                    },
+                    "duration": {
+                        "text": "1 hour 46 mins",
+                        "value": 6356
+                    },
+                    "end_address": "Haarlem, Hogeschool InHolland, 2015 CN Haarlem, Netherlands",
+                    "end_location": {
+                        "lat": 52.387196,
+                        "lng": 4.614508
+                    },
+                    "start_address": "N508, 1703 Heerhugowaard, Netherlands",
+                    "start_location": {
+                        "lat": 52.639833,
+                        "lng": 4.801021299999999
+                    },
+                    "steps": [
+                        {
+                            "distance": {
+                                "text": "0.6 km",
+                                "value": 603
+                            },
+                            "duration": {
+                                "text": "7 mins",
+                                "value": 434
+                            },
+                            "end_location": {
+                                "lat": 52.6434761,
+                                "lng": 4.796813
+                            },
+                            "html_instructions": "Walk to Heerhugowaard, Park van Luna",
+                            "polyline": {
+                                "points": "}eh`Ikuh\\KVGRGRI^Mt@]xCKn@G\\I\\O\\Q\\OVGFON[ViAv@]XUTU\\i@v@INkEjHm@qAaA}B"
+                            },
+                            "start_location": {
+                                "lat": 52.639833,
+                                "lng": 4.801021299999999
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "0.5 km",
+                                        "value": 510
+                                    },
+                                    "duration": {
+                                        "text": "6 mins",
+                                        "value": 366
+                                    },
+                                    "end_location": {
+                                        "lat": 52.64292349999999,
+                                        "lng": 4.795770399999999
+                                    },
+                                    "html_instructions": "Head <b>northwest</b> toward <b>Middenweg</b>",
+                                    "polyline": {
+                                        "points": "}eh`Ikuh\\KVGRGRI^Mt@]xCKn@G\\I\\O\\Q\\OVGFON[ViAv@]XUTU\\i@v@INkEjH"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.639833,
+                                        "lng": 4.801021299999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "93 m",
+                                        "value": 93
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 68
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6434761,
+                                        "lng": 4.796813
+                                    },
+                                    "html_instructions": "Turn <b>right</b> onto <b>Middenweg</b><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                                    "maneuver": "turn-right",
+                                    "polyline": {
+                                        "points": "gyh`Iqtg\\m@qAaA}B"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.64292349999999,
+                                        "lng": 4.795770399999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "7.3 km",
+                                "value": 7342
+                            },
+                            "duration": {
+                                "text": "14 mins",
+                                "value": 840
+                            },
+                            "end_location": {
+                                "lat": 52.63808,
+                                "lng": 4.743257000000001
+                            },
+                            "html_instructions": "Bus towards Alkmaar Station",
+                            "polyline": {
+                                "points": "{|h`I{zg\\BE`A|Bl@pAVf@Zv@j@lAfA~BN\\NTLLLFJBH?H?J?HETKNQPYt@uAZm@Ta@l@y@VSZKV?n@L^HTDNB|A\\JB`@Vd@r@V|@BH@FHj@BV@R@N@XAz@EZG^CNW~@Uj@KRMVCJAFCV?N@L@LBLBLFJDHBFHFFDNDp@P^JTJNFF@F@FAFEDGDI@K@I@KA]Bk@@g@lAJr@RZ\\BDTl@DNL`@Pn@?@n@tAxExHXf@rCpENTtFxIRXxA~Bp@dABDZd@xAvBVV^Z^\\RRn@f@r@`@j@VZNv@\\tAn@dBv@dA`@dFvBnC|A`Aj@`@TbAl@f@VXFLBT@R?f@?t@UZOf@U\\Wd@MZCb@Ab@L^Tb@XRNF?D?D?@CBADGPm@`@qAf@uA\\g@V]`AcATUPMVMf@UBA\\KfASt@WRMPUHKPGDEDCD?B?D?D@B@BBBB@DDJHZOLQLSLSHUHqAXm@Li@Pg@TYPQNYTKJQPQTMPGFINKNGNIPITO`@MZGRERGRGVOp@CFCRGXEVMt@_A|EIb@Q`AQ~@Ih@I^If@GTKn@Kf@Kf@ABOl@Y|@Yp@SZO^KNSRONKJIHa@`@SLWZWVQPJ`@gFrFKW@CGUIFGJ]b@Ub@Yd@MZUj@]hAi@fBWv@g@zAAVCJOt@]zBcBhK[dBc@hCc@bCId@c@dCMVgA`HQvAANCPMx@WrBB@Gh@QzAAXA\\qAhKQtASrAUrAYt@KVm@nAWb@_A~Aa@f@CDMRIJEHOZADM\\Md@Kd@IXEPAFGh@EDA@A@?BCFA@ABA@A?AAG?GGEIGQGi@AQ?O@M@OHIJEHAHAZBJ@J@JDHDRP^\\^j@BB@B@B@F?F@H?DAHAHINWl@Q^CJWl@s@xDe@rCIb@GVQt@Kj@Kj@SnAg@lCBZ_@xBg@rCe@bCKf@Ml@EJIZKJc@dAO\\O\\WZKDG@WDmA@c@AG?KCsEOaAG{@Eo@Ai@??\\@N?XC\\EZ?HM^G`@@AAH?t@Bl@y@h@PlD"
+                            },
+                            "start_location": {
+                                "lat": 52.643499,
+                                "lng": 4.796781
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.63808,
+                                        "lng": 4.743257000000001
+                                    },
+                                    "name": "Alkmaar, Station"
+                                },
+                                "arrival_time": {
+                                    "text": "8:20pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591640400
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.643499,
+                                        "lng": 4.796781
+                                    },
+                                    "name": "Heerhugowaard, Park van Luna"
+                                },
+                                "departure_time": {
+                                    "text": "8:06pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591639560
+                                },
+                                "headsign": "Alkmaar Station",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "Overal (Connexxion)",
+                                            "phone": "011 31 900 2666399",
+                                            "url": "http://www.overal.nl/"
+                                        }
+                                    ],
+                                    "color": "#f2f200",
+                                    "name": "Alkmaar Station - Heerhugowaard",
+                                    "short_name": "160",
+                                    "text_color": "#000000",
+                                    "url": "http://www.connexxion.nl/dienstregeling/lijn?ID=H160",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                                        "name": "Bus",
+                                        "type": "BUS"
+                                    }
+                                },
+                                "num_stops": 5
+                            },
+                            "travel_mode": "TRANSIT"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.1 km",
+                                "value": 143
+                            },
+                            "duration": {
+                                "text": "2 mins",
+                                "value": 105
+                            },
+                            "end_location": {
+                                "lat": 52.6375115,
+                                "lng": 4.7409004
+                            },
+                            "html_instructions": "Walk to Alkmaar",
+                            "polyline": {
+                                "points": "_yg`Iqj}[NlC@H?JNrBLtB@N"
+                            },
+                            "start_location": {
+                                "lat": 52.63776319999999,
+                                "lng": 4.742972099999999
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 143
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 105
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6375115,
+                                        "lng": 4.7409004
+                                    },
+                                    "html_instructions": "Head <b>west</b> on <b>Stationsweg</b> toward <b>Stationstraat</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                                    "polyline": {
+                                        "points": "_yg`Iqj}[NlC@H?JNrBLtB@N"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.63776319999999,
+                                        "lng": 4.742972099999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "33.9 km",
+                                "value": 33911
+                            },
+                            "duration": {
+                                "text": "41 mins",
+                                "value": 2460
+                            },
+                            "end_location": {
+                                "lat": 52.3882482,
+                                "lng": 4.6369922
+                            },
+                            "html_instructions": "Train towards Amsterdam Centraal",
+                            "polyline": {
+                                "points": "_yg`I{x|[G@d@fIJjBLzAHt@Nx@Jh@Pr@Nr@@DBDLb@Lb@BD@DTr@Vr@Tl@Zn@Xl@\\n@^h@V^\\^Z^|@z@TRRRNLLLPLPNhGrFNLxFdFJJJHrR|PdGnFzFdFzFdFnE~DnE|DXVZVxEfE|@x@^Z|BrBjC~B|CnCzDlDbK`JpDbDzDjD|CnCzDlD|CnCzDjDzFdF\\\\ZZlOdNjIpHJLvEzD|ApAb@^vFdFzDlDB@HFv@j@TPpAjA|I`IbA|@xFdFvF`F|CpC^Z|BrBdA~@dDvClDzC`BxA`BxAzAzADBDDhEtD`BvAbBxAjKjJhAdA`EpDrD~CbBzAbBzArDbDf@d@hC|BpE|DnE|DbA|@x@t@BBBBdHjGfCzBpE~DzEhEvLrKxH~GzGbGzEhE|@v@zFdFnC`CjB`BzFdFdA~@tChCv@l@DB|@z@hC~BfC|Bd@`@b@`@rBhBrBhBzBnB|BpBJHJLdOrMRPhFrEZT`BrAl@b@dBz@p@\\JFHDrA\\r@R~@Pt@N~@HfAJB?z@@|@@r@?P@v@CDAhBSdBYTCpA]jAYHCj@MpBu@z@c@lAw@HGv@i@fAqAz@{@b@o@bBoCLUBKBKNYx@yAfAyBfAaC~@}BnAwCnAuCVk@Xk@b@gAd@eA|CgH~DiJfEwJ`IyQzHwQx@mBBE`MmYn@wA~CmHzBiFdHmPJW|DaJ|AmDp@{A|AqD|GwOn@{AhBgELWx@mBz@mBb@eAd@cAb@cA|@wAdAsBzAqCz@iBbA_CFKr@cBTi@`@_Ax@mBzAmDfAiC`@gAJS\\q@`@s@Vo@To@^w@`@w@NYJSBCXc@f@u@h@s@bCcCh@_@fAi@`Ae@fAc@\\Iv@QtAQfAKLCvA@vAFvAPtAXrAb@LFdA^nAx@lA|@lAfAfAjAFHzBxCRVnEhGjA|AZd@~B`D\\f@`DhE~CjExEvGPXdE|F`ErFhA|AjGnINXNXfEzF~AvBfHtJ`ArAbAtAPVTZlDzElD|ElBnC^f@lCvDf@p@`IrKtAlB@@rAlBNPLPx@hAv@hAHHxB|CzBzCV\\|@lA\\b@v@fAPV\\d@\\f@LPNTf@p@lBdCrCvD@@vC`EvApBpCvEp@lABDn@tALXDJN\\P`@\\`ARn@BH\\`AFTPf@Tx@?B^rABL\\rAXnALh@j@dCb@nBhA|EbAnERx@Rx@n@tCZtAVdANp@Pr@HZz@hCXlAT~@R`At@xCj@`CLf@BHRp@@HNh@n@tBTn@h@|AFNp@dBlAfCFH?@nBtDfA`BFJdCfDdArAPTdAjA\\`@DBv@x@~@r@^Z^XNJfAt@HD~@f@d@RbAb@@@`@Lf@PbBb@F@|@NxARNBjBHdEGfAAZAhFu@VIzCw@hDoA`AY|Bm@`EiAzH}BhGaB|Ae@rAa@lHsBpFuAp@MrAUfIgBzC[vABhDZB?`@Hb@H`@Hb@Hb@HD@hBh@ZL`@NRJLF~@d@B@^T`@Td@ZXTp@f@LL|AxALL`DlD`@f@nDlE\\b@pBhCFHxDzHvAfD`@rAzApFFRdAzEbDfPr@jDH\\XfAf@`Br@|BTp@Tp@j@tAb@~@~@pBl@fAJR^n@DFvAvBjAzAdBnBrArA`Av@NLv@j@r@b@~BtAr@`@nBt@fCt@x@RlCl@hB`@r@^H@ZHn@LzCp@fEp@p@Jr@LPBr@Jh@FfANtEh@|F^fAFL@T?b@@j@BZ@jBBx@@L@vEJF?fCFhBBJ@fDF`@@pCFD?lCFjADjABvABpA?n@Ab@Ch@Cz@EZAbAExAKt@GTGp@I\\EdBUt@K~@OpBYn@ItASf@Gf@Eb@ENAf@An@Cb@@jA@JAvAJj@FXDz@N^H\\Hn@NNFPF`@L\\L`@PhCfAvBz@d@RlAh@hBv@v@Zh@T|CnAf@ThBv@NFrAj@t@ZpCjAhAd@NFxAn@`CbAfAd@NFdAb@v@\\~@`@`@Pv@ZLDZNj@Th@V`@NzB`A@?pCjA|Ap@hCfA`Ab@JD~B`AtAl@HBHBPFr@X^NTFNDXFXFPDd@HNBXDj@Hb@H@?d@F\\FLBl@HZDrARv@Hp@JJ@H?X@n@@t@CTCVEj@Kx@WNEv@]\\Q~@c@d@UbB}@RKPKd@YZWNMJKp@q@DEl@y@`@o@^q@p@}A`@eAV_ANk@Lk@Ha@Ny@L{@D]J_ABa@F{@FuABuABu@@aAHkF@u@@w@FyEBkA@u@@i@D_ALeDTaCJcBBe@D{@q@I"
+                            },
+                            "start_location": {
+                                "lat": 52.63776069999999,
+                                "lng": 4.7401446
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.3882482,
+                                        "lng": 4.6369922
+                                    },
+                                    "name": "Haarlem"
+                                },
+                                "arrival_time": {
+                                    "text": "9:30pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591644600
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.63776069999999,
+                                        "lng": 4.7401446
+                                    },
+                                    "name": "Alkmaar"
+                                },
+                                "departure_time": {
+                                    "text": "8:49pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591642140
+                                },
+                                "headsign": "Amsterdam Centraal",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "NS",
+                                            "phone": "011 31 30 751 5155",
+                                            "url": "http://www.ns.nl/"
+                                        }
+                                    ],
+                                    "name": "Amsterdam Centraal <-> Hoorn SPR4800",
+                                    "short_name": "Intercity",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+                                        "name": "Train",
+                                        "type": "HEAVY_RAIL"
+                                    }
+                                },
+                                "num_stops": 10,
+                                "trip_short_name": "4868"
+                            },
+                            "travel_mode": "TRANSIT"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.2 km",
+                                "value": 178
+                            },
+                            "duration": {
+                                "text": "2 mins",
+                                "value": 133
+                            },
+                            "end_location": {
+                                "lat": 52.38756,
+                                "lng": 4.6386527
+                            },
+                            "html_instructions": "Walk to Haarlem, Station",
+                            "polyline": {
+                                "points": "oaw~Hmth[ZFfAPN{C@QLmCBa@"
+                            },
+                            "start_location": {
+                                "lat": 52.388244,
+                                "lng": 4.6370341
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "57 m",
+                                        "value": 57
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 42
+                                    },
+                                    "end_location": {
+                                        "lat": 52.3877408,
+                                        "lng": 4.636898299999999
+                                    },
+                                    "html_instructions": "Head <b>south</b> on <b>Kruisweg</b> toward <b>Stationsplein</b>",
+                                    "polyline": {
+                                        "points": "oaw~Hmth[ZFfAP"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.388244,
+                                        "lng": 4.6370341
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 121
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 91
+                                    },
+                                    "end_location": {
+                                        "lat": 52.38756,
+                                        "lng": 4.6386527
+                                    },
+                                    "html_instructions": "Turn <b>left</b> onto <b>Stationsplein</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                                    "maneuver": "turn-left",
+                                    "polyline": {
+                                        "points": "k~v~Hssh[N{C@QLmCBa@"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.3877408,
+                                        "lng": 4.636898299999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "2.4 km",
+                                "value": 2380
+                            },
+                            "duration": {
+                                "text": "6 mins",
+                                "value": 360
+                            },
+                            "end_location": {
+                                "lat": 52.387196,
+                                "lng": 4.614508
+                            },
+                            "html_instructions": "Bus towards Zandvoort via Bloemend.Str.",
+                            "polyline": {
+                                "points": "}{v~Hg~h[KA@YJBlAVAR?@A\\C\\AJARA^A\\ARAJAP?JA@A?G?Ah@Ch@?@Ev@VFf@Dl@HrBf@WfGC|@A^?P?RBPD\\DXR|@Dp@@j@Cf@G\\EL_@THJJf@JdAFTBHDBLD~@HF?J@TDXDJDF?j@Tf@Zf@\\JFJLJJt@n@`AhAlAlAT^b@Zv@d@TNBF?@BBXVLJJNENGJGJEJE@GBI@KBkA{@OKWSc@YM^i@tBSz@e@dB?@ACCJMh@ENEPETGTQp@Qp@_A|D_A|DWlAYjAS|@?@U~@CHCJUx@Sz@_@rACHCJQ|@Q~@?|@@n@@b@Dt@BN@L@N@R@v@@r@?dA?h@An@Gz@C`@ETOz@Mz@CNCNI^EVGVEPGTWhACH[tAKTCJMh@I\\?DAFCLAJEVEVAJAJCJAFATCr@?XC?"
+                            },
+                            "start_location": {
+                                "lat": 52.387351,
+                                "lng": 4.638596
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.387196,
+                                        "lng": 4.614508
+                                    },
+                                    "name": "Haarlem, Hogeschool INHOLLAND"
+                                },
+                                "arrival_time": {
+                                    "text": "9:44pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591645440
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.387351,
+                                        "lng": 4.638596
+                                    },
+                                    "name": "Haarlem, Station"
+                                },
+                                "departure_time": {
+                                    "text": "9:38pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591645080
+                                },
+                                "headsign": "Zandvoort via Bloemend.Str.",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "Connexxion",
+                                            "phone": "011 31 900 2666399",
+                                            "url": "http://www.connexxion.nl/"
+                                        }
+                                    ],
+                                    "color": "#66cc33",
+                                    "name": "Zandvoort - Haarlem Station",
+                                    "short_name": "81",
+                                    "text_color": "#000000",
+                                    "url": "http://www.connexxion.nl/dienstregeling/lijn?ID=N081",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                                        "name": "Bus",
+                                        "type": "BUS"
+                                    }
+                                },
+                                "num_stops": 4
+                            },
+                            "travel_mode": "TRANSIT"
+                        }
+                    ],
+                    "traffic_speed_entry": [],
+                    "via_waypoint": []
+                }
+            ],
+            "overview_polyline": {
+                "points": "}eh`Ikuh\\e@~A_A|GYz@a@t@}BfBs@n@_AtAuEzHoBoEnBnEfDlH^r@ZTj@B^Q`@k@tC_Fr@_@fALbDp@l@Zd@r@V|@DPLbABxBi@jCs@bBC|@Pt@Z^vBn@f@HTc@D_B@g@lAJr@RZ\\Xr@Rp@Pp@hGnKrLhRbDdFtB|Cv@r@r@p@bBhAtEtBjDxAdFvBnC|AbB`AjBdApALf@?t@UbAe@bAe@~@EbAb@v@h@TC|@iCdA}BxAaBf@c@~@c@~Cy@`Aw@TIRFTp@iAr@_EbAmBlAcB|BoAxD_FxWw@vCiA|B_D|CQPJ`@gFrFKWEYQR{AhCuBtGi@rBS`AaEtVm@hDq@|C_BzKe@lDCj@gB|Oe@hDo@hCqCjF}@lAe@hA{@pDOROGM[GyAJYTG|@DhAz@d@r@D\\Mh@eAfCkBhKi@lC{@|EBZ_@xBmAvGYtAOf@o@pA_@z@c@`@qCFiH[kBGi@??\\@h@Ix@ShAA~@Bl@y@h@PlD~@x@PvC^dGy@xCp@rLVpCZbBf@rB`CxGnBfDlCnChRtPhx@ls@vjAjdAbYdWlSlQzMtLhDpCtg@hd@hYbWbbAh|@vaBhyAtu@vp@|BhBrC~A|@d@|Ab@rBd@tBXdENbCCnEm@fBa@tA]|CcAjEmCbCmCfC_Ed@gA`CsEfC_GpEeKfh@wlA`g@kjAlV}j@hD{HzGgMtK_WlBaEnBoEx@uApAiBlDcDhCoAdBm@lCc@tAOnDHlDj@`Bj@tCxAzCdCnAtAjLxOl\\td@fc@~l@xi@nu@~Wt^dKlNvF`KhCbHjC`KbIv]tA`GtBrHlDtNnBbGnCfG~DdHbH|IzCrCvCvBrDdBnDdAnDh@jBHdEGbBC`G_AdIgC|ToGhV}GbHcBzK}BzC[vABlDZjCf@nDbAbChAjBhAvDdD`KpLnClD`EdIxBzFbBdGfHl]jCxIdDxH~ArCbDrExDbE|DtCrDvBvFjBfE`AhB`@r@^d@JjE~@~HnAzJlAhJh@vEJlUd@hS^hLk@bNmBhEg@jCEvA?bCRrCh@rBl@`IbDnRdI~]bOt]~NxBv@jB^lEp@vH|@dBAl@IdBc@fAc@fFiCfBiArAqAnAiBpAoCvA}El@uD^sFRyLNsKVeIj@gIo@QbBXb@}Ih@HKA@YJBlAVARA^I|AGnAALI?KlC`F~@]vJN|AXnBArAMj@_@THJVlBJ^zARfARr@TnAx@xApAhErEpA~@v@v@[r@c@JwCuBqBvHm@`CiFxToBtHc@|B@lBLvBFnCIzE_AfG}AjGk@~CIj@IbB"
+            },
+            "summary": "",
+            "warnings": [
+                "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+            ],
+            "waypoint_order": []
+        },
+        {
+            "bounds": {
+                "northeast": {
+                    "lat": 52.640268,
+                    "lng": 4.808686799999999
+                },
+                "southwest": {
+                    "lat": 52.3824,
+                    "lng": 4.6145064
+                }
+            },
+            "copyrights": "Map data ©2020",
+            "legs": [
+                {
+                    "arrival_time": {
+                        "text": "9:44pm",
+                        "time_zone": "Europe/Amsterdam",
+                        "value": 1591645440
+                    },
+                    "departure_time": {
+                        "text": "8:02pm",
+                        "time_zone": "Europe/Amsterdam",
+                        "value": 1591639358
+                    },
+                    "distance": {
+                        "text": "45.3 km",
+                        "value": 45271
+                    },
+                    "duration": {
+                        "text": "1 hour 41 mins",
+                        "value": 6082
+                    },
+                    "end_address": "Haarlem, Hogeschool InHolland, 2015 CN Haarlem, Netherlands",
+                    "end_location": {
+                        "lat": 52.387196,
+                        "lng": 4.614508
+                    },
+                    "start_address": "N508, 1703 Heerhugowaard, Netherlands",
+                    "start_location": {
+                        "lat": 52.639833,
+                        "lng": 4.801021299999999
+                    },
+                    "steps": [
+                        {
+                            "distance": {
+                                "text": "0.8 km",
+                                "value": 803
+                            },
+                            "duration": {
+                                "text": "10 mins",
+                                "value": 622
+                            },
+                            "end_location": {
+                                "lat": 52.6402262,
+                                "lng": 4.808686799999999
+                            },
+                            "html_instructions": "Walk to Heerhugowaard, Huygendijkbos",
+                            "polyline": {
+                                "points": "}eh`Ikuh\\JYJYDILYPUPKDCr@]\\IF?ZAH?\\?ZKHIJIPUHYDUF]@Q@OBQDMDODK@E@G?GAECKCEACAEAGAK?I?O@O?_@@MBg@Dk@Js@BOFYHWHQHQDKs@iAEISw@Oi@EKEGq@aAGDEBG?MCIIAEAEAEAEAG?I?My@i@c@WOOKMAAYc@Yk@qA_D_@{@"
+                            },
+                            "start_location": {
+                                "lat": 52.639833,
+                                "lng": 4.801021299999999
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 113
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 97
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6389885,
+                                        "lng": 4.8018512
+                                    },
+                                    "html_instructions": "Head <b>southeast</b>",
+                                    "polyline": {
+                                        "points": "}eh`Ikuh\\JYJYDILYPUPKDCr@]\\I"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.639833,
+                                        "lng": 4.801021299999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.3 km",
+                                        "value": 303
+                                    },
+                                    "duration": {
+                                        "text": "4 mins",
+                                        "value": 222
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6377184,
+                                        "lng": 4.8050592
+                                    },
+                                    "html_instructions": "Take the pedestrian overpass",
+                                    "polyline": {
+                                        "points": "u`h`Iqzh\\F?ZAH?\\?ZKHIJIPUHYDUF]@Q@OBQDMDODK@E@G?GAECKCEACAEAGAK?I?O@O?_@@MBg@Dk@Js@BOFYHWHQHQDK"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6389885,
+                                        "lng": 4.8018512
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "38 m",
+                                        "value": 38
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 27
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6379795,
+                                        "lng": 4.8054334
+                                    },
+                                    "html_instructions": "Turn <b>left</b> onto <b>Oosttangent</b>/<wbr/><b>N508</b>",
+                                    "maneuver": "turn-left",
+                                    "polyline": {
+                                        "points": "wxg`Isni\\s@iA"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6377184,
+                                        "lng": 4.8050592
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.3 km",
+                                        "value": 349
+                                    },
+                                    "duration": {
+                                        "text": "5 mins",
+                                        "value": 276
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6402262,
+                                        "lng": 4.808686799999999
+                                    },
+                                    "html_instructions": "Keep <b>left</b> to stay on <b>Oosttangent</b>/<wbr/><b>N508</b><div style=\"font-size:0.9em\">Go through 1 roundabout</div><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                                    "maneuver": "keep-left",
+                                    "polyline": {
+                                        "points": "kzg`I}pi\\EISw@Oi@EKEGq@aAGDEBG?MCIIAEAEAEAEAG?I?My@i@c@WOOKMAAYc@Yk@qA_D_@{@"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6379795,
+                                        "lng": 4.8054334
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "7.9 km",
+                                "value": 7856
+                            },
+                            "duration": {
+                                "text": "15 mins",
+                                "value": 900
+                            },
+                            "end_location": {
+                                "lat": 52.63808,
+                                "lng": 4.743257000000001
+                            },
+                            "html_instructions": "Bus towards Alkmaar Station",
+                            "polyline": {
+                                "points": "uhh`I}dj\\FK^z@pA~CTr@Rd@NTBBTXXRHFHJLZJXBRBP@P?NAhACf@AZA`@?b@A`@@b@?`@@`@?^@b@@`@@`@?b@@f@?TAb@?f@Ab@A^Cb@C`@G`AIhBSlDK~AEdAGbAE`@C`@E^ALGt@I~@Gh@En@?@Er@KzAQxCEt@Ex@Gz@Ev@QxCCl@CV^V\\BPDb@?v@ItAUHAXAJC@XAz@EZG^CNW~@Uj@KRMVCJAFCV?N@L@LBLBLFJDHBFHFFDNDp@P^JTJNFF@F@FAFEDGDI@K@I@KA]Bk@@g@lAJr@RZ\\BDTl@DNL`@Pn@?@n@tAxExHXf@rCpENTtFxIRXxA~Bp@dABDZd@xAvBVV^Z^\\RRn@f@r@`@j@VZNv@\\tAn@dBv@dA`@dFvBnC|A`Aj@`@TbAl@f@VXFLBT@R?f@?t@UZOf@U\\Wd@MZCb@Ab@L^Tb@XRNF?D?D?@CBADGPm@`@qAf@uA\\g@V]`AcATUPMVMf@UBA\\KfASt@WRMPUHKPGDEDCD?B?D?D@B@BBBB@DDJHZOLQLSLSHUHqAXm@Li@Pg@TYPQNYTKJQPQTMPGFINKNGNIPITO`@MZGRERGRGVOp@CFCRGXEVMt@_A|EIb@Q`AQ~@Ih@I^If@GTKn@Kf@Kf@ABOl@Y|@Yp@SZO^KNSRONKJIHa@`@SLWZWVQPJ`@gFrFKW@CGUIFGJ]b@Ub@ABACMNWb@KNIN[x@Up@St@Md@]tAKd@EPCXYfAGb@uBhMc@nCaApGs@`EUfAAJ}@`GGd@GZG`@Kx@KdAGh@QzAAXA\\qAhKQtASrAUrAYt@KVm@nAWb@_A~Aa@f@CDMRIJEHOZADM\\Md@Kd@IXEPAFGh@EDA@A@?BCFA@ABA@A?AAG?GGEIGQGi@AQ?O@M@OHIJEHAHAZBJ@J@JDHDRP^\\^j@BB@B@B@F?F@H?DAHAHINWl@Q^CJWl@s@xDe@rCIb@GVQt@Kj@Kj@SnAg@lCBZ_@xBg@rCe@bCKf@Ml@EJIZKJc@dAO\\O\\WZKDG@WDmA@c@AG?KCsEOaAG{@Eo@Ai@??\\@N?XC\\EZ?HM^G`@@AAH?t@Bl@y@h@PlD"
+                            },
+                            "start_location": {
+                                "lat": 52.640268,
+                                "lng": 4.808629
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.63808,
+                                        "lng": 4.743257000000001
+                                    },
+                                    "name": "Alkmaar, Station"
+                                },
+                                "arrival_time": {
+                                    "text": "8:28pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591640880
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.640268,
+                                        "lng": 4.808629
+                                    },
+                                    "name": "Heerhugowaard, Huygendijkbos"
+                                },
+                                "departure_time": {
+                                    "text": "8:13pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591639980
+                                },
+                                "headsign": "Alkmaar Station",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "Overal (Connexxion)",
+                                            "phone": "011 31 900 2666399",
+                                            "url": "http://www.overal.nl/"
+                                        }
+                                    ],
+                                    "color": "#e00000",
+                                    "name": "Alkmaar Station - Heerhugowaard Icaruslaan",
+                                    "short_name": "162",
+                                    "text_color": "#ffffff",
+                                    "url": "http://www.connexxion.nl/dienstregeling/lijn?ID=H162",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                                        "name": "Bus",
+                                        "type": "BUS"
+                                    }
+                                },
+                                "num_stops": 6
+                            },
+                            "travel_mode": "TRANSIT"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.1 km",
+                                "value": 143
+                            },
+                            "duration": {
+                                "text": "2 mins",
+                                "value": 105
+                            },
+                            "end_location": {
+                                "lat": 52.6375115,
+                                "lng": 4.7409004
+                            },
+                            "html_instructions": "Walk to Alkmaar",
+                            "polyline": {
+                                "points": "_yg`Iqj}[NlC@H?JNrBLtB@N"
+                            },
+                            "start_location": {
+                                "lat": 52.63776319999999,
+                                "lng": 4.742972099999999
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 143
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 105
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6375115,
+                                        "lng": 4.7409004
+                                    },
+                                    "html_instructions": "Head <b>west</b> on <b>Stationsweg</b> toward <b>Stationstraat</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                                    "polyline": {
+                                        "points": "_yg`Iqj}[NlC@H?JNrBLtB@N"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.63776319999999,
+                                        "lng": 4.742972099999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "33.9 km",
+                                "value": 33911
+                            },
+                            "duration": {
+                                "text": "41 mins",
+                                "value": 2460
+                            },
+                            "end_location": {
+                                "lat": 52.3882482,
+                                "lng": 4.6369922
+                            },
+                            "html_instructions": "Train towards Amsterdam Centraal",
+                            "polyline": {
+                                "points": "_yg`I{x|[G@d@fIJjBLzAHt@Nx@Jh@Pr@Nr@@DBDLb@Lb@BD@DTr@Vr@Tl@Zn@Xl@\\n@^h@V^\\^Z^|@z@TRRRNLLLPLPNhGrFNLxFdFJJJHrR|PdGnFzFdFzFdFnE~DnE|DXVZVxEfE|@x@^Z|BrBjC~B|CnCzDlDbK`JpDbDzDjD|CnCzDlD|CnCzDjDzFdF\\\\ZZlOdNjIpHJLvEzD|ApAb@^vFdFzDlDB@HFv@j@TPpAjA|I`IbA|@xFdFvF`F|CpC^Z|BrBdA~@dDvClDzC`BxA`BxAzAzADBDDhEtD`BvAbBxAjKjJhAdA`EpDrD~CbBzAbBzArDbDf@d@hC|BpE|DnE|DbA|@x@t@BBBBdHjGfCzBpE~DzEhEvLrKxH~GzGbGzEhE|@v@zFdFnC`CjB`BzFdFdA~@tChCv@l@DB|@z@hC~BfC|Bd@`@b@`@rBhBrBhBzBnB|BpBJHJLdOrMRPhFrEZT`BrAl@b@dBz@p@\\JFHDrA\\r@R~@Pt@N~@HfAJB?z@@|@@r@?P@v@CDAhBSdBYTCpA]jAYHCj@MpBu@z@c@lAw@HGv@i@fAqAz@{@b@o@bBoCLUBKBKNYx@yAfAyBfAaC~@}BnAwCnAuCVk@Xk@b@gAd@eA|CgH~DiJfEwJ`IyQzHwQx@mBBE`MmYn@wA~CmHzBiFdHmPJW|DaJ|AmDp@{A|AqD|GwOn@{AhBgELWx@mBz@mBb@eAd@cAb@cA|@wAdAsBzAqCz@iBbA_CFKr@cBTi@`@_Ax@mBzAmDfAiC`@gAJS\\q@`@s@Vo@To@^w@`@w@NYJSBCXc@f@u@h@s@bCcCh@_@fAi@`Ae@fAc@\\Iv@QtAQfAKLCvA@vAFvAPtAXrAb@LFdA^nAx@lA|@lAfAfAjAFHzBxCRVnEhGjA|AZd@~B`D\\f@`DhE~CjExEvGPXdE|F`ErFhA|AjGnINXNXfEzF~AvBfHtJ`ArAbAtAPVTZlDzElD|ElBnC^f@lCvDf@p@`IrKtAlB@@rAlBNPLPx@hAv@hAHHxB|CzBzCV\\|@lA\\b@v@fAPV\\d@\\f@LPNTf@p@lBdCrCvD@@vC`EvApBpCvEp@lABDn@tALXDJN\\P`@\\`ARn@BH\\`AFTPf@Tx@?B^rABL\\rAXnALh@j@dCb@nBhA|EbAnERx@Rx@n@tCZtAVdANp@Pr@HZz@hCXlAT~@R`At@xCj@`CLf@BHRp@@HNh@n@tBTn@h@|AFNp@dBlAfCFH?@nBtDfA`BFJdCfDdArAPTdAjA\\`@DBv@x@~@r@^Z^XNJfAt@HD~@f@d@RbAb@@@`@Lf@PbBb@F@|@NxARNBjBHdEGfAAZAhFu@VIzCw@hDoA`AY|Bm@`EiAzH}BhGaB|Ae@rAa@lHsBpFuAp@MrAUfIgBzC[vABhDZB?`@Hb@H`@Hb@Hb@HD@hBh@ZL`@NRJLF~@d@B@^T`@Td@ZXTp@f@LL|AxALL`DlD`@f@nDlE\\b@pBhCFHxDzHvAfD`@rAzApFFRdAzEbDfPr@jDH\\XfAf@`Br@|BTp@Tp@j@tAb@~@~@pBl@fAJR^n@DFvAvBjAzAdBnBrArA`Av@NLv@j@r@b@~BtAr@`@nBt@fCt@x@RlCl@hB`@r@^H@ZHn@LzCp@fEp@p@Jr@LPBr@Jh@FfANtEh@|F^fAFL@T?b@@j@BZ@jBBx@@L@vEJF?fCFhBBJ@fDF`@@pCFD?lCFjADjABvABpA?n@Ab@Ch@Cz@EZAbAExAKt@GTGp@I\\EdBUt@K~@OpBYn@ItASf@Gf@Eb@ENAf@An@Cb@@jA@JAvAJj@FXDz@N^H\\Hn@NNFPF`@L\\L`@PhCfAvBz@d@RlAh@hBv@v@Zh@T|CnAf@ThBv@NFrAj@t@ZpCjAhAd@NFxAn@`CbAfAd@NFdAb@v@\\~@`@`@Pv@ZLDZNj@Th@V`@NzB`A@?pCjA|Ap@hCfA`Ab@JD~B`AtAl@HBHBPFr@X^NTFNDXFXFPDd@HNBXDj@Hb@H@?d@F\\FLBl@HZDrARv@Hp@JJ@H?X@n@@t@CTCVEj@Kx@WNEv@]\\Q~@c@d@UbB}@RKPKd@YZWNMJKp@q@DEl@y@`@o@^q@p@}A`@eAV_ANk@Lk@Ha@Ny@L{@D]J_ABa@F{@FuABuABu@@aAHkF@u@@w@FyEBkA@u@@i@D_ALeDTaCJcBBe@D{@q@I"
+                            },
+                            "start_location": {
+                                "lat": 52.63776069999999,
+                                "lng": 4.7401446
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.3882482,
+                                        "lng": 4.6369922
+                                    },
+                                    "name": "Haarlem"
+                                },
+                                "arrival_time": {
+                                    "text": "9:30pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591644600
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.63776069999999,
+                                        "lng": 4.7401446
+                                    },
+                                    "name": "Alkmaar"
+                                },
+                                "departure_time": {
+                                    "text": "8:49pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591642140
+                                },
+                                "headsign": "Amsterdam Centraal",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "NS",
+                                            "phone": "011 31 30 751 5155",
+                                            "url": "http://www.ns.nl/"
+                                        }
+                                    ],
+                                    "name": "Amsterdam Centraal <-> Hoorn SPR4800",
+                                    "short_name": "Sprinter",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+                                        "name": "Train",
+                                        "type": "HEAVY_RAIL"
+                                    }
+                                },
+                                "num_stops": 10,
+                                "trip_short_name": "4868"
+                            },
+                            "travel_mode": "TRANSIT"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.2 km",
+                                "value": 178
+                            },
+                            "duration": {
+                                "text": "2 mins",
+                                "value": 133
+                            },
+                            "end_location": {
+                                "lat": 52.38756,
+                                "lng": 4.6386527
+                            },
+                            "html_instructions": "Walk to Haarlem, Station",
+                            "polyline": {
+                                "points": "oaw~Hmth[ZFfAPN{C@QLmCBa@"
+                            },
+                            "start_location": {
+                                "lat": 52.388244,
+                                "lng": 4.6370341
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "57 m",
+                                        "value": 57
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 42
+                                    },
+                                    "end_location": {
+                                        "lat": 52.3877408,
+                                        "lng": 4.636898299999999
+                                    },
+                                    "html_instructions": "Head <b>south</b> on <b>Kruisweg</b> toward <b>Stationsplein</b>",
+                                    "polyline": {
+                                        "points": "oaw~Hmth[ZFfAP"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.388244,
+                                        "lng": 4.6370341
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 121
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 91
+                                    },
+                                    "end_location": {
+                                        "lat": 52.38756,
+                                        "lng": 4.6386527
+                                    },
+                                    "html_instructions": "Turn <b>left</b> onto <b>Stationsplein</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                                    "maneuver": "turn-left",
+                                    "polyline": {
+                                        "points": "k~v~Hssh[N{C@QLmCBa@"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.3877408,
+                                        "lng": 4.636898299999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "2.4 km",
+                                "value": 2380
+                            },
+                            "duration": {
+                                "text": "6 mins",
+                                "value": 360
+                            },
+                            "end_location": {
+                                "lat": 52.387196,
+                                "lng": 4.614508
+                            },
+                            "html_instructions": "Bus towards Zandvoort via Bloemend.Str.",
+                            "polyline": {
+                                "points": "}{v~Hg~h[KA@YJBlAVAR?@A\\C\\AJARA^A\\ARAJAP?JA@A?G?Ah@Ch@?@Ev@VFf@Dl@HrBf@WfGC|@A^?P?RBPD\\DXR|@Dp@@j@Cf@G\\EL_@THJJf@JdAFTBHDBLD~@HF?J@TDXDJDF?j@Tf@Zf@\\JFJLJJt@n@`AhAlAlAT^b@Zv@d@TNBF?@BBXVLJJNENGJGJEJE@GBI@KBkA{@OKWSc@YM^i@tBSz@e@dB?@ACCJMh@ENEPETGTQp@Qp@_A|D_A|DWlAYjAS|@?@U~@CHCJUx@Sz@_@rACHCJQ|@Q~@?|@@n@@b@Dt@BN@L@N@R@v@@r@?dA?h@An@Gz@C`@ETOz@Mz@CNCNI^EVGVEPGTWhACH[tAKTCJMh@I\\?DAFCLAJEVEVAJAJCJAFATCr@?XC?"
+                            },
+                            "start_location": {
+                                "lat": 52.387351,
+                                "lng": 4.638596
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.387196,
+                                        "lng": 4.614508
+                                    },
+                                    "name": "Haarlem, Hogeschool INHOLLAND"
+                                },
+                                "arrival_time": {
+                                    "text": "9:44pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591645440
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.387351,
+                                        "lng": 4.638596
+                                    },
+                                    "name": "Haarlem, Station"
+                                },
+                                "departure_time": {
+                                    "text": "9:38pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591645080
+                                },
+                                "headsign": "Zandvoort via Bloemend.Str.",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "Connexxion",
+                                            "phone": "011 31 900 2666399",
+                                            "url": "http://www.connexxion.nl/"
+                                        }
+                                    ],
+                                    "color": "#66cc33",
+                                    "name": "Zandvoort - Haarlem Station",
+                                    "short_name": "81",
+                                    "text_color": "#000000",
+                                    "url": "http://www.connexxion.nl/dienstregeling/lijn?ID=N081",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                                        "name": "Bus",
+                                        "type": "BUS"
+                                    }
+                                },
+                                "num_stops": 4
+                            },
+                            "travel_mode": "TRANSIT"
+                        }
+                    ],
+                    "traffic_speed_entry": [],
+                    "via_waypoint": []
+                }
+            ],
+            "overview_polyline": {
+                "points": "}eh`Ikuh\\j@wA|AcAjAKx@KTSZo@Ls@LaANi@I_@EgBVuC^sAN]y@sAo@uBy@{@MB[YE]y@w@s@g@aA_BqB{EGJFKpBzEh@xAbAfAl@hAHfAIzHHjG_@`K_AhOcAzNYbFUfECV^Vn@HzAIdC]MpC}@nCWbAFx@Tj@rAd@lA`@\\MJk@@iA@g@lAJnAp@Xr@d@bBhGnKlDxFrJhOjDhFjBdBjDpBxHfDdFvBnC|AbB`ArCpAh@@|AUfCkA~@EbAb@dAh@PMr@_CdA}B`CeC`Bq@|Bk@d@c@f@]T@LNNf@a@ZoCz@yCfAiAbAyAfCoAjEmC~NkAjGi@jBm@lA_ArAkAdAo@r@QPJ`@gFrFKWEYeAzAi@r@gAjCwBnJmJhl@eAzJmCfSkB`EuCxEgAlEOVWSQ}AB]TOz@@t@^bAlABz@w@hBkAfFo@vDe@xB_@zBc@hDyBxLi@`B{A|CyBNcNe@AdB[fBBjBy@h@PlD~@x@NlC@T\\hFo@fD\\hIr@vHn@vChBnFrBvDnCzCdKbJzsAtlArbBjzAtPdOzAfA`h@td@d_Aty@|oCpcCr_@r\\tK`JlDfB|FrAfEVzD?jFs@rEiAlDyAvA_A~B{B~AkBxB}DxEoJvFwMfg@ujAn~@ivB~DeJbGaLhK_VbGcN`AiB`AyAlDwDzFsCrFy@dBAnDX|FdB|CvBtCrCfJdMrXt_@d}@dnAhd@jn@hFjHzK`O~G|KzCvHnCrJlHp[rBbJpBfHrDjOtAnEpDzI~DbHdF|G`DjDnCtBvDvBnCdAbGhAzBLlGIdGw@rDaAjFiB~HwBvVgH~OiEdCc@fIgBzC[`G^jB\\vD~@~Ap@dCrA~BfBnH|HfIdKpGbN|BdIdHb]~BdIzBxFxC|F|A~BpDjE|EdErDxBbDvAxLxChCx@hM|BvDf@rMhAtAH`CFpS`@~Uf@nEItFYhNkBtEk@jCMrEL`Df@nBh@jFtB|RhIhQpHb\\dN~OzGpEtApOvBtCClCo@jJyEhBcBtBaDzBoGt@cE\\{DPcHb@_Xr@qLD{@q@I\\?fAPN{CN_DBa@h@HI[xAZATIzAM|BIh@Cj@Ev@VFtANrBf@WfGE|AHtAXvAF|AKdAe@b@Tr@RzAHLlANbALfBv@jA~@zEfFtBxAj@h@D^OV]RwAw@g@_@c@YM^}@pDk@nB_@`BqFlUkBjHUhAQ|BLxCF|HaAjH_BvGi@rCUfDC?"
+            },
+            "summary": "",
+            "warnings": [
+                "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+            ],
+            "waypoint_order": []
+        },
+        {
+            "bounds": {
+                "northeast": {
+                    "lat": 52.640268,
+                    "lng": 4.808686799999999
+                },
+                "southwest": {
+                    "lat": 52.3824,
+                    "lng": 4.614508
+                }
+            },
+            "copyrights": "Map data ©2020",
+            "legs": [
+                {
+                    "arrival_time": {
+                        "text": "10:44pm",
+                        "time_zone": "Europe/Amsterdam",
+                        "value": 1591649040
+                    },
+                    "departure_time": {
+                        "text": "9:02pm",
+                        "time_zone": "Europe/Amsterdam",
+                        "value": 1591642958
+                    },
+                    "distance": {
+                        "text": "45.3 km",
+                        "value": 45276
+                    },
+                    "duration": {
+                        "text": "1 hour 41 mins",
+                        "value": 6082
+                    },
+                    "end_address": "Haarlem, Hogeschool InHolland, 2015 CN Haarlem, Netherlands",
+                    "end_location": {
+                        "lat": 52.387196,
+                        "lng": 4.614508
+                    },
+                    "start_address": "N508, 1703 Heerhugowaard, Netherlands",
+                    "start_location": {
+                        "lat": 52.639833,
+                        "lng": 4.801021299999999
+                    },
+                    "steps": [
+                        {
+                            "distance": {
+                                "text": "0.8 km",
+                                "value": 803
+                            },
+                            "duration": {
+                                "text": "10 mins",
+                                "value": 622
+                            },
+                            "end_location": {
+                                "lat": 52.6402262,
+                                "lng": 4.808686799999999
+                            },
+                            "html_instructions": "Walk to Heerhugowaard, Huygendijkbos",
+                            "polyline": {
+                                "points": "}eh`Ikuh\\JYJYDILYPUPKDCr@]\\IF?ZAH?\\?ZKHIJIPUHYDUF]@Q@OBQDMDODK@E@G?GAECKCEACAEAGAK?I?O@O?_@@MBg@Dk@Js@BOFYHWHQHQDKs@iAEISw@Oi@EKEGq@aAGDEBG?MCIIAEAEAEAEAG?I?My@i@c@WOOKMAAYc@Yk@qA_D_@{@"
+                            },
+                            "start_location": {
+                                "lat": 52.639833,
+                                "lng": 4.801021299999999
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 113
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 97
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6389885,
+                                        "lng": 4.8018512
+                                    },
+                                    "html_instructions": "Head <b>southeast</b>",
+                                    "polyline": {
+                                        "points": "}eh`Ikuh\\JYJYDILYPUPKDCr@]\\I"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.639833,
+                                        "lng": 4.801021299999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.3 km",
+                                        "value": 303
+                                    },
+                                    "duration": {
+                                        "text": "4 mins",
+                                        "value": 222
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6377184,
+                                        "lng": 4.8050592
+                                    },
+                                    "html_instructions": "Take the pedestrian overpass",
+                                    "polyline": {
+                                        "points": "u`h`Iqzh\\F?ZAH?\\?ZKHIJIPUHYDUF]@Q@OBQDMDODK@E@G?GAECKCEACAEAGAK?I?O@O?_@@MBg@Dk@Js@BOFYHWHQHQDK"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6389885,
+                                        "lng": 4.8018512
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "38 m",
+                                        "value": 38
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 27
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6379795,
+                                        "lng": 4.8054334
+                                    },
+                                    "html_instructions": "Turn <b>left</b> onto <b>Oosttangent</b>/<wbr/><b>N508</b>",
+                                    "maneuver": "turn-left",
+                                    "polyline": {
+                                        "points": "wxg`Isni\\s@iA"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6377184,
+                                        "lng": 4.8050592
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.3 km",
+                                        "value": 349
+                                    },
+                                    "duration": {
+                                        "text": "5 mins",
+                                        "value": 276
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6402262,
+                                        "lng": 4.808686799999999
+                                    },
+                                    "html_instructions": "Keep <b>left</b> to stay on <b>Oosttangent</b>/<wbr/><b>N508</b><div style=\"font-size:0.9em\">Go through 1 roundabout</div><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                                    "maneuver": "keep-left",
+                                    "polyline": {
+                                        "points": "kzg`I}pi\\EISw@Oi@EKEGq@aAGDEBG?MCIIAEAEAEAEAG?I?My@i@c@WOOKMAAYc@Yk@qA_D_@{@"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6379795,
+                                        "lng": 4.8054334
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "7.9 km",
+                                "value": 7856
+                            },
+                            "duration": {
+                                "text": "15 mins",
+                                "value": 900
+                            },
+                            "end_location": {
+                                "lat": 52.63808,
+                                "lng": 4.743257000000001
+                            },
+                            "html_instructions": "Bus towards Alkmaar Station",
+                            "polyline": {
+                                "points": "uhh`I}dj\\FK^z@pA~CTr@Rd@NTBBTXXRHFHJLZJXBRBP@P?NAhACf@AZA`@?b@A`@@b@?`@@`@?^@b@@`@@`@?b@@f@?TAb@?f@Ab@A^Cb@C`@G`AIhBSlDK~AEdAGbAE`@C`@E^ALGt@I~@Gh@En@?@Er@KzAQxCEt@Ex@Gz@Ev@QxCCl@CV^V\\BPDb@?v@ItAUHAXAJC@XAz@EZG^CNW~@Uj@KRMVCJAFCV?N@L@LBLBLFJDHBFHFFDNDp@P^JTJNFF@F@FAFEDGDI@K@I@KA]Bk@@g@lAJr@RZ\\BDTl@DNL`@Pn@?@n@tAxExHXf@rCpENTtFxIRXxA~Bp@dABDZd@xAvBVV^Z^\\RRn@f@r@`@j@VZNv@\\tAn@dBv@dA`@dFvBnC|A`Aj@`@TbAl@f@VXFLBT@R?f@?t@UZOf@U\\Wd@MZCb@Ab@L^Tb@XRNF?D?D?@CBADGPm@`@qAf@uA\\g@V]`AcATUPMVMf@UBA\\KfASt@WRMPUHKPGDEDCD?B?D?D@B@BBBB@DDJHZOLQLSLSHUHqAXm@Li@Pg@TYPQNYTKJQPQTMPGFINKNGNIPITO`@MZGRERGRGVOp@CFCRGXEVMt@_A|EIb@Q`AQ~@Ih@I^If@GTKn@Kf@Kf@ABOl@Y|@Yp@SZO^KNSRONKJIHa@`@SLWZWVQPJ`@gFrFKW@CGUIFGJ]b@Ub@ABACMNWb@KNIN[x@Up@St@Md@]tAKd@EPCXYfAGb@uBhMc@nCaApGs@`EUfAAJ}@`GGd@GZG`@Kx@KdAGh@QzAAXA\\qAhKQtASrAUrAYt@KVm@nAWb@_A~Aa@f@CDMRIJEHOZADM\\Md@Kd@IXEPAFGh@EDA@A@?BCFA@ABA@A?AAG?GGEIGQGi@AQ?O@M@OHIJEHAHAZBJ@J@JDHDRP^\\^j@BB@B@B@F?F@H?DAHAHINWl@Q^CJWl@s@xDe@rCIb@GVQt@Kj@Kj@SnAg@lCBZ_@xBg@rCe@bCKf@Ml@EJIZKJc@dAO\\O\\WZKDG@WDmA@c@AG?KCsEOaAG{@Eo@Ai@??\\@N?XC\\EZ?HM^G`@@AAH?t@Bl@y@h@PlD"
+                            },
+                            "start_location": {
+                                "lat": 52.640268,
+                                "lng": 4.808629
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.63808,
+                                        "lng": 4.743257000000001
+                                    },
+                                    "name": "Alkmaar, Station"
+                                },
+                                "arrival_time": {
+                                    "text": "9:28pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591644480
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.640268,
+                                        "lng": 4.808629
+                                    },
+                                    "name": "Heerhugowaard, Huygendijkbos"
+                                },
+                                "departure_time": {
+                                    "text": "9:13pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591643580
+                                },
+                                "headsign": "Alkmaar Station",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "Overal (Connexxion)",
+                                            "phone": "011 31 900 2666399",
+                                            "url": "http://www.overal.nl/"
+                                        }
+                                    ],
+                                    "color": "#e00000",
+                                    "name": "Alkmaar Station - Heerhugowaard Icaruslaan",
+                                    "short_name": "162",
+                                    "text_color": "#ffffff",
+                                    "url": "http://www.connexxion.nl/dienstregeling/lijn?ID=H162",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                                        "name": "Bus",
+                                        "type": "BUS"
+                                    }
+                                },
+                                "num_stops": 6
+                            },
+                            "travel_mode": "TRANSIT"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.1 km",
+                                "value": 143
+                            },
+                            "duration": {
+                                "text": "2 mins",
+                                "value": 105
+                            },
+                            "end_location": {
+                                "lat": 52.6375115,
+                                "lng": 4.7409004
+                            },
+                            "html_instructions": "Walk to Alkmaar",
+                            "polyline": {
+                                "points": "_yg`Iqj}[NlC@H?JNrBLtB@N"
+                            },
+                            "start_location": {
+                                "lat": 52.63776319999999,
+                                "lng": 4.742972099999999
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 143
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 105
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6375115,
+                                        "lng": 4.7409004
+                                    },
+                                    "html_instructions": "Head <b>west</b> on <b>Stationsweg</b> toward <b>Stationstraat</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                                    "polyline": {
+                                        "points": "_yg`Iqj}[NlC@H?JNrBLtB@N"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.63776319999999,
+                                        "lng": 4.742972099999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "33.9 km",
+                                "value": 33916
+                            },
+                            "duration": {
+                                "text": "41 mins",
+                                "value": 2460
+                            },
+                            "end_location": {
+                                "lat": 52.3882482,
+                                "lng": 4.6369922
+                            },
+                            "html_instructions": "Train towards Amsterdam Centraal",
+                            "polyline": {
+                                "points": "szg`Iex|[JCh@fJHfAHj@BRFb@Jf@BJJ\\ZbARj@@BNf@@DBDLb@Lb@BD@DTr@Vr@Tl@Zn@Xl@\\n@^h@V^\\^Z^|@z@TRRRNLLLPLPNhGrFNLxFdFJJJHrR|PdGnFzFdFzFdFnE~DnE|DXVZVxEfE|@x@^Z|BrBjC~B|CnCzDlDbK`JpDbDzDjD|CnCzDlD|CnCzDjDzFdF\\\\ZZlOdNjIpHJLvEzD|ApAb@^vFdFzDlDB@HFv@j@TPpAjA|I`IbA|@xFdFvF`F|CpC^Z|BrBdA~@dDvClDzC`BxA`BxAzAzADBDDhEtD`BvAbBxAjKjJhAdA`EpDrD~CbBzAbBzArDbDf@d@hC|BpE|DnE|DbA|@x@t@BBBBdHjGfCzBpE~DzEhEvLrKxH~GzGbGzEhE|@v@zFdFnC`CjB`BzFdFdA~@tChCv@l@DB|@z@hC~BfC|Bd@`@b@`@rBhBrBhBzBnB|BpBJHJLdOrMRPhFrEZT`BrAl@b@dBz@p@\\JFHDrA\\r@R~@Pt@N~@HfAJB?z@@|@@r@?P@v@CDAhBSdBYTCpA]jAYHCj@MpBu@z@c@lAw@HGv@i@fAqAz@{@b@o@bBoCLUBKBKNYx@yAfAyBfAaC~@}BnAwCnAuCVk@Xk@b@gAd@eA|CgH~DiJfEwJ`IyQzHwQx@mBBE`MmYn@wA~CmHzBiFdHmPJW|DaJ|AmDp@{A|AqD|GwOn@{AhBgELWx@mBz@mBb@eAd@cAb@cA|@wAdAsBzAqCz@iBbA_CFKr@cBTi@`@_Ax@mBzAmDfAiC`@gAJS\\q@`@s@Vo@To@^w@`@w@NYJSBCXc@f@u@h@s@bCcCh@_@fAi@`Ae@fAc@\\Iv@QtAQfAKLCvA@vAFvAPtAXrAb@LFdA^nAx@lA|@lAfAfAjAFHzBxCRVnEhGjA|AZd@~B`D\\f@`DhE~CjExEvGPXdE|F`ErFhA|AjGnINXNXfEzF~AvBfHtJ`ArAbAtAPVTZlDzElD|ElBnC^f@lCvDf@p@`IrKtAlB@@rAlBNPLPx@hAv@hAHHxB|CzBzCV\\|@lA\\b@v@fAPV\\d@\\f@LPNTf@p@lBdCrCvD@@vC`EvApBpCvEp@lABDn@tALXDJN\\P`@\\`ARn@BH\\`AFTPf@Tx@?B^rABL\\rAXnALh@j@dCb@nBhA|EbAnERx@Rx@n@tCZtAVdANp@Pr@HZz@hCXlAT~@R`At@xCj@`CLf@BHRp@@HNh@n@tBTn@h@|AFNp@dBlAfCFH?@nBtDfA`BFJdCfDdArAPTdAjA\\`@DBv@x@~@r@^Z^XNJfAt@HD~@f@d@RbAb@@@`@Lf@PbBb@F@|@NxARNBjBHdEGfAAZAhFu@VIzCw@hDoA`AY|Bm@`EiAzH}BhGaB|Ae@rAa@lHsBpFuAp@MrAUfIgBzC[vABhDZB?`@Hb@H`@Hb@Hb@HD@hBh@ZL`@NRJLF~@d@B@^T`@Td@ZXTp@f@LL|AxALL`DlD`@f@nDlE\\b@pBhCFHxDzHvAfD`@rAzApFFRdAzEbDfPr@jDH\\XfAf@`Br@|BTp@Tp@j@tAb@~@~@pBl@fAJR^n@DFvAvBjAzAdBnBrArA`Av@NLv@j@r@b@~BtAr@`@nBt@fCt@x@RlCl@hB`@r@^H@ZHn@LzCp@fEp@p@Jr@LPBr@Jh@FfANtEh@|F^fAFL@T?b@@j@BZ@jBBx@@L@vEJF?fCFhBBJ@fDF`@@pCFD?lCFjADjABvABpA?n@Ab@Ch@Cz@EZAbAExAKt@GTGp@I\\EdBUt@K~@OpBYn@ItASf@Gf@Eb@ENAf@An@Cb@@jA@JAvAJj@FXDz@N^H\\Hn@NNFPF`@L\\L`@PhCfAvBz@d@RlAh@hBv@v@Zh@T|CnAf@ThBv@NFrAj@t@ZpCjAhAd@NFxAn@`CbAfAd@NFdAb@v@\\~@`@`@Pv@ZLDZNj@Th@V`@NzB`A@?pCjA|Ap@hCfA`Ab@JD~B`AtAl@HBHBPFr@X^NTFNDXFXFPDd@HNBXDj@Hb@H@?d@F\\FLBl@HZDrARv@Hp@JJ@H?X@n@@t@CTCVEj@Kx@WNEv@]\\Q~@c@d@UbB}@RKPKd@YZWNMJKp@q@DEl@y@`@o@^q@p@}A`@eAV_ANk@Lk@Ha@Ny@L{@D]J_ABa@F{@FuABuABu@@aAHkF@u@@w@FyEBkA@u@@i@D_ALeDTaCJcBBe@D{@q@I"
+                            },
+                            "start_location": {
+                                "lat": 52.6380244,
+                                "lng": 4.740031999999999
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.3882482,
+                                        "lng": 4.6369922
+                                    },
+                                    "name": "Haarlem"
+                                },
+                                "arrival_time": {
+                                    "text": "10:30pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591648200
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.6380244,
+                                        "lng": 4.740031999999999
+                                    },
+                                    "name": "Alkmaar"
+                                },
+                                "departure_time": {
+                                    "text": "9:49pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591645740
+                                },
+                                "headsign": "Amsterdam Centraal",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "NS",
+                                            "phone": "011 31 30 751 5155",
+                                            "url": "http://www.ns.nl/"
+                                        }
+                                    ],
+                                    "name": "Amsterdam Centraal <-> Hoorn SPR4800",
+                                    "short_name": "Sprinter",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+                                        "name": "Train",
+                                        "type": "HEAVY_RAIL"
+                                    }
+                                },
+                                "num_stops": 10,
+                                "trip_short_name": "4872"
+                            },
+                            "travel_mode": "TRANSIT"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.2 km",
+                                "value": 178
+                            },
+                            "duration": {
+                                "text": "2 mins",
+                                "value": 133
+                            },
+                            "end_location": {
+                                "lat": 52.38756,
+                                "lng": 4.6386527
+                            },
+                            "html_instructions": "Walk to Haarlem, Station",
+                            "polyline": {
+                                "points": "oaw~Hmth[ZFfAPN{C@QLmCBa@"
+                            },
+                            "start_location": {
+                                "lat": 52.388244,
+                                "lng": 4.6370341
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "57 m",
+                                        "value": 57
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 42
+                                    },
+                                    "end_location": {
+                                        "lat": 52.3877408,
+                                        "lng": 4.636898299999999
+                                    },
+                                    "html_instructions": "Head <b>south</b> on <b>Kruisweg</b> toward <b>Stationsplein</b>",
+                                    "polyline": {
+                                        "points": "oaw~Hmth[ZFfAP"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.388244,
+                                        "lng": 4.6370341
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 121
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 91
+                                    },
+                                    "end_location": {
+                                        "lat": 52.38756,
+                                        "lng": 4.6386527
+                                    },
+                                    "html_instructions": "Turn <b>left</b> onto <b>Stationsplein</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                                    "maneuver": "turn-left",
+                                    "polyline": {
+                                        "points": "k~v~Hssh[N{C@QLmCBa@"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.3877408,
+                                        "lng": 4.636898299999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "2.4 km",
+                                "value": 2380
+                            },
+                            "duration": {
+                                "text": "6 mins",
+                                "value": 360
+                            },
+                            "end_location": {
+                                "lat": 52.387196,
+                                "lng": 4.614508
+                            },
+                            "html_instructions": "Bus towards Zandvoort via Bloemend.Str.",
+                            "polyline": {
+                                "points": "}{v~Hg~h[KA@YJBlAVAR?@A\\C\\AJARA^A\\ARAJAP?JA@A?G?Ah@Ch@?@Ev@VFf@Dl@HrBf@WfGC|@A^?P?RBPD\\DXR|@Dp@@j@Cf@G\\EL_@THJJf@JdAFTBHDBLD~@HF?J@TDXDJDF?j@Tf@Zf@\\JFJLJJt@n@`AhAlAlAT^b@Zv@d@TNBF?@BBXVLJJNENGJGJEJE@GBI@KBkA{@OKWSc@YM^i@tBSz@e@dB?@ACCJMh@ENEPETGTQp@Qp@_A|D_A|DWlAYjAS|@?@U~@CHCJUx@Sz@_@rACHCJQ|@Q~@?|@@n@@b@Dt@BN@L@N@R@v@@r@?dA?h@An@Gz@C`@ETOz@Mz@CNCNI^EVGVEPGTWhACH[tAKTCJMh@I\\?DAFCLAJEVEVAJAJCJAFATCr@?XC?"
+                            },
+                            "start_location": {
+                                "lat": 52.387351,
+                                "lng": 4.638596
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.387196,
+                                        "lng": 4.614508
+                                    },
+                                    "name": "Haarlem, Hogeschool INHOLLAND"
+                                },
+                                "arrival_time": {
+                                    "text": "10:44pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591649040
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.387351,
+                                        "lng": 4.638596
+                                    },
+                                    "name": "Haarlem, Station"
+                                },
+                                "departure_time": {
+                                    "text": "10:38pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591648680
+                                },
+                                "headsign": "Zandvoort via Bloemend.Str.",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "Connexxion",
+                                            "phone": "011 31 900 2666399",
+                                            "url": "http://www.connexxion.nl/"
+                                        }
+                                    ],
+                                    "color": "#66cc33",
+                                    "name": "Zandvoort - Haarlem Station",
+                                    "short_name": "81",
+                                    "text_color": "#000000",
+                                    "url": "http://www.connexxion.nl/dienstregeling/lijn?ID=N081",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                                        "name": "Bus",
+                                        "type": "BUS"
+                                    }
+                                },
+                                "num_stops": 4
+                            },
+                            "travel_mode": "TRANSIT"
+                        }
+                    ],
+                    "traffic_speed_entry": [],
+                    "via_waypoint": []
+                }
+            ],
+            "overview_polyline": {
+                "points": "}eh`Ikuh\\j@wAb@a@x@a@jAKx@KTSZo@Ls@LaANi@I_@EgBVuC^sAN]y@sAo@uBy@{@MB[YE]y@w@s@g@aA_BqB{EGJFKpBzEh@xAbAfAl@hAHfAIzHHjG_@`K_AhOcAzNYbFUfECV^Vn@HzAIdC]?tAMz@}@nCWbAFx@Tj@rAd@lA`@\\MJk@@iA@g@lAJnAp@Xr@d@bBhGnKlDxFrJhOjDhFjBdBjDpBxHfDdFvBnC|AbB`AjBdAf@Jh@@|AUfCkA~@EbAb@dAh@PMr@_CdA}B`CeC`Bq@|Bk@d@c@f@]T@LNNf@a@Zg@VgBb@wA^aAf@iAbAyAfCoAjEmC~NkAjGi@jBm@lA[n@c@b@kAdAo@r@QPJ`@gFrFKWEYeAzAi@r@gAjCkAvEk@vCmJhl@eAzJmCfSkB`EuCxEgAlEOVWSQ}AB]TOz@@t@^bAlABz@w@hBkAfFo@vDe@xB_@zBg@lCBZgAlGq@jDi@`B{A|CyBNcNe@AdB[fBBjBy@h@PlD~@x@NlC@T\\hF@NeBlDJCh@fJRrBJv@v@tCjApDdAzCrBvDnCzCfAbAbe@xa@ll@ph@|kAreArr@fn@hYxVt_Adz@dvCbiC|XvVpP|NtK`JlDfB|FrAfEVzD?jFs@rEiAlDyAvA_A~B{B~AkBxB}DxEoJxNy\\npAixCdSyd@bGaLzDyI`J}SpDuH`AyAlDwDzFsCrFy@dBAnDXhD|@rAf@|CvBtCrCfJdMdGlIjg@fr@fW~]|h@jt@p]re@hFhIt@rArAxCtCvIbNnl@pBfHjC|K|B|Hp@lB~BlF~DbHdF|G`DjDnCtBvDvBnCdAbGhAzBLlGIdGw@rDaAjFiB~HwBvVgH~OiEdCc@fIgBzC[`G^jB\\vD~@dFdC~BfBnH|HfIdKpGbN|BdIdHb]~BdIzBxFxC|F|A~BpDjE|EdErDxBbDvAxLxC|@`@jAVhM|BvDf@rMhAtAH`CFjKRfR^|JTnEItFYzC_@bPwBjCMrEL`Df@nBh@`QfHjP~Gv\\pNfR`IdJpDpEx@tG`A~BVtCClCo@zDiBnDoBhBcBtBaDrAcDf@kBt@cE\\{Df@wYLkFr@qLD{@q@I\\?fAPN{CN_DBa@h@HKA@YxAZATIzAG|AE^Ih@Cj@Ev@VFtANrBf@WfGE|AHtAXvAF|AKdAe@b@Tr@RzAHLlANbALfBv@jA~@zEfFtBxAj@h@D^OV]RKBkA{@g@_@c@YM^}@pDk@nBkCxKcDlNmArEUhAQ|BLxCFhB?rEa@nD{@rE_BxG[tBKjB"
+            },
+            "summary": "",
+            "warnings": [
+                "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+            ],
+            "waypoint_order": []
+        },
+        {
+            "bounds": {
+                "northeast": {
+                    "lat": 52.6706993,
+                    "lng": 4.8336025
+                },
+                "southwest": {
+                    "lat": 52.3825234,
+                    "lng": 4.614621800000001
+                }
+            },
+            "copyrights": "Map data ©2020",
+            "legs": [
+                {
+                    "arrival_time": {
+                        "text": "10:26pm",
+                        "time_zone": "Europe/Amsterdam",
+                        "value": 1591648008
+                    },
+                    "departure_time": {
+                        "text": "8:33pm",
+                        "time_zone": "Europe/Amsterdam",
+                        "value": 1591641224
+                    },
+                    "distance": {
+                        "text": "49.5 km",
+                        "value": 49500
+                    },
+                    "duration": {
+                        "text": "1 hour 53 mins",
+                        "value": 6784
+                    },
+                    "end_address": "Haarlem, Hogeschool InHolland, 2015 CN Haarlem, Netherlands",
+                    "end_location": {
+                        "lat": 52.3870911,
+                        "lng": 4.614621800000001
+                    },
+                    "start_address": "N508, 1703 Heerhugowaard, Netherlands",
+                    "start_location": {
+                        "lat": 52.639833,
+                        "lng": 4.801021299999999
+                    },
+                    "steps": [
+                        {
+                            "distance": {
+                                "text": "0.8 km",
+                                "value": 807
+                            },
+                            "duration": {
+                                "text": "10 mins",
+                                "value": 616
+                            },
+                            "end_location": {
+                                "lat": 52.6401186,
+                                "lng": 4.8087184
+                            },
+                            "html_instructions": "Walk to Heerhugowaard, Huygendijkbos",
+                            "polyline": {
+                                "points": "}eh`Ikuh\\JYJYDILYPUPKDCr@]\\IF?ZAH?\\?ZKHIJIPUHYDUF]@Q@OBQDMDODK@E@G?GAECKCEACAEAGAK?I?O@O?_@@MBg@Dk@Js@BOFYHWHQHQDKu@mAWqAGUGYs@qABM?I?G?E?E?C?EAECECGGGECEAAAC?E@C@A@EBEH]Q]MMGm@g@S_@IM_CuF"
+                            },
+                            "start_location": {
+                                "lat": 52.639833,
+                                "lng": 4.801021299999999
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 113
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 97
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6389885,
+                                        "lng": 4.8018512
+                                    },
+                                    "html_instructions": "Head <b>southeast</b>",
+                                    "polyline": {
+                                        "points": "}eh`Ikuh\\JYJYDILYPUPKDCr@]\\I"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.639833,
+                                        "lng": 4.801021299999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.3 km",
+                                        "value": 303
+                                    },
+                                    "duration": {
+                                        "text": "4 mins",
+                                        "value": 222
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6377184,
+                                        "lng": 4.8050592
+                                    },
+                                    "html_instructions": "Take the pedestrian overpass",
+                                    "polyline": {
+                                        "points": "u`h`Iqzh\\F?ZAH?\\?ZKHIJIPUHYDUF]@Q@OBQDMDODK@E@G?GAECKCEACAEAGAK?I?O@O?_@@MBg@Dk@Js@BOFYHWHQHQDK"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6389885,
+                                        "lng": 4.8018512
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "38 m",
+                                        "value": 38
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 27
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6379925,
+                                        "lng": 4.805452
+                                    },
+                                    "html_instructions": "Turn <b>left</b> onto <b>Oosttangent</b>/<wbr/><b>N508</b>",
+                                    "maneuver": "turn-left",
+                                    "polyline": {
+                                        "points": "wxg`Isni\\u@mA"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6377184,
+                                        "lng": 4.8050592
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.4 km",
+                                        "value": 353
+                                    },
+                                    "duration": {
+                                        "text": "5 mins",
+                                        "value": 270
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6401186,
+                                        "lng": 4.8087184
+                                    },
+                                    "html_instructions": "Slight <b>right</b> to stay on <b>Oosttangent</b>/<wbr/><b>N508</b><div style=\"font-size:0.9em\">Go through 1 roundabout</div><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                                    "maneuver": "turn-slight-right",
+                                    "polyline": {
+                                        "points": "mzg`Iaqi\\WqAGUGYs@qABM?I?G?E?E?C?EAECECGGGECEAAAC?E@C@A@EBEH]Q]MMGm@g@S_@IM_CuF"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6379925,
+                                        "lng": 4.805452
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "5.5 km",
+                                "value": 5473
+                            },
+                            "duration": {
+                                "text": "12 mins",
+                                "value": 720
+                            },
+                            "end_location": {
+                                "lat": 52.669739,
+                                "lng": 4.824148
+                            },
+                            "html_instructions": "Bus towards Heerhugowaard Icaruslaan",
+                            "polyline": {
+                                "points": "sgh`Iuej\\CDq@aBKMaA{AqGaOuGcOi@{ABQ@E?EAOCKEICAAAEAE?C?C?CBo@gAQa@IQqEeKw@kBGKaAuBBIBM@K?MCIAIGIGCEAG@E@GD[u@]w@GQCGGOUi@mAkCkAkCBK@K@I?I?IAICIEIGCEAE?G@CBEBgAcCoCiGCEGMQc@KUy@kBBG?C@C?C@E?E?G?E?GAECMCEAACACACAC?C?C?C@C@ABC@ABCD}@mB}@mBqM{YuBiFQo@AIKg@Os@@EBI?I@IAI?IEKEEEECACAE@C@EDEDCHCF?HAH@H@HU\\U^u@hAA@s@lAi@z@o@h@QJBH@JNt@FdA?VBh@@f@?J?H?h@@h@?xEAnBEfCCzAAz@AnAAp@C|@Ap@?d@ElCCr@Aj@Mx@EZGXUr@Sb@KRiAhBy@vASZi@bAOJy@Ki@y@o@q@UUIGIAEAI?MHIJGHGJGPmAnBu@bAININc@r@a@p@U^U^KPMPA@e@v@g@x@QXQZg@|@i@~@Wb@Wb@]Zg@V[JS@[@QBSESGMG]QWc@GKEECGGMEUMYWm@KW]}@Qm@Gk@SgAQeAIg@Gg@s@oFm@{AcAaCM[A@_@}@s@_BKSkBxCc@v@oAtBMTwAbC[j@e@aA}AoDaA_CcB_EM[Ub@o@hAm@pAUf@o@hBQj@CFIVcAmAgA}AIEMYUc@_@y@A@AYBU@SFs@?Uk@l@OL?@GH"
+                            },
+                            "start_location": {
+                                "lat": 52.640097,
+                                "lng": 4.808749
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.669739,
+                                        "lng": 4.824148
+                                    },
+                                    "name": "Heerhugowaard, Station"
+                                },
+                                "arrival_time": {
+                                    "text": "8:56pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591642560
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.640097,
+                                        "lng": 4.808749
+                                    },
+                                    "name": "Heerhugowaard, Huygendijkbos"
+                                },
+                                "departure_time": {
+                                    "text": "8:44pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591641840
+                                },
+                                "headsign": "Heerhugowaard Icaruslaan",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "Overal (Connexxion)",
+                                            "phone": "011 31 900 2666399",
+                                            "url": "http://www.overal.nl/"
+                                        }
+                                    ],
+                                    "color": "#e00000",
+                                    "name": "Alkmaar Station - Heerhugowaard Icaruslaan",
+                                    "short_name": "162",
+                                    "text_color": "#ffffff",
+                                    "url": "http://www.connexxion.nl/dienstregeling/lijn?ID=H162",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                                        "name": "Bus",
+                                        "type": "BUS"
+                                    }
+                                },
+                                "num_stops": 10
+                            },
+                            "travel_mode": "TRANSIT"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.2 km",
+                                "value": 165
+                            },
+                            "duration": {
+                                "text": "2 mins",
+                                "value": 124
+                            },
+                            "end_location": {
+                                "lat": 52.67063539999999,
+                                "lng": 4.8242301
+                            },
+                            "html_instructions": "Walk to Heerhugowaard",
+                            "polyline": {
+                                "points": "san`Iigm\\[f@Qe@Qc@Sc@Ys@MTKTKLHXILSVJZ"
+                            },
+                            "start_location": {
+                                "lat": 52.66985510000001,
+                                "lng": 4.824368
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "21 m",
+                                        "value": 21
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 15
+                                    },
+                                    "end_location": {
+                                        "lat": 52.669995,
+                                        "lng": 4.8241673
+                                    },
+                                    "html_instructions": "Head <b>northwest</b>",
+                                    "polyline": {
+                                        "points": "san`Iigm\\[f@"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.66985510000001,
+                                        "lng": 4.824368
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "72 m",
+                                        "value": 72
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 53
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6704082,
+                                        "lng": 4.8249824
+                                    },
+                                    "html_instructions": "Turn <b>right</b> toward <b>Stationsweg</b>",
+                                    "maneuver": "turn-right",
+                                    "polyline": {
+                                        "points": "obn`Iafm\\Qe@Qc@Sc@Ys@"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.669995,
+                                        "lng": 4.8241673
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "29 m",
+                                        "value": 29
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 24
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6706021,
+                                        "lng": 4.8246864
+                                    },
+                                    "html_instructions": "Turn <b>left</b> onto <b>Stationsweg</b>",
+                                    "maneuver": "turn-left",
+                                    "polyline": {
+                                        "points": "aen`Ickm\\MTKTKL"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6704082,
+                                        "lng": 4.8249824
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "10 m",
+                                        "value": 10
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 8
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6705501,
+                                        "lng": 4.8245635
+                                    },
+                                    "html_instructions": "Turn <b>left</b>",
+                                    "maneuver": "turn-left",
+                                    "polyline": {
+                                        "points": "gfn`Iiim\\HX"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6706021,
+                                        "lng": 4.8246864
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "21 m",
+                                        "value": 21
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 16
+                                    },
+                                    "end_location": {
+                                        "lat": 52.6706993,
+                                        "lng": 4.8243667
+                                    },
+                                    "html_instructions": "Turn <b>right</b>",
+                                    "maneuver": "turn-right",
+                                    "polyline": {
+                                        "points": "}en`Iohm\\ILSV"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6705501,
+                                        "lng": 4.8245635
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "12 m",
+                                        "value": 12
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 8
+                                    },
+                                    "end_location": {
+                                        "lat": 52.67063539999999,
+                                        "lng": 4.8242301
+                                    },
+                                    "html_instructions": "Turn <b>left</b>",
+                                    "maneuver": "turn-left",
+                                    "polyline": {
+                                        "points": "{fn`Iigm\\JZ"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.6706993,
+                                        "lng": 4.8243667
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "40.6 km",
+                                "value": 40612
+                            },
+                            "duration": {
+                                "text": "54 mins",
+                                "value": 3240
+                            },
+                            "end_location": {
+                                "lat": 52.3882482,
+                                "lng": 4.6369922
+                            },
+                            "html_instructions": "Train towards Amsterdam Centraal",
+                            "polyline": {
+                                "points": "ibn`Ig}l\\DG|DnLFVHTt@vBv@vB~@nCRn@nBzFdBbF|AvE\\`AZ~@L\\L\\f@xAvAdEhBnF~@lC|DnL~DlLhFlOh@~ATn@Tn@n@lBFRDLL`@lAdDVv@Vv@v@`CtA|Dh@~Aj@~A|@nC~@lC~B~GtA~D~DlL|Nzb@zAlEL^HVxAjE|HjUTn@|B|GFNNb@pAxDxBpG`EpLlC`I`DdJ~@nCh@~A^dA@F~@lCh@~ApCdInC`Ip@tBRh@Vr@Rn@h@|A@@HXL\\HVHRPh@l@bBJZ\\bAh@~AnAvDjAhDdCjHFNHXJXJ\\l@vBJ\\FTt@|Cn@hDn@nEf@jFX~DRfE@LPnFN|CN~CBZ@P@LRpD@RBTBj@Z|DFbABz@DvABnA@t@D~@t@tMPnCVjEHpAJ|@Jp@Jf@J\\Pf@Rn@L^L\\HXJ\\JNHPBD@DTr@Vr@Tl@Zn@Xl@\\n@^h@V^\\^Z^|@z@TRRRNLLLPLPNhGrFNLxFdFJJJHrR|PdGnFzFdFzFdFnE~DnE|DXVZVxEfE|@x@^Z|BrBjC~B|CnCzDlDbK`JpDbDzDjD|CnCzDlD|CnCzDjDzFdF\\\\ZZlOdNjIpHJLvEzD|ApAb@^vFdFzDlDB@HFv@j@TPpAjA|I`IbA|@xFdFvF`F|CpC^Z|BrBdA~@dDvClDzC`BxA`BxAzAzADBDDhEtD`BvAbBxAjKjJhAdA`EpDrD~CbBzAbBzArDbDf@d@hC|BpE|DnE|DbA|@x@t@BBBBdHjGfCzBpE~DzEhEvLrKxH~GzGbGzEhE|@v@zFdFnC`CjB`BzFdFdA~@tChCv@l@DB|@z@hC~BfC|Bd@`@b@`@rBhBrBhBzBnB|BpBJHJLdOrMRPhFrEZT`BrAl@b@dBz@p@\\JFHDrA\\r@R~@Pt@N~@HfAJB?z@@|@@r@?P@v@CDAhBSdBYTCpA]jAYHCj@MpBu@z@c@lAw@HGv@i@fAqAz@{@b@o@bBoCLUBKBKNYx@yAfAyBfAaC~@}BnAwCnAuCVk@Xk@b@gAd@eA|CgH~DiJfEwJ`IyQzHwQx@mBBE`MmYn@wA~CmHzBiFdHmPJW|DaJ|AmDp@{A|AqD|GwOn@{AhBgELWx@mBz@mBb@eAd@cAb@cA|@wAdAsBzAqCz@iBbA_CFKr@cBTi@`@_Ax@mBzAmDfAiC`@gAJS\\q@`@s@Vo@To@^w@`@w@NYJSBCXc@f@u@h@s@bCcCh@_@fAi@`Ae@fAc@\\Iv@QtAQfAKLCvA@vAFvAPtAXrAb@LFdA^nAx@lA|@lAfAfAjAFHzBxCRVnEhGjA|AZd@~B`D\\f@`DhE~CjExEvGPXdE|F`ErFhA|AjGnINXNXfEzF~AvBfHtJ`ArAbAtAPVTZlDzElD|ElBnC^f@lCvDf@p@`IrKtAlB@@rAlBNPLPx@hAv@hAHHxB|CzBzCV\\|@lA\\b@v@fAPV\\d@\\f@LPNTf@p@lBdCrCvD@@vC`EvApBpCvEp@lABDn@tALXDJN\\P`@\\`ARn@BH\\`AFTPf@Tx@?B^rABL\\rAXnALh@j@dCb@nBhA|EbAnERx@Rx@n@tCZtAVdANp@Pr@HZz@hCXlAT~@R`At@xCj@`CLf@BHRp@@HNh@n@tBTn@h@|AFNp@dBlAfCFH?@nBtDfA`BFJdCfDdArAPTdAjA\\`@DBv@x@~@r@^Z^XNJfAt@HD~@f@d@RbAb@@@`@Lf@PbBb@F@|@NxARNBjBHdEGfAAZAhFu@VIzCw@hDoA`AY|Bm@`EiAzH}BhGaB|Ae@rAa@lHsBpFuAp@MrAUfIgBzC[vABhDZB?`@Hb@H`@Hb@Hb@HD@hBh@ZL`@NRJLF~@d@B@^T`@Td@ZXTp@f@LL|AxALL`DlD`@f@nDlE\\b@pBhCFHxDzHvAfD`@rAzApFFRdAzEbDfPr@jDH\\XfAf@`Br@|BTp@Tp@j@tAb@~@~@pBl@fAJR^n@DFvAvBjAzAdBnBrArA`Av@NLv@j@r@b@~BtAr@`@nBt@fCt@x@RlCl@hB`@r@^H@ZHn@LzCp@fEp@p@Jr@LPBr@Jh@FfANtEh@|F^fAFL@T?b@@j@BZ@jBBx@@L@vEJF?fCFhBBJ@fDF`@@pCFD?lCFjADjABvABpA?n@Ab@Ch@Cz@EZAbAExAKt@GTGp@I\\EdBUt@K~@OpBYn@ItASf@Gf@Eb@ENAf@An@Cb@@jA@JAvAJj@FXDz@N^H\\Hn@NNFPF`@L\\L`@PhCfAvBz@d@RlAh@hBv@v@Zh@T|CnAf@ThBv@NFrAj@t@ZpCjAhAd@NFxAn@`CbAfAd@NFdAb@v@\\~@`@`@Pv@ZLDZNj@Th@V`@NzB`A@?pCjA|Ap@hCfA`Ab@JD~B`AtAl@HBHBPFr@X^NTFNDXFXFPDd@HNBXDj@Hb@H@?d@F\\FLBl@HZDrARv@Hp@JJ@H?X@n@@t@CTCVEj@Kx@WNEv@]\\Q~@c@d@UbB}@RKPKd@YZWNMJKp@q@DEl@y@`@o@^q@p@}A`@eAV_ANk@Lk@Ha@Ny@L{@D]J_ABa@F{@FuABuABu@@aAHkF@u@@w@FyEBkA@u@@i@D_ALeDTaCJcBBe@D{@q@I"
+                            },
+                            "start_location": {
+                                "lat": 52.669971,
+                                "lng": 4.8227613
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.3882482,
+                                        "lng": 4.6369922
+                                    },
+                                    "name": "Haarlem"
+                                },
+                                "arrival_time": {
+                                    "text": "10:00pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591646400
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.669971,
+                                        "lng": 4.8227613
+                                    },
+                                    "name": "Heerhugowaard"
+                                },
+                                "departure_time": {
+                                    "text": "9:06pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591643160
+                                },
+                                "headsign": "Amsterdam Centraal",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "NS",
+                                            "phone": "011 31 30 751 5155",
+                                            "url": "http://www.ns.nl/"
+                                        }
+                                    ],
+                                    "name": "Amsterdam Centraal <-> Hoorn SPR4800",
+                                    "short_name": "Sprinter",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+                                        "name": "Train",
+                                        "type": "HEAVY_RAIL"
+                                    }
+                                },
+                                "num_stops": 12,
+                                "trip_short_name": "4870"
+                            },
+                            "travel_mode": "TRANSIT"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.2 km",
+                                "value": 169
+                            },
+                            "duration": {
+                                "text": "2 mins",
+                                "value": 126
+                            },
+                            "end_location": {
+                                "lat": 52.3875724,
+                                "lng": 4.6385307
+                            },
+                            "html_instructions": "Walk to Haarlem, Station",
+                            "polyline": {
+                                "points": "oaw~Hmth[ZFfAPN{C@QLmC@I"
+                            },
+                            "start_location": {
+                                "lat": 52.388244,
+                                "lng": 4.6370341
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "57 m",
+                                        "value": 57
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 42
+                                    },
+                                    "end_location": {
+                                        "lat": 52.3877408,
+                                        "lng": 4.636898299999999
+                                    },
+                                    "html_instructions": "Head <b>south</b> on <b>Kruisweg</b> toward <b>Stationsplein</b>",
+                                    "polyline": {
+                                        "points": "oaw~Hmth[ZFfAP"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.388244,
+                                        "lng": 4.6370341
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 112
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 84
+                                    },
+                                    "end_location": {
+                                        "lat": 52.3875724,
+                                        "lng": 4.6385307
+                                    },
+                                    "html_instructions": "Turn <b>left</b> onto <b>Stationsplein</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                                    "maneuver": "turn-left",
+                                    "polyline": {
+                                        "points": "k~v~Hssh[N{C@QLmC@I"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.3877408,
+                                        "lng": 4.636898299999999
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.9 km",
+                                "value": 870
+                            },
+                            "duration": {
+                                "text": "2 mins",
+                                "value": 120
+                            },
+                            "end_location": {
+                                "lat": 52.383195,
+                                "lng": 4.632439000000001
+                            },
+                            "html_instructions": "Bus towards Schalkwijk Centrum",
+                            "polyline": {
+                                "points": "a|v~Hk}h[?BIA?C@Y@[JBlAVATAR?H?BCXC^A^A\\ARAJAP?JA@A?G?Ah@Ch@?@Ev@VFf@D`@FJ@rBf@WfGC|@A^?P?RBPD\\@FBPPKn@UHAHCJ?FBr@JHBl@FJ@b@Dd@LVLHDx@`Ad@l@LPX`@RTd@b@XXRLLJCJ"
+                            },
+                            "start_location": {
+                                "lat": 52.387368,
+                                "lng": 4.638464
+                            },
+                            "transit_details": {
+                                "arrival_stop": {
+                                    "location": {
+                                        "lat": 52.383195,
+                                        "lng": 4.632439000000001
+                                    },
+                                    "name": "Haarlem, Nassaulaan"
+                                },
+                                "arrival_time": {
+                                    "text": "10:09pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591646940
+                                },
+                                "departure_stop": {
+                                    "location": {
+                                        "lat": 52.387368,
+                                        "lng": 4.638464
+                                    },
+                                    "name": "Haarlem, Station"
+                                },
+                                "departure_time": {
+                                    "text": "10:07pm",
+                                    "time_zone": "Europe/Amsterdam",
+                                    "value": 1591646820
+                                },
+                                "headsign": "Schalkwijk Centrum",
+                                "line": {
+                                    "agencies": [
+                                        {
+                                            "name": "Connexxion",
+                                            "phone": "011 31 900 2666399",
+                                            "url": "http://www.connexxion.nl/"
+                                        }
+                                    ],
+                                    "color": "#c291f2",
+                                    "name": "Schalkwijk Centrum - Uitgeest Station",
+                                    "short_name": "73",
+                                    "text_color": "#ffffff",
+                                    "url": "http://www.connexxion.nl/dienstregeling/lijn?ID=N073",
+                                    "vehicle": {
+                                        "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                                        "name": "Bus",
+                                        "type": "BUS"
+                                    }
+                                },
+                                "num_stops": 1
+                            },
+                            "travel_mode": "TRANSIT"
+                        },
+                        {
+                            "distance": {
+                                "text": "1.4 km",
+                                "value": 1404
+                            },
+                            "duration": {
+                                "text": "18 mins",
+                                "value": 1068
+                            },
+                            "end_location": {
+                                "lat": 52.3870911,
+                                "lng": 4.614621800000001
+                            },
+                            "html_instructions": "Walk to Haarlem, Hogeschool InHolland, 2015 CN Haarlem, Netherlands",
+                            "polyline": {
+                                "points": "{av~Hcxg[?@JFJDJH~Al@CLIbACZALCLCNCRCHAHCFGRENGLIRMVGJGNILABMTGNEJEHCH_@`BIBGBCNEL_@xA]zAG`@Gb@Mh@Mh@ENEPETGTQp@Qp@_A|D_A|DYlAWjAS~@U~@CHCJUx@Sz@_@rACHCJQ|@Q~@?|@@n@@b@Dt@BN@L@N@R@v@@r@?dA?h@An@Gz@C`@GTMz@Mz@CNCNI^EVGVEPGT[rA[tACZCNG^Gd@ALEVMn@Cb@AFCt@AP"
+                            },
+                            "start_location": {
+                                "lat": 52.38317929999999,
+                                "lng": 4.6324955
+                            },
+                            "steps": [
+                                {
+                                    "distance": {
+                                        "text": "77 m",
+                                        "value": 77
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 58
+                                    },
+                                    "end_location": {
+                                        "lat": 52.3825234,
+                                        "lng": 4.6321388
+                                    },
+                                    "html_instructions": "Head <b>southwest</b> on <b>Nassaulaan</b> toward <b>Zijlstraat</b>",
+                                    "polyline": {
+                                        "points": "{av~Hcxg[?@JFJDJH~Al@"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.38317929999999,
+                                        "lng": 4.6324955
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.2 km",
+                                        "value": 167
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 120
+                                    },
+                                    "end_location": {
+                                        "lat": 52.3832879,
+                                        "lng": 4.6300775
+                                    },
+                                    "html_instructions": "Turn <b>right</b> onto <b>Zijlstraat</b>",
+                                    "maneuver": "turn-right",
+                                    "polyline": {
+                                        "points": "w}u~H{ug[CLIbACZALCLCNCRCHAHCFGRENGLIRMVGJGNILABMTGNEJEHCH"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.3825234,
+                                        "lng": 4.6321388
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "47 m",
+                                        "value": 47
+                                    },
+                                    "duration": {
+                                        "text": "1 min",
+                                        "value": 33
+                                    },
+                                    "end_location": {
+                                        "lat": 52.3835379,
+                                        "lng": 4.6295491
+                                    },
+                                    "html_instructions": "Continue onto <b>Zijlbrug</b>",
+                                    "polyline": {
+                                        "points": "qbv~H_ig[_@`BIBGB"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.3832879,
+                                        "lng": 4.6300775
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "1.0 km",
+                                        "value": 1001
+                                    },
+                                    "duration": {
+                                        "text": "12 mins",
+                                        "value": 747
+                                    },
+                                    "end_location": {
+                                        "lat": 52.3867981,
+                                        "lng": 4.6161971
+                                    },
+                                    "html_instructions": "Continue onto <b>Zijlweg</b>",
+                                    "polyline": {
+                                        "points": "cdv~Hueg[CNEL_@xA]zAG`@Gb@Mh@Mh@ENEPETGTQp@Qp@_A|D_A|DYlAWjAS~@U~@CHCJUx@Sz@_@rACHCJQ|@Q~@?|@@n@@b@Dt@BN@L@N@R@v@@r@?dA?h@An@Gz@C`@GTMz@Mz@CNCNI^EVGVEPGT[rA[tA"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.3835379,
+                                        "lng": 4.6295491
+                                    },
+                                    "travel_mode": "WALKING"
+                                },
+                                {
+                                    "distance": {
+                                        "text": "0.1 km",
+                                        "value": 112
+                                    },
+                                    "duration": {
+                                        "text": "2 mins",
+                                        "value": 110
+                                    },
+                                    "end_location": {
+                                        "lat": 52.3870911,
+                                        "lng": 4.614621800000001
+                                    },
+                                    "html_instructions": "Slight <b>left</b> to stay on <b>Zijlweg</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                                    "maneuver": "turn-slight-left",
+                                    "polyline": {
+                                        "points": "oxv~Hgrd[CZCNG^Gd@ALEVMn@Cb@AFCt@AP"
+                                    },
+                                    "start_location": {
+                                        "lat": 52.3867981,
+                                        "lng": 4.6161971
+                                    },
+                                    "travel_mode": "WALKING"
+                                }
+                            ],
+                            "travel_mode": "WALKING"
+                        }
+                    ],
+                    "traffic_speed_entry": [],
+                    "via_waypoint": []
+                }
+            ],
+            "overview_polyline": {
+                "points": "}eh`Ikuh\\j@wAb@a@x@a@jAKx@KTSZo@Ls@LaANi@I_@EgBVuC^sAN]u@mAWqAOo@o@_B?]EUWUO@GDEH]Qk@UaAgAiCcG}@oBaA{AqGaO_I_RDWKk@QEG?s@cAeHePiAaCFWCm@]MMFy@mBi@sAyCwGDW?g@WYWHcFaLsAmDBm@K[OE[R{B{EgQea@o@uCFc@Me@SGSVCd@Sf@kAhBu@nAyAdBMTP`ALnD@hBUhXKxG]zCi@vAuA|BgCbEy@Ki@y@eAgAc@Kg@j@uCtEwCzEsFlJeAr@o@Lm@Dg@Mk@Y_@o@Wq@oA}C_AgFQoAs@oFm@{AqA}Ca@{@_AsBoCpEqEzHiHqPM[Ub@}AzC{AdEIVcAmAqAcBeAuBJwB?Uk@l@ONGHWk@[f@Qe@e@gAYs@MTWb@HXILSVJZjC|GdGtQxNpb@bUvp@jXdx@vy@bcCft@tvBlAhEdBfIvAzL`AdSd@jJfArQP|GhBb[n@tD`AtC~AlEhBzDpBhCrLpK~oAbiAf`BnxArYvVxd@ra@|XzV`f@pb@hjA|cArfAl`Ab`@b]zJnIpEdCpEhA`Ed@~DD|@EnEm@|D_A|CcAhC{A`Aq@bCmCxCaFtCyFfHmPb^iy@|gAihCfDyHhAgCbCkEvC{FjAkCdD{HpEsKlBeE|A}CnBqClDcDhCoAdBm@lCc@tAOnDHlDj@`Bj@tCxAzCdC~EfGp^dg@hz@njAxe@lp@~FfIjHpJnFrHbEdHfA`CrApDtBhHvHj\\vBjJfBjGjEnQ`AhDxBbGdEhIzGhJzBfCvDbD`DnBlCfApEfAhBVpH@bBC`G_AdIgC~DgAdZoI`KuCbHcBzK}BzC[vABlDZdARnB^zDrApBdArCnBzGbH`JbL`EdIxBzFbBdGhFbW~BrJjCvH|ClGhEjGxDbEpAdA~GfEvFjBfE`A|C`Ad@JdM|BbDd@|Gx@dIf@rBF`T`@rSd@|FAdEQvEe@xFw@~G_AbCOjDAxEh@pF`Bvf@rSjZhMfTbJhErAxO|BhC?rCm@tIeE|AkAfCaDpAoCx@eCv@sDb@{DV}G^aXReF`@eFHaBo@QbBXPmDNwCf@PIEBu@xAZCh@GfAG|AE^Ih@Cj@Ev@VFhAL~Bh@[dI@vAFd@BPPKx@WTCrBZn@F|@ZvBfClBtB`@XCJBKJHVN~Al@CLM~AM~@Qn@aAvBa@z@c@jBQFgArEk@xC}DlPmCdLy@fDQ|BBrALbBDdEMvDg@|CaBpHq@jFGnA"
+            },
+            "summary": "",
+            "warnings": [
+                "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+            ],
+            "waypoint_order": []
+        }
+    ],
+    "status": "OK"
+}
