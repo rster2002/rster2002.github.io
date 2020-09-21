@@ -137,6 +137,10 @@
     content: "\F0140"
 }
 
+.mdi-chevron-up::before {
+    content: "\F0143"
+}
+
 .mdi-stop-circle-outline::before {
     content: "\F0667"
 }
@@ -151,4 +155,32 @@
 
 .mdi-bookmark-multiple-outline::before {
     content: "\F0E16"
+}
+
+.mdi-crosshairs-gps::before {
+    content: "\F01A4"
+}
+
+.mdi-pencil::before {
+    content: "\F03EB"
+}
+
+.mdi-format-list-numbered::before {
+    content: "\F027B"
+}
+
+.mdi-home-outline::before {
+    content: "\F06A1"
+}
+
+.mdi-briefcase-outline::before {
+    content: "\F0814"
+}
+
+.mdi-arrow-decision-auto-outline::before {
+    content: "\F09BD"
+}
+
+.mdi-swap-horizontal::before {
+    content: "\F04E1"
 }
