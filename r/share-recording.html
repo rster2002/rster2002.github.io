@@ -1,0 +1,477 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Guide</title><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-require-zoom-fix foreignobject { font-size: var(--mermaid-font-zoom); }
+
+
+@import url("file:///C://Users//bjorn//AppData//Roaming//Typora/themes/https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,700,700i&display=swap");
+@import url("file:///C://Users//bjorn//AppData//Roaming//Typora/themes/https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&display=swap");
+html, body {
+  background-color: #ffffff;
+}
+
+.typora-node #typora-sidebar .file-tree-node.active > .file-node-background {
+  background-color: #e6e6e6;
+  border: 0;
+}
+
+#write {
+  max-width: 914px;
+}
+
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write li {
+  color: #000000;
+}
+
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p[mdlike=h1], #write p[mdlike=h2], #write p[mdlike=h3], #write p[mdlike=h4], #write p[mdlike=h5], #write p[mdlike=h6] {
+  font-family: "Roboto Mono", monospace;
+}
+
+#write h1:not(:first-of-type) {
+  page-break-before: always;
+}
+
+#write p, #write a, #write li {
+  font-family: "Roboto", sans-serif;
+}
+
+#write a {
+  color: #0e5585;
+}
+
+#write a[href=subtitle] {
+  text-decoration: none;
+  cursor: text;
+  font-size: 24px;
+  font-family: "Roboto Mono", monospace;
+  color: #868686;
+}
+
+#write a[href=img-footer] {
+  text-decoration: none;
+  cursor: text;
+  width: 100%;
+  display: block;
+  text-align: center;
+  color: #868686;
+}
+
+#write p {
+  font-size: 16px;
+  page-break-before: avoid;
+}
+
+#write p[mdlike=h1]:before, #write p[mdlike=h2]:before, #write p[mdlike=h3]:before, #write p[mdlike=h4]:before, #write p[mdlike=h5]:before, #write p[mdlike=h6]:before {
+  padding: 0 6px;
+  position: absolute;
+  left: -45px;
+  font-size: 14px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-weight: 100;
+  border: 1px solid #444444;
+  border-radius: 5px;
+}
+
+#write h1, #write p[mdlike=h1] {
+  font-size: 52px;
+}
+
+#write h2, #write p[mdlike=h2] {
+  font-size: 30px;
+  margin-top: 32px;
+}
+
+#write h3, #write p[mdlike=h3] {
+  font-size: 24px;
+}
+
+#write h4, #write p[mdlike=h4] {
+  font-size: 22px;
+}
+
+#write h5, #write p[mdlike=h5] {
+  font-size: 18px;
+}
+
+#write h6, #write p[mdlike=h6] {
+  font-size: 16px;
+}
+
+#write p[mdlike=h1]:before {
+  content: "H1";
+}
+
+#write p[mdlike=h2]:before {
+  content: "H2";
+}
+
+#write p[mdlike=h3]:before {
+  content: "H3";
+}
+
+#write p[mdlike=h4]:before {
+  content: "H4";
+}
+
+#write p[mdlike=h5]:before {
+  content: "H5";
+}
+
+#write p[mdlike=h6]:before {
+  content: "H6";
+}
+
+#write table {
+  border: 1px solid #000000;
+  color: #000000;
+}
+
+#write table th {
+  padding: 8px 16px;
+}
+
+#write table td {
+  padding: 16px;
+}
+
+#write .md-table-edit + table th, #write .md-table-edit + table td {
+  border: 1px solid #000000;
+}
+
+#write .md-toc-content {
+  color: #0e5585;
+}
+
+#write .md-meta {
+  color: #444444;
+}
+
+#write .md-blockmeta {
+  font-style: normal;
+  font-weight: 100;
+}
+
+#write blockquote {
+  padding: 16px;
+  padding: 0 16px;
+  border-left: 1px dashed #000000;
+}
+
+#write blockquote h1, #write blockquote h2, #write blockquote h3, #write blockquote h4, #write blockquote h5, #write blockquote h6, #write blockquote p[mdlike=h1], #write blockquote p[mdlike=h2], #write blockquote p[mdlike=h3], #write blockquote p[mdlike=h4], #write blockquote p[mdlike=h5], #write blockquote p[mdlike=h6] {
+  font-size: 18px;
+}
+
+#write .CodeMirror {
+  padding: 16px;
+  color: #cecece;
+  border-radius: 5px;
+  background-color: #cecece !important;
+}
+
+#write .CodeMirror .cm-keyword {
+  color: #8418a7;
+}
+
+#write .CodeMirror .cm-attribute {
+  color: #019659;
+}
+
+#write .CodeMirror .cm-quote {
+  color: #ca3d07;
+}
+
+#write .CodeMirror .cm-def {
+  color: #ff8300;
+}
+
+#write .CodeMirror .cm-variable {
+  color: #1e38ff;
+}
+
+#write .CodeMirror .cm-variable-3 {
+  color: #148058;
+}
+
+#write .CodeMirror .cm-operator {
+  color: #000000;
+}
+
+#write .CodeMirror .cm-string {
+  color: #9a4000;
+}
+
+#write .CodeMirror .cm-comment {
+  color: #737373;
+}
+
+#write .CodeMirror .CodeMirror-cursor {
+  border-left: 1px solid #000000 !important;
+}
+
+#write .md-diagram-panel {
+  background-color: #cecece;
+}
+
+#write .md-diagram-panel-preview > svg .arrowheadPath {
+  fill: #444444;
+}
+
+#write .md-diagram-panel-preview > svg .edgePath .path {
+  stroke: #444444;
+}
+
+#write .md-diagram-panel-preview > svg .cluster rect {
+  fill: transparent;
+  stroke: #444444;
+}
+
+#write .md-diagram-panel-preview > svg .label {
+  color: #444444;
+}
+
+#write .md-diagram-panel-preview > svg .edgeLabel .label div span {
+  background-color: #cecece;
+  color: #444444;
+}
+
+#write .md-diagram-panel-preview > svg .node rect, #write .md-diagram-panel-preview > svg .node circle, #write .md-diagram-panel-preview > svg .node ellipse, #write .md-diagram-panel-preview > svg .node polygon {
+  fill: #202020;
+}
+
+#write .md-diagram-panel-preview > svg .node rect[rx="5"] {
+  rx: 50%;
+  ry: 50%;
+}
+
+#write .md-diagram-panel-preview > svg .node .label {
+  color: #cecece;
+}
+
+#write .code-tooltip {
+  color: #000000;
+  background-color: #cecece !important;
+}
+
+#write .MathJax_SVG {
+  color: #000000;
+}
+
+#write .mathjax-block:hover {
+  background-color: #ffffff;
+}
+
+.CodeMirror-code {
+  color: #000000;
+}
+
+.typora-node #typora-sidebar {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.typora-node #typora-sidebar .file-node-content {
+  color: #000000;
+}
+
+.typora-node #typora-sidebar .file-tree-node.active > .file-node-background {
+  background-color: #c9c9c9;
+}
+
+.footer-item, .sidebar-footer-item {
+  color: #000000;
+}
+
+.footnotes {
+  color: #000000;
+}
+
+.footer-item:hover, .sidebar-footer-item:hover {
+  background-color: #c9c9c9;
+}
+
+.sidebar-files-menu {
+  color: #000000;
+}
+
+.dropdown-menu > li > a {
+  color: #000000;
+}
+
+#md-notification, .md-notification {
+  color: #000000;
+}
+
+.on-focus-mode .md-focus, .on-focus-mode .md-focus-container {
+  color: #000000;
+}
+
+
+
+</style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write'  class=''><h2><a name="-zet-de-recording-open-voor-iedereen" class="md-header-anchor"></a><span>Zet de recording open voor iedereen</span></h2><h3><a name="stap-1" class="md-header-anchor"></a><span>Stap 1</span></h3><p><span>Ga naar de meeting die je heb opgenomen en open de opnamen. Als je op dit scherm bent moet je op &quot;Koppeling kopieren&quot; klikken.</span></p><p><img src="C:\Users\bjorn\OneDrive\Afbeeldingen\Guide\1.png" referrerpolicy="no-referrer" alt="1"></p><h3><a name="stap-2" class="md-header-anchor"></a><span>Stap 2</span></h3><p><span>Klik dan op de onderste knop zoals hieronder aangegeven.</span></p><p><img src="C:\Users\bjorn\OneDrive\Afbeeldingen\Guide\2.png" referrerpolicy="no-referrer" alt="2"></p><h3><a name="stap-3" class="md-header-anchor"></a><span>Stap 3</span></h3><p><span>Selecteer dan &quot;Personen in Hogeschool Inholland met de koppeling&quot;</span></p><p><img src="C:\Users\bjorn\OneDrive\Afbeeldingen\Guide\3.png" referrerpolicy="no-referrer" alt="3"></p><h3><a name="stap-4" class="md-header-anchor"></a><span>Stap 4</span></h3><p><span>Zorg ervoor dat &quot;Bewerken toestaan&quot; uit staat. Klik dan op &quot;Toepassen&quot;</span></p><p><img src="C:\Users\bjorn\OneDrive\Afbeeldingen\Guide\4.png" referrerpolicy="no-referrer" alt="4"></p><h3><a name="stap-5" class="md-header-anchor"></a><span>Stap 5</span></h3><p><span>Kopieer nu de link die verschijnt een paste hem in de meeting chat zodat iedereen erbij kan. Als je er niet uit komt moet je mij (Bjørn) maar even appen of mailen via (642238@student.inholland.nl)</span></p><p><img src="C:\Users\bjorn\OneDrive\Afbeeldingen\Guide\5.png" referrerpolicy="no-referrer" alt="5"></p></div>
+</body>
+</html>
