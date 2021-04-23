@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/aut-ov/precache-manifest.d8a26f2cf449d6283a0c53b1d08b1ed4.js"
+  "/aut-ov/precache-manifest.a036b9612e7e00b08a8232252ea0811f.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "aut-ov"});
