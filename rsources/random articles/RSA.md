@@ -20,9 +20,5 @@ n = pq \\
 d = e^{-1} \mod \phi
 $$
 
-<button>Something cool</button>
 
-<div>
-    <input type="number" placeholder="Some key" />
-</div>
 
