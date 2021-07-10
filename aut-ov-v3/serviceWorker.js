@@ -1,4 +1,4 @@
-const cacheName = "aut-ov-cache-GTSfLwPUd";
+const cacheName = "aut-ov-cache-UTktPtiVk";
 const assets = [
     "./",
     "./index.html",

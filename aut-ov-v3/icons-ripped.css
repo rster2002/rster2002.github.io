@@ -184,3 +184,55 @@
 .mdi-swap-horizontal::before {
     content: "\F04E1"
 }
+
+.mdi-refresh::before {
+    content: "\F0450"
+}
+
+.mdi-map-marker-circle::before {
+    content: "\F034F"
+}
+
+.mdi-map-marker::before {
+    content: "\F034E"
+}
+
+.mdi-content-save-outline::before {
+    content: "\F0818"
+}
+
+.mdi-cog-outline::before {
+    content: "\F08BB"
+}
+
+.mdi-check::before {
+    content: "\F012C"
+}
+
+.mdi-download::before {
+    content: "\F01DA"
+}
+
+.mdi-view-list-outline::before {
+    content: "\F148B"
+}
+
+.mdi-map-marker-remove-outline::before {
+    content: "\F12FA"
+}
+
+.mdi-tape-measure::before {
+    content: "\F0B4D"
+}
+
+.mdi-wheelchair-accessibility::before {
+    content: "\F05A4"
+}
+
+.mdi-arrow-expand-all::before {
+    content: "\F004C"
+}
+
+.mdi-help-rhombus-outline::before {
+    content: "\F0BA6"
+}
