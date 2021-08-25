@@ -236,3 +236,7 @@
 .mdi-help-rhombus-outline::before {
     content: "\F0BA6"
 }
+
+.mdi-alert::before {
+    content: "\F0026"
+}

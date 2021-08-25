@@ -18,10 +18,10 @@ const assets = [
     "./fonts/materialdesignicons-webfont.woff2",
     "./fonts/Roboto-Regular.ttf",
     "./fonts/Roboto-Bold.ttf",
-    "./json/stationCodes.json",
-    "./json/stationCodesSearchable.json",
-    "./json/stationLocations.json",
-    "./json/stationsFullDetails.json",
+    // "./json/stationCodes.json",
+    // "./json/stationCodesSearchable.json",
+    // "./json/stationLocations.json",
+    // "./json/stationsFullDetails.json",
 ];
 
 const iconSizes = [72, 96, 128, 144, 152, 192, 384, 512];
