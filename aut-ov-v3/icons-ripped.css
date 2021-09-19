@@ -240,3 +240,7 @@
 .mdi-alert::before {
     content: "\F0026"
 }
+
+.mdi-delete-outline::before {
+    content: "\F09E7"
+}

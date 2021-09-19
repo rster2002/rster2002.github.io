@@ -1,4 +1,4 @@
-const cacheName = "aut-ov-cache-3.0.0-Beta.1";
+const cacheName = "aut-ov-cache-3.0.0-Beta.2";
 const assets = [
     "./",
     "./index.html",
@@ -26,8 +26,6 @@ for (var size of iconSizes) {
 }
 
 self.addEventListener("install", event => {
-    console.log("Installed");
-
     try {
         event.waitUntil(
             (async () => {
