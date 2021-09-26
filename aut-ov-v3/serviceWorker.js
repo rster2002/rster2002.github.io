@@ -1,4 +1,4 @@
-const cacheName = "aut-ov-cache-3.0.0-Beta.2";
+const cacheName = "aut-ov-cache-3.0.0-Beta.5";
 const assets = [
     "./",
     "./index.html",
@@ -81,21 +81,36 @@ self.addEventListener("fetch", event => {
     }
 });
 
-self.addEventListener("periodicsync", event => {
-    if (event.tag == 'test') {
-        event.waitUntil(new Promise(res => {
-            console.log("Notification?");
+// self.addEventListener("periodicsync", event => {
+//     if (event.tag == 'test') {
+//         event.waitUntil(new Promise(res => {
+            
 
-            if (Notification.permission === "granted") {
-                self.registration.showNotification('Vibration Sample', {
-                    body: 'Buzz! Buzz!',
-                    icon: './img/icon-black.png',
-                    vibrate: [200, 100, 200, 100, 200, 100, 200],
-                    tag: 'vibration-sample'
-                });
-            }
 
-            res();
-        }));
-    }
-});
+
+//             res();
+//         }));
+//     }
+// });
+
+// self.addEventListener('sync', function (event) {
+//     console.log('syncing started.');
+//     event.waitUntil(
+//         setTimeout(() => {
+//             new Promise((res, rej) => {
+//                 console.log("Notification?");
+
+//                 if (Notification.permission === "granted") {
+//                     self.registration.showNotification('Vibration Sample', {
+//                         body: 'Buzz! Buzz!',
+//                         icon: './img/icon-black.png',
+//                         vibrate: [200, 100, 200, 100, 200, 100, 200],
+//                         tag: 'vibration-sample'
+//                     });
+//                 }
+
+//                 rej();
+//             })
+//         }, 3000)
+//     );
+// });
