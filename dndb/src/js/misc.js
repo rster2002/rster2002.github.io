@@ -18,19 +18,19 @@ if (DEV) {
 	db = "dev";
 	dbNew = "dev";
 	$("#pageTitle").text("DEV");
-	$("#vueLib").append("<script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>");
+	$("#vueLib").append("<script src='https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js'></script>");
 } else {
 	db = "";
 	dbNew = "production";
 	DEV = false;
-	$("#vueLib").append("<script src='https://cdn.jsdelivr.net/npm/vue'></script>");
+	$("#vueLib").append("<script src='https://cdn.jsdelivr.net/npm/vue@2'></script>");
 }
 
 if (url.includes("?test")) {
 	db = "test";
 	dbNew = "test";
 	$("#pageTitle").text("DEV");
-	$("#vueLib").append("<script src='https://cdn.jsdelivr.net/npm/vue'></script>");
+	$("#vueLib").append("<script src='https://cdn.jsdelivr.net/npm/vue@2'></script>");
 }
 
 if (url.includes("?log") || url.includes("&log")) {
