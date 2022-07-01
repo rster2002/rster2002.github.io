@@ -1,3 +1,0 @@
-Student name: Bjørn Reemer
-Student number: 642238
-Student class: INF1SD
