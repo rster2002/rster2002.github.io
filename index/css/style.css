@@ -34,7 +34,7 @@ main header {
     padding: 32px;
     box-sizing: border-box;
 
-    background-image: url(/index/img/header-background.webp);
+    background-image: url("/index/img/header-background (Small).webp");
     background-size: cover;
 
     color: #ffffff;
