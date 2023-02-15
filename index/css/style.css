@@ -5,8 +5,9 @@
 }
 
 @font-face {
-    font-family: "Roboto-Mono";
-    src: url(/index/fonts/RobotoMono-Regular.ttf);
+    font-family: "Ubuntu";
+    src: url(/index/fonts/Ubuntu-Bold.ttf);
+    font-weight: 700;
     font-display: swap;
 }
 
@@ -44,7 +45,8 @@ main header {
 main header h1 {
     margin: 0;
 
-    font-family: "Roboto-Mono", monospace;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
 }
 
 main header a {
@@ -89,7 +91,8 @@ main > section h3 {
     margin: 0;
 
     font-size: 1.5em;
-    font-family: "Roboto-Mono", monospace;
+    font-family: "Ubuntu", monospace;
+    font-weight: 700;
 }
 
 main > section h4 {
